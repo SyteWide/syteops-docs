@@ -51,6 +51,8 @@ const config: Config = {
       logo: {
         alt: 'SyteOps Logo',
         src: 'img/logo.png',
+        width: 40,
+        height: 40,
       },
       items: [
         {
