@@ -8,6 +8,9 @@
   --ifm-color-primary-lightest: #93bbfd;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --ifm-h1-font-size: 1.75rem;
+  --ifm-h2-font-size: 1.4rem;
+  --ifm-h3-font-size: 1.15rem;
 }
 
 [data-theme='dark'] {
@@ -19,4 +22,14 @@
   --ifm-color-primary-lighter: #bfdbfe;
   --ifm-color-primary-lightest: #dbeafe;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+.hero__title {
+  font-size: 2rem;
+}
+
+@media screen and (max-width: 996px) {
+  .hero__title {
+    font-size: 1.6rem;
+  }
 }

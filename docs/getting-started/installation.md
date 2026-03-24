@@ -51,7 +51,7 @@ Follow the on-screen prompts to connect FlowMattic. A valid license is required.
 
 ## Installing Modules
 
-SyteOps business modules (Notes, Estimates, Banners, Notice Management) are distributed as ZIP packages and must be uploaded before they can be enabled.
+SyteOps modules are distributed as ZIP packages and must be uploaded before they can be enabled.
 
 1. Navigate to **SyteOps Admin > Admin tab > SyteOps Modules**
 2. Click **Upload Module Package (.zip)**

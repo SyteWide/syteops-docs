@@ -6,7 +6,7 @@ description: Managing users, system roles, custom roles, and user data in SyteOp
 
 # User Management
 
-SyteOps supports up to 20 users with comprehensive profile management, role assignments, and FlowMattic variable sync.
+SyteOps provides comprehensive user profile management, role assignments, and FlowMattic variable sync.
 
 ## User Profiles
 
@@ -15,8 +15,7 @@ Each user has 31+ fields organized into categories:
 - **Contact Information** — Address, additional contacts
 - **CRM IDs** — Identifiers across 15 supported CRM systems
 - **Profile Pictures** — Upload or link to user avatars
-- **Notes** — Per-user notes (requires Notes module)
-- **Estimates** — Per-user estimates (requires Estimates module)
+- **Module Data** — Additional per-user data from active modules
 
 ## System Roles
 

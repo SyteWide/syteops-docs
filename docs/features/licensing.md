@@ -10,13 +10,13 @@ SyteOps uses two separate licensing systems. Understanding the difference preven
 
 ## Product License (Domain A)
 
-Your **Product License** is the FluentCart license key that proves you purchased SyteOps.
+Your **Product License** is the SyteWide license key that proves you purchased SyteOps.
 
 ### Activation
 
 1. During Initial Setup, enter your license key
 2. Click **Save & Activate** (server) or **Activate** (endpoint)
-3. The license validates against FluentCart's licensing API
+3. The license validates against SyteWide's licensing API
 4. Activation limits apply based on your plan (1, 5, 15, 50, or unlimited sites)
 
 ### License States

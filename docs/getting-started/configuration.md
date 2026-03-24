@@ -14,13 +14,7 @@ The Admin tab is the primary configuration surface. It contains:
 
 ### SyteOps Modules
 
-Toggle business modules ON/OFF. Available modules:
-- **Notes** — Note-taking and documentation for users
-- **Estimates** — Estimation and quoting system
-- **Banners** — Banner management with scheduling
-- **Notice Management** — WordPress admin notice control
-
-Modules must be uploaded as ZIP packages before they can be enabled. When toggled OFF, FlowMattic variables are cleaned up but all settings data is preserved for easy re-activation.
+Toggle modules ON/OFF. Modules must be uploaded as ZIP packages before they can be enabled. When toggled OFF, FlowMattic variables are cleaned up but all settings data is preserved for easy re-activation.
 
 ### Configuration Management
 
@@ -36,13 +30,13 @@ Modules must be uploaded as ZIP packages before they can be enabled. When toggle
 
 ## Users Tab
 
-Manage up to 20 users with 31+ fields per user:
+Manage users with 31+ fields per user:
 - Identity (name, email, phone)
 - Contact information
 - CRM IDs (15 supported CRM systems)
 - Profile pictures
 - Role assignments
-- Notes and estimates (when modules are enabled)
+- Module data (when modules are enabled)
 
 ### System Roles
 
