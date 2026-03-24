@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 340" width="640" height="340" role="img" aria-label="SyteOps Server Connections Architecture">
+  <title>SyteOps Server Connections Architecture</title>
+
+  <!-- Background -->
+  <rect width="640" height="340" fill="#f8fafc" rx="12"/>
+
+  <!-- ── Server node ─────────────────────────────────── -->
+  <rect x="230" y="24" width="180" height="70" rx="10"
+        fill="#2563eb" stroke="#1d4ed8" stroke-width="1.5"/>
+  <!-- Server icon (stack) -->
+  <rect x="258" y="40" width="30" height="6" rx="2" fill="rgba(255,255,255,0.6)"/>
+  <rect x="258" y="50" width="30" height="6" rx="2" fill="rgba(255,255,255,0.4)"/>
+  <rect x="258" y="60" width="30" height="6" rx="2" fill="rgba(255,255,255,0.2)"/>
+  <text x="318" y="53" font-family="'Plus Jakarta Sans', Inter, system-ui, sans-serif"
+        font-size="13" font-weight="700" fill="white" text-anchor="middle">SyteOps</text>
+  <text x="318" y="69" font-family="'Plus Jakarta Sans', Inter, system-ui, sans-serif"
+        font-size="11" font-weight="500" fill="rgba(255,255,255,0.85)" text-anchor="middle">Server</text>
+
+  <!-- ── Connector lines ────────────────────────────── -->
+  <!-- Left endpoint -->
+  <line x1="230" y1="80" x2="100" y2="210" stroke="#93c5fd" stroke-width="2" stroke-dasharray="6 3"/>
+  <!-- Center endpoint -->
+  <line x1="320" y1="94" x2="320" y2="200" stroke="#93c5fd" stroke-width="2" stroke-dasharray="6 3"/>
+  <!-- Right endpoint -->
+  <line x1="410" y1="80" x2="540" y2="210" stroke="#93c5fd" stroke-width="2" stroke-dasharray="6 3"/>
+
+  <!-- ── Arrow markers at endpoint end ─────────────── -->
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#60a5fa"/>
+    </marker>
+  </defs>
+  <line x1="230" y1="80" x2="104" y2="206" stroke="#93c5fd" stroke-width="2"
+        stroke-dasharray="6 3" marker-end="url(#arrow)"/>
+  <line x1="320" y1="94" x2="320" y2="200" stroke="#93c5fd" stroke-width="2"
+        stroke-dasharray="6 3" marker-end="url(#arrow)"/>
+  <line x1="410" y1="80" x2="536" y2="206" stroke="#93c5fd" stroke-width="2"
+        stroke-dasharray="6 3" marker-end="url(#arrow)"/>
+
+  <!-- ── Endpoint nodes ─────────────────────────────── -->
+  <!-- Left endpoint -->
+  <rect x="34" y="200" width="132" height="72" rx="10"
+        fill="white" stroke="#bfdbfe" stroke-width="1.5"/>
+  <rect x="50" y="214" width="20" height="14" rx="3" fill="#dbeafe"/>
+  <rect x="50" y="214" width="20" height="4" rx="2" fill="#93c5fd"/>
+  <text x="100" y="228" font-family="'Plus Jakarta Sans', Inter, system-ui, sans-serif"
+        font-size="11" font-weight="600" fill="#1e40af" text-anchor="middle">Endpoint A</text>
+  <text x="100" y="244" font-family="Inter, system-ui, sans-serif"
+        font-size="10" fill="#475569" text-anchor="middle">WordPress Site 1</text>
+  <rect x="50" y="254" width="48" height="8" rx="4" fill="#dcfce7"/>
+  <text x="74" y="261" font-family="Inter, system-ui, sans-serif"
+        font-size="8" fill="#16a34a" text-anchor="middle" font-weight="600">● Active</text>
+
+  <!-- Center endpoint -->
+  <rect x="254" y="200" width="132" height="72" rx="10"
+        fill="white" stroke="#bfdbfe" stroke-width="1.5"/>
+  <rect x="270" y="214" width="20" height="14" rx="3" fill="#dbeafe"/>
+  <rect x="270" y="214" width="20" height="4" rx="2" fill="#93c5fd"/>
+  <text x="320" y="228" font-family="'Plus Jakarta Sans', Inter, system-ui, sans-serif"
+        font-size="11" font-weight="600" fill="#1e40af" text-anchor="middle">Endpoint B</text>
+  <text x="320" y="244" font-family="Inter, system-ui, sans-serif"
+        font-size="10" fill="#475569" text-anchor="middle">WordPress Site 2</text>
+  <rect x="270" y="254" width="48" height="8" rx="4" fill="#dcfce7"/>
+  <text x="294" y="261" font-family="Inter, system-ui, sans-serif"
+        font-size="8" fill="#16a34a" text-anchor="middle" font-weight="600">● Active</text>
+
+  <!-- Right endpoint -->
+  <rect x="474" y="200" width="132" height="72" rx="10"
+        fill="white" stroke="#bfdbfe" stroke-width="1.5"/>
+  <rect x="490" y="214" width="20" height="14" rx="3" fill="#dbeafe"/>
+  <rect x="490" y="214" width="20" height="4" rx="2" fill="#93c5fd"/>
+  <text x="540" y="228" font-family="'Plus Jakarta Sans', Inter, system-ui, sans-serif"
+        font-size="11" font-weight="600" fill="#1e40af" text-anchor="middle">Endpoint C</text>
+  <text x="540" y="244" font-family="Inter, system-ui, sans-serif"
+        font-size="10" fill="#475569" text-anchor="middle">WordPress Site 3</text>
+  <rect x="490" y="254" width="48" height="8" rx="4" fill="#fef9c3"/>
+  <text x="514" y="261" font-family="Inter, system-ui, sans-serif"
+        font-size="8" fill="#b45309" text-anchor="middle" font-weight="600">● Pending</text>
+
+  <!-- ── Legend ─────────────────────────────────────── -->
+  <rect x="24" y="298" width="592" height="28" rx="6" fill="#eff6ff"/>
+  <line x1="44" y1="312" x2="68" y2="312" stroke="#93c5fd" stroke-width="2" stroke-dasharray="4 2"/>
+  <text x="76" y="316" font-family="Inter, system-ui, sans-serif" font-size="10"
+        fill="#475569">Managed connection (polling)</text>
+  <circle cx="220" cy="312" r="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1"/>
+  <text x="230" y="316" font-family="Inter, system-ui, sans-serif" font-size="10"
+        fill="#475569">Active</text>
+  <circle cx="290" cy="312" r="4" fill="#fef9c3" stroke="#b45309" stroke-width="1"/>
+  <text x="300" y="316" font-family="Inter, system-ui, sans-serif" font-size="10"
+        fill="#475569">Pending activation</text>
+  <text x="600" y="316" font-family="Inter, system-ui, sans-serif" font-size="9"
+        fill="#94a3b8" text-anchor="end">SyteOps</text>
+</svg>

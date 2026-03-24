@@ -1,3 +1,92 @@
+/* ── Google Fonts ─────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+
+/* ── Tailwind Layers ─────────────────────────────────────────────────── */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Design Tokens — Light Mode ──────────────────────────────────────── */
+:root {
+  /* Primary */
+  --so-primary-50: #eff6ff;
+  --so-primary-100: #dbeafe;
+  --so-primary-200: #bfdbfe;
+  --so-primary-300: #93c5fd;
+  --so-primary-400: #60a5fa;
+  --so-primary-500: #3b82f6;
+  --so-primary-600: #2563eb;
+  --so-primary-700: #1d4ed8;
+  --so-primary-800: #1e40af;
+  --so-primary-900: #1e3a8a;
+  --so-primary-950: #172554;
+
+  /* Accent (violet) */
+  --so-accent-50: #f5f3ff;
+  --so-accent-400: #a78bfa;
+  --so-accent-500: #8b5cf6;
+  --so-accent-600: #7c3aed;
+
+  /* Surfaces */
+  --so-surface-0: #ffffff;
+  --so-surface-50: #f8fafc;
+  --so-surface-100: #f1f5f9;
+  --so-surface-200: #e2e8f0;
+  --so-surface-300: #cbd5e1;
+
+  /* Text */
+  --so-text-primary: #0f172a;
+  --so-text-secondary: #475569;
+  --so-text-tertiary: #94a3b8;
+
+  /* Semantic */
+  --so-success: #16a34a;
+  --so-warning: #d97706;
+  --so-error: #dc2626;
+  --so-info: #2563eb;
+
+  /* Typography */
+  --so-font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --so-font-heading: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+  --so-font-mono: 'Fira Code', 'Cascadia Code', 'JetBrains Mono', monospace;
+
+  /* Radius */
+  --so-radius-sm: 6px;
+  --so-radius-md: 8px;
+  --so-radius-lg: 12px;
+  --so-radius-xl: 16px;
+
+  /* Shadows */
+  --so-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --so-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --so-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+  /* Transition */
+  --so-transition: all 0.2s ease;
+}
+
+/* ── Design Tokens — Dark Mode ───────────────────────────────────────── */
+[data-theme='dark'] {
+  --so-primary-50: #172554;
+  --so-primary-100: #1e3a8a;
+
+  --so-surface-0: #0f172a;
+  --so-surface-50: #020617;
+  --so-surface-100: #1e293b;
+  --so-surface-200: #334155;
+  --so-surface-300: #475569;
+
+  --so-text-primary: #f1f5f9;
+  --so-text-secondary: #cbd5e1;
+  --so-text-tertiary: #64748b;
+
+  --so-success: #4ade80;
+  --so-warning: #fbbf24;
+  --so-error: #f87171;
+  --so-info: #60a5fa;
+}
+
+/* ── Infima Bridge — Light Mode ──────────────────────────────────────── */
 :root {
   --ifm-color-primary: #2563eb;
   --ifm-color-primary-dark: #1d4ed8;
@@ -5,69 +94,287 @@
   --ifm-color-primary-darkest: #1e3a8a;
   --ifm-color-primary-light: #3b82f6;
   --ifm-color-primary-lighter: #60a5fa;
-  --ifm-color-primary-lightest: #93bbfd;
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
-  --ifm-h1-font-size: 2.1875rem; /* 35px */
-  --ifm-h2-font-size: 1.75rem;   /* 28px */
-  --ifm-h3-font-size: 1.375rem;  /* 22px */
-  --ifm-h4-font-size: 1.125rem;  /* 18px */
-  --ifm-h5-font-size: 1rem;      /* 16px */
+  --ifm-color-primary-lightest: #93c5fd;
+
+  --ifm-font-family-base: var(--so-font-body);
+  --ifm-heading-font-family: var(--so-font-heading);
+  --ifm-font-family-monospace: var(--so-font-mono);
+  --ifm-code-font-size: 0.875rem;
   --ifm-font-base-size: 16px;
+
+  --ifm-h1-font-size: 2.25rem;
+  --ifm-h2-font-size: 1.75rem;
+  --ifm-h3-font-size: 1.375rem;
+  --ifm-h4-font-size: 1.125rem;
+  --ifm-h5-font-size: 1rem;
+
+  --ifm-border-radius: 8px;
+  --ifm-global-radius: 8px;
+
+  --docusaurus-highlighted-code-line-bg: rgba(37, 99, 235, 0.1);
 }
 
+/* ── Infima Bridge — Dark Mode ───────────────────────────────────────── */
 [data-theme='dark'] {
   --ifm-color-primary: #60a5fa;
   --ifm-color-primary-dark: #3b82f6;
   --ifm-color-primary-darker: #2563eb;
   --ifm-color-primary-darkest: #1d4ed8;
-  --ifm-color-primary-light: #93bbfd;
+  --ifm-color-primary-light: #93c5fd;
   --ifm-color-primary-lighter: #bfdbfe;
   --ifm-color-primary-lightest: #dbeafe;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+
+  --docusaurus-highlighted-code-line-bg: rgba(96, 165, 250, 0.15);
 }
 
-/* Navbar logo — force square */
+/* ── Global Typography ───────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--so-font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--so-font-heading);
+  font-weight: 700;
+}
+
+code, pre {
+  font-family: var(--so-font-mono);
+}
+
+/* Focus ring for accessibility */
+:focus-visible {
+  outline: 2px solid var(--so-primary-500);
+  outline-offset: 2px;
+}
+
+/* ── Navbar — logo constraint (CLAUDE.md rule) ───────────────────────── */
 .navbar__logo img {
   width: 40px !important;
   height: 40px !important;
 }
 
-/* Force heading sizes — overrides Infima defaults */
-h1, .markdown h1 {
-  font-size: 2.1875rem !important; /* 35px */
+/* ── Navbar — glass effect base ──────────────────────────────────────── */
+.navbar {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.8);
+  border-bottom: 1px solid var(--so-surface-200);
+  transition: box-shadow 0.2s ease;
 }
 
-h2, .markdown h2 {
-  font-size: 1.75rem !important; /* 28px */
+[data-theme='dark'] .navbar {
+  background: rgba(15, 23, 42, 0.8);
+  border-bottom-color: var(--so-surface-200);
 }
 
-h3, .markdown h3 {
-  font-size: 1.375rem !important; /* 22px */
+.navbar--scrolled .navbar {
+  box-shadow: var(--so-shadow-md);
 }
 
-h4, .markdown h4 {
-  font-size: 1.125rem !important; /* 18px */
+.navbar__title {
+  font-family: var(--so-font-heading);
+  font-weight: 600;
 }
 
-h5, .markdown h5 {
-  font-size: 1rem !important; /* 16px */
+.navbar__link {
+  font-weight: 500;
+  font-size: 0.875rem;
+  transition: color 0.2s ease;
 }
 
-.hero__title {
-  font-size: 2.1875rem !important; /* 35px */
+/* ── Sidebar refinements ─────────────────────────────────────────────── */
+.theme-doc-sidebar-container {
+  border-right: 1px solid var(--so-surface-200) !important;
 }
 
+[data-theme='dark'] .theme-doc-sidebar-container {
+  border-right-color: var(--so-surface-200) !important;
+}
+
+.theme-doc-sidebar-menu .menu__link {
+  font-size: 0.875rem;
+  border-radius: var(--so-radius-sm);
+  padding: 0.375rem 0.75rem;
+  transition: var(--so-transition);
+}
+
+.theme-doc-sidebar-menu .menu__link--active:not(.menu__link--sublist) {
+  background: var(--so-primary-50);
+  color: var(--so-primary-700);
+  font-weight: 500;
+  border-left: 2px solid var(--so-primary-600);
+}
+
+[data-theme='dark'] .theme-doc-sidebar-menu .menu__link--active:not(.menu__link--sublist) {
+  background: rgba(37, 99, 235, 0.1);
+  color: var(--so-primary-400);
+  border-left-color: var(--so-primary-400);
+}
+
+.menu__list-item-collapsible .menu__link--sublist {
+  font-family: var(--so-font-heading);
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--so-text-tertiary);
+}
+
+/* ── Code blocks ─────────────────────────────────────────────────────── */
+.prism-code {
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+div[class*='codeBlockContainer'] {
+  border-radius: var(--so-radius-lg);
+  border: 1px solid var(--so-surface-200);
+  overflow: hidden;
+  box-shadow: var(--so-shadow-sm);
+}
+
+[data-theme='dark'] div[class*='codeBlockContainer'] {
+  border-color: var(--so-surface-200);
+}
+
+div[class*='codeBlockTitle'] {
+  background: var(--so-surface-100);
+  border-bottom: 1px solid var(--so-surface-200);
+  font-family: var(--so-font-mono);
+  font-size: 0.75rem;
+  color: var(--so-text-tertiary);
+  padding: 0.5rem 1rem;
+}
+
+/* ── Tabs restyling ──────────────────────────────────────────────────── */
+.tabs-container .tabs {
+  border-bottom: 2px solid var(--so-surface-200);
+}
+
+.tabs-container .tabs__item {
+  font-family: var(--so-font-heading);
+  font-weight: 500;
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: var(--so-transition);
+  color: var(--so-text-tertiary);
+}
+
+.tabs-container .tabs__item--active {
+  border-bottom-color: var(--so-primary-600);
+  color: var(--so-primary-600);
+}
+
+[data-theme='dark'] .tabs-container .tabs__item--active {
+  border-bottom-color: var(--so-primary-400);
+  color: var(--so-primary-400);
+}
+
+.tabs-container .tabs__item:hover:not(.tabs__item--active) {
+  color: var(--so-text-primary);
+  background: var(--so-surface-50);
+  border-radius: var(--so-radius-md) var(--so-radius-md) 0 0;
+}
+
+/* ── Admonitions ─────────────────────────────────────────────────────── */
+.alert {
+  border-radius: var(--so-radius-lg);
+  border: 1px solid;
+  border-left-width: 4px;
+}
+
+/* ── TOC ─────────────────────────────────────────────────────────────── */
+.table-of-contents__link {
+  font-size: 0.8125rem;
+  color: var(--so-text-tertiary);
+  transition: color 0.2s ease;
+}
+
+.table-of-contents__link--active,
+.table-of-contents__link:hover {
+  color: var(--so-primary-600);
+}
+
+[data-theme='dark'] .table-of-contents__link--active,
+[data-theme='dark'] .table-of-contents__link:hover {
+  color: var(--so-primary-400);
+}
+
+/* ── Breadcrumbs ─────────────────────────────────────────────────────── */
+.breadcrumbs__item .breadcrumbs__link {
+  font-size: 0.8125rem;
+  color: var(--so-text-tertiary);
+}
+
+.breadcrumbs__item--active .breadcrumbs__link {
+  color: var(--so-text-primary);
+}
+
+/* ── Search bar ──────────────────────────────────────────────────────── */
+.navbar .DocSearch-Button,
+.navbar [class*='searchBar'] input {
+  border-radius: var(--so-radius-md);
+  background: var(--so-surface-100);
+  border: 1px solid var(--so-surface-200);
+  font-family: var(--so-font-body);
+  font-size: 0.875rem;
+}
+
+/* ── Pagination ──────────────────────────────────────────────────────── */
+.pagination-nav__link {
+  border-radius: var(--so-radius-lg);
+  border-color: var(--so-surface-200);
+  transition: var(--so-transition);
+}
+
+.pagination-nav__link:hover {
+  border-color: var(--so-primary-300);
+  box-shadow: var(--so-shadow-sm);
+}
+
+.pagination-nav__sublabel {
+  font-size: 0.75rem;
+  color: var(--so-text-tertiary);
+}
+
+.pagination-nav__label {
+  font-family: var(--so-font-heading);
+  font-weight: 600;
+}
+
+/* ── Announcement bar ────────────────────────────────────────────────── */
+div[class*='announcementBar'] {
+  font-family: var(--so-font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────── */
 @media screen and (max-width: 996px) {
-  h1, .markdown h1, .hero__title {
-    font-size: 1.75rem !important; /* 28px */
+  :root {
+    --ifm-h1-font-size: 1.75rem;
+    --ifm-h2-font-size: 1.375rem;
+    --ifm-h3-font-size: 1.125rem;
+  }
+}
+
+/* ── Reduced motion ──────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 
-  h2, .markdown h2 {
-    font-size: 1.375rem !important; /* 22px */
-  }
-
-  h3, .markdown h3 {
-    font-size: 1.125rem !important; /* 18px */
+  html {
+    scroll-behavior: auto;
   }
 }

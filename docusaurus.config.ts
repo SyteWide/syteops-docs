@@ -24,6 +24,28 @@ const config: Config = {
     locales: ['en'],
   },
 
+  headTags: [
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'preconnect',
+        href: 'https://fonts.googleapis.com',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'preconnect',
+        href: 'https://fonts.gstatic.com',
+        crossorigin: 'anonymous',
+      },
+    },
+  ],
+
+  markdown: {
+    mermaid: true,
+  },
+
   presets: [
     [
       'classic',
@@ -40,11 +62,53 @@ const config: Config = {
     ],
   ],
 
+  themes: [
+    '@docusaurus/theme-mermaid',
+    [
+      '@easyops-cn/docusaurus-search-local',
+      {
+        hashed: true,
+        language: ['en'],
+        indexDocs: true,
+        indexBlog: false,
+        indexPages: false,
+        docsRouteBasePath: '/docs',
+        highlightSearchTermsOnTargetPage: true,
+        searchResultLimits: 8,
+        searchResultContextMaxLength: 50,
+      },
+    ],
+  ],
+
+  plugins: [
+    'docusaurus-plugin-image-zoom',
+    // Suppress known upstream warning from vscode-languageserver-types
+    // bundled transitively by @docusaurus/theme-mermaid. Not actionable.
+    function suppressVSCodeLsWarning() {
+      return {
+        name: 'suppress-vscode-ls-warning',
+        configureWebpack() {
+          return {
+            ignoreWarnings: [{module: /vscode-languageserver-types/}],
+          };
+        },
+      };
+    },
+  ],
+
   themeConfig: {
     image: 'img/syteops-social-card.png',
     colorMode: {
       defaultMode: 'light',
       respectPrefersColorScheme: true,
+    },
+    announcementBar: {
+      id: 'new_docs_2025',
+      content:
+        'Welcome to the redesigned SyteOps documentation! <a href="/docs/getting-started/installation">Get started here</a>.',
+      backgroundColor: '#2563eb',
+      textColor: '#ffffff',
+      isCloseable: true,
     },
     navbar: {
       title: 'SyteOps',
@@ -93,6 +157,17 @@ const config: Config = {
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
+    },
+    zoom: {
+      selector: '.markdown img',
+      background: {
+        light: 'rgba(255, 255, 255, 0.9)',
+        dark: 'rgba(15, 23, 42, 0.9)',
+      },
+      config: {
+        margin: 40,
+        scrollOffset: 0,
+      },
     },
   } satisfies Preset.ThemeConfig,
 };

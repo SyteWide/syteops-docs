@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 6
 title: Backup & Restore
 description: Creating backups, restoring data, and configuring automatic backups in SyteOps.
 ---

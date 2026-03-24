@@ -52,6 +52,15 @@ Single-assignment roles (only one user per role):
 
 User-defined roles with flexible assignment. See [User Management](../features/user-management).
 
+## CRM Tab
+
+Centralized CRM system configuration. See [CRM Management](../features/crm).
+
+- CRM count selector (0–15 systems)
+- Per-CRM fields: name, code, URL, admin-only flag, encrypted API credentials
+- Platform selection: Primary Communication Platform, Primary Booking Platform
+- CRM Variables (RSVS) with FlowMattic sync
+
 ## General Tab
 
 - FlowMattic quick links and workflow access
@@ -60,9 +69,9 @@ User-defined roles with flexible assignment. See [User Management](../features/u
 
 ## Integrations Tab
 
-- CRM configuration with encrypted API credentials
-- Team communication (Slack, Teams, etc.)
-- Booking platform integration
+- Integration toggles (enable/disable individual integrations)
+- Team communication (Slack, Monday.com)
+- Booking platform integration (Fluent Booking)
 - Code injection textareas with CodeMirror syntax highlighting
 
 ## Backup Tab

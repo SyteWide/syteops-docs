@@ -141,7 +141,8 @@ SyteOps automatically allows REST API access for key services when REST restrict
 
 | Service | Allowed Path |
 |---|---|
-| SyteOps | `/wp-json/syteops/v1/*` |
+| SyteOps | `/wp-json/syteops/*` |
+| ContentPen | `/wp-json/syteops-int-cp/*` |
 | FlowMattic | `/wp-json/flowmattic/v1/*` |
 | Google Site Kit | `/wp-json/google-site-kit/*` |
 | Wordfence | `/wp-json/wordfence/v1/authenticate` |

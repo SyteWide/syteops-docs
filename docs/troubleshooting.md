@@ -104,11 +104,11 @@ WooCommerce OAuth (`/wc-auth/v1/*`) is automatically allowed. For custom WooComm
 
 ### Save Changes Button Does Nothing on Admin Tab
 
-**Cause:** This was fixed in v1.1.014. Update to the latest version.
+**Cause:** This was fixed in a previous version. Update to the latest version.
 
 ### WooCommerce Admin Pages Blank
 
-**Cause:** This was fixed in v1.1.003. SyteOps no longer loads CSS/JS on WooCommerce admin screens.
+**Cause:** This was fixed in a previous version. SyteOps no longer loads CSS/JS on WooCommerce admin screens.
 
 ### Safari Form Input Lag
 
@@ -116,10 +116,14 @@ WooCommerce OAuth (`/wc-auth/v1/*`) is automatically allowed. For custom WooComm
 
 ## Debug Mode
 
-Enable Debug Mode in the Admin tab to access:
-- **Debug Tool** — Search across options and FlowMattic variables
-- **Structured logs** — Stored in `wp-content/` with automatic rotation and size caps
+Enable Debug Mode in the Admin tab to access the [Debug Tool](features/debug-tool):
+- **Search** — Search across options and FlowMattic variables
+- **Find & Replace** — Safe find-and-replace across FlowMattic workflow data with preview and backups
+- **Structured logs** — View, download, and manage debug logs
+- **Variable maintenance** — Orphan cleanup, HTML field decoding, stray variable detection
 - **Destructive wipes** — Variable cleanup (requires SyteOps Admin + Debug Mode)
+
+See the full [Debug Tool](features/debug-tool) documentation for details.
 
 ## Getting Help
 
