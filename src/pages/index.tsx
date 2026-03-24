@@ -31,18 +31,18 @@ function HomepageHeader() {
 const features = [
   {
     title: 'User Management',
-    description: 'Manage up to 20 users with 31+ fields, system roles, custom roles, and CRM integration across 15 platforms.',
+    description: 'Manage users with 31+ fields, system roles, custom roles, and CRM integration across 15 platforms.',
     link: '/docs/features/user-management',
   },
   {
-    title: 'Business Modules',
-    description: 'Expandable module system for Notes, Estimates, Banners, and Notice Management. Install, activate, and manage independently.',
+    title: 'Modules',
+    description: 'Expandable module system — like plugins for the plugin. Install, activate, and manage modules independently.',
     link: '/docs/features/modules',
   },
   {
-    title: 'FlowMattic Integration',
-    description: 'Automatic two-way sync of all configuration data to FlowMattic variables for seamless workflow automation.',
-    link: '/docs/integrations/flowmattic',
+    title: 'Integrations',
+    description: '17+ integrations including FlowMattic, Cloudflare, Slack, ContentPen, OpenAI, and more.',
+    link: '/docs/integrations/overview',
   },
   {
     title: 'Backup & Restore',

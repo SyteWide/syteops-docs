@@ -50,7 +50,7 @@ const config: Config = {
       title: 'SyteOps',
       logo: {
         alt: 'SyteOps Logo',
-        src: 'img/logo.png',
+        src: 'img/logo.svg',
       },
       items: [
         {
@@ -74,6 +74,7 @@ const config: Config = {
           items: [
             {label: 'Getting Started', to: '/docs/getting-started/installation'},
             {label: 'Features', to: '/docs/features/overview'},
+            {label: 'Integrations', to: '/docs/integrations/overview'},
             {label: 'Troubleshooting', to: '/docs/troubleshooting'},
           ],
         },

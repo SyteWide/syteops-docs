@@ -29,7 +29,10 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: 'Integrations',
       items: [
+        'integrations/overview',
         'integrations/flowmattic',
+        'integrations/cloudflare',
+        'integrations/contentpen',
       ],
     },
     'troubleshooting',

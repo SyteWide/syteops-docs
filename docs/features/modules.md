@@ -1,37 +1,12 @@
 ---
 sidebar_position: 3
-title: Business Modules
-description: Installing, activating, and managing SyteOps business modules.
+title: Modules
+description: Installing, activating, and managing SyteOps modules.
 ---
 
-# Business Modules
+# Modules
 
-SyteOps uses an expandable module system for business features. Modules are packaged as ZIP files that can be uploaded, activated, and managed independently.
-
-## Available Modules
-
-### Notes
-
-Note-taking and documentation functionality attached to user profiles. When enabled, each user card gains a Notes section for recording information.
-
-### Estimates
-
-Estimation and quoting system for business operations. Provides structured estimate fields per user.
-
-### Banners
-
-Banner management with scheduling capabilities:
-- Create and manage banners with custom content
-- Schedule display periods
-- Frontend display integration
-- Custom post type with admin UI
-
-### Notice Management
-
-WordPress admin notice control:
-- Suppress matched admin notices via client-side hide
-- Show button to reveal full notice text when needed
-- Scoped to SyteOps screens to avoid interfering with other plugins
+SyteOps uses an expandable module system — like plugins for the plugin. Modules can add new features, patch other plugins, or extend SyteOps in a variety of ways. They are packaged as ZIP files that can be uploaded, activated, and managed independently.
 
 ## Installing a Module
 
@@ -59,4 +34,4 @@ Upload a new version of the module ZIP. The upload flow handles overwriting the 
 
 ## FlowMattic Integration
 
-Each active module generates FlowMattic variables that can be used in automated workflows. Variable cleanup happens automatically on deactivation.
+Some active modules generate FlowMattic variables that can be used in automated workflows. Variable cleanup happens automatically on deactivation.

@@ -12,17 +12,11 @@ SyteOps is a comprehensive WordPress management platform that centralizes busine
 
 ### User Management
 
-Manage up to 20 users with 31+ fields per user including identity, contact information, CRM IDs across 15 supported systems, and profile pictures. Assign system roles (Site Owner, Technical Contact, Marketing Contact) and create custom roles with flexible constraints.
+Manage users with 31+ fields per user including identity, contact information, CRM IDs across 15 supported systems, and profile pictures. Assign system roles (Site Owner, Technical Contact, Marketing Contact) and create custom roles with flexible constraints.
 
-### Business Modules
+### Modules
 
-Expandable module system for business features:
-- **Notes** — Note-taking and documentation per user
-- **Estimates** — Estimation and quoting system
-- **Banners** — Banner management with scheduling and frontend display
-- **Notice Management** — WordPress admin notice suppression and control
-
-Modules are installed as ZIP packages and can be independently activated or deactivated. Deactivation preserves all data for easy re-enablement.
+Expandable module system — like plugins for the plugin. Modules can add new features, patch other plugins, or extend SyteOps in a variety of ways. They are installed as ZIP packages and can be independently activated or deactivated. Deactivation preserves all data for easy re-enablement.
 
 ### FlowMattic Integration
 
@@ -70,7 +64,7 @@ Default-deny security model for the WordPress REST API:
 
 ### Licensing Security
 
-- Product License activation via FluentCart
+- Product License activation via SyteWide
 - Management Connection for server-to-endpoint control
 - License lock behavior preserves settings while restricting access
 - Automatic restoration when license validates
