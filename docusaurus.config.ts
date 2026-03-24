@@ -126,6 +126,11 @@ const config: Config = {
           label: 'Documentation',
         },
         {
+          href: 'https://sytewide.com/buy-syteops',
+          label: 'Buy SyteOps',
+          position: 'right',
+        },
+        {
           href: 'https://sytewide.com',
           label: 'SyteWide.com',
           position: 'right',
@@ -147,6 +152,7 @@ const config: Config = {
         {
           title: 'Resources',
           items: [
+            {label: 'Buy SyteOps', href: 'https://sytewide.com/buy-syteops'},
             {label: 'SyteWide.com', href: 'https://sytewide.com'},
             {label: 'FlowMattic', href: 'https://flowmattic.com'},
           ],
