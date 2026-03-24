@@ -27,6 +27,12 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
+/* Navbar logo — force square */
+.navbar__logo img {
+  width: 40px !important;
+  height: 40px !important;
+}
+
 /* Force heading sizes — overrides Infima defaults */
 h1, .markdown h1 {
   font-size: 2.1875rem !important; /* 35px */
