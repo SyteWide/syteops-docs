@@ -1,5 +1,5 @@
 ---
-sidebar_position: 6
+sidebar_position: 7
 title: REST API Restriction
 description: Controlling and securing WordPress REST API access with SyteOps.
 ---
@@ -34,7 +34,8 @@ These endpoints are always allowed when REST restriction (not Block All) is enab
 | Endpoint | Purpose |
 |---|---|
 | `/wp-json` | REST API discovery |
-| `/wp-json/syteops/v1/*` | SyteOps management endpoints |
+| `/wp-json/syteops/*` | SyteOps plugin endpoints |
+| `/wp-json/syteops-int-cp/*` | ContentPen integration endpoints |
 | `/wp-json/flowmattic/v1/*` | FlowMattic workflow automation |
 | `/wp-json/google-site-kit/*` | Google Site Kit |
 | `/wp-json/wordfence/v1/authenticate` | Wordfence security |
@@ -54,7 +55,69 @@ When Block All is enabled:
 
 - Blocked anonymous requests receive a randomized delay (200-800ms) before the 401 response to discourage automated probing
 - Legitimate authenticated users experience no change
-- REST API access logs are available for monitoring (configurable columns)
+- REST API access logs are available for monitoring (see below)
+
+## REST API Monitoring
+
+SyteOps includes a built-in REST API logging system to monitor API access on your site. Settings are on the **REST API** page under the Logging Settings card.
+
+### Enabling Logging
+
+Toggle **Enable REST Logging** to start capturing REST API requests. Logging is disabled by default.
+
+### Logging Settings
+
+| Setting | Default | Description |
+|---|---|---|
+| **Sampling Rate** | 100% | Percentage of requests to log (1–100). Lower values reduce database usage on high-traffic sites |
+| **Retention** | 30 days | Logs older than this are automatically deleted daily (1–365 days) |
+| **Hash IP Addresses** | Off | Stores HMAC-SHA-256 pseudonyms instead of raw IPs (GDPR-friendly) |
+
+### Route Exclusions
+
+High-volume routes can be excluded from logging to reduce noise. Three common routes are excluded by default:
+
+- `/wp-json/wp/v2/` — WordPress Core REST
+- `/wp-json/wc/store/` — WooCommerce Store API
+- `/wp-json/oembed/` — oEmbed
+
+You can add additional route prefixes to exclude (one per line).
+
+### Log Table
+
+The log table shows these columns by default:
+
+| Column | Description |
+|---|---|
+| **Time** | Request timestamp in site timezone |
+| **Route** | REST endpoint path (click to copy) |
+| **Method** | HTTP method (GET, POST, PUT, DELETE) |
+| **User** | Username or "Guest" |
+| **IP Address** | Full IP or hashed value |
+| **Auth Type** | Authentication method (logged-in, application password, JWT, unauthenticated, etc.) |
+| **Outcome** | Result (allowed, allowlisted, blocked, failed auth, etc.) |
+| **Status** | HTTP status code |
+| **Time (ms)** | Request execution time |
+| **User Agent** | Client identifier |
+
+Additional columns (Site URL, Blog ID, User ID, Roles, Query String, Request Body, Referrer, Allowlist Pattern) are available via **Screen Options** at the top of the page.
+
+### Filtering
+
+Use the filter bar to narrow results by:
+- **Route** — Search by endpoint path
+- **IP Address** — Filter by specific IP
+- **User** — Filter by username or user ID
+- **Date** — Filter by calendar date
+- **Outcome** — Filter by result type (allowed, blocked, etc.)
+
+### Exporting Logs
+
+Click **Export CSV** or **Export JSON** to download the currently filtered log data. Exports include up to 5,000 rows and respect all active filters.
+
+### Clearing Logs
+
+Use the **Clear All Logs** button to permanently delete all log entries. This action cannot be undone.
 
 ## Configuration
 

@@ -6,54 +6,21 @@ description: How to configure Cloudflare firewall rules, caching, and WAF settin
 
 # Cloudflare Setup Guide
 
-If your WordPress site uses Cloudflare, you need to configure a few rules so that SyteOps licensing, webhooks, and scheduled tasks work correctly. Without these rules, Cloudflare's security features may block legitimate SyteOps requests.
+If your WordPress site uses Cloudflare, you need to configure a few rules so that SyteOps webhooks and scheduled tasks work correctly. Without these rules, Cloudflare's security features may block legitimate SyteOps requests.
 
 ## What Needs Configuration
 
-SyteOps uses several URL paths for licensing, webhooks, and background tasks. Cloudflare's firewall, WAF, and caching can interfere with these requests if not configured properly.
+SyteOps uses several URL paths for webhooks and background tasks. Cloudflare's firewall, WAF, and caching can interfere with these requests if not configured properly.
 
 | Path | Purpose |
 |---|---|
-| `/wp-json/syteops/v1/license/*` | Licensing validation and server-endpoint communication |
 | `/wp-json/syteops-int-cp/v1/webhook` | ContentPen webhook delivery |
 | `/wp-cron.php` | WordPress scheduled tasks (backups, sync) |
 | `/wp-json` | REST API discovery |
 
 ---
 
-## Step 1: Allow SyteOps Licensing Requests
-
-SyteOps licensing requests include a special header (`X-SyteOps-Request: 1`) that identifies them. Create a Cloudflare rule to allow these requests through your firewall.
-
-### Create the Rule
-
-1. Log in to your Cloudflare dashboard
-2. Select your domain
-3. Go to **Security > WAF > Custom Rules**
-4. Click **Create Rule**
-5. Configure:
-   - **Rule name:** `Allow SyteOps Requests`
-   - **Expression:**
-     ```
-     (http.request.headers["x-syteops-request"][0] eq "1")
-     ```
-   - **Action:** Allow
-6. Save and deploy
-
-This allows all requests that include the SyteOps header, which is only sent by SyteOps plugin installations.
-
-### More Restrictive Alternative
-
-If you prefer to limit the rule to specific paths:
-
-```
-(http.request.headers["x-syteops-request"][0] eq "1") and
-(http.request.uri.path contains "/wp-json/syteops/v1/license/")
-```
-
----
-
-## Step 2: Allow ContentPen Webhooks
+## Step 1: Allow ContentPen Webhooks
 
 If you use the ContentPen integration, its webhooks are server-to-server requests that Cloudflare's Bot Fight Mode often blocks.
 
@@ -74,7 +41,7 @@ SyteOps verifies the webhook signature after the request reaches your server, so
 
 ---
 
-## Step 3: Configure WP-Cron Caching
+## Step 2: Configure WP-Cron Caching
 
 WordPress uses `wp-cron.php` for scheduled tasks like automatic backups and FlowMattic sync. If Cloudflare caches this file, scheduled tasks stop running.
 
@@ -97,23 +64,23 @@ When `wp-cron.php` is cached, only the first request runs PHP. Later requests ge
 
 ---
 
-## Step 4: WAF and Bot Fight Mode
+## Step 3: WAF and Bot Fight Mode
 
 Cloudflare's security features can interfere with legitimate server-to-server requests. Here are the common issues and fixes.
 
 ### Bot Fight Mode
 
-Bot Fight Mode can block server-to-server requests (like licensing checks and webhooks) because they don't come from a browser.
+Bot Fight Mode can block server-to-server requests (like webhooks) because they don't come from a browser.
 
-**Fix:** If you see 403 errors on SyteOps licensing or webhook requests, either:
+**Fix:** If you see 403 errors on SyteOps webhook requests, either:
 - Turn off Bot Fight Mode for the zone (Security > Bots)
-- Ensure your Allow rules (Steps 1-2) are placed **above** the Bot Fight Mode rules — Allow rules evaluated first will skip later bot checks
+- Ensure your Allow rules (Step 1) are placed **above** the Bot Fight Mode rules — Allow rules evaluated first will skip later bot checks
 
 ### Security Level
 
 If your site is set to "I'm Under Attack" or "High" security level, Cloudflare may challenge or block SyteOps requests.
 
-**Fix:** Add the Allow rules from Steps 1-2. These are evaluated before the security level check, so matched requests pass through without a challenge.
+**Fix:** Add the Allow rule from Step 1. It is evaluated before the security level check, so matched requests pass through without a challenge.
 
 ### Managed Rules (WAF)
 
@@ -128,11 +95,10 @@ Cloudflare's managed WAF rules can occasionally flag SyteOps requests.
 Cloudflare evaluates rules in order from top to bottom. Place your Allow rules **before** any blocking rules.
 
 **Recommended order:**
-1. Allow SyteOps Requests (licensing)
-2. Allow ContentPen Webhook
-3. Bypass Cache for WP-Cron
-4. Your other allow rules
-5. Your blocking/security rules
+1. Allow ContentPen Webhook
+2. Bypass Cache for WP-Cron
+3. Your other allow rules
+4. Your blocking/security rules
 
 ---
 
@@ -170,19 +136,14 @@ This ensures only your Worker can trigger cron, even if other security rules wou
 
 After setting up your rules:
 
-### 1. Test Licensing
-
-- Try connecting a SyteOps endpoint to a server (or re-validate your license)
-- If it succeeds, your licensing rules are working
-
-### 2. Check Cloudflare Events
+### 1. Check Cloudflare Events
 
 1. Go to **Security > Events**
 2. Filter by URL containing `syteops` or `wp-cron`
 3. Look for any blocked or challenged requests
 4. Verify your allowed requests show "Allowed" status
 
-### 3. Test WP-Cron
+### 2. Test WP-Cron
 
 1. Visit `https://yoursite.com/wp-cron.php` directly in a browser — you should see a blank page (this is normal)
 2. Check that your scheduled backups are running on time
@@ -191,13 +152,6 @@ After setting up your rules:
 ---
 
 ## Troubleshooting
-
-### Licensing Requests Getting 403 Errors
-
-1. **Check rule order** — Allow rules must be before blocking rules
-2. **Check Security > Events** — Filter by response code 403 and path containing `syteops`
-3. **Verify the header** — Expand the blocked request in Events and check for `x-syteops-request: 1`
-4. **Check other security settings** — WAF managed rules, rate limiting, and IP access rules can all cause 403s
 
 ### ContentPen Webhooks Failing
 

@@ -18,10 +18,13 @@ const sidebars: SidebarsConfig = {
       items: [
         'features/overview',
         'features/user-management',
+        'features/crm',
         'features/modules',
         'features/variable-sets',
         'features/backup-and-restore',
         'features/rest-api-restriction',
+        'features/debug-tool',
+        'features/server-connections',
         'features/licensing',
       ],
     },

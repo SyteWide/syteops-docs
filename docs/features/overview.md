@@ -14,6 +14,10 @@ SyteOps is a comprehensive WordPress management platform that centralizes busine
 
 Manage users with 31+ fields per user including identity, contact information, CRM IDs across 15 supported systems, and profile pictures. Assign system roles (Site Owner, Technical Contact, Marketing Contact) and create custom roles with flexible constraints.
 
+### CRM Management
+
+Centralized configuration for up to 15 CRM systems with encrypted API credentials, platform selection for team communication and booking, and RSVS-based CRM variables that sync to FlowMattic for workflow automation.
+
 ### Modules
 
 Expandable module system — like plugins for the plugin. Modules can add new features, patch other plugins, or extend SyteOps in a variety of ways. They are installed as ZIP packages and can be independently activated or deactivated. Deactivation preserves all data for easy re-enablement.
@@ -62,6 +66,14 @@ Default-deny security model for the WordPress REST API:
 - Custom allowlist for specific endpoints
 - Built-in allowlist for WooCommerce, FlowMattic, Google Site Kit, and Wordfence
 
+### Server Connections
+
+Remote management system for controlling multiple SyteOps endpoints from a central server:
+- Issue connections to endpoints for centralized control
+- Remote actions for REST API, Debug, Logging, FlowMattic, and Plugins
+- Endpoint status scanning and monitoring
+- Bulk actions across multiple connections
+
 ### Licensing Security
 
 - Product License activation via SyteWide
@@ -83,4 +95,4 @@ Administrative diagnostic tool (requires Debug Mode):
 | WordPress | 6.4+ |
 | PHP | 8.1+ |
 | MySQL | 5.7+ (or MariaDB 10.3+) |
-| FlowMattic | Required for admin UI access |
+| FlowMattic | Recommended — required for workflow automation, CRM, Notes, and Estimates features |

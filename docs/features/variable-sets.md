@@ -1,5 +1,5 @@
 ---
-sidebar_position: 4
+sidebar_position: 5
 title: Variable Sets
 description: Creating and managing custom variable set tabs in SyteOps.
 ---

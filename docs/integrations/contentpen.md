@@ -55,7 +55,7 @@ Invalid signatures are rejected before any processing occurs.
 
 ## Cloudflare Configuration
 
-If your site uses Cloudflare, server-to-server webhook requests may be blocked by Bot Fight Mode or other security features. See the [Cloudflare Setup Guide](cloudflare#step-2-allow-contentpen-webhooks) for the specific firewall rule to add.
+If your site uses Cloudflare, server-to-server webhook requests may be blocked by Bot Fight Mode or other security features. See the [Cloudflare Setup Guide](cloudflare#step-1-allow-contentpen-webhooks) for the specific firewall rule to add.
 
 ## Troubleshooting
 

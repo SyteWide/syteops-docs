@@ -13,7 +13,7 @@ description: System requirements, installation methods, and first-run setup for 
 | WordPress | 6.4+ |
 | PHP | 8.1+ |
 | MySQL | 5.7+ (or MariaDB 10.3+) |
-| FlowMattic | Required for admin UI access |
+| FlowMattic | Recommended — required for workflow automation, CRM, Notes, and Estimates features |
 
 ## Install
 
