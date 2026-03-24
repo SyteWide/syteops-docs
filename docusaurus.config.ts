@@ -5,7 +5,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 const config: Config = {
   title: 'SyteOps Documentation',
   tagline: 'Centralize operations. Automate workflows. Secure your WordPress.',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.png',
 
   future: {
     v4: true,
@@ -50,7 +50,7 @@ const config: Config = {
       title: 'SyteOps',
       logo: {
         alt: 'SyteOps Logo',
-        src: 'img/logo.svg',
+        src: 'img/logo.png',
       },
       items: [
         {
