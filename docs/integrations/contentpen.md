@@ -1,16 +1,26 @@
 ---
 sidebar_position: 4
 title: ContentPen Integration
-description: Setting up ContentPen content relay and webhook delivery with SyteOps.
+description: Setting up ContentPen content relay, webhook delivery, and self-routing content pipelines with SyteOps.
 ---
 
 # ContentPen Integration
 
-SyteOps integrates with ContentPen for programmatic content relay and formatting. ContentPen sends webhooks to your WordPress site, which SyteOps processes and relays to FlowMattic for workflow automation.
+SyteOps integrates with ContentPen to build self-routing content pipelines. ContentPen generates content and sends it as a webhook. SyteOps verifies the payload, relays it to FlowMattic, and your SyteOps user and role data tells the workflow exactly what to do with it — including who it belongs to.
+
+The result: content arrives in WordPress assigned to the right author, with fields populated and SEO metadata ready. No manual assignment. No workflow editing when authors change.
+
+For the complete pipeline story, see [Content Pipelines](../features/content-pipelines).
 
 ## What It Does
 
-When ContentPen generates or processes content, it sends a webhook to your SyteOps installation. SyteOps verifies the webhook signature, processes the payload, and relays it to FlowMattic where you can build automated workflows around the content.
+When ContentPen generates or processes content, it sends a webhook to your SyteOps installation. SyteOps:
+
+1. Verifies the webhook signature (HMAC-SHA256)
+2. Processes and normalizes the payload
+3. Relays it to the FlowMattic webhook URL you configure in the System/API tab
+
+From there, FlowMattic handles the rest — using SyteOps variables (user data, role assignments, variable sets) to route and process the content.
 
 ## Requirements
 
@@ -30,7 +40,7 @@ When ContentPen generates or processes content, it sends a webhook to your SyteO
 
 1. Go to the **System/API** tab
 2. Find the ContentPen section
-3. Enter your ContentPen API credentials
+3. Enter your ContentPen webhook secret and FlowMattic relay URL
 4. Save
 
 ### 3. Configure Webhook URL
@@ -52,6 +62,17 @@ SyteOps verifies every incoming ContentPen webhook using HMAC-SHA256 signature v
 - `X-Contentpen-Delivery-Id` — Unique delivery identifier
 
 Invalid signatures are rejected before any processing occurs.
+
+## Role-Aware Author Assignment
+
+The power of the ContentPen integration comes from combining it with SyteOps role data:
+
+- Your FlowMattic workflow references `syteops_user_NNN_is_{role}` variables to identify the current holder of a content role
+- ContentPen sends one webhook to one FlowMattic workflow
+- The workflow reads SyteOps role variables to determine which WordPress author to assign
+- The article lands assigned correctly — every time
+
+When the author changes, update their role assignment in SyteOps. The next ContentPen article routes to them automatically. No workflow edits needed.
 
 ## Cloudflare Configuration
 

@@ -1,92 +1,148 @@
 ---
 sidebar_position: 1
 title: Plugin Overview
-description: High-level summary of all SyteOps features and capabilities.
+description: Complete feature guide for SyteOps — WordPress management, FlowMattic automation, multi-site control, REST security, and more.
 ---
 
 # Plugin Overview
 
-SyteOps is a comprehensive WordPress management platform that centralizes business operations, automates workflows, and provides secure administrative controls.
+SyteOps is the operational platform for WordPress agencies and power operators. It centralizes users, roles, CRM data, API connections, and security settings into one structured hub — and syncs everything to FlowMattic so your automations always reflect your actual configuration.
 
-## Core Capabilities
+If you manage multiple sites, build complex FlowMattic workflows, or want your WordPress backend locked down and repeatable, SyteOps is the layer that makes it all work together.
 
-### User Management
+## FlowMattic Integration
 
-Manage users with 31+ fields per user including identity, contact information, CRM IDs across 15 supported systems, and profile pictures. Assign system roles (Site Owner, Technical Contact, Marketing Contact) and create custom roles with flexible constraints.
+Every piece of configuration you store in SyteOps — users, roles, CRM systems, API keys, custom variables — becomes a ready-to-use FlowMattic variable. Change a value in SyteOps, the variable updates automatically. No manual syncing, no stale workflow data.
 
-### CRM Management
+- All configuration data syncs to FlowMattic variables on save
+- Non-destructive **Resync All Variables** to re-align after any import or restore
+- **Find & Replace** across FlowMattic workflow definitions (with preview and backups)
+- Compatibility sentinel ensures FlowMattic is available before dependent operations run
+- Sensitive credential values are masked in the FlowMattic variable surface
 
-Centralized configuration for up to 15 CRM systems with encrypted API credentials, platform selection for team communication and booking, and RSVS-based CRM variables that sync to FlowMattic for workflow automation.
+## Multi-Site Server Management
 
-### Modules
+Issue management connections from a central SyteOps server to any number of endpoint WordPress sites. Remote-control each endpoint without logging into it.
 
-Expandable module system — like plugins for the plugin. Modules can add new features, patch other plugins, or extend SyteOps in a variety of ways. They are installed as ZIP packages and can be independently activated or deactivated. Deactivation preserves all data for easy re-enablement.
+From the server dashboard you can:
+- Scan endpoint status and connection health
+- Control REST API restriction settings remotely
+- Enable or disable Debug and Logging modes
+- Deploy FlowMattic workflows to endpoints
+- Manage installed plugins — view, install, delete (with your own stack protected)
+- Run bulk actions across multiple connections at once
 
-### FlowMattic Integration
+This is how agencies manage a fleet of client sites from one place without per-site logins.
 
-Seamless two-way integration with FlowMattic for workflow automation:
-- Configuration data automatically syncs to FlowMattic variables
-- Variable maintenance with non-destructive resync
-- Compatibility sentinel ensures FlowMattic is available before dependent operations
+## Roles as Live Automation Variables
 
-### Variable Sets
+Create custom roles — Managers, Assistants, Reviewers, or anything your operation uses. Assign users to those roles. SyteOps turns each role into a set of FlowMattic aggregator variables:
 
-Create custom admin tabs with three types of variable collections:
-- **SVS (Static Variable Set)** — Suffix + typed value (text, email, URL, number, textarea, HTML)
-- **DVS (Dynamic Variable Set)** — Suffix only, no stored value
-- **RSVS (Related Static Variable Sets)** — Groups of SVS under Set 01..20
+- A single variable for all email addresses in that role
+- A single variable for all display names in that role
+- Slack aggregator variable for direct notification routing
 
-### Backup and Restore
+Add or remove a user from a role and every workflow that references that role variable updates automatically. No workflow editing required. When a new SyteWide plugin (like SyteSlyders) is installed, it can access those same roles directly.
 
-Comprehensive data protection:
+## User and CRM Management
+
+Up to 20 structured user slots with 31+ fields each, including identity, contact details, profile images, and CRM IDs across up to 15 supported CRM systems.
+
+- **System roles** — Site Owner, Technical Contact, Marketing Contact
+- **Custom roles** — Define your own with user assignment and FlowMattic aggregation
+- **CRM systems** — Encrypted credentials, booking platform selection, multi-system user ID mapping
+- All user and CRM data syncs to FlowMattic as named variables
+
+## White Label and Client Protection
+
+Adopt any installed WordPress plugin as a SyteOps module. It stops appearing as a standalone plugin in the admin. Clients see one clean interface — not the full stack of tools powering their site.
+
+- Hide licenses, competitive tools, and proprietary automation from client view
+- Choose which plugins appear in the client's Plugins list
+- Protect your operational IP while still delivering a polished admin experience
+
+## REST API Security
+
+Default-deny security model for the WordPress REST API. One toggle blocks all anonymous REST access across the site.
+
+- **Block All** mode for staging or locked-down environments
+- **Custom allowlist** for endpoints your specific stack needs open
+- Built-in allowlist entries for WooCommerce, FlowMattic, Google Site Kit, and Wordfence
+- REST monitor for observing what hits your endpoints
+- Per-endpoint control from the server dashboard on managed sites
+
+Your WordPress REST API is not public infrastructure. SyteOps makes enforcing that easy.
+
+## Module System
+
+Modules are ZIP-installable extensions that add capabilities to SyteOps. Think of them as plugins for your plugin.
+
+What modules can do:
+- Add new post types, admin pages, and settings tabs
+- Patch known issues in third-party plugins (without waiting for a vendor release)
+- Extend FlowMattic variable families with new data domains
+- Introduce new automation dispatch patterns
+
+Modules can be toggled on or off without losing configuration data. First-party SyteWide modules and custom-built packages are both supported. The Package Builder module lets you create and encrypt your own `.sytepkg` packages.
+
+## Smart Content Pipelines
+
+Pair SyteOps user and role data with ContentPen, FlowMattic, ACF, and Squirrly SEO to build self-routing content workflows.
+
+A practical example: ContentPen sends a payload to one FlowMattic webhook. SyteOps user and role variables tell the workflow who the assigned author is. ACF populates the field structure. Squirrly SEO applies the metadata. The article arrives in WordPress, structured and SEO-ready, assigned to the right author — ready for review. One click to publish.
+
+No per-author workflow duplication. No workflow edits when authors change. The configuration is the source of truth.
+
+## Variable Sets
+
+Create custom admin tabs with your own structured data collections. Three variable types:
+
+- **SVS (Static Variable Set)** — A value you define: text, email, URL, number, textarea, or HTML. Syncs to FlowMattic.
+- **DVS (Dynamic Variable Set)** — A suffix placeholder with no stored value. Used for dynamic runtime injection in workflows.
+- **RSVS (Related Static Variable Sets)** — Up to 20 grouped SVS entries under one tab. Useful for repeating data patterns like client lists or API credential sets.
+
+Variable sets give you a structured, UI-managed way to feed constant data into FlowMattic without hardcoding values in workflows.
+
+## Backup and Restore
+
 - Full backup with manifest-based ZIP restore points
 - Scoped backups (per tab, per user, per module)
 - Automatic scheduled backups with configurable retention
-- Cross-site restore with URL rewriting
+- Cross-site restore with URL rewriting for domain migrations
 - Backup audit log
+- Post-restore license re-validation for security
 
-### Configuration Management
+## Configuration Management
 
-- Master export/import for complete site configuration
-- Scoped export/import for individual tabs or areas
-- Single user card export/import with automatic remapping
-- Present-state pruning and policy enforcement
+Move your entire SyteOps setup between sites without rebuilding from scratch.
+
+- Master export/import for complete configuration
+- Scoped export/import for individual tabs or data areas
+- Single user card export/import with automatic slot remapping
+- ACF field group importer for bringing field definitions across sites
+
+## Integrations
+
+SyteOps includes toggleable integrations with tools across your stack. See the [Integrations Overview](../integrations/overview) for the full list.
+
+Core integrations built in (no toggle required): FlowMattic, ContentPen, ACF.
 
 ## Security
 
 ### SyteOps Admin Role
 
-Restricted WordPress role with strict assignment policies. Only existing SyteOps Admins can assign this role to others. Automatic role recovery if capabilities are lost.
+A dedicated capability tier separate from WordPress admin. Only existing SyteOps Admins can grant this role to others. Automatic role recovery if capabilities are lost.
 
-### REST API Restriction
+### Encrypted Credential Storage
 
-Default-deny security model for the WordPress REST API:
-- Block anonymous REST requests while allowing authenticated usage
-- Block All mode for staging/development sites
-- Custom allowlist for specific endpoints
-- Built-in allowlist for WooCommerce, FlowMattic, Google Site Kit, and Wordfence
-
-### Server Connections
-
-Remote management system for controlling multiple SyteOps endpoints from a central server:
-- Issue connections to endpoints for centralized control
-- Remote actions for REST API, Debug, Logging, FlowMattic, and Plugins
-- Endpoint status scanning and monitoring
-- Bulk actions across multiple connections
-
-### Licensing Security
-
-- Product License activation via SyteWide
-- Management Connection for server-to-endpoint control
-- License lock behavior preserves settings while restricting access
-- Automatic restoration when license validates
+API keys, secrets, and CRM credentials stored in an encrypted secrets structure — not in plaintext options.
 
 ### Debug Tool
 
-Administrative diagnostic tool (requires Debug Mode):
-- Search across options and FlowMattic variables
-- Find & Replace in FlowMattic workflow definitions (with preview and backups)
-- Destructive wipes for variable cleanup (SyteOps Admin + Debug Mode required)
+Admin-only diagnostic tool requiring Debug Mode:
+- Search across all options and FlowMattic variables
+- Find & Replace in FlowMattic workflow definitions (with preview mode and JSON backups before any changes)
+- Destructive variable wipes gated behind SyteOps Admin and Debug Mode
 
 ## Requirements
 
@@ -95,4 +151,4 @@ Administrative diagnostic tool (requires Debug Mode):
 | WordPress | 6.4+ |
 | PHP | 8.1+ |
 | MySQL | 5.7+ (or MariaDB 10.3+) |
-| FlowMattic | Recommended — required for workflow automation, CRM, Notes, and Estimates features |
+| FlowMattic | Required for workflow automation, CRM sync, and full admin UI access |

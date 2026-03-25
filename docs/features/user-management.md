@@ -1,25 +1,27 @@
 ---
 sidebar_position: 2
 title: User Management
-description: Managing users, system roles, custom roles, and user data in SyteOps.
+description: Managing users, system roles, custom roles, and FlowMattic automation variables in SyteOps.
 ---
 
 # User Management
 
-SyteOps provides comprehensive user profile management, role assignments, and FlowMattic variable sync.
+SyteOps provides structured user profile management and role-based FlowMattic automation. Every user you configure and every role you define becomes part of your automation infrastructure — without you ever updating a workflow.
 
 ## User Profiles
 
-Each user has 31+ fields organized into categories:
+Each user slot has 31+ fields organized into categories:
 - **Identity** — Name, email, phone
 - **Contact Information** — Address, additional contacts
 - **CRM IDs** — Identifiers across 15 supported CRM systems
 - **Profile Pictures** — Upload or link to user avatars
 - **Module Data** — Additional per-user data from active modules
 
+SyteOps supports up to 20 user slots. All user data syncs to FlowMattic as named variables — `syteops_user_001_name`, `syteops_user_001_email`, etc. — making user data available to every workflow without manual maintenance.
+
 ## System Roles
 
-System roles are single-assignment — only one user can hold each role at a time.
+System roles are single-assignment — exactly one user can hold each role at a time.
 
 | Role | Purpose |
 |---|---|
@@ -27,17 +29,16 @@ System roles are single-assignment — only one user can hold each role at a tim
 | Technical Contact | Primary technical contact for the site |
 | Marketing Contact | Primary marketing contact |
 
-To assign a system role:
-1. Navigate to the **Users** tab
-2. Open the user's card
-3. Check the role checkbox
-4. Save
+System roles generate stable alias variable families in FlowMattic:
+- `syteops_user_owner_*` — The current Site Owner's full profile
+- `syteops_user_contact_tech_*` — The current Technical Contact's full profile
+- `syteops_user_contact_marketing_*` — The current Marketing Contact's full profile
 
-When a system role is unchecked, it is cleared from the user and removed from FlowMattic.
+Reassign a system role and these variables update automatically on the next save.
 
 ## Custom Roles
 
-Create your own roles beyond the built-in system roles.
+Create your own roles beyond the built-in system roles. Custom roles are the foundation for team-aware automation. See [Roles & Automation Variables](roles-and-automation) for the full story.
 
 ### Creating a Custom Role
 
@@ -53,13 +54,18 @@ Create your own roles beyond the built-in system roles.
 
 ### Assigning Custom Roles
 
-Custom roles appear as checkboxes on each user card. Check the role to assign it, uncheck to remove it.
+Custom roles appear as checkboxes on each user card. Check the role to assign it, uncheck to remove it. FlowMattic aggregator variables update on save.
 
-### FlowMattic Variables
+### FlowMattic Variables Generated Per Custom Role
 
-Custom roles automatically generate FlowMattic variables:
-- `syteops_user_NNN_is_{role_slug}` — Whether each user has the role
-- Aggregator variables for team communication (names, emails, Slack handles)
+| Variable | Contains |
+|---|---|
+| `syteops_std_systm_contact_{slug}_all_emails` | All emails for users in this role |
+| `syteops_std_systm_contact_{slug}_all_names` | All display names for users in this role |
+| `syteops_std_systm_contact_{slug}_slack` | Slack aggregator for this role group |
+| `syteops_user_NNN_is_{slug}` | Per-user boolean: does user 001–020 hold this role |
+
+These variables are generated and synced automatically. Reference them in FlowMattic to build team-aware workflows that never need editing when your team changes.
 
 ## SyteOps Admin Role
 
@@ -77,3 +83,7 @@ The first user to complete Initial Setup becomes a SyteOps Admin.
 - **Import** — Import remaps to the chosen target user slot; profile pictures are link-only
 - **Master export** includes all user data
 - Role assignments are preserved across export/import
+
+## Roles & Users Admin Page
+
+For a dedicated role management interface, navigate to **SyteOps > Roles & Users** in the WordPress admin sidebar. This standalone page shows all system and custom roles, their current user assignments, assignment counts, and aggregator variable status.
