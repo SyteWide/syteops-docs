@@ -65,6 +65,14 @@ The **Management Connection** is a separate system for server-to-endpoint contro
 
 Management Connections are completely independent from your Product License. A valid Product License is required for both servers and endpoints, but the connection system operates separately.
 
+## Package Encryption Keys
+
+Your Product License automatically delivers the encryption key needed to install encrypted `.sytepkg` module and workflow packages. No manual key configuration is required.
+
+The key is refreshed automatically during daily license validation. If you encounter a "package key not available" error when installing a `.sytepkg` package, go to **Admin tab > Product License > Recheck** to re-validate your license and refresh the key.
+
+See [Encrypted Packages](modules/packages) for details on the `.sytepkg` format.
+
 ## GitHub Update Token
 
 For receiving plugin updates from private GitHub repositories:

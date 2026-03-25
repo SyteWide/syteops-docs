@@ -114,6 +114,72 @@ WooCommerce OAuth (`/wc-auth/v1/*`) is automatically allowed. For custom WooComm
 
 **Cause:** Known Safari performance issue with form validation. Fixed in codebase — update to latest version.
 
+## Module Updates
+
+### No Updates Showing
+
+**Cause:** SyteOps checks for updates every 12 hours. You may already be on the latest version.
+
+**Solution:** Wait for the next automatic check, or manually trigger a check from the Modules section. If no updates appear, your modules are up to date.
+
+### Update Download Fails
+
+**Cause:** Site cannot reach the SyteWide distribution server.
+
+**Solution:** Verify your server has outbound internet access. Check firewall rules. Ensure your Product License is valid — the license provides both the update manifest URL and the decryption key.
+
+### Update Keeps Failing
+
+**Cause:** After 3 consecutive failures, SyteOps backs off to daily checks to avoid hammering the server.
+
+**Solution:** Check the SyteOps error log for the specific error message. Verify your license is valid and your server can reach the distribution endpoint.
+
+## Encrypted Packages (.sytepkg)
+
+### "Package key not available"
+
+**Cause:** Your Product License has not been validated, so the decryption key has not been delivered.
+
+**Solution:** Go to **Admin tab > Product License > Recheck** to validate your license. The key is delivered automatically during validation.
+
+### "Signature verification failed"
+
+**Cause:** The package file is corrupted or was signed by an untrusted key.
+
+**Solution:** Re-download the package from its original source. If the problem persists, contact the package provider.
+
+### "FlowMattic unavailable" During Workflow Import
+
+**Cause:** FlowMattic is not installed or not active.
+
+**Solution:** Install and activate FlowMattic before importing workflow template packages.
+
+### "Unsupported schema version"
+
+**Cause:** The package was built with a newer version of SyteOps than you're running.
+
+**Solution:** Update SyteOps to the latest version.
+
+## Workflow Templates
+
+### Imported Variables Are Empty
+
+**Cause:** Sensitive values (API keys, passwords, tokens) are automatically scrubbed during workflow export. This is by design to prevent credential leakage.
+
+**Solution:** After import, configure the scrubbed variables with your site-specific credentials. Variables requiring configuration will have placeholder values.
+
+### Workflow Conflict on Import
+
+**Cause:** A workflow with the same name already exists on your site.
+
+**Solution:** Choose a conflict resolution policy: **Overwrite** to replace the existing workflow, **Create New** to import alongside it with a timestamp suffix, or **Skip** to keep the existing version.
+
+### Variables Not Syncing After Import
+
+**Cause:** FlowMattic master sync may need a manual trigger after import.
+
+**Solution:** Use the **Resync All Variables** button in the Debug Tool.
+
 ## Debug Mode
 
 Enable Debug Mode in the Admin tab to access the [Debug Tool](features/debug-tool):
