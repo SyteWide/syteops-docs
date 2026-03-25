@@ -38,6 +38,11 @@ export default function HeroSection() {
             className="inline-flex items-center px-8 py-3 rounded-lg bg-surface-0 dark:bg-surface-100 border border-surface-200 hover:border-primary-300 dark:hover:border-primary-700 text-text-primary font-semibold text-base transition-all no-underline hover:no-underline hover:text-text-primary">
             Explore Features
           </Link>
+          <Link
+            href="https://sytewide.com/buy-syteops"
+            className="inline-flex items-center px-8 py-3 rounded-lg bg-primary-600 hover:bg-primary-700 text-white font-semibold text-base shadow-md hover:shadow-lg transition-all no-underline hover:no-underline hover:text-white">
+            Buy SyteOps
+          </Link>
         </div>
       </div>
     </section>
