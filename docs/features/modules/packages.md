@@ -1,12 +1,12 @@
 ---
 sidebar_position: 3
 title: Encrypted Packages (.sytepkg)
-description: Installing and creating encrypted module and workflow packages.
+description: Installing encrypted module and workflow packages from SyteWide.
 ---
 
 # Encrypted Packages (.sytepkg)
 
-`.sytepkg` is SyteOps' encrypted package format for securely distributing modules and workflow templates. Packages are encrypted and digitally signed so that source code is protected and tampering is detected. Whether you are installing a first-party SyteWide module or a package built by your agency, the process is the same.
+`.sytepkg` is SyteOps' encrypted package format for securely distributing modules and workflow templates. Packages are encrypted and digitally signed so that source code is protected and tampering is detected. Packages are distributed by SyteWide and installed through the standard module or workflow import flows described below.
 
 ## What's Inside a .sytepkg File
 
@@ -67,18 +67,6 @@ If an imported workflow matches an existing workflow, you choose how to handle i
 Associated FlowMattic variables are imported automatically along with the workflows.
 
 Variables marked as **sensitive** (API keys, credentials, secrets) are imported with placeholder values. After import, navigate to the relevant variable configuration and enter the correct values for your site. This prevents credentials from being transferred between environments.
-
-## Creating Your Own Packages
-
-If you build modules or workflow templates and need to distribute them, the **Package Builder** module handles encryption and packaging.
-
-1. Install and activate the Package Builder module
-2. Select a module or FlowMattic workflows to package
-3. Package Builder encrypts and signs the contents, producing a `.sytepkg` file ready for distribution
-
-Recipients install the package through the standard flows described above. This requires builder mode configuration before you can create packages.
-
-See [First-Party Module Guides](module-guides#package-builder) for Package Builder setup instructions.
 
 ## Troubleshooting
 

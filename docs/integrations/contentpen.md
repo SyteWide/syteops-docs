@@ -6,7 +6,7 @@ description: Setting up ContentPen content relay, webhook delivery, and self-rou
 
 # ContentPen Integration
 
-SyteOps integrates with ContentPen to build self-routing content pipelines. ContentPen generates content and sends it as a webhook. SyteOps verifies the payload, relays it to FlowMattic, and your SyteOps user and role data tells the workflow exactly what to do with it — including who it belongs to.
+SyteOps integrates with [ContentPen](https://contentpen.ai?ref=chet28&fp_sid=sytewide) to build self-routing content pipelines. ContentPen generates content and sends it as a webhook. SyteOps verifies the payload, relays it to FlowMattic, and your SyteOps user and role data tells the workflow exactly what to do with it — including who it belongs to.
 
 The result: content arrives in WordPress assigned to the right author, with fields populated and SEO metadata ready. No manual assignment. No workflow editing when authors change.
 

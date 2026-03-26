@@ -6,7 +6,7 @@ description: Building self-routing content workflows with ContentPen, FlowMattic
 
 # Content Pipelines
 
-SyteOps is the configuration backbone that makes content automation self-routing. When you connect ContentPen, FlowMattic, ACF, and Squirrly SEO around SyteOps user and role data, you get a pipeline where content arrives, finds its owner, builds to spec, and lands ready to publish — without manual assignment or workflow edits.
+SyteOps is the configuration backbone that makes content automation self-routing. When you connect [ContentPen](https://contentpen.ai?ref=chet28&fp_sid=sytewide), FlowMattic, ACF, and Squirrly SEO around SyteOps user and role data, you get a pipeline where content arrives, finds its owner, builds to spec, and lands ready to publish — without manual assignment or workflow edits.
 
 ## How It Comes Together
 
@@ -14,7 +14,7 @@ The pieces:
 
 | Tool | Role in the pipeline |
 |---|---|
-| **ContentPen** | Generates content and sends it as a webhook payload |
+| **[ContentPen](https://contentpen.ai?ref=chet28&fp_sid=sytewide)** | Generates content and sends it as a webhook payload |
 | **SyteOps** | Routes the webhook to FlowMattic; provides user and role variables for assignment |
 | **FlowMattic** | Executes the workflow logic: field mapping, author assignment, metadata injection |
 | **ACF** | Provides the field structure that the workflow populates |

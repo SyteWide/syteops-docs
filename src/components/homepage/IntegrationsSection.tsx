@@ -1,25 +1,28 @@
 import React from 'react';
 import Link from '@docusaurus/Link';
 
-const integrations = [
-  'FlowMattic',
-  'Cloudflare',
-  'ContentPen',
-  'Slack',
-  'Monday.com',
-  'OpenAI',
-  'AWS SES',
-  'Fluent Forms',
-  'WPVivid',
-  'Sendy',
-  'Documentero',
-  'Frill',
-  'Pulsetic',
-  'Squirrly SEO',
-  'UpdraftPlus',
-  'Fluent Booking',
-  'Trustily',
+const integrations: Array<{ name: string; href?: string }> = [
+  { name: 'FlowMattic' },
+  { name: 'Cloudflare' },
+  { name: 'ContentPen', href: 'https://contentpen.ai?ref=chet28&fp_sid=sytewide' },
+  { name: 'Slack' },
+  { name: 'Monday.com' },
+  { name: 'OpenAI' },
+  { name: 'AWS SES' },
+  { name: 'Fluent Forms' },
+  { name: 'WPVivid' },
+  { name: 'Sendy' },
+  { name: 'Documentero' },
+  { name: 'Frill' },
+  { name: 'Pulsetic' },
+  { name: 'Squirrly SEO' },
+  { name: 'UpdraftPlus' },
+  { name: 'Fluent Booking' },
+  { name: 'Trustily' },
 ];
+
+const pillClasses =
+  'inline-flex items-center px-4 py-2 rounded-full bg-surface-50 dark:bg-surface-100 border border-surface-200 text-sm text-text-secondary font-medium transition-colors hover:border-primary-300 dark:hover:border-primary-700 hover:text-primary-600 dark:hover:text-primary-400';
 
 export default function IntegrationsSection() {
   return (
@@ -35,13 +38,22 @@ export default function IntegrationsSection() {
         </div>
 
         <div className="flex flex-wrap items-center justify-center gap-3">
-          {integrations.map((name) => (
-            <span
-              key={name}
-              className="inline-flex items-center px-4 py-2 rounded-full bg-surface-50 dark:bg-surface-100 border border-surface-200 text-sm text-text-secondary font-medium transition-colors hover:border-primary-300 dark:hover:border-primary-700 hover:text-primary-600 dark:hover:text-primary-400">
-              {name}
-            </span>
-          ))}
+          {integrations.map((integration) =>
+            integration.href ? (
+              <a
+                key={integration.name}
+                href={integration.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${pillClasses} no-underline`}>
+                {integration.name}
+              </a>
+            ) : (
+              <span key={integration.name} className={pillClasses}>
+                {integration.name}
+              </span>
+            ),
+          )}
         </div>
 
         <div className="text-center mt-8">

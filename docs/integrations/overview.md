@@ -75,7 +75,7 @@ DNS, edge security, and cache control integration. Cloudflare requires specific 
 
 ### ContentPen
 
-Programmatic content relay and formatting integration. ContentPen sends webhooks to SyteOps for content processing — see the dedicated [ContentPen Integration](contentpen) page for setup details.
+Programmatic content relay and formatting integration. [ContentPen](https://contentpen.ai?ref=chet28&fp_sid=sytewide) sends webhooks to SyteOps for content processing — see the dedicated [ContentPen Integration](contentpen) page for setup details.
 
 ### Squirrly SEO
 

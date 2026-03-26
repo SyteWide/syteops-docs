@@ -1,19 +1,18 @@
 ---
 sidebar_position: 13
 title: "Workflow Templates"
-description: "Package, distribute, and deploy FlowMattic workflow templates across sites."
+description: "Import and deploy FlowMattic workflow templates across sites."
 ---
 
 # Workflow Templates
 
-Workflow templates let you package FlowMattic workflows for repeatable deployment across multiple sites. Instead of manually recreating workflows on each site, you can export them once and import everywhere.
+Workflow templates are pre-built FlowMattic workflow packages distributed by SyteWide as encrypted `.sytepkg` files. Instead of manually recreating workflows on each site, you can import a template package and deploy it everywhere.
 
 ## Use Cases
 
-- **Multi-site agencies** — Deploy the same automation workflows to every client site
-- **Team collaboration** — Share proven workflow patterns with team members
-- **Customer distribution** — Package workflows as part of a product or service offering
-- **Backup and migration** — Move workflows between staging and production environments
+- **Multi-site deployment** — Import a SyteWide workflow template once and deploy it to every managed site
+- **Staging to production** — Move workflow configurations between environments
+- **Standardized automations** — Use proven, tested workflow patterns across your sites
 
 ## What Gets Included
 
@@ -22,7 +21,7 @@ A workflow template package contains:
 - **Associated variables** — FlowMattic variables used by the workflows are exported alongside them
 
 What is **not** included:
-- **Credentials and API keys** — Sensitive values (API tokens, passwords, secrets) are automatically scrubbed during export. You need to configure these on each destination site after import.
+- **Credentials and API keys** — Sensitive values (API tokens, passwords, secrets) are scrubbed before distribution. You need to configure these on each destination site after import.
 - **Site-specific URLs** — Webhook URLs or domain-specific endpoints need to be updated after import
 - **External service connections** — OAuth tokens and third-party service links must be established on each site
 
@@ -42,28 +41,16 @@ After import, FlowMattic variables are synchronized automatically. Variables tha
 
 **Requirements:** FlowMattic must be installed and active. A valid SyteWide Product License is required for decrypting the package.
 
-## Exporting Workflow Templates
-
-Exporting requires the **Package Builder** module.
-
-1. Install and activate Package Builder (see [First-Party Module Guides](modules/module-guides#package-builder))
-2. Select the FlowMattic workflows you want to package
-3. Package Builder collects the workflows and their associated variables
-4. Sensitive values are automatically detected and scrubbed
-5. Everything is encrypted and signed into a `.sytepkg` file
-
-The resulting file can be distributed to any SyteOps site with a valid license.
-
 ## Deploying to Managed Endpoints
 
-If you manage multiple sites through SyteOps Server Connections, you can push workflow templates to endpoints directly:
+If you manage multiple sites through SyteOps Server Connections, you can push SyteWide-provided workflow template packages to your endpoints directly:
 
 1. From the Server tab, select an endpoint connection
 2. Use the **FlowMattic: Manage Workflows** action
 3. Select the workflow template package to deploy
 4. The endpoint receives, decrypts, and imports the workflows
 
-This combines the distribution convenience of Server Connections with the security of encrypted packages. See [Server Connections](server-connections) for more on managing endpoints.
+This combines the management convenience of Server Connections with the security of encrypted packages. See [Server Connections](server-connections) for more on managing endpoints.
 
 ## Troubleshooting
 
