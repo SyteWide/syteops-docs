@@ -1,7 +1,7 @@
 ---
 sidebar_position: 4
 title: Modules
-description: Installing, activating, and managing SyteOps modules — and building your own.
+description: Installing, activating, and managing SyteOps modules.
 ---
 
 # Modules
@@ -20,7 +20,7 @@ Modules are not just feature add-ons. They serve several distinct purposes:
 
 **Introduce new automation dispatch patterns** — Modules can register new inbound webhook routes, processing pipelines, or outbound dispatch behaviors. This allows specialized automation extensions to ship as module packages rather than standalone plugins.
 
-**Package and distribute workflow templates** — With the Package Builder module, you can export FlowMattic workflows as encrypted packages for repeatable deployment across sites. See [Workflow Templates](../workflow-templates) for details.
+**Deploy workflow templates** — SyteWide distributes FlowMattic workflow templates as encrypted packages for repeatable deployment across sites. See [Workflow Templates](../workflow-templates) for details.
 
 ## Installing a Module
 
@@ -63,23 +63,6 @@ These SyteWide-built modules are available separately. See [First-Party Module G
 | **LiteSpeed CF Token Fix** | Patches a known issue where LiteSpeed Cache sends the wrong Cloudflare authentication token. Toggle off when the vendor ships the fix. |
 | **Fluent Forms GDPR Fix** | Rebuilds the FlowMattic payload correctly when GDPR-triggered database deletions occur in Fluent Forms. |
 | **FluentCart Licensing** | Configures your SyteOps server as a licensing gateway connected to a FluentCart install. |
-| **Package Builder** | Encrypt and package modules and FlowMattic workflow templates as distributable `.sytepkg` files. |
-
-## Building and Distributing Your Own Modules
-
-The **Package Builder** module lets you create your own modules and workflow packages.
-
-1. Install and activate the Package Builder module
-2. Select the module or workflow template you want to package
-3. Package Builder exports and encrypts it as a `.sytepkg` file
-4. Distribute the package — recipients install it through the standard module upload flow
-
-This is the same format used for first-party SyteWide modules. You can use it to:
-- Build and ship internal tools across your client sites without exposing source
-- Distribute patched or customized module configurations
-- Package FlowMattic workflow templates for repeatable deployment
-
-See [Encrypted Packages](packages) for more on the `.sytepkg` format.
 
 ## FlowMattic Integration
 

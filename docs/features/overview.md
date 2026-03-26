@@ -87,7 +87,7 @@ Modules can be toggled on or off without losing configuration data. First-party 
 
 ## Smart Content Pipelines
 
-Pair SyteOps user and role data with ContentPen, FlowMattic, ACF, and Squirrly SEO to build self-routing content workflows.
+Pair SyteOps user and role data with [ContentPen](https://contentpen.ai?ref=chet28&fp_sid=sytewide), FlowMattic, ACF, and Squirrly SEO to build self-routing content workflows.
 
 A practical example: ContentPen sends a payload to one FlowMattic webhook. SyteOps user and role variables tell the workflow who the assigned author is. ACF populates the field structure. Squirrly SEO applies the metadata. The article arrives in WordPress, structured and SEO-ready, assigned to the right author — ready for review. One click to publish.
 
