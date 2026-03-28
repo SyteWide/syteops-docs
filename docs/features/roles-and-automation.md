@@ -82,11 +82,11 @@ The FlowMattic variables for this role are created immediately.
 
 On any user card in the Users tab, custom role checkboxes appear for each defined role. Check a box to assign, uncheck to remove. FlowMattic variables update on save.
 
-## Integration with SyteWide Plugins
+## Integration with SyteOps Ecosystem Plugins
 
-SyteOps is designed as the foundation layer for the SyteWide plugin ecosystem. When other SyteWide plugins (like SyteSlyders) are installed alongside SyteOps, they can access your defined roles and user data directly.
+SyteOps is designed as the foundation layer for a broader plugin ecosystem. When other SyteOps ecosystem plugins (like SyteHero) are installed alongside SyteOps, they can access your defined roles and user data directly.
 
-For example, a reporting feature in a SyteWide plugin can send reports to "all Managers" by referencing the aggregator variable — without you configuring names or emails in the reporting plugin itself. Add a Manager in SyteOps, they start receiving reports.
+For example, a reporting feature in an ecosystem plugin can send reports to "all Managers" by referencing the aggregator variable — without you configuring names or emails in the reporting plugin itself. Add a Manager in SyteOps, they start receiving reports.
 
 ## Role Aggregator: Slack
 

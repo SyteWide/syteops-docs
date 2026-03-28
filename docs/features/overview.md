@@ -42,7 +42,7 @@ Create custom roles — Managers, Assistants, Reviewers, or anything your operat
 - A single variable for all display names in that role
 - Slack aggregator variable for direct notification routing
 
-Add or remove a user from a role and every workflow that references that role variable updates automatically. No workflow editing required. When a new SyteWide plugin (like SyteSlyders) is installed, it can access those same roles directly.
+Add or remove a user from a role and every workflow that references that role variable updates automatically. No workflow editing required. When a new SyteOps ecosystem plugin (like SyteHero) is installed, it can access those same roles directly.
 
 ## User and CRM Management
 
@@ -83,7 +83,7 @@ What modules can do:
 - Extend FlowMattic variable families with new data domains
 - Introduce new automation dispatch patterns
 
-Modules can be toggled on or off without losing configuration data. First-party SyteWide modules and custom-built packages are both supported. The Package Builder module lets you create and encrypt your own `.sytepkg` packages.
+Modules can be toggled on or off without losing configuration data. First-party SyteOps modules and custom-built packages are both supported. The Package Builder module lets you create and encrypt your own `.sytepkg` packages.
 
 ## Smart Content Pipelines
 
