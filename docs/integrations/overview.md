@@ -77,6 +77,10 @@ DNS, edge security, and cache control integration. Cloudflare requires specific 
 
 Programmatic content relay and formatting integration. [ContentPen](https://contentpen.ai?ref=chet28&fp_sid=sytewide) sends webhooks to SyteOps for content processing — see the dedicated [ContentPen Integration](contentpen) page for setup details.
 
+### LinkCentral
+
+Automatic keyword linking and internal cross-linking. When enabled, SyteOps scans post content for keywords from your LinkCentral library and inserts links automatically — with proper SEO attributes and density controls. See the dedicated [LinkCentral Integration](linkcentral) page for setup details.
+
 ### Squirrly SEO
 
 SEO field mapping and metadata control. When enabled, SyteOps can coordinate with Squirrly SEO for metadata management.
