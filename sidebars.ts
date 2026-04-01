@@ -50,6 +50,7 @@ const sidebars: SidebarsConfig = {
         'integrations/cloudflare',
         'integrations/contentpen',
         'integrations/linkcentral',
+        'integrations/squirrly-seo',
       ],
     },
     'troubleshooting',
