@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.3.027
+
+- Internal improvements and maintenance
+
 ## v1.3.026
 
 - Internal improvements and maintenance
