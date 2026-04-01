@@ -147,6 +147,7 @@ const config: Config = {
             {label: 'Features', to: '/docs/features/overview'},
             {label: 'Integrations', to: '/docs/integrations/overview'},
             {label: 'Troubleshooting', to: '/docs/troubleshooting'},
+            {label: 'Changelog', to: '/docs/changelog'},
           ],
         },
         {
