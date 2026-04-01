@@ -83,7 +83,7 @@ The integration works with any FlowMattic workflow that creates or updates posts
 | **Max Cross-Links per Post** | 3 | Maximum internal links to related posts. Set to 0 to disable cross-linking. |
 | **First Occurrence Only** | On | When enabled, each keyword is linked only once (the first time it appears). |
 | **Open Links in New Tab** | Off | When enabled, auto-inserted links open in a new browser tab. |
-| **Cross-Link Mode** | Heuristic | Choose between taxonomy-based matching (free, fast) or AI-enhanced scoring (requires OpenAI). |
+| **Cross-Link Mode** | Heuristic | Choose between taxonomy-based matching (free, fast) or AI-enhanced scoring (requires an AI provider). |
 | **Min Word Gap** | 50 | Minimum number of words between consecutive auto-inserted links. Prevents link clustering. |
 | **LC Category Filter** | All | Comma-separated LinkCentral category IDs. Leave empty to use keywords from all categories. |
 | **Cross-Link Post Types** | post | Comma-separated post types to consider for cross-linking (e.g., post,page). |
@@ -111,13 +111,15 @@ This mode is fast, free, and works well for most sites.
 
 ### AI-Enhanced
 
-Uses OpenAI to score candidate posts for relevance and generate natural-sounding anchor text. Produces higher quality cross-links but adds a small delay and uses your OpenAI API quota.
+Uses your configured AI provider to score candidate posts for relevance and generate natural-sounding anchor text. Produces higher quality cross-links but adds a small delay and uses your AI provider's API quota.
+
+SyteOps supports five AI providers for cross-link scoring: **OpenAI**, **Anthropic**, **OpenRouter** (recommended), **Gemini**, and **Straico**. OpenRouter is recommended because it gives you access to models from all providers with a single API key.
 
 **Requirements:**
-- OpenAI integration enabled in the SyteOps Integrations tab
-- OpenAI API key configured in the System / API tab
+- At least one AI provider API key configured in the **System / API** tab
+- An AI provider and model selected for LinkCentral (click **Configure AI Provider** in the LinkCentral settings card)
 
-If OpenAI is unavailable (API error, rate limit, etc.), the integration automatically falls back to heuristic mode.
+If the AI provider is unavailable (API error, rate limit, missing key, etc.), the integration automatically falls back to heuristic mode.
 
 ## Dry Run / Preview
 
@@ -162,4 +164,126 @@ No API token has been saved in SyteOps yet. Go to the System / API tab, enter a 
 **Cross-links not appearing**
 - The post needs to have categories or tags assigned for the cross-linker to find related posts
 - There must be other published posts sharing those categories or tags
-- If using AI mode: verify the OpenAI integration is enabled and the API key is valid
+- If using AI mode: verify your AI provider API key is valid and a model is selected for LinkCentral
+
+## REST API Reference
+
+All endpoints require Bearer token authentication. Use the API token you configured in the LinkCentral settings card.
+
+```
+Authorization: Bearer {your_api_token}
+Content-Type: application/json
+```
+
+### Process Links
+
+**POST** `/wp-json/syteops/v1/linkcentral/process-links`
+
+Processes a post by inserting keyword links and cross-links.
+
+**Request body:**
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `post_id` | integer | Yes | The WordPress post ID to process. |
+| `dry_run` | boolean | No | When `true`, returns proposed changes without modifying the post. Default: `false`. |
+| `options` | object | No | Override default settings for this request (see Options below). |
+
+**Options object** (all fields optional — omit to use your saved settings):
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `max_lc_links_per_500_words` | integer | Override max keyword links per 500 words. |
+| `max_crosslinks` | integer | Override max cross-links per post. |
+| `crosslink_mode` | string | `"heuristic"` or `"ai"`. |
+| `first_occurrence` | boolean | Override first-occurrence-only setting. |
+| `target_blank` | boolean | Override open-in-new-tab setting. |
+
+**Example request:**
+
+```json
+{
+  "post_id": 12345,
+  "dry_run": false,
+  "options": {
+    "max_crosslinks": 5,
+    "crosslink_mode": "ai"
+  }
+}
+```
+
+**Success response (200):**
+
+```json
+{
+  "ok": true,
+  "post_id": 12345,
+  "dry_run": false,
+  "linkcentral_links_inserted": 5,
+  "crosslinks_inserted": 2,
+  "total_links_inserted": 7,
+  "word_count": 1200,
+  "links_per_500_words": 2.92,
+  "crosslink_mode": "ai",
+  "details": {
+    "linkcentral": [
+      {"keyword": "project management", "url": "https://...", "position": "paragraph_2"}
+    ],
+    "crosslinks": [
+      {"post_id": 456, "title": "Related Post", "anchor": "related topic", "url": "https://...", "position": "paragraph_4"}
+    ]
+  },
+  "warnings": [],
+  "processing_time_ms": 245
+}
+```
+
+**Error responses:**
+
+| Status | Code | Cause |
+|--------|------|-------|
+| 400 | `invalid_post_id` | Missing or invalid `post_id`. |
+| 401 | `unauthorized` | Missing or invalid Bearer token. |
+| 404 | `post_not_found` | Post does not exist. |
+| 503 | `integration_disabled` | LinkCentral integration is not enabled. |
+
+### Preview Links
+
+**POST** `/wp-json/syteops/v1/linkcentral/preview-links`
+
+Identical to Process Links but always runs in dry-run mode. The post is never modified.
+
+**Request body:** Same as Process Links (the `dry_run` field is ignored — always treated as `true`).
+
+### Status
+
+**GET** `/wp-json/syteops/v1/linkcentral/status`
+
+Returns integration health, keyword index status, and available configuration.
+
+**Response (200):**
+
+```json
+{
+  "ok": true,
+  "linkcentral_active": true,
+  "keyword_count": 42,
+  "index_last_built": "2026-03-30 14:22:00",
+  "index_ttl_remaining_seconds": 3200,
+  "integration_enabled": true,
+  "crosslink_modes_available": ["heuristic", "ai"],
+  "ai_provider": "openrouter",
+  "ai_provider_configured": true,
+  "openai_key_configured": true,
+  "settings": {
+    "max_lc_links_per_500_words": 3,
+    "max_crosslinks": 3,
+    "first_occurrence_only": true,
+    "default_crosslink_mode": "heuristic"
+  }
+}
+```
+
+:::note
+The `openai_key_configured` field is kept for backward compatibility. New integrations should use `ai_provider_configured` and `ai_provider` instead.
+:::

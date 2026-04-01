@@ -49,6 +49,7 @@ const sidebars: SidebarsConfig = {
         'integrations/flowmattic',
         'integrations/cloudflare',
         'integrations/contentpen',
+        'integrations/linkcentral',
       ],
     },
     'troubleshooting',
