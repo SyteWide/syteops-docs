@@ -89,9 +89,17 @@ SEO field mapping and metadata control. When enabled, SyteOps can coordinate wit
 
 ## AI
 
-### OpenAI
+SyteOps supports five AI providers. Configure one or more API keys in the **System / API** tab to enable AI-powered features (cross-link scoring, content generation, notes, and estimates).
 
-AI-assisted prompts and model-backed actions. Configure your OpenAI API key to enable AI capabilities in your workflows.
+| Provider | Description |
+|---|---|
+| **OpenAI** | GPT models for content and analysis tasks. |
+| **Anthropic** | Claude models for structured reasoning and generation. |
+| **OpenRouter** (recommended) | Aggregates models from all providers with a single API key. |
+| **Gemini** | Google's Gemini models for multimodal tasks. |
+| **Straico** | Multi-model platform with unified billing. |
+
+OpenRouter is the recommended default — it gives you access to models from every provider through one key.
 
 ---
 
