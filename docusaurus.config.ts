@@ -11,7 +11,7 @@ const config: Config = {
     v4: true,
   },
 
-  url: 'https://opsdocs.sytewide.com',
+  url: 'https://syteops.sytewide.com',
   baseUrl: '/',
 
   organizationName: 'sculpted-marketing',
