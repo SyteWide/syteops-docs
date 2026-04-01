@@ -6,7 +6,16 @@ description: Custom SEO settings, ACF field mapping, and social image control fo
 
 # Squirrly SEO Integration
 
-SyteOps extends Squirrly SEO with custom settings that give you centralized control over SEO title mapping, social image dimensions, and post type targeting. When enabled, SyteOps manages these settings through the System/API tab and syncs them to FlowMattic for workflow-driven SEO automation.
+SyteOps extends Squirrly SEO with custom settings that give you centralized control over SEO title mapping, social image dimensions, and post type targeting. When enabled, SyteOps manages these settings through the System/API tab. Squirrly SEO custom settings are stored in SyteOps options and are not synced to FlowMattic (see project rules for field ownership).
+
+## Official Squirrly SEO (Newton) documentation
+
+These are maintained by Squirrly and describe how the plugin stores SEO data and which filters exist:
+
+- [Knowledge base home](https://howto12.squirrly.co/) — search the Squirrly SEO (Newton) knowledge base
+- [Meta keys in `wp_postmeta` (`_sq_title`, `_sq_description`, `_sq_keywords`)](https://howto12.squirrly.co/faq/fetch-values-from-wp_postmeta)
+- [Hooks: `sq_title`, `sq_description`, `sq_keywords`](https://howto12.squirrly.co/ht_kb/hook-squirrly-title-description-with-custom-data)
+- [Database tables created by Squirrly (`wp_qss` and Advanced Pack tables)](https://howto12.squirrly.co/faq/what-database-tables-does-squirrly-create)
 
 ## What It Does
 
@@ -80,3 +89,14 @@ Corrects a malformed inline script from Squirrly SEO that uses double-quotes aro
 1. Confirm the ACF field key (not name) is entered for the Title Key field
 2. Confirm the ACF field name (not key) is entered for the Product Name Description field
 3. Verify the ACF field group is active and assigned to the correct post types
+
+### SEO title, description, or keywords change without editing the post
+
+Squirrly SEO can update snippet data in the background (scheduled tasks, Focus Pages, SEO Automation, Bulk SEO). If values seem to reset overnight or at odd times:
+
+1. List Squirrly-related cron events, for example with WP-CLI: `wp cron event list` and look for hooks whose names contain `sq` or `squirrly` (exact names depend on your Squirrly SEO version).
+2. Note which Squirrly automation features are enabled and test with automation paused on a staging copy if you need to confirm the source.
+
+SyteOps keeps the computed SEO title aligned with WordPress post meta `_sq_title` when custom settings save runs; Squirrly’s own automation and cloud features are outside SyteOps.
+
+For developer details, see the repository doc: `docs/developer/integrations/squirrly-seo.md`.
