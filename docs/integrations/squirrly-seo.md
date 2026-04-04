@@ -56,11 +56,15 @@ Select which post types Squirrly SEO custom settings apply to. Common choices in
 
 ### ACF Title Key
 
-The ACF field key used for the `_sq_title` meta. Enter the full field key (e.g., `field_698b9e914e950`). This maps an ACF field value into the Squirrly SEO title for each post.
+ACF field key for the field mapped to Squirrly post meta `_sq_title`. Enter the full field key (e.g., `field_698b9e914e950`). SyteOps writes the computed Squirrly SEO title into this ACF field and keeps post meta aligned.
 
-### ACF Product Name Description Field
+### ACF Description Key
 
-The ACF field name (not key) for a product or description field used in the SEO title. Enter the field name as it appears in your field group (e.g., `seo_product_name_description`).
+ACF field key for the description or product field used when building the Squirrly SEO title. Enter the full field key (e.g., `field_698ba06758e1d`). SyteOps reads this field's value and appends it to the post title to form the title.
+
+### ACF Keywords Key
+
+ACF field key for the field mapped to Squirrly post meta `_sq_keywords`. Enter the full field key (e.g., `field_66996c2798c3f`). When set, SyteOps preserves this value during saves that omit ACF field data so Squirrly keywords are not cleared.
 
 ### Theme JS File Path
 
@@ -86,17 +90,28 @@ Corrects a malformed inline script from Squirrly SEO that uses double-quotes aro
 
 ### ACF Fields Not Mapping
 
-1. Confirm the ACF field key (not name) is entered for the Title Key field
-2. Confirm the ACF field name (not key) is entered for the Product Name Description field
+1. Confirm the ACF field key is entered for all three key fields (Title Key, Description Key, Keywords Key)
+2. Field keys start with `field_` and can be found in your ACF field group editor
 3. Verify the ACF field group is active and assigned to the correct post types
+
+### ACF keyword or description fields cleared after publish
+
+SyteOps automatically protects Squirrly-managed ACF fields when a save omits ACF field data (for example, some page builder publish flows). If fields are still being cleared:
+
+1. Ensure **ACF Keywords Key** is configured in the Squirrly SEO settings (System/API tab)
+2. Ensure **ACF Description Key** is also configured if the description field is affected
+3. Save the SyteOps settings and test again
 
 ### SEO title, description, or keywords change without editing the post
 
-Squirrly SEO can update snippet data in the background (scheduled tasks, Focus Pages, SEO Automation, Bulk SEO). If values seem to reset overnight or at odd times:
+SyteOps guards all three Squirrly-managed fields (`_sq_title`, `_sq_description`, `_sq_keywords`) against empty writes and deletions from Squirrly background features. In most cases these guards prevent fields from being wiped automatically.
 
-1. List Squirrly-related cron events, for example with WP-CLI: `wp cron event list` and look for hooks whose names contain `sq` or `squirrly` (exact names depend on your Squirrly SEO version).
-2. Note which Squirrly automation features are enabled and test with automation paused on a staging copy if you need to confirm the source.
+If values still change unexpectedly:
 
-SyteOps keeps the computed SEO title aligned with WordPress post meta `_sq_title` when custom settings save runs; Squirrly’s own automation and cloud features are outside SyteOps.
+1. Check whether the **Squirrly Briefcase** feature was used around the same time — Squirrly’s keyword research save process temporarily removes and re-writes the keywords field. SyteOps intercepts this and preserves your stored value.
+2. List Squirrly-related scheduled events with WP-CLI: `wp cron event list` and look for hooks containing `sq` or `squirrly`.
+3. Note which Squirrly automation features are enabled (Focus Pages, SEO Automation, Bulk SEO) and test with automation paused on a staging copy to confirm the source.
+
+If SyteOps debug logging is enabled (System/API → Debug tab), the log will show `DELETE_GUARD blocked` or `META_GUARD blocked` entries when it prevents Squirrly from clearing a field, along with the exact Squirrly routine responsible.
 
 For developer details, see the repository doc: `docs/developer/integrations/squirrly-seo.md`.
