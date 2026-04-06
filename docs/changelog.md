@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.3.030
+
+- Fixed: Admin removal action now correctly provides success or error feedback after completing
+- Improved: JavaScript bundle no longer loads on non-plugin admin screens
+
 ## v1.3.028
 
 - Fixed: Toggle knobs in checkbox-grid toggle layouts now vertically center within the track
