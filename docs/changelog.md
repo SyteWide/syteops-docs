@@ -8,6 +8,12 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.3.031
+
+- Fixed: Gutenberg block editor now saves correctly on pages managed by page-builder plugins
+- Fixed: Block editor saves no longer fail for non-admin roles when a page-builder plugin is active
+- Fixed: Connected-sites status card hidden correctly when server mode is disabled
+
 ## v1.3.030
 
 - Fixed: Admin removal action now correctly provides success or error feedback after completing
