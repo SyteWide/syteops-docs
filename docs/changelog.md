@@ -8,6 +8,17 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.3.032
+
+- Added: AI keyword enricher — generates anchor-text keyword phrases for LinkCentral link posts that have no keywords, enabling automatic link insertion on previously-skipped links
+- Added: LinkCentral keyword editor is now always visible on link posts when the integration is active, with no manual settings change required
+- Added: Keyword Enrichment section in the LinkCentral settings card with AI provider/model configuration, a keyword status line, and a batch trigger button that supports multi-batch continuation
+- Added: Cross-link candidate discovery now falls back to title-keyword search when shared taxonomy terms are sparse, improving cross-link coverage on lightly-categorised sites
+- Improved: LinkCentral settings card reorganised into collapsible sections with adaptive multi-select inputs for category and post-type filters
+- Improved: Manual process UI now includes post-title search with autocomplete, rich per-link result tables showing keyword and cross-link details, and a dry-run preview mode
+- Improved: Cross-link scoring adds article vocabulary overlap and skips the opening paragraph to avoid over-linking near the top of content
+- Improved: Custom taxonomies can now be selected as the basis for cross-link candidate discovery
+
 ## v1.3.031
 
 - Fixed: Gutenberg block editor now saves correctly on pages managed by page-builder plugins
