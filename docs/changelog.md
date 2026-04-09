@@ -8,6 +8,12 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.3.033
+
+- Added: Keyword enrichment now runs up to 5 concurrent workers in parallel, significantly reducing the time to enrich large link libraries
+- Added: New Concurrent Workers setting (1–5, default 2) in the keyword enrichment settings; batch size limit raised to 50
+- Improved: AI requests that time out are automatically retried once with an extended timeout before a link is marked as skipped
+
 ## v1.3.032
 
 - Added: AI keyword enricher — generates anchor-text keyword phrases for LinkCentral link posts that have no keywords, enabling automatic link insertion on previously-skipped links

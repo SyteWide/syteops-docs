@@ -88,11 +88,53 @@ The integration works with any FlowMattic workflow that creates or updates posts
 | **LC Category Filter** | All | Comma-separated LinkCentral category IDs. Leave empty to use keywords from all categories. |
 | **Cross-Link Post Types** | post | Comma-separated post types to consider for cross-linking (e.g., post,page). |
 
+## Keyword Enrichment
+
+Links in your LinkCentral library need keywords before the auto-linker can insert them into posts. If you have links with no keywords, or links whose keywords were added manually and you want AI to improve them, use the **Enrich Keywords with AI** tool.
+
+### Running Bulk Enrichment
+
+1. Go to the **System / API** tab in SyteOps settings
+2. Scroll to the **LinkCentral** card
+3. Click **Enrich Keywords with AI**
+
+SyteOps processes your eligible links in parallel, generating keyword phrases for each one based on the link title, destination URL, and optional additional context. Progress is shown in real time. Click **Stop Enriching** at any time to pause — already-enriched links are saved immediately.
+
+When enrichment is complete, a summary shows how many links were enriched and lists any that were skipped with the reason.
+
+### Re-Enriching
+
+Check **Re-enrich AI-enriched links** before starting if you want to regenerate keywords for links that already have AI-generated keywords (for example, after changing your AI model or custom prompt). Links whose keywords were set manually are never overwritten.
+
+### Enrichment Settings
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| **Keywords per Link** | 5 | Number of keyword phrases the AI generates per link. Higher values give the auto-linker more chances to match but may reduce per-keyword quality. Recommended maximum: 25. |
+| **Default Density** | Medium | How frequently each keyword link is inserted across posts. **High** inserts the link up to 3 times per post; **Medium** inserts once per post; **Low** inserts once across several posts. The AI may override this per keyword when it has a strong signal. |
+| **Batch Size** | 1 | How many links each worker processes per request (1–50). Keep this low (1–5) when using multiple concurrent workers. Larger values reduce round-trips but increase the work done per request. |
+| **Concurrent Workers** | 2 | Number of links processed in parallel (1–5). Increasing this speeds up large enrichment runs — for example, 3 workers process roughly 3× as fast as 1. Higher values consume more AI API quota simultaneously. |
+| **Context Layers** | All on | Three optional sources of context the AI uses to generate better keywords: **Perplexity AI web search** (looks up the destination URL to describe what the page offers), **Page metadata fetch** (reads Open Graph tags and JSON-LD from the destination URL), and **LinkCentral categories** (your link's assigned categories). Disabling layers speeds up enrichment at some cost to keyword quality. |
+| **Custom Prompt** | — | Additional instructions appended to every AI keyword request. Use this to guide the style or focus of keywords (e.g., "Focus on buyer-intent phrases" or "Use UK English spelling"). |
+
+### AI Provider for Enrichment
+
+Enrichment uses a separately configured AI provider from the main cross-link AI settings. Click **Configure AI Provider** in the LinkCentral enrichment section of the System / API tab to choose your provider, model, and token limit.
+
+[OpenRouter](https://openrouter.ai/) is recommended because it aggregates models from all major providers under a single API key.
+
+### Tips for Large Libraries
+
+- Start with **Concurrent Workers: 3** and **Batch Size: 1** for the best combination of speed and reliability
+- If you see links skipped due to timeouts, SyteOps automatically retries each failed request once with a longer timeout before marking it as skipped
+- Run enrichment in smaller passes (using the stop button) if you want to review results incrementally
+- After enrichment, re-run your ContentPen publishing workflow on existing posts to pick up the new keywords
+
 ## How It Works
 
 When the endpoint is called with a post ID:
 
-1. **Load keywords** — SyteOps reads your LinkCentral link library and builds an index of keywords mapped to their link URLs, SEO attributes, and density settings.
+1. **Load keywords** — SyteOps reads your LinkCentral link library and builds an index of keywords mapped to their link URLs, SEO attributes, and density settings. Keyword enrichment uses layered context — combining Perplexity web search, page metadata, and link categories — to produce more accurate keyword matches.
 2. **Clean previous runs** — Any links from a previous auto-linking run are removed first, so the process always starts fresh. Manual links you added yourself are never touched.
 3. **Scan paragraphs** — The engine walks through your post content paragraph by paragraph, skipping headings, existing links, code blocks, and shortcodes.
 4. **Insert keyword links** — When a keyword match is found, it inserts a link to the corresponding LinkCentral URL with the correct nofollow/sponsored attributes.
@@ -113,7 +155,7 @@ This mode is fast, free, and works well for most sites.
 
 Uses your configured AI provider to score candidate posts for relevance and generate natural-sounding anchor text. Produces higher quality cross-links but adds a small delay and uses your AI provider's API quota.
 
-SyteOps supports five AI providers for cross-link scoring: **OpenAI**, **Anthropic**, **OpenRouter** (recommended), **Gemini**, and **Straico**. OpenRouter is recommended because it gives you access to models from all providers with a single API key.
+SyteOps supports six AI providers for cross-link scoring: **OpenAI**, **Anthropic**, **OpenRouter** (recommended), **Gemini**, **Perplexity**, and **Straico**. OpenRouter is recommended because it gives you access to models from all providers with a single API key.
 
 **Requirements:**
 - At least one AI provider API key configured in the **System / API** tab
