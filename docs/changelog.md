@@ -8,6 +8,12 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.3.034
+
+- Fixed: Re-activating a previously activated site no longer returns an error; the gateway recovers gracefully and confirms active status
+- Fixed: Product License status is now always set to active on activation, regardless of upstream response ordering
+- Improved: Gateway responses include consistent license identifier fields and explicit success signals for reliable client-side detection
+
 ## v1.3.033
 
 - Added: Keyword enrichment now runs up to 5 concurrent workers in parallel, significantly reducing the time to enrich large link libraries
