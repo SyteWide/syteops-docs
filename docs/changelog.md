@@ -8,6 +8,16 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.3.035
+
+- Changed: Keyword enrichment prefers AI web search context over page metadata when the two disagree, and context mismatch no longer forces a flagged quality state by itself
+- Added: Flagged-links review for enrichment results that need attention, with admin UI aligned to existing card styling
+- Added: Per-link model and max-tokens overrides (including OpenRouter model-limit hints and a quick “max tokens” action)
+- Added: Option to include manual keywords when re-running enrichment; clearer Keyword vs Context AI labeling in the admin
+- Improved: AI timeouts, provider-specific limits, and enrichment retries tuned to reduce spurious failures; better handling of HTML and edge-case page fetches during enrichment
+- Improved: Product License gateway validate-by-key refresh behavior and related diagnostics; licensing integration packages updated
+- Fixed: Checkbox accent styling so check marks stay visible with themed controls
+
 ## v1.3.034
 
 - Fixed: Re-activating a previously activated site no longer returns an error; the gateway recovers gracefully and confirms active status
