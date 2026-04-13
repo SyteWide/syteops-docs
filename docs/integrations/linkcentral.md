@@ -102,9 +102,16 @@ SyteOps processes your eligible links in parallel, generating keyword phrases fo
 
 When enrichment is complete, a summary shows how many links were enriched and lists any that were skipped with the reason.
 
-### Re-Enriching
+### Enrichment checkboxes
 
-Check **Re-enrich AI-enriched links** before starting if you want to regenerate keywords for links that already have AI-generated keywords (for example, after changing your AI model or custom prompt). Links whose keywords were set manually are never overwritten.
+Before you click **Enrich Keywords with AI**, you can choose two independent options:
+
+| Option | What it does |
+|--------|----------------|
+| **Re-enrich existing AI-generated keywords** | When **checked**, links that already have AI-generated keywords (including older links where the source was not recorded) are included so the AI can generate fresh keywords—for example after you change the enrichment model or custom prompt. When **unchecked**, those links are skipped; only links that still have **no** keywords are eligible, plus manual-keyword links if you enable the next option. |
+| **Include manually-edited keywords (overwrites manual edits)** | When **checked**, links whose keywords were edited manually in LinkCentral are included and will be **replaced** by new AI-generated keywords. You can use this on a normal run (without re-enrich) to target only new links and manual-keyword links, or together with re-enrich to refresh your whole library. SyteOps asks for confirmation before overwriting manual keywords. When **unchecked**, manual-keyword links are not overwritten on a normal run; on a re-enrich run they stay protected unless you check this box. |
+
+You can combine the checkboxes in any way that matches your goal. The status line above the button updates to show how many links are eligible for the combination you selected.
 
 ### Enrichment Settings
 
@@ -117,6 +124,12 @@ Check **Re-enrich AI-enriched links** before starting if you want to regenerate 
 | **Context Layers** | All on | Three optional sources of context the AI uses to generate better keywords: **Perplexity AI web search** (looks up the destination URL to describe what the page offers), **Page metadata fetch** (reads Open Graph tags and JSON-LD from the destination URL), and **LinkCentral categories** (your link's assigned categories). Disabling layers speeds up enrichment at some cost to keyword quality. |
 | **Custom Prompt** | — | Additional instructions appended to every AI keyword request. Use this to guide the style or focus of keywords (e.g., "Focus on buyer-intent phrases" or "Use UK English spelling"). |
 
+### Saving settings vs running enrichment
+
+You can change enrichment providers, models, batch size, context layers, and other controls on the System / API tab and run **Enrich Keywords with AI** right away. The plugin uses the values currently shown on that page for the enrichment run, even if you have not clicked **Save Changes** on the main SyteOps settings form. Click **Save Changes** when you want those values stored for the next time you load the settings screen.
+
+When web-search context is enabled, enrichment uses two steps: one AI call gathers information about the destination site (**Context AI**), and a second call generates the keyword phrases (**Keyword AI**). If something fails, messages say which step had the problem when possible. If Context AI fails but keyword generation still completes, you may see a warning even though keywords were saved.
+
 ### AI Provider for Enrichment
 
 Enrichment uses a separately configured AI provider from the main cross-link AI settings. Click **Configure AI Provider** in the LinkCentral enrichment section of the System / API tab to choose your provider, model, and token limit.
@@ -125,7 +138,7 @@ Enrichment uses a separately configured AI provider from the main cross-link AI 
 
 ### Tips for Large Libraries
 
-- Start with **Concurrent Workers: 3** and **Batch Size: 1** for the best combination of speed and reliability
+- **Throughput settings:** For most AI providers, start with **Concurrent Workers: 3** and **Batch Size: 1** for a good balance of speed and reliability. If you use **Straico** for keyword enrichment or for the context (Sonar) model, SyteOps **locks both to 1** (proxy latency), trims how much web-search and page metadata is sent, uses a shorter keyword prompt for Straico, and if the provider still reports an oversize-context-style error, retries that link once with a minimal prompt (title, destination URL, and categories only)
 - If you see links skipped due to timeouts, SyteOps automatically retries each failed request once with a longer timeout before marking it as skipped
 - Run enrichment in smaller passes (using the stop button) if you want to review results incrementally
 - After enrichment, re-run your ContentPen publishing workflow on existing posts to pick up the new keywords
