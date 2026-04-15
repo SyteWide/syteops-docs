@@ -38,11 +38,11 @@ When you trigger the LinkCentral integration on a post, SyteOps:
 
 1. Go to the **System / API** tab
 2. Scroll to the **LinkCentral Auto-Linking** card
-3. Set your **API Token** — this is a password that FlowMattic will use to authenticate when calling the endpoint. Choose any strong random string (e.g., generate one with a password manager)
+3. Open the **API & FlowMattic** section (at the bottom of the card) and set your **API Token** — this is a password that FlowMattic will use to authenticate when calling the endpoint. Choose any strong random string (e.g., generate one with a password manager)
 4. Adjust the linking settings to your preference (see Settings Reference below)
 5. Click **Save Changes**
 
-The card also displays the **Process Links Endpoint** URL. Copy this — you'll need it for the FlowMattic step.
+The **API & FlowMattic** section also shows the **Process Links Endpoint** URL. Copy this — you'll need it for the FlowMattic step.
 
 ### 3. Add the FlowMattic Workflow Step
 
@@ -85,8 +85,13 @@ The integration works with any FlowMattic workflow that creates or updates posts
 | **Open Links in New Tab** | Off | When enabled, auto-inserted links open in a new browser tab. |
 | **Cross-Link Mode** | Heuristic | Choose between taxonomy-based matching (free, fast) or AI-enhanced scoring (requires an AI provider). |
 | **Min Word Gap** | 50 | Minimum number of words between consecutive auto-inserted links. Prevents link clustering. |
+| **Keyword Matching Mode** | Exact match | How SyteOps finds keyword phrases in your post: **Exact match** links only when the keyword text appears as whole words. **AI semantic match** asks your configured LinkCentral AI to map each library keyword to a phrase that actually appears in the article (useful when wording differs). **Fallback** tries exact matching first, then uses AI only if no keyword links were inserted. AI modes need a valid AI provider and model for LinkCentral (same as cross-link AI). |
 | **LC Category Filter** | All | Comma-separated LinkCentral category IDs. Leave empty to use keywords from all categories. |
 | **Cross-Link Post Types** | post | Comma-separated post types to consider for cross-linking (e.g., post,page). |
+
+### Large articles and keyword libraries (AI modes)
+
+When you use **AI semantic match** or **Fallback**, SyteOps may trim very long post text and very large keyword lists so the request stays within model limits. If that happens, the processing response includes a short warning explaining what was trimmed. You can split work across multiple posts or reduce the number of active keywords per category if you routinely hit these limits.
 
 ## Keyword Enrichment
 
@@ -95,8 +100,8 @@ Links in your LinkCentral library need keywords before the auto-linker can inser
 ### Running Bulk Enrichment
 
 1. Go to the **System / API** tab in SyteOps settings
-2. Scroll to the **LinkCentral** card
-3. Click **Enrich Keywords with AI**
+2. Scroll to the **LinkCentral** card — the **Keyword Status & Actions** section is open by default and shows your library at a glance: how many links are **Enriched**, **Missing** keywords, and **Flagged** for review
+3. Click **Enrich Keywords with AI** to start enriching all eligible links
 
 SyteOps processes your eligible links in parallel, generating keyword phrases for each one based on the link title, destination URL, and optional additional context. Progress is shown in real time. Click **Stop Enriching** at any time to pause — already-enriched links are saved immediately.
 
@@ -115,10 +120,12 @@ You can combine the checkboxes in any way that matches your goal. The status lin
 
 ### Enrichment Settings
 
+These settings live in the **Enrichment Settings** section of the LinkCentral card.
+
 | Setting | Default | Description |
 |---------|---------|-------------|
-| **Keywords per Link** | 5 | Number of keyword phrases the AI generates per link. Higher values give the auto-linker more chances to match but may reduce per-keyword quality. Recommended maximum: 25. |
-| **Default Density** | Medium | How frequently each keyword link is inserted across posts. **High** inserts the link up to 3 times per post; **Medium** inserts once per post; **Low** inserts once across several posts. The AI may override this per keyword when it has a strong signal. |
+| **Quality Tier** | Standard | Controls the enrichment pipeline depth. **Quick** makes one AI call with no web context (10–15 keywords). **Standard** adds a Perplexity context lookup (20–30 keywords). **Thorough** makes two AI calls with Perplexity context (25–40 keywords). |
+| **Target Keywords** | 25 | The number of keywords to generate per URL (5–60). The quality tier caps this (Quick ≤ 15, Thorough ≤ 40); Standard uses the value as-is. |
 | **Batch Size** | 1 | How many links each worker processes per request (1–50). Keep this low (1–5) when using multiple concurrent workers. Larger values reduce round-trips but increase the work done per request. |
 | **Concurrent Workers** | 2 | Number of links processed in parallel (1–5). Increasing this speeds up large enrichment runs — for example, 3 workers process roughly 3× as fast as 1. Higher values consume more AI API quota simultaneously. |
 | **Context Layers** | All on | Three optional sources of context the AI uses to generate better keywords: **Perplexity AI web search** (looks up the destination URL to describe what the page offers), **Page metadata fetch** (reads Open Graph tags and JSON-LD from the destination URL), and **LinkCentral categories** (your link's assigned categories). Disabling layers speeds up enrichment at some cost to keyword quality. |
@@ -130,11 +137,19 @@ You can change enrichment providers, models, batch size, context layers, and oth
 
 When web-search context is enabled, enrichment uses two steps: one AI call gathers information about the destination site (**Context AI**), and a second call generates the keyword phrases (**Keyword AI**). If something fails, messages say which step had the problem when possible. If Context AI fails but keyword generation still completes, you may see a warning even though keywords were saved.
 
-### AI Provider for Enrichment
+### AI Providers
 
-Enrichment uses a separately configured AI provider from the main cross-link AI settings. Click **Configure AI Provider** in the LinkCentral enrichment section of the System / API tab to choose your provider, model, and token limit.
+All AI configurations for LinkCentral are managed in the **AI Providers** section of the LinkCentral card. Open this section to configure three independent areas:
 
-[OpenRouter](https://openrouter.ai/) is recommended because it aggregates models from all major providers under a single API key.
+| Area | Used for |
+|------|----------|
+| **Cross-Link AI** | Scoring candidate posts for relevance and generating anchor text in AI-Enhanced cross-link mode |
+| **Keyword AI** | Generating keyword phrases during enrichment. Fast/mini models are recommended (e.g. GPT-4o-mini, Claude Haiku) — reasoning or thinking models add latency with no quality benefit here |
+| **Context AI** | Fetching Perplexity web search summaries of destination sites before keywords are generated. Only Perplexity, OpenRouter, and Straico can access Perplexity search models |
+
+You can also click **Configure AI Provider** in the card header to quickly set the primary AI configuration via the provider modal.
+
+[OpenRouter](https://openrouter.ai/) is recommended for all areas because it aggregates models from all major providers under a single API key.
 
 ### Tips for Large Libraries
 
@@ -150,7 +165,7 @@ When the endpoint is called with a post ID:
 1. **Load keywords** — SyteOps reads your LinkCentral link library and builds an index of keywords mapped to their link URLs, SEO attributes, and density settings. Keyword enrichment uses layered context — combining Perplexity web search, page metadata, and link categories — to produce more accurate keyword matches.
 2. **Clean previous runs** — Any links from a previous auto-linking run are removed first, so the process always starts fresh. Manual links you added yourself are never touched.
 3. **Scan paragraphs** — The engine walks through your post content paragraph by paragraph, skipping headings, existing links, code blocks, and shortcodes.
-4. **Insert keyword links** — When a keyword match is found, it inserts a link to the corresponding LinkCentral URL with the correct nofollow/sponsored attributes.
+4. **Insert keyword links** — Depending on **Keyword Matching Mode**, SyteOps either matches whole words exactly, or uses AI to pick verbatim phrases from the article that correspond to your library keywords, then inserts links to the correct LinkCentral URLs with the right nofollow/sponsored attributes.
 5. **Insert cross-links** — Related posts are identified by shared categories and tags, and contextual links are placed in relevant paragraphs.
 6. **Save** — The updated content is saved back to the post (unless you used dry-run mode).
 
@@ -172,7 +187,7 @@ SyteOps supports six AI providers for cross-link scoring: **OpenAI**, **Anthropi
 
 **Requirements:**
 - At least one AI provider API key configured in the **System / API** tab
-- An AI provider and model selected for LinkCentral (click **Configure AI Provider** in the LinkCentral settings card)
+- An AI provider and model selected for the **Cross-Link AI** area (open the **AI Providers** section in the LinkCentral card, or click **Configure AI Provider** in the card header)
 
 If the AI provider is unavailable (API error, rate limit, missing key, etc.), the integration automatically falls back to heuristic mode.
 
@@ -214,7 +229,11 @@ No API token has been saved in SyteOps yet. Go to the System / API tab, enter a 
 - Verify the post is in draft, publish, pending, or future status
 - Verify the post has actual content (not empty)
 - Check the response from the endpoint — the `total_links_inserted` field tells you how many links were added. If zero, check the `warnings` array for details.
-- Make sure your LinkCentral keywords actually appear in the post content
+- Make sure your LinkCentral keywords actually appear in the post content (for **Exact match** mode), or that your AI provider is configured if you use **AI semantic match** or **Fallback**
+
+**Elementor-built pages**
+
+Elementor stores your layout in Elementor’s own data, not in the regular WordPress content field. SyteOps reads the same rendered HTML a visitor would see when matching keywords and cross-links. If you run a live (non–dry-run) process, SyteOps may report proposed links in the response but **not** write them into the post automatically, and you will see a warning explaining that Elementor pages must be updated in Elementor (or use a block/classic post if you need automatic saving into the post body).
 
 **Cross-links not appearing**
 - The post needs to have categories or tags assigned for the cross-linker to find related posts
@@ -253,6 +272,7 @@ Processes a post by inserting keyword links and cross-links.
 | `crosslink_mode` | string | `"heuristic"` or `"ai"`. |
 | `first_occurrence` | boolean | Override first-occurrence-only setting. |
 | `target_blank` | boolean | Override open-in-new-tab setting. |
+| `keyword_matching_mode` | string | `exact`, `ai`, or `fallback` — same meaning as the Keyword Matching Mode setting. |
 
 **Example request:**
 
@@ -280,6 +300,7 @@ Processes a post by inserting keyword links and cross-links.
   "word_count": 1200,
   "links_per_500_words": 2.92,
   "crosslink_mode": "ai",
+  "keyword_matching_mode": "exact",
   "details": {
     "linkcentral": [
       {"keyword": "project management", "url": "https://...", "position": "paragraph_2"}
@@ -329,7 +350,6 @@ Returns integration health, keyword index status, and available configuration.
   "crosslink_modes_available": ["heuristic", "ai"],
   "ai_provider": "openrouter",
   "ai_provider_configured": true,
-  "openai_key_configured": true,
   "settings": {
     "max_lc_links_per_500_words": 3,
     "max_crosslinks": 3,
@@ -339,6 +359,3 @@ Returns integration health, keyword index status, and available configuration.
 }
 ```
 
-:::note
-The `openai_key_configured` field is kept for backward compatibility. New integrations should use `ai_provider_configured` and `ai_provider` instead.
-:::
