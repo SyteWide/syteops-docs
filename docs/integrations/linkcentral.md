@@ -107,6 +107,15 @@ SyteOps processes your eligible links in parallel, generating keyword phrases fo
 
 When enrichment is complete, a summary shows how many links were enriched and lists any that were skipped with the reason.
 
+### Reprocess flagged links in one click
+
+If links are marked as **Flagged** in the Keyword Status card, click **Process All Flagged Keywords** to run keyword generation again for every flagged link.
+
+- SyteOps uses the same single-link keyword processor it uses for manual one-off runs.
+- It uses the **Enrich Single Link** override controls for **Context AI Model** and **Max Tokens** while processing flagged links in bulk.
+- Progress is shown as each flagged link is processed.
+- When the run finishes, you get a summary of successes and failures so you can follow up on any links that still need review.
+
 ### Enrichment checkboxes
 
 Before you click **Enrich Keywords with AI**, you can choose two independent options:
@@ -135,7 +144,13 @@ These settings live in the **Enrichment Settings** section of the LinkCentral ca
 
 You can change enrichment providers, models, batch size, context layers, and other controls on the System / API tab and run **Enrich Keywords with AI** right away. The plugin uses the values currently shown on that page for the enrichment run, even if you have not clicked **Save Changes** on the main SyteOps settings form. Click **Save Changes** when you want those values stored for the next time you load the settings screen.
 
-When web-search context is enabled, enrichment uses two steps: one AI call gathers information about the destination site (**Context AI**), and a second call generates the keyword phrases (**Keyword AI**). If something fails, messages say which step had the problem when possible. If Context AI fails but keyword generation still completes, you may see a warning even though keywords were saved.
+How enrichment methods work:
+
+- **Cross-Link AI:** analyzes each destination link to identify the best internal cross-link opportunities. **Recommended model type:** standard chat models. **Recommended models:** GPT-5.4-mini, GPT-4o-mini, Claude Haiku.
+- **Keyword AI:** generates the actual keywords. **Recommended model type:** fast, lightweight chat models. **Recommended models:** GPT-5.4-mini, GPT-4o-mini, Claude Haiku.
+- **Context AI:** optional second model that uses Perplexity web search to gather information about each link destination before keywords are generated. **Recommended model type:** search-enabled models (Sonar family). **Recommended models:** Sonar, Sonar Pro. Only Perplexity, OpenRouter, and Straico can access Perplexity search models.
+
+When web-search context is enabled, keyword enrichment runs in two AI steps (Context AI then Keyword AI). If something fails, messages identify which step had the issue when possible. If Context AI fails but keyword generation still completes, you may see a warning even though keywords were saved.
 
 ### AI Providers
 
@@ -143,9 +158,9 @@ All AI configurations for LinkCentral are managed in the **AI Providers** sectio
 
 | Area | Used for |
 |------|----------|
-| **Cross-Link AI** | Scoring candidate posts for relevance and generating anchor text in AI-Enhanced cross-link mode |
-| **Keyword AI** | Generating keyword phrases during enrichment. Fast/mini models are recommended (e.g. GPT-4o-mini, Claude Haiku) — reasoning or thinking models add latency with no quality benefit here |
-| **Context AI** | Fetching Perplexity web search summaries of destination sites before keywords are generated. Only Perplexity, OpenRouter, and Straico can access Perplexity search models |
+| **Cross-Link AI** | Scoring candidate posts for relevance and generating anchor text in AI-Enhanced cross-link mode. Recommended model type: standard chat models. Recommended models: GPT-5.4-mini, GPT-4o-mini, Claude Haiku |
+| **Keyword AI** | Generating keyword phrases during enrichment. Recommended model type: fast, lightweight chat models. Recommended models: GPT-5.4-mini, GPT-4o-mini, Claude Haiku |
+| **Context AI** | Fetching Perplexity web search summaries of destination sites before keywords are generated. Recommended model type: search-enabled models (Sonar family). Recommended models: Sonar, Sonar Pro. Only Perplexity, OpenRouter, and Straico can access Perplexity search models |
 
 You can also click **Configure AI Provider** in the card header to quickly set the primary AI configuration via the provider modal.
 

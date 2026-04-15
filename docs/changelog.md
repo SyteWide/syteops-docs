@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.3.037
+
+- Added: Bulk processing for flagged keyword links with per-link status feedback and post-run refresh support
+- Improved: LinkCentral settings visibility now follows integration state and guidance text is clearer across settings and docs
+
 ## v1.3.036
 
 - Added: Live balance display for all six AI providers in the API Keys settings tile, with per-provider refresh and last-updated timestamps
