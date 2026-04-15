@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.3.036
+
+- Added: Live balance display for all six AI providers in the API Keys settings tile, with per-provider refresh and last-updated timestamps
+- Added: Provider branding modal showing documentation links and provider identity, accessible from the API Keys tile
+- Added: Systems/API navigation entry in the WordPress admin sidebar for direct access to provider configuration
+- Fixed: Straico balance value parser corrected for current API response format
+- Improved: AI model logging unified across all providers; balance display strings localized
+
 ## v1.3.035
 
 - Changed: Keyword enrichment prefers AI web search context over page metadata when the two disagree, and context mismatch no longer forces a flagged quality state by itself
