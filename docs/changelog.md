@@ -8,6 +8,13 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.3.038
+
+- Changed: Straico AI provider migrated to v2 OpenAI-compatible API with standard chat and models endpoints
+- Removed: Straico-specific prompt size limits and context caps in keyword enrichment; all providers now use uniform limits
+- Improved: AI provider HTTP response validation widened to accept all 2xx status codes
+- Improved: Straico model cache automatically cleared on plugin update to ensure fresh model data
+
 ## v1.3.037
 
 - Added: Bulk processing for flagged keyword links with per-link status feedback and post-run refresh support
