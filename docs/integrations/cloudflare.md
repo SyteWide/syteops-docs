@@ -6,6 +6,8 @@ description: How to configure Cloudflare firewall rules, caching, and WAF settin
 
 # Cloudflare Setup Guide
 
+**Tier: Basic** — Toggle-only integration on the SyteOps side. The bulk of this guide is about configuring Cloudflare itself so SyteOps webhooks and scheduled tasks work through it.
+
 If your WordPress site uses Cloudflare, you need to configure a few rules so that SyteOps webhooks and scheduled tasks work correctly. Without these rules, Cloudflare's security features may block legitimate SyteOps requests.
 
 ## What Needs Configuration

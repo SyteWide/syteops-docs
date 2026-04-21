@@ -74,6 +74,21 @@ Centralized CRM system configuration. See [CRM Management](../features/crm).
 - Booking platform integration (Fluent Booking)
 - Code injection textareas with CodeMirror syntax highlighting
 
+## System / API Tab
+
+A per-integration configuration surface organized as collapsible cards — one card per integration or feature that needs credentials, endpoints, or AI configuration. Cards only appear for integrations that are currently toggled ON, so the page stays focused on what you're actually using.
+
+Each card contains sections:
+
+- **Credentials / API keys** — provider tokens, secret keys, webhook tokens. All secrets are encrypted at rest and masked after save.
+- **Endpoints / Webhook URLs** — copy-ready URLs your external services should call.
+- **Feature-specific settings** — link density, keyword matching mode, enrichment tier, etc. Varies by integration.
+- **AI Providers** (for AI-using features) — the per-feature AI provider, model, and max-tokens selectors described on the [AI Providers](../features/ai-providers) page.
+
+There is also a top-level **API Keys** tile that lists all six AI providers side-by-side with live balance display and per-provider refresh.
+
+Navigate via the admin menu: **SyteOps → System / API**.
+
 ## Backup Tab
 
 Full backup and restore surface. See [Backup and Restore](../features/backup-and-restore).

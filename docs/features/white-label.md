@@ -81,3 +81,10 @@ The **Notice Management** module (available separately) takes admin cleanliness 
 - Monitors and surfaces notices to SyteOps Admins only, via sticky monitoring toasts
 
 This is particularly useful when running many plugins: clients get a clean workspace, SyteOps Admins get operational awareness.
+
+## Related
+
+- [User Management](user-management) — user capabilities that determine which admin screens each role sees
+- [Roles & Automation](roles-and-automation) — custom roles and their visibility rules
+- [REST API Restriction](rest-api-restriction) — pair with white-label to lock down both UI and API surfaces
+- [Modules](modules) — modules that add admin surfaces respect the same client-protection visibility rules

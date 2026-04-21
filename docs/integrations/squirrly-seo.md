@@ -6,6 +6,8 @@ description: Custom SEO settings, ACF field mapping, and social image control fo
 
 # Squirrly SEO Integration
 
+**Tier: Basic** — Plugin-based toggle integration. Adds Squirrly-specific settings inside SyteOps when Squirrly SEO is installed.
+
 SyteOps extends Squirrly SEO with custom settings that give you centralized control over SEO title mapping, social image dimensions, and post type targeting. When enabled, SyteOps manages these settings through the System/API tab. Squirrly SEO custom settings are stored in SyteOps options and are not synced to FlowMattic (see project rules for field ownership).
 
 ## Official Squirrly SEO (Newton) documentation

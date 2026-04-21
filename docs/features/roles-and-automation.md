@@ -95,3 +95,10 @@ The Slack aggregator variable (`syteops_std_systm_contact_{slug}_slack`) contain
 ## Managing Roles
 
 Access the full Roles management interface at **SyteOps > Roles & Users** in the WordPress admin sidebar. This standalone page shows all system and custom roles, their current assignments, user counts, and aggregator status.
+
+## Related
+
+- [User Management](user-management) — user slots and fields that role assignments reference
+- [Slack Integration](../integrations/slack) — using the Slack role aggregator in FlowMattic
+- [Workflow Templates](workflow-templates) — pre-built workflows that consume role aggregator variables
+- [White Label & Client Protection](white-label) — how role visibility interacts with client-facing admin views

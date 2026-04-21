@@ -54,18 +54,45 @@ Click **Run automatic backup now** to trigger the pipeline immediately using cur
 ## Scoped Backups
 
 In addition to full backups, you can export and import specific sections:
-- **Master export** — All settings
-- **Scoped export** — Settings for a specific tab (General, Users, Integrations, etc.)
-- **Single user export** — One user card with all fields, roles, notes, and estimates
 
-Scoped imports remap data to the target site automatically.
+| Scope | What's included | Typical use |
+|---|---|---|
+| **Master export** | All settings, all tabs, all modules, all user data, all roles | Full-site transfer or full-fidelity snapshot |
+| **Scoped export** | A single tab's data (General, Users, Integrations, System / API, etc.) | Migrate just the CRM setup, or just the integration toggles |
+| **Per-module export** | One module's data only | Move Notes or Estimates data between sites without dragging the rest |
+| **Single user export** | One user card with all fields, role assignments, per-user notes and estimates | Onboard a single user onto another site; clone a template user |
+
+Scoped imports remap data to the target site automatically and only touch the scope you imported. Other tabs, modules, and users on the destination site are untouched.
+
+## Related
+
+- [Licensing](licensing.md) — the Product License that post-restore re-check validates
+- [Modules](modules/index.md) — module data is included in full backups; per-module export is available for portability
 
 ## Cross-Site Restore
 
 When restoring a backup from a different site:
+
 1. Enable the **URL rewrite** option during restore
-2. SyteOps maps URLs from the source site to the current site
-3. Profile pictures remain as links (not transferred as files)
+2. SyteOps maps URLs from the source site to the current site — values that contained the source site URL (webhook endpoints, dashboard links, documentation URLs) are updated to match the destination
+3. Profile pictures remain as links (not transferred as files) — if they're hosted externally they still work; if they were uploaded to the source site's media library they need to be re-uploaded on the destination
+4. Secrets (API keys, tokens, signing keys) are **not** included in the backup — after restore, open each integration card on the destination site and re-enter the credentials
+
+### Before a cross-site restore
+
+- Confirm the destination site has a valid SyteOps license (cross-site restore does not move the license — see "Post-Restore License Re-Check" below).
+- If your automations fire on user or CRM changes, consider pausing the relevant FlowMattic workflows during restore so the mass of change events doesn't trigger downstream side effects.
+- Take a safety backup of the destination site first (Backup → Create backup now) so you have a known rollback point.
+
+## Post-Restore License Re-Check
+
+After any full restore, SyteOps locks certain operations until the Product License is re-validated. This prevents a restored backup from bringing in stale license state that no longer matches your current site.
+
+1. A banner appears on the Admin tab prompting you to re-check the license.
+2. Open **Admin → Product License → Recheck**.
+3. On success, the lock releases and encrypted-package operations (module updates, workflow-template imports) resume.
+
+This is expected behavior — the re-check completes in a few seconds and only needs to happen once per restore.
 
 ## Backup Contents
 
