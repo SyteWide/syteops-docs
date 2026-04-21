@@ -63,7 +63,7 @@ Common issues and solutions for SyteOps administrators.
 
 1. Verify FlowMattic is activated and has a valid license
 2. Use the **Resync All Variables** button
-3. Check for Compatibility Sentinel warnings
+3. Look for FlowMattic readiness warnings in the SyteOps admin — these indicate FlowMattic isn't reachable
 
 ### FlowMattic Won't Install During Initial Setup
 
@@ -179,6 +179,86 @@ WooCommerce OAuth (`/wc-auth/v1/*`) is automatically allowed. For custom WooComm
 **Cause:** FlowMattic master sync may need a manual trigger after import.
 
 **Solution:** Use the **Resync All Variables** button in the Debug Tool.
+
+## AI Providers
+
+### Balance shows "—" or fails to refresh
+
+**Cause:** The provider either does not expose a balance endpoint, or the response format changed (Straico did in v1.3.036, and the parser was corrected then).
+
+**Solution:** Click the per-provider refresh icon on the **API Keys** tile. If it still fails, check the provider dashboard directly — your actual balance is authoritative there. For Straico specifically, confirm you're on v1.3.036 or newer.
+
+### Models not loading in the dropdown
+
+**Cause:** Missing or invalid API key for that provider; cached model list stale; intermittent provider outage.
+
+**Solution:**
+1. Confirm the provider's key is saved (the field should show a masked value).
+2. Click **Fetch Models** on the AI area to force a cache refresh.
+3. If the provider is Straico and models still do not appear, the cache may be stuck on v1 format — updating to v1.3.038 clears it automatically.
+
+### Keyword enrichment timeouts / skipped links
+
+**Cause:** Destination-site fetches that stall; AI requests that exceed the provider's timeout; very long URLs or noisy HTML responses.
+
+**Solution:**
+- SyteOps automatically retries timed-out AI requests once with a longer timeout before skipping. If skipped, the skip reason is shown in the post-run summary.
+- Reduce **Concurrent Workers** (LinkCentral Enrichment Settings) if the destination sites are rate-limiting you.
+- For Straico specifically, concurrency is locked to 1 (proxy latency) and the prompt is trimmed — no user action needed, but expect slower throughput.
+- If timeouts are persistent for specific links, use **Enrich Single Link** on the LinkCentral link's edit screen with a provider override to isolate the failing link.
+
+### Context AI dropdown only shows three providers
+
+**This is by design.** Context AI requires web-search capability. Only **Perplexity**, **OpenRouter**, and **Straico** can serve Perplexity Sonar models. SyteOps filters the dropdown so you can't accidentally choose a non-capable provider.
+
+## Integrations
+
+### Webhook signature verification failed
+
+**Cause:** The token/secret sent by the external service does not match the one saved in SyteOps, or the request was altered in transit (unlikely over HTTPS).
+
+**Solution:**
+- Open the integration's card on the **System / API** tab and compare the saved token to what the external service is sending.
+- If you rotated the token, update both sides in one session.
+- Confirm the webhook URL path is exact — a trailing slash or mismatched namespace will also return signature-style errors on some integrations.
+
+### Integration toggle is disabled with "Not Installed"
+
+**Cause:** The integration is plugin-based and the target WordPress plugin is not active on this site.
+
+**Solution:** Install and activate the third-party plugin (listed on the integration card). SaaS/API integrations (Slack, Monday, AWS SES, Cloudflare) never show "Not Installed" because they have no WordPress plugin to detect.
+
+## Server Connections
+
+### Endpoint scan fails on a specific site
+
+**Cause:** The endpoint site is unreachable, has REST restriction locked down too far, or the management connection token has been rotated without updating the server side.
+
+**Solution:**
+1. Confirm the endpoint site is up and reachable from your server.
+2. On the endpoint, open **SyteOps → REST API** and confirm that `/wp-json/syteops/*` is allowed (it should be automatic; check if the allowlist was manually edited).
+3. Re-issue the management connection token from the server if you suspect it was rotated.
+
+### "Management Connection" vs "Product License"
+
+These are **two independent systems** — do not confuse them. See [Licensing](features/licensing) for the distinction:
+
+- **Product License** — activation of the SyteOps plugin itself against the FluentCart gateway. Errors here block plugin features.
+- **Management Connection** — a server-to-endpoint connection for remote control. Errors here block the scan/control flows but do not affect plugin licensing.
+
+## Variable Sets
+
+### Import fails with "schema mismatch"
+
+**Cause:** The export came from a SyteOps version with a different variable-set schema.
+
+**Solution:** Update the destination site to the same version (or newer) as the source, then retry the import. Scoped variable-set imports are versioned; cross-version imports are not guaranteed to succeed.
+
+### Variable not appearing in FlowMattic after creation
+
+**Cause:** The master sync has not run yet, or the variable set is not currently published.
+
+**Solution:** Use the **Resync All Variables** button in the Debug Tool to force a sync. If still missing, confirm the variable set is in published state, not draft.
 
 ## Debug Mode
 

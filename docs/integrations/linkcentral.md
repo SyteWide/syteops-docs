@@ -6,6 +6,8 @@ description: Automatic keyword linking and internal cross-linking for your WordP
 
 # LinkCentral Integration
 
+**Tier: AI-Powered** — Full admin experience with deep AI features. You pick which AI provider and model to use for keyword matching and enrichment; SyteOps runs the work in the background with built-in quality gating.
+
 SyteOps integrates with [LinkCentral](https://designforwp.com/linkcentral/) to automatically insert keyword links and internal cross-links into your WordPress posts. When combined with the ContentPen publishing workflow, links are inserted automatically as posts are created — no manual editing required.
 
 The result: every article gets relevant affiliate links, product links, and internal cross-links inserted in natural positions, with proper SEO attributes, all controlled by your LinkCentral link library and SyteOps settings.
@@ -107,6 +109,21 @@ SyteOps processes your eligible links in parallel, generating keyword phrases fo
 
 When enrichment is complete, a summary shows how many links were enriched and lists any that were skipped with the reason.
 
+### Enrich a single link (with overrides)
+
+For one-off refreshes or to test different models before committing them to your full library, you can enrich a single link from the link's edit screen in LinkCentral:
+
+1. Open any LinkCentral link (Links → Library → click a link)
+2. In the SyteOps **Enrich Single Link** panel, click **Enrich Now** to run with the defaults saved on the System / API tab, **or** expand the override controls first
+3. Override controls available per run:
+   - **Provider / Model (override)** — choose a different AI provider or model for just this link (useful when comparing models side-by-side). The override dropdown is filtered to models the provider can actually serve, and for the Context AI step it is locked to Perplexity-capable providers (Perplexity, OpenRouter, Straico).
+   - **Max Tokens (override)** — override the provider's max-output tokens for this run. A shortcut action sets the value to the model's maximum when the model exposes one.
+4. Click **Enrich Now** and watch the per-step feedback; the run uses the overrides for that link only
+
+Overrides are not persisted — the next run of bulk enrichment uses the values saved on the System / API tab. Use single-link enrichment to evaluate a model before rolling it out to your whole library.
+
+Single-link enrichment is also what powers **Process All Flagged Keywords**, so the same override values apply when you reprocess flagged links in bulk (below).
+
 ### Reprocess flagged links in one click
 
 If links are marked as **Flagged** in the Keyword Status card, click **Process All Flagged Keywords** to run keyword generation again for every flagged link.
@@ -133,7 +150,7 @@ These settings live in the **Enrichment Settings** section of the LinkCentral ca
 
 | Setting | Default | Description |
 |---------|---------|-------------|
-| **Quality Tier** | Standard | Controls the enrichment pipeline depth. **Quick** makes one AI call with no web context (10–15 keywords). **Standard** adds a Perplexity context lookup (20–30 keywords). **Thorough** makes two AI calls with Perplexity context (25–40 keywords). |
+| **Quality Tier** | Standard | Controls the enrichment pipeline depth. **Quick** makes one AI call with no web context (10–15 keywords) — use for large libraries where speed matters and links are well-described. **Standard** adds a Perplexity context lookup (20–30 keywords) — the default and a good balance. **Thorough** makes two AI calls with Perplexity context (25–40 keywords) — use for high-value links where anchor-text quality matters more than cost or speed. |
 | **Target Keywords** | 25 | The number of keywords to generate per URL (5–60). The quality tier caps this (Quick ≤ 15, Thorough ≤ 40); Standard uses the value as-is. |
 | **Batch Size** | 1 | How many links each worker processes per request (1–50). Keep this low (1–5) when using multiple concurrent workers. Larger values reduce round-trips but increase the work done per request. |
 | **Concurrent Workers** | 2 | Number of links processed in parallel (1–5). Increasing this speeds up large enrichment runs — for example, 3 workers process roughly 3× as fast as 1. Higher values consume more AI API quota simultaneously. |
@@ -192,7 +209,7 @@ The process is **idempotent**: running it again on the same post produces the sa
 
 Finds related posts by looking at shared categories and tags. Posts that share more taxonomy terms with your article score higher. Recent posts get a small bonus.
 
-This mode is fast, free, and works well for most sites.
+This mode is fast, free, and works well for most sites. If shared taxonomy terms are sparse (for example, on lightly-categorised sites), the cross-linker also performs a **title-keyword fallback** — searching published posts for those of your library keywords that match the current article's subject — so cross-link coverage stays useful even without deep category assignments.
 
 ### AI-Enhanced
 

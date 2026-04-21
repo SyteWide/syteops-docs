@@ -15,10 +15,10 @@ If you manage multiple sites, build complex FlowMattic workflows, or want your W
 Every piece of configuration you store in SyteOps — users, roles, CRM systems, API keys, custom variables — becomes a ready-to-use FlowMattic variable. Change a value in SyteOps, the variable updates automatically. No manual syncing, no stale workflow data.
 
 - All configuration data syncs to FlowMattic variables on save
-- Non-destructive **Resync All Variables** to re-align after any import or restore
+- **Resync All Variables** safely re-aligns values after any import or restore — it won't overwrite values you've already set
 - **Find & Replace** across FlowMattic workflow definitions (with preview and backups)
-- Compatibility sentinel ensures FlowMattic is available before dependent operations run
-- Sensitive credential values are masked in the FlowMattic variable surface
+- A readiness check makes sure FlowMattic is installed and available before SyteOps runs any operation that depends on it
+- Sensitive credential values are masked in the variables SyteOps shares with FlowMattic
 
 ## Multi-Site Server Management
 
@@ -36,11 +36,11 @@ This is how agencies manage a fleet of client sites from one place without per-s
 
 ## Roles as Live Automation Variables
 
-Create custom roles — Managers, Assistants, Reviewers, or anything your operation uses. Assign users to those roles. SyteOps turns each role into a set of FlowMattic aggregator variables:
+Create custom roles — Managers, Assistants, Reviewers, or anything your operation uses. Assign users to those roles. SyteOps turns each role into a set of **aggregator variables** — variables that automatically combine data from every user assigned to the role, so a single variable references the whole group:
 
 - A single variable for all email addresses in that role
 - A single variable for all display names in that role
-- Slack aggregator variable for direct notification routing
+- A Slack aggregator variable for direct notification routing to everyone in the role
 
 Add or remove a user from a role and every workflow that references that role variable updates automatically. No workflow editing required. When a new SyteOps ecosystem plugin (like SyteHero) is installed, it can access those same roles directly.
 
@@ -69,7 +69,7 @@ Default-deny security model for the WordPress REST API. One toggle blocks all an
 - **Custom allowlist** for endpoints your specific stack needs open
 - Built-in allowlist entries for WooCommerce, FlowMattic, Google Site Kit, and Wordfence
 - REST monitor for observing what hits your endpoints
-- Per-endpoint control from the server dashboard on managed sites
+- Per-endpoint control from the server dashboard on your connected sites
 
 Your WordPress REST API is not public infrastructure. SyteOps makes enforcing that easy.
 
@@ -95,13 +95,13 @@ No per-author workflow duplication. No workflow edits when authors change. The c
 
 ## Variable Sets
 
-Create custom admin tabs with your own structured data collections. Three variable types:
+Create your own labeled admin tabs for reusable values — brand colors, support emails, office locations, service packages, canned responses, and anything else that would otherwise be copy-pasted across workflows. Three styles:
 
-- **SVS (Static Variable Set)** — A value you define: text, email, URL, number, textarea, or HTML. Syncs to FlowMattic.
-- **DVS (Dynamic Variable Set)** — A suffix placeholder with no stored value. Used for dynamic runtime injection in workflows.
-- **RSVS (Related Static Variable Sets)** — Up to 20 grouped SVS entries under one tab. Useful for repeating data patterns like client lists or API credential sets.
+- **Static** — a value you define (text, email, URL, number, multi-line text, or HTML) that gets sent to FlowMattic.
+- **Dynamic** — a marker or trigger with no stored value. Use it as an event name or placeholder.
+- **Related Static** — up to 20 groups of the same fields. Perfect for repeating data like a list of service packages or client tiers.
 
-Variable sets give you a structured, UI-managed way to feed constant data into FlowMattic without hardcoding values in workflows.
+One place to update a value; every workflow that references it stays in sync. See the [Variable Sets guide](variable-sets) for step-by-step setup.
 
 ## Backup and Restore
 

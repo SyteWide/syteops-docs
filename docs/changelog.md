@@ -8,6 +8,15 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## Unreleased
+
+- Added: Integration tier system — every integration card now shows a discreet **Basic**, **Extended**, or **AI-Powered** badge so you can tell at a glance how involved each integration is
+- Added: Dedicated documentation pages for AWS SES, Fluent Forms, WooCommerce, Wordfence, and Google Site Kit integrations
+- Added: Dedicated documentation page for the Banners module
+- Improved: Variable Sets documentation rewritten in plain language — leads with a clear introduction before introducing technical terms
+- Improved: Documentation jargon cleanup across the overview, FlowMattic, Monday.com, and troubleshooting pages for easier reading
+- Improved: Documentation sidebar now includes every integration and feature page for complete navigation
+
 ## v1.3.038
 
 - Changed: Straico AI provider migrated to v2 OpenAI-compatible API with standard chat and models endpoints

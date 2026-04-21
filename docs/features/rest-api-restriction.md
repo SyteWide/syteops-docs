@@ -137,3 +137,9 @@ WooCommerce OAuth paths (`/wc-auth/v1/*`) are automatically allowed. If you have
 
 **Block All is too restrictive:**
 Block All is intended for staging/development. Switch to standard REST restriction for production sites that need selective endpoint access.
+
+## Related
+
+- [REST Logging](rest-logging) — record and review the REST requests your restriction is (or isn't) blocking
+- [White Label & Client Protection](white-label) — pair REST restriction with white-label mode for fully curated client admins
+- [Troubleshooting](../troubleshooting) — REST-related troubleshooting flows

@@ -43,7 +43,7 @@ This is how agencies deploy standardized automation across client sites without 
 ## How Sync Works
 
 - **Automatic** — Changes save to FlowMattic immediately when you click Save
-- **Non-destructive** — Empty values are never written (prevents accidental data loss in FlowMattic)
+- **Safe** — Empty values are never written, so SyteOps won't accidentally clear data already in FlowMattic
 - **Module-aware** — When a module is deactivated, its FlowMattic variables are cleaned up; when re-activated, they are restored
 - **Async pipeline** — Saves enqueue a sync job; the worker processes the sync without blocking your save response
 
@@ -71,9 +71,9 @@ When you need to update a value inside FlowMattic workflow definitions themselve
 
 This is useful after domain migrations, credential rotations, or rebranding.
 
-## Compatibility Sentinel
+## FlowMattic Readiness Check
 
-SyteOps checks that FlowMattic is available before any dependent operation. If FlowMattic is deactivated or unavailable, dependent features are safely gated — they won't fail silently or corrupt data.
+Before any operation that depends on FlowMattic, SyteOps runs a quick readiness check to make sure FlowMattic is installed and active. If it isn't, SyteOps disables the feature instead of running it — so nothing fails silently or corrupts data.
 
 ## Variable Naming Conventions
 
@@ -100,7 +100,7 @@ API keys and secrets synced to FlowMattic are masked in the FlowMattic variable 
 **FlowMattic variables not updating:**
 1. Verify FlowMattic is activated and licensed
 2. Try the **Resync All Variables** button
-3. Check that the Compatibility Sentinel is not blocking (visible warning if so)
+3. Look for a FlowMattic readiness warning in the SyteOps admin — if one is visible, FlowMattic can't be reached and the warning explains why
 
 **FlowMattic not installing during setup:**
 1. Ensure your server can reach WordPress.org
