@@ -49,7 +49,7 @@ Work management platform integration for project communication and task sync. On
 
 ### Fluent Booking
 
-Appointment booking and scheduling integration. When enabled, SyteOps can coordinate booking workflows and sync scheduling data through FlowMattic.
+Appointment booking and scheduling integration. When enabled, SyteOps can coordinate booking workflows and sync scheduling data through FlowMattic. See the dedicated [Fluent Booking Integration](fluent-booking) page for setup.
 
 ---
 
@@ -57,11 +57,15 @@ Appointment booking and scheduling integration. When enabled, SyteOps can coordi
 
 ### Fluent Forms
 
-Form capture and automation handoff. Connect Fluent Forms to SyteOps for seamless data flow from form submissions into your automated workflows.
+Form capture and automation handoff. Connect Fluent Forms to SyteOps for seamless data flow from form submissions into your automated workflows. See the dedicated [Fluent Forms Integration](fluent-forms) page for setup.
 
 ### Documentero
 
-Document generation and outbound delivery integration. Use Documentero to create automated documents from your SyteOps data.
+Document generation and outbound delivery integration. Use Documentero to create automated documents from your SyteOps data. See the dedicated [Documentero Integration](documentero) page for setup.
+
+### Contact Form 7
+
+Public form submission support for sites using Contact Form 7. The toggle allowlists the Contact Form 7 feedback endpoint so submissions keep flowing when SyteOps REST API restriction is enabled. See the dedicated [Contact Form 7 Integration](contact-form-7) page for setup.
 
 ---
 
@@ -69,11 +73,19 @@ Document generation and outbound delivery integration. Use Documentero to create
 
 ### AWS SES
 
-Transactional email delivery via Amazon Simple Email Service. Configure your SES credentials to power reliable email delivery in your workflows.
+Transactional email delivery via Amazon Simple Email Service. Configure your SES credentials to power reliable email delivery in your workflows. See the dedicated [AWS SES Integration](aws-ses) page for setup.
 
 ### Sendy
 
-Newsletter and campaign management integration. Connect Sendy for email list management and campaign automation.
+Newsletter and campaign management integration. Connect Sendy for email list management and campaign automation. See the dedicated [Sendy Integration](sendy) page for setup.
+
+---
+
+## E-Commerce
+
+### WooCommerce
+
+WooCommerce REST and payment gateway support for stores that run on WooCommerce. The toggle allowlists the WooCommerce REST authentication path (`/wc-auth/v1/*`) so the platform keeps working when SyteOps REST API restriction is enabled. See the dedicated [WooCommerce Integration](woocommerce) page for setup.
 
 ---
 
@@ -97,7 +109,39 @@ Automatic keyword linking and internal cross-linking. When enabled, SyteOps scan
 
 ### Squirrly SEO
 
-SEO field mapping and metadata control. When enabled, SyteOps can coordinate with Squirrly SEO for metadata management.
+SEO field mapping and metadata control. When enabled, SyteOps can coordinate with Squirrly SEO for metadata management. See the dedicated [Squirrly SEO Integration](squirrly-seo) page for setup.
+
+---
+
+## Analytics & SEO
+
+### Google Site Kit
+
+Google Site Kit support for sites that use Google's analytics and search-insights plugin. The toggle allowlists the Site Kit REST endpoints so the plugin's data sync keeps working when SyteOps REST API restriction is enabled. See the dedicated [Google Site Kit Integration](google-site-kit) page for setup.
+
+### WP Full Picture
+
+Analytics data sender support for sites using WP Full Picture (free or premium). The toggle allowlists the `fupi/v1/sender` endpoint so analytics events keep flowing under SyteOps REST restriction. See the dedicated [WP Full Picture Integration](wp-full-picture) page for setup.
+
+---
+
+## Security
+
+### Wordfence
+
+Wordfence authentication support. The toggle allowlists the Wordfence authenticate endpoint so Wordfence-driven sign-ins keep working when SyteOps REST API restriction is enabled. See the dedicated [Wordfence Integration](wordfence) page for setup.
+
+### Secure Passkeys
+
+Passkey (WebAuthn) authentication support. The toggle allowlists the `passkeys/v1/*` endpoints so passkey login ceremonies keep working under SyteOps REST restriction. See the dedicated [Secure Passkeys Integration](secure-passkeys) page for setup.
+
+---
+
+## Events
+
+### The Events Calendar
+
+Event and venue REST support for sites using The Events Calendar. The toggle allowlists the `tribe/events/v1/*` endpoints so event data stays reachable under SyteOps REST restriction. See the dedicated [The Events Calendar Integration](the-events-calendar) page for setup.
 
 ---
 
@@ -122,11 +166,11 @@ OpenRouter is the recommended default — it gives you access to models from eve
 
 ### WPVivid
 
-Backup utility integration for coordinating backup controls and recovery behavior with WPVivid.
+Backup utility integration for coordinating backup controls and recovery behavior with WPVivid. See the dedicated [WPVivid Integration](wpvivid) page for setup.
 
 ### UpdraftPlus
 
-Backup status monitoring and recovery behavior integration with UpdraftPlus.
+Backup status monitoring and recovery behavior integration with UpdraftPlus. See the dedicated [UpdraftPlus Integration](updraftplus) page for setup.
 
 ---
 
@@ -134,11 +178,11 @@ Backup status monitoring and recovery behavior integration with UpdraftPlus.
 
 ### White Label
 
-Admin label and interface branding controls. Customize the SyteOps interface appearance for your organization.
+Admin label and interface branding controls. Customize the SyteOps interface appearance for your organization. See the dedicated [White Label Integration](white-label) page for setup.
 
 ### Trustily
 
-Reputation and trust page linking controls. Connect your Trustily profile for reputation management.
+Reputation and trust page linking controls. Connect your Trustily profile for reputation management. See the dedicated [Trustily Integration](trustily) page for setup.
 
 ---
 
@@ -146,11 +190,11 @@ Reputation and trust page linking controls. Connect your Trustily profile for re
 
 ### Frill
 
-Changelog widget and release stream display. Show product updates and changelogs to your team through the Frill widget.
+Changelog widget and release stream display. Show product updates and changelogs to your team through the Frill widget. See the dedicated [Frill Integration](frill) page for setup.
 
 ### Pulsetic
 
-Uptime status monitoring and badge display. Connect Pulsetic to display uptime status information in your SyteOps dashboard.
+Uptime status monitoring and badge display. Connect Pulsetic to display uptime status information in your SyteOps dashboard. See the dedicated [Pulsetic Integration](pulsetic) page for setup.
 
 ---
 
