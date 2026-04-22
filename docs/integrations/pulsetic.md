@@ -27,7 +27,7 @@ Pulsetic is a SaaS service — there's no WordPress plugin to install, so turnin
 
 ## Common use-cases
 
-- Forward Pulsetic downtime alerts into Slack, Monday.com, or email via FlowMattic.
+- Forward Pulsetic downtime alerts into Slack or email via FlowMattic.
 - Maintain an operational record of which sites you monitor with Pulsetic.
 - Coordinate uptime badges or status pages referenced from your marketing site.
 

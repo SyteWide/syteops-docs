@@ -70,7 +70,7 @@ Centralized CRM system configuration. See [CRM Management](../features/crm).
 ## Integrations Tab
 
 - Integration toggles (enable/disable individual integrations)
-- Team communication (Slack, Monday.com)
+- Team communication (Slack)
 - Booking platform integration (Fluent Booking)
 - Code injection textareas with CodeMirror syntax highlighting
 

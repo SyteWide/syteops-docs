@@ -55,7 +55,6 @@ const sidebars: SidebarsConfig = {
         'integrations/linkcentral',
         'integrations/squirrly-seo',
         'integrations/slack',
-        'integrations/monday',
         'integrations/aws-ses',
         'integrations/fluent-forms',
         'integrations/fluent-booking',

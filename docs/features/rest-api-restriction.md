@@ -22,10 +22,17 @@ Blocks **all** REST API requests with no exceptions, including authenticated req
 
 ### Custom Allowlist
 
-Add specific endpoints that should be allowed even when restriction is enabled. Enter one path per line:
+Add specific endpoints that should be allowed even when restriction is enabled. Each endpoint is managed one at a time:
+
+- Type a path in the input and click **Add** to save it — the row appears in the list immediately.
+- Click the **×** next to any saved path to remove it — removal takes effect immediately.
+- You do not need to click **Save Access Control** for allowlist changes; the Access Control save button only covers the Restrict REST API and Block All toggles.
+
+Path rules:
 - Must begin with `/`
 - Wildcards allowed as suffix: `/wp-json/myplugin/v1/*`
 - Non-REST paths supported: `/wc-auth/v1/*`
+- Paths already covered by a built-in rule are rejected with a message — you don't need (and can't add) duplicates of the read-only list above.
 
 ## Built-In Allowlist
 
@@ -38,7 +45,7 @@ These endpoints are always allowed when REST restriction (not Block All) is enab
 | `/wp-json/syteops-int-cp/*` | ContentPen integration endpoints |
 | `/wp-json/flowmattic/v1/*` | FlowMattic workflow automation |
 | `/wp-json/google-site-kit/*` | Google Site Kit |
-| `/wp-json/wordfence/v1/authenticate` | Wordfence security |
+| `/wp-json/wordfence/v1/*` | Wordfence security |
 | `/wc-auth/v1/*` | WooCommerce OAuth |
 
 ## What Gets Blocked
@@ -124,8 +131,8 @@ Use the **Clear All Logs** button to permanently delete all log entries. This ac
 Settings are found on the **REST API** page in the Access Control card:
 1. **Enable REST Restriction** — Toggle on to activate
 2. **Block All REST API** — Toggle for full blocking
-3. **Custom Allowlist** — Add additional paths as needed
-4. **Save Changes**
+3. **Save Access Control** to apply the two toggles above
+4. **Custom Allowlist** — Add paths one at a time using the input + **Add** button; remove any saved path with its **×**. These changes save immediately and do not require the Save Access Control button.
 
 ## Troubleshooting
 

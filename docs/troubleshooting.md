@@ -226,7 +226,7 @@ WooCommerce OAuth (`/wc-auth/v1/*`) is automatically allowed. For custom WooComm
 
 **Cause:** The integration is plugin-based and the target WordPress plugin is not active on this site.
 
-**Solution:** Install and activate the third-party plugin (listed on the integration card). SaaS/API integrations (Slack, Monday, AWS SES, Cloudflare) never show "Not Installed" because they have no WordPress plugin to detect.
+**Solution:** Install and activate the third-party plugin (listed on the integration card). SaaS/API integrations (Slack, AWS SES, Cloudflare) never show "Not Installed" because they have no WordPress plugin to detect.
 
 ## Server Connections
 
