@@ -35,7 +35,7 @@ API keys and secrets are encrypted at rest and never displayed in the interface.
 
 At the top of the CRM Management card, you can designate your primary platforms:
 
-- **Primary Communication Platform** — Your team communication tool (Slack or Monday.com, depending on which integrations are enabled)
+- **Primary Communication Platform** — Your team communication tool (Slack, depending on which integrations are enabled)
 - **Primary Booking Platform** — Your booking system (Fluent Booking, when enabled)
 
 Platform options are only available when their corresponding integrations are enabled in the Integrations tab. Disabled integrations are shown for reference.

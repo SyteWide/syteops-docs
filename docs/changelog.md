@@ -8,14 +8,23 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
-## Unreleased
+## v1.3.039
 
+- Added: Row-based add/remove controls for the REST API custom allowlist — each saved endpoint is its own row with a small × remove button, plus a separate input + **Add** button that appends one path at a time
+- Added: Built-in rule collision check on the custom allowlist — paths already covered by a built-in rule are rejected with a clear message so you don't end up with redundant entries
 - Added: Integration tier system — every integration card now shows a discreet **Basic**, **Extended**, or **AI-Powered** badge so you can tell at a glance how involved each integration is
 - Added: Dedicated documentation pages for AWS SES, Fluent Forms, WooCommerce, Wordfence, and Google Site Kit integrations
 - Added: Dedicated documentation page for the Banners module
+- Changed: Notice Management unified into a single notice-suppression flow — paste a notice, capture the last one, or pick from visible notices on the page
+- Changed: Wordfence REST allowlist widened to the full v1 namespace so all Wordfence endpoints work under REST API Restriction (not just `/authenticate`)
+- Removed: Monday integration and its documentation
+- Improved: Custom allowlist changes save immediately — no longer coupled to the Save Access Control button
 - Improved: Variable Sets documentation rewritten in plain language — leads with a clear introduction before introducing technical terms
-- Improved: Documentation jargon cleanup across the overview, FlowMattic, Monday.com, and troubleshooting pages for easier reading
+- Improved: Documentation jargon cleanup across the overview, FlowMattic, and troubleshooting pages for easier reading
 - Improved: Documentation sidebar now includes every integration and feature page for complete navigation
+- Fixed: Notice Management no longer blanket-hides every SyteOps toast when suppressions exist — only the toasts you actually target
+- Fixed: WordPress "Dismiss this notice" button text is stripped before notice messages are captured in the picker or matched at render time
+- Fixed: LinkCentral AI label padding and a toast relay regression
 
 ## v1.3.038
 

@@ -25,7 +25,7 @@ Each integration card shows a small **tier badge** next to the category label. T
 
 | Tier | What it means | Examples |
 |---|---|---|
-| **Basic** | Toggle-only. Flip it on and you're done. Some Basic integrations store a single credential (like an API key), but there's no dedicated control panel. Most integrations live here. | Slack, Monday, Cloudflare, AWS SES, WooCommerce, Wordfence |
+| **Basic** | Toggle-only. Flip it on and you're done. Some Basic integrations store a single credential (like an API key), but there's no dedicated control panel. Most integrations live here. | Slack, Cloudflare, AWS SES, WooCommerce, Wordfence |
 | **Extended** | Has its own settings area inside SyteOps, stores credentials, and includes light AI configuration where applicable. More involved than Basic but doesn't drive deep AI features. | ContentPen |
 | **AI-Powered** | A full control panel with deep AI features — you pick which AI provider and model to use, SyteOps runs background jobs on your behalf, and the integration has quality gating built in. | LinkCentral |
 
@@ -38,10 +38,6 @@ The tier is purely informational. It doesn't change how an integration works or 
 ### Slack
 
 Team messaging integration for channel notifications and workflow automation. Once the toggle is on, send messages from FlowMattic using Slack incoming webhooks. See the dedicated [Slack Integration](slack) page for setup.
-
-### Monday.com
-
-Work management platform integration for project communication and task sync. Once the toggle is on, create and update board items from FlowMattic using the Monday.com API. See the dedicated [Monday.com Integration](monday) page for setup.
 
 ---
 
@@ -216,7 +212,7 @@ SyteOps automatically allows REST API access for key services when REST restrict
 | ContentPen | `/wp-json/syteops-int-cp/*` |
 | FlowMattic | `/wp-json/flowmattic/v1/*` |
 | Google Site Kit | `/wp-json/google-site-kit/*` |
-| Wordfence | `/wp-json/wordfence/v1/authenticate` |
+| Wordfence | `/wp-json/wordfence/v1/*` |
 | WooCommerce | `/wc-auth/v1/*` |
 
 See [REST API Restriction](../features/rest-api-restriction) for details.

@@ -30,7 +30,7 @@ Trustily is a SaaS service — there's no WordPress plugin to install, so turnin
 
 - Insert your Trustily reputation link into FlowMattic-driven emails, signatures, or landing pages.
 - Keep a single canonical reputation URL that the rest of the operation references instead of copy/pasting.
-- Drive Slack / Monday.com notifications on new Trustily reviews via FlowMattic.
+- Drive Slack notifications on new Trustily reviews via FlowMattic.
 
 ## Resources
 
