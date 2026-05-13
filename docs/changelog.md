@@ -8,6 +8,15 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.3.040
+
+- Fixed: The **Show** button on the Management Server Secret now reveals the actual token instead of `encrypted:sodium:…` text
+- Fixed: **Request Connection** from an endpoint now succeeds — the token sent to the Management Server is the real secret, so authentication passes
+- Fixed: Plugin updates from the GitHub source now work after a fresh endpoint connection — the GitHub token is no longer scrambled when the Management Server returns it to the endpoint
+- Fixed: Re-pasting a secret that was previously revealed (and copied) no longer corrupts the stored value
+- Fixed: A stale "connection failed" notice no longer persists after a successful retry
+- Improved: The "unauthorized domain" message from the Management Server is now clean — no debug-flavored tail in the toast
+
 ## v1.3.039
 
 - Added: Row-based add/remove controls for the REST API custom allowlist — each saved endpoint is its own row with a small × remove button, plus a separate input + **Add** button that appends one path at a time
