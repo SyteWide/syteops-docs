@@ -8,6 +8,16 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.3.041
+
+- Added: **User Enumeration Defense** card on the REST API admin page (Security → REST API → "User Enumeration Defense"). Single toggle (default ON) that blocks the three classic WordPress user-enumeration attack surfaces for unauthenticated visitors:
+  - `?author=N` redirect leak (returns 404 instead of redirecting to `/author/<login_slug>/`)
+  - `/author/<slug>/` direct archive hits (also returns 404 — no signal whether the username exists)
+  - `/wp-json/wp/v2/users` REST endpoint (returns 404 with `rest_no_route` for users without `list_users` capability, even when other plugins or themes re-register the route or restrict the broader REST API)
+  - Also strips `author_url` from OEmbed responses (the URL contains the login slug)
+- Added: Independent of the existing "Restrict REST API" / "Block All REST API" controls. Use this when you want enumeration protection without locking down the full REST API.
+- Note: Default ON. Existing installs get the protection automatically on upgrade. Toggle off if you have any site that legitimately needs public `?author=` or public `/wp-json/wp/v2/users` access (rare on marketing sites; common on headless WordPress setups).
+
 ## v1.3.040
 
 - Fixed: The **Show** button on the Management Server Secret now reveals the actual token instead of `encrypted:sodium:…` text
