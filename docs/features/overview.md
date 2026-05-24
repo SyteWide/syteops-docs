@@ -68,6 +68,7 @@ Default-deny security model for the WordPress REST API. One toggle blocks all an
 - **Block All** mode for staging or locked-down environments
 - **Custom allowlist** for endpoints your specific stack needs open
 - Built-in allowlist entries for WooCommerce, FlowMattic, Google Site Kit, and Wordfence
+- **User Enumeration Defense** — independent toggle (default ON) that returns 404 for `?author=N`, `/author/<slug>/`, and unauthenticated `/wp-json/wp/v2/users` requests so attackers cannot harvest login names
 - REST monitor for observing what hits your endpoints
 - Per-endpoint control from the server dashboard on your connected sites
 

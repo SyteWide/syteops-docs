@@ -64,6 +64,38 @@ When Block All is enabled:
 - Legitimate authenticated users experience no change
 - REST API access logs are available for monitoring (see below)
 
+## User Enumeration Defense
+
+WordPress leaks usernames to unauthenticated visitors through three well-known surfaces that anyone scanning your site can use to harvest valid login names. **User Enumeration Defense** is an independent toggle on the same REST API admin page that closes all three.
+
+The card lives under **Security → REST API → User Enumeration Defense**. It is **on by default** for new installs and turns on automatically after the upgrade.
+
+### What it blocks
+
+When the toggle is on, unauthenticated visitors receive HTTP 404 from these three surfaces:
+
+| Surface | What attackers normally see | With defense on |
+|---|---|---|
+| `?author=N` | 301 redirect to `/author/<login_slug>/` — leaks the actual login field | 404, no redirect |
+| `/author/<slug>/` | Author archive page confirming the username exists | 404 |
+| `/wp-json/wp/v2/users` | JSON list of users with login + display name | 404 with `rest_no_route` |
+
+It also strips `author_url` from OEmbed responses (the URL contains the login slug).
+
+### Independent of REST Restriction
+
+This is a **separate** control from **Enable REST Restriction** and **Block All REST API** above. Use it when you want enumeration protection without locking down the rest of the REST API — for example, on a marketing site where you still want `/wp-json/wp/v2/posts` to work for headless previews but you do not want `/wp-json/wp/v2/users` exposed.
+
+### When to turn it off
+
+The toggle is safe to leave on for almost every site. Turn it off only if you have a legitimate need for:
+
+- Public `?author=N` URLs (rare; some legacy themes and SEO setups)
+- A public `/wp-json/wp/v2/users` endpoint (common on **headless WordPress** sites where a Next.js / Nuxt / static-site frontend fetches the public author list)
+- Public `/author/<slug>/` archive pages indexed by search engines
+
+Logged-in users with the `list_users` capability are never affected — admins previewing author archives or legitimate REST consumers with valid auth still see the full content.
+
 ## REST API Monitoring
 
 SyteOps includes a built-in REST API logging system to monitor API access on your site. Settings are on the **REST API** page under the Logging Settings card.
@@ -128,11 +160,19 @@ Use the **Clear All Logs** button to permanently delete all log entries. This ac
 
 ## Configuration
 
-Settings are found on the **REST API** page in the Access Control card:
+Settings are found on the **REST API** page. The page has three independent cards:
+
+**Access Control** (REST restriction):
 1. **Enable REST Restriction** — Toggle on to activate
 2. **Block All REST API** — Toggle for full blocking
 3. **Save Access Control** to apply the two toggles above
 4. **Custom Allowlist** — Add paths one at a time using the input + **Add** button; remove any saved path with its **×**. These changes save immediately and do not require the Save Access Control button.
+
+**User Enumeration Defense** (independent of Access Control):
+- Single toggle, default ON. Save with **Save Enumeration Defense**.
+
+**Logging Settings** (REST monitoring):
+- Sampling, retention, IP hashing, and route exclusions. See below.
 
 ## Troubleshooting
 

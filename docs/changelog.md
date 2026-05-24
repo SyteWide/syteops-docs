@@ -8,6 +8,12 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.3.042
+
+- Improved: Admin section headings restyled from button-like pills to a three-tier typographic system
+- Improved: Tab page headers now center the title at the top with the description italicized beneath
+- Improved: All cards across the admin UI use a more pronounced layered shadow for clearer visual separation
+
 ## v1.3.041
 
 - Added: **User Enumeration Defense** card on the REST API admin page (Security → REST API → "User Enumeration Defense"). Single toggle (default ON) that blocks the three classic WordPress user-enumeration attack surfaces for unauthenticated visitors:

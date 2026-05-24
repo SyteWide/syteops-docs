@@ -100,6 +100,24 @@ Common issues and solutions for SyteOps administrators.
 
 WooCommerce OAuth (`/wc-auth/v1/*`) is automatically allowed. For custom WooCommerce integrations, add their specific routes to the allowlist.
 
+### Author Archive Pages Return 404
+
+**Cause:** **User Enumeration Defense** is on (default for new installs and after upgrade). It returns 404 for `/author/<slug>/` to unauthenticated visitors so attackers cannot confirm a username exists.
+
+**Solution:** If your site legitimately needs public author archive pages (rare on marketing sites; common on author-driven blogs), turn the toggle off at **SyteOps → REST API → User Enumeration Defense**. Logged-in admins are never affected.
+
+### `?author=N` URLs Return 404 Instead of Redirecting
+
+**Cause:** Same as above — User Enumeration Defense intentionally returns 404 for `?author=N` so the response cannot leak the login slug.
+
+**Solution:** Turn the toggle off only if you need this behavior. Most sites should leave it on.
+
+### Headless Frontend Cannot Read `/wp-json/wp/v2/users`
+
+**Cause:** User Enumeration Defense returns 404 for unauthenticated requests to `/wp-json/wp/v2/users`. Most headless sites should authenticate this request anyway, but some setups expect it to be public.
+
+**Solution:** Either authenticate the request from your frontend (recommended), or turn off **User Enumeration Defense** at **SyteOps → REST API**.
+
 ## UI Issues
 
 ### Save Changes Button Does Nothing on Admin Tab
