@@ -8,6 +8,15 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.3.045
+
+- Fixed: Rolling Management Server credentials now reliably saves the new secret on each endpoint and overwrites the stored value
+- Added: Credential rolling now reports per-endpoint results and confirms the new secret was applied, clearly listing any endpoint that did not update
+- Fixed: License-activation consent checkboxes now show a visible checkmark when selected
+- Fixed: Admin dialogs no longer get clipped when opened from a settings card
+- Improved: The credential-roll dialog footer buttons are now laid out correctly
+- Fixed: Status notifications for Management Connection actions now show the correct heading
+
 ## v1.3.044
 
 - Improved: Quick Navigation links sit closer to their heading with tighter, balanced spacing
