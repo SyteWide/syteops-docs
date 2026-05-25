@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.3.044
+
+- Improved: Quick Navigation links sit closer to their heading with tighter, balanced spacing
+- Improved: FlowMattic quick-action button icons are now clearly visible, with better spacing between icon and label
+
 ## v1.3.043
 
 - Fixed: Connection data could be cleared unexpectedly on sites that run scheduled tasks through the server's own scheduler instead of the built-in WordPress scheduler. The tool that resets connections now runs only when launched intentionally, never as a side effect of routine background processing.
