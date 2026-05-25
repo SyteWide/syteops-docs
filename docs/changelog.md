@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.3.043
+
+- Fixed: Connection data could be cleared unexpectedly on sites that run scheduled tasks through the server's own scheduler instead of the built-in WordPress scheduler. The tool that resets connections now runs only when launched intentionally, never as a side effect of routine background processing.
+- Recommended for all sites. After updating, endpoints automatically re-establish their connection on the next status check.
+
 ## v1.3.042
 
 - Improved: Admin section headings restyled from button-like pills to a three-tier typographic system
