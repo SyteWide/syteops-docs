@@ -13,24 +13,26 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // Primary — SyteOps brand teal palette (anchored on plugin --sf-primary).
         primary: {
-          50: '#eff6ff',
-          100: '#dbeafe',
-          200: '#bfdbfe',
-          300: '#93c5fd',
-          400: '#60a5fa',
-          500: '#3b82f6',
-          600: '#2563eb',
-          700: '#1d4ed8',
-          800: '#1e40af',
-          900: '#1e3a8a',
-          950: '#172554',
+          50:  '#EEF8F9',
+          100: '#D6ECEF',
+          200: '#A8D5DC',
+          300: '#7DBBC5',
+          400: '#4DA1AE',
+          500: '#2D9CB0',
+          600: '#0F6F7E',
+          700: '#0A5260',
+          800: '#074049',
+          900: '#052E35',
+          950: '#03191D',
         },
+        // Accent — SyteWide parent-brand blue family.
         accent: {
-          50: '#f5f3ff',
-          400: '#a78bfa',
-          500: '#8b5cf6',
-          600: '#7c3aed',
+          50:  '#EEF2FB',
+          400: '#5B7CD9',
+          500: '#3354A8',
+          600: '#1E3A8A',
         },
         surface: {
           0: 'var(--so-surface-0)',

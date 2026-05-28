@@ -8,24 +8,28 @@
 
 /* ── Design Tokens — Light Mode ──────────────────────────────────────── */
 :root {
-  /* Primary */
-  --so-primary-50: #eff6ff;
-  --so-primary-100: #dbeafe;
-  --so-primary-200: #bfdbfe;
-  --so-primary-300: #93c5fd;
-  --so-primary-400: #60a5fa;
-  --so-primary-500: #3b82f6;
-  --so-primary-600: #2563eb;
-  --so-primary-700: #1d4ed8;
-  --so-primary-800: #1e40af;
-  --so-primary-900: #1e3a8a;
-  --so-primary-950: #172554;
+  /* Primary — SyteOps brand teal palette.
+     500 (#2D9CB0) = on-dark "lifted" variant from the brand system.
+     600 (#0F6F7E) = canonical light-bg brand color (matches plugin --sf-primary).
+     700 (#0A5260) = darker shade (matches plugin --sf-primary-dark). */
+  --so-primary-50:  #EEF8F9;
+  --so-primary-100: #D6ECEF;
+  --so-primary-200: #A8D5DC;
+  --so-primary-300: #7DBBC5;
+  --so-primary-400: #4DA1AE;
+  --so-primary-500: #2D9CB0;
+  --so-primary-600: #0F6F7E;
+  --so-primary-700: #0A5260;
+  --so-primary-800: #074049;
+  --so-primary-900: #052E35;
+  --so-primary-950: #03191D;
 
-  /* Accent (violet) */
-  --so-accent-50: #f5f3ff;
-  --so-accent-400: #a78bfa;
-  --so-accent-500: #8b5cf6;
-  --so-accent-600: #7c3aed;
+  /* Accent — SyteWide parent-brand blue family.
+     Pairs the SyteOps teal primary with a navy accent for variety. */
+  --so-accent-50:  #EEF2FB;
+  --so-accent-400: #5B7CD9;
+  --so-accent-500: #3354A8;
+  --so-accent-600: #1E3A8A;
 
   /* Surfaces */
   --so-surface-0: #ffffff;
@@ -43,7 +47,7 @@
   --so-success: #16a34a;
   --so-warning: #d97706;
   --so-error: #dc2626;
-  --so-info: #2563eb;
+  --so-info: #0F6F7E;
 
   /* Typography */
   --so-font-body: 'Inter', system-ui, -apple-system, sans-serif;
@@ -67,8 +71,8 @@
 
 /* ── Design Tokens — Dark Mode ───────────────────────────────────────── */
 [data-theme='dark'] {
-  --so-primary-50: #172554;
-  --so-primary-100: #1e3a8a;
+  --so-primary-50:  #03191D;
+  --so-primary-100: #052E35;
 
   --so-surface-0: #0f172a;
   --so-surface-50: #020617;
@@ -83,18 +87,18 @@
   --so-success: #4ade80;
   --so-warning: #fbbf24;
   --so-error: #f87171;
-  --so-info: #60a5fa;
+  --so-info: #2D9CB0;
 }
 
 /* ── Infima Bridge — Light Mode ──────────────────────────────────────── */
 :root {
-  --ifm-color-primary: #2563eb;
-  --ifm-color-primary-dark: #1d4ed8;
-  --ifm-color-primary-darker: #1e40af;
-  --ifm-color-primary-darkest: #1e3a8a;
-  --ifm-color-primary-light: #3b82f6;
-  --ifm-color-primary-lighter: #60a5fa;
-  --ifm-color-primary-lightest: #93c5fd;
+  --ifm-color-primary: #0F6F7E;
+  --ifm-color-primary-dark: #0A5260;
+  --ifm-color-primary-darker: #074049;
+  --ifm-color-primary-darkest: #052E35;
+  --ifm-color-primary-light: #2D9CB0;
+  --ifm-color-primary-lighter: #4DA1AE;
+  --ifm-color-primary-lightest: #7DBBC5;
 
   --ifm-font-family-base: var(--so-font-body);
   --ifm-heading-font-family: var(--so-font-heading);
@@ -111,20 +115,20 @@
   --ifm-border-radius: 8px;
   --ifm-global-radius: 8px;
 
-  --docusaurus-highlighted-code-line-bg: rgba(37, 99, 235, 0.1);
+  --docusaurus-highlighted-code-line-bg: rgba(15, 111, 126, 0.1);
 }
 
 /* ── Infima Bridge — Dark Mode ───────────────────────────────────────── */
 [data-theme='dark'] {
-  --ifm-color-primary: #60a5fa;
-  --ifm-color-primary-dark: #3b82f6;
-  --ifm-color-primary-darker: #2563eb;
-  --ifm-color-primary-darkest: #1d4ed8;
-  --ifm-color-primary-light: #93c5fd;
-  --ifm-color-primary-lighter: #bfdbfe;
-  --ifm-color-primary-lightest: #dbeafe;
+  --ifm-color-primary: #4DA1AE;
+  --ifm-color-primary-dark: #2D9CB0;
+  --ifm-color-primary-darker: #0F6F7E;
+  --ifm-color-primary-darkest: #0A5260;
+  --ifm-color-primary-light: #7DBBC5;
+  --ifm-color-primary-lighter: #A8D5DC;
+  --ifm-color-primary-lightest: #D6ECEF;
 
-  --docusaurus-highlighted-code-line-bg: rgba(96, 165, 250, 0.15);
+  --docusaurus-highlighted-code-line-bg: rgba(45, 156, 176, 0.15);
 }
 
 /* ── Global Typography ───────────────────────────────────────────────── */
@@ -154,17 +158,9 @@ code, pre {
 }
 
 /* ── Navbar — logo constraint (CLAUDE.md rule) ───────────────────────── */
-/* Wrapper must match the 40px mark so the img centers with the title text;
-   the default 2rem wrapper let the taller img overhang downward (~4px off). */
-.navbar__logo {
-  height: 40px;
-  display: flex;
-  align-items: center;
-}
 .navbar__logo img {
   width: 40px !important;
   height: 40px !important;
-  display: block;
 }
 
 /* ── Navbar — glass effect base ──────────────────────────────────────── */
@@ -220,7 +216,7 @@ code, pre {
 }
 
 [data-theme='dark'] .theme-doc-sidebar-menu .menu__link--active:not(.menu__link--sublist) {
-  background: rgba(37, 99, 235, 0.1);
+  background: rgba(15, 111, 126, 0.1);
   color: var(--so-primary-400);
   border-left-color: var(--so-primary-400);
 }

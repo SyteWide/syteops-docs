@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.3.046
+
+- Refreshed: SyteOps and SyteWide branding across the admin UI (logos, primary teal color, login screen, footer, sidebar mark).
+- Improved: The brand library is now bundled locally so logos no longer depend on external image hot-links.
+
 ## v1.3.045
 
 - Fixed: Rolling Management Server credentials now reliably saves the new secret on each endpoint and overwrites the stored value
