@@ -14,7 +14,7 @@ const config: Config = {
   url: 'https://syteops.sytewide.com',
   baseUrl: '/',
 
-  organizationName: 'SyteWide',
+  organizationName: 'sculpted-marketing',
   projectName: 'syteops-docs',
 
   onBrokenLinks: 'throw',
@@ -97,7 +97,7 @@ const config: Config = {
   ],
 
   themeConfig: {
-    image: 'img/syteops-social-card.png',
+    image: 'img/syteops-og-1200x630.png',
     colorMode: {
       defaultMode: 'light',
       respectPrefersColorScheme: true,
@@ -106,7 +106,7 @@ const config: Config = {
       id: 'new_docs_2025',
       content:
         'Welcome to the redesigned SyteOps documentation! <a href="/docs/getting-started/installation">Get started here</a>.',
-      backgroundColor: '#2563eb',
+      backgroundColor: '#0F6F7E',
       textColor: '#ffffff',
       isCloseable: true,
     },
@@ -114,8 +114,7 @@ const config: Config = {
       title: 'SyteOps',
       logo: {
         alt: 'SyteOps Logo',
-        src: 'img/logo.svg',
-        srcDark: 'img/logo-dark.svg',
+        src: 'img/logo.png',
         width: 40,
         height: 40,
       },

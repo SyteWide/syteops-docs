@@ -6,7 +6,7 @@
 
   <!-- ── Server node ─────────────────────────────────── -->
   <rect x="230" y="24" width="180" height="70" rx="10"
-        fill="#2563eb" stroke="#1d4ed8" stroke-width="1.5"/>
+        fill="#0F6F7E" stroke="#0A5260" stroke-width="1.5"/>
   <!-- Server icon (stack) -->
   <rect x="258" y="40" width="30" height="6" rx="2" fill="rgba(255,255,255,0.6)"/>
   <rect x="258" y="50" width="30" height="6" rx="2" fill="rgba(255,255,255,0.4)"/>
@@ -18,33 +18,33 @@
 
   <!-- ── Connector lines ────────────────────────────── -->
   <!-- Left endpoint -->
-  <line x1="230" y1="80" x2="100" y2="210" stroke="#93c5fd" stroke-width="2" stroke-dasharray="6 3"/>
+  <line x1="230" y1="80" x2="100" y2="210" stroke="#7DBBC5" stroke-width="2" stroke-dasharray="6 3"/>
   <!-- Center endpoint -->
-  <line x1="320" y1="94" x2="320" y2="200" stroke="#93c5fd" stroke-width="2" stroke-dasharray="6 3"/>
+  <line x1="320" y1="94" x2="320" y2="200" stroke="#7DBBC5" stroke-width="2" stroke-dasharray="6 3"/>
   <!-- Right endpoint -->
-  <line x1="410" y1="80" x2="540" y2="210" stroke="#93c5fd" stroke-width="2" stroke-dasharray="6 3"/>
+  <line x1="410" y1="80" x2="540" y2="210" stroke="#7DBBC5" stroke-width="2" stroke-dasharray="6 3"/>
 
   <!-- ── Arrow markers at endpoint end ─────────────── -->
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-      <path d="M0,0 L0,6 L8,3 z" fill="#60a5fa"/>
+      <path d="M0,0 L0,6 L8,3 z" fill="#4DA1AE"/>
     </marker>
   </defs>
-  <line x1="230" y1="80" x2="104" y2="206" stroke="#93c5fd" stroke-width="2"
+  <line x1="230" y1="80" x2="104" y2="206" stroke="#7DBBC5" stroke-width="2"
         stroke-dasharray="6 3" marker-end="url(#arrow)"/>
-  <line x1="320" y1="94" x2="320" y2="200" stroke="#93c5fd" stroke-width="2"
+  <line x1="320" y1="94" x2="320" y2="200" stroke="#7DBBC5" stroke-width="2"
         stroke-dasharray="6 3" marker-end="url(#arrow)"/>
-  <line x1="410" y1="80" x2="536" y2="206" stroke="#93c5fd" stroke-width="2"
+  <line x1="410" y1="80" x2="536" y2="206" stroke="#7DBBC5" stroke-width="2"
         stroke-dasharray="6 3" marker-end="url(#arrow)"/>
 
   <!-- ── Endpoint nodes ─────────────────────────────── -->
   <!-- Left endpoint -->
   <rect x="34" y="200" width="132" height="72" rx="10"
-        fill="white" stroke="#bfdbfe" stroke-width="1.5"/>
-  <rect x="50" y="214" width="20" height="14" rx="3" fill="#dbeafe"/>
-  <rect x="50" y="214" width="20" height="4" rx="2" fill="#93c5fd"/>
+        fill="white" stroke="#A8D5DC" stroke-width="1.5"/>
+  <rect x="50" y="214" width="20" height="14" rx="3" fill="#D6ECEF"/>
+  <rect x="50" y="214" width="20" height="4" rx="2" fill="#7DBBC5"/>
   <text x="100" y="228" font-family="'Plus Jakarta Sans', Inter, system-ui, sans-serif"
-        font-size="11" font-weight="600" fill="#1e40af" text-anchor="middle">Endpoint A</text>
+        font-size="11" font-weight="600" fill="#0A5260" text-anchor="middle">Endpoint A</text>
   <text x="100" y="244" font-family="Inter, system-ui, sans-serif"
         font-size="10" fill="#475569" text-anchor="middle">WordPress Site 1</text>
   <rect x="50" y="254" width="48" height="8" rx="4" fill="#dcfce7"/>
@@ -53,11 +53,11 @@
 
   <!-- Center endpoint -->
   <rect x="254" y="200" width="132" height="72" rx="10"
-        fill="white" stroke="#bfdbfe" stroke-width="1.5"/>
-  <rect x="270" y="214" width="20" height="14" rx="3" fill="#dbeafe"/>
-  <rect x="270" y="214" width="20" height="4" rx="2" fill="#93c5fd"/>
+        fill="white" stroke="#A8D5DC" stroke-width="1.5"/>
+  <rect x="270" y="214" width="20" height="14" rx="3" fill="#D6ECEF"/>
+  <rect x="270" y="214" width="20" height="4" rx="2" fill="#7DBBC5"/>
   <text x="320" y="228" font-family="'Plus Jakarta Sans', Inter, system-ui, sans-serif"
-        font-size="11" font-weight="600" fill="#1e40af" text-anchor="middle">Endpoint B</text>
+        font-size="11" font-weight="600" fill="#0A5260" text-anchor="middle">Endpoint B</text>
   <text x="320" y="244" font-family="Inter, system-ui, sans-serif"
         font-size="10" fill="#475569" text-anchor="middle">WordPress Site 2</text>
   <rect x="270" y="254" width="48" height="8" rx="4" fill="#dcfce7"/>
@@ -66,11 +66,11 @@
 
   <!-- Right endpoint -->
   <rect x="474" y="200" width="132" height="72" rx="10"
-        fill="white" stroke="#bfdbfe" stroke-width="1.5"/>
-  <rect x="490" y="214" width="20" height="14" rx="3" fill="#dbeafe"/>
-  <rect x="490" y="214" width="20" height="4" rx="2" fill="#93c5fd"/>
+        fill="white" stroke="#A8D5DC" stroke-width="1.5"/>
+  <rect x="490" y="214" width="20" height="14" rx="3" fill="#D6ECEF"/>
+  <rect x="490" y="214" width="20" height="4" rx="2" fill="#7DBBC5"/>
   <text x="540" y="228" font-family="'Plus Jakarta Sans', Inter, system-ui, sans-serif"
-        font-size="11" font-weight="600" fill="#1e40af" text-anchor="middle">Endpoint C</text>
+        font-size="11" font-weight="600" fill="#0A5260" text-anchor="middle">Endpoint C</text>
   <text x="540" y="244" font-family="Inter, system-ui, sans-serif"
         font-size="10" fill="#475569" text-anchor="middle">WordPress Site 3</text>
   <rect x="490" y="254" width="48" height="8" rx="4" fill="#fef9c3"/>
@@ -79,7 +79,7 @@
 
   <!-- ── Legend ─────────────────────────────────────── -->
   <rect x="24" y="298" width="592" height="28" rx="6" fill="#eff6ff"/>
-  <line x1="44" y1="312" x2="68" y2="312" stroke="#93c5fd" stroke-width="2" stroke-dasharray="4 2"/>
+  <line x1="44" y1="312" x2="68" y2="312" stroke="#7DBBC5" stroke-width="2" stroke-dasharray="4 2"/>
   <text x="76" y="316" font-family="Inter, system-ui, sans-serif" font-size="10"
         fill="#475569">Managed connection (polling)</text>
   <circle cx="220" cy="312" r="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1"/>
