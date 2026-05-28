@@ -114,7 +114,8 @@ const config: Config = {
       title: 'SyteOps',
       logo: {
         alt: 'SyteOps Logo',
-        src: 'img/logo.png',
+        src: 'img/logo.svg',
+        srcDark: 'img/logo-dark.svg',
         width: 40,
         height: 40,
       },
