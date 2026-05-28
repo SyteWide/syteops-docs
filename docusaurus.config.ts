@@ -14,7 +14,7 @@ const config: Config = {
   url: 'https://syteops.sytewide.com',
   baseUrl: '/',
 
-  organizationName: 'sculpted-marketing',
+  organizationName: 'SyteWide',
   projectName: 'syteops-docs',
 
   onBrokenLinks: 'throw',
