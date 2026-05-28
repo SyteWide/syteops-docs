@@ -154,9 +154,17 @@ code, pre {
 }
 
 /* ── Navbar — logo constraint (CLAUDE.md rule) ───────────────────────── */
+/* Wrapper must match the 40px mark so the img centers with the title text;
+   the default 2rem wrapper let the taller img overhang downward (~4px off). */
+.navbar__logo {
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
 .navbar__logo img {
   width: 40px !important;
   height: 40px !important;
+  display: block;
 }
 
 /* ── Navbar — glass effect base ──────────────────────────────────────── */
