@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.3.048
+
+- Fixed: The WordPress login screen logo now displays the full wordmark instead of appearing cut off on the right edge.
+- Fixed: Removing or replacing the custom login logo now saves reliably — it no longer reappears on the next page load or adds duplicate copies to your media library.
+
 ## v1.3.046
 
 - Refreshed: SyteOps and SyteWide branding across the admin UI (logos, primary teal color, login screen, footer, sidebar mark).
