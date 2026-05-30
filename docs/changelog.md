@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.3.049
+
+- Fixed: Removing the custom admin branding logo now falls back to the default logo instead of leaving the branding area blank.
+
 ## v1.3.048
 
 - Fixed: The WordPress login screen logo now displays the full wordmark instead of appearing cut off on the right edge.
