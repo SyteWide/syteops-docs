@@ -8,6 +8,12 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.4.000
+
+- Added: A new Manage API lets trusted external tools and automations control SyteOps over a secure connection, using an API key you generate.
+- Added: Generate, rotate, or revoke your Manage API key from Admin → Other Options — the key is shown only once and stored encrypted.
+- Improved: Destructive actions performed through the API require explicit confirmation, and stored credentials are never returned in responses.
+
 ## v1.3.049
 
 - Fixed: Removing the custom admin branding logo now falls back to the default logo instead of leaving the branding area blank.

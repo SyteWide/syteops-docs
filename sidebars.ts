@@ -42,6 +42,7 @@ const sidebars: SidebarsConfig = {
         'features/debug-tool',
         'features/licensing',
         'features/workflow-templates',
+        'features/manage-api',
       ],
     },
     {
