@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.4.003
+
+- Fixed: Example hint text in lead settings fields (email addresses, webhook URLs, selectors) now displays in its proper format instead of title case.
+
 ## v1.4.002
 
 - Added: Your own logo can now appear at the top of lead notification emails — upload or pick one from the media library so emails match your brand.
