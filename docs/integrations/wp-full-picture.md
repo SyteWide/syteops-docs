@@ -35,7 +35,12 @@ When SyteOps REST API restriction is off, the allowlist entry has no practical e
 
 - [WP Full Picture](https://r.freemius.com/5405/7092390/) — vendor site.
 
+## Works with Lead Attribution
+
+If you use the [Lead Attribution](../features/lead-attribution.md) module, enable its **Mirror to WP Full Picture** option and each captured conversion (phone-call click, reveal-number click, or form submit) is also recorded as a WP Full Picture event — so your existing analytics dashboards reflect the same leads. This is optional; Lead Attribution works on its own when WP Full Picture isn't installed.
+
 ## Related
 
+- [Lead Attribution](../features/lead-attribution.md) — capture and attribute phone/form leads
 - [REST API Restriction](../features/rest-api-restriction.md) — how allowlist gating works end-to-end
 - [Integrations Overview](overview.md) — all supported integrations

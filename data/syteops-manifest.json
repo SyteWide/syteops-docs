@@ -1,0 +1,944 @@
+{
+    "schema_version": 1,
+    "syteops_version": "1.4.002",
+    "operations": [
+        {
+            "resource": "users",
+            "action": "list",
+            "summary": "List all active SyteOps team-member records.",
+            "params": [],
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data.users[]: array of {user_num, ...fields}"
+        },
+        {
+            "resource": "users",
+            "action": "get",
+            "summary": "Get one SyteOps team-member record by slot number (e.g. \"003\").",
+            "params": {
+                "user_num": {
+                    "type": "string",
+                    "required": true
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {user_num, ...fields}"
+        },
+        {
+            "resource": "users",
+            "action": "create",
+            "summary": "Create a SyteOps team-member record in the next free slot and fill its fields.",
+            "params": {
+                "first_name": {
+                    "type": "string"
+                },
+                "last_name": {
+                    "type": "string"
+                },
+                "full_name": {
+                    "type": "string"
+                },
+                "nickname": {
+                    "type": "string"
+                },
+                "company_name": {
+                    "type": "string"
+                },
+                "phone_number": {
+                    "type": "string"
+                },
+                "phone_map_pref": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "email"
+                },
+                "email_alternate": {
+                    "type": "email"
+                },
+                "email_personal": {
+                    "type": "email"
+                },
+                "link_profile_pic": {
+                    "type": "url"
+                },
+                "link_profile_pic_attachment_id": {
+                    "type": "integer"
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {user_num, ...fields}"
+        },
+        {
+            "resource": "users",
+            "action": "update",
+            "summary": "Update fields on an existing SyteOps team-member record.",
+            "params": {
+                "user_num": {
+                    "type": "string",
+                    "required": true
+                },
+                "first_name": {
+                    "type": "string"
+                },
+                "last_name": {
+                    "type": "string"
+                },
+                "full_name": {
+                    "type": "string"
+                },
+                "nickname": {
+                    "type": "string"
+                },
+                "company_name": {
+                    "type": "string"
+                },
+                "phone_number": {
+                    "type": "string"
+                },
+                "phone_map_pref": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "email"
+                },
+                "email_alternate": {
+                    "type": "email"
+                },
+                "email_personal": {
+                    "type": "email"
+                },
+                "link_profile_pic": {
+                    "type": "url"
+                },
+                "link_profile_pic_attachment_id": {
+                    "type": "integer"
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {user_num, ...fields}"
+        },
+        {
+            "resource": "users",
+            "action": "delete",
+            "summary": "Soft-delete a SyteOps team-member record (frees its slot for reuse).",
+            "params": {
+                "user_num": {
+                    "type": "string",
+                    "required": true
+                },
+                "confirm": {
+                    "type": "boolean"
+                }
+            },
+            "destructive": true,
+            "capability": "manage_options",
+            "returns": "data: {user_num, deleted: true}"
+        },
+        {
+            "resource": "status",
+            "action": "get",
+            "summary": "Read-only summary: plugin version, active modules, integration toggle counts.",
+            "params": [],
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {version, active_modules[], integrations_enabled_count}"
+        },
+        {
+            "resource": "modules",
+            "action": "list",
+            "summary": "List known SyteOps modules and whether each is active.",
+            "params": [],
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data.modules[]: array of {module, active}"
+        },
+        {
+            "resource": "modules",
+            "action": "activate",
+            "summary": "Activate a SyteOps module.",
+            "params": {
+                "module": {
+                    "type": "string",
+                    "required": true
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {module, active: true}"
+        },
+        {
+            "resource": "modules",
+            "action": "deactivate",
+            "summary": "Deactivate a SyteOps module.",
+            "params": {
+                "module": {
+                    "type": "string",
+                    "required": true
+                },
+                "confirm": {
+                    "type": "boolean"
+                }
+            },
+            "destructive": true,
+            "capability": "manage_options",
+            "returns": "data: {module, active: false}"
+        },
+        {
+            "resource": "modules",
+            "action": "get_config",
+            "summary": "Get a module's stored configuration.",
+            "params": {
+                "module": {
+                    "type": "string",
+                    "required": true
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {module, config}"
+        },
+        {
+            "resource": "modules",
+            "action": "update_config",
+            "summary": "Merge keys into a module's stored configuration.",
+            "params": {
+                "module": {
+                    "type": "string",
+                    "required": true
+                },
+                "config": {
+                    "type": "object",
+                    "required": true
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {module, config}"
+        },
+        {
+            "resource": "integrations",
+            "action": "list",
+            "summary": "List integration toggles with enabled + plugin-installed state.",
+            "params": [],
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data.integrations[]: array of {slug, enabled, plugin_installed}"
+        },
+        {
+            "resource": "integrations",
+            "action": "enable",
+            "summary": "Enable an integration (refused if its required plugin is not installed).",
+            "params": {
+                "slug": {
+                    "type": "string",
+                    "required": true
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {slug, enabled: true}"
+        },
+        {
+            "resource": "integrations",
+            "action": "disable",
+            "summary": "Disable an integration.",
+            "params": {
+                "slug": {
+                    "type": "string",
+                    "required": true
+                },
+                "confirm": {
+                    "type": "boolean"
+                }
+            },
+            "destructive": true,
+            "capability": "manage_options",
+            "returns": "data: {slug, enabled: false}"
+        },
+        {
+            "resource": "ai",
+            "action": "get_providers",
+            "summary": "List available AI provider slugs and the default.",
+            "params": [],
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {providers[], default}"
+        },
+        {
+            "resource": "ai",
+            "action": "get_area",
+            "summary": "Get the AI provider/model/max_tokens for an AI-consuming area.",
+            "params": {
+                "area": {
+                    "type": "string",
+                    "required": true
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {area, provider, model, max_tokens}"
+        },
+        {
+            "resource": "ai",
+            "action": "set_area",
+            "summary": "Set provider/model/max_tokens for an AI-consuming area.",
+            "params": {
+                "area": {
+                    "type": "string",
+                    "required": true
+                },
+                "provider": {
+                    "type": "string"
+                },
+                "model": {
+                    "type": "string"
+                },
+                "max_tokens": {
+                    "type": "integer"
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {area, provider, model, max_tokens}"
+        },
+        {
+            "resource": "ai",
+            "action": "set_key",
+            "summary": "Store (encrypted) the API key for an AI provider.",
+            "params": {
+                "provider": {
+                    "type": "string",
+                    "required": true
+                },
+                "api_key": {
+                    "type": "string",
+                    "required": true
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "secret_keys": [
+                "api_key"
+            ],
+            "returns": "data: {provider, key_set}"
+        },
+        {
+            "resource": "crm",
+            "action": "list",
+            "summary": "List all non-empty CRM system slots (gap-aware; never includes api_key).",
+            "params": [],
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data.crms[]: array of {crm_num, name, code, url, link_admin_only}"
+        },
+        {
+            "resource": "crm",
+            "action": "get",
+            "summary": "Get a single CRM slot by crm_num (e.g. \"003\").",
+            "params": {
+                "crm_num": {
+                    "type": "string",
+                    "required": true
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {crm_num, name, code, url, link_admin_only}"
+        },
+        {
+            "resource": "crm",
+            "action": "create",
+            "summary": "Create a CRM record in the next free slot (up to SYTEOPS_MAX_CRM_SYSTEMS).",
+            "params": {
+                "name": {
+                    "type": "string",
+                    "required": true
+                },
+                "url": {
+                    "type": "url"
+                },
+                "link_admin_only": {
+                    "type": "boolean"
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {crm_num, name, code, url, link_admin_only}"
+        },
+        {
+            "resource": "crm",
+            "action": "update",
+            "summary": "Update editable fields on an existing CRM slot.",
+            "params": {
+                "crm_num": {
+                    "type": "string",
+                    "required": true
+                },
+                "name": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "url"
+                },
+                "link_admin_only": {
+                    "type": "boolean"
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {crm_num, name, code, url, link_admin_only}"
+        },
+        {
+            "resource": "crm",
+            "action": "delete",
+            "summary": "Delete a CRM slot: clears fields and secret; crm_count stays as high-water mark.",
+            "params": {
+                "crm_num": {
+                    "type": "string",
+                    "required": true
+                },
+                "confirm": {
+                    "type": "boolean"
+                }
+            },
+            "destructive": true,
+            "capability": "manage_options",
+            "returns": "data: {crm_num, deleted: true}"
+        },
+        {
+            "resource": "crm",
+            "action": "set_secret",
+            "summary": "Store (encrypted) the API key for a CRM slot. Key is never returned.",
+            "params": {
+                "crm_num": {
+                    "type": "string",
+                    "required": true
+                },
+                "api_key": {
+                    "type": "string",
+                    "required": true
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "secret_keys": [
+                "api_key"
+            ],
+            "returns": "data: {crm_num, key_set}"
+        },
+        {
+            "resource": "roles",
+            "action": "list",
+            "summary": "List system + custom roles with assignees.",
+            "params": [],
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data.roles[]: {slug, name, system, constraint_type, assigned_users}"
+        },
+        {
+            "resource": "roles",
+            "action": "create",
+            "summary": "Create a custom role.",
+            "params": {
+                "name": {
+                    "type": "string",
+                    "required": true
+                },
+                "description": {
+                    "type": "string"
+                },
+                "icon": {
+                    "type": "string"
+                },
+                "color": {
+                    "type": "string"
+                },
+                "constraint_type": {
+                    "type": "string"
+                },
+                "max_count": {
+                    "type": "integer"
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {slug, role}"
+        },
+        {
+            "resource": "roles",
+            "action": "update",
+            "summary": "Update a custom role.",
+            "params": {
+                "slug": {
+                    "type": "string",
+                    "required": true
+                },
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "icon": {
+                    "type": "string"
+                },
+                "color": {
+                    "type": "string"
+                },
+                "constraint_type": {
+                    "type": "string"
+                },
+                "max_count": {
+                    "type": "integer"
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {slug, role}"
+        },
+        {
+            "resource": "roles",
+            "action": "delete",
+            "summary": "Delete a custom role (system roles cannot be deleted).",
+            "params": {
+                "slug": {
+                    "type": "string",
+                    "required": true
+                },
+                "confirm": {
+                    "type": "boolean"
+                }
+            },
+            "destructive": true,
+            "capability": "manage_options",
+            "returns": "data: {slug, deleted: true}"
+        },
+        {
+            "resource": "roles",
+            "action": "assign",
+            "summary": "Assign a user (slot number) to a role.",
+            "params": {
+                "slug": {
+                    "type": "string",
+                    "required": true
+                },
+                "user_num": {
+                    "type": "string",
+                    "required": true
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {slug, assigned_users}"
+        },
+        {
+            "resource": "roles",
+            "action": "unassign",
+            "summary": "Unassign a user (slot number) from a role.",
+            "params": {
+                "slug": {
+                    "type": "string",
+                    "required": true
+                },
+                "user_num": {
+                    "type": "string",
+                    "required": true
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {slug, assigned_users}"
+        },
+        {
+            "resource": "variables",
+            "action": "catalog",
+            "summary": "Discover syteops_* FlowMattic variables: free-form (writable) + registry-managed (read-only).",
+            "params": [],
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {flowmattic_available, variables[]: {name, description, source, current_value, writable}}"
+        },
+        {
+            "resource": "variables",
+            "action": "get",
+            "summary": "Get one free-form variable by key.",
+            "params": {
+                "key": {
+                    "type": "string",
+                    "required": true
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {key, name, value, description}"
+        },
+        {
+            "resource": "variables",
+            "action": "set",
+            "summary": "Upsert a free-form variable (emits syteops_api_<key> to FlowMattic).",
+            "params": {
+                "key": {
+                    "type": "string",
+                    "required": true
+                },
+                "value": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {key, name, value, description}"
+        },
+        {
+            "resource": "variables",
+            "action": "delete",
+            "summary": "Delete a free-form variable and its FlowMattic variable.",
+            "params": {
+                "key": {
+                    "type": "string",
+                    "required": true
+                },
+                "confirm": {
+                    "type": "boolean"
+                }
+            },
+            "destructive": true,
+            "capability": "manage_options",
+            "returns": "data: {key, deleted: true}"
+        },
+        {
+            "resource": "variables",
+            "action": "resync",
+            "summary": "Force a full master-registry push to FlowMattic (idempotent).",
+            "params": [],
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {resynced: true}"
+        },
+        {
+            "resource": "notes_items",
+            "action": "list",
+            "summary": "List Notes items (paginated).",
+            "params": {
+                "per_page": {
+                    "type": "integer"
+                },
+                "page": {
+                    "type": "integer"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "search": {
+                    "type": "string"
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {items[]: {id,type,title,content,excerpt,status,slug,author,date,modified}, total, page, per_page}"
+        },
+        {
+            "resource": "notes_items",
+            "action": "get",
+            "summary": "Get one Notes item by id (includes meta).",
+            "params": {
+                "id": {
+                    "type": "integer",
+                    "required": true
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {id,type,title,content,excerpt,status,slug,author,date,modified,meta}"
+        },
+        {
+            "resource": "notes_items",
+            "action": "create",
+            "summary": "Create a Notes item.",
+            "params": {
+                "title": {
+                    "type": "string"
+                },
+                "content": {
+                    "type": "string"
+                },
+                "excerpt": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "slug": {
+                    "type": "string"
+                },
+                "author": {
+                    "type": "integer"
+                },
+                "meta": {
+                    "type": "object"
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {id, ...item}"
+        },
+        {
+            "resource": "notes_items",
+            "action": "update",
+            "summary": "Update a Notes item.",
+            "params": {
+                "id": {
+                    "type": "integer",
+                    "required": true
+                },
+                "title": {
+                    "type": "string"
+                },
+                "content": {
+                    "type": "string"
+                },
+                "excerpt": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "slug": {
+                    "type": "string"
+                },
+                "author": {
+                    "type": "integer"
+                },
+                "meta": {
+                    "type": "object"
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {id, ...item}"
+        },
+        {
+            "resource": "notes_items",
+            "action": "delete",
+            "summary": "Permanently delete a Notes item.",
+            "params": {
+                "id": {
+                    "type": "integer",
+                    "required": true
+                },
+                "confirm": {
+                    "type": "boolean"
+                }
+            },
+            "destructive": true,
+            "capability": "manage_options",
+            "returns": "data: {id, deleted: true}"
+        },
+        {
+            "resource": "estimates_items",
+            "action": "list",
+            "summary": "List Estimates items (paginated).",
+            "params": {
+                "per_page": {
+                    "type": "integer"
+                },
+                "page": {
+                    "type": "integer"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "search": {
+                    "type": "string"
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {items[]: {id,type,title,content,excerpt,status,slug,author,date,modified}, total, page, per_page}"
+        },
+        {
+            "resource": "estimates_items",
+            "action": "get",
+            "summary": "Get one Estimates item by id (includes meta).",
+            "params": {
+                "id": {
+                    "type": "integer",
+                    "required": true
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {id,type,title,content,excerpt,status,slug,author,date,modified,meta}"
+        },
+        {
+            "resource": "estimates_items",
+            "action": "create",
+            "summary": "Create a Estimates item.",
+            "params": {
+                "title": {
+                    "type": "string"
+                },
+                "content": {
+                    "type": "string"
+                },
+                "excerpt": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "slug": {
+                    "type": "string"
+                },
+                "author": {
+                    "type": "integer"
+                },
+                "meta": {
+                    "type": "object"
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {id, ...item}"
+        },
+        {
+            "resource": "estimates_items",
+            "action": "update",
+            "summary": "Update a Estimates item.",
+            "params": {
+                "id": {
+                    "type": "integer",
+                    "required": true
+                },
+                "title": {
+                    "type": "string"
+                },
+                "content": {
+                    "type": "string"
+                },
+                "excerpt": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "slug": {
+                    "type": "string"
+                },
+                "author": {
+                    "type": "integer"
+                },
+                "meta": {
+                    "type": "object"
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {id, ...item}"
+        },
+        {
+            "resource": "estimates_items",
+            "action": "delete",
+            "summary": "Permanently delete a Estimates item.",
+            "params": {
+                "id": {
+                    "type": "integer",
+                    "required": true
+                },
+                "confirm": {
+                    "type": "boolean"
+                }
+            },
+            "destructive": true,
+            "capability": "manage_options",
+            "returns": "data: {id, deleted: true}"
+        },
+        {
+            "resource": "leads",
+            "action": "list",
+            "summary": "List captured leads (paginated; filter by source/since).",
+            "params": {
+                "per_page": {
+                    "type": "integer"
+                },
+                "page": {
+                    "type": "integer"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "since": {
+                    "type": "string"
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {items[]: {id,ref,source,campaign,status,event_count,first_seen}, total, page, per_page}"
+        },
+        {
+            "resource": "leads",
+            "action": "get",
+            "summary": "Get one lead with attribution, event timeline, and chain status.",
+            "params": {
+                "id": {
+                    "type": "integer",
+                    "required": true
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {id,ref,attribution,events[],chain:{ok,count,broken_at}}"
+        },
+        {
+            "resource": "leads",
+            "action": "export",
+            "summary": "Export the lead ledger as structured rows (optionally since a datetime).",
+            "params": {
+                "since": {
+                    "type": "string"
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {rows[], count}"
+        },
+        {
+            "resource": "leads",
+            "action": "verify",
+            "summary": "Verify the tamper-evident integrity chain for a lead.",
+            "params": {
+                "id": {
+                    "type": "integer",
+                    "required": true
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {id, chain:{ok,count,broken_at}}"
+        },
+        {
+            "resource": "leads",
+            "action": "delete",
+            "summary": "Permanently delete a lead and its events.",
+            "params": {
+                "id": {
+                    "type": "integer",
+                    "required": true
+                },
+                "confirm": {
+                    "type": "boolean"
+                }
+            },
+            "destructive": true,
+            "capability": "manage_options",
+            "returns": "data: {id, deleted: true}"
+        }
+    ]
+}
