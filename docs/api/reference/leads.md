@@ -1,5 +1,6 @@
 ---
-title: leads
+title: Leads
+sidebar_label: Leads
 description: Manage API operations for the leads resource.
 ---
 

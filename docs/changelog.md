@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.4.004
+
+- Fixed: The "Send test email" action returns a clear failure notice quickly when the site's mail transport is slow or unreachable, instead of leaving the page hanging.
+- Improved: Scheduled lead summary emails get the same fast-fail protection, so a slow mail transport won't stall them.
+
 ## v1.4.003
 
 - Fixed: Example hint text in lead settings fields (email addresses, webhook URLs, selectors) now displays in its proper format instead of title case.

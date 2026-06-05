@@ -1,5 +1,6 @@
 ---
-title: variables
+title: Variables
+sidebar_label: Variables
 description: Manage API operations for the variables resource.
 ---
 

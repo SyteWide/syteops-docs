@@ -1,5 +1,6 @@
 ---
-title: crm
+title: CRM
+sidebar_label: CRM
 description: Manage API operations for the crm resource.
 ---
 

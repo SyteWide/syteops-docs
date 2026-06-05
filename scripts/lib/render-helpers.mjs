@@ -1,7 +1,8 @@
 export const BANNER = '<!-- GENERATED — do not edit by hand; run `npm run docs:generate` -->';
 
-export function frontmatter({ title, description, sidebar_position }) {
+export function frontmatter({ title, description, sidebar_label, sidebar_position }) {
   const lines = ['---', `title: ${jsonish(title)}`];
+  if (sidebar_label) lines.push(`sidebar_label: ${jsonish(sidebar_label)}`);
   if (description) lines.push(`description: ${jsonish(description)}`);
   if (sidebar_position != null) lines.push(`sidebar_position: ${sidebar_position}`);
   lines.push('---', '');
