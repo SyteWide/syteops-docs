@@ -8,8 +8,22 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.4.002
+
+- Added: Your own logo can now appear at the top of lead notification emails — upload or pick one from the media library so emails match your brand.
+- Improved: The logo sits on a fixed white panel, so it stays legible in both light and dark email clients.
+- Improved: The logo is embedded directly in each email, so it displays even when an inbox blocks remote images.
+
+## v1.4.001
+
+- Fixed: Tidied the Leads settings layout — removed an empty tab and corrected page spacing.
+- Fixed: The "which conversions to send" switches now reliably apply to form submissions captured on the server.
+- Fixed: The lead-scoring question builder keeps custom question IDs when you rename a question, so saved answers stay linked.
+- Fixed: Editing one advanced (raw JSON) box no longer clears the other.
+
 ## v1.4.000
 
+- Redesigned the Leads settings screen with clearer explanations, on/off switches, and a point-and-click builder for lead-scoring questions. Webhooks now work with any automation platform.
 - Added: A new Manage API lets trusted external tools and automations control SyteOps over a secure connection, using an API key you generate.
 - Added: Generate, rotate, or revoke your Manage API key from Admin → Other Options — the key is shown only once and stored encrypted.
 - Improved: Destructive actions performed through the API require explicit confirmation, and stored credentials are never returned in responses.
