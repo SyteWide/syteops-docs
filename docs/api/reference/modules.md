@@ -1,5 +1,6 @@
 ---
-title: modules
+title: Modules
+sidebar_label: Modules
 description: Manage API operations for the modules resource.
 ---
 

@@ -1,5 +1,6 @@
 ---
-title: integrations
+title: Integrations
+sidebar_label: Integrations
 description: Manage API operations for the integrations resource.
 ---
 

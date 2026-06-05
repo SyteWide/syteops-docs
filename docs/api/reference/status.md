@@ -1,5 +1,6 @@
 ---
-title: status
+title: Status
+sidebar_label: Status
 description: Manage API operations for the status resource.
 ---
 

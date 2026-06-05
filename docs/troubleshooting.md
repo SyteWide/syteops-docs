@@ -246,6 +246,19 @@ WooCommerce OAuth (`/wc-auth/v1/*`) is automatically allowed. For custom WooComm
 
 **Solution:** Install and activate the third-party plugin (listed on the integration card). SaaS/API integrations (Slack, AWS SES, Cloudflare) never show "Not Installed" because they have no WordPress plugin to detect.
 
+## Lead Attribution
+
+### "Send test email" fails instead of confirming delivery
+
+**Cause:** The site's email transport (your SMTP plugin or host mail) is slow or unreachable, so the test message couldn't be sent. SyteOps caps how long it waits, so the action now returns a clear failure notice quickly instead of leaving the page hanging or showing a connection-timeout error.
+
+**Solution:**
+1. Confirm your SMTP plugin (e.g. FluentSMTP, WP Mail SMTP) is configured and its own "send test" works.
+2. If you don't use an SMTP plugin, verify your host's mail service is working.
+3. Once the transport is healthy, retry **Leads → Settings → Maintenance → Send test email**.
+
+The same fast-fail protection applies to scheduled lead summaries, so a bad transport won't stall the digest. See [Lead Attribution](features/lead-attribution) for email report settings.
+
 ## Server Connections
 
 ### Endpoint scan fails on a specific site

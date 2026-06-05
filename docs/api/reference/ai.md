@@ -1,5 +1,6 @@
 ---
-title: ai
+title: AI
+sidebar_label: AI
 description: Manage API operations for the ai resource.
 ---
 

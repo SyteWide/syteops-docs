@@ -1,5 +1,6 @@
 ---
-title: notes_items
+title: Notes Items
+sidebar_label: Notes Items
 description: Manage API operations for the notes_items resource.
 ---
 

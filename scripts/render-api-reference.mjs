@@ -14,10 +14,30 @@ export function resourceSlug(resource) {
   return String(resource).replace(/_/g, '-');
 }
 
+// WHY: the resource key is the literal dispatch value (lowercase, underscored — e.g. notes_items),
+// but the sidebar nav and page title read better Title-Cased. This only affects the human-facing
+// label; the literal key still appears in the H1, request bodies, and the index table.
+const RESOURCE_ACRONYMS = new Set(['ai', 'crm', 'api', 'mcp', 'rest', 'url', 'id', 'seo', 'sso']);
+export function resourceDisplayName(resource) {
+  return String(resource)
+    .split('_')
+    .filter(Boolean)
+    .map((word) =>
+      RESOURCE_ACRONYMS.has(word.toLowerCase())
+        ? word.toUpperCase()
+        : word.charAt(0).toUpperCase() + word.slice(1),
+    )
+    .join(' ');
+}
+
 export function renderResourcePage(resource, ops) {
   const sorted = [...ops].sort((a, b) => a.action.localeCompare(b.action));
   const parts = [
-    frontmatter({ title: resource, description: `Manage API operations for the ${resource} resource.` }),
+    frontmatter({
+      title: resourceDisplayName(resource),
+      sidebar_label: resourceDisplayName(resource),
+      description: `Manage API operations for the ${resource} resource.`,
+    }),
     BANNER, '',
     `# \`${resource}\``, '',
     `${sorted.length} operation(s). All run through \`POST /syteops/v1/manage/dispatch\` (reads may use the documented GET form).`, '',

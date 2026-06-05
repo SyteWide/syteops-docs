@@ -1,5 +1,6 @@
 ---
-title: estimates_items
+title: Estimates Items
+sidebar_label: Estimates Items
 description: Manage API operations for the estimates_items resource.
 ---
 

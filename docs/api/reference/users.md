@@ -1,5 +1,6 @@
 ---
-title: users
+title: Users
+sidebar_label: Users
 description: Manage API operations for the users resource.
 ---
 

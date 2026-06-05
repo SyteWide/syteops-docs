@@ -1,5 +1,6 @@
 ---
-title: roles
+title: Roles
+sidebar_label: Roles
 description: Manage API operations for the roles resource.
 ---
 
