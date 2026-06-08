@@ -8,6 +8,15 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.4.006
+
+- Added: Block public access to wp-content/debug.log — SyteOps maintains a deny rule in wp-content/.htaccess so the WordPress debug log can't be fetched directly over HTTP (REST API settings → User Enumeration Defense, default on).
+
+## v1.4.005
+
+- Fixed: WordPress admin list screens (Orders, Products, Pages — any post-type list) no longer show a critical error on sites where the Leads module is not active.
+- Fixed: REST security logging no longer emits PHP warnings or records array query parameters as the literal string "Array"; nested values are preserved and secret keys inside them are redacted.
+
 ## v1.4.004
 
 - Fixed: The "Send test email" action returns a clear failure notice quickly when the site's mail transport is slow or unreachable, instead of leaving the page hanging.
