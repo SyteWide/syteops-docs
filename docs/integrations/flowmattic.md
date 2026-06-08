@@ -95,6 +95,28 @@ Use these names in your FlowMattic workflow conditions, actions, and mappings.
 
 API keys and secrets synced to FlowMattic are masked in the FlowMattic variable display. They are available for use in workflows but are not surfaced as readable values in the FlowMattic admin interface.
 
+## Headless Install (WP-CLI)
+
+When no browser session is available — such as during automated site bring-up or CI pipelines — use the WP-CLI command to install FlowMattic without visiting the Initial Setup screen:
+
+```bash
+wp syteops flowmattic install [--activate|--no-activate] [--force-refresh]
+```
+
+The command is **idempotent**: it is a no-op when FlowMattic is already active. By default it installs the newest FlowMattic from SyteOps-defined storage, activates it, and auto-licenses it. Pass `--no-activate` to install without activating. Pass `--force-refresh` to re-download even if the package is already cached.
+
+The CLI defaults to the cached discovery URL (1-hour transient); pass `--force-refresh` to bypass the cache and re-resolve the newest build. (The AJAX wizard in the admin UI always force-refreshes.)
+
+The command exits non-zero (`WP_CLI::error`) if discovery fails or if the download is blocked by a license check.
+
+To run the headless install on an operator-managed site without opening a terminal session, use the deploy tool's `--install-flowmattic` mode:
+
+```bash
+scripts/upload-plugin-release.sh --install-flowmattic --target <slug> [--dry-run]
+```
+
+`--dry-run` prints the remote command without connecting. `--all` is not supported for this mode — `--target` is required.
+
 ## Troubleshooting
 
 **FlowMattic variables not updating:**
