@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.4.009
+
+- Fixed: Activation checkboxes in the FlowMattic MCP Server settings now show their checkmark when enabled, instead of appearing blank even when the option is switched on.
+
 ## v1.4.008
 
 - Fixed: When FlowMattic is already installed but not active, setup now activates the existing copy in place instead of triggering a fresh license-gated download, so connecting FlowMattic completes reliably.
