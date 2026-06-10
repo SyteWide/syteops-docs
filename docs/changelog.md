@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.4.008
+
+- Fixed: When FlowMattic is already installed but not active, setup now activates the existing copy in place instead of triggering a fresh license-gated download, so connecting FlowMattic completes reliably.
+
 ## v1.4.006
 
 - Added: Block public access to wp-content/debug.log — SyteOps maintains a deny rule in wp-content/.htaccess so the WordPress debug log can't be fetched directly over HTTP (REST API settings → User Enumeration Defense, default on).
