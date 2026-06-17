@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.4.012
+
+- Improved: The fill-in box for adding a user now appears on the Users tab in settings as well, not only on the Roles & Users page.
+- Fixed: The add-user fill-in box can be closed with the Escape key.
+
 ## v1.4.011
 
 - Added: When adding a user, a quick fill-in form lets you pre-populate their details (name, email, company, and phone) before the user is created.

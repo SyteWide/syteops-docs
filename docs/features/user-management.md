@@ -19,6 +19,17 @@ Each user slot has 31+ fields organized into categories:
 
 SyteOps supports up to 20 user slots. All user data syncs to FlowMattic as named variables — `syteops_user_001_name`, `syteops_user_001_email`, etc. — making user data available to every workflow without manual maintenance.
 
+## Adding a User
+
+When you click **Add User** — from either the **Users** tab in SyteOps settings or the **Roles & Users** admin page — a short fill-in box appears so you can pre-populate the basics up front:
+
+- First name and last name
+- Work email
+- Company name
+- Phone number
+
+Every field is optional: enter what you have and complete the rest on the user's card afterward. The user is created when you confirm, and the details you entered are saved right away.
+
 ## System Roles
 
 System roles are single-assignment — exactly one user can hold each role at a time.
