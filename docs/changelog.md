@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.4.010
+
+- Fixed: Creating a new role no longer fails with a blank page or error.
+- Fixed: Adding a new user no longer fails with a server error.
+- Fixed: Owner, technical, and marketing contact badges display on the Users tab again.
+- Improved: The role identifier (slug) field now allows underscores, removes a trailing plural "s" automatically, and shows clearer guidance on which characters are allowed.
+- Improved: Minor admin interface alignment fixes.
+
 ## v1.4.009
 
 - Fixed: Activation checkboxes in the FlowMattic MCP Server settings now show their checkmark when enabled, instead of appearing blank even when the option is switched on.
