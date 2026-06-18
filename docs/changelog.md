@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.4.015
+
+- Fixed: Team member variables no longer stop updating in connected workflows after certain background syncs.
+- Fixed: Forcing a variable re-sync now reliably rebuilds all team member variables instead of clearing them.
+
 ## v1.4.014
 
 - Internal improvements and maintenance.
