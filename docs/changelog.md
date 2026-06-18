@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.4.013
+
+- Improved: Dialog headers now match your configured brand colors.
+- Improved: The user quick-navigation pills are restyled with larger, clearer profile pictures.
+
 ## v1.4.012
 
 - Improved: The fill-in box for adding a user now appears on the Users tab in settings as well, not only on the Roles & Users page.
