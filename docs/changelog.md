@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.4.016
+
+- Improved: Primary action buttons now use your configured brand color instead of the default blue.
+- Improved: Button icons are now vertically centered with their labels throughout the admin.
+
 ## v1.4.015
 
 - Fixed: Team member variables no longer stop updating in connected workflows after certain background syncs.
