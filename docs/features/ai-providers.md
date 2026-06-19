@@ -32,6 +32,25 @@ Several SyteOps features call AI models — LinkCentral keyword enrichment and c
 
 All six keys are encrypted at rest. They are never displayed in plaintext after save — you see a masked value.
 
+**Test a saved key:** each tile has a **Test key** button (shown once a key is saved). It makes a quick live call to the provider and reports back — "Key valid — N models available", or the provider's error message if the key is rejected. Useful for providers that don't expose a balance you can sanity-check against.
+
+## Per-provider default model and token limit
+
+Each provider tile on the **API Keys** card has its own **Preferred model** and **Max tokens** fields, right below the key field:
+
+1. Enter and save the provider's API key.
+2. Click **Fetch Models** to load that provider's live model list, then pick a model (or choose **Custom** to type a model ID by hand).
+3. Set **Max tokens**, or click the refresh (↻) button to snap it to the selected model's maximum.
+
+These give you a single, provider-level default — handy when you want every automation that uses a provider to share the same model and token ceiling. Each field also has a **copy icon** that copies its FlowMattic variable (wrapped in `{{ }}`) so you can drop it straight into a workflow:
+
+- `{{syteops_std_systm_openai_model_001_preferred}}` / `{{syteops_std_systm_openai_model_001_max_tokens}}`
+- …and the matching `anthropic`, `openrouter`, `gemini`, `straico`, and `perplexity` variables.
+
+The model and token-limit fields appear on a provider tile once that provider's key is saved (so the model list has a key to load with).
+
+**Used as a fallback:** when a feature that runs AI in SyteOps (e.g. LinkCentral cross-linking and keyword matching) has no model of its own set, it falls back to the matching provider's default model and token limit here — so you can set a sensible default once per provider instead of per feature.
+
 ## Per-feature provider and model selection
 
 Each AI-using feature stores its own provider, model, and max-tokens values. You can point different features at different providers — for example, a cheap keyword model via OpenRouter and a reasoning model via Anthropic for estimates.
@@ -52,6 +71,7 @@ There are two ways to set per-feature AI configuration:
 
 Each provider's card on the **API Keys** tile shows your current balance (or credit/usage, depending on what the provider returns):
 
+- The balance row only appears once you've saved a key for that provider — providers with no key entered don't show a balance (and won't surface a balance-lookup error).
 - Click the refresh icon to re-fetch the balance.
 - The last-updated timestamp shows when the balance was most recently pulled.
 - If a provider doesn't expose a balance endpoint, the field shows "—".
