@@ -8,7 +8,7 @@ description: Setting up ContentPen content relay, webhook delivery, and self-rou
 
 **Tier: Extended** — Has its own settings area, stored credentials, webhook endpoint, and light AI configuration for content formatting.
 
-SyteOps integrates with [ContentPen](https://contentpen.ai?ref=chet28&fp_sid=sytewide) to build self-routing content pipelines. ContentPen generates content and sends it as a webhook. SyteOps verifies the payload, relays it to FlowMattic, and your SyteOps user and role data tells the workflow exactly what to do with it — including who it belongs to.
+SyteOps integrates with [ContentPen](https://contentpen.ai?ref=chet28&fp_sid=sytewide) to build self-routing content pipelines. ContentPen generates content and sends it as a webhook. SyteOps verifies the payload and either relays it to FlowMattic (the default) or — in **native publishing mode** — creates the WordPress post directly with no FlowMattic required. Either way, your SyteOps user and role data determines who the content belongs to and how it's routed.
 
 The result: content arrives in WordPress assigned to the right author, with fields populated and SEO metadata ready. No manual assignment. No workflow editing when authors change.
 
@@ -20,15 +20,14 @@ When ContentPen generates or processes content, it sends a webhook to your SyteO
 
 1. Verifies the webhook signature (HMAC-SHA256)
 2. Processes and normalizes the payload
-3. Relays it to the FlowMattic webhook URL you configure in the System/API tab
-
-From there, FlowMattic handles the rest — using SyteOps variables (user data, role assignments, variable sets) to route and process the content.
+3. **In relay mode (the default):** relays it to the FlowMattic webhook URL you configure in the System/API tab. FlowMattic then handles the rest — using SyteOps variables (user data, role assignments, variable sets) to route and process the content.
+4. **In native publishing mode:** creates the WordPress post directly (author, taxonomy, and SEO metadata) with no FlowMattic required. See [Native Publishing Mode](#native-publishing-mode).
 
 ## Requirements
 
 - SyteOps installed and activated
-- FlowMattic installed and activated
-- ContentPen integration enabled in SyteOps
+- FlowMattic installed and activated — for **relay mode** (the default); **not required** for native publishing mode
+- ContentPen integration enabled in SyteOps (no ContentPen WordPress plugin is required — ContentPen sends webhooks from its cloud service)
 
 ## Setup
 
@@ -42,7 +41,7 @@ From there, FlowMattic handles the rest — using SyteOps variables (user data, 
 
 1. Go to the **System/API** tab
 2. Find the ContentPen section
-3. Enter your ContentPen webhook secret and FlowMattic relay URL
+3. Enter your ContentPen webhook secret (and, for relay mode, the FlowMattic relay URL)
 4. Save
 
 ### 3. Configure Webhook URL
@@ -76,6 +75,22 @@ The power of the ContentPen integration comes from combining it with SyteOps rol
 
 When the author changes, update their role assignment in SyteOps. The next ContentPen article routes to them automatically. No workflow edits needed.
 
+## Native Publishing Mode
+
+By default, SyteOps relays ContentPen webhooks to FlowMattic, which handles post creation through your workflow. If you prefer a simpler setup with no FlowMattic workflow required, you can switch to **native publishing mode**.
+
+To enable it, go to **System/API → ContentPen → Handling mode** and select **Native (create posts directly)**. Save the page.
+
+When native publishing mode is active:
+
+- **Incoming content creates a WordPress post automatically.** No FlowMattic workflow is needed for the creation step.
+- **Posts arrive as drafts by default.** The author receives an email notification so they can review and publish. You can optionally change this to auto-publish in the same settings area.
+- **Author matching happens by email.** SyteOps looks up the WordPress user whose email matches the author field sent by ContentPen. If no match is found, the post is assigned to the site's default author.
+- **Categories and tags are assigned automatically** based on the article's content. Any categories or tags that don't already exist on your site are created for you.
+- **The relay mode (default) is unchanged.** Switching back to **Relay to FlowMattic** restores the original behavior exactly.
+
+Native publishing mode is a good fit for teams that want content to land in WordPress immediately without building a FlowMattic workflow. Teams that need custom routing, multi-step automation, or conditional logic should continue using relay mode.
+
 ## Cloudflare Configuration
 
 If your site uses Cloudflare, server-to-server webhook requests may be blocked by Bot Fight Mode or other security features. See the [Cloudflare Setup Guide](cloudflare#step-1-allow-contentpen-webhooks) for the specific firewall rule to add.
@@ -87,7 +102,7 @@ If your site uses Cloudflare, server-to-server webhook requests may be blocked b
 1. **Check the webhook URL** — Ensure it's exactly `/wp-json/syteops-int-cp/v1/webhook` with the correct domain
 2. **Check Cloudflare** — If using Cloudflare, verify the Allow rule is in place (see [Cloudflare Setup Guide](cloudflare))
 3. **Check REST API restriction** — SyteOps endpoints (`/wp-json/syteops-int-cp/*`) should be automatically allowed, but verify in your REST API settings
-4. **Check FlowMattic** — Ensure FlowMattic is active and licensed, as the webhook relay depends on it
+4. **Check FlowMattic (relay mode only)** — In relay mode (the default), ensure FlowMattic is active and licensed, as the webhook relay depends on it. Native publishing mode does not use FlowMattic.
 
 ### Getting 403 Errors
 
@@ -96,5 +111,5 @@ This usually means Cloudflare or another security layer is blocking the request 
 ### Webhook Received but Not Processed
 
 1. Verify the ContentPen integration is toggled ON in the Integrations tab
-2. Check that FlowMattic is active — the relay depends on FlowMattic being available
+2. **In relay mode**, check that FlowMattic is active — the relay depends on FlowMattic being available (native publishing mode does not use FlowMattic)
 3. Enable Debug Mode in SyteOps for detailed logging

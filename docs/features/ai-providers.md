@@ -16,12 +16,11 @@ Several SyteOps features call AI models — LinkCentral keyword enrichment and c
 | **Anthropic** | Claude family (Opus, Sonnet, Haiku) | Strong instruction-following; long context |
 | **OpenRouter** (recommended) | Aggregated access to models from most major providers | One key unlocks every listed model — including Perplexity Sonar |
 | **Gemini** | Google's Gemini 1.5 / 2.x / 3.x families | Long context; native Google integration |
-| **Straico** | Proxy to many underlying models | v2 OpenAI-compatible as of v1.3.038 |
 | **Perplexity** | Sonar models with built-in web search | Real-time web context for destination-site lookups |
 
 **Why OpenRouter is the recommended default:** one API key gives you access to models from every other provider. If you're not sure which provider to use for a given feature, start with OpenRouter and pick a model from the provider you prefer.
 
-**Perplexity's web-search exclusivity:** the Context AI step in LinkCentral keyword enrichment requires a model that can perform web search. Only Perplexity, OpenRouter, and Straico can serve those models. SyteOps automatically filters the Context AI provider dropdown to show only providers that can access them.
+**Perplexity's web-search exclusivity:** the Context AI step in LinkCentral keyword enrichment requires a model that can perform web search. Only Perplexity and OpenRouter can serve those models. SyteOps automatically filters the Context AI provider dropdown to show only providers that can access them.
 
 ## Where API keys live
 
@@ -30,7 +29,7 @@ Several SyteOps features call AI models — LinkCentral keyword enrichment and c
 3. Paste each provider's key into the matching field
 4. Click **Save Changes**
 
-All six keys are encrypted at rest. They are never displayed in plaintext after save — you see a masked value.
+All five keys are encrypted at rest. They are never displayed in plaintext after save — you see a masked value.
 
 **Test a saved key:** each tile has a **Test key** button (shown once a key is saved). It makes a quick live call to the provider and reports back — "Key valid — N models available", or the provider's error message if the key is rejected. Useful for providers that don't expose a balance you can sanity-check against.
 
@@ -45,7 +44,7 @@ Each provider tile on the **API Keys** card has its own **Preferred model** and 
 These give you a single, provider-level default — handy when you want every automation that uses a provider to share the same model and token ceiling. Each field also has a **copy icon** that copies its FlowMattic variable (wrapped in `{{ }}`) so you can drop it straight into a workflow:
 
 - `{{syteops_std_systm_openai_model_001_preferred}}` / `{{syteops_std_systm_openai_model_001_max_tokens}}`
-- …and the matching `anthropic`, `openrouter`, `gemini`, `straico`, and `perplexity` variables.
+- …and the matching `anthropic`, `openrouter`, `gemini`, and `perplexity` variables.
 
 The model and token-limit fields appear on a provider tile once that provider's key is saved (so the model list has a key to load with).
 
@@ -111,7 +110,7 @@ Reasoning / thinking modes add latency. For short tasks like keyword generation,
 
 - Confirm the provider's API key is saved (the field should show a masked value, not be empty).
 - Click **Fetch Models** on the AI area to force a refresh of the cache.
-- Provider model caches are cleared automatically on plugin update (Straico v1.3.038); other providers refresh on demand.
+- Provider model caches are cleared automatically on plugin update; other providers refresh on demand.
 
 **"Balance shows —"**
 
@@ -120,7 +119,7 @@ Reasoning / thinking modes add latency. For short tasks like keyword generation,
 
 **"Perplexity doesn't appear as a Context AI provider"**
 
-- The Context AI dropdown is filtered to Perplexity-capable providers (Perplexity, OpenRouter, Straico). If you selected a different provider for Keyword AI, the Context AI dropdown still shows only the three eligible providers — this is by design.
+- The Context AI dropdown is filtered to Perplexity-capable providers (Perplexity, OpenRouter). If you selected a different provider for Keyword AI, the Context AI dropdown still shows only the eligible providers — this is by design.
 
 ## Related
 

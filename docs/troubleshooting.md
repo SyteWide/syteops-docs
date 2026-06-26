@@ -202,9 +202,9 @@ WooCommerce OAuth (`/wc-auth/v1/*`) is automatically allowed. For custom WooComm
 
 ### Balance shows "—" or fails to refresh
 
-**Cause:** The provider either does not expose a balance endpoint, or the response format changed (Straico did in v1.3.036, and the parser was corrected then).
+**Cause:** The provider either does not expose a balance endpoint, or the response format changed.
 
-**Solution:** Click the per-provider refresh icon on the **API Keys** tile. If it still fails, check the provider dashboard directly — your actual balance is authoritative there. For Straico specifically, confirm you're on v1.3.036 or newer.
+**Solution:** Click the per-provider refresh icon on the **API Keys** tile. If it still fails, check the provider dashboard directly — your actual balance is authoritative there.
 
 ### Models not loading in the dropdown
 
@@ -213,7 +213,6 @@ WooCommerce OAuth (`/wc-auth/v1/*`) is automatically allowed. For custom WooComm
 **Solution:**
 1. Confirm the provider's key is saved (the field should show a masked value).
 2. Click **Fetch Models** on the AI area to force a cache refresh.
-3. If the provider is Straico and models still do not appear, the cache may be stuck on v1 format — updating to v1.3.038 clears it automatically.
 
 ### Keyword enrichment timeouts / skipped links
 
@@ -222,12 +221,11 @@ WooCommerce OAuth (`/wc-auth/v1/*`) is automatically allowed. For custom WooComm
 **Solution:**
 - SyteOps automatically retries timed-out AI requests once with a longer timeout before skipping. If skipped, the skip reason is shown in the post-run summary.
 - Reduce **Concurrent Workers** (LinkCentral Enrichment Settings) if the destination sites are rate-limiting you.
-- For Straico specifically, concurrency is locked to 1 (proxy latency) and the prompt is trimmed — no user action needed, but expect slower throughput.
 - If timeouts are persistent for specific links, use **Enrich Single Link** on the LinkCentral link's edit screen with a provider override to isolate the failing link.
 
-### Context AI dropdown only shows three providers
+### Context AI dropdown only shows some providers
 
-**This is by design.** Context AI requires web-search capability. Only **Perplexity**, **OpenRouter**, and **Straico** can serve Perplexity Sonar models. SyteOps filters the dropdown so you can't accidentally choose a non-capable provider.
+**This is by design.** Context AI requires web-search capability. Only **Perplexity** and **OpenRouter** can serve Perplexity Sonar models. SyteOps filters the dropdown so you can't accidentally choose a non-capable provider.
 
 ## Integrations
 

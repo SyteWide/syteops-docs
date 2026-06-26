@@ -8,8 +8,24 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## Operator Tools — 2026-06-23
+
+### Added
+- **Deploy tool: `--avada` / `--no-avada` toggle to reset Avada/Fusion caches after deploy (default on; no-op on non-Avada sites).**
+
+## v1.5.000
+
+- Added: Live preview — reviewers can open a post exactly as it will appear on your site before publishing.
+- Added: AI-assisted meta description generation in the review and publish workflow.
+- Added: A dedicated SEO title field that stays in sync with your SEO plugin, with a clean automatic default.
+- Added: Publish notifications — the author and reviewers receive a branded email when a post is published or scheduled.
+- Added: Secondary keywords are captured from generated content and editable while reviewing.
+- Improved: The content editor toolbar gains numbered lists, underline, remove-link, clear-formatting, and undo/redo.
+- Improved: SEO titles now use the clean post title; the meta description is no longer appended to the page title.
+
 ## v1.4.016
 
+- **Content Pipelines module:** New module that automatically runs cross-linking, SEO, and llms.txt stages when posts are published. Manage recipes and view run history from the new Content Pipelines tab.
 - Improved: Primary action buttons now use your configured brand color instead of the default blue.
 - Improved: Button icons are now vertically centered with their labels throughout the admin.
 
@@ -169,10 +185,8 @@ A running log of user-facing changes in each SyteOps release. Only features, imp
 
 ## v1.3.038
 
-- Changed: Straico AI provider migrated to v2 OpenAI-compatible API with standard chat and models endpoints
-- Removed: Straico-specific prompt size limits and context caps in keyword enrichment; all providers now use uniform limits
 - Improved: AI provider HTTP response validation widened to accept all 2xx status codes
-- Improved: Straico model cache automatically cleared on plugin update to ensure fresh model data
+- Improved: AI model caches automatically cleared on plugin update to ensure fresh model data
 
 ## v1.3.037
 
@@ -181,10 +195,9 @@ A running log of user-facing changes in each SyteOps release. Only features, imp
 
 ## v1.3.036
 
-- Added: Live balance display for all six AI providers in the API Keys settings tile, with per-provider refresh and last-updated timestamps
+- Added: Live balance display for AI providers in the API Keys settings tile, with per-provider refresh and last-updated timestamps
 - Added: Provider branding modal showing documentation links and provider identity, accessible from the API Keys tile
 - Added: Systems/API navigation entry in the WordPress admin sidebar for direct access to provider configuration
-- Fixed: Straico balance value parser corrected for current API response format
 - Improved: AI model logging unified across all providers; balance display strings localized
 
 ## v1.3.035
@@ -269,7 +282,7 @@ A running log of user-facing changes in each SyteOps release. Only features, imp
 
 ## v1.3.020
 
-- Added: Multi-provider AI support for LinkCentral cross-linking (OpenAI, Anthropic, OpenRouter, Gemini, Straico)
+- Added: Multi-provider AI support for LinkCentral cross-linking (OpenAI, Anthropic, OpenRouter, Gemini)
 - Fixed: Cross-link scoring now uses the provider, model, and max tokens configured for LinkCentral instead of hardcoded defaults
 - Improved: Systems/API tab with quick navigation for all integration sections, configured-count badge on AI keys, and section entry animations
 
@@ -304,7 +317,6 @@ A running log of user-facing changes in each SyteOps release. Only features, imp
 
 ## v1.3.015
 
-- Fixed: Straico models not loading in the AI provider modal
 - Added: "View provider documentation" link now updates to model-specific docs page when a model is selected
 
 ## v1.3.014
@@ -332,7 +344,7 @@ A running log of user-facing changes in each SyteOps release. Only features, imp
 
 ## v1.3.007
 
-- Added: Multi-provider AI configuration supporting OpenAI, Anthropic, OpenRouter, Gemini, and Straico
+- Added: Multi-provider AI configuration supporting OpenAI, Anthropic, OpenRouter, Gemini, and Perplexity
 - Added: AI provider selection modal with per-area model and token configuration
 - Added: 7 new integration tiles with plugin detection and conditional REST allowlist entries
 - Added: Manual post processing UI for auto-linking integration

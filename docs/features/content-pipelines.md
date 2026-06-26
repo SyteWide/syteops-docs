@@ -1,111 +1,85 @@
 ---
 sidebar_position: 12
 title: Content Pipelines
-description: Building self-routing content workflows with ContentPen, FlowMattic, ACF, and SyteOps roles.
+description: Automate content processing workflows that run on publish — cross-linking, SEO, and llms.txt — with the Content Pipelines module.
 ---
 
 # Content Pipelines
 
-SyteOps is the configuration backbone that makes content automation self-routing. When you connect [ContentPen](https://contentpen.ai?ref=chet28&fp_sid=sytewide), FlowMattic, ACF, and Squirrly SEO around SyteOps user and role data, you get a pipeline where content arrives, finds its owner, builds to spec, and lands ready to publish — without manual assignment or workflow edits.
+Content Pipelines is a SyteOps module that automatically runs a sequence of content-processing stages when a post is published. Each pipeline recipe defines which stages run, in what order, and under what conditions.
 
-## How It Comes Together
+## Getting Started
 
-The pieces:
+### 1. Upload and activate the module
 
-| Tool | Role in the pipeline |
+1. Go to **SyteOps → Modules**
+2. Upload the `syteops-content-pipelines-module.zip` file
+3. Click **Activate** on the Content Pipelines card
+
+Once active, a **Content Pipelines** tab appears in the main SyteOps navigation.
+
+## The Content Pipelines Tab
+
+Open Content Pipelines from the **Content Pipelines** link in the SyteOps admin sidebar (or the Content Pipelines tab in SyteOps settings). The tab has two views, accessible from the quick-nav pills at the top.
+
+### Runs dashboard
+
+The Runs dashboard shows every pipeline execution:
+
+- **Stat cards** show total runs, runs in the last 7 days, posts that were changed, and error counts.
+- **Filter pills** let you filter by recipe or status (OK, Errors, Skipped).
+- **Run now** lets you trigger a pipeline manually for any post — choose a recipe, enter a Post ID, and optionally enable dry-run mode to preview changes without writing them.
+- **Runs table** lists each execution with the source (pipeline trigger or ContentPen), the recipe used, post, status, which stages ran, whether the post was changed, and the trigger type.
+- Click a row to expand the **stage drawer**, which shows the result of each stage with its message and duration.
+
+### Provider status cards
+
+At the very top of the Runs view, above the stat cards, a row of cards shows whether each pipeline provider is wired up:
+
+- **ContentPen** — the inbound webhook source.
+- **Link Engines**, **SEO**, and **GEO** — the processing stages.
+
+Each card shows a status — **Ready**, **Off**, **Needs setup**, or **Not installed** — and a
+link that takes you straight to that provider's settings to finish wiring it up. Use it as a
+quick checklist: every card should read **Ready** before you rely on a recipe that uses that stage.
+
+The **GEO** card (when it uses the built-in `llms.txt` engine) adds a one-click **Turn on** / **Turn off** button that enables or disables AI Search Discovery right from the card — no need to leave the page.
+
+### Recipes
+
+Recipes define how your pipeline behaves:
+
+- The **default recipe** runs all available stages in sequence. It cannot be deleted.
+- **Custom recipes** let you configure stage order, enable or disable individual stages, adjust LinkCentral dial-in settings, set trigger conditions (post types, tags), and define policies (skip unchanged posts, stop or continue on error, dry-run mode).
+- Use the **Add recipe** button to open the recipe builder.
+
+## Recipe Builder
+
+The builder walks you through four sections:
+
+1. **Recipe name and priority** — Give the recipe a name and set its priority (lower numbers run first when multiple recipes match).
+2. **Stages** — Enable or disable individual stages and drag them into the order you want. The Link Engines stage includes LinkCentral dial-in settings to fine-tune cross-linking behavior.
+3. **Trigger** — Choose when the recipe fires: on auto-publish or manual trigger only. Optionally restrict to specific post types or tag slugs.
+4. **Policy** — Control what happens when content hasn't changed (skip it), when a stage errors (stop or continue), and whether to run in dry-run (preview) mode.
+
+## Available Stages
+
+| Stage | What it does |
 |---|---|
-| **[ContentPen](https://contentpen.ai?ref=chet28&fp_sid=sytewide)** | Generates content and sends it as a webhook payload |
-| **SyteOps** | Routes the webhook to FlowMattic; provides user and role variables for assignment |
-| **FlowMattic** | Executes the workflow logic: field mapping, author assignment, metadata injection |
-| **ACF** | Provides the field structure that the workflow populates |
-| **Squirrly SEO** | Applies SEO metadata using field values from ACF + SyteOps data |
+| **Link Engines** | Adds cross-links to published content based on your LinkCentral keyword index |
+| **SEO** | Applies Squirrly SEO metadata using your configured settings |
+| **GEO** | Regenerates your llms.txt file to reflect the new content |
 
-## A Complete Example
+Stages that depend on other integrations (LinkCentral, Squirrly SEO) are available only when those integrations are active and configured.
 
-**The goal:** An article created in ContentPen should arrive in WordPress, assigned to the correct author, with ACF fields populated and SEO metadata ready. All with one click in ContentPen.
+The **GEO** step has a swappable engine. By default it uses the built-in `llms.txt` generator; if the [LLMS Amplifier](../integrations/llms-amplifier) plugin is installed and its integration is enabled, you can select **LLMS Amplifier** as the GEO engine on the recipe's GEO stage row for richer `llms.txt` / `llms-full.txt` output.
 
-**Step 1: ContentPen sends the payload**
+When LLMS Amplifier is the GEO engine and isn't set to "Manual," the GEO provider card shows a one-click **Set to Manual** button, and you can also adjust its update frequency from **System / API → LLMS Amplifier**.
 
-ContentPen delivers a webhook to your SyteOps endpoint:
-```
-POST /wp-json/syteops-int-cp/v1/webhook
-```
+## Dry-Run Mode
 
-The payload includes article content, metadata, and optionally the assigned author or content category.
+Enable **dry-run** on a recipe or on a manual run to preview what would change without actually writing to the database. Dry-run results appear in the Runs dashboard with a "Preview" badge.
 
-**Step 2: SyteOps verifies and relays**
+## ContentPen Integration
 
-SyteOps verifies the webhook signature (HMAC-SHA256), then relays the payload to the configured FlowMattic webhook URL.
-
-**Step 3: FlowMattic detects the author**
-
-The FlowMattic workflow uses SyteOps role variables to identify who the article belongs to. For example:
-- Check `syteops_user_NNN_is_content_lead` to find the current Content Lead
-- Or match the article's metadata to a user slot's CRM ID
-- Or route based on article category → role mapping using SyteOps custom variables
-
-**Step 4: ACF fields get populated**
-
-FlowMattic maps the payload fields to the ACF field keys for the post. SyteOps variable sets can store the mapping (ACF field keys, post type slugs, category IDs) so they're available in FlowMattic without hardcoding.
-
-**Step 5: Squirrly SEO applies metadata**
-
-Squirrly SEO reads from the ACF fields populated by the workflow. SyteOps System/API settings include the Squirrly SEO field mappings, making them available as FlowMattic variables for the workflow.
-
-**Step 6: Article lands in review**
-
-The WordPress post is created in draft status, assigned to the correct author, with all fields populated and SEO metadata set. The author gets a notification (using their email from SyteOps user data). They review, approve, and publish.
-
-**The result:** One click in ContentPen. One workflow. Zero manual assignment. Zero workflow editing when the team changes.
-
-## Why This Works Without Workflow Edits
-
-The key is that SyteOps decouples the "who" and "how" from the workflow itself:
-
-- **Who** — Author assignment comes from SyteOps role variables. Change the Content Lead in SyteOps, the next article routes to them automatically.
-- **How** — Field mappings, API keys, and configuration live in SyteOps as FlowMattic variables. Change a mapping, every workflow that references it picks it up.
-- **What** — The workflow logic (steps, conditions, actions) stays stable. It references named variables, not hardcoded values.
-
-## Setting Up the ContentPen Integration
-
-See the full setup guide: [ContentPen Integration](../integrations/contentpen)
-
-Short version:
-1. Enable **ContentPen** in the Integrations tab
-2. Add your ContentPen API credentials in the **System/API** tab
-3. Set your ContentPen webhook URL to `https://yoursite.com/wp-json/syteops-int-cp/v1/webhook`
-4. Configure your FlowMattic workflow to handle the relayed payload
-
-## Storing Configuration in Variable Sets
-
-Use [Variable Sets](variable-sets) to store the mapping data your content workflow needs:
-
-- ACF field keys for your post types
-- Post type slugs for different content categories
-- Category or tag IDs used in routing conditions
-- Any other repeating values your workflow references
-
-Change a value in SyteOps → it propagates to FlowMattic → every workflow that uses it is automatically current.
-
-## Role-Aware Routing Without Per-Author Workflows
-
-A common pattern: one workflow handles all articles, regardless of author.
-
-**How:** The workflow uses conditional logic that checks `syteops_user_NNN_is_{role}` variables to find the current holder of a role, then acts accordingly. Because these are SyteOps-managed variables, the workflow logic doesn't need to know who the person is — only which role they hold.
-
-**Result:** One workflow. Many authors. No duplicates. No edits when teams change.
-
-## Squirrly SEO Integration
-
-When the **Squirrly SEO** integration is enabled, SyteOps provides additional field mapping configuration in the System/API tab:
-
-- ACF title key
-- Product name/description field mapping
-- Social image dimensions
-- Custom JS path overrides
-
-These settings are available as FlowMattic variables, enabling workflows to set SEO fields correctly without hardcoding Squirrly-specific configuration into workflow definitions.
-
-## Other Supported Content Sources
-
-The ContentPen relay pattern works for any webhook-based content source. If your content tool can send a webhook with a verifiable signature, SyteOps can route it to FlowMattic using the same pattern. The role-awareness and user data that make ContentPen powerful are available to any workflow.
+When you publish content through ContentPen, each article automatically creates a run entry in the Runs dashboard with `source: contentpen`. The pipeline stages that are enabled in the matching recipe apply to ContentPen-published posts the same way they apply to manually published posts.

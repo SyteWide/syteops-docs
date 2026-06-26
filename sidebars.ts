@@ -20,6 +20,7 @@ const sidebars: SidebarsConfig = {
         'features/user-management',
         'features/roles-and-automation',
         'features/crm',
+        'features/llms-txt',
         {
           type: 'category',
           label: 'Modules',
@@ -39,6 +40,7 @@ const sidebars: SidebarsConfig = {
         'features/rest-api-restriction',
         'features/rest-logging',
         'features/content-pipelines',
+        'features/review-and-publish-your-post',
         'features/server-connections',
         'features/debug-tool',
         'features/licensing',
@@ -56,6 +58,7 @@ const sidebars: SidebarsConfig = {
         'integrations/contentpen',
         'integrations/linkcentral',
         'integrations/squirrly-seo',
+        'integrations/llms-amplifier',
         'integrations/slack',
         'integrations/aws-ses',
         'integrations/fluent-forms',

@@ -56,13 +56,19 @@ The Squirrly SEO integration adds:
 
 Select which post types Squirrly SEO custom settings apply to. Common choices include Posts, Pages, and any custom post types registered on your site. Only public post types with a UI are listed.
 
+### ACF field mapping and the Review Portal work together
+
+Both your **ACF custom fields** (filled in on the post, in wp-admin or your page builder) and the **ContentPen Review Portal** SEO panel write to the same Squirrly fields (`_sq_title` / `_sq_description` / `_sq_keywords`). They are two editing surfaces over one set of SEO values, kept in sync both directions — an edit in either place shows up in the other.
+
+The **SEO title** is the one field with special handling: by default it is auto-generated from the **post title** (clean — the description is **not** appended; that's the meta description's job). If a reviewer types a **custom** SEO title in the portal, SyteOps marks it as a manual override and stops auto-recomposing it, so a later post save in wp-admin won't overwrite the reviewer's title. Clearing the portal field (or leaving it at the auto-generated value) returns the title to automatic.
+
 ### ACF Title Key
 
 ACF field key for the field mapped to Squirrly post meta `_sq_title`. Enter the full field key (e.g., `field_698b9e914e950`). SyteOps writes the computed Squirrly SEO title into this ACF field and keeps post meta aligned.
 
 ### ACF Description Key
 
-ACF field key for the description or product field used when building the Squirrly SEO title. Enter the full field key (e.g., `field_698ba06758e1d`). SyteOps reads this field's value and appends it to the post title to form the title.
+ACF field key for the field mapped to Squirrly post meta `_sq_description` (the meta description). Enter the full field key (e.g., `field_698ba06758e1d`). SyteOps keeps this field aligned with `_sq_description`. (It is **no longer** appended to the SEO title — the title is the post title, optionally overridden per-post in the Review Portal.)
 
 ### ACF Keywords Key
 
