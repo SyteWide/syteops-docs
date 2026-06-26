@@ -13,6 +13,10 @@ A running log of user-facing changes in each SyteOps release. Only features, imp
 ### Added
 - **Deploy tool: `--avada` / `--no-avada` toggle to reset Avada/Fusion caches after deploy (default on; no-op on non-Avada sites).**
 
+## v1.5.001
+
+- Fixed: Switching between Content Pipelines views (Runs, Recipes, Review Portal) now tabs over instantly instead of reloading the page.
+
 ## v1.5.000
 
 - Added: Live preview — reviewers can open a post exactly as it will appear on your site before publishing.
