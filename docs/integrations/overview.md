@@ -26,7 +26,7 @@ Each integration card shows a small **tier badge** next to the category label. T
 | Tier | What it means | Examples |
 |---|---|---|
 | **Basic** | Toggle-only. Flip it on and you're done. Some Basic integrations store a single credential (like an API key), but there's no dedicated control panel. Most integrations live here. | Slack, Cloudflare, AWS SES, WooCommerce, Wordfence |
-| **Extended** | Has its own settings area inside SyteOps, stores credentials, and includes light AI configuration where applicable. More involved than Basic but doesn't drive deep AI features. | ContentPen |
+| **Extended** | Has its own settings area inside SyteOps, stores credentials, and includes light AI configuration where applicable. More involved than Basic but doesn't drive deep AI features. | ContentPen, LLMS Amplifier |
 | **AI-Powered** | A full control panel with deep AI features — you pick which AI provider and model to use, SyteOps runs background jobs on your behalf, and the integration has quality gating built in. | LinkCentral |
 
 The tier is purely informational. It doesn't change how an integration works or what it costs — it just helps you plan your setup time and understand what each toggle unlocks.
@@ -107,6 +107,10 @@ Automatic keyword linking and internal cross-linking. When enabled, SyteOps scan
 
 SEO field mapping and metadata control. When enabled, SyteOps can coordinate with Squirrly SEO for metadata management. See the dedicated [Squirrly SEO Integration](squirrly-seo) page for setup.
 
+### LLMS Amplifier
+
+AI-discovery file generation (`llms.txt` and `llms-full.txt`) for AI search engines. When enabled and the LLMS Amplifier plugin is installed, you can select it as the engine for the GEO step in Content Pipelines instead of the built-in generator. See the dedicated [LLMS Amplifier Integration](llms-amplifier) page for setup.
+
 ---
 
 ## Analytics & SEO
@@ -152,7 +156,6 @@ SyteOps supports six AI providers. Configure one or more API keys in the **Syste
 | **OpenRouter** (recommended) | Aggregates models from all providers with a single API key. |
 | **Gemini** | Google's Gemini models for multimodal tasks. |
 | **Perplexity** | Web-aware models with built-in search for grounded, up-to-date responses. |
-| **Straico** | Multi-model platform with unified billing. |
 
 OpenRouter is the recommended default — it gives you access to models from every provider through one key.
 

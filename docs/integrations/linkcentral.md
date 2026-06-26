@@ -21,6 +21,8 @@ When you trigger the LinkCentral integration on a post, SyteOps:
 - Finds related posts on your site and adds internal cross-links to strengthen your SEO
 - Respects density limits so your content reads naturally — no link spam
 
+Your managed links are also available in the [Review & Publish portal](../features/review-and-publish-your-post.md#formatting-and-links): a reviewer editing a draft can search the library and drop a managed link straight into the body text.
+
 ## Requirements
 
 - SyteOps installed and activated
@@ -116,7 +118,7 @@ For one-off refreshes or to test different models before committing them to your
 1. Open any LinkCentral link (Links → Library → click a link)
 2. In the SyteOps **Enrich Single Link** panel, click **Enrich Now** to run with the defaults saved on the System / API tab, **or** expand the override controls first
 3. Override controls available per run:
-   - **Provider / Model (override)** — choose a different AI provider or model for just this link (useful when comparing models side-by-side). The override dropdown is filtered to models the provider can actually serve, and for the Context AI step it is locked to Perplexity-capable providers (Perplexity, OpenRouter, Straico).
+   - **Provider / Model (override)** — choose a different AI provider or model for just this link (useful when comparing models side-by-side). The override dropdown is filtered to models the provider can actually serve, and for the Context AI step it is locked to Perplexity-capable providers (Perplexity, OpenRouter).
    - **Max Tokens (override)** — override the provider's max-output tokens for this run. A shortcut action sets the value to the model's maximum when the model exposes one.
 4. Click **Enrich Now** and watch the per-step feedback; the run uses the overrides for that link only
 
@@ -165,7 +167,7 @@ How enrichment methods work:
 
 - **Cross-Link AI:** analyzes each destination link to identify the best internal cross-link opportunities. **Recommended model type:** standard chat models. **Recommended models:** GPT-5.4-mini, GPT-4o-mini, Claude Haiku.
 - **Keyword AI:** generates the actual keywords. **Recommended model type:** fast, lightweight chat models. **Recommended models:** GPT-5.4-mini, GPT-4o-mini, Claude Haiku.
-- **Context AI:** optional second model that uses Perplexity web search to gather information about each link destination before keywords are generated. **Recommended model type:** search-enabled models (Sonar family). **Recommended models:** Sonar, Sonar Pro. Only Perplexity, OpenRouter, and Straico can access Perplexity search models.
+- **Context AI:** optional second model that uses Perplexity web search to gather information about each link destination before keywords are generated. **Recommended model type:** search-enabled models (Sonar family). **Recommended models:** Sonar, Sonar Pro. Only Perplexity and OpenRouter can access Perplexity search models.
 
 When web-search context is enabled, keyword enrichment runs in two AI steps (Context AI then Keyword AI). If something fails, messages identify which step had the issue when possible. If Context AI fails but keyword generation still completes, you may see a warning even though keywords were saved.
 
@@ -177,7 +179,7 @@ All AI configurations for LinkCentral are managed in the **AI Providers** sectio
 |------|----------|
 | **Cross-Link AI** | Scoring candidate posts for relevance and generating anchor text in AI-Enhanced cross-link mode. Recommended model type: standard chat models. Recommended models: GPT-5.4-mini, GPT-4o-mini, Claude Haiku |
 | **Keyword AI** | Generating keyword phrases during enrichment. Recommended model type: fast, lightweight chat models. Recommended models: GPT-5.4-mini, GPT-4o-mini, Claude Haiku |
-| **Context AI** | Fetching Perplexity web search summaries of destination sites before keywords are generated. Recommended model type: search-enabled models (Sonar family). Recommended models: Sonar, Sonar Pro. Only Perplexity, OpenRouter, and Straico can access Perplexity search models |
+| **Context AI** | Fetching Perplexity web search summaries of destination sites before keywords are generated. Recommended model type: search-enabled models (Sonar family). Recommended models: Sonar, Sonar Pro. Only Perplexity and OpenRouter can access Perplexity search models |
 
 You can also click **Configure AI Provider** in the card header to quickly set the primary AI configuration via the provider modal.
 
@@ -185,7 +187,7 @@ You can also click **Configure AI Provider** in the card header to quickly set t
 
 ### Tips for Large Libraries
 
-- **Throughput settings:** For most AI providers, start with **Concurrent Workers: 3** and **Batch Size: 1** for a good balance of speed and reliability. If you use **Straico** for keyword enrichment or for the context (Sonar) model, SyteOps **locks both to 1** (proxy latency), trims how much web-search and page metadata is sent, uses a shorter keyword prompt for Straico, and if the provider still reports an oversize-context-style error, retries that link once with a minimal prompt (title, destination URL, and categories only)
+- **Throughput settings:** Start with **Concurrent Workers: 3** and **Batch Size: 1** for a good balance of speed and reliability. If a provider reports an oversize-context-style error, SyteOps retries that link once with a minimal prompt (title, destination URL, and categories only)
 - If you see links skipped due to timeouts, SyteOps automatically retries each failed request once with a longer timeout before marking it as skipped
 - Run enrichment in smaller passes (using the stop button) if you want to review results incrementally
 - After enrichment, re-run your ContentPen publishing workflow on existing posts to pick up the new keywords
@@ -215,7 +217,7 @@ This mode is fast, free, and works well for most sites. If shared taxonomy terms
 
 Uses your configured AI provider to score candidate posts for relevance and generate natural-sounding anchor text. Produces higher quality cross-links but adds a small delay and uses your AI provider's API quota.
 
-SyteOps supports six AI providers for cross-link scoring: **OpenAI**, **Anthropic**, **OpenRouter** (recommended), **Gemini**, **Perplexity**, and **Straico**. OpenRouter is recommended because it gives you access to models from all providers with a single API key.
+SyteOps supports five AI providers for cross-link scoring: **OpenAI**, **Anthropic**, **OpenRouter** (recommended), **Gemini**, and **Perplexity**. OpenRouter is recommended because it gives you access to models from all providers with a single API key.
 
 **Requirements:**
 - At least one AI provider API key configured in the **System / API** tab

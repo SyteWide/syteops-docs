@@ -1,6 +1,6 @@
 {
     "schema_version": 1,
-    "syteops_version": "1.4.016",
+    "syteops_version": "1.5.000",
     "operations": [
         {
             "resource": "users",
@@ -930,6 +930,166 @@
             "params": {
                 "id": {
                     "type": "integer",
+                    "required": true
+                },
+                "confirm": {
+                    "type": "boolean"
+                }
+            },
+            "destructive": true,
+            "capability": "manage_options",
+            "returns": "data: {id, deleted: true}"
+        },
+        {
+            "resource": "pipelines",
+            "action": "run",
+            "summary": "Run a recipe against one post now (inline; admin-initiated). force bypasses skip-unchanged.",
+            "params": {
+                "post_id": {
+                    "type": "integer",
+                    "required": true
+                },
+                "recipe_id": {
+                    "type": "string"
+                },
+                "dry_run": {
+                    "type": "boolean"
+                },
+                "force": {
+                    "type": "boolean"
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {status,post_id,recipe,stages,run_id,changed}"
+        },
+        {
+            "resource": "pipelines",
+            "action": "list_runs",
+            "summary": "List pipeline run-history ledger rows (paginated; filter by post/recipe/status).",
+            "params": {
+                "per_page": {
+                    "type": "integer"
+                },
+                "page": {
+                    "type": "integer"
+                },
+                "post_id": {
+                    "type": "integer"
+                },
+                "recipe_id": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {items[]: {id,source,post_id,recipe_id,status,trigger_kind,is_dry_run,changed,duration_ms,content_hash,message,created_at}, total, page, per_page}"
+        },
+        {
+            "resource": "pipelines",
+            "action": "get_run",
+            "summary": "Get one run-history row by id (includes decoded per-stage results).",
+            "params": {
+                "id": {
+                    "type": "integer",
+                    "required": true
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {id,source,post_id,recipe_id,status,...,stages}"
+        },
+        {
+            "resource": "pipelines",
+            "action": "list_recipes",
+            "summary": "List all configured pipeline recipes.",
+            "params": [],
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data.recipes[]: array of recipe objects"
+        },
+        {
+            "resource": "pipelines",
+            "action": "get_recipe",
+            "summary": "Get one recipe by id.",
+            "params": {
+                "id": {
+                    "type": "string",
+                    "required": true
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: recipe object"
+        },
+        {
+            "resource": "pipelines",
+            "action": "create_recipe",
+            "summary": "Create a pipeline recipe.",
+            "params": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string",
+                    "required": true
+                },
+                "priority": {
+                    "type": "integer"
+                },
+                "stages": {
+                    "type": "object"
+                },
+                "trigger": {
+                    "type": "object"
+                },
+                "policy": {
+                    "type": "object"
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: recipe object"
+        },
+        {
+            "resource": "pipelines",
+            "action": "update_recipe",
+            "summary": "Update an existing pipeline recipe (merge-patch: omitted top-level keys are preserved, but a supplied trigger or policy replaces that whole sub-object — send the full sub-object to change one field).",
+            "params": {
+                "id": {
+                    "type": "string",
+                    "required": true
+                },
+                "name": {
+                    "type": "string"
+                },
+                "priority": {
+                    "type": "integer"
+                },
+                "stages": {
+                    "type": "object"
+                },
+                "trigger": {
+                    "type": "object"
+                },
+                "policy": {
+                    "type": "object"
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: recipe object"
+        },
+        {
+            "resource": "pipelines",
+            "action": "delete_recipe",
+            "summary": "Delete a pipeline recipe (the default recipe cannot be deleted).",
+            "params": {
+                "id": {
+                    "type": "string",
                     "required": true
                 },
                 "confirm": {
