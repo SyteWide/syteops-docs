@@ -10,6 +10,10 @@ When ContentPen finishes generating a new article, SyteOps sends a branded revie
 
 This page explains the full workflow from the moment that email arrives to the moment the post is published.
 
+:::note Requires Content Pipelines
+The Review & Publish portal is part of the **Content Pipelines** feature. An administrator must have **Content Pipelines turned on** (and the ContentPen integration enabled) for review emails to be sent and the secure editor to open. If Content Pipelines is turned off, incoming ContentPen articles are handed to your configured webhook automation instead of the in-WordPress portal.
+:::
+
 ---
 
 ## Step 1: You receive a review email

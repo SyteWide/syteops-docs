@@ -13,6 +13,10 @@ A running log of user-facing changes in each SyteOps release. Only features, imp
 ### Added
 - **Deploy tool: `--avada` / `--no-avada` toggle to reset Avada/Fusion caches after deploy (default on; no-op on non-Avada sites).**
 
+## v1.5.002
+
+- Improved: The review-and-publish portal now activates only when Content Pipelines is enabled; with it turned off, incoming content is handed to your configured webhook automation instead.
+
 ## v1.5.001
 
 - Fixed: Switching between Content Pipelines views (Runs, Recipes, Review Portal) now tabs over instantly instead of reloading the page.
