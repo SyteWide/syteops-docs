@@ -13,6 +13,11 @@ A running log of user-facing changes in each SyteOps release. Only features, imp
 ### Added
 - **Deploy tool: `--avada` / `--no-avada` toggle to reset Avada/Fusion caches after deploy (default on; no-op on non-Avada sites).**
 
+## v1.5.007
+
+- Security: The portal preview is now restricted to administrators and sends stricter framing and referrer headers.
+- Fixed: Reliability improvements to the portal preview window and the Content Pipelines navigation tabs.
+
 ## v1.5.006
 
 - Added: A "Preview Portal" button on the Review Portal branding settings opens a full read-only preview of the portal — with your current branding — right inside the admin, so you can see how it looks before sending a review link.
