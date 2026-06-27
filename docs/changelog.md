@@ -13,6 +13,10 @@ A running log of user-facing changes in each SyteOps release. Only features, imp
 ### Added
 - **Deploy tool: `--avada` / `--no-avada` toggle to reset Avada/Fusion caches after deploy (default on; no-op on non-Avada sites).**
 
+## v1.5.006
+
+- Added: A "Preview Portal" button on the Review Portal branding settings opens a full read-only preview of the portal — with your current branding — right inside the admin, so you can see how it looks before sending a review link.
+
 ## v1.5.005
 
 - Improved: The Review Portal branding settings now show a single save button and a clearer "Saved" confirmation.
