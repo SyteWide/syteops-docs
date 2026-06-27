@@ -13,6 +13,10 @@ A running log of user-facing changes in each SyteOps release. Only features, imp
 ### Added
 - **Deploy tool: `--avada` / `--no-avada` toggle to reset Avada/Fusion caches after deploy (default on; no-op on non-Avada sites).**
 
+## v1.5.004
+
+- Fixed: The Review Portal branding preview now shows your actual logo from General → Branding instead of a placeholder initial.
+
 ## v1.5.003
 
 - Fixed: The navigation tabs on the Content Pipelines screen (Runs, Recipes, Review Portal) now switch views correctly when clicked.
