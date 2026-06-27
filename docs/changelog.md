@@ -13,6 +13,11 @@ A running log of user-facing changes in each SyteOps release. Only features, imp
 ### Added
 - **Deploy tool: `--avada` / `--no-avada` toggle to reset Avada/Fusion caches after deploy (default on; no-op on non-Avada sites).**
 
+## v1.5.005
+
+- Improved: The Review Portal branding settings now show a single save button and a clearer "Saved" confirmation.
+- Improved: When you enable branding override, the colour fields now start from your current branding instead of blank defaults.
+
 ## v1.5.004
 
 - Fixed: The Review Portal branding preview now shows your actual logo from General → Branding instead of a placeholder initial.
