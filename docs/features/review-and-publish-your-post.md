@@ -129,6 +129,12 @@ Once you have finished reviewing all panels, choose one of the action buttons:
 - **Schedule** _(if enabled by the site owner)_ — Check the **Schedule** box to pick a future date and time, then click **Approve & Publish**. The post will go live automatically at the time you selected rather than immediately.
 - **Request changes** — Opens a short note prompt where you can describe what needs updating. Your current edits are saved to the draft, the author and co-reviewers are notified by email, and your note is added to the portal's **Feedback** panel. See [Step 5](#step-5-request-changes) for the full walkthrough.
 
+:::tip Open the full WordPress editor
+
+If you have WordPress editing access for the post (Editor role or above), the portal's top bar shows an **Edit in WordPress** link. It opens the post in the full WordPress block editor in a new tab — handy when you need a capability the streamlined portal doesn't offer, such as reordering blocks or adding an advanced layout. Your portal tab stays open so you can return to it to approve or publish.
+
+:::
+
 :::tip Review links expire
 
 The link in your review email is valid for the number of days your site owner has configured (the default is **7 days**). If you try to open a link after it has expired, you will see an error page. Contact the site owner and ask them to re-send the review link — your draft is still saved and nothing has been lost.
@@ -206,7 +212,7 @@ Site owners can configure the Review Portal from **SyteOps → Content Pipelines
 
 By default the portal uses the same logo, company name, and colors you have set in your general site branding. If you want the review emails and portal page to display different branding — for example, a client-facing brand rather than your internal agency name — enable **Override branding for the Review Portal** and fill in the alternative company name, logo URL, and color pickers. When you turn the override on, the color fields start from your current branding so you can adjust from there instead of from blank.
 
-Use the **Preview Portal** button to open a read-only preview of the portal — with your current branding applied — right inside the admin, so you can see exactly how it looks before sending a review link. The preview is read-only: nothing in it can save, publish, or change a post.
+Use the **Preview Portal** button to open a read-only preview of the portal — with your current branding applied — right inside the admin, so you can see exactly how it looks before sending a review link. The preview is read-only: nothing in it can save, publish, or change a post. In the preview window's title bar you can click the **expand** icon to grow the preview to fill your whole screen (click again to shrink it back), or the **open-in-new-tab** icon to view the portal as a standalone full page.
 
 ### AI assistance
 
@@ -228,6 +234,41 @@ These are the same provider and model settings used by ContentPen and GEO elsewh
 | **Review link expiry** | How long the secure review link in each email stays valid. Options are 3, 7, 14, or 30 days. The default is **7 days**. After a link expires, re-send it from the draft — the post itself is unaffected. |
 
 You can also update the **Default reviewers** and **Default CC reviewers** lists here — these are the same fields described in [Who receives the review email](#who-receives-the-review-email) above.
+
+### Editing permissions
+
+The **Reviewer editing permissions** section lets you control which parts of the portal each reviewer type can change. By default every reviewer type has full edit access to every area — you only need to configure this section when you want to lock something down.
+
+**How it works**
+
+Permissions are set by reviewer type (role). The panel shows a row for each role your site uses, plus an **Everyone else (default)** row that applies to anyone who doesn't match a more specific role — if a reviewer's user type has its own row in the table, that row's settings are used; the default row only applies to everyone else. For each row you can choose a restriction for each portal area:
+
+| Area | Restrictions available |
+|---|---|
+| **Featured image** | Edit (full) or View only |
+| **Permalink** | Edit (full) or View only |
+| **SEO** | Edit (full) or View only |
+| **GEO** | Edit (full) or View only |
+| **Reviewers** | Allow (can add/remove reviewers) or Hide (reviewer panel not shown) |
+| **Categories & tags** | Edit and create new terms, Edit using existing terms only, or View only |
+
+Choosing **View only** makes the area visible in the portal but all controls are disabled so the reviewer can read but not change it. Choosing **existing terms only** for categories and tags lets reviewers choose from your site's existing terms but prevents them from creating new ones — the add-term field shows a suggestion list of matching existing terms.
+
+**Per-user overrides**
+
+Below the role rows there is a collapsible **Per-user overrides** section. This lets you grant or restrict individual team members differently from their role — useful if one person on a team should have extra access or a tighter restriction than everyone else in their role.
+
+**Admins are never restricted**
+
+WordPress administrators always have full access to every area regardless of what the permissions matrix says. The restrictions only apply to non-admin reviewers.
+
+**Saving changes**
+
+Click **Save settings** at the bottom of the panel to apply your changes. The new permissions take effect the next time a reviewer opens or refreshes a portal link.
+
+### Open the portal for any post
+
+You don't have to wait for a ContentPen draft to use the portal. From the WordPress **Posts** (or **Pages**) list, hover over any post you can edit and click the **Review portal** link in its row of actions. SyteOps issues a fresh secure link for that post and opens the portal in a new tab — the same review window contributors see, with the same expiry window as an emailed link. This lets you put an existing post (or one written by hand) through the same review-and-approve flow.
 
 ---
 
