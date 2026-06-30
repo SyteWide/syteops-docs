@@ -8,6 +8,24 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.013
+
+- Added: Reviewer editing permissions — limit which parts of a shared review link each reviewer type can change (view-only areas, existing-terms-only categories & tags), with per-user overrides. Admins are never restricted.
+
+## v1.5.010
+
+- Fixed: Further review portal polish — the header, action bar, and side panels resize cleanly on narrow screens, long names and tags no longer overflow their columns, and the read-only preview banner no longer hides the header on scroll.
+
+## v1.5.009
+
+- Fixed: Review portal display — the brand logo no longer clips, large featured images are scaled to a tidy preview, article bodies wrap correctly instead of overflowing, and the editor uses more of the available width.
+
+## v1.5.008
+
+- Added: An **Edit in WordPress** link in the review portal opens the full block editor in a new tab.
+- Added: Open the secure review portal for any post straight from the Posts or Pages list.
+- Improved: The in-admin portal preview opens larger and adds clear **Full screen** and **Open in new tab** buttons.
+
 ## Operator Tools — 2026-06-23
 
 ### Added
