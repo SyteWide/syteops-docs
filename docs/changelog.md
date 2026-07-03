@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.017
+
+- Improved: Cleaner spacing and layout on the content sources screen. Each source's inbound webhook is automatically allowed through the REST API restriction, with no manual whitelisting needed.
+
 ## v1.5.016
 
 - Improved: Re-sending content no longer overwrites a post a reviewer has already published (each source can opt into always-overwrite), repeat deliveries reuse the existing featured image instead of re-downloading it, and reviewers are notified once when a draft is created rather than on every delivery.
