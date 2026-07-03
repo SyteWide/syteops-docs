@@ -1,6 +1,6 @@
 {
     "schema_version": 1,
-    "syteops_version": "1.5.013",
+    "syteops_version": "1.5.016",
     "operations": [
         {
             "resource": "users",
@@ -1099,6 +1099,142 @@
             "destructive": true,
             "capability": "manage_options",
             "returns": "data: {id, deleted: true}"
+        },
+        {
+            "resource": "content_sources",
+            "action": "list",
+            "summary": "List all configured content sources (never includes the secret).",
+            "params": [],
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data.sources[]: array of {id, name, slug, enabled, status, auth_mode, shape_fingerprint, mapping, mapping_status, sample, default_author_id, pin_author, default_reviewers, default_ccs, default_post_status, created_at, updated_at}"
+        },
+        {
+            "resource": "content_sources",
+            "action": "get",
+            "summary": "Get a single content source by id (never includes the secret).",
+            "params": {
+                "id": {
+                    "type": "string",
+                    "required": true
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {id, name, slug, enabled, status, auth_mode, mapping, mapping_status, ...}"
+        },
+        {
+            "resource": "content_sources",
+            "action": "create",
+            "summary": "Create a content source; generates its id, slug, and webhook secret.",
+            "params": {
+                "name": {
+                    "type": "string",
+                    "required": true
+                },
+                "auth_mode": {
+                    "type": "string"
+                },
+                "default_author_id": {
+                    "type": "integer"
+                },
+                "pin_author": {
+                    "type": "boolean"
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {id, name, slug, secret, ...} — secret is plaintext, returned only this once"
+        },
+        {
+            "resource": "content_sources",
+            "action": "update",
+            "summary": "Update editable fields on an existing content source (slug and secret are not editable here).",
+            "params": {
+                "id": {
+                    "type": "string",
+                    "required": true
+                },
+                "name": {
+                    "type": "string"
+                },
+                "default_author_id": {
+                    "type": "integer"
+                },
+                "pin_author": {
+                    "type": "boolean"
+                },
+                "default_reviewers": {
+                    "type": "object"
+                },
+                "default_ccs": {
+                    "type": "object"
+                },
+                "default_post_status": {
+                    "type": "string"
+                },
+                "auth_mode": {
+                    "type": "string"
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "reingest_mode": {
+                    "type": "string"
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {id, name, slug, ...} (no secret)"
+        },
+        {
+            "resource": "content_sources",
+            "action": "delete",
+            "summary": "Permanently delete a content source.",
+            "params": {
+                "id": {
+                    "type": "string",
+                    "required": true
+                },
+                "confirm": {
+                    "type": "boolean"
+                }
+            },
+            "destructive": true,
+            "capability": "manage_options",
+            "returns": "data: {id, deleted: true}"
+        },
+        {
+            "resource": "content_sources",
+            "action": "rotate_secret",
+            "summary": "Generate a new webhook secret for a content source, invalidating the old one.",
+            "params": {
+                "id": {
+                    "type": "string",
+                    "required": true
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {id, secret} — secret is plaintext, returned only this once"
+        },
+        {
+            "resource": "content_sources",
+            "action": "approve_mapping",
+            "summary": "Approve a field mapping for a source, activating it for live ingest.",
+            "params": {
+                "id": {
+                    "type": "string",
+                    "required": true
+                },
+                "mapping": {
+                    "type": "object",
+                    "required": true
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {id, status, mapping_status, mapping}"
         }
     ]
 }

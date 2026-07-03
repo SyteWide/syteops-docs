@@ -83,3 +83,55 @@ Enable **dry-run** on a recipe or on a manual run to preview what would change w
 ## ContentPen Integration
 
 When you publish content through ContentPen, each article automatically creates a run entry in the Runs dashboard with `source: contentpen`. The pipeline stages that are enabled in the matching recipe apply to ContentPen-published posts the same way they apply to manually published posts.
+
+## Content Sources
+
+Content Sources let **any** external application — not just ContentPen — send finished articles into SyteOps as review-ready drafts. Each source you register gets its own **Ingest URL** and a **webhook secret**. When the app posts an article to that URL, SyteOps maps the incoming fields onto the editor and creates a draft in the [Review & Publish portal](./review-and-publish-your-post.md), where your team reviews and publishes it.
+
+Open the **Content Sources** view from the quick-nav pills at the top of the Content Pipelines tab.
+
+### Register a content source
+
+1. In the **Content Sources** card, enter a **Source name** (for example, "Marketing CMS").
+2. Choose an **Auth mode** — how the sending app proves each request is genuine:
+   - **HMAC signature** (recommended) — the app signs every request with the secret.
+   - **Bearer token** — the app sends the secret in an `Authorization` header.
+   - **HMAC or bearer** — accept either.
+3. Click **Add source**.
+
+SyteOps then shows the **Ingest URL** and the **Webhook secret** in a highlighted box labeled **Save this secret now — it is shown only once.** Copy the secret and store it somewhere safe (a password manager, or the sending app's settings). If you ever lose it, use **Rotate secret** on the source to generate a new one — the old secret stops working immediately.
+
+### Point your app at the Ingest URL
+
+Configure the sending application's webhook to POST its article as JSON to the source's **Ingest URL**. How it authenticates depends on the **Auth mode** you chose:
+
+| Auth mode | What the app sends |
+|---|---|
+| **HMAC signature** | An `X-SyteOps-Signature` header in the form `t=<timestamp>,v1=<hex>`, signed with the secret. If your secret begins with `whsec_`, drop that prefix and sign with the remaining characters. |
+| **Bearer token** | An `Authorization: Bearer <secret>` header using the **full** secret string, including any `whsec_` prefix. |
+
+You can copy the URL again at any time with **Copy URL** on the source card.
+
+### Send a sample and approve the mapping
+
+Before content flows automatically, SyteOps needs to learn how the app's JSON maps onto editor fields (title, body, excerpt, and so on).
+
+1. Have the app send one article to the Ingest URL. SyteOps captures it and holds the source in a **pending** state — no draft is created yet. (You can also paste an example into the **Sample payload (JSON)** box on the source card.)
+2. Click **Learn from sample**. SyteOps proposes a **Field mapping**, filling each row's **Path** (a location inside the payload), an optional **Transform**, and a **Confidence** score. You can hand-write or adjust any row yourself.
+3. Click **Test with sample** to preview what each field would receive.
+4. When the mapping looks right, click **Approve mapping**.
+
+Once approved, the source goes **active**: every future post to its Ingest URL becomes a Review & Publish draft automatically, using the same mapping. Any field the mapping doesn't fill is simply left blank for the reviewer to complete.
+
+### Per-source settings
+
+Expand **Settings** on a source card to control:
+
+| Setting | What it does |
+|---|---|
+| **Source name** | The label shown for this source. |
+| **Default author** | The WordPress user credited as the post author. Tick **Always use this author** to override whatever the payload suggests. |
+| **Default post status** | **Draft** or **Publish**. This is set here only — the incoming payload can never publish content on its own. |
+| **Auth mode** | Change the accepted authentication style. |
+
+Use **Rotate secret** to replace a leaked or aging secret, **Disable** to pause a source without deleting it, and **Delete** to remove it permanently.
