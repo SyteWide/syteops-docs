@@ -8,6 +8,18 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.016
+
+- Improved: Re-sending content no longer overwrites a post a reviewer has already published (each source can opt into always-overwrite), repeat deliveries reuse the existing featured image instead of re-downloading it, and reviewers are notified once when a draft is created rather than on every delivery.
+
+## v1.5.015
+
+- Fixed: Imported content keeps its featured-image alt text and handles original publish dates reliably; a source whose field mapping is incomplete now holds content for review instead of creating blank drafts.
+
+## v1.5.014
+
+- Added: Register external apps as content sources that send content into the review portal, with AI-assisted field mapping and a secure webhook URL for each source.
+
 ## v1.5.013
 
 - Added: Reviewer editing permissions — limit which parts of a shared review link each reviewer type can change (view-only areas, existing-terms-only categories & tags), with per-user overrides. Admins are never restricted.
