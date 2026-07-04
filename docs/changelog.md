@@ -8,6 +8,20 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.025
+
+- Internal improvements and maintenance.
+
+## v1.5.024
+
+- Improved: Each inbound card on the content pipeline dashboard now shows whether a source is one you added ("Manual source") or the built-in "Integration", so they are easy to tell apart.
+- Improved: A content source's ingest URL is now click-to-copy and sized to fit the address.
+- Fixed: "Finish setup" on a content source card now opens the Content Sources panel instead of the activity view.
+
+## v1.5.023
+
+- Improved: The "Enable modules after installation" switch now remembers whether you left it on or off, rather than resetting each time the page loads. It remains off by default.
+
 ## v1.5.022
 
 - Fixed: Naming a content source "ContentPen" or "Pipeline" no longer merges its activity with the built-in source of the same name — each keeps its own dashboard card, filter pill, and stats.
