@@ -27,7 +27,7 @@ Open Content Pipelines from the **Content Pipelines** link in the SyteOps admin 
 The Runs dashboard shows every pipeline execution:
 
 - **Stat cards** show total runs, runs in the last 7 days, posts that were changed, and error counts.
-- **Filter pills** let you filter by recipe or status (OK, Errors, Skipped).
+- **Filter pills** let you filter by recipe, status (OK, Errors, Skipped), or source (Pipeline, each content source, and ContentPen when its integration is in use).
 - **Run now** lets you trigger a pipeline manually for any post — choose a recipe, enter a Post ID, and optionally enable dry-run mode to preview changes without writing them.
 - **Runs table** lists each execution with the source (pipeline trigger or ContentPen), the recipe used, post, status, which stages ran, whether the post was changed, and the trigger type.
 - Click a row to expand the **stage drawer**, which shows the result of each stage with its message and duration.
@@ -36,7 +36,7 @@ The Runs dashboard shows every pipeline execution:
 
 At the very top of the Runs view, above the stat cards, a row of cards shows whether each pipeline provider is wired up:
 
-- **ContentPen** — the inbound webhook source.
+- **Content sources** — one card for each content source you've registered, shown by its name, indicating whether it's connected and receiving content. If you also use the built-in **ContentPen** integration, it appears here too with its own status.
 - **Link Engines**, **SEO**, and **GEO** — the processing stages.
 
 Each card shows a status — **Ready**, **Off**, **Needs setup**, or **Not installed** — and a
