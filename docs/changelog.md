@@ -8,6 +8,27 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.022
+
+- Fixed: Naming a content source "ContentPen" or "Pipeline" no longer merges its activity with the built-in source of the same name — each keeps its own dashboard card, filter pill, and stats.
+- Improved: The pipeline activity list can now be filtered to just the built-in ContentPen integration's events with a dedicated Source filter pill.
+
+## v1.5.021
+
+- Improved: The pipeline activity dashboard now shows the built-in ContentPen integration's status (when it's in use) alongside your registered content sources.
+
+## v1.5.020
+
+- Fixed: On the pipeline activity dashboard, the per-content-source filter now filters the activity list correctly (previously it had no effect for a custom source).
+
+## v1.5.019
+
+- Improved: The pipeline dashboard now shows a card and filter for each content source you've registered (by its chosen name and live status) instead of a single fixed source.
+
+## v1.5.018
+
+- Improved: Pick a content source's default author from a dropdown of WordPress users (by name) instead of typing a numeric user ID.
+
 ## v1.5.017
 
 - Improved: Cleaner spacing and layout on the content sources screen. Each source's inbound webhook is automatically allowed through the REST API restriction, with no manual whitelisting needed.
