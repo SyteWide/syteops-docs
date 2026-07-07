@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.031
+
+- Fixed: A removed legacy feature's leftover files could, in rare cases, cause a site error after an update. These are now detected and cleaned up automatically on load.
+
 ## v1.5.030
 
 - Internal improvements and maintenance.
