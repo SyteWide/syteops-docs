@@ -17,7 +17,6 @@ The Manage API lets trusted external tools and automations read and update the t
 - **AI settings** — the provider, model, and limits for each AI-powered area.
 - **CRM systems** — your connected CRM records.
 - **Automation variables** — the values SyteOps shares with your workflow automations.
-- **Notes & Estimates items** — the entries stored by the Notes and Estimates modules (available when those modules are active).
 - **Status** — a read-only summary of your plugin version, active modules, and integration counts.
 
 Your product license and management connection are **read-only** here and can never be changed through this API.

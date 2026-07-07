@@ -1,22 +1,16 @@
 ---
 sidebar_position: 12
 title: Content Pipelines
-description: Automate content processing workflows that run on publish — cross-linking, SEO, and llms.txt — with the Content Pipelines module.
+description: Automate content processing workflows that run on publish — cross-linking, SEO, and llms.txt — with Content Pipelines.
 ---
 
 # Content Pipelines
 
-Content Pipelines is a SyteOps module that automatically runs a sequence of content-processing stages when a post is published. Each pipeline recipe defines which stages run, in what order, and under what conditions.
+Content Pipelines is a built-in SyteOps feature that automatically runs a sequence of content-processing stages when a post is published. Each pipeline recipe defines which stages run, in what order, and under what conditions.
 
 ## Getting Started
 
-### 1. Upload and activate the module
-
-1. Go to **SyteOps → Modules**
-2. Upload the `syteops-content-pipelines-module.zip` file
-3. Click **Activate** on the Content Pipelines card
-
-Once active, a **Content Pipelines** tab appears in the main SyteOps navigation.
+Content Pipelines is built in to SyteOps — there's nothing to upload or activate. It's available out of the box, and you'll find it in its own **Content Pipelines** tab in the SyteOps admin.
 
 ## The Content Pipelines Tab
 
@@ -135,3 +129,51 @@ Expand **Settings** on a source card to control:
 | **Auth mode** | Change the accepted authentication style. |
 
 Use **Rotate secret** to replace a leaked or aging secret, **Disable** to pause a source without deleting it, and **Delete** to remove it permanently.
+
+### Choose where drafts land
+
+By default, every source's drafts are created as regular **Posts**. You can point a source somewhere else instead — either when you register it, or later from its card.
+
+- **Send into an existing content type** — Expand **Settings** on the source's card and choose from **Land drafts into**: Posts, Pages, or any other content type already on your site (including a type created by another content source).
+- **Define a brand-new content type** — When registering the source, set **Land drafts into** to **Define a new type**, then fill in:
+
+| Field | What it does |
+|---|---|
+| **Singular name / Plural name** | What the content type is called (for example "Listing" / "Listings"). |
+| **Supports** | Which editing features it has: Title, Content editor, Excerpt, Featured image, Custom fields, Author. |
+| **Taxonomies** | Whether it uses Categories, Tags, or both. |
+
+SyteOps creates the content type for you, and every draft from this source lands there from then on. A new type's name, supported features, and taxonomies are locked in when the source is created and can't be changed afterward, so plan them before you register the source. (You can still switch the source to a different **existing** content type later from its card — only defining a brand-new type is a one-time choice.)
+
+### Add custom fields
+
+If a source's articles carry information beyond the standard title, body, and excerpt — a SKU, a price, a source URL — expand **Custom fields (post meta)** on its card and add one row per field:
+
+| Column | What it does |
+|---|---|
+| **Field key** | A short internal name (lowercase letters, numbers, underscores). |
+| **Label** | The friendly name shown in the mapping table. |
+| **Type** | How the value is handled: Text, Text area, Number, Yes/No, URL, or Date. |
+
+Click **Add field** for each one you need, then **Save custom fields**. Every field you define shows up as its own row in **Field mapping**, so you can point it at the right location in the incoming payload just like the built-in fields. Once mapped, the values are saved as custom fields (post meta) on the draft.
+
+### FlowMattic config variables
+
+Expand **FlowMattic config variables** on a source's card to define named values that automations can read for that specific source — a brand name, a campaign id, a routing tag, or anything else your workflows need.
+
+1. Enter a **Key** (lowercase letters, numbers, and underscores) and a **Value**.
+2. SyteOps shows the resulting **FlowMattic variable** name next to each entry — copy that exact name to reference it in your FlowMattic workflows.
+3. Click **Add variable** for each one you need, then **Save FlowMattic variables**.
+
+Because each source's variables are named after that source, two sources can use the same key (for example, both defining a `brand` value) without colliding.
+
+### Forward to a workflow
+
+Expand **Forward to workflow** on a source's card to also send each mapped article to a FlowMattic workflow webhook, in addition to creating the Review & Publish draft.
+
+1. Turn on **Enable forwarding**.
+2. Enter the **Workflow webhook URL** from FlowMattic.
+3. Pick an **Auth mode** — **None**, **Bearer token**, **Basic auth**, or **Bearer + Basic** — to match what the workflow expects, and enter the matching **Auth secret** (leave it blank to keep whatever secret is already saved).
+4. Click **Save forwarding settings**.
+
+Forwarding is optional and never gets in the way: SyteOps always creates the Review & Publish draft first, then sends a copy of the mapped content to your workflow in the background. A slow or unreachable workflow endpoint never delays or blocks the draft.

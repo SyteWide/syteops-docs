@@ -11,7 +11,7 @@ SyteOps uses an expandable module system — like plugins for the plugin. Module
 **In this section:**
 
 - This page — module concepts, installation, lifecycle, and FlowMattic behavior
-- [First-Party Module Guides](module-guides) — per-module walkthroughs (Notes, Estimates, Banners, etc.)
+- [First-Party Module Guides](module-guides) — per-module walkthroughs (Banners, Notice Management, etc.)
 - [Encrypted Packages (.sytepkg)](packages) — secure distribution format, signature verification, license-tied decryption
 - [Module Auto-Updates](auto-updates) — the twice-daily update check, per-module control, and cron requirements
 
@@ -19,7 +19,7 @@ SyteOps uses an expandable module system — like plugins for the plugin. Module
 
 Modules are not just feature add-ons. They serve several distinct purposes:
 
-**Add new capabilities** — New post types, admin pages, settings tabs, and FlowMattic variable families. Examples: meeting notes capture with FlowMattic dispatch, client estimate management with approval tracking.
+**Add new capabilities** — New post types, admin pages, settings tabs, and FlowMattic variable families. Examples: a custom post type with structured metadata and its own FlowMattic variable family, or a client-facing workflow with approval tracking.
 
 **Patch third-party plugin issues** — Some known problems in popular plugins take months to get fixed upstream. A SyteOps module can patch the behavior at the WordPress layer without touching the third-party plugin's code. When the vendor eventually ships the fix, deactivate the module. Examples: the LiteSpeed Cache + Cloudflare token issue, the Fluent Forms + FlowMattic GDPR deletion edge case.
 
@@ -64,8 +64,6 @@ These SyteWide-built modules are available separately. See [First-Party Module G
 | Module | Purpose |
 |---|---|
 | **Notice Management** | Suppresses third-party admin notices for non-SyteOps users. Clients get a clean admin; SyteOps Admins see notices as monitoring toasts. |
-| **Notes** | Structured meeting notes with metadata and FlowMattic variable sync for automated dispatch. |
-| **Estimates** | Client estimate creation and management with approval tracking and FlowMattic integration. |
 | **Banners** | Admin banner scheduling and display configuration. |
 | **LiteSpeed CF Token Fix** | Patches a known issue where LiteSpeed Cache sends the wrong Cloudflare authentication token. Toggle off when the vendor ships the fix. |
 | **Fluent Forms GDPR Fix** | Rebuilds the FlowMattic payload correctly when GDPR-triggered database deletions occur in Fluent Forms. |

@@ -1,6 +1,6 @@
 {
     "schema_version": 1,
-    "syteops_version": "1.5.025",
+    "syteops_version": "1.5.029",
     "operations": [
         {
             "resource": "users",
@@ -623,244 +623,6 @@
             "returns": "data: {resynced: true}"
         },
         {
-            "resource": "notes_items",
-            "action": "list",
-            "summary": "List Notes items (paginated).",
-            "params": {
-                "per_page": {
-                    "type": "integer"
-                },
-                "page": {
-                    "type": "integer"
-                },
-                "status": {
-                    "type": "string"
-                },
-                "search": {
-                    "type": "string"
-                }
-            },
-            "destructive": false,
-            "capability": "manage_options",
-            "returns": "data: {items[]: {id,type,title,content,excerpt,status,slug,author,date,modified}, total, page, per_page}"
-        },
-        {
-            "resource": "notes_items",
-            "action": "get",
-            "summary": "Get one Notes item by id (includes meta).",
-            "params": {
-                "id": {
-                    "type": "integer",
-                    "required": true
-                }
-            },
-            "destructive": false,
-            "capability": "manage_options",
-            "returns": "data: {id,type,title,content,excerpt,status,slug,author,date,modified,meta}"
-        },
-        {
-            "resource": "notes_items",
-            "action": "create",
-            "summary": "Create a Notes item.",
-            "params": {
-                "title": {
-                    "type": "string"
-                },
-                "content": {
-                    "type": "string"
-                },
-                "excerpt": {
-                    "type": "string"
-                },
-                "status": {
-                    "type": "string"
-                },
-                "slug": {
-                    "type": "string"
-                },
-                "author": {
-                    "type": "integer"
-                },
-                "meta": {
-                    "type": "object"
-                }
-            },
-            "destructive": false,
-            "capability": "manage_options",
-            "returns": "data: {id, ...item}"
-        },
-        {
-            "resource": "notes_items",
-            "action": "update",
-            "summary": "Update a Notes item.",
-            "params": {
-                "id": {
-                    "type": "integer",
-                    "required": true
-                },
-                "title": {
-                    "type": "string"
-                },
-                "content": {
-                    "type": "string"
-                },
-                "excerpt": {
-                    "type": "string"
-                },
-                "status": {
-                    "type": "string"
-                },
-                "slug": {
-                    "type": "string"
-                },
-                "author": {
-                    "type": "integer"
-                },
-                "meta": {
-                    "type": "object"
-                }
-            },
-            "destructive": false,
-            "capability": "manage_options",
-            "returns": "data: {id, ...item}"
-        },
-        {
-            "resource": "notes_items",
-            "action": "delete",
-            "summary": "Permanently delete a Notes item.",
-            "params": {
-                "id": {
-                    "type": "integer",
-                    "required": true
-                },
-                "confirm": {
-                    "type": "boolean"
-                }
-            },
-            "destructive": true,
-            "capability": "manage_options",
-            "returns": "data: {id, deleted: true}"
-        },
-        {
-            "resource": "estimates_items",
-            "action": "list",
-            "summary": "List Estimates items (paginated).",
-            "params": {
-                "per_page": {
-                    "type": "integer"
-                },
-                "page": {
-                    "type": "integer"
-                },
-                "status": {
-                    "type": "string"
-                },
-                "search": {
-                    "type": "string"
-                }
-            },
-            "destructive": false,
-            "capability": "manage_options",
-            "returns": "data: {items[]: {id,type,title,content,excerpt,status,slug,author,date,modified}, total, page, per_page}"
-        },
-        {
-            "resource": "estimates_items",
-            "action": "get",
-            "summary": "Get one Estimates item by id (includes meta).",
-            "params": {
-                "id": {
-                    "type": "integer",
-                    "required": true
-                }
-            },
-            "destructive": false,
-            "capability": "manage_options",
-            "returns": "data: {id,type,title,content,excerpt,status,slug,author,date,modified,meta}"
-        },
-        {
-            "resource": "estimates_items",
-            "action": "create",
-            "summary": "Create a Estimates item.",
-            "params": {
-                "title": {
-                    "type": "string"
-                },
-                "content": {
-                    "type": "string"
-                },
-                "excerpt": {
-                    "type": "string"
-                },
-                "status": {
-                    "type": "string"
-                },
-                "slug": {
-                    "type": "string"
-                },
-                "author": {
-                    "type": "integer"
-                },
-                "meta": {
-                    "type": "object"
-                }
-            },
-            "destructive": false,
-            "capability": "manage_options",
-            "returns": "data: {id, ...item}"
-        },
-        {
-            "resource": "estimates_items",
-            "action": "update",
-            "summary": "Update a Estimates item.",
-            "params": {
-                "id": {
-                    "type": "integer",
-                    "required": true
-                },
-                "title": {
-                    "type": "string"
-                },
-                "content": {
-                    "type": "string"
-                },
-                "excerpt": {
-                    "type": "string"
-                },
-                "status": {
-                    "type": "string"
-                },
-                "slug": {
-                    "type": "string"
-                },
-                "author": {
-                    "type": "integer"
-                },
-                "meta": {
-                    "type": "object"
-                }
-            },
-            "destructive": false,
-            "capability": "manage_options",
-            "returns": "data: {id, ...item}"
-        },
-        {
-            "resource": "estimates_items",
-            "action": "delete",
-            "summary": "Permanently delete a Estimates item.",
-            "params": {
-                "id": {
-                    "type": "integer",
-                    "required": true
-                },
-                "confirm": {
-                    "type": "boolean"
-                }
-            },
-            "destructive": true,
-            "capability": "manage_options",
-            "returns": "data: {id, deleted: true}"
-        },
-        {
             "resource": "leads",
             "action": "list",
             "summary": "List captured leads (paginated; filter by source/since).",
@@ -1107,7 +869,7 @@
             "params": [],
             "destructive": false,
             "capability": "manage_options",
-            "returns": "data.sources[]: array of {id, name, slug, enabled, status, auth_mode, shape_fingerprint, mapping, mapping_status, sample, default_author_id, pin_author, default_reviewers, default_ccs, default_post_status, created_at, updated_at}"
+            "returns": "data.sources[]: array of {id, name, slug, enabled, status, auth_mode, target_post_type, cpt_post_type, shape_fingerprint, mapping, mapping_status, sample, default_author_id, pin_author, default_reviewers, default_ccs, default_post_status, meta_fields, fm_variables, forward_enabled, forward_url, forward_auth_mode, created_at, updated_at} (secret and forward_secret are never included)"
         },
         {
             "resource": "content_sources",
@@ -1140,11 +902,35 @@
                 },
                 "pin_author": {
                     "type": "boolean"
+                },
+                "target_post_type": {
+                    "type": "string"
+                },
+                "new_cpt": {
+                    "type": "object"
+                },
+                "meta_fields": {
+                    "type": "object"
+                },
+                "fm_variables": {
+                    "type": "object"
+                },
+                "forward_enabled": {
+                    "type": "boolean"
+                },
+                "forward_url": {
+                    "type": "url"
+                },
+                "forward_auth_mode": {
+                    "type": "string"
+                },
+                "forward_secret": {
+                    "type": "string"
                 }
             },
             "destructive": false,
             "capability": "manage_options",
-            "returns": "data: {id, name, slug, secret, ...} — secret is plaintext, returned only this once"
+            "returns": "data: {id, name, slug, secret, ...} — secret is plaintext, returned only this once (forward_secret is never returned)"
         },
         {
             "resource": "content_sources",
@@ -1181,11 +967,32 @@
                 },
                 "reingest_mode": {
                     "type": "string"
+                },
+                "target_post_type": {
+                    "type": "string"
+                },
+                "meta_fields": {
+                    "type": "object"
+                },
+                "fm_variables": {
+                    "type": "object"
+                },
+                "forward_enabled": {
+                    "type": "boolean"
+                },
+                "forward_url": {
+                    "type": "url"
+                },
+                "forward_auth_mode": {
+                    "type": "string"
+                },
+                "forward_secret": {
+                    "type": "string"
                 }
             },
             "destructive": false,
             "capability": "manage_options",
-            "returns": "data: {id, name, slug, ...} (no secret)"
+            "returns": "data: {id, name, slug, ...} (no secret, no forward_secret)"
         },
         {
             "resource": "content_sources",
