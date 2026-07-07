@@ -12,59 +12,6 @@ This page covers every first-party module in detail: what it does, who needs it,
 
 ---
 
-## Notes
-
-Structured meeting notes management inside SyteOps. The Notes module creates a dedicated custom post type (`syteops_notes`) with its own tab in the SyteOps navigation, giving you a central place to capture, organize, and act on meeting notes without leaving the WordPress admin.
-
-### When you need it
-
-Enable Notes if you track client meetings, internal standups, or any recurring note-taking workflow and want that data structured, searchable, and available to your automations.
-
-### Getting started
-
-1. Upload the Notes module package via **Admin > Modules > Upload**
-2. Toggle the module **ON** in the modules list
-3. The **Notes** tab appears in the SyteOps navigation
-
-### Key behaviors and settings
-
-- **Metadata capture** -- Each note supports structured metadata fields beyond the note body, so you can attach context like attendees, action items, or follow-up dates.
-- **Settings modal** -- Click the settings icon in the Notes tab to configure module-specific options.
-- **Import/Export** -- Notes data can be exported and imported between sites using the standard SyteOps backup and restore flow.
-
-### FlowMattic integration
-
-Notes declares a FlowMattic variable family that syncs automatically on save. This means your notes data is available as FlowMattic variables for use in workflows -- for example, dispatching a summary email after a meeting note is saved, or routing action items to a project management tool.
-
----
-
-## Estimates
-
-Client estimate creation and management with built-in approval tracking. The Estimates module creates a custom post type (`syteops_est_storage`) with its own tab, providing a structured workflow for drafting, sending, and tracking estimates.
-
-### When you need it
-
-Enable Estimates if you create client estimates or proposals and want to manage them inside WordPress with approval tracking and automation support.
-
-### Getting started
-
-1. Upload the Estimates module package via **Admin > Modules > Upload**
-2. Toggle the module **ON** in the modules list
-3. The **Estimates** tab appears in the SyteOps navigation
-
-### Key behaviors and settings
-
-- **Approval tracking** -- Each estimate carries status metadata so you can track where it stands in the approval process.
-- **Metadata capture** -- Structured fields for estimate details beyond the main content.
-- **Settings modal** -- Configure module-specific options through the settings icon in the Estimates tab.
-- **Import/Export** -- Estimate data can be exported and imported between sites.
-
-### FlowMattic integration
-
-Estimates declares a FlowMattic variable family (using the `estmt` slug) that syncs automatically on save. Estimate data is available as FlowMattic variables, enabling workflows like sending approval notifications, updating a CRM when an estimate is accepted, or generating invoices from approved estimates.
-
----
-
 ## Banners
 
 Admin banner scheduling and display configuration. The Banners module gives you control over what informational banners appear in the WordPress admin and when they appear.

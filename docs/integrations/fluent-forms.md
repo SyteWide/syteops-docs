@@ -14,7 +14,6 @@ The Fluent Forms integration pairs SyteOps with the Fluent Forms plugin to route
 
 - Enables Fluent Forms-related configuration and workflow hooks inside SyteOps.
 - Keeps form-related SyteOps variables (form IDs, field mappings) available to FlowMattic.
-- Required by certain SyteOps modules — for example, when the **Notes** or **Estimates** modules are active, Fluent Forms is required and the toggle stays enabled.
 
 ## Setup
 
@@ -24,10 +23,6 @@ The Fluent Forms integration pairs SyteOps with the Fluent Forms plugin to route
 4. Toggle it **ON** and click **Save Changes**.
 
 If Fluent Forms isn't installed, SyteOps disables the toggle and shows "Not Installed" until you install the plugin.
-
-## Required state for some modules
-
-If you have the Notes or Estimates modules active, Fluent Forms is required and cannot be turned off. The toggle shows **Required** and remains on. Deactivating the dependent modules releases the requirement.
 
 ## Connect Fluent Forms to your FlowMattic workflow
 
@@ -40,7 +35,7 @@ If you have the Notes or Estimates modules active, Fluent Forms is required and 
 
 - Onboarding forms that create users or assign roles in SyteOps via FlowMattic.
 - Client intake forms that populate CRM fields.
-- Estimate request forms that hand off to the Estimates module.
+- Contact or quote forms that Lead Attribution auto-detects to capture and attribute leads.
 - Support ticket intake that routes to the right role (using SyteOps aggregator variables).
 
 ## Related

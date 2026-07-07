@@ -55,11 +55,19 @@ Create a content source; generates its id, slug, and webhook secret.
 | `auth_mode` | string | no |  |
 | `default_author_id` | integer | no |  |
 | `pin_author` | boolean | no |  |
+| `target_post_type` | string | no |  |
+| `new_cpt` | object | no |  |
+| `meta_fields` | object | no |  |
+| `fm_variables` | object | no |  |
+| `forward_enabled` | boolean | no |  |
+| `forward_url` | url | no |  |
+| `forward_auth_mode` | string | no |  |
+| `forward_secret` | string | no |  |
 
 
 **Returns**
 
-data: &#123;id, name, slug, secret, ...} — secret is plaintext, returned only this once
+data: &#123;id, name, slug, secret, ...} — secret is plaintext, returned only this once (forward_secret is never returned)
 
 **Request**
 
@@ -71,7 +79,15 @@ data: &#123;id, name, slug, secret, ...} — secret is plaintext, returned only 
     "name": "string",
     "auth_mode": "string",
     "default_author_id": 0,
-    "pin_author": true
+    "pin_author": true,
+    "target_post_type": "string",
+    "new_cpt": {},
+    "meta_fields": {},
+    "fm_variables": {},
+    "forward_enabled": true,
+    "forward_url": "https://example.com",
+    "forward_auth_mode": "string",
+    "forward_secret": "string"
   }
 }
 ```
@@ -151,7 +167,7 @@ _No parameters._
 
 **Returns**
 
-data.sources[]: array of &#123;id, name, slug, enabled, status, auth_mode, shape_fingerprint, mapping, mapping_status, sample, default_author_id, pin_author, default_reviewers, default_ccs, default_post_status, created_at, updated_at}
+data.sources[]: array of &#123;id, name, slug, enabled, status, auth_mode, target_post_type, cpt_post_type, shape_fingerprint, mapping, mapping_status, sample, default_author_id, pin_author, default_reviewers, default_ccs, default_post_status, meta_fields, fm_variables, forward_enabled, forward_url, forward_auth_mode, created_at, updated_at} (secret and forward_secret are never included)
 
 **Request**
 
@@ -212,11 +228,18 @@ Update editable fields on an existing content source (slug and secret are not ed
 | `auth_mode` | string | no |  |
 | `enabled` | boolean | no |  |
 | `reingest_mode` | string | no |  |
+| `target_post_type` | string | no |  |
+| `meta_fields` | object | no |  |
+| `fm_variables` | object | no |  |
+| `forward_enabled` | boolean | no |  |
+| `forward_url` | url | no |  |
+| `forward_auth_mode` | string | no |  |
+| `forward_secret` | string | no |  |
 
 
 **Returns**
 
-data: &#123;id, name, slug, ...} (no secret)
+data: &#123;id, name, slug, ...} (no secret, no forward_secret)
 
 **Request**
 
@@ -234,7 +257,14 @@ data: &#123;id, name, slug, ...} (no secret)
     "default_post_status": "string",
     "auth_mode": "string",
     "enabled": true,
-    "reingest_mode": "string"
+    "reingest_mode": "string",
+    "target_post_type": "string",
+    "meta_fields": {},
+    "fm_variables": {},
+    "forward_enabled": true,
+    "forward_url": "https://example.com",
+    "forward_auth_mode": "string",
+    "forward_secret": "string"
   }
 }
 ```

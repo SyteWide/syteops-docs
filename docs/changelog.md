@@ -8,6 +8,26 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.029
+
+- Fixed: Removing a content source now also clears the automation configuration variables it created — no leftover variables.
+- Improved: Attribution records are now included in the backup created before the plugin is uninstalled.
+
+## v1.5.028
+
+- Changed: Content Pipelines is now a built-in core feature — no separate module to install or activate; it's available out of the box.
+
+## v1.5.027
+
+- Added: Content Sources can land drafts into any post type or a new custom type you define.
+- Added: Custom fields per source, mapped from incoming data.
+- Added: Per-source FlowMattic config variables and opt-in forwarding to a workflow.
+
+## v1.5.026
+
+- Removed unused legacy internal modules, along with their settings and data-management screens, to simplify the plugin.
+- Internal reliability fixes.
+
 ## v1.5.025
 
 - Internal improvements and maintenance.

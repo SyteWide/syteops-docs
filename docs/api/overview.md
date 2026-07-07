@@ -70,8 +70,6 @@ The following resource groups are exposed through the Manage API. Each resource 
 | `crm` | CRM connection settings |
 | `roles` | Role and capability configuration |
 | `variables` | Stored site variables |
-| `notes_items` | Internal notes entries |
-| `estimates_items` | Estimate records |
 | `leads` | Lead records and pipeline data |
 
 For full parameter schemas, required capabilities, and per-action return shapes, see the [Manage API reference](./reference/).
