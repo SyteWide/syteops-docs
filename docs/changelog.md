@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.030
+
+- Internal improvements and maintenance.
+
 ## v1.5.029
 
 - Fixed: Removing a content source now also clears the automation configuration variables it created — no leftover variables.
