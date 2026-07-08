@@ -12246,7 +12246,7 @@
         {
             "name": "sqseo_set_snippet",
             "provider": "squirrly",
-            "description": "Write a page's Squirrly SEO snippet. Writes the canonical wp_qss row (the layer that renders the <title>) plus the _sq_* post-meta and ACF mirror layers. Only supplied fields change. Target by post_id or url (\"/\" = homepage). Destructive: pass dry_run:true to preview the call (the arguments to be written) without executing.",
+            "description": "Write a page's Squirrly SEO snippet. Writes the canonical wp_qss row (the layer that renders the <title>) plus the _sq_* post-meta mirror layer. Only supplied fields change. Target by post_id or url (\"/\" = homepage). Destructive: pass dry_run:true to preview the call (the arguments to be written) without executing.",
             "inputSchema": {
                 "type": "object",
                 "properties": {
