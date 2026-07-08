@@ -8,6 +8,25 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.036
+
+- Fixed: Sending or scheduling a social post from the posts list now shows a clear, actually-visible confirmation before the dialog closes.
+- Improved: Review portal + scheduling refinements — internal validation and documentation cleanups.
+
+## v1.5.035
+
+- Fixed: The publish-time post type change now only allows the same publishable types offered in the picker, closing a gap where a reviewer could otherwise switch a post to a hidden type.
+- Fixed: Schedule/send error messages in the social compose modal were hidden behind the modal itself.
+
+## v1.5.034
+
+- Added: Schedule a composed social update to send at a specific time, or automatically once the post publishes — with a pending-sends list and cancel option.
+- Added: Choose the post type when publishing a draft from the review portal, instead of always publishing to the type it was created as.
+
+## v1.5.033
+
+- Added: Social Publishing — compose an AI-summarized post in a chosen voice and send it to a webhook (LinkedIn via your automation tool, Slack, or any endpoint), from the review portal or the posts list.
+
 ## v1.5.032
 
 - Fixed: The automatic cleanup of leftover files from a removed feature now removes only the plugin's own package folders, never a same-named folder that belongs to another plugin.
