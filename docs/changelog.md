@@ -8,6 +8,24 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.040
+
+- Removed redundant helper text from the AWS credential fields on the System / API tab.
+
+## v1.5.039
+
+- Fixed: scope-limited configuration backups for the Banners and Integrations areas now capture their settings (previously these targeted backups could come out empty).
+- Fixed: variable-set configuration backups can now be restored (they were previously rejected as incomplete).
+- Fixed: license activation now reports a clear product, plan, or email mismatch instead of a generic error, and shows an "activation pending — please try again shortly" message when the store hasn't finished registering your site.
+
+## v1.5.038
+
+- Fixed: full configuration exports now preserve your Integrations module settings (such as the site-code header) — previously that data could be dropped from the exported file.
+
+## v1.5.037
+
+- Added: **AWS IAM Access Key** and **AWS IAM Access Key Secret** fields in the AWS SES area of the System / API tab. Both are stored encrypted, sync to FlowMattic as masked variables, and include a copy button for the variable name; the secret can be cleared on save.
+
 ## v1.5.036
 
 - Fixed: Sending or scheduling a social post from the posts list now shows a clear, actually-visible confirmation before the dialog closes.
