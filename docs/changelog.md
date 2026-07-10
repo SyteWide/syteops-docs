@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.042
+
+- Fixed the headless System / API WP-CLI setter added in 1.5.041: its `--stdin` flag was declared unbracketed, which WP-CLI rejected as an invalid synopsis, so the command never ran. It now uses `[--stdin]` and populates the fields as intended.
+
 ## v1.5.041
 
 - Added a headless WP-CLI command to populate System / API variables (such as the AWS IAM keys) from deployment tooling; values are stored encrypted and synced to FlowMattic.
