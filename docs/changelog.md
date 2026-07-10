@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.041
+
+- Added a headless WP-CLI command to populate System / API variables (such as the AWS IAM keys) from deployment tooling; values are stored encrypted and synced to FlowMattic.
+
 ## v1.5.040
 
 - Removed redundant helper text from the AWS credential fields on the System / API tab.
