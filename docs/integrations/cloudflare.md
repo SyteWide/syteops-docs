@@ -16,24 +16,24 @@ SyteOps uses several URL paths for webhooks and background tasks. Cloudflare's f
 
 | Path | Purpose |
 |---|---|
-| `/wp-json/syteops-int-cp/v1/webhook` | ContentPen webhook delivery |
+| `/wp-json/syteops/v1/pipelines/ingest/*` | Content source webhook delivery |
 | `/wp-cron.php` | WordPress scheduled tasks (backups, sync) |
 | `/wp-json` | REST API discovery |
 
 ---
 
-## Step 1: Allow ContentPen Webhooks
+## Step 1: Allow Content Source Webhooks
 
-If you use the ContentPen integration, its webhooks are server-to-server requests that Cloudflare's Bot Fight Mode often blocks.
+If a content source delivers articles from an external app (such as ContentPen), those webhooks are server-to-server requests that Cloudflare's Bot Fight Mode often blocks.
 
 ### Create the Rule
 
 1. In **Security > WAF > Custom Rules**, create a new rule
 2. Configure:
-   - **Rule name:** `Allow ContentPen Webhook`
+   - **Rule name:** `Allow SyteOps Content Ingest`
    - **Expression:**
      ```
-     (http.request.uri.path eq "/wp-json/syteops-int-cp/v1/webhook") and
+     (starts_with(http.request.uri.path, "/wp-json/syteops/v1/pipelines/ingest/")) and
      (http.request.method eq "POST")
      ```
    - **Action:** Allow
@@ -97,7 +97,7 @@ Cloudflare's managed WAF rules can occasionally flag SyteOps requests.
 Cloudflare evaluates rules in order from top to bottom. Place your Allow rules **before** any blocking rules.
 
 **Recommended order:**
-1. Allow ContentPen Webhook
+1. Allow SyteOps Content Ingest
 2. Bypass Cache for WP-Cron
 3. Your other allow rules
 4. Your blocking/security rules
@@ -155,11 +155,11 @@ After setting up your rules:
 
 ## Troubleshooting
 
-### ContentPen Webhooks Failing
+### Content Source Webhooks Failing
 
-1. **Check Security > Events** — Look for blocks on `/wp-json/syteops-int-cp/v1/webhook`
+1. **Check Security > Events** — Look for blocks on `/wp-json/syteops/v1/pipelines/ingest/`
 2. **Check Security > Bots** — Bot Fight Mode is the most common cause
-3. **Try the "fix without finding the cause" approach** — Add the Allow ContentPen Webhook rule at the **top** of your Custom Rules list
+3. **Try the "fix without finding the cause" approach** — Add the Allow SyteOps Content Ingest rule at the **top** of your Custom Rules list
 
 ### Scheduled Tasks Not Running
 

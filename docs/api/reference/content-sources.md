@@ -43,7 +43,7 @@ data: &#123;id, status, mapping_status, mapping}
 
 ## `create`
 
-Create a content source; generates its id, slug, and webhook secret.
+Create a content source; generates its id and slug, and (unless a secret is provided or auth_mode is none) a webhook secret.
 
 **Capability:** `manage_options`
 
@@ -53,6 +53,7 @@ Create a content source; generates its id, slug, and webhook secret.
 |---|---|---|---|
 | `name` | string | yes |  |
 | `auth_mode` | string | no |  |
+| `secret` | string | no |  |
 | `default_author_id` | integer | no |  |
 | `pin_author` | boolean | no |  |
 | `target_post_type` | string | no |  |
@@ -63,11 +64,19 @@ Create a content source; generates its id, slug, and webhook secret.
 | `forward_url` | url | no |  |
 | `forward_auth_mode` | string | no |  |
 | `forward_secret` | string | no |  |
+| `sig_header_mode` | string | no |  |
+| `sig_header_name` | string | no |  |
+| `ai_taxonomy_enabled` | boolean | no |  |
+| `author_match_mode` | string | no |  |
+| `target_tag_slug` | string | no |  |
+| `taxonomy_apply_mode` | string | no |  |
+| `strip_uncategorized` | boolean | no |  |
+| `content_cleanup` | boolean | no |  |
 
 
 **Returns**
 
-data: &#123;id, name, slug, secret, ...} — secret is plaintext, returned only this once (forward_secret is never returned)
+data: &#123;id, name, slug, secret, secret_source, ...} — secret is plaintext and NON-EMPTY only when secret_source is "generated" (empty for "provided"/"none"), returned only this once (forward_secret is never returned)
 
 **Request**
 
@@ -78,6 +87,7 @@ data: &#123;id, name, slug, secret, ...} — secret is plaintext, returned only 
   "params": {
     "name": "string",
     "auth_mode": "string",
+    "secret": "string",
     "default_author_id": 0,
     "pin_author": true,
     "target_post_type": "string",
@@ -87,7 +97,15 @@ data: &#123;id, name, slug, secret, ...} — secret is plaintext, returned only 
     "forward_enabled": true,
     "forward_url": "https://example.com",
     "forward_auth_mode": "string",
-    "forward_secret": "string"
+    "forward_secret": "string",
+    "sig_header_mode": "string",
+    "sig_header_name": "string",
+    "ai_taxonomy_enabled": true,
+    "author_match_mode": "string",
+    "target_tag_slug": "string",
+    "taxonomy_apply_mode": "string",
+    "strip_uncategorized": true,
+    "content_cleanup": true
   }
 }
 ```
@@ -210,7 +228,7 @@ data: &#123;id, secret} — secret is plaintext, returned only this once
 
 ## `update`
 
-Update editable fields on an existing content source (slug and secret are not editable here).
+Update editable fields on an existing content source (slug is not editable; secret is write-only).
 
 **Capability:** `manage_options`
 
@@ -226,6 +244,7 @@ Update editable fields on an existing content source (slug and secret are not ed
 | `default_ccs` | object | no |  |
 | `default_post_status` | string | no |  |
 | `auth_mode` | string | no |  |
+| `secret` | string | no |  |
 | `enabled` | boolean | no |  |
 | `reingest_mode` | string | no |  |
 | `target_post_type` | string | no |  |
@@ -235,6 +254,14 @@ Update editable fields on an existing content source (slug and secret are not ed
 | `forward_url` | url | no |  |
 | `forward_auth_mode` | string | no |  |
 | `forward_secret` | string | no |  |
+| `sig_header_mode` | string | no |  |
+| `sig_header_name` | string | no |  |
+| `ai_taxonomy_enabled` | boolean | no |  |
+| `author_match_mode` | string | no |  |
+| `target_tag_slug` | string | no |  |
+| `taxonomy_apply_mode` | string | no |  |
+| `strip_uncategorized` | boolean | no |  |
+| `content_cleanup` | boolean | no |  |
 
 
 **Returns**
@@ -256,6 +283,7 @@ data: &#123;id, name, slug, ...} (no secret, no forward_secret)
     "default_ccs": {},
     "default_post_status": "string",
     "auth_mode": "string",
+    "secret": "string",
     "enabled": true,
     "reingest_mode": "string",
     "target_post_type": "string",
@@ -264,7 +292,15 @@ data: &#123;id, name, slug, ...} (no secret, no forward_secret)
     "forward_enabled": true,
     "forward_url": "https://example.com",
     "forward_auth_mode": "string",
-    "forward_secret": "string"
+    "forward_secret": "string",
+    "sig_header_mode": "string",
+    "sig_header_name": "string",
+    "ai_taxonomy_enabled": true,
+    "author_match_mode": "string",
+    "target_tag_slug": "string",
+    "taxonomy_apply_mode": "string",
+    "strip_uncategorized": true,
+    "content_cleanup": true
   }
 }
 ```

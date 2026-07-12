@@ -67,7 +67,7 @@ API keys, CRM secrets, and integration tokens stored in SyteOps are encrypted at
 
 This applies to:
 - CRM API keys and secrets (up to 15 CRM systems)
-- Integration API keys (AWS SES, Cloudflare, Sendy, Documentero, OpenAI, ContentPen)
+- Integration API keys (AWS SES, Cloudflare, Sendy, Documentero, OpenAI)
 - Any credential stored in the System/API tab
 
 To remove a stored credential, use the "Clear on save" toggle and save. The old value is gone — not just hidden.

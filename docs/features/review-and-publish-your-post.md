@@ -6,22 +6,22 @@ description: Open your branded review email, edit the draft in the secure portal
 
 # Review & Publish Your Post
 
-When ContentPen finishes generating a new article, SyteOps sends a branded review email to everyone on the notification list and opens a secure editing portal where reviewers can read, refine, and approve the post before it goes live.
+When your content source finishes generating a new article, SyteOps sends a branded review email to everyone on the notification list and opens a secure editing portal where reviewers can read, refine, and approve the post before it goes live.
 
 This page explains the full workflow from the moment that email arrives to the moment the post is published.
 
-:::note Requires Content Pipelines
-The Review & Publish portal is part of the **Content Pipelines** feature. An administrator must have **Content Pipelines turned on** (and the ContentPen integration enabled) for review emails to be sent and the secure editor to open. If Content Pipelines is turned off, incoming ContentPen articles are handed to your configured webhook automation instead of the in-WordPress portal.
+:::note Part of Content Pipelines
+The Review & Publish portal is part of the **Content Pipelines** feature. It becomes available once you have at least one **content source** set up to deliver articles into your site — each incoming article opens as a draft in the secure editor for your team to review before it goes live.
 :::
 
 ---
 
 ## Step 1: You receive a review email
 
-As soon as ContentPen generates a new draft, SyteOps sends a notification email to:
+As soon as a new draft arrives from your content source, SyteOps sends a notification email to:
 
 - The **post's author** (the WordPress user the post will be attributed to).
-- Anyone listed as a **Default reviewer** or **Default CC reviewer** in your ContentPen settings (see [ContentPen settings](#who-receives-the-review-email) below).
+- Anyone listed as a **Default reviewer** or **Default CC reviewer** in your Review Portal settings (see [Who receives the review email](#who-receives-the-review-email) below).
 
 The email comes from your site, uses your site's logo, and includes a summary of the article title and source keyword. At the bottom there is a single call-to-action button: **Open secure editor**.
 
@@ -79,9 +79,9 @@ The preview updates as soon as the new image is set. If your account does not ha
 The **SEO** panel lets you control how the post appears in Google and other search engines.
 
 - **SEO title** _(shown only when your site uses a supported SEO plugin, such as Squirrly SEO)_ — The search-result headline. It is **auto-generated** from the post title by default; type your own to set a **custom title that overrides** the automatic one. Leaving it as shown (or clearing it) keeps the automatic title, so it stays in sync with how your editors manage SEO in the post itself. When no SEO plugin is active, this field is hidden.
-- **Primary keyword** — The main search phrase this article is targeting. ContentPen pre-fills this from the keyword used to generate the post. You can change it at any time.
-- **Secondary keywords** — Supporting search phrases for the article, pre-filled from ContentPen when provided. Enter them comma-separated. They are saved with the post and available to your SEO tools.
-- **Meta description** — The short sentence that appears under the page title in search results. Keep it to one or two clear sentences that summarise the article. Click **Generate with AI** to have the AI draft a meta description from the current title and body — the result fills the field for you to review and edit. (This requires a ContentPen AI provider to be configured in the Review Portal settings.)
+- **Primary keyword** — The main search phrase this article is targeting. Your content source pre-fills this from the keyword used to generate the post. You can change it at any time.
+- **Secondary keywords** — Supporting search phrases for the article, pre-filled from your content source when provided. Enter them comma-separated. They are saved with the post and available to your SEO tools.
+- **Meta description** — The short sentence that appears under the page title in search results. Keep it to one or two clear sentences that summarise the article. Click **Generate with AI** to have the AI draft a meta description from the current title and body — the result fills the field for you to review and edit. (This requires a Content AI provider to be configured in the Review Portal settings.)
 
 As you type, a **search-result preview** updates in real time so you can see exactly how the title and meta description will look to someone finding your post on Google before you publish. When an SEO title is set, the preview uses it as the headline.
 
@@ -191,14 +191,14 @@ The **Feedback** panel collects every change request submitted for this draft, o
 The notification list for each new draft is made up of two groups:
 
 - **The post author** — always included automatically.
-- **Default reviewers and Default CC reviewers** — team members you have added to the notification list in the ContentPen settings.
+- **Default reviewers and Default CC reviewers** — team members you have added to the notification list in the Review Portal settings.
 
-To configure the default list, go to **SyteOps → Content Pipelines**, open the **ContentPen** settings, and look for the **Default reviewers** and **Default CC reviewers** fields. Make sure each contributor is also linked to a WordPress author on the **Users** tab — this ensures their articles are published under the correct byline and they appear in the reviewer lists.
+To configure the default list, go to **SyteOps → Content Pipelines**, open the **Review Portal** settings, and look for the **Default reviewers** and **Default CC reviewers** fields. Make sure each contributor is also linked to a WordPress author on the **Users** tab — this ensures their articles are published under the correct byline and they appear in the reviewer lists.
 
 - **Default reviewers** are the primary recipients of the email and can edit the draft.
 - **Default CC reviewers** are copied on the email and can also edit the draft.
 
-Changes to these lists take effect on the next draft that ContentPen generates — existing drafts already sent are not affected.
+Changes to these lists take effect on the next draft that arrives from your content source — existing drafts already sent are not affected.
 
 ---
 
@@ -218,10 +218,10 @@ Use the **Preview Portal** button to open a read-only preview of the portal — 
 
 This section lets you choose the AI provider and model used by two features inside the portal:
 
-- **ContentPen AI** — the model that generates and refines article content.
+- **Content AI** — the model that generates and refines article content.
 - **GEO AI** — the model that runs the AI readiness analysis in the GEO panel.
 
-These are the same provider and model settings used by ContentPen and GEO elsewhere in SyteOps. Changing them here updates the same underlying values.
+These are the same provider and model settings used by the Content AI and GEO areas elsewhere in SyteOps. Changing them here updates the same underlying values.
 
 ### Review & approval rules
 
@@ -268,11 +268,11 @@ Click **Save settings** at the bottom of the panel to apply your changes. The ne
 
 ### Open the portal for any post
 
-You don't have to wait for a ContentPen draft to use the portal. From the WordPress **Posts** (or **Pages**) list, hover over any post you can edit and click the **Review portal** link in its row of actions. SyteOps issues a fresh secure link for that post and opens the portal in a new tab — the same review window contributors see, with the same expiry window as an emailed link. This lets you put an existing post (or one written by hand) through the same review-and-approve flow.
+You don't have to wait for a draft from your content source to use the portal. From the WordPress **Posts** (or **Pages**) list, hover over any post you can edit and click the **Review portal** link in its row of actions. SyteOps issues a fresh secure link for that post and opens the portal in a new tab — the same review window contributors see, with the same expiry window as an emailed link. This lets you put an existing post (or one written by hand) through the same review-and-approve flow.
 
 ---
 
 ## Related pages
 
-- [Content Pipelines](./content-pipelines.md) — The module that drives ContentPen integration and post-publish processing.
-- [ContentPen integration](../integrations/contentpen.md) — How to connect ContentPen to your SyteOps site.
+- [Content Pipelines](./content-pipelines.md) — The feature that drives content ingest and post-publish processing.
+- [Content Sources](./content-pipelines.md#content-sources) — How external content apps deliver articles into the review portal.

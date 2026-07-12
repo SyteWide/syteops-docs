@@ -1,7 +1,7 @@
 ---
 title: Other REST endpoints
 sidebar_position: 7
-description: Integration and webhook REST endpoints outside the general Manage API — licensing, leads ingest and qualification, proof packets, LinkCentral, and ContentPen relay.
+description: Integration and webhook REST endpoints outside the general Manage API — licensing, leads ingest and qualification, proof packets, LinkCentral, and content source ingest.
 ---
 
 # Other REST endpoints
@@ -61,12 +61,12 @@ Namespace: `syteops/v1`. Authentication: bearer token. These endpoints are only 
 | `POST` | `/linkcentral/preview-links` | bearer | Returns a preview of how submitted links would be resolved without persisting |
 | `GET` | `/linkcentral/status` | bearer | Returns the current status of the LinkCentral integration |
 
-## ContentPen relay
+## Content source ingest
 
-Namespace: `syteops-int-cp/v1`. Authentication: HMAC signature verification.
+Namespace: `syteops/v1`. Authentication: per-source HMAC signature, bearer token, or none.
 
 | Method | Path | Auth | Purpose |
 |---|---|---|---|
-| `POST` | `/webhook` | HMAC | Verifies the request signature and relays the payload to the configured automation or FlowMattic workflow |
+| `POST` | `/pipelines/ingest/{source}` | HMAC, bearer, or none | Accepts an article from a registered content source, verifies the request, maps the payload onto editor fields, and creates a Review & Publish draft |
 
-The ContentPen relay lives under its own namespace (`syteops-int-cp/v1`) and is only active when the ContentPen integration module is enabled. The receiving handler verifies the HMAC signature before forwarding; payloads that fail signature verification are silently dropped.
+Each registered content source has its own `{source}` slug and (unless it uses the **None** auth mode) a secret. The receiving handler verifies the request (HMAC signature or bearer token, per the source's configured auth mode) before creating the draft; requests that fail verification are rejected. A source set to **None** performs no verification — the unguessable `{source}` slug URL is the only gate, so it is intended only for senders that cannot sign. See [Content Pipelines → Content Sources](../features/content-pipelines.md#content-sources) for setup.

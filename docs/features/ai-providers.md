@@ -6,7 +6,7 @@ description: Configure one or more AI providers for the features and integration
 
 # AI Providers
 
-Several SyteOps features call AI models — LinkCentral keyword enrichment and cross-link scoring, ContentPen drafting, Notes and Estimates AI suggestions, and more. SyteOps supports six providers and lets each feature pick its own provider, model, and token budget so you can match the model to the job.
+Several SyteOps features call AI models — LinkCentral keyword enrichment and cross-link scoring, Content Pipelines drafting, GEO readiness analysis, content ingest mapping, social content generation, and more. SyteOps supports six providers and lets each feature pick its own provider, model, and token budget so you can match the model to the job.
 
 ## Supported providers
 
@@ -52,14 +52,15 @@ The model and token-limit fields appear on a provider tile once that provider's 
 
 ## Per-feature provider and model selection
 
-Each AI-using feature stores its own provider, model, and max-tokens values. You can point different features at different providers — for example, a cheap keyword model via OpenRouter and a reasoning model via Anthropic for estimates.
+Each AI-using feature stores its own provider, model, and max-tokens values. You can point different features at different providers — for example, a cheap keyword model via OpenRouter and a reasoning model via Anthropic for content drafting.
 
 Features that have per-feature AI configuration:
 
 - **LinkCentral** — three independent AI areas (Cross-Link, Keyword, Context). See the [LinkCentral integration page](../integrations/linkcentral.md) for detail.
-- **ContentPen** — drafting and content operations. See the [ContentPen integration page](../integrations/contentpen.md).
-- **Notes** — AI suggestions on notes (configurable per install).
-- **Estimates** — AI line-item assistance.
+- **Content** — AI-suggested categories, tags, and meta descriptions for content sources and the Review & Publish portal. See [Content Pipelines](./content-pipelines.md).
+- **GEO** — AI readiness analysis that scores how well a post is positioned for AI answer engines. See [Content Pipelines](./content-pipelines.md).
+- **Ingest** — proposes how an inbound content-source payload maps to your post fields when you set up a new content source. See [Content Pipelines](./content-pipelines.md).
+- **Social** — AI-generated social posts from your published content.
 
 There are two ways to set per-feature AI configuration:
 
@@ -124,5 +125,5 @@ Reasoning / thinking modes add latency. For short tasks like keyword generation,
 ## Related
 
 - [LinkCentral Integration](../integrations/linkcentral.md) — three-area AI configuration (Cross-Link, Keyword, Context)
-- [ContentPen Integration](../integrations/contentpen.md) — drafting and content operations
+- [Content Pipelines](./content-pipelines.md) — AI-suggested categories, tags, and meta descriptions for content
 - [Troubleshooting](../troubleshooting.md) — AI provider-specific troubleshooting

@@ -42,7 +42,6 @@ These endpoints are always allowed when REST restriction (not Block All) is enab
 |---|---|
 | `/wp-json` | REST API discovery |
 | `/wp-json/syteops/*` | SyteOps plugin endpoints |
-| `/wp-json/syteops-int-cp/*` | ContentPen integration endpoints |
 | `/wp-json/flowmattic/v1/*` | FlowMattic workflow automation |
 | `/wp-json/google-site-kit/*` | Google Site Kit |
 | `/wp-json/wordfence/v1/*` | Wordfence security |

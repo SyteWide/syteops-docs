@@ -88,9 +88,9 @@ Modules can be toggled on or off without losing configuration data. First-party 
 
 ## Smart Content Pipelines
 
-Pair SyteOps user and role data with [ContentPen](https://contentpen.ai?ref=chet28&fp_sid=sytewide), FlowMattic, ACF, and Squirrly SEO to build self-routing content workflows.
+Pair SyteOps user and role data with your content source — an external content app such as [ContentPen](https://contentpen.ai?ref=chet28&fp_sid=sytewide) — plus FlowMattic, ACF, and Squirrly SEO to build self-routing content workflows.
 
-A practical example: ContentPen sends a payload to one FlowMattic webhook. SyteOps user and role variables tell the workflow who the assigned author is. ACF populates the field structure. Squirrly SEO applies the metadata. The article arrives in WordPress, structured and SEO-ready, assigned to the right author — ready for review. One click to publish.
+A practical example: your content source sends a payload to one FlowMattic webhook. SyteOps user and role variables tell the workflow who the assigned author is. ACF populates the field structure. Squirrly SEO applies the metadata. The article arrives in WordPress, structured and SEO-ready, assigned to the right author — ready for review. One click to publish.
 
 No per-author workflow duplication. No workflow edits when authors change. The configuration is the source of truth.
 
@@ -126,7 +126,7 @@ Move your entire SyteOps setup between sites without rebuilding from scratch.
 
 SyteOps includes toggleable integrations with tools across your stack. See the [Integrations Overview](../integrations/overview) for the full list.
 
-Core integrations built in (no toggle required): FlowMattic, ContentPen, ACF.
+Core integrations built in (no toggle required): FlowMattic, ACF.
 
 ## Security
 

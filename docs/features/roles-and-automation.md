@@ -51,7 +51,7 @@ You have a workflow that needs to notify all Project Managers when a new estimat
 
 ## Practical Example: Role-Based Content Assignment
 
-An article arrives via ContentPen. The workflow needs to assign it to the correct author based on a role.
+An article arrives via a content source. The workflow needs to assign it to the correct author based on a role.
 
 1. The incoming webhook includes metadata about the article type or client
 2. A FlowMattic condition checks the `syteops_user_NNN_is_content_lead` variable to find the current Content Lead
