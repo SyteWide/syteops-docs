@@ -8,6 +8,12 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.050
+
+- Fixed: entering a custom inbound signature header on a content source no longer gets discarded when the header mode is left on "Standard" — the header you type is now saved. Previously this could cause a provider's webhooks (such as ContentPen) to fail verification.
+- Content Sources: a new "Prefill for ContentPen" button sets the correct ContentPen signature header in one click, so ContentPen webhooks verify without manual setup.
+- Content ingest now returns a clearer "Missing signature header" message when a webhook arrives without a signature, making it easier to tell a misconfigured header apart from a mismatched secret.
+
 ## v1.5.049
 
 - Content sources can now skip signature verification with a new "None" auth mode, for senders that cannot sign requests — the unguessable ingest URL is the only gate.
