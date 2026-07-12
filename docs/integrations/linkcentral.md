@@ -8,7 +8,7 @@ description: Automatic keyword linking and internal cross-linking for your WordP
 
 **Tier: AI-Powered** — Full admin experience with deep AI features. You pick which AI provider and model to use for keyword matching and enrichment; SyteOps runs the work in the background with built-in quality gating.
 
-SyteOps integrates with [LinkCentral](https://designforwp.com/linkcentral/) to automatically insert keyword links and internal cross-links into your WordPress posts. When combined with the ContentPen publishing workflow, links are inserted automatically as posts are created — no manual editing required.
+SyteOps integrates with [LinkCentral](https://designforwp.com/linkcentral/) to automatically insert keyword links and internal cross-links into your WordPress posts. When combined with a content-source publishing workflow, links are inserted automatically as posts are created — no manual editing required.
 
 The result: every article gets relevant affiliate links, product links, and internal cross-links inserted in natural positions, with proper SEO attributes, all controlled by your LinkCentral link library and SyteOps settings.
 
@@ -52,7 +52,7 @@ The **API & FlowMattic** section also shows the **Process Links Endpoint** URL. 
 
 This step adds automatic link processing to your content publishing workflow. Add it after the step that creates the WordPress post.
 
-1. Open your FlowMattic workflow (e.g., the ContentPen Publishing Workflow)
+1. Open your FlowMattic workflow (e.g., your content-source publishing workflow)
 2. Find the step that creates the WordPress post (the one that outputs a `post_id`)
 3. Add a new step **after** it
 4. Choose **API by FlowMattic** as the app
@@ -76,7 +76,7 @@ Replace `{wordpress_step.post_id}` with the actual FlowMattic variable reference
 
 7. Save the workflow
 
-The integration works with any FlowMattic workflow that creates or updates posts — not just ContentPen workflows.
+The integration works with any FlowMattic workflow that creates or updates posts — not just content-source workflows.
 
 ## Settings Reference
 
@@ -190,7 +190,7 @@ You can also click **Configure AI Provider** in the card header to quickly set t
 - **Throughput settings:** Start with **Concurrent Workers: 3** and **Batch Size: 1** for a good balance of speed and reliability. If a provider reports an oversize-context-style error, SyteOps retries that link once with a minimal prompt (title, destination URL, and categories only)
 - If you see links skipped due to timeouts, SyteOps automatically retries each failed request once with a longer timeout before marking it as skipped
 - Run enrichment in smaller passes (using the stop button) if you want to review results incrementally
-- After enrichment, re-run your ContentPen publishing workflow on existing posts to pick up the new keywords
+- After enrichment, re-run your content-source publishing workflow on existing posts to pick up the new keywords
 
 ## How It Works
 

@@ -8,7 +8,7 @@ description: How SyteOps writes SEO title/description/keywords into Squirrly SEO
 
 **Tier: Basic** — Plugin-based toggle integration. When Squirrly SEO is installed and the integration is enabled, SyteOps writes SEO metadata into Squirrly's native storage and applies a small wp-admin fix.
 
-SyteOps uses Squirrly SEO as the SEO engine for **Content Pipelines** and the **ContentPen Review Portal**. When the integration is on, the SEO **title**, **description**, and **keywords** that a pipeline generates — or that a reviewer sets in the portal — are written to Squirrly's native post meta (`_sq_title` / `_sq_description` / `_sq_keywords`) and to the canonical `wp_qss` snippet row that renders your page `<title>`. There is no separate settings screen to configure: enabling the integration is all that's required.
+SyteOps uses Squirrly SEO as the SEO engine for **Content Pipelines** and the **Review & Publish Portal**. When the integration is on, the SEO **title**, **description**, and **keywords** that a pipeline generates — or that a reviewer sets in the portal — are written to Squirrly's native post meta (`_sq_title` / `_sq_description` / `_sq_keywords`) and to the canonical `wp_qss` snippet row that renders your page `<title>`. There is no separate settings screen to configure: enabling the integration is all that's required.
 
 :::note Removed in a recent release
 Earlier versions exposed a **"Squirrly SEO Custom Settings"** card on the System/API tab — ACF field mapping, social-image dimensions, post-type targeting, and meta-field guards. That card and the **ACF field mapping** have been **removed**: Content Pipelines now own SEO end-to-end and write Squirrly's native fields directly. Existing `_sq_*` data is unaffected (it was already the source of truth).
@@ -25,7 +25,7 @@ These are maintained by Squirrly and describe how the plugin stores SEO data and
 
 ## What It Does
 
-- **Pipeline & Review-Portal SEO writing** — SEO title/description/keywords produced by a Content Pipeline's SEO stage, or entered in the ContentPen Review Portal SEO panel, are written to `_sq_title` / `_sq_description` / `_sq_keywords` post meta **and** the canonical `wp_qss` row.
+- **Pipeline & Review-Portal SEO writing** — SEO title/description/keywords produced by a Content Pipeline's SEO stage, or entered in the Review & Publish Portal SEO panel, are written to `_sq_title` / `_sq_description` / `_sq_keywords` post meta **and** the canonical `wp_qss` row.
 - **Settings-URL fix** — Automatically corrects a known Squirrly SEO inline-script syntax error in wp-admin. Enabled automatically whenever the integration is on.
 
 ## Requirements
@@ -44,7 +44,7 @@ That's it — no additional configuration. With the integration on and the Squir
 
 ## How SEO values are written
 
-A **Content Pipeline's SEO stage** and the **ContentPen Review Portal** SEO panel are two surfaces over the same Squirrly fields (`_sq_title` / `_sq_description` / `_sq_keywords`), plus the `wp_qss` snippet row that renders the page title.
+A **Content Pipeline's SEO stage** and the **Review & Publish Portal** SEO panel are two surfaces over the same Squirrly fields (`_sq_title` / `_sq_description` / `_sq_keywords`), plus the `wp_qss` snippet row that renders the page title.
 
 The **SEO title** has special handling: by default it is auto-generated from the **post title** (clean — the description is *not* appended; that's the meta description's job). If a reviewer types a **custom** SEO title in the Review Portal, SyteOps marks it as a manual override and stops auto-recomposing it, so a later pipeline run won't overwrite the reviewer's title. Clearing the portal field returns the title to automatic.
 

@@ -21,16 +21,16 @@ Open Content Pipelines from the **Content Pipelines** link in the SyteOps admin 
 The Runs dashboard shows every pipeline execution:
 
 - **Stat cards** show total runs, runs in the last 7 days, posts that were changed, and error counts.
-- **Filter pills** let you filter by recipe, status (OK, Errors, Skipped), or source (Pipeline, each content source, and ContentPen when its integration is in use).
+- **Filter pills** let you filter by recipe, status (OK, Errors, Skipped), or source (Pipeline, or each content source you've registered).
 - **Run now** lets you trigger a pipeline manually for any post — choose a recipe, enter a Post ID, and optionally enable dry-run mode to preview changes without writing them.
-- **Runs table** lists each execution with the source (pipeline trigger or ContentPen), the recipe used, post, status, which stages ran, whether the post was changed, and the trigger type.
+- **Runs table** lists each execution with the source (pipeline trigger or a content source), the recipe used, post, status, which stages ran, whether the post was changed, and the trigger type.
 - Click a row to expand the **stage drawer**, which shows the result of each stage with its message and duration.
 
 ### Provider status cards
 
 At the very top of the Runs view, above the stat cards, a row of cards shows whether each pipeline provider is wired up:
 
-- **Content sources** — one card for each content source you've registered, shown by its name, indicating whether it's connected and receiving content. If you also use the built-in **ContentPen** integration, it appears here too with its own status.
+- **Content sources** — one card for each content source you've registered, shown by its name, indicating whether it's connected and receiving content.
 - **Link Engines**, **SEO**, and **GEO** — the processing stages.
 
 Each card shows a status — **Ready**, **Off**, **Needs setup**, or **Not installed** — and a
@@ -74,15 +74,24 @@ When LLMS Amplifier is the GEO engine and isn't set to "Manual," the GEO provide
 
 Enable **dry-run** on a recipe or on a manual run to preview what would change without actually writing to the database. Dry-run results appear in the Runs dashboard with a "Preview" badge.
 
-## ContentPen Integration
-
-When you publish content through ContentPen, each article automatically creates a run entry in the Runs dashboard with `source: contentpen`. The pipeline stages that are enabled in the matching recipe apply to ContentPen-published posts the same way they apply to manually published posts.
-
 ## Content Sources
 
 Content Sources let **any** external application — not just ContentPen — send finished articles into SyteOps as review-ready drafts. Each source you register gets its own **Ingest URL** and a **webhook secret**. When the app posts an article to that URL, SyteOps maps the incoming fields onto the editor and creates a draft in the [Review & Publish portal](./review-and-publish-your-post.md), where your team reviews and publishes it.
 
 Open the **Content Sources** view from the quick-nav pills at the top of the Content Pipelines tab.
+
+### Receiving content from an external app
+
+Any external content app can deliver finished articles straight into a content source — **ContentPen** is the built-in example, and existing ContentPen setups are carried over for you automatically. The app posts each article to the source's **Ingest URL**; unless you turn verification off, it signs each request with the source's **webhook secret** so SyteOps can confirm the request is genuine before mapping the fields onto the editor and creating a [Review & Publish](./review-and-publish-your-post.md) draft for your team — nothing is published without a human approving it.
+
+You can tailor how each source proves and processes its content, and every option below is set per source, so different apps can be handled differently:
+
+- **Verification secret** — the shared secret used to check each request. Leave it blank and SyteOps generates one for you (shown once), or paste the sending app's own signing secret if it supplies one (for example, a ContentPen webhook secret). If a sender can't sign at all, you can turn verification off entirely (see **None** below).
+- **Signature header** — choose which request header the sending app signs with, so a source can match whatever your app already sends.
+- **AI categories and tags** — let SyteOps read each incoming article and suggest categories and tags for it.
+- **Author matching** — match the article's stated author to one of your registered team members (by email or last name), falling back to a default author when there's no match.
+- **Target tag** — automatically add a tag of your choosing to every post from this source, so you can find and group its content later.
+- **Display cleanup** — tidy the article's markup when the post is shown on your site.
 
 ### Register a content source
 
@@ -91,9 +100,14 @@ Open the **Content Sources** view from the quick-nav pills at the top of the Con
    - **HMAC signature** (recommended) — the app signs every request with the secret.
    - **Bearer token** — the app sends the secret in an `Authorization` header.
    - **HMAC or bearer** — accept either.
-3. Click **Add source**.
+   - **None (no verification)** — accept requests with no signature, token, or secret at all. Choose this only for a sender that can't sign; the unguessable Ingest URL becomes the only thing protecting the source, so treat that URL like a password.
+3. *(Optional)* If the sending app supplies its own signing secret, expand the verification fields and paste it into **Verification secret** — leave it blank to have SyteOps generate one for you. You can also set a **custom signature header** here if the app signs with its own header name (for example, `X-Contentpen-Signature`). These fields are hidden when Auth mode is **None**.
+4. Click **Add source**.
 
-SyteOps then shows the **Ingest URL** and the **Webhook secret** in a highlighted box labeled **Save this secret now — it is shown only once.** Copy the secret and store it somewhere safe (a password manager, or the sending app's settings). If you ever lose it, use **Rotate secret** on the source to generate a new one — the old secret stops working immediately.
+What SyteOps shows next depends on how the secret was set:
+
+- **SyteOps generated the secret** — a highlighted box labeled **Save this secret now — it is shown only once** displays the **Ingest URL** and the **Webhook secret**. Copy the secret and store it somewhere safe (a password manager, or the sending app's settings). If you ever lose it, use **Rotate secret** on the source to generate a new one — the old secret stops working immediately.
+- **You pasted your own secret, or chose None** — there's no secret to reveal (you already have it, or there isn't one), so the box shows just the **Ingest URL** and a **Done** button.
 
 ### Point your app at the Ingest URL
 
@@ -101,8 +115,9 @@ Configure the sending application's webhook to POST its article as JSON to the s
 
 | Auth mode | What the app sends |
 |---|---|
-| **HMAC signature** | An `X-SyteOps-Signature` header in the form `t=<timestamp>,v1=<hex>`, signed with the secret. If your secret begins with `whsec_`, drop that prefix and sign with the remaining characters. |
+| **HMAC signature** | An `X-SyteOps-Signature` header (or your chosen custom header) in the form `t=<timestamp>,v1=<hex>`, signed with the secret. If your secret begins with `whsec_`, drop that prefix and sign with the remaining characters. |
 | **Bearer token** | An `Authorization: Bearer <secret>` header using the **full** secret string, including any `whsec_` prefix. |
+| **None** | Nothing extra — just the POST to the Ingest URL. SyteOps accepts it without any check, so keep the URL secret. |
 
 You can copy the URL again at any time with **Copy URL** on the source card.
 
@@ -126,9 +141,11 @@ Expand **Settings** on a source card to control:
 | **Source name** | The label shown for this source. |
 | **Default author** | The WordPress user credited as the post author. Tick **Always use this author** to override whatever the payload suggests. |
 | **Default post status** | **Draft** or **Publish**. This is set here only — the incoming payload can never publish content on its own. |
-| **Auth mode** | Change the accepted authentication style. |
+| **Auth mode** | Change the accepted authentication style (**HMAC**, **Bearer**, **HMAC or bearer**, or **None**). |
+| **Verification secret** | Paste a new secret to replace the current one (for example, when the sending app rotates its own key). Leave it blank to keep the existing secret — for security it's never shown here, only a **(configured)** or **(not set)** indicator. Ignored when Auth mode is **None**. |
+| **Inbound signature header** | Whether the sender signs with the standard `X-SyteOps-Signature` header or a custom header name of your choosing. |
 
-Use **Rotate secret** to replace a leaked or aging secret, **Disable** to pause a source without deleting it, and **Delete** to remove it permanently.
+Use **Rotate secret** to have SyteOps generate a brand-new secret (and reveal it once), **Verification secret** to paste one the sender gave you, **Disable** to pause a source without deleting it, and **Delete** to remove it permanently.
 
 ### Choose where drafts land
 

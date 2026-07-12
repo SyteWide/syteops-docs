@@ -27,7 +27,7 @@ const features = [
   {
     title: 'Integrations',
     description:
-      '17+ integrations including FlowMattic, Cloudflare, Slack, ContentPen, OpenAI, and more.',
+      '17+ integrations including FlowMattic, Cloudflare, Slack, LinkCentral, OpenAI, and more.',
     href: '/docs/integrations/overview',
     Icon: PlugIcon,
   },

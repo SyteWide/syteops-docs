@@ -4,7 +4,6 @@ import Link from '@docusaurus/Link';
 const integrations: Array<{ name: string; href?: string }> = [
   { name: 'FlowMattic' },
   { name: 'Cloudflare' },
-  { name: 'ContentPen', href: 'https://contentpen.ai?ref=chet28&fp_sid=sytewide' },
   { name: 'Slack' },
   { name: 'Monday.com' },
   { name: 'OpenAI' },

@@ -8,6 +8,35 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.049
+
+- Content sources can now skip signature verification with a new "None" auth mode, for senders that cannot sign requests — the unguessable ingest URL is the only gate.
+- Content sources can now store a provider-supplied verification secret and a custom signature header name, so webhooks signed with the provider's own key are verified.
+
+## v1.5.048
+
+- Deleting a content source now frees its ingest URL for reuse — recreating a source with the same name reclaims the original ingest URL instead of getting a numbered suffix.
+
+## v1.5.047
+
+- The operator deploy tool now remembers the SyteOps Admin user you pick at its prompt — it writes the resolved id to the env files the next deploy reads, so subsequent deploys stop asking for it. Preset `SYTEOPS_ADMIN_USER` to skip the prompt entirely.
+
+## v1.5.046
+
+- Added an `integration enable|disable <slug>` command to the System / API command family, so deployment tooling can toggle a SyteOps integration headlessly — turn an integration on when its plugin is installed or adopted, and off when it is removed.
+
+## v1.5.045
+
+- Retired the standalone ContentPen integration. Everything it did — signed webhook ingest, AI-suggested categories and tags, author matching, target-tag rules, and display cleanup — is now built into Content Sources, and existing ContentPen setups are migrated over automatically.
+
+## v1.5.044
+
+- Content Sources can now match what the ContentPen integration does — AI-suggested categories and tags, author matching, target-tag rules, display cleanup, and a configurable webhook signature header.
+
+## v1.5.043
+
+- System / API — added a Cloudflare Zone ID field (with its FlowMattic sync variable), relabeled the Cloudflare token field to *API Token* (its option key and FlowMattic variable are unchanged), added copy buttons to all three Cloudflare fields, and widened the System / API `set` command so it also accepts the five AI-provider API keys (OpenAI, Anthropic, OpenRouter, Gemini, Perplexity).
+
 ## v1.5.042
 
 - Fixed the headless System / API WP-CLI setter added in 1.5.041: its `--stdin` flag was declared unbracketed, which WP-CLI rejected as an invalid synopsis, so the command never ran. It now uses `[--stdin]` and populates the fields as intended.

@@ -56,7 +56,6 @@ const sidebars: SidebarsConfig = {
         'integrations/overview',
         'integrations/flowmattic',
         'integrations/cloudflare',
-        'integrations/contentpen',
         'integrations/linkcentral',
         'integrations/squirrly-seo',
         'integrations/llms-amplifier',

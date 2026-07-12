@@ -1,6 +1,6 @@
 {
     "schema_version": 1,
-    "syteops_version": "1.5.042",
+    "syteops_version": "1.5.049",
     "operations": [
         {
             "resource": "users",
@@ -888,13 +888,16 @@
         {
             "resource": "content_sources",
             "action": "create",
-            "summary": "Create a content source; generates its id, slug, and webhook secret.",
+            "summary": "Create a content source; generates its id and slug, and (unless a secret is provided or auth_mode is none) a webhook secret.",
             "params": {
                 "name": {
                     "type": "string",
                     "required": true
                 },
                 "auth_mode": {
+                    "type": "string"
+                },
+                "secret": {
                     "type": "string"
                 },
                 "default_author_id": {
@@ -926,16 +929,40 @@
                 },
                 "forward_secret": {
                     "type": "string"
+                },
+                "sig_header_mode": {
+                    "type": "string"
+                },
+                "sig_header_name": {
+                    "type": "string"
+                },
+                "ai_taxonomy_enabled": {
+                    "type": "boolean"
+                },
+                "author_match_mode": {
+                    "type": "string"
+                },
+                "target_tag_slug": {
+                    "type": "string"
+                },
+                "taxonomy_apply_mode": {
+                    "type": "string"
+                },
+                "strip_uncategorized": {
+                    "type": "boolean"
+                },
+                "content_cleanup": {
+                    "type": "boolean"
                 }
             },
             "destructive": false,
             "capability": "manage_options",
-            "returns": "data: {id, name, slug, secret, ...} — secret is plaintext, returned only this once (forward_secret is never returned)"
+            "returns": "data: {id, name, slug, secret, secret_source, ...} — secret is plaintext and NON-EMPTY only when secret_source is \"generated\" (empty for \"provided\"/\"none\"), returned only this once (forward_secret is never returned)"
         },
         {
             "resource": "content_sources",
             "action": "update",
-            "summary": "Update editable fields on an existing content source (slug and secret are not editable here).",
+            "summary": "Update editable fields on an existing content source (slug is not editable; secret is write-only).",
             "params": {
                 "id": {
                     "type": "string",
@@ -960,6 +987,9 @@
                     "type": "string"
                 },
                 "auth_mode": {
+                    "type": "string"
+                },
+                "secret": {
                     "type": "string"
                 },
                 "enabled": {
@@ -988,6 +1018,30 @@
                 },
                 "forward_secret": {
                     "type": "string"
+                },
+                "sig_header_mode": {
+                    "type": "string"
+                },
+                "sig_header_name": {
+                    "type": "string"
+                },
+                "ai_taxonomy_enabled": {
+                    "type": "boolean"
+                },
+                "author_match_mode": {
+                    "type": "string"
+                },
+                "target_tag_slug": {
+                    "type": "string"
+                },
+                "taxonomy_apply_mode": {
+                    "type": "string"
+                },
+                "strip_uncategorized": {
+                    "type": "boolean"
+                },
+                "content_cleanup": {
+                    "type": "boolean"
                 }
             },
             "destructive": false,
