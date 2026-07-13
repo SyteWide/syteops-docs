@@ -132,6 +132,22 @@ Before content flows automatically, SyteOps needs to learn how the app's JSON ma
 
 Once approved, the source goes **active**: every future post to its Ingest URL becomes a Review & Publish draft automatically, using the same mapping. Any field the mapping doesn't fill is simply left blank for the reviewer to complete.
 
+### Visual payload mapper
+
+Instead of typing a **Path** into a mapping row by hand, you can point and click.
+
+Every source has a sticky **Payload** panel on its card that shows a real payload as a clickable tree:
+
+- If the source has received content before, the panel shows the **last payload it received** — SyteOps automatically remembers the most recent one for each source. This is visible only to you in the SyteOps admin; it's never exposed anywhere public.
+- If the source hasn't received anything yet, paste an example into the **Sample payload (JSON)** box and the panel shows that instead.
+
+To map a field visually:
+
+1. Click into the **Path** box for the field you want to map (in **Field mapping** or a **FlowMattic config variable** — see below).
+2. In the Payload panel, click through the tree to find the value you want, then click it.
+
+SyteOps fills in the *location* of the value you clicked, not the value itself. That means the mapping keeps working correctly on every future payload, even though the specific text you clicked on was only ever from one example — nothing is frozen to that one sample.
+
 ### Per-source settings
 
 Expand **Settings** on a source card to control:
@@ -183,6 +199,15 @@ Expand **FlowMattic config variables** on a source's card to define named values
 3. Click **Add variable** for each one you need, then **Save FlowMattic variables**.
 
 Because each source's variables are named after that source, two sources can use the same key (for example, both defining a `brand` value) without colliding.
+
+### Dynamic FlowMattic variables
+
+Each FlowMattic config variable row has a **Source** setting, so its value can either stay fixed or change with every article:
+
+- **Static** — a value you type once, same as above. Good for things that never change, like a brand name or a routing tag.
+- **From payload** — instead of typing a value, use the payload picker (the same clickable tree described in [Visual payload mapper](#visual-payload-mapper)) to choose where in each incoming article the value should come from. SyteOps resolves it fresh for every article as it arrives, so something like a campaign id or a source URL that's different on every article stays accurate automatically — no manual updates needed.
+
+**From payload** variables are only useful once they're actually sent somewhere, so they travel along with each mapped article to your **Forward to workflow** webhook (see below) — one resolved value per article, per variable. Because of that, **From payload** requires **Forward to workflow** to be turned on for the source. A **Static** variable doesn't have that requirement — it works whether or not forwarding is enabled.
 
 ### Forward to a workflow
 

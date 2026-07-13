@@ -8,6 +8,12 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.051
+
+- Added: Visual payload mapper for Content Sources — click a value in a received payload to map its field, while viewing the payload.
+- Added: FlowMattic config variables can now pull a value from each incoming payload (per-article), delivered with the forwarded workflow.
+- Improved: Content Sources remember the last payload each source received, so you can map against exactly what arrived.
+
 ## v1.5.050
 
 - Fixed: entering a custom inbound signature header on a content source no longer gets discarded when the header mode is left on "Standard" — the header you type is now saved. Previously this could cause a provider's webhooks (such as ContentPen) to fail verification.
