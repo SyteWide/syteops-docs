@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.058
+
+- Fixed: A helper label placed right after a button now has proper spacing instead of sitting crammed against it.
+
+## v1.5.057
+
+- Fixed: In the Content Sources editor, the config-variable and custom-field rows now line up in their columns instead of overflowing and overlapping their neighbors.
+
 ## v1.5.056
 
 - Fixed: The content source Ingest URL field now always shows the full URL instead of truncating to a narrow box.
