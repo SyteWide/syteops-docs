@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.053
+
+- Added: A Setup / Production mode for content pipelines. In Setup mode drafts are still created so you can preview mappings, but runs aren't recorded and nothing is sent out — no reviewer emails, workflow forwards, or social posts — so you can test safely. Switch to Production when you're ready to go live. Note: every site starts in Setup after this update — if yours was already live, open Content Pipelines → Runs and switch to Production to resume recording and sending.
+- Added: A "Clear all run history" button in the Runs view.
+- Fixed: The Review Portal settings view no longer renders blank during setup — the AI provider, branding, and portal settings are available before any content source goes live.
+- Fixed: In Content Sources, the FlowMattic config-variable and custom-field editor tables no longer run off the right edge of the card on a narrow browser window.
+- Improved: Clearer helper text for where the Content AI provider is configured, plus a freshened example in the source config-variable editor.
+
 ## v1.5.052
 
 - Added: In the payload mapper, click into a mapping field to get a filterable dropdown of the incoming payload's paths — type to narrow it, arrow keys and Enter to pick — alongside the existing clickable tree.
