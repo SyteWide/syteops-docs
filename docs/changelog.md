@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.054
+
+- Fixed: AI model dropdowns now show the full model name instead of truncating to a narrow box.
+- Improved: A visual polish pass across the Content Pipelines admin screens — consistent card depth and titles, tidier spacing and alignment, and the field-mapping payload tree now stays beside the mapping fields while you scroll.
+
 ## v1.5.053
 
 - Added: A Setup / Production mode for content pipelines. In Setup mode drafts are still created so you can preview mappings, but runs aren't recorded and nothing is sent out — no reviewer emails, workflow forwards, or social posts — so you can test safely. Switch to Production when you're ready to go live. Note: every site starts in Setup after this update — if yours was already live, open Content Pipelines → Runs and switch to Production to resume recording and sending.
