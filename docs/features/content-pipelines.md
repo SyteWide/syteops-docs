@@ -141,12 +141,14 @@ Every source has a sticky **Payload** panel on its card that shows a real payloa
 - If the source has received content before, the panel shows the **last payload it received** — SyteOps automatically remembers the most recent one for each source. This is visible only to you in the SyteOps admin; it's never exposed anywhere public.
 - If the source hasn't received anything yet, paste an example into the **Sample payload (JSON)** box and the panel shows that instead.
 
-To map a field visually:
+To map a field visually, use whichever is quicker:
 
-1. Click into the **Path** box for the field you want to map (in **Field mapping** or a **FlowMattic config variable** — see below).
-2. In the Payload panel, click through the tree to find the value you want, then click it.
+- **Dropdown (fastest):** click into the **Path** box for the field you want to map (in **Field mapping** or a **FlowMattic config variable** — see below). A dropdown of every path in the current payload appears right there — start typing to filter it, then click a row (or use the arrow keys and Enter) to fill it in.
+- **Tree:** click into the **Path** box, then in the sticky **Payload** panel click through the tree to find the value you want and click it.
 
-SyteOps fills in the *location* of the value you clicked, not the value itself. That means the mapping keeps working correctly on every future payload, even though the specific text you clicked on was only ever from one example — nothing is frozen to that one sample.
+Either way, SyteOps fills in the *location* of the value you picked, not the value itself. That means the mapping keeps working correctly on every future payload, even though the specific text you saw was only ever from one example — nothing is frozen to that one sample.
+
+**Clearing remembered payloads.** Each source's Payload panel has a **Clear** button that forgets just that source's last payload. To forget them all at once, use **Delete all captured payloads** at the top of the Content Sources page (it appears once at least one source has a remembered payload).
 
 ### Per-source settings
 

@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.052
+
+- Added: In the payload mapper, click into a mapping field to get a filterable dropdown of the incoming payload's paths — type to narrow it, arrow keys and Enter to pick — alongside the existing clickable tree.
+- Added: A "Delete all captured payloads" button clears every source's remembered payload in one click.
+
 ## v1.5.051
 
 - Added: Visual payload mapper for Content Sources — click a value in a received payload to map its field, while viewing the payload.
