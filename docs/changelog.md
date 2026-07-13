@@ -8,6 +8,19 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.061
+
+- Fixed: The Content Pipelines screen no longer appears unstyled when opened by clicking its tab — it now displays correctly without needing a page refresh.
+
+## v1.5.060
+
+- Improved: Licensing credentials saved from the server configuration screens are now encrypted at rest, matching how they are stored when saved from the settings form.
+- Fixed: Registry import preview and conflict lists render safely regardless of imported tab names, and REST log page permission errors now return the correct HTTP status.
+
+## v1.5.059
+
+- Fixed: Minor admin wording polish — a punctuation fix on the setup-status notice and removal of a redundant explanatory note.
+
 ## v1.5.058
 
 - Fixed: A helper label placed right after a button now has proper spacing instead of sitting crammed against it.
