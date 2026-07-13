@@ -8,6 +8,12 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.055
+
+- Improved: The Cloudflare account ID and zone ID are now hidden on the FlowMattic Variables screen, matching how the Cloudflare API token is already masked there.
+- Fixed: A Cloudflare Zone ID entered on the System/API screen now saves reliably — previously the typed value could be dropped when saving.
+- Fixed: Non-secret System/API identifiers (such as the Cloudflare account and zone IDs) configured through automated (headless) setup now display correctly on the System/API screen instead of as scrambled text.
+
 ## v1.5.054
 
 - Fixed: AI model dropdowns now show the full model name instead of truncating to a narrow box.
