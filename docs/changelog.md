@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.056
+
+- Fixed: The content source Ingest URL field now always shows the full URL instead of truncating to a narrow box.
+- Changed: Removed a provider-specific shortcut on the Content Sources add-source form — the standard signature-header fields cover the same setup.
+
 ## v1.5.055
 
 - Improved: The Cloudflare account ID and zone ID are now hidden on the FlowMattic Variables screen, matching how the Cloudflare API token is already masked there.
