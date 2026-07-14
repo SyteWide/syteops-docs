@@ -1,5 +1,5 @@
 ---
-sidebar_position: 18
+sidebar_position: 18.5
 title: REST Logging
 description: Log REST API access in your WordPress site — sampling, retention, exclusions, hashed IPs, filtered log viewer, and CSV/JSON export.
 ---

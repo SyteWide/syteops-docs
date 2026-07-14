@@ -14,7 +14,7 @@ Content Pipelines is built in to SyteOps — there's nothing to upload or activa
 
 ## The Content Pipelines Tab
 
-Open Content Pipelines from the **Content Pipelines** link in the SyteOps admin sidebar (or the Content Pipelines tab in SyteOps settings). The tab has two views, accessible from the quick-nav pills at the top.
+Open Content Pipelines from the **Content Pipelines** link in the SyteOps admin sidebar (or the Content Pipelines tab in SyteOps settings). The tab has several views, accessible from the quick-nav pills at the top.
 
 ### Runs dashboard
 
@@ -73,6 +73,39 @@ When LLMS Amplifier is the GEO engine and isn't set to "Manual," the GEO provide
 ## Dry-Run Mode
 
 Enable **dry-run** on a recipe or on a manual run to preview what would change without actually writing to the database. Dry-run results appear in the Runs dashboard with a "Preview" badge.
+
+## Content Calendar
+
+The **Calendar** view gives you a month-at-a-glance look at your content: recent, draft, scheduled, and published posts, all in one place.
+
+Open it from the quick-nav pills at the top of the Content Pipelines tab, alongside Runs, Recipes, and Content Sources.
+
+Each post appears as a chip with a colored bar on the left showing its status:
+
+| Color | Status |
+|---|---|
+| Teal | Scheduled |
+| Green | Published |
+| Amber | Pending review |
+| Gray | Draft |
+
+Drafts that don't have a publish date yet appear in the **Unscheduled drafts** list next to the grid, instead of on a specific day.
+
+### Rescheduling and scheduling posts
+
+- **Move a scheduled post** — drag its chip from one day to another to change when it goes live.
+- **Schedule a draft** — drag a post from the **Unscheduled drafts** list onto a day to give it a publish date.
+- **Pick an exact time** — click a post to open a small picker where you can choose the exact date and time instead of dragging.
+
+A few rules apply:
+
+- You can only move posts you have permission to edit.
+- Scheduling a draft (turning it into a scheduled post) requires permission to publish, following the same **Who can publish** rule used in the [Review & Publish portal](./review-and-publish-your-post.md#review--approval-rules).
+- Published posts are read-only on the calendar — they can't be dragged or rescheduled.
+
+### Showing all content
+
+By default, the calendar shows only content your pipeline has touched — posts imported from a content source, plus posts a recipe has run against. Turn on **Show all content** at the top of the calendar to also include every post, page, or other content type, whether or not the pipeline has touched it, so you can see everything on your editorial schedule in one view.
 
 ## Content Sources
 
