@@ -8,7 +8,11 @@ SyteOps can generate and serve an **`llms.txt`** file at your site root — a pl
 
 ## Enable it
 
-Go to **Admin settings → AI Search Discovery (llms.txt)** and turn on **Generate llms.txt**. Once enabled, your `llms.txt` is served at `https://yoursite.com/llms.txt` and refreshes automatically when you publish content (and daily).
+Go to the **Content Pipelines** tab and, on the **GEO (llms.txt)** provider card, click **Turn on**. Once enabled, your `llms.txt` is served at `https://yoursite.com/llms.txt` and refreshes automatically when you publish content (and daily).
+
+### Native generator or LLMS Amplifier
+
+By default the built-in generator produces your `llms.txt` — no extra plugin required. If you install and enable the **LLMS Amplifier** integration, it takes over `llms.txt` generation instead (an either/or choice), and the built-in generator steps aside. Switch between them from the **GEO (llms.txt)** card — **Use LLMS Amplifier engine** / **Use native engine** — with no separate setup step. See [LLMS Amplifier](../integrations/llms-amplifier.md).
 
 ## What's in it
 

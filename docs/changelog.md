@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.074
+
+- Changed: The AI Search Discovery (`llms.txt`) engine is now either/or — switch between the built-in generator and the LLMS Amplifier integration from one place on the Content Pipelines tab. Turning LLMS Amplifier on automatically sets it to manual updates and turns AI Search Discovery on; turning it off reverts to the built-in generator, so AI Search Discovery is never left off.
+- Changed: The AI Search Discovery on/off switch and engine choice, and the Social Publishing on/off switch, now live together with their other settings on the Content Pipelines tab instead of being scattered across separate settings screens.
+
 ## v1.5.073
 
 - Improved: The content calendar's "draft" status indicator now meets accessibility contrast standards, and rescheduling reports clearer, more accurate errors.
