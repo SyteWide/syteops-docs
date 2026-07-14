@@ -105,7 +105,7 @@ SEO field mapping and metadata control. When enabled, SyteOps can coordinate wit
 
 ### LLMS Amplifier
 
-AI-discovery file generation (`llms.txt` and `llms-full.txt`) for AI search engines. When enabled and the LLMS Amplifier plugin is installed, you can select it as the engine for the GEO step in Content Pipelines instead of the built-in generator. See the dedicated [LLMS Amplifier Integration](llms-amplifier) page for setup.
+AI-discovery file generation (`llms.txt` and `llms-full.txt`) for AI search engines. Enabling the LLMS Amplifier integration makes it the engine for the GEO step in Content Pipelines instead of the built-in generator — an either/or choice you flip from the GEO card, with no separate setup step. See the dedicated [LLMS Amplifier Integration](llms-amplifier) page for setup.
 
 ---
 

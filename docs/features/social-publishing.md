@@ -26,8 +26,8 @@ SyteOps does not connect directly to LinkedIn or any other social network. For L
 
 ## Enabling Social Publishing
 
-1. Go to **SyteOps → Admin**.
-2. Scroll down to the **Social Publishing** section.
+1. Go to **SyteOps → Content Pipelines**.
+2. Find the **Social Publishing** settings card.
 3. Turn on **Enable Social Publishing**.
 
 With the feature enabled, you'll set up an AI provider, at least one voice profile, and at least one destination before the send buttons appear anywhere in the admin.
