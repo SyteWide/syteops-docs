@@ -1,5 +1,5 @@
 ---
-sidebar_position: 10
+sidebar_position: 10.5
 title: White Label & Client Protection
 description: Adopt plugins as SyteOps modules, control the client admin view, and protect your proprietary tools.
 ---

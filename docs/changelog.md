@@ -8,6 +8,36 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.073
+
+- Improved: The content calendar's "draft" status indicator now meets accessibility contrast standards, and rescheduling reports clearer, more accurate errors.
+
+## v1.5.072
+
+- Fixed: Scheduled banners now display and report correctly across a daylight-saving-time change. Previously the banner would switch over at the right moment, but its on-screen visibility and the admin status pill could be off by an hour on sites that observe daylight saving.
+- Fixed: Choosing a clock time that doesn't exist on the spring-forward night (when clocks jump ahead) now moves the schedule forward past the skipped hour, the way calendars normally handle it.
+- Improved: The banner "Now", "Today", and "Tomorrow" quick-set buttons now fill in your site's local time instead of the time on whatever computer you're using.
+
+## v1.5.071
+
+- Fixed: Scheduled social posts now fire at the intended time in your site's timezone, instead of the timezone of whoever's browser was used to schedule them.
+- Fixed: Banner activation and deactivation times are now read in your site's timezone, so a scheduled banner no longer switches on or off early (or late) on sites that aren't set to UTC.
+
+## v1.5.070
+
+- Fixed: Scheduled and rescheduled times now use your site's timezone instead of the timezone of whoever's browser is being used, so a post set for "9:00 AM" goes live at 9:00 AM site time no matter where the editor is. This applies to the calendar, the Publish schedule control, and social scheduling.
+- Improved: Calendar text — post times and out-of-month day numbers — is now easier to read, meeting accessibility contrast standards.
+- Changed: Moving an already-scheduled post now respects the same publish permissions as scheduling a draft, so only people allowed to publish can change when a scheduled post goes live.
+- Fixed: Dragging a post scheduled for exactly midnight no longer resets its time, and the calendar no longer holds on to memory as you move between months.
+
+## v1.5.069
+
+- Added: An editorial calendar showing your recent, draft, scheduled, and published posts, in both the Content Pipelines area and the review portal. Drag a post to a new day — or pick an exact date and time — to reschedule it, and drag an unscheduled draft onto a day to schedule it. You can only move posts you're allowed to edit, and scheduling a draft needs permission to publish.
+
+## v1.5.068
+
+- Fixed: The content pipeline activity filters no longer cut off their last option (such as "Skipped"). When space is tight a filter group now wraps to the next row instead of being squeezed and clipped.
+
 ## v1.5.067
 
 - Changed: Renamed the content pipeline activity "Pipeline" source filter (and the matching per-row tag) to "Direct" so it's easier to tell apart from your content-source filters.

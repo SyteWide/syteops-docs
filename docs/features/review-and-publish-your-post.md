@@ -1,5 +1,5 @@
 ---
-sidebar_position: 13
+sidebar_position: 12.5
 title: Review & Publish Your Post
 description: Open your branded review email, edit the draft in the secure portal, approve it for publishing, and share it with a teammate — all without logging into WordPress directly.
 ---
@@ -181,6 +181,30 @@ The post stays as a draft throughout — nothing is published until someone clic
 :::note Feedback panel
 
 The **Feedback** panel collects every change request submitted for this draft, oldest first. It is visible to everyone who has access to the portal, so it keeps an honest record of the review conversation. If you posted a note by mistake, click the **×** next to your own note to remove it (you can only delete notes you wrote; site administrators can remove any note).
+
+:::
+
+---
+
+## Step 6: Use the content calendar
+
+The portal includes a **Calendar** button that opens a month view of your recent, draft, scheduled, and published posts. Each post shows as a chip with a colored bar on the left: teal for scheduled, green for published, amber for pending review, and gray for draft. Drafts without a publish date yet appear in an **Unscheduled drafts** list next to the grid.
+
+From the calendar you can:
+
+- **Drag a scheduled post to a new day** to move it to a different publish date.
+- **Drag a post from Unscheduled drafts onto a day** to give it a publish date.
+- **Click a post** to open a picker and choose an exact date and time instead of dragging.
+
+A few rules apply:
+
+- You can only move posts you're allowed to edit.
+- Scheduling a draft (giving it a publish date) requires publish permission, following the same **Who can publish** setting described below.
+- Published posts can't be moved.
+
+:::note Reviewers see the full calendar
+
+As a reviewer, you see the full upcoming calendar so you have context on everything coming up — but you can only drag or reschedule the posts you have permission to edit. Everything else appears for reference only.
 
 :::
 
