@@ -21,9 +21,9 @@ Open Content Pipelines from the **Content Pipelines** link in the SyteOps admin 
 The Runs dashboard shows every pipeline execution:
 
 - **Stat cards** show total runs, runs in the last 7 days, posts that were changed, and error counts.
-- **Filter pills** let you filter by recipe, status (OK, Errors, Skipped), or source (Pipeline, or each content source you've registered).
+- **Filter pills** let you filter by recipe, status (OK, Errors, Skipped), or source (**Direct** — post-processing runs you trigger or that fire on publish/schedule — or each content source you've registered).
 - **Run now** lets you trigger a pipeline manually for any post — choose a recipe, enter a Post ID, and optionally enable dry-run mode to preview changes without writing them.
-- **Runs table** lists each execution with the source (pipeline trigger or a content source), the recipe used, post, status, which stages ran, whether the post was changed, and the trigger type.
+- **Runs table** lists each execution with the source (**Direct** for post-processing runs, or a content source), the recipe used, post, status, which stages ran, whether the post was changed, and the trigger type.
 - Click a row to expand the **stage drawer**, which shows the result of each stage with its message and duration.
 
 ### Provider status cards

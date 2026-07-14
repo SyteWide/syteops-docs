@@ -8,6 +8,33 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.067
+
+- Changed: Renamed the content pipeline activity "Pipeline" source filter (and the matching per-row tag) to "Direct" so it's easier to tell apart from your content-source filters.
+
+## v1.5.066
+
+- Improved: Security hardening across admin screens with better escaping of displayed data and clearer error messages when requests fail.
+- Fixed: Import preview now surfaces per-item conflicts so you can choose to skip or overwrite each one.
+
+## v1.5.065
+
+- Internal improvements and maintenance.
+
+## v1.5.064
+
+- Improved: Internal cleanup removing outdated code left over from retired modules; error logging now follows the plugin's logging system.
+
+## v1.5.063
+
+- Improved: Admin screen requests now use a unified security check with clearer permission error messages.
+- Fixed: Configuration import and backup restore now report file read or write problems instead of failing silently.
+
+## v1.5.062
+
+- Improved: Uninstalling the plugin now removes additional stored data (internal tables, update-checker state, scheduled sync tasks, and the backup folder) for a cleaner removal.
+- Fixed: Debug logging now follows the plugin's own debug mode setting, and module activation logs are written to per-module log files.
+
 ## v1.5.061
 
 - Fixed: The Content Pipelines screen no longer appears unstyled when opened by clicking its tab — it now displays correctly without needing a page refresh.
