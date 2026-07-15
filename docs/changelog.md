@@ -8,6 +8,16 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.077
+
+- Added: A Form Field Mapping tool on the Leads settings page — pick a form plugin and a form, then map its fields to a lead's name, email, phone, and message with no code. Works with Fluent Forms, Gravity Forms, WPForms, and Contact Form 7.
+- Added: The privacy control for how contact details are stored on leads (full, masked, or off) is now set directly on the Leads settings page.
+
+## v1.5.076
+
+- Added: Lead records now capture the contact name, email, phone, first-touch attribution, and the message submitted through a connected form, so each lead is a complete record on its own.
+- Added: A privacy control for how personal data on lead records is stored — keep it in full, store a masked version, or don't store it at all. Personal data is never written to the tamper-evident activity log.
+
 ## v1.5.075
 
 - Improved: Removed a redundant "Edit settings" link from the AI Search Discovery card on the Content Pipelines dashboard. The card's on/off switch and engine choice already live on the card itself, so the link had nowhere new to go.
