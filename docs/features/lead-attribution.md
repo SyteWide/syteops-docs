@@ -136,6 +136,32 @@ And the matching tiers array:
 - **Fluent Forms** — if you already build forms with Fluent Forms, point SyteOps at the form (enter its form ID) and map each Fluent Forms field to a question ID. When someone submits that form, SyteOps scores their answers and attaches them to the lead automatically. No extra form widget needed.
 - **Native form** — drop the built-in questionnaire anywhere with the `[syteops_lead_form]` shortcode or the **Lead Form** block, or configure it as a pop-up (see [Shortcode & block reference](#shortcode--block-reference) below).
 
+## Save contact details on the lead (form field mapping)
+
+By default a form submission is counted as a lead with its source and campaign, but the visitor's **contact details** (name, email, phone, and message) aren't copied onto the lead. **Form field mapping** turns that on — with no code.
+
+On **Leads → Settings**, open the **Form field mapping** card and:
+
+1. Click **Add form mapping**.
+2. Choose your **form plugin** — Fluent Forms, Gravity Forms, WPForms, or Contact Form 7.
+3. Choose the **form** (the list loads automatically once the plugin is selected).
+4. For each of **Name, Email, Phone, and Message**, pick which form field it comes from. Leave any you don't need on "Not mapped".
+5. Tick **Enabled** and **Save settings**.
+
+From then on, every submission of that form copies the mapped details onto the lead. You can add a mapping for as many forms as you like. First names and last names that a form keeps in separate boxes are joined automatically. Attribution (source, campaign, UTMs) is always added for you — you don't map it.
+
+Mapping copies details onto the lead **when the submission is captured as a lead**, so make sure form-submission tracking is turned on (in **Conversion goals** above) and set to cover the form's plugin — if it's limited to a specific plugin, submissions from the others won't be captured or mapped.
+
+### How contact details are stored (privacy)
+
+The same card has a **How to store contact details** control:
+
+- **Masked** (recommended) — stores only non-identifying hints (initials, a partial email, the last four phone digits). The message isn't stored.
+- **Full** — stores the exact name, email, phone, and message. Choose this only where your privacy policy allows.
+- **Off** — stores no contact identity or message at all.
+
+Whichever you choose, contact details are **never** written to the tamper-evident activity log behind each lead — only to the editable lead record, so they remain easy to remove for data-erasure requests.
+
 ## Send leads to your tools (webhooks)
 
 Lead Attribution can fire webhooks to any tool that accepts an incoming HTTP POST — an **automation webhook** (FlowMattic, Make, Zapier, n8n, or any other platform), a CRM, a custom endpoint, or a combination.
