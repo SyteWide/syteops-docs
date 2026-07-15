@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.075
+
+- Improved: Removed a redundant "Edit settings" link from the AI Search Discovery card on the Content Pipelines dashboard. The card's on/off switch and engine choice already live on the card itself, so the link had nowhere new to go.
+- Fixed: A large email logo no longer stops automated report and digest emails from sending. An oversized image is kept as a linked image instead of being embedded in the message, and the email logo stays small even when a resized version isn't available.
+
 ## v1.5.074
 
 - Changed: The AI Search Discovery (`llms.txt`) engine is now either/or — switch between the built-in generator and the LLMS Amplifier integration from one place on the Content Pipelines tab. Turning LLMS Amplifier on automatically sets it to manual updates and turns AI Search Discovery on; turning it off reverts to the built-in generator, so AI Search Discovery is never left off.
