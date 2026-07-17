@@ -236,7 +236,18 @@ The native qualification form can be placed anywhere on your site:
 
 ## The dashboard
 
-**Leads → Dashboard** shows your totals (all-time, last 7 and 30 days), the most recent leads, and an **Export CSV** button. Click any lead to open its **proof packet**.
+**Leads → Dashboard** shows your totals (all-time, last 7 and 30 days) and your most recent leads. Each row shows the lead's **name**, **how it was received** (form, phone tap, reveal-number click, or call), **email**, and **phone**, plus a **status** you can set right from the list.
+
+**Lead status** is a simple pipeline: **New → Contacted → Qualified → Unqualified → Customer**. Pick a status from the drop-down on any row and it saves instantly. (This is separate from the optional *scoring tiers* — Hot/Warm/Cold — which come from your qualification questions.)
+
+**Row actions:**
+
+- **Send to webhook** — push that single lead to your automation webhook on demand (in addition to the automatic send for new leads).
+- **Delete** — remove the lead. If RingTonic sync is on, its RingTonic contact is moved to **Lost** (RingTonic keeps its own record — it has no delete).
+
+**Export CSV** downloads your leads — now including name, how received, email, phone, and status alongside the attribution columns.
+
+Click a lead's name to open its **proof packet**.
 
 ## Proof packets and shareable links
 
@@ -244,9 +255,29 @@ Each lead's proof packet shows its full story: the source, campaign, landing pag
 
 Need to show a client the evidence without giving them admin access? Use the **shareable proof link** — a read-only web page for that single lead. You can regenerate the link at any time to revoke the old one.
 
+## Consent & privacy
+
+Lead Attribution is **consent-aware**. Nothing is recorded, no cookie is set, and no first-touch attribution is stored until the visitor's consent and jurisdiction allow it.
+
+**Global Privacy Control (GPC) is always honored** — a visitor whose browser sends GPC is never tracked, in any region.
+
+How consent is decided depends on your setup:
+
+- **Using WP Full Picture (recommended):** enable the [WP Full Picture integration](./../integrations/wp-full-picture.md#consent-gating-lead-attribution) and SyteOps follows Full Picture's consent choices automatically — a lead is recorded only after the visitor grants **Statistics** consent. That page also has the exact Full Picture settings and how to register SyteOps's cookies.
+- **Using another consent tool (or none):** set a **Consent mode** on **Leads → Settings → Consent & privacy**:
+  - **Opt-out** (default) — track unless a visitor withholds consent. Grant can be signaled by a consent cookie/value you configure, a JavaScript consent flag your tool sets, or a consent-update event your tool dispatches.
+  - **Opt-in** — track only after consent is given (via the cookie/value, flag, or event above).
+  - **By location** — treat EU/EEA/UK visitors as opt-in and everyone else as opt-out, based on the visitor's country.
+
+### Cookies this feature sets
+
+Lead Attribution sets two first-party cookies: a **visitor-id cookie** (1 year — a random id with no personal data, linking a visitor's conversions) and a **session cookie** (30 minutes — groups conversions within a visit). Register them with your consent tool so its scanner keeps them — an undeclared cookie is often auto-deleted, which breaks attribution. The exact cookie names to register are on the [WP Full Picture integration page](./../integrations/wp-full-picture.md).
+
+Suppressing tracking never breaks a form submission or call the visitor initiated — only the *analytics record* is withheld.
+
 ## WP Full Picture
 
-If you use [WP Full Picture](./../integrations/wp-full-picture.md) for analytics, turn on the mirror option and SyteOps will also record each conversion as a WP Full Picture event, so your existing dashboards stay in sync. It's entirely optional — Lead Attribution works on its own.
+If you use [WP Full Picture](./../integrations/wp-full-picture.md) for analytics, turn on the mirror option and SyteOps will also record each conversion as a WP Full Picture event, so your existing dashboards stay in sync. It's entirely optional — Lead Attribution works on its own. (Full Picture is also the recommended **consent** authority — see [Consent & privacy](#consent--privacy) above.)
 
 ## Troubleshooting
 

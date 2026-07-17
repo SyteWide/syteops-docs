@@ -8,6 +8,22 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.080
+
+- Added: The lead qualification form now honors Global Privacy Control. It still records what a visitor submits, but leaves out the tracking identifiers when a visitor's browser asks not to be tracked.
+- Changed: The leads list is redesigned to show each lead's name, how it was received, email, and phone — with a status you can set right from the list (New, Contacted, Qualified, Unqualified, Customer).
+- Added: Lead export — send a single lead to your automation webhook, or download the full list.
+- Added: RingTonic integration — keep a lead's status in sync with the RingTonic call-tracking CRM.
+
+## v1.5.079
+
+- Added: Lead tracking is now consent-aware. When the WP Full Picture integration is enabled, the tracker follows Full Picture's consent choices and only records a lead — and sets its cookies / stores first-touch attribution — once analytics consent is granted. Global Privacy Control (GPC) is always honored, and visitors in the EU/EEA/UK are treated as opt-in (nothing stored or sent until they consent). The US and the rest of the world remain opt-out unless GPC is set.
+- Added: The cookies the leads tracker sets are now declared (name, lifetime, purpose), so your consent tool can register them.
+
+## v1.5.078
+
+- Fixed: The Form Field Mapping tool on the Leads settings page now lists your Fluent Forms forms correctly. Previously the form dropdown could appear empty even when forms existed.
+
 ## v1.5.077
 
 - Added: A Form Field Mapping tool on the Leads settings page — pick a form plugin and a form, then map its fields to a lead's name, email, phone, and message with no code. Works with Fluent Forms, Gravity Forms, WPForms, and Contact Form 7.
