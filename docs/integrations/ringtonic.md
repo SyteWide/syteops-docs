@@ -22,11 +22,11 @@ Three quick steps: turn the integration on, paste your API key, then change a st
 
 ### 1. Turn it on
 
-Go to the **Integrations** tab in SyteOps, toggle **RingTonic** ON, and save.
+Go to the **Integrations** tab in SyteOps, toggle **RingTonic** ON, and save. Once it's on, the RingTonic tile shows a **Set API key in Leads** link that jumps straight to the key field described in the next step.
 
 ### 2. Add your Agency API key
 
-Open **Leads → Settings** and find the **RingTonic** card. Paste your RingTonic **Agency API key** into it and save. The key is stored securely (encrypted) and is never shown back to you in full.
+Open **Leads → Settings** and find the **RingTonic** card (it only appears once the integration is turned on). Paste your RingTonic **Agency API key** into it and save. The key is stored securely (encrypted) and is never shown back to you in full.
 
 :::note For advanced users
 Instead of pasting the key into the settings card, you can define it in your site's `wp-config.php` as the constant `SYTEOPS_LEADS_RINGTONIC_API_KEY`. When that constant is present it takes precedence, which is handy for keeping the key out of the database on managed or version-controlled environments.
