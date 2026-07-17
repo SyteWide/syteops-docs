@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.081
+
+- Changed: The RingTonic API key field on the Leads settings screen now appears only when the RingTonic integration is turned on.
+- Added: The RingTonic integration tile links directly to its API key field once the integration is enabled.
+
 ## v1.5.080
 
 - Added: The lead qualification form now honors Global Privacy Control. It still records what a visitor submits, but leaves out the tracking identifiers when a visitor's browser asks not to be tracked.
