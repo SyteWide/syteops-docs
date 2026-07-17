@@ -59,6 +59,7 @@ const sidebars: SidebarsConfig = {
         'integrations/linkcentral',
         'integrations/squirrly-seo',
         'integrations/llms-amplifier',
+        'integrations/ringtonic',
         'integrations/slack',
         'integrations/aws-ses',
         'integrations/fluent-forms',

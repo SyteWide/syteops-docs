@@ -1,6 +1,6 @@
 {
     "schema_version": 1,
-    "syteops_version": "1.5.077",
+    "syteops_version": "1.5.080",
     "operations": [
         {
             "resource": "users",
@@ -687,8 +687,44 @@
         },
         {
             "resource": "leads",
+            "action": "set_status",
+            "summary": "Set a lead's pipeline status (New/Contacted/Qualified/Unqualified/Customer). Used by the RingTonic inbound reconcile; recorded as inbound so it does not echo back to RingTonic.",
+            "params": {
+                "id": {
+                    "type": "integer",
+                    "required": true
+                },
+                "status": {
+                    "type": "string",
+                    "required": true
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {id, status, label}"
+        },
+        {
+            "resource": "leads",
+            "action": "link_rt_contact",
+            "summary": "Store the RingTonic contact id on a lead (the reconcile calls this after matching by phone/email).",
+            "params": {
+                "id": {
+                    "type": "integer",
+                    "required": true
+                },
+                "rt_contact_id": {
+                    "type": "string",
+                    "required": true
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {id, rt_contact_id}"
+        },
+        {
+            "resource": "leads",
             "action": "delete",
-            "summary": "Permanently delete a lead and its events.",
+            "summary": "Permanently delete a lead and its events (best-effort moves its RingTonic contact to \"lost\").",
             "params": {
                 "id": {
                     "type": "integer",
