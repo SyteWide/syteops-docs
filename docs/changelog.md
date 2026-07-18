@@ -8,6 +8,18 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.084
+
+- Added: The RingTonic CRM API key can now be set headlessly (encrypted, integration auto-enabled) — managed site launches push it automatically when the RingTonic MCP is selected.
+
+## v1.5.083
+
+- Fixed: Form-selection dropdowns now list your forms on sites where they previously appeared empty even though forms existed.
+
+## v1.5.082
+
+- Added: The RingTonic integration now displays its logo on the Integrations tab.
+
 ## v1.5.081
 
 - Changed: The RingTonic API key field on the Leads settings screen now appears only when the RingTonic integration is turned on.
