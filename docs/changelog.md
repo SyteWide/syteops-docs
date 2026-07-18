@@ -8,6 +8,17 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.086
+
+- Added: Map any of your form's fields to a named custom field on the lead — with an optional "sensitive" flag so it follows your privacy setting. Custom fields show on the lead, in the CSV export, in lead emails, and in the outgoing webhook.
+- Added: Pull contact data from RingTonic into the lead. Your originally captured details are preserved; RingTonic's extra and differing fields are added alongside without duplicating what you already have — refreshed automatically on sync or on demand with a "Refresh from RingTonic" button, and included in the outgoing webhook.
+
+## v1.5.085
+
+- Added: An optional office phone field when mapping a website form to leads — it shows on the Leads list, in the CSV export, and in lead emails alongside the other contact details.
+- Added: The outgoing lead webhook payload now includes the lead's contact details (name, email, phone, and office phone), each sent exactly as it is stored under your privacy setting.
+- Added: A one-click Backfill that applies your saved form mappings to existing leads, filling in contact details from each form's stored submissions. It matches submissions to leads by contact identity, never overwrites anything already set, and skips form tools that don't store submissions (Contact Form 7, WPForms Lite).
+
 ## v1.5.084
 
 - Added: The RingTonic CRM API key can now be set headlessly (encrypted, integration auto-enabled) — managed site launches push it automatically when the RingTonic MCP is selected.
