@@ -138,14 +138,14 @@ And the matching tiers array:
 
 ## Save contact details on the lead (form field mapping)
 
-By default a form submission is counted as a lead with its source and campaign, but the visitor's **contact details** (name, email, phone, and message) aren't copied onto the lead. **Form field mapping** turns that on — with no code.
+By default a form submission is counted as a lead with its source and campaign, but the visitor's **contact details** (name, email, phone, office phone, and message) aren't copied onto the lead. **Form field mapping** turns that on — with no code.
 
 On **Leads → Settings**, open the **Form field mapping** card and:
 
 1. Click **Add form mapping**.
 2. Choose your **form plugin** — Fluent Forms, Gravity Forms, WPForms, or Contact Form 7.
 3. Choose the **form** (the list loads automatically once the plugin is selected).
-4. For each of **Name, Email, Phone, and Message**, pick which form field it comes from. Leave any you don't need on "Not mapped".
+4. For each of **Name, Email, Phone, Office phone, and Message**, pick which form field it comes from. Leave any you don't need on "Not mapped". (Office phone is a second, separate number — handy when a form asks for both a mobile and a business/office line.)
 5. Tick **Enabled** and **Save settings**.
 
 From then on, every submission of that form copies the mapped details onto the lead. You can add a mapping for as many forms as you like. First names and last names that a form keeps in separate boxes are joined automatically. Attribution (source, campaign, UTMs) is always added for you — you don't map it.
@@ -156,11 +156,32 @@ Mapping copies details onto the lead **when the submission is captured as a lead
 
 The same card has a **How to store contact details** control:
 
-- **Masked** (recommended) — stores only non-identifying hints (initials, a partial email, the last four phone digits). The message isn't stored.
-- **Full** — stores the exact name, email, phone, and message. Choose this only where your privacy policy allows.
+- **Masked** (recommended) — stores only non-identifying hints (initials, a partial email, the last four digits of each phone — mobile and office alike). The message isn't stored.
+- **Full** — stores the exact name, email, phone, office phone, and message. Choose this only where your privacy policy allows.
 - **Off** — stores no contact identity or message at all.
 
 Whichever you choose, contact details are **never** written to the tamper-evident activity log behind each lead — only to the editable lead record, so they remain easy to remove for data-erasure requests.
+
+### Map any form field (custom fields)
+
+Beyond Name, Email, Phone, Office phone and Message, you can map **any** of a form's fields to a **custom field** on the lead. In a mapping's **Custom fields** section, click **+ Add custom field**, type a name (e.g. "Budget" or "Company"), and pick the form field it comes from. Tick **Sensitive** for anything that shouldn't be stored in the clear — a sensitive field is masked under **Masked** storage and dropped under **Off**, while ordinary business fields like "Budget" are kept as-is.
+
+Custom fields appear on the lead, in the CSV export, in lead emails, and in the outgoing webhook (under a `custom` object). You don't need to map UTM or campaign fields — those are captured automatically and already sent.
+
+### Pull data from RingTonic into the lead
+
+When the RingTonic integration is on, SyteOps can bring the CRM's contact data onto the lead. It works as an **overlay**: the lead keeps the details it originally captured, and RingTonic's **extra** fields (custom fields, tags, stage) plus anything RingTonic has that **differs** are added alongside — nothing you already have is stored twice or overwritten. This happens automatically the first time a lead syncs with RingTonic, and you can pull the latest anytime with the **Refresh from RingTonic** button on the lead. RingTonic data rides the outgoing webhook under a `ringtonic` object.
+
+### Fill in leads you already have (Backfill)
+
+Mapping only copies details onto leads captured **after** you set it up. If you added or changed a mapping later — or just turned on the new office phone field — your earlier leads won't have those details yet. The **Backfill existing Leads from saved mappings** button (on the same card) fixes that in one click.
+
+1. Set up and **Save** your mappings first.
+2. Click **Backfill existing Leads from saved mappings** and watch the running count.
+
+It reads each mapped form's **stored submissions**, matches each one to an existing lead by contact identity (email, then phone — using the same privacy setting as above), and fills in any contact details that are still blank. It **never overwrites** anything already on a lead, and it never creates new leads. If a stored submission could match more than one lead, it's skipped rather than guessed. Contact Form 7 and WPForms Lite don't keep stored submissions, so mappings for those are skipped and reported at the end.
+
+Under **Masked** storage the lead only holds a partial email/phone, so matching is approximate: the backfill guards against obvious mismatches (it skips when a lead's other stored detail contradicts the submission), but for the most precise matching, run the backfill while **Full** storage is selected.
 
 ## Send leads to your tools (webhooks)
 
@@ -183,6 +204,10 @@ Paste any URL into the **Automation webhook URL** field to activate it. Use the 
 | `campaign` | Campaign / UTM campaign |
 | `status` | Lead status |
 | `first_seen` | First-touch timestamp |
+| `name` | Contact name, if captured (stored per your privacy setting) |
+| `email` | Contact email, if captured (stored per your privacy setting) |
+| `phone` | Contact phone, if captured (stored per your privacy setting) |
+| `office_phone` | Mapped office phone, if any (stored per your privacy setting) |
 | `landing` | Landing page URL |
 | `referrer` | Referring URL |
 | `utm_source` | UTM source tag |
@@ -190,8 +215,12 @@ Paste any URL into the **Automation webhook URL** field to activate it. Use the 
 | `utm_campaign` | UTM campaign tag |
 | `gclid` | Google Ads click ID |
 | `fbclid` | Facebook Ads click ID |
+| `custom` | Object of your mapped custom fields, if any (`{ key: value }`) |
+| `ringtonic` | Object of RingTonic overlay data, if any (extra/differing CRM fields) |
 | `admin_url` | Deep link to the lead in WP admin |
 | `proof_url` | Shareable read-only proof link |
+
+The contact fields (`name`, `email`, `phone`, `office_phone`) are sent exactly as they're stored on the lead, so they follow your **How to store contact details** setting — masked values under Masked, exact values under Full, and empty under Off. They're populated by [form field mapping](#save-contact-details-on-the-lead-form-field-mapping); without a mapping they're blank.
 
 ### CRM webhook (qualified leads only)
 
@@ -236,7 +265,7 @@ The native qualification form can be placed anywhere on your site:
 
 ## The dashboard
 
-**Leads → Dashboard** shows your totals (all-time, last 7 and 30 days) and your most recent leads. Each row shows the lead's **name**, **how it was received** (form, phone tap, reveal-number click, or call), **email**, and **phone**, plus a **status** you can set right from the list.
+**Leads → Dashboard** shows your totals (all-time, last 7 and 30 days) and your most recent leads. Each row shows the lead's **name**, **how it was received** (form, phone tap, reveal-number click, or call), **email**, **phone**, and **office phone**, plus a **status** you can set right from the list.
 
 **Lead status** is a simple pipeline: **New → Contacted → Qualified → Unqualified → Customer**. Pick a status from the drop-down on any row and it saves instantly. (This is separate from the optional *scoring tiers* — Hot/Warm/Cold — which come from your qualification questions.)
 
@@ -245,7 +274,7 @@ The native qualification form can be placed anywhere on your site:
 - **Send to webhook** — push that single lead to your automation webhook on demand (in addition to the automatic send for new leads).
 - **Delete** — remove the lead. If RingTonic sync is on, its RingTonic contact is moved to **Lost** (RingTonic keeps its own record — it has no delete).
 
-**Export CSV** downloads your leads — now including name, how received, email, phone, and status alongside the attribution columns.
+**Export CSV** downloads your leads — now including name, how received, email, phone, office phone, and status alongside the attribution columns.
 
 Click a lead's name to open its **proof packet**.
 
