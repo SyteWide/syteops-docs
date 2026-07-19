@@ -168,6 +168,18 @@ Beyond Name, Email, Phone, Office phone and Message, you can map **any** of a fo
 
 Custom fields appear on the lead, in the CSV export, in lead emails, and in the outgoing webhook (under a `custom` object). You don't need to map UTM or campaign fields — those are captured automatically and already sent.
 
+### Let AI map the form for you (Auto-map with AI)
+
+Instead of mapping each field by hand, you can let AI do the first pass. On a mapping row, once you've picked a form plugin and a form, click **Auto-map with AI**. It reads that form's fields and fills the row in for you:
+
+- It sets **Name, Email, Phone, Office phone, and Message** to the fields that best match.
+- It **creates a custom field** for every other meaningful field (e.g. "Budget", "Company", "Timeline"), and flags anything that looks personal or confidential as **Sensitive**.
+- It skips buttons, section headings, and spam-protection fields.
+
+Nothing is saved yet — the suggestions are pre-filled so you can review them, change any dropdown, rename or delete a custom field, then click **Save settings** as usual. Each AI-suggested value shows a small confidence hint that clears once you edit it.
+
+To use it, first choose your AI provider and model in the **AI mapping** card lower on the same settings screen. (If you haven't set a provider, the button tells you so — Auto-map is an optional helper; you can always map by hand.)
+
 ### Pull data from RingTonic into the lead
 
 When the RingTonic integration is on, SyteOps can bring the CRM's contact data onto the lead. It works as an **overlay**: the lead keeps the details it originally captured, and RingTonic's **extra** fields (custom fields, tags, stage) plus anything RingTonic has that **differs** are added alongside — nothing you already have is stored twice or overwritten. This happens automatically the first time a lead syncs with RingTonic, and you can pull the latest anytime with the **Refresh from RingTonic** button on the lead. RingTonic data rides the outgoing webhook under a `ringtonic` object.
