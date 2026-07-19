@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.090
+
+- Fixed: Lead phone numbers now display in a consistent (NNN) NNN-NNNN format on the leads list and in lead emails, matching the office phone. Masked, international, and unusual numbers are shown unchanged.
+
 ## v1.5.089
 
 - Fixed: A form submitted without a tracking cookie now attaches to the visitor's existing lead instead of creating a duplicate, unattributed lead.
