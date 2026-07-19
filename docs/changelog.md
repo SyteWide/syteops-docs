@@ -8,6 +8,21 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.089
+
+- Fixed: A form submitted without a tracking cookie now attaches to the visitor's existing lead instead of creating a duplicate, unattributed lead.
+- Fixed: Qualified-lead alerts now honor the same per-goal automation opt-out as new-lead alerts, and no longer re-send when a visitor re-submits the same answers.
+- Fixed: Phone-only (call) leads can now sync their pipeline status to the RingTonic CRM.
+- Fixed: Deleting a lead now fully removes its event history, and lead event counts stay accurate under rapid activity.
+
+## v1.5.088
+
+- Added: "Auto-map with AI" on the leads form-field mapping. It reads a form's fields and suggests which are the name, email, phone, office phone, and message — and proposes named custom fields for the rest — pre-filled for you to review, edit, or remove before saving. Choose which AI provider to use in the new "AI mapping" card on the leads settings screen.
+
+## v1.5.087
+
+- Fixed: On the leads settings, the form-to-lead field mapping controls now render at a consistent, full width, so long form and field names are no longer cut off, and the custom-field row is spaced out instead of cramped.
+
 ## v1.5.086
 
 - Added: Map any of your form's fields to a named custom field on the lead — with an optional "sensitive" flag so it follows your privacy setting. Custom fields show on the lead, in the CSV export, in lead emails, and in the outgoing webhook.
