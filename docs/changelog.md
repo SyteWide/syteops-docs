@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.092
+
+- Improved: The "Send to webhook" and "Delete" actions on the leads list are now styled buttons — a brand-colored Send action and a red Delete action — instead of plain text links, making them easier to spot and harder to click by mistake.
+
 ## v1.5.091
 
 - Changed: The recommended Cloudflare firewall rule for allowing SyteOps licensing and management requests is now scoped to the plugin's own API path, so a forged request-marker header can no longer be reused to let other traffic bypass your firewall.
