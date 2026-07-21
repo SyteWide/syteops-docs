@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.094
+
+- Improved: Workflows imported into FlowMattic — from a template package or from a connected server — now carry FlowMattic's full native workflow settings, so an imported workflow opens in the current workflow builder and appears under the "All" folder, just like one created directly in FlowMattic.
+
+## v1.5.093
+
+- Changed: SyteOps now supports FlowMattic 7.0. On FlowMattic's redesigned Variables screen your sensitive values (API keys, tokens, and secrets) stay hidden instead of appearing in plain text; installing FlowMattic from SyteOps no longer detours you to FlowMattic's own setup wizard; and importing a workflow into FlowMattic now saves correctly. FlowMattic 6.x installs keep working unchanged.
+
 ## v1.5.092
 
 - Improved: The "Send to webhook" and "Delete" actions on the leads list are now styled buttons — a brand-colored Send action and a red Delete action — instead of plain text links, making them easier to spot and harder to click by mistake.
