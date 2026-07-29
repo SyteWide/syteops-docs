@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.095
+
+- Changed: FlowMattic's Variables screen no longer shows a "… Setting/Variable" label on every variable this plugin writes — the Description column is left blank by default so the list is easier to scan. A new "Label FlowMattic variables with a description" toggle under Admin > Other Options turns the labels back on. Only these auto-generated labels are added or removed; any description you wrote yourself is left untouched. When the labels are switched on, they now carry your own brand name on white-labeled installs.
+
 ## v1.5.094
 
 - Improved: Workflows imported into FlowMattic — from a template package or from a connected server — now carry FlowMattic's full native workflow settings, so an imported workflow opens in the current workflow builder and appears under the "All" folder, just like one created directly in FlowMattic.
