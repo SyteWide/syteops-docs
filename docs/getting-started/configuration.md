@@ -26,6 +26,7 @@ Toggle modules ON/OFF. Modules must be uploaded as ZIP packages before they can 
 ### Other Options
 
 - **Debug Mode** — Enables the Debug Tool and structured logs under wp-content. Required for destructive wipes.
+- **Label FlowMattic variables with a description** — Off by default. When on, every variable the plugin writes carries a short "… Setting/Variable" label in FlowMattic's Variables screen. Leaving it off keeps that Description column blank so the list is easier to scan. Only these auto-generated labels are added or removed — any description you wrote yourself is left alone.
 - **REST API Restriction** — See [REST API Restriction](../features/rest-api-restriction)
 
 ## Users Tab
