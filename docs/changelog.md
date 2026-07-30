@@ -8,6 +8,18 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.098
+
+- Fixed: a security issue in the licensing gateway. Requests that referred to a license or customer record by its ID number are now verified to belong to the license key making the request, so one site can no longer read or change another customer's licence details by guessing ID numbers. Normal activation, validation and deactivation are unaffected.
+
+## v1.5.097
+
+- Changed: the private credential on requests between your sites and the licensing server is now sent only to the licensing host itself, and the stricter checking mode is applied only to the specific endpoints you opt in — so turning it up can no longer affect customer license activations. Defaults are unchanged and nothing is rejected until you opt an endpoint in.
+
+## v1.5.096
+
+- Changed: requests between your sites and the licensing server now carry a private credential in addition to the existing routing header, so the firewall allow rule can no longer be satisfied by copying a public header. Existing customer integrations are unaffected — the public header keeps working exactly as documented, and the new check starts in a monitor-only mode that rejects nothing.
+
 ## v1.5.095
 
 - Changed: FlowMattic's Variables screen no longer shows a "… Setting/Variable" label on every variable this plugin writes — the Description column is left blank by default so the list is easier to scan. A new "Label FlowMattic variables with a description" toggle under Admin > Other Options turns the labels back on. Only these auto-generated labels are added or removed; any description you wrote yourself is left untouched. When the labels are switched on, they now carry your own brand name on white-labeled installs.
