@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.099
+
+- Fixed: retired and built-in features could linger in the Modules list long after they were removed or folded into the plugin — showing a status and version that no longer meant anything. These leftover entries are now cleaned up automatically.
+
 ## v1.5.098
 
 - Fixed: a security issue in the licensing gateway. Requests that referred to a license or customer record by its ID number are now verified to belong to the license key making the request, so one site can no longer read or change another customer's licence details by guessing ID numbers. Normal activation, validation and deactivation are unaffected.
