@@ -16,6 +16,17 @@ When a newer version is found, the update appears in the **Modules** section of 
 
 No action happens automatically -- SyteOps notifies you that an update is available and waits for you to install it.
 
+:::note Not seeing any updates?
+The check can only find a newer version when one has been **published** to the distribution server.
+If your modules were supplied to you directly -- installed from a package file rather than
+downloaded -- there may be nothing published for SyteOps to find, and the check will keep reporting
+that you are up to date.
+
+That is not a fault. You can always update a module by uploading a newer package yourself: see
+[Installing an Update](#installing-an-update) below and use the upload option. If you are unsure
+whether a newer version exists, ask whoever supplies your modules.
+:::
+
 ## Installing an Update
 
 When an update is available for a module:
@@ -54,7 +65,7 @@ If your hosting environment disables WP-Cron, you can configure a system-level c
 
 | Issue | Cause | Solution |
 |---|---|---|
-| No updates showing | The check runs every 12 hours; you may already be up to date | Wait for the next check cycle, or manually trigger a check from the Modules section |
+| No updates showing | The check runs every 12 hours; you may already be up to date -- **or** nothing has been published for your modules to update to | Wait for the next check cycle, or manually trigger a check from the Modules section. If updates never appear, confirm with your module supplier that packages are being published; you can always update by uploading a package manually |
 | "Download failed" | Site cannot reach the distribution server | Verify your server has outbound internet access; check firewall rules |
 | Update keeps failing | After 3 consecutive failures, SyteOps backs off to daily checks | Check the SyteOps error log for specific error messages; ensure your license is valid |
 | Module version did not change after update | Browser cache may show stale data | Refresh the admin page; the module registry updates immediately after install |

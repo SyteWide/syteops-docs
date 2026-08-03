@@ -12,7 +12,7 @@ The endpoints on this page are **integration and webhook surfaces**, not part of
 
 ## Licensing
 
-Namespace: `syteops/v1`. Authentication: HMAC-signed requests.
+Namespace: `syteops/v1`. Authentication varies per endpoint — see the Auth column.
 
 | Method | Path | Auth | Purpose |
 |---|---|---|---|
@@ -20,7 +20,7 @@ Namespace: `syteops/v1`. Authentication: HMAC-signed requests.
 | `POST` | `/license/validate` | HMAC | Validates a license key and records the result locally |
 | `POST` | `/license/control` | HMAC | Applies a control instruction (e.g. suspend or reinstate) to the local install |
 | `POST` | `/license/syte-gateway-purchase` | HMAC | Records a purchase event arriving from the Syte gateway |
-| `POST` | `/license/syte-gateway` | HMAC | General Syte gateway webhook receiver |
+| `POST` | `/license/syte-gateway` | License key | The licensing gateway your plugin calls to activate, validate and deactivate a license. Authenticated by the license key in the request (bound to the record it addresses), with per-key and per-email throttling. Not HMAC-signed, and not a webhook receiver. |
 
 ## Leads ingest
 
