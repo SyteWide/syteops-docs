@@ -8,6 +8,18 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.104
+
+- Fixed: all admin screens are now fully isolated from styling loaded by other installed plugins and themes. Every control the plugin renders — cards, buttons, badges, pills, tags, toggles, modals and filters — now uses its own private style names, so another plugin bundling a common CSS framework (such as Bootstrap) can no longer distort the SyteOps admin interface.
+
+## v1.5.103
+
+- Fixed: the pipeline run-history filter controls could be distorted by styling from other installed plugins or themes — most visibly the "Source" label crowding against the Status pills with no space between them. The filter controls are now fully isolated from outside styles, so their spacing stays even everywhere.
+
+## v1.5.102
+
+- Fixed: the filter pills on the pipeline run-history view (Recipe / Status / Source) could show their last label pressed against — or clipped by — the rounded edge of the filter group; every label now renders fully inside its track with clear spacing, at any window size.
+
 ## v1.5.101
 
 - Changed: articles arriving from a content source now always get their categories and tags chosen by AI — SyteOps reads each article and picks from your site's existing categories and tags, creating new ones only when nothing fits, so you no longer end up with a brand-new category for every article. Categories and tags can no longer be mapped from the incoming webhook payload, and each source's Target tag is still added to every post so display formatting keeps working.
