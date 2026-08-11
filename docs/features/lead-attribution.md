@@ -43,6 +43,7 @@ Stay informed without watching a dashboard:
 
 - **Per-lead emails** — get an email the moment a new lead is captured. You can set a short digest window (e.g. 15 minutes) so that several leads arriving in quick succession are bundled into one message.
 - **Scheduled summaries** — choose daily, weekly, or monthly digests for a periodic overview of lead volume and sources. Pick the send hour, and (for weekly/monthly) the day it goes out.
+- **Reply-To address** — replies to any lead report email can go to a person (for example, your sales lead) instead of the site's sending address. Set it under **Leads → Settings → Email reports**; leave it blank to keep the default.
 
 ### Email branding
 
