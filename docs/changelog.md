@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.106
+
+- Improved: pipeline recipe cards now have a thin but clearly visible border, so each recipe stands out from the page instead of blending into the background. Added: a Reply-To address for portal notification emails — replies to reviewer-facing emails can now go to a person (such as your editor) instead of the site's sending address. The same option now exists for lead report emails: a Reply-To address on the email reports settings so replies to lead alerts and summaries reach the right person. Refreshed the email footer tagline example text.
+
 ## v1.5.105
 
 - Added: a complete Email notifications settings area for the Review Portal (Content Pipelines tab). Four independent switches control every automated email — New draft received, Draft updated by source (sent only when a re-delivered article actually changed), Published or scheduled, and a Source held alert that tells the site admin when a live content source stops matching its approved field mapping. Review emails gained a details table (source, article date, status) and every email now closes with a dark branded footer with optional tagline and click-to-call phone. The run history now records each email's outcome (sent, skipped and why, or failed), so a missing notification is never a mystery.
