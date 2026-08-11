@@ -1,6 +1,6 @@
 {
     "schema_version": 1,
-    "syteops_version": "1.5.100",
+    "syteops_version": "1.5.101",
     "operations": [
         {
             "resource": "users",
@@ -972,9 +972,6 @@
                 "sig_header_name": {
                     "type": "string"
                 },
-                "ai_taxonomy_enabled": {
-                    "type": "boolean"
-                },
                 "author_match_mode": {
                     "type": "string"
                 },
@@ -1060,9 +1057,6 @@
                 },
                 "sig_header_name": {
                     "type": "string"
-                },
-                "ai_taxonomy_enabled": {
-                    "type": "boolean"
                 },
                 "author_match_mode": {
                     "type": "string"
