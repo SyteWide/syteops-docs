@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.101
+
+- Changed: articles arriving from a content source now always get their categories and tags chosen by AI — SyteOps reads each article and picks from your site's existing categories and tags, creating new ones only when nothing fits, so you no longer end up with a brand-new category for every article. Categories and tags can no longer be mapped from the incoming webhook payload, and each source's Target tag is still added to every post so display formatting keeps working.
+- Improved: the dropdowns in the review portal — “Send to a colleague” and the “Publish as” picker in the action bar — are now styled to match the portal’s other fields, with the same border, rounded corners, focus highlight and chevron, instead of the plain browser dropdowns they used before.
+
 ## v1.5.100
 
 - Changed: the licensing server can now require the private credential from requests that CLAIM to be one of your own sites. Set which domains count as yours, opt that check in, and a request naming one of them must present the credential — everything else, including every customer activation, is completely unaffected. Also fixed: the warning shown before turning the stricter mode on could never appear, and scoping a customer-facing endpoint applied before warning you.

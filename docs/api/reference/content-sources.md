@@ -66,7 +66,6 @@ Create a content source; generates its id and slug, and (unless a secret is prov
 | `forward_secret` | string | no |  |
 | `sig_header_mode` | string | no |  |
 | `sig_header_name` | string | no |  |
-| `ai_taxonomy_enabled` | boolean | no |  |
 | `author_match_mode` | string | no |  |
 | `target_tag_slug` | string | no |  |
 | `taxonomy_apply_mode` | string | no |  |
@@ -100,7 +99,6 @@ data: &#123;id, name, slug, secret, secret_source, ...} — secret is plaintext 
     "forward_secret": "string",
     "sig_header_mode": "string",
     "sig_header_name": "string",
-    "ai_taxonomy_enabled": true,
     "author_match_mode": "string",
     "target_tag_slug": "string",
     "taxonomy_apply_mode": "string",
@@ -256,7 +254,6 @@ Update editable fields on an existing content source (slug is not editable; secr
 | `forward_secret` | string | no |  |
 | `sig_header_mode` | string | no |  |
 | `sig_header_name` | string | no |  |
-| `ai_taxonomy_enabled` | boolean | no |  |
 | `author_match_mode` | string | no |  |
 | `target_tag_slug` | string | no |  |
 | `taxonomy_apply_mode` | string | no |  |
@@ -295,7 +292,6 @@ data: &#123;id, name, slug, ...} (no secret, no forward_secret)
     "forward_secret": "string",
     "sig_header_mode": "string",
     "sig_header_name": "string",
-    "ai_taxonomy_enabled": true,
     "author_match_mode": "string",
     "target_tag_slug": "string",
     "taxonomy_apply_mode": "string",
