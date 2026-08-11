@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.105
+
+- Added: a complete Email notifications settings area for the Review Portal (Content Pipelines tab). Four independent switches control every automated email — New draft received, Draft updated by source (sent only when a re-delivered article actually changed), Published or scheduled, and a Source held alert that tells the site admin when a live content source stops matching its approved field mapping. Review emails gained a details table (source, article date, status) and every email now closes with a dark branded footer with optional tagline and click-to-call phone. The run history now records each email's outcome (sent, skipped and why, or failed), so a missing notification is never a mystery.
+
 ## v1.5.104
 
 - Fixed: all admin screens are now fully isolated from styling loaded by other installed plugins and themes. Every control the plugin renders — cards, buttons, badges, pills, tags, toggles, modals and filters — now uses its own private style names, so another plugin bundling a common CSS framework (such as Bootstrap) can no longer distort the SyteOps admin interface.

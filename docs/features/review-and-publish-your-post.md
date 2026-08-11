@@ -226,11 +226,24 @@ Changes to these lists take effect on the next draft that arrives from your cont
 
 ---
 
+## Email notifications
+
+Every automated portal email is controlled from one place: **SyteOps → Content Pipelines → Review Portal → Email notifications**. Each can be switched on or off independently:
+
+- **New draft received** *(on by default)* — emails the author and reviewers when a new article arrives and its review draft is created. This is the main review email, with the article preview, who can review it, and the secure editor link.
+- **Draft updated by source** *(off by default)* — emails the author and reviewers when your content source re-delivers an article **with changed content**, so nobody reviews a stale version. Identical re-deliveries (delivery retries) never send an email.
+- **Published or scheduled** *(on by default)* — confirms to the author and reviewers when a draft goes live or is scheduled.
+- **Source held (needs attention)** *(on by default)* — alerts the **site admin** (not the reviewers) when a live content source stops matching its approved field mapping: incoming articles are put safely on hold, and this email tells you to re-approve the mapping so they can flow again. It sends once per incident, not on every held delivery.
+
+Two optional fields polish the emails' footer: a **Footer tagline** (a short line about your business) and a **Footer phone** (shown as a click-to-call link). Both appear in the dark footer bar of every portal email, alongside your company name. All emails carry your portal branding — logo, company name, and colors — from the Branding settings below.
+
+You can also see each email's outcome in the run history: each draft-creation row on the Runs dashboard notes whether the notification was sent, skipped (and why — for example, when no recipients could be resolved), or failed, and held rows note when the admin was alerted — so a missing email is never a mystery.
+
 ---
 
 ## Review Portal settings (for site owners)
 
-Site owners can configure the Review Portal from **SyteOps → Content Pipelines**, then clicking the **Review Portal** settings view. The panel is organized into three areas.
+Site owners can configure the Review Portal from **SyteOps → Content Pipelines**, then clicking the **Review Portal** settings view. The panel is organized into several areas.
 
 ### Branding
 
@@ -254,7 +267,6 @@ These are the same provider and model settings used by the Content AI and GEO ar
 | **Who can publish** | Choose **Any selected reviewer** to let any team member who received the review link publish the post, or choose **Author or designated approver only** to restrict publishing to the post's author and a named approver. |
 | **Soft lock** | When enabled, a reviewer who opens a draft while a teammate is already editing it will see a warning banner. This prevents accidental overwrites. |
 | **Scheduled publishing** | When enabled, reviewers see a **Schedule** option in the portal so they can publish the post at a future date and time instead of immediately. When disabled, the schedule option is hidden and all approvals publish immediately. |
-| **Publish notifications** | When enabled (the default), the post author and reviewers receive a branded email confirming a draft was published or scheduled. Turn it off to keep approvals silent. |
 | **Review link expiry** | How long the secure review link in each email stays valid. Options are 3, 7, 14, or 30 days. The default is **7 days**. After a link expires, re-send it from the draft — the post itself is unaffected. |
 
 You can also update the **Default reviewers** and **Default CC reviewers** lists here — these are the same fields described in [Who receives the review email](#who-receives-the-review-email) above.
