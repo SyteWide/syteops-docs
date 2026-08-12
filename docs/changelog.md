@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.109
+
+- Fixed: status toasts built from admin notices now render with proper spacing and separators — nested notice content no longer runs together as one unpunctuated line, and hidden notice states are no longer included in the toast text
+
 ## v1.5.108
 
 - Fixed: placeholder example text now renders exactly as written — "e.g." no longer displays as "E.G." and email or selector examples are no longer title-cased
