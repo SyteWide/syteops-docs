@@ -8,6 +8,25 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.112
+
+- Fixed: an article delivered without a usable title or body is now held for review instead of creating a blank draft (or, when the article carries no id, a duplicate half-empty one) — while a source that maps only custom fields keeps publishing normally, with each article kept separate instead of overwriting one post.
+- Fixed: a delivery that carries only part of an article no longer wipes the other half of the SEO description/keyword pair, no longer reassigns the post to a different author (which could remove the real author's access to their own draft in the review portal), and no longer sends a "draft updated" email for content that did not actually change.
+- Improved: "Reprocess last payload" now tells you what happened on both the source card and the run history — including when nothing was written because the matching post is already published — instead of refreshing the page before you can read it.
+
+## v1.5.111
+
+- Fixed: an incoming article that only carries some of its mapped fields no longer wipes the rest of an existing draft — fields the delivery didn't include keep the values already on the post (including the reviewer's edits).
+- Fixed: a delivery that carries neither an article id nor a title or body is now held for review instead of repeatedly overwriting one draft.
+- Fixed: "Reprocess last payload" no longer pauses a live content source or emails a "source held" alert, and no longer sends a duplicate article to a connected workflow when the draft already exists; it also now says plainly when nothing changed because the matching post is already published.
+
+## v1.5.110
+
+- Fixed: a content source's live field mapping is no longer paused by a single field that happens to be missing from one delivery — only a delivery that doesn't match the mapping at all is held for review.
+- Added: a "Reprocess last payload" action — on a content source's card, right after approving a fixed mapping, and on held rows in the pipeline run history — replays the last captured article through the mapping to create its draft without waiting for the sending app to resend it.
+- Improved: held pipeline runs now show an honest amber "Held" status instead of a misleading "OK," and can be filtered on their own; the "source held" alert email now points you straight at Reprocess last payload.
+- Added: a review queue page listing every article awaiting a reviewer's review, linked from every review notification email — reviewers see only their own assigned drafts (administrators see everything), and once signed in a reviewer is never blocked by an expired review link.
+
 ## v1.5.109
 
 - Fixed: status toasts built from admin notices now render with proper spacing and separators — nested notice content no longer runs together as one unpunctuated line, and hidden notice states are no longer included in the toast text

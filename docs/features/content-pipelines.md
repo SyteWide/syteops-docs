@@ -21,9 +21,9 @@ Open Content Pipelines from the **Content Pipelines** link in the SyteOps admin 
 The Runs dashboard shows every pipeline execution:
 
 - **Stat cards** show total runs, runs in the last 7 days, posts that were changed, and error counts.
-- **Filter pills** let you filter by recipe, status (OK, Errors, Skipped), or source (**Direct** — post-processing runs you trigger or that fire on publish/schedule — or each content source you've registered).
+- **Filter pills** let you filter by recipe, status (OK, Errors, Skipped, Held), or source (**Direct** — post-processing runs you trigger or that fire on publish/schedule — or each content source you've registered).
 - **Run now** lets you trigger a pipeline manually for any post — choose a recipe, enter a Post ID, and optionally enable dry-run mode to preview changes without writing them.
-- **Runs table** lists each execution with the source (**Direct** for post-processing runs, or a content source), the recipe used, post, status, which stages ran, whether the post was changed, and the trigger type.
+- **Runs table** lists each execution with the source (**Direct** for post-processing runs, or a content source), the recipe used, post, status, which stages ran, whether the post was changed, and the trigger type. A delivery that couldn't be mapped shows an amber **Held** status rather than a misleading "OK," and a **Reprocess** button appears on held rows once you've fixed and re-approved the source's mapping — see [Reprocess last payload](#reprocess-last-payload) below.
 - Click a row to expand the **stage drawer**, which shows the result of each stage with its message and duration.
 
 ### Provider status cards
@@ -175,9 +175,27 @@ Before content flows automatically, SyteOps needs to learn how the app's JSON ma
 3. Click **Test with sample** to preview what each field would receive.
 4. When the mapping looks right, click **Approve mapping**.
 
-Once approved, the source goes **active**: every future post to its Ingest URL becomes a Review & Publish draft automatically, using the same mapping. Any field the mapping doesn't fill is simply left blank for the reviewer to complete.
+Once approved, the source goes **active**: every future post to its Ingest URL becomes a Review & Publish draft automatically, using the same mapping. Any field the mapping doesn't fill — because that particular delivery genuinely has no value at the mapped location — is simply left blank for the reviewer to complete. SyteOps only pauses (holds) the source when an entire delivery doesn't match the mapping at all, so one article missing a single field never blocks the ones behind it.
 
 Categories and tags are not part of the mapping: SyteOps reads each incoming article and chooses them with AI, preferring your site's existing categories and tags and adding new ones only when nothing fits. Reviewers can adjust the suggestions in the Review & Publish portal before publishing, and the source's **Target tag** (if set) is always added on top.
+
+### Reprocess last payload
+
+If a source's field mapping stops matching what the sending app is actually delivering — for example, the app changes its JSON structure — SyteOps holds further deliveries rather than creating incomplete drafts from them, and (if the "Source held" email is switched on) alerts the site admin. Once you've fixed and re-approved the mapping, you don't have to wait for the app to send another article to confirm it worked:
+
+- **From the source card** — a **Reprocess last payload** button appears whenever SyteOps has a remembered payload for that source (see [Visual payload mapper](#visual-payload-mapper) below) and it isn't too large to replay. Click it to run that payload through the corrected mapping and create the draft right away.
+- **Right after approving a mapping** — clicking **Approve mapping** offers to reprocess the last captured payload immediately, so you can confirm the fix worked without leaving the page.
+- **From the Runs view** — a held row's **Reprocess** button (see [Runs dashboard](#runs-dashboard) above) does the same thing from the run history.
+
+Each reprocessed draft is recorded in the run history as a **manual** trigger, separate from the automatic deliveries the source normally receives.
+
+:::warning Reprocessing an already-active source overwrites the existing draft
+
+Reprocessing a **held** or never-approved source is the low-risk case — there's no draft yet, so the replay simply creates one.
+
+If the source is already **active**, its last payload has already become a draft (or a published post), and replaying it writes over that draft: any edits made since are replaced, the AI re-reads the article and re-picks categories and tags, and — with the default **Replace** taxonomy mode — categories and tags a reviewer curated by hand can be swapped for the new AI suggestions. Because of that, SyteOps asks you to confirm before reprocessing an active source. Published posts are protected separately: unless the source is set to overwrite, a replay leaves live content untouched.
+
+:::
 
 ### Visual payload mapper
 
