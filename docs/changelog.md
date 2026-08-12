@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.107
+
+- Fixed: the recipe-card border and card styling shipped in the previous release now actually display — the card frame was referencing a style name that no longer existed after an earlier styling isolation pass, leaving recipe cards without their border, rounded corners, and grid layout.
+
 ## v1.5.106
 
 - Improved: pipeline recipe cards now have a thin but clearly visible border, so each recipe stands out from the page instead of blending into the background. Added: a Reply-To address for portal notification emails — replies to reviewer-facing emails can now go to a person (such as your editor) instead of the site's sending address. The same option now exists for lead report emails: a Reply-To address on the email reports settings so replies to lead alerts and summaries reach the right person. Refreshed the email footer tagline example text.
