@@ -23,13 +23,13 @@ As soon as a new draft arrives from your content source, SyteOps sends a notific
 - The **post's author** (the WordPress user the post will be attributed to).
 - Anyone listed as a **Default reviewer** or **Default CC reviewer** in your Review Portal settings (see [Who receives the review email](#who-receives-the-review-email) below).
 
-The email comes from your site, uses your site's logo, and includes a summary of the article title and source keyword. At the bottom there is a single call-to-action button: **Open secure editor**.
+The email comes from your site, uses your site's logo, and includes a summary of the article title and source keyword. At the bottom there are two buttons: **Edit/View this article**, which opens this particular draft, and **See all my reviews**, which opens your full review queue.
 
 ---
 
 ## Step 2: Open the secure editor and sign in
 
-Click **Open secure editor** in the email. Your browser opens the Review & Publish portal — a page on your own WordPress site.
+Click **Edit/View this article** in the email. Your browser opens the Review & Publish portal — a page on your own WordPress site.
 
 **The link alone cannot publish or change anything.** It simply takes you to the portal. To make any edits or approve the post, you must be signed in to your WordPress account.
 
@@ -128,6 +128,23 @@ Once you have finished reviewing all panels, choose one of the action buttons:
 - **Approve & Publish** — Saves all your edits and publishes the post to your site immediately. The portal then shows a confirmation that the post has been published and is live on your site. By default, the author and reviewers receive an email confirming the post went live (site owners can turn this off — see the rules table below).
 - **Schedule** _(if enabled by the site owner)_ — Check the **Schedule** box to pick a future date and time, then click **Approve & Publish**. The post will go live automatically at the time you selected rather than immediately.
 - **Request changes** — Opens a short note prompt where you can describe what needs updating. Your current edits are saved to the draft, the author and co-reviewers are notified by email, and your note is added to the portal's **Feedback** panel. See [Step 5](#step-5-request-changes) for the full walkthrough.
+
+### Before you can publish
+
+To stop half-finished articles going live, **Approve & Publish** first checks that the article is actually ready. If anything is outstanding, a short list appears instead of publishing, and each item has a button that completes it there and then:
+
+| Requirement | What it means | Button |
+| --- | --- | --- |
+| GEO analysis | The article has never been analyzed for AI-engine readiness. | **Analyze GEO** |
+| GEO analysis is current | The article was edited after it was last analyzed, so the score is out of date. Formatting-only edits — bolding a word, re-wrapping a paragraph — do not count. | **Re-analyze GEO** |
+| Meta description | The meta description is empty. | **Generate with AI** |
+| Categories & tags | The article has no category, or no tag. "Uncategorized" does not count. | **Suggest categories & tags** |
+
+Some items finish as soon as you click the button. Others — accepting a generated meta description, or choosing which suggested categories and tags to keep — hand back to you, and the list closes so you can make the choice. Once everything is clear, click **Publish now** and the article goes live.
+
+A requirement is skipped automatically whenever you could not act on it — if you do not have permission to edit that panel, or if the site's AI provider is not set up, it will never block you.
+
+Site owners can switch any of the four requirements off individually — see [Review Portal settings](#review-portal-settings-for-site-owners).
 
 :::tip Open the full WordPress editor
 
@@ -263,6 +280,19 @@ Site owners can configure the Review Portal from **SyteOps → Content Pipelines
 By default the portal uses the same logo, company name, and colors you have set in your general site branding. If you want the review emails and portal page to display different branding — for example, a client-facing brand rather than your internal agency name — enable **Override branding for the Review Portal** and fill in the alternative company name, logo URL, and color pickers. When you turn the override on, the color fields start from your current branding so you can adjust from there instead of from blank.
 
 Use the **Preview Portal** button to open a read-only preview of the portal — with your current branding applied — right inside the admin, so you can see exactly how it looks before sending a review link. The preview is read-only: nothing in it can save, publish, or change a post. In the preview window's title bar you can click the **expand** icon to grow the preview to fill your whole screen (click again to shrink it back), or the **open-in-new-tab** icon to view the portal as a standalone full page.
+
+### Pre-publish requirements
+
+Four switches control what **Approve & Publish** insists on before an article can go live. All four are **on** by default:
+
+- **GEO analysis has run** — require an AI-engine readiness analysis.
+- **GEO analysis is current** — also require a fresh analysis when the article changed after it was last analyzed. Formatting-only edits are ignored, so a reviewer fixing a typo is not sent back for another analysis.
+- **Meta description present** — require a meta description.
+- **Categories & tags assigned** — require at least one category and one tag.
+
+Turn one off if your workflow legitimately publishes without it — for example, if you do not use tags. Whatever you leave on is enforced both in the portal and on the server, so it holds even if a reviewer leaves a browser tab open for a long time.
+
+A requirement is never enforced against a reviewer who could not satisfy it. If they lack permission for that panel, or the AI provider behind the fix is not configured, the requirement is skipped for them automatically rather than leaving them unable to publish.
 
 ### AI assistance
 
