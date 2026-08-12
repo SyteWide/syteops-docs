@@ -8,6 +8,12 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.108
+
+- Fixed: placeholder example text now renders exactly as written — "e.g." no longer displays as "E.G." and email or selector examples are no longer title-cased
+- Fixed: the Fetch Models button no longer stays stuck on "Fetching..." after a retried fetch completes
+- Improved: consistent spacing around the AI model and max-tokens controls across all AI settings areas
+
 ## v1.5.107
 
 - Fixed: the recipe-card border and card styling shipped in the previous release now actually display — the card frame was referencing a style name that no longer existed after an earlier styling isolation pass, leaving recipe cards without their border, rounded corners, and grid layout.
