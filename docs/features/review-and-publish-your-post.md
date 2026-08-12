@@ -210,6 +210,19 @@ As a reviewer, you see the full upcoming calendar so you have context on everyth
 
 ---
 
+## Your review queue
+
+Every reviewer-facing email — a new draft, an updated draft, a change request, or an invitation from a colleague — includes a footer link to **Articles awaiting your review**: a single page listing every draft currently waiting on you, so you don't have to hunt through your inbox for the right email.
+
+- **Sign in required.** Like the portal itself, you must be signed in to your WordPress account to see the queue — SyteOps checks your account against the reviewers assigned to each draft, so you only ever see articles you're actually on.
+- **Administrators see everything.** A WordPress administrator opening the queue sees every draft currently assigned to any reviewer, not just their own.
+- **No link expiry.** Once you're signed in, opening a draft from your review queue always works, even past the normal review-link expiry window — your WordPress session is what proves who you are, not the link.
+- **The newest items first.** The queue lists up to 100 articles, drawn from the most recently updated drafts on the site. If there are more than that, or if the site has a very large backlog of drafts awaiting review, the page tells you so with a note reading *"Older items may not be listed."* When you see that note, older articles may be waiting on you even though they aren't shown — open them from their original review email, or ask your site administrator.
+
+Bookmark the queue page, or just click the footer link in your next review email, to check what's waiting on you at any time.
+
+---
+
 ## Who receives the review email
 
 The notification list for each new draft is made up of two groups:
@@ -233,7 +246,7 @@ Every automated portal email is controlled from one place: **SyteOps → Content
 - **New draft received** *(on by default)* — emails the author and reviewers when a new article arrives and its review draft is created. This is the main review email, with the article preview, who can review it, and the secure editor link.
 - **Draft updated by source** *(off by default)* — emails the author and reviewers when your content source re-delivers an article **with changed content**, so nobody reviews a stale version. Identical re-deliveries (delivery retries) never send an email.
 - **Published or scheduled** *(on by default)* — confirms to the author and reviewers when a draft goes live or is scheduled.
-- **Source held (needs attention)** *(on by default)* — alerts the **site admin** (not the reviewers) when a live content source stops matching its approved field mapping: incoming articles are put safely on hold, and this email tells you to re-approve the mapping so they can flow again. It sends once per incident, not on every held delivery.
+- **Source held (needs attention)** *(on by default)* — alerts the **site admin** (not the reviewers) when a live content source stops matching its approved field mapping: incoming articles are put safely on hold, and this email tells you to re-approve the mapping, then use **Reprocess last payload** on the source to bring in the article that triggered the hold. It sends once per incident, not on every held delivery.
 
 A **Reply-To address** field lets replies to the reviewer-facing emails (review requests, update notices, colleague invites, change requests, and published confirmations) go to a person (for example, your editor) instead of the site's sending address — leave it blank to keep the default. The administrator "payload held" alert always replies to the sending address. Two optional fields polish the emails' footer: a **Footer tagline** (a short line about your business) and a **Footer phone** (shown as a click-to-call link). Both appear in the dark footer bar of every portal email, alongside your company name. All emails carry your portal branding — logo, company name, and colors — from the Branding settings below.
 
@@ -268,6 +281,16 @@ These are the same provider and model settings used by the Content AI and GEO ar
 | **Soft lock** | When enabled, a reviewer who opens a draft while a teammate is already editing it will see a warning banner. This prevents accidental overwrites. |
 | **Scheduled publishing** | When enabled, reviewers see a **Schedule** option in the portal so they can publish the post at a future date and time instead of immediately. When disabled, the schedule option is hidden and all approvals publish immediately. |
 | **Review link expiry** | How long the secure review link in each email stays valid. Options are 3, 7, 14, or 30 days. The default is **7 days**. After a link expires, re-send it from the draft — the post itself is unaffected. |
+
+:::info What "Review link expiry" does and doesn't cover
+
+Expiry protects the **link**, not the post. It stops an old email link from being opened by someone who is *not* signed in — a forwarded email, a link pasted into a chat, a shared inbox.
+
+Anyone who **is** signed in to a WordPress account that's on the draft's reviewer list (and any administrator) can still open that draft after the window has passed, including from their review queue. Once a reviewer is signed in, their WordPress session is what proves who they are — the link is no longer doing that job.
+
+So if you want to remove someone's access to a draft entirely, take them off the reviewer list or deactivate their WordPress account. Setting a shorter expiry won't do it on its own.
+
+:::
 
 You can also update the **Default reviewers** and **Default CC reviewers** lists here — these are the same fields described in [Who receives the review email](#who-receives-the-review-email) above.
 
