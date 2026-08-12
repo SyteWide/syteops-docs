@@ -8,6 +8,13 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.113
+
+- Fixed: article images and the featured image no longer appear blank in the review portal on sites that use image lazy-loading or an image CDN — and those blank placeholders can no longer be saved into the article, which previously added a broken image and a duplicate on every save.
+- Fixed: the image picker in the review portal now renders with its normal styling instead of appearing unformatted.
+- Changed: review notification emails now offer two buttons — "Edit/View this article" and "See all my reviews" — instead of one button and a text link.
+- Added: Approve & Publish now checks an article is finished before it can go live, listing anything outstanding with one-click buttons to complete it. Each requirement — GEO analysis, an up-to-date GEO analysis, a meta description, and categories and tags — can be switched off individually on the Review Portal settings, and any requirement the reviewer cannot act on is skipped automatically.
+
 ## v1.5.112
 
 - Fixed: an article delivered without a usable title or body is now held for review instead of creating a blank draft (or, when the article carries no id, a duplicate half-empty one) — while a source that maps only custom fields keeps publishing normally, with each article kept separate instead of overwriting one post.
