@@ -8,6 +8,15 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.121
+
+- Added: links to articles sent to reviewers and authors can now carry your site's internal-traffic parameter, so editorial visits are excluded from analytics. Links shown to readers are never tagged.
+- Added: a setting for how many questions the GEO analysis should ask for (default 8), and the AI is now told not to return the same question twice in different words.
+- Added: an option to hide alt text on images that fail to load, so editorial alt copy no longer appears as paragraph text. The alt text itself is kept for screen readers and search engines.
+- Fixed: the review portal served stale styles and scripts to anyone who had opened it before, because its files were requested without a version. Reviewers were seeing an old version of the editor no matter how many updates were installed.
+- Fixed: the "Sign in & open editor" button on the review portal had dark text on a dark background, making it unreadable.
+- Improved: requests to AI providers now identify this plugin, so usage shows up under a name instead of "App Unknown" in provider dashboards.
+
 ## v1.5.120
 
 - Fixed: the "Resend email" action in the pipeline run history returned a server error instead of sending. It now emails everyone on the article's reviewer list, and says plainly when an article has no reviewers with a usable email address rather than reporting a delivery failure.
