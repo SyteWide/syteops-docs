@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.120
+
+- Fixed: the "Resend email" action in the pipeline run history returned a server error instead of sending. It now emails everyone on the article's reviewer list, and says plainly when an article has no reviewers with a usable email address rather than reporting a delivery failure.
+
 ## v1.5.119
 
 - Added: a field to store an Erlin AI key, so sites that use Erlin can keep their key alongside the other service credentials.
