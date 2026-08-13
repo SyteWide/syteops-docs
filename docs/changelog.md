@@ -8,6 +8,32 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.119
+
+- Added: a field to store an Erlin AI key, so sites that use Erlin can keep their key alongside the other service credentials.
+
+## v1.5.118
+
+- Fixed: the review portal's answer editor — drafting an answer while adding or removing another row could leave the answer invisible, and re-running the analysis from the pre-publish checklist could discard answers you had just typed.
+- Fixed: drafting a new answer with AI now clears the "I have reviewed these answers" confirmation, so freshly written text is never published as already-checked.
+- Fixed: the confirmation is now only accepted from reviewers who are allowed to edit this area, so it cannot be bypassed.
+
+## v1.5.117
+
+- Added: the questions and answers published for AI search engines are now shown in the review portal, where they can be edited, added to, or removed before the article goes live.
+- Added: a "Draft answer" button writes a short answer to any question straight from the article. If the article genuinely does not answer it, it says so instead of inventing one.
+- Changed: re-running the GEO analysis no longer replaces your work. It keeps the wording and answers you have written, fills in only the blanks, and adds anything new it finds.
+- Added: Approve & Publish now asks someone to confirm they have checked the AI-written answers, since those answers are published to search engines. Skipped automatically when nothing publishes answers, or when an article has none.
+- Fixed: llms.txt and the questions feed were served with a "not found" status, which meant AI crawlers discarded them.
+- Fixed: only public content types can now appear in llms.txt and the questions feed.
+
+## v1.5.116
+
+- Added: the questions each article answers — captured by the GEO analysis — are now published where AI answer engines will read them: under each article's entry in llms.txt, in a new site-wide "Questions this site answers" section, as an optional FAQ structured-data block on the article itself, and as a machine-readable feed at /llms-questions.json.
+- Added: each of the four answer-engine surfaces has its own switch under Content Pipelines, on the Review Portal settings. FAQ structured data starts switched off, because adding a second FAQ block to a page that already has one is invalid.
+- Changed: the GEO analysis now records a short answer alongside every question it finds, so the published surfaces carry the answer an engine can actually quote — not just the question.
+- Fixed: the pre-publish requirement switches (GEO analysis, up-to-date GEO analysis, meta description, categories and tags) could be moved but never saved, so every requirement silently stayed at its default.
+
 ## v1.5.114
 
 - Added: a "Resend email" action on each processed article in the pipeline run history, for when a review notification was missed or a reviewer was added after the article arrived.
