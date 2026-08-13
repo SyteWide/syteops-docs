@@ -33,6 +33,14 @@ All five keys are encrypted at rest. They are never displayed in plaintext after
 
 **Test a saved key:** each tile has a **Test key** button (shown once a key is saved). It makes a quick live call to the provider and reports back — "Key valid — N models available", or the provider's error message if the key is rejected. Useful for providers that don't expose a balance you can sanity-check against.
 
+### Other service keys
+
+Some services SyteOps talks to are not AI providers, so their keys live further down the same **System / API** tab, with the other service credentials rather than in the API Keys tile:
+
+- **Erlin API Key** — for [Erlin AI](https://erlin.ai), an AI-search visibility service. Generate the key in Erlin under **Settings → Accounts → MCP**; it begins with `ek_live_`. The field simply stores the key — nothing in SyteOps contacts Erlin yet.
+
+Like the provider keys, it is encrypted at rest, masked after save, and excluded from configuration exports.
+
 ## Per-provider default model and token limit
 
 Each provider tile on the **API Keys** card has its own **Preferred model** and **Max tokens** fields, right below the key field:
