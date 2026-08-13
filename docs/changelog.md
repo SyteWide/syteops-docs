@@ -8,6 +8,12 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.114
+
+- Added: a "Resend email" action on each processed article in the pipeline run history, for when a review notification was missed or a reviewer was added after the article arrived.
+- Fixed: a held pipeline run no longer displays as "Post #0" — it now says plainly that no post was created and why.
+- Fixed: a held run stops offering "Reprocess" once its article has already been processed, or once a newer article has replaced the stored copy. It shows "Superseded" instead.
+
 ## v1.5.113
 
 - Fixed: article images and the featured image no longer appear blank in the review portal on sites that use image lazy-loading or an image CDN — and those blank placeholders can no longer be saved into the article, which previously added a broken image and a duplicate on every save.
