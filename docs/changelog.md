@@ -8,6 +8,16 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.129
+
+- Changed: modules marked internal are no longer published at all — they are delivered only to the specific sites entitled to them, over the existing secure licensing connection
+- Changed: sites that are not entitled never see the module listed and never receive its files
+
+## v1.5.128
+
+- Changed: the list of available modules is no longer published to a public web address. It is delivered to each site over the existing secure licensing connection instead, so your module names and versions are not readable by anyone who finds the URL
+- Note: module packages themselves were already encrypted and signed — that has not changed
+
 ## v1.5.127
 
 - Added: the reviewer queue page now lists live articles you can edit, alongside the drafts awaiting your review
