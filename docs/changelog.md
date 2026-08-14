@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.126
+
+- Added: published articles can now be edited in the review portal. The action bar changes to "Save changes", a banner states that the article is live and changes publish immediately, and scheduling is hidden since it cannot apply. Edits to live articles are recorded in the audit log.
+
 ## v1.5.125
 
 - Added: click any image in the review portal to edit its alt text and caption. Alt text is what screen readers announce and what AI search engines read, and it previously could only be changed by editing the HTML by hand.
