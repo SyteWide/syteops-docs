@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.123
+
+- Fixed: re-running the GEO analysis now fills in answers for questions that were left blank. Previously it only asked for new questions, so an article with unanswered questions stayed that way no matter how many times it was analyzed.
+- Fixed: articles whose images were damaged by an earlier save — showing a broken image, or the same picture twice — now repair themselves when opened in the review portal.
+- Fixed: expanding the questions on a pipeline run no longer pushes the rest of that row out of line.
+- Fixed: the calendar button now explains why it cannot open instead of doing nothing.
+- Improved: images in the review preview now have space above and below them.
+
 ## v1.5.122
 
 - Added: the pipeline run history now shows the questions and answers recorded for each article, with a count so an article that produced questions but no answers is obvious at a glance.
