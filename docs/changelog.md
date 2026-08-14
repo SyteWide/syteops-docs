@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.122
+
+- Added: the pipeline run history now shows the questions and answers recorded for each article, with a count so an article that produced questions but no answers is obvious at a glance.
+- Improved: the Review Portal settings are grouped by how often you use them — Workflow, What gets sent and published, and Setup — instead of one long list. Setup starts collapsed, since branding and AI providers are configured once and then left alone.
+
 ## v1.5.121
 
 - Added: links to articles sent to reviewers and authors can now carry your site's internal-traffic parameter, so editorial visits are excluded from analytics. Links shown to readers are never tagged.
