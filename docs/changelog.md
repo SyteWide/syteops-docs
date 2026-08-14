@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.125
+
+- Added: click any image in the review portal to edit its alt text and caption. Alt text is what screen readers announce and what AI search engines read, and it previously could only be changed by editing the HTML by hand.
+
+## v1.5.124
+
+- Fixed: images in the review preview now have proper space above and below them, and the option to hide alt text on broken images now actually takes effect. Both were written against a container name the portal does not use, so neither had any visible effect.
+
 ## v1.5.123
 
 - Fixed: re-running the GEO analysis now fills in answers for questions that were left blank. Previously it only asked for new questions, so an article with unanswered questions stayed that way no matter how many times it was analyzed.
