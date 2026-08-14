@@ -8,6 +8,16 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.127
+
+- Added: the reviewer queue page now lists live articles you can edit, alongside the drafts awaiting your review
+- Added: each live row shows how many of its questions have answers, and warns when published answers have not been signed off by a person
+- Added: a link to view the live article that is excluded from your site analytics
+- Added: an "Open review portal" link in the toolbar while editing a post, so you no longer have to hover a row in the posts list to find it
+- Added: a link to your review queue from the pipeline run history
+- Improved: the review portal action now appears for the content types your content sources produce, not just posts and pages
+- Fixed: the review queue page served stale styling to anyone who had opened it before, because its stylesheet was requested without a version
+
 ## v1.5.126
 
 - Added: published articles can now be edited in the review portal. The action bar changes to "Save changes", a banner states that the article is live and changes publish immediately, and scheduling is hidden since it cannot apply. Edits to live articles are recorded in the audit log.

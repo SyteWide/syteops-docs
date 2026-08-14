@@ -236,7 +236,20 @@ Every reviewer-facing email — a new draft, an updated draft, a change request,
 - **No link expiry.** Once you're signed in, opening a draft from your review queue always works, even past the normal review-link expiry window — your WordPress session is what proves who you are, not the link.
 - **The newest items first.** The queue lists up to 100 articles, drawn from the most recently updated drafts on the site. If there are more than that, or if the site has a very large backlog of drafts awaiting review, the page tells you so with a note reading *"Older items may not be listed."* When you see that note, older articles may be waiting on you even though they aren't shown — open them from their original review email, or ask your site administrator.
 
-Bookmark the queue page, or just click the footer link in your next review email, to check what's waiting on you at any time.
+Bookmark the queue page, or just click the footer link in your next review email, to check what's waiting on you at any time. Site owners can also reach it from **Content Pipelines → Runs**, using the **Open my review queue** button.
+
+Each row also shows how many questions the AI search analysis recorded for that article and how many of them have answers — for example *12 Q · 9 answered* — so you can tell at a glance whether an article's answers still need finishing.
+
+### Live articles you can edit
+
+Beneath the drafts awaiting you, the queue lists any **published** articles you're assigned to, under **Live articles you can edit**. If you have none, the section doesn't appear at all.
+
+These behave differently from drafts, and the page says so:
+
+- **Changes go live immediately.** There's no approval step — opening one of these in the portal and saving publishes the change straight away.
+- **Answer coverage.** Each row shows the same question and answer counts as a draft.
+- **"Answers not signed off".** If your site publishes AI-written answers to search engines and nobody has confirmed the answers on that article, the row says so. Those answers are already public, so this is worth acting on.
+- **View live article.** A link to the published article as your readers see it. If your site is set up to exclude internal traffic, this link carries that exclusion, so checking your own work doesn't show up in your site's analytics.
 
 ---
 
@@ -357,7 +370,14 @@ Click **Save settings** at the bottom of the panel to apply your changes. The ne
 
 ### Open the portal for any post
 
-You don't have to wait for a draft from your content source to use the portal. From the WordPress **Posts** (or **Pages**) list, hover over any post you can edit and click the **Review portal** link in its row of actions. SyteOps issues a fresh secure link for that post and opens the portal in a new tab — the same review window contributors see, with the same expiry window as an emailed link. This lets you put an existing post (or one written by hand) through the same review-and-approve flow.
+You don't have to wait for a draft from your content source to use the portal. There are two ways in:
+
+- **From the posts list.** In the WordPress **Posts** (or **Pages**) list, hover over any post you can edit and click the **Review portal** link in its row of actions.
+- **From the post itself.** While editing a post, click **Open review portal** in the toolbar at the top of the screen.
+
+Either way, SyteOps issues a fresh secure link for that post and opens the portal in a new tab — the same review window contributors see, with the same expiry window as an emailed link. This lets you put an existing post (or one written by hand) through the same review-and-approve flow.
+
+The **Review portal** action appears on posts and pages, and on any other content type your content sources publish into. It won't appear on unrelated content types added by other plugins.
 
 ---
 
