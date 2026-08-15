@@ -322,7 +322,7 @@ These are the same provider and model settings used by the Content AI and GEO ar
 |---|---|
 | **Who can publish** | Choose **Any selected reviewer** to let any team member who received the review link publish the post, or choose **Author or designated approver only** to restrict publishing to the post's author and a named approver. |
 | **Soft lock** | When enabled, a reviewer who opens a draft while a teammate is already editing it will see a warning banner. This prevents accidental overwrites. |
-| **Require a passkey** | When enabled, reviewers must sign in with a passkey to use the portal. A password sign-in is not enough. Available only when the Secure Passkeys plugin is active, and **on by default wherever it is**. See below. |
+| **Offer passkey sign-in** | Adds a "Sign in with a passkey" button to the portal sign-in card. Signing in with a password still works. Available only when the Secure Passkeys plugin is active, and **on by default wherever it is**. See below. |
 | **Scheduled publishing** | When enabled, reviewers see a **Schedule** option in the portal so they can publish the post at a future date and time instead of immediately. When disabled, the schedule option is hidden and all approvals publish immediately. |
 | **Review link expiry** | How long the secure review link in each email stays valid. Options are 3, 7, 14, or 30 days. The default is **7 days**. After a link expires, re-send it from the draft — the post itself is unaffected. |
 
@@ -338,71 +338,34 @@ So if you want to remove someone's access to a draft entirely, take them off the
 
 You can also update the **Default reviewers** and **Default CC reviewers** lists here — these are the same fields described in [Who receives the review email](#who-receives-the-review-email) above.
 
-### Requiring a passkey
+### Offering passkey sign-in
 
-The review portal is the one place where someone who is not an administrator can publish to your live
-site. Everything they can do there rests on being signed in — so if a reviewer's password is guessed,
-reused, or phished, whoever has it can publish.
+Reviewers sign in to the portal with their WordPress account. If you have the
+[Secure Passkeys](../integrations/secure-passkeys.md) plugin active, the portal's sign-in card shows a
+second button — **Sign in with a passkey** — beneath the usual one.
 
-A passkey cannot be phished or reused. If you have the [Secure Passkeys](../integrations/secure-passkeys.md)
-plugin active, you can require one for the portal.
+A passkey cannot be phished, guessed, or reused across sites, so it is the safer way in. Offering it
+here simply puts it in front of reviewers at the moment they are signing in.
 
-**Turn it on** under **SyteOps → Content Pipelines → Review Portal → Review & approval rules**. The
-switch is greyed out and reads "Secure Passkeys is not active" until that plugin is running; once it
-is, the switch becomes available and is **on by default**.
+**The setting** is **Offer passkey sign-in**, under **SyteOps → Content Pipelines → Review Portal →
+Review & approval rules**. It is greyed out until Secure Passkeys is active, and **on by default**
+once it is.
 
-It asks for the passkey itself, not just for one to exist on the account. A reviewer who has registered
-a passkey but signed in with their password is still asked to sign in again with the passkey — otherwise
-the requirement would be satisfied by exactly the stolen password it is meant to stop.
+:::info Signing in with a password still works
 
-A reviewer who cannot get in sees one of two messages — on the article page and on their review queue
-alike — each with a button:
+This adds an option; it does not take one away. Reviewers who sign in with a password reach the portal
+and work exactly as before, and so does anyone on a device with no passkey support — the passkey button
+only appears where the browser can actually use one.
 
-- **"Passkey required"** — they are signed in, but not with their passkey. The button is **Sign in with
-  your passkey**. It signs them out of WordPress first and then shows the login screen, which is the
-  only way to reach the passkey prompt; simply revisiting the login page while still signed in would
-  send them straight back here.
-- **"Set up a passkey first"** — there is no passkey on their account yet. The button is **Register a
-  passkey**. They add one, then return to the link.
-
-Two things to know about the sign-in step:
-
-- Signing in to WordPress again for any reason — following a "Log in" link elsewhere on the site, for
-  example — starts a fresh session, and that session has not presented a passkey. The reviewer will be
-  asked for it again the next time they open the portal. This is deliberate: the portal checks the
-  session in front of it, not what the account did earlier.
-- The "Set up a passkey" button points at the WordPress profile screen, which is where Secure Passkeys
-  puts its enrollment section. If your reviewers cannot reach that screen, point the button somewhere
-  they can — see the note on the [Secure Passkeys](../integrations/secure-passkeys.md) page.
-
-:::info What this does and does not cover
-
-It protects **the review portal**, not the WordPress account.
-
-A reviewer who also has permission to edit the post inside WordPress itself — an Author, Editor, or
-administrator — can still open it at **Posts → Edit** and publish from there with a password-only
-sign-in. For them, this setting raises the bar on the portal specifically.
-
-Where it adds real protection is the case the portal exists for: a reviewer who has **no** editing
-permission in WordPress and whose only route to publishing is the portal link. For those accounts the
-passkey becomes the actual barrier.
-
-If you want passkeys enforced for signing in to WordPress at all, that is a Secure Passkeys setting,
-not this one.
+Because a password sign-in is still accepted, this is **not** a protection against a stolen or reused
+reviewer password. It makes the stronger method available and records which one was used; it does not
+block anybody. If you want passkeys *enforced* for signing in to WordPress, that is a Secure Passkeys
+setting rather than this one.
 
 :::
 
-:::caution This applies to administrators too, and it applies immediately
-
-Administrators are not exempt. They are the accounts with the most authority in the portal, so
-exempting them would leave the requirement protecting only the accounts that matter least.
-
-It also takes effect straight away: because it is on by default, everyone already signed in with a
-password — including you — is asked to sign in again with their passkey the next time they open the
-portal. Nobody is locked out of WordPress itself, and the switch is always reachable in wp-admin, so
-you can turn it off at any time.
-
-:::
+The audit trail on each article records whether the person was signed in with a passkey, so you can
+tell at a glance how an edit or a publish was authenticated.
 
 ### Editing permissions
 

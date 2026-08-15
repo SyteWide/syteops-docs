@@ -8,6 +8,16 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.134
+
+- Fixed: three places still named a product that is no longer used — the heading of the AI provider dialog for the shared content area, a review-portal message shown when no AI provider is set, and the webhook-secret hint shown when adding a content source.
+- Internal reorganisation and maintenance. No settings, stored data or web addresses changed.
+
+## v1.5.133
+
+- Changed: the review portal now **offers** reviewers a passkey sign-in rather than requiring one. A "Sign in with a passkey" button appears beside the usual sign-in wherever the Secure Passkeys plugin is active. Signing in with a password works exactly as before, so no reviewer — and no administrator — can be locked out of the portal. This replaces the requirement introduced in the previous release.
+- Added: the record kept against each article notes whether the person was signed in with a passkey, so you can see how an edit or a publish was authenticated.
+
 ## v1.5.132
 
 - Added: the review portal can now require reviewers to sign in with a passkey instead of a password. **This is switched on automatically wherever the Secure Passkeys plugin is active**, so reviewers already signed in with a password are asked to sign in again with their passkey. The portal tells them exactly what to do, and anyone without a passkey is shown where to register one. Administrators are included. Turn it off under Content Pipelines → Review Portal if you are not ready for it.
