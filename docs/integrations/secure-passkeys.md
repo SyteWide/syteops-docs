@@ -25,28 +25,20 @@ The Secure Passkeys integration in SyteOps exists so the plugin's authentication
 
 When SyteOps REST API restriction is off, the allowlist entry has no practical effect — Secure Passkeys endpoints are reachable either way. The integration matters when restriction is on.
 
-## Requiring a passkey for the review portal
+## Passkey sign-in for the review portal
 
-Separately from this toggle, the ContentPen Review Portal can require reviewers to **sign in with a
-passkey** before they can edit or publish. That switch lives on the Review Portal settings, not here —
-it reads whether the Secure Passkeys plugin is active directly, so it works whether or not the
-integration toggle above is on.
+Separately from this toggle, the Review Portal can show reviewers a **Sign in with a
+passkey** button on its sign-in card. That switch lives on the Review Portal settings, not here — it
+reads whether the Secure Passkeys plugin is active directly, so it works whether or not the integration
+toggle above is on.
 
-It is **on by default** wherever the plugin is active — and the reverse also holds: deactivating
-Secure Passkeys switches the requirement off, even if you had explicitly turned it on. Reviewers go
-back to password-only access, so deactivating that plugin is a security decision, not just a
-housekeeping one. See
-[Requiring a passkey](../features/review-and-publish-your-post.md#requiring-a-passkey) for what
-reviewers see and how to turn it off.
+It is **on by default** wherever the plugin is active, and it only ever *adds* an option: signing in
+with a password continues to work, so no reviewer can be locked out by it. See
+[Offering passkey sign-in](../features/review-and-publish-your-post.md#offering-passkey-sign-in).
 
-Two things worth checking before you rely on it:
-
-- **Secure Passkeys must offer its passkey button on the WordPress login screen.** A reviewer who is
-  told "sign in again with your passkey" is sent to that screen; if the button is not there, they can
-  only sign in with a password and will come straight back to the same message.
-- **Reviewers must be able to reach the screen where passkeys are registered.** The default is the
-  WordPress profile page. If a membership or security plugin blocks your reviewers from wp-admin, send
-  them somewhere else by filtering `syteops/cp_review/passkey_setup_url`.
+For the button to lead anywhere, Secure Passkeys must be set to show its own passkey option on the
+WordPress login screen — that is its `display_passkey_login_wp_enabled` setting, on by default. The
+button is hidden automatically on browsers that cannot use passkeys.
 
 ## Common use-cases
 
