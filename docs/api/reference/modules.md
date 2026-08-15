@@ -8,7 +8,7 @@ description: Manage API operations for the modules resource.
 
 # `modules`
 
-5 operation(s). All run through `POST /syteops/v1/manage/dispatch` (reads may use the documented GET form).
+9 operation(s). All run through `POST /syteops/v1/manage/dispatch` (reads may use the documented GET form).
 
 ## `activate`
 
@@ -66,6 +66,134 @@ data: &#123;module, active: false}
   "action": "deactivate",
   "params": {
     "module": "string",
+    "confirm": true
+  },
+  "confirm": true
+}
+```
+
+## `entitlements_grant`
+
+Entitle one domain to one private module. Idempotent.
+
+**🔴 Destructive** — requires `confirm: true`.  
+**Capability:** `manage_options`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `module_id` | string | yes |  |
+| `domain` | string | yes |  |
+| `confirm` | boolean | no |  |
+
+
+**Returns**
+
+data: &#123;module_id, domain, domains: [domains for THIS module only]}
+
+**Request**
+
+```json
+{
+  "resource": "modules",
+  "action": "entitlements_grant",
+  "params": {
+    "module_id": "string",
+    "domain": "string",
+    "confirm": true
+  },
+  "confirm": true
+}
+```
+
+## `entitlements_list`
+
+List which domains are entitled to which private modules.
+
+**Capability:** SyteOps admin only (or an X-API-Key caller).
+
+**Parameters**
+
+_No parameters._
+
+
+**Returns**
+
+data: &#123;entitlements: &#123;module_id: [domains]}, source: "option"|"constant"}
+
+**Request**
+
+```json
+{
+  "resource": "modules",
+  "action": "entitlements_list",
+  "params": {}
+}
+```
+
+## `entitlements_revoke`
+
+Remove one domain from one private module. Stops that site receiving the module.
+
+**🔴 Destructive** — requires `confirm: true`.  
+**Capability:** `manage_options`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `module_id` | string | yes |  |
+| `domain` | string | yes |  |
+| `confirm` | boolean | no |  |
+
+
+**Returns**
+
+data: &#123;module_id, domain, domains: [domains for THIS module only]}
+
+**Request**
+
+```json
+{
+  "resource": "modules",
+  "action": "entitlements_revoke",
+  "params": {
+    "module_id": "string",
+    "domain": "string",
+    "confirm": true
+  },
+  "confirm": true
+}
+```
+
+## `entitlements_set`
+
+Replace the whole entitlement map. Any domain omitted stops receiving its module.
+
+**🔴 Destructive** — requires `confirm: true`.  
+**Capability:** `manage_options`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `entitlements` | object | yes |  |
+| `confirm` | boolean | no |  |
+
+
+**Returns**
+
+data: &#123;entitlements}
+
+**Request**
+
+```json
+{
+  "resource": "modules",
+  "action": "entitlements_set",
+  "params": {
+    "entitlements": {},
     "confirm": true
   },
   "confirm": true

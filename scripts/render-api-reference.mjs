@@ -47,7 +47,11 @@ export function renderResourcePage(resource, ops) {
     if (op.summary) parts.push(escapeText(op.summary), '');
     const badges = [];
     if (op.destructive) badges.push('**🔴 Destructive** — requires `confirm: true`.');
+    // An EMPTY capability is the tightest gate, not the absence of one: the Manage API's authorize
+    // step falls through to a SyteOps admin (or an X-API-Key caller) when no capability is
+    // declared. Printing nothing made the most restricted operation read as the least restricted.
     if (op.capability) badges.push(`**Capability:** \`${op.capability}\``);
+    else badges.push('**Capability:** SyteOps admin only (or an X-API-Key caller).');
     if (Array.isArray(op.secret_keys) && op.secret_keys.length) {
       badges.push(`**Redacted fields:** ${op.secret_keys.map((k) => `\`${k}\``).join(', ')}`);
     }
