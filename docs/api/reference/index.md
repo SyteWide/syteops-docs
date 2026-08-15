@@ -17,7 +17,7 @@ Every operation runs through the single dispatch endpoint. See [Dispatch contrac
 | [`crm`](./crm) | 6 | yes |
 | [`integrations`](./integrations) | 3 | yes |
 | [`leads`](./leads) | 7 | yes |
-| [`modules`](./modules) | 5 | yes |
+| [`modules`](./modules) | 9 | yes |
 | [`pipelines`](./pipelines) | 8 | yes |
 | [`roles`](./roles) | 6 | yes |
 | [`status`](./status) | 1 | no |

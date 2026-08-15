@@ -8,6 +8,19 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.132
+
+- Added: the review portal can now require reviewers to sign in with a passkey instead of a password. **This is switched on automatically wherever the Secure Passkeys plugin is active**, so reviewers already signed in with a password are asked to sign in again with their passkey. The portal tells them exactly what to do, and anyone without a passkey is shown where to register one. Administrators are included. Turn it off under Content Pipelines → Review Portal if you are not ready for it.
+- Fixed: the "AI answers reviewed" pre-publish requirement could be switched off but never saved — it reported success and then silently switched itself back on.
+
+## v1.5.131
+
+- Changed: which sites may receive an internal-only module is now managed through the control API instead of a server configuration file, so adding or removing a site no longer requires editing configuration by hand
+
+## v1.5.130
+
+- Changed: a module previously restricted to specific sites is distributed normally rather than as internal-only, so every site that runs it continues to receive updates
+
 ## v1.5.129
 
 - Changed: modules marked internal are no longer published at all — they are delivered only to the specific sites entitled to them, over the existing secure licensing connection

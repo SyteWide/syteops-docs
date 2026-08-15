@@ -1,6 +1,6 @@
 {
     "schema_version": 1,
-    "syteops_version": "1.5.129",
+    "syteops_version": "1.5.132",
     "operations": [
         {
             "resource": "users",
@@ -169,6 +169,74 @@
             "destructive": false,
             "capability": "manage_options",
             "returns": "data: {module, active: true}"
+        },
+        {
+            "resource": "modules",
+            "action": "entitlements_list",
+            "summary": "List which domains are entitled to which private modules.",
+            "params": [],
+            "destructive": false,
+            "capability": "",
+            "returns": "data: {entitlements: {module_id: [domains]}, source: \"option\"|\"constant\"}"
+        },
+        {
+            "resource": "modules",
+            "action": "entitlements_grant",
+            "summary": "Entitle one domain to one private module. Idempotent.",
+            "params": {
+                "module_id": {
+                    "type": "string",
+                    "required": true
+                },
+                "domain": {
+                    "type": "string",
+                    "required": true
+                },
+                "confirm": {
+                    "type": "boolean"
+                }
+            },
+            "destructive": true,
+            "capability": "manage_options",
+            "returns": "data: {module_id, domain, domains: [domains for THIS module only]}"
+        },
+        {
+            "resource": "modules",
+            "action": "entitlements_revoke",
+            "summary": "Remove one domain from one private module. Stops that site receiving the module.",
+            "params": {
+                "module_id": {
+                    "type": "string",
+                    "required": true
+                },
+                "domain": {
+                    "type": "string",
+                    "required": true
+                },
+                "confirm": {
+                    "type": "boolean"
+                }
+            },
+            "destructive": true,
+            "capability": "manage_options",
+            "returns": "data: {module_id, domain, domains: [domains for THIS module only]}"
+        },
+        {
+            "resource": "modules",
+            "action": "entitlements_set",
+            "summary": "Replace the whole entitlement map. Any domain omitted stops receiving its module.",
+            "params": {
+                "entitlements": {
+                    "type": "object",
+                    "required": true
+                },
+                "confirm": {
+                    "type": "boolean"
+                }
+            },
+            "destructive": true,
+            "capability": "manage_options",
+            "returns": "data: {entitlements}"
         },
         {
             "resource": "modules",
