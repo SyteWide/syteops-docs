@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.135
+
+- Internal maintenance: the Review Portal's stored settings were renamed behind the scenes so they match the rest of Content Pipelines. Your settings are carried across automatically as soon as the update is in place — nothing to reconfigure, and nothing changes on screen.
+
 ## v1.5.134
 
 - Fixed: three places still named a product that is no longer used — the heading of the AI provider dialog for the shared content area, a review-portal message shown when no AI provider is set, and the webhook-secret hint shown when adding a content source.
