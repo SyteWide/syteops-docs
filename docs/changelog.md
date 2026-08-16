@@ -8,6 +8,18 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.141
+
+- Added: the review portal sign-in card now has a username and password form on the card itself, so signing in no longer sends you to the WordPress login screen and back.
+- Fixed: the passkey sign-in button on the review portal did nothing, because the portal never loaded the passkey plugin's script.
+- Fixed: the sign-in card offered two passkey buttons that did the same job. There is now one.
+
+## v1.5.140
+
+- Fixed: module updates could not be installed. The trusted signing key set in the site configuration file was ignored unless written in one specific format, so sites set up the documented way refused every module package as untrusted.
+- Fixed: an installed module whose internal name differs from its package name was treated as a brand-new install, which skipped the safeguard that stops an older package replacing a newer one.
+- Fixed: a licensing server could not see its own published module updates, because it never receives the update list it publishes to every other site. It now reads its own copy.
+
 ## v1.5.139
 
 - Added: reviewers can now sign in with a passkey without leaving the review page. The passkey prompt appears on the sign-in card itself instead of sending them to the WordPress login screen and back. The ordinary sign-in button is still there and still works, so nobody is ever left without a way in.
