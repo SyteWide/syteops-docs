@@ -8,6 +8,22 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.139
+
+- Added: reviewers can now sign in with a passkey without leaving the review page. The passkey prompt appears on the sign-in card itself instead of sending them to the WordPress login screen and back. The ordinary sign-in button is still there and still works, so nobody is ever left without a way in.
+
+## v1.5.138
+
+- Added: an "Open in portal" action on each processed article in the pipeline run history, so an article can be opened for review straight from the run that produced it instead of hunting for it in the posts list. It appears only for articles the portal can actually open, and the review link is issued when you click it rather than when the page loads.
+
+## v1.5.137
+
+- Internal improvements and maintenance.
+
+## v1.5.136
+
+- Fixed: three administrative actions in the licensing module refused unauthorised users but replied with a success status, so monitoring and firewall rules saw a normal page rather than a refusal. They now return the correct refused status. Also: internal development checks gained sweeps that verify every administrative endpoint is capability-checked and every refusal returns the right status.
+
 ## v1.5.135
 
 - Internal maintenance: the Review Portal's stored settings were renamed behind the scenes so they match the rest of Content Pipelines. Your settings are carried across automatically as soon as the update is in place — nothing to reconfigure, and nothing changes on screen.
