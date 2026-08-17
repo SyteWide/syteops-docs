@@ -211,7 +211,7 @@ The process is **idempotent**: running it again on the same post produces the sa
 
 Finds related posts by looking at shared categories and tags. Posts that share more taxonomy terms with your article score higher. Recent posts get a small bonus.
 
-This mode is fast, free, and works well for most sites. If shared taxonomy terms are sparse (for example, on lightly-categorised sites), the cross-linker also performs a **title-keyword fallback** — searching published posts for those of your library keywords that match the current article's subject — so cross-link coverage stays useful even without deep category assignments.
+This mode is fast, free, and works well for most sites. If shared taxonomy terms are sparse (for example, on lightly-categorized sites), the cross-linker also performs a **title-keyword fallback** — searching published posts for those of your library keywords that match the current article's subject — so cross-link coverage stays useful even without deep category assignments.
 
 ### AI-Enhanced
 

@@ -38,7 +38,7 @@ Per-profile tool counts vary by which plugins are installed on a site. The admin
 
 You can also pass a **comma-separated list** mixing profile names and raw provider
 IDs — they union. Examples: `booking,cart`, `crm,fluent-smtp`, `wp,booking`.
-Unrecognised tokens are ignored; an empty or all-unknown spec falls back to
+Unrecognized tokens are ignored; an empty or all-unknown spec falls back to
 `lean`; if any token is `full`, you get everything.
 
 Provider IDs: `wp-content`, `wp-users`, `wp-comments`, `wp-media`, `wp-plugins`,

@@ -13,7 +13,7 @@ The Secure Passkeys integration in SyteOps exists so the plugin's authentication
 ## What the toggle does
 
 - Adds `/wp-json/passkeys/v1/*` to the SyteOps REST restriction allowlist.
-- Greys the toggle out and shows "Not Installed" when the Secure Passkeys plugin is not detected.
+- Grays the toggle out and shows "Not Installed" when the Secure Passkeys plugin is not detected.
 - Removes the allowlist carve-out when toggled off, so your restriction policy applies to the endpoints again.
 
 ## Setup
