@@ -63,6 +63,30 @@ The built-in generator serves `llms.txt` *virtually* — it does not write a fil
 
 When a pipeline runs the GEO stage with LLMS Amplifier as the engine, SyteOps asks LLMS Amplifier to rebuild its files for the whole site. Because GEO runs after the cross-linking and SEO stages, the rebuilt files reflect those changes. Dry-run (preview) mode is not available for LLMS Amplifier — preview runs report that the step was skipped.
 
+SyteOps also rebuilds LLMS Amplifier's files on its own when something changes what they should say but no pipeline run would have fired: editing an article's answers after it is live, marking it as a pillar, excluding it from `llms.txt`, changing which content types are covered, publishing content of a type either side covers, or unpublishing, trashing or deleting an article. Those rebuilds are batched, so a run of edits produces one rebuild, they happen in the background, and if something else rebuilt the files in the meantime SyteOps skips its own pass.
+
+"Either side" matters here: SyteOps watches both its own **Content types** setting and LLMS Amplifier's own **Post Types** list. Because SyteOps switches LLMS Amplifier to Manual, it is the only thing left that rebuilds those files — so it has to cover everything they describe, not only the types it analyses itself.
+
+Setting **Update Frequency** to Manual stops LLMS Amplifier scheduling its own recurring rebuilds; it does not stop it repairing a file that is missing or invalid when someone requests it. SyteOps leaves that repair alone.
+
+## Publishing into llms-index.json
+
+Two SyteOps options — **Questions in the LLMS Amplifier index** and **Business identity in the LLMS Amplifier index**, both under Content Pipelines → Review Portal → Answer-engine publishing — write into LLMS Amplifier's `llms-index.json` file.
+
+:::caution The JSON index has to be switched on
+Those two options can only publish if LLMS Amplifier is generating `llms-index.json` in the first place. If its JSON index is off, both options sit there switched on and publish nothing.
+
+SyteOps tells you when that is the case: a warning appears above the two options on the Answer-engine publishing card, and an entry appears in LLMS Amplifier's own health panel. Switch the JSON index on in LLMS Amplifier's settings and both start publishing.
+:::
+
+Articles you have marked as **Pillar article (cornerstone)** are listed first in that index and carry a `content_role` of `pillar`, so they survive LLMS Amplifier's maximum-pages limit and are the ones an AI tool is pointed to.
+
+## A separate front end (headless)
+
+If LLMS Amplifier is serving a decoupled front end, it works out each article's public address from its own **public routing** settings, and a content type with no route there has no address it can publish. SyteOps never invents one — those entries are published without a link rather than with a wrong one.
+
+Since the two halves of that decision live on two different screens, SyteOps names any content type it covers that has no route: beside the **Content types** setting on the Answer-engine publishing card, and as an entry in LLMS Amplifier's own health panel. Add the route in LLMS Amplifier, or untick the type in SyteOps.
+
 ## Update frequency
 
 SyteOps sets LLMS Amplifier's **Update Frequency** to **Manual** automatically the moment it becomes your GEO engine — there's nothing to set yourself. If you also use LLMS Amplifier outside of SyteOps and change its Update Frequency directly on the LLMS Amplifier settings page, know that turning the integration off and back on in SyteOps sets it back to Manual again.

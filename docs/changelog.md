@@ -8,6 +8,28 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.148
+
+- Added: a "Content types" setting on the Review Portal settings chooses which content your AI files describe — llms.txt, the questions feed, FAQ structured data and the LLMS Amplifier index.
+- Changed: that setting starts at Posts only. Pages were previously included automatically, but they are site furniture rather than content an answer engine can cite. Tick Pages there if you want them back.
+- Fixed: changing what your AI files cover, or which questions they publish, now rebuilds those files straight away. Previously only the LLMS Amplifier files were rebuilt, so a site generating llms.txt itself kept serving the old content until the next day's scheduled rebuild.
+- Fixed: with LLMS Amplifier generating your AI files, publishing a content type Amplifier covers but SyteOps did not — a custom post type, say — rebuilt nothing at all, because SyteOps had already stood Amplifier's own scheduled rebuild down.
+- Added: where LLMS Amplifier runs a separate public front end, SyteOps now says which content types have no address on it, since their entries are published without a link. The warning appears beside the new setting and in Amplifier's own health panel.
+- Fixed: "exclude from llms.txt" on an individual article now holds for every content type LLMS Amplifier publishes, not only the types SyteOps analyses. Previously, narrowing the content types could quietly bring an excluded page back into the generated files.
+- Fixed: media attachments can no longer end up in your AI files, and a content type stays selected while its plugin is temporarily deactivated instead of being dropped the next time you save the page.
+
+## v1.5.147
+
+- Added: mark an article as a Pillar (cornerstone) in the review portal's GEO panel. A pillar is listed first in your AI index file so it survives the file's size limit, its questions and answers are kept ahead of other articles' when the index has to choose, and when several articles answer the same question the pillar is the one an AI tool is pointed to. It is also marked as cornerstone content in Squirrly SEO.
+- Fixed: editing or approving an article's answers after it was already published never reached your AI files, because nothing rebuilt them until some unrelated article was published. Those files now rebuild on their own shortly after such a change, batched so a run of edits produces one rebuild rather than one per save.
+- Fixed: publishing a page rebuilt nothing either — and neither did unpublishing, trashing or deleting an article, so a retracted article's details stayed in your AI files indefinitely. All of those now rebuild the files on their own.
+- Fixed: the two options that publish into the LLMS Amplifier index quietly did nothing when Amplifier's own JSON index file was switched off. SyteOps now says so, both beside the options and in Amplifier's own health panel.
+
+## v1.5.146
+
+- Added: the review portal's "Signed in as" area is now a menu. Hover it (or tap it on a phone) for a Sign out option, so a reviewer on a shared or borrowed computer can end their session without leaving the portal.
+- Fixed: an article you excluded from llms.txt stayed out of llms.txt itself but reappeared in the LLMS Amplifier index file, its knowledge bundle, and any per-section files. The exclusion now applies to every file Amplifier produces, as intended.
+
 ## v1.5.145
 
 - Fixed: the passkey button on the review portal sign-in card could refuse to sign anyone in, showing "A request is already pending." Pressing it in the first seconds after the card appeared collided with the passkey plugin's own background sign-in check, which starts a moment later. The portal now holds that check back as soon as a reviewer presses the button.

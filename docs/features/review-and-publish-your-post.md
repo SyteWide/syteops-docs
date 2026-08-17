@@ -33,7 +33,7 @@ Click **Edit/View this article** in the email. Your browser opens the Review & P
 
 **The link alone cannot publish or change anything.** It simply takes you to the portal. To make any edits or approve the post, you must be signed in to your WordPress account.
 
-If you are not already logged in, you will see your site's standard WordPress login screen. Sign in with your normal username and password, and you will be taken straight to the draft.
+If you are not already logged in, the portal shows its own branded sign-in card. Enter your usual WordPress username and password there and you are taken straight to the draft — you never leave the portal for the WordPress login screen. If your site owner has passkeys switched on, the card also offers a **Sign in with a passkey** button; a password still works either way.
 
 ---
 
@@ -107,6 +107,29 @@ The **Include in llms.txt / AI answer feed** toggle controls whether this specif
 
 This setting is saved when you click **Save draft** or **Approve & Publish**.
 
+**Pillar article (cornerstone)**
+
+Tick **Pillar article (cornerstone)** to mark this as one of the articles your site's authority rests
+on — the definitive guide on its topic, rather than a routine update.
+
+Your AI files can only hold so much, and without this they simply keep whatever was published or
+edited most recently. Marking an article as a pillar changes that in three ways:
+
+- Its questions and answers are **kept ahead of** other articles' when the index has to choose which
+  to publish.
+- When several of your articles answer the same question, the pillar is the one an AI tool is
+  pointed to.
+- If your site uses LLMS Amplifier, the article is listed **first** in its index file, so it survives
+  even when that list is trimmed.
+
+If you use Squirrly SEO, ticking this also marks the article as **cornerstone content** there, so you
+only have to say it once.
+
+Use it sparingly. If everything is a pillar, nothing is — the point is to tell AI tools which handful
+of pages to trust first.
+
+This setting is saved when you click **Save draft** or **Approve & Publish**.
+
 ### Categories and tags
 
 The **Categories & tags** panel shows the categories and tags that will be applied to the post when it is published. They appear as individual chips that you can manage directly in the portal.
@@ -149,6 +172,15 @@ Site owners can switch any of the four requirements off individually — see [Re
 :::tip Open the full WordPress editor
 
 If you have WordPress editing access for the post (Editor role or above), the portal's top bar shows an **Edit in WordPress** link. It opens the post in the full WordPress block editor in a new tab — handy when you need a capability the streamlined portal doesn't offer, such as reordering blocks or adding an advanced layout. Your portal tab stays open so you can return to it to approve or publish.
+
+:::
+
+:::tip Signing out
+
+Your name sits in the top-right corner of the portal. Hover over it — or tap it on a phone — and a
+**Sign out** option appears. Use it when you are on a shared or borrowed computer: it ends your
+WordPress session and returns you to the portal's sign-in card, so the next person cannot pick up
+where you left off.
 
 :::
 
