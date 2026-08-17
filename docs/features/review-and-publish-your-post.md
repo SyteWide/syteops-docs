@@ -35,6 +35,8 @@ Click **Edit/View this article** in the email. Your browser opens the Review & P
 
 If you are not already logged in, the portal shows its own branded sign-in card. Enter your usual WordPress username and password there and you are taken straight to the draft — you never leave the portal for the WordPress login screen. If your site owner has passkeys switched on, the card also offers a **Sign in with a passkey** button; a password still works either way.
 
+If your site runs a security plugin that challenges a sign-in — asking for a two-factor code, or emailing you a link to verify a login from an unfamiliar device or location — you are taken to the standard WordPress sign-in screen so that plugin can tell you what it needs. Complete the check there and you land on the draft as usual. The portal's own card only reports a wrong username or password, so a message about your credentials always means exactly that.
+
 ---
 
 ## Step 3: Review and edit the draft
@@ -81,7 +83,9 @@ The **SEO** panel lets you control how the post appears in Google and other sear
 - **SEO title** _(shown only when your site uses a supported SEO plugin, such as Squirrly SEO)_ — The search-result headline. It is **auto-generated** from the post title by default; type your own to set a **custom title that overrides** the automatic one. Leaving it as shown (or clearing it) keeps the automatic title, so it stays in sync with how your editors manage SEO in the post itself. When no SEO plugin is active, this field is hidden.
 - **Primary keyword** — The main search phrase this article is targeting. Your content source pre-fills this from the keyword used to generate the post. You can change it at any time.
 - **Secondary keywords** — Supporting search phrases for the article, pre-filled from your content source when provided. Enter them comma-separated. They are saved with the post and available to your SEO tools.
-- **Meta description** — The short sentence that appears under the page title in search results. Keep it to one or two clear sentences that summarise the article. Click **Generate with AI** to have the AI draft a meta description from the current title and body — the result fills the field for you to review and edit. (This requires a Content AI provider to be configured in the Review Portal settings.)
+- **Meta description** — The short sentence that appears under the page title in search results. Keep it to one or two clear sentences that summarize the article. Click **Generate with AI** to have the AI draft a meta description from the current title and body — the result fills the field for you to review and edit. (This requires a Content AI provider to be configured in the Review Portal settings.)
+
+Each of the SEO, GEO and Categories & tags panels has its own **Save** button at the foot of the panel, so you never have to scroll to the bottom of the page to keep your work. It saves everything on the page exactly as shown, not just that one panel. The portal also saves on its own a few seconds after you stop typing — and immediately after any of the AI buttons fills something in — so generated text is never left sitting only in your browser.
 
 As you type, a **search-result preview** updates in real time so you can see exactly how the title and meta description will look to someone finding your post on Google before you publish. When an SEO title is set, the preview uses it as the headline.
 
@@ -94,9 +98,9 @@ The **GEO** panel (Generative Engine Optimization) helps you understand how well
 Click **Analyze GEO readiness** to run an AI analysis of the post. Within a few seconds the panel shows:
 
 - A **readiness score** indicating how well the article is structured to be picked up and cited by AI answer engines.
-- A list of the **questions your article answers** — these are the kinds of questions an AI search tool might recognise your article as a source for.
+- A list of the **questions your article answers** — these are the kinds of questions an AI search tool might recognize your article as a source for.
 
-You can run the analysis as many times as you like; it does not change the article itself.
+You can run the analysis as many times as you like; it does not change the article itself. The score and the questions are stored as soon as the analysis finishes, and re-running never discards answers you have edited yourself.
 
 **AI answer feed toggle**
 
@@ -105,7 +109,7 @@ The **Include in llms.txt / AI answer feed** toggle controls whether this specif
 - The toggle is **on by default** for every published post, meaning all of your published content is included automatically.
 - Turn the toggle **off** if you want to keep a particular post out of the AI feed (for example, a time-sensitive or confidential article).
 
-This setting is saved when you click **Save draft** or **Approve & Publish**.
+This setting is saved when you click the panel's **Save** button, **Save draft**, or **Approve & Publish**.
 
 **Pillar article (cornerstone)**
 
@@ -128,7 +132,7 @@ only have to say it once.
 Use it sparingly. If everything is a pillar, nothing is — the point is to tell AI tools which handful
 of pages to trust first.
 
-This setting is saved when you click **Save draft** or **Approve & Publish**.
+This setting is saved when you click the panel's **Save** button, **Save draft**, or **Approve & Publish**.
 
 ### Categories and tags
 
@@ -138,7 +142,7 @@ The **Categories & tags** panel shows the categories and tags that will be appli
 - **Remove a category or tag** — Click the × on any chip to remove it.
 - **Get fresh AI suggestions** — Click **Refresh** to ask the AI for a new set of suggested categories and tags based on the current article content. The suggestions are shown as chips you can accept, adjust, or discard — clicking Refresh does not apply anything automatically.
 
-The final set of categories and tags is saved when you click **Save draft** or **Approve & Publish**.
+The final set of categories and tags is saved when you click the panel's **Save** button, **Save draft**, or **Approve & Publish**.
 
 ---
 
@@ -380,7 +384,7 @@ A passkey cannot be phished, guessed, or reused across sites, so it is the safer
 here simply puts it in front of reviewers at the moment they are signing in.
 
 **The setting** is **Offer passkey sign-in**, under **SyteOps → Content Pipelines → Review Portal →
-Review & approval rules**. It is greyed out until Secure Passkeys is active, and **on by default**
+Review & approval rules**. It is grayed out until Secure Passkeys is active, and **on by default**
 once it is.
 
 :::info Signing in with a password still works

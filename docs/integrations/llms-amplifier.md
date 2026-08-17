@@ -65,7 +65,7 @@ When a pipeline runs the GEO stage with LLMS Amplifier as the engine, SyteOps as
 
 SyteOps also rebuilds LLMS Amplifier's files on its own when something changes what they should say but no pipeline run would have fired: editing an article's answers after it is live, marking it as a pillar, excluding it from `llms.txt`, changing which content types are covered, publishing content of a type either side covers, or unpublishing, trashing or deleting an article. Those rebuilds are batched, so a run of edits produces one rebuild, they happen in the background, and if something else rebuilt the files in the meantime SyteOps skips its own pass.
 
-"Either side" matters here: SyteOps watches both its own **Content types** setting and LLMS Amplifier's own **Post Types** list. Because SyteOps switches LLMS Amplifier to Manual, it is the only thing left that rebuilds those files — so it has to cover everything they describe, not only the types it analyses itself.
+"Either side" matters here: SyteOps watches both its own **Content types** setting and LLMS Amplifier's own **Post Types** list. Because SyteOps switches LLMS Amplifier to Manual, it is the only thing left that rebuilds those files — so it has to cover everything they describe, not only the types it analyzes itself.
 
 Setting **Update Frequency** to Manual stops LLMS Amplifier scheduling its own recurring rebuilds; it does not stop it repairing a file that is missing or invalid when someone requests it. SyteOps leaves that repair alone.
 
