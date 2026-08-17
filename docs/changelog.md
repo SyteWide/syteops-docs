@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.145
+
+- Fixed: the passkey button on the review portal sign-in card could refuse to sign anyone in, showing "A request is already pending." Pressing it in the first seconds after the card appeared collided with the passkey plugin's own background sign-in check, which starts a moment later. The portal now holds that check back as soon as a reviewer presses the button.
+
 ## v1.5.144
 
 - Fixed: the LLMS Amplifier FAQ publishing feature added in the previous release was never actually switched on. The code that publishes your reviewed questions and answers into the Amplifier index file was written but never loaded, so it had no effect on any site. It is now active.
