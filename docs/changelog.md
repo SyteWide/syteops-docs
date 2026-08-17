@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.149
+
+- Added: the answer-engine settings now tell you when publishing for AI is switched off, with a Turn on button right there on the card. Previously every option on that page could be changed and saved while nothing was actually being published, and nothing on screen explained why.
+
 ## v1.5.148
 
 - Added: a "Content types" setting on the Review Portal settings chooses which content your AI files describe — llms.txt, the questions feed, FAQ structured data and the LLMS Amplifier index.
