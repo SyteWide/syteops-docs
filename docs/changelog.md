@@ -8,6 +8,26 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.144
+
+- Fixed: the LLMS Amplifier FAQ publishing feature added in the previous release was never actually switched on. The code that publishes your reviewed questions and answers into the Amplifier index file was written but never loaded, so it had no effect on any site. It is now active.
+- Added: company details now include country, a short business description, entity type, and business hours, plus LinkedIn and X profile links — all synced to FlowMattic alongside your existing company fields.
+- Added: your business profile (name, description, entity type, logo, address, social links, and hours) can now be published into the LLMS Amplifier AI index, so AI agents reading it learn who the business is. Turn it on or off under Content Pipelines, in Review Portal settings; contact emails and phone numbers are never published.
+- Added: business identity can now be read and updated through the secure control-plane API used by connected automation tools.
+- Improved: old company automation variables retire safely. One still referenced by a workflow stays available until that workflow is updated, and a notice lists exactly which workflows are still using it.
+- Fixed: the company postal code field now accepts international formats such as "SW1A 1AA" or "K1A 0B1". Previously anything other than a US ZIP code was silently erased when you saved, which mattered as soon as the new country field invited non-US addresses.
+
+## v1.5.143
+
+- Added: the questions and answers your articles record can now be published into the LLMS Amplifier index file, so AI agents reading it find the answers you have already written and approved. The option appears only where that plugin is installed, and any FAQ entries you uploaded yourself are kept and take precedence.
+- Fixed: an article you excluded from llms.txt stayed excluded only while SyteOps generated that file. With LLMS Amplifier generating it instead, the article reappeared — your exclusion silently stopped applying. It now applies to every file Amplifier produces, including its new knowledge bundle.
+- Fixed: with recent versions of LLMS Amplifier, a successful file regeneration was recorded as a failure in the pipeline history, so the step always looked broken even when it worked.
+- Added: unchecked AI-written answers are now reported in Amplifier's own health panel, where you look before regenerating your files.
+
+## v1.5.142
+
+- Fixed: the passkey button on the review portal still did nothing after the previous release. The fix shipped last release looked for the passkey plugin's code under a name that does not exist on a real install, so the button was left with nothing behind it.
+
 ## v1.5.141
 
 - Added: the review portal sign-in card now has a username and password form on the card itself, so signing in no longer sends you to the WordPress login screen and back.

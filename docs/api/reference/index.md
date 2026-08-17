@@ -15,6 +15,7 @@ Every operation runs through the single dispatch endpoint. See [Dispatch contrac
 | [`ai`](./ai) | 4 | no |
 | [`content_sources`](./content-sources) | 7 | yes |
 | [`crm`](./crm) | 6 | yes |
+| [`identity`](./identity) | 2 | no |
 | [`integrations`](./integrations) | 3 | yes |
 | [`leads`](./leads) | 7 | yes |
 | [`modules`](./modules) | 9 | yes |

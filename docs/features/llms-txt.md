@@ -20,7 +20,7 @@ A Markdown list of your published Pages and Posts (most-recently-updated first),
 
 ## Publishing the questions your articles answer
 
-When an article goes through the [Review Portal](review-and-publish-your-post.md), the GEO analysis records the specific questions it answers well — and a short answer for each. Those question-and-answer pairs are what an AI answer engine actually quotes, so SyteOps can publish them in four places.
+When an article goes through the [Review Portal](review-and-publish-your-post.md), the GEO analysis records the specific questions it answers well — and a short answer for each. Those question-and-answer pairs are what an AI answer engine actually quotes, so SyteOps can publish them in five places.
 
 Each one has its own switch under **Content Pipelines → Review Portal settings → Answer-engine publishing**:
 
@@ -30,8 +30,13 @@ Each one has its own switch under **Content Pipelines → Review Portal settings
 | **Site-wide questions section** | Adds a **Questions this site answers** section to `llms.txt`, combining every article's questions into one deduplicated list with the pages that answer them. On by default. |
 | **FAQ structured data** | Adds FAQ structured data to the published article, which Google and Bing read today. **Off by default** — see the warning below. |
 | **Questions feed** | Publishes the whole question set as JSON at `https://yoursite.com/llms-questions.json`. On by default. |
+| **Questions in the LLMS Amplifier index** | Adds the question set to the FAQ section of LLMS Amplifier's `llms-index.json`. On by default. This switch appears only when LLMS Amplifier is installed and switched on. Any FAQ entries you uploaded to Amplifier yourself are kept, and take precedence over these. |
 
 Both `llms.txt` options work the same whether the built-in generator or LLMS Amplifier is producing your `llms.txt`. The questions feed and the FAQ structured data are served by SyteOps either way, so they keep working no matter which generator you use.
+
+### Leaving an article out
+
+The Review Portal lets you exclude an individual article from `llms.txt`. That exclusion now applies no matter which generator you use — including every file LLMS Amplifier produces, such as its knowledge bundle. Previously it applied only while SyteOps generated the file, so an excluded article reappeared once LLMS Amplifier took over.
 
 If you use LLMS Amplifier, note that its own **Include metadata** option controls whether the per-article block appears — with that switched off in Amplifier, there is no metadata section for the questions to attach to.
 

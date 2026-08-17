@@ -68,6 +68,25 @@ Centralized CRM system configuration. See [CRM Management](../features/crm).
 - Theme customization settings
 - Clickable code values for copying variable names
 
+### Company Information
+
+This is where you tell SyteOps who your business is. Every field here becomes part of your site's shared business identity — used across automations, the Review Portal, and (where applicable) AI-facing surfaces.
+
+- **Company Name** and **Agency Name**
+- **Company Address** — Street Address 1 and 2, City, State, **Zip / Postal Code**, and **Country**. International postal formats are accepted, so UK, Canadian, Japanese and other non-US codes save exactly as you type them.
+- **Business Profile**:
+  - **Description** — one or two sentences describing what the business does. This feeds single-line AI surfaces, so keep it short; line breaks are collapsed on save.
+  - **Entity Type** — Organization, or Person for a personal brand. Leave it unset if you'd rather not specify.
+  - **Business Hours** — free text, e.g. `Mo-Fr 09:00-17:00`.
+- **Social & public links** — Home Page, Blog, Facebook, Instagram, TikTok, YouTube, **LinkedIn**, **X (Twitter)**, Trustily, Proof of Insurance, Logo Image, and Image Storage.
+
+#### Where this is used
+
+- **FlowMattic automation variables** — every field above syncs to a FlowMattic variable your workflows can reference, so a change here reaches your automations automatically.
+- **Review Portal branding** — if a reviewer's branding override doesn't set its own company name, the Review Portal falls back to the Company Name set here.
+- **Answer-engine publishing (LLMS Amplifier)** — if the LLMS Amplifier integration is installed and active, your business profile (name, description, entity type, logo, address, social links, and hours) can be published into Amplifier's own AI index file, so AI agents reading it learn who the site belongs to. This is a separate on/off switch located under **Content Pipelines → Review Portal settings → Answer-engine publishing → "Business identity in the LLMS Amplifier index."** Anything already configured directly in LLMS Amplifier's own settings always takes priority — SyteOps only fills in what's missing.
+- **Contact emails and phone numbers are never published** by any of the above — they are excluded from this shared identity entirely and stay private no matter how these settings are configured.
+
 ## Integrations Tab
 
 - Integration toggles (enable/disable individual integrations)
