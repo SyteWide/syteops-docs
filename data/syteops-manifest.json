@@ -1,6 +1,6 @@
 {
     "schema_version": 1,
-    "syteops_version": "1.5.141",
+    "syteops_version": "1.5.144",
     "operations": [
         {
             "resource": "users",
@@ -1194,6 +1194,29 @@
             "destructive": false,
             "capability": "manage_options",
             "returns": "data: {id, status, mapping_status, mapping}"
+        },
+        {
+            "resource": "identity",
+            "action": "get",
+            "summary": "Get the per-site business identity (company facts) map.",
+            "params": [],
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {fields: {company_name, ..., syteops_system_company_hours}}"
+        },
+        {
+            "resource": "identity",
+            "action": "set",
+            "summary": "Update business identity fields (partial map; unknown keys rejected).",
+            "params": {
+                "fields": {
+                    "type": "object",
+                    "required": true
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {fields: {...updated map...}}"
         }
     ]
 }
