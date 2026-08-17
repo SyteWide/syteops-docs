@@ -16,7 +16,21 @@ By default the built-in generator produces your `llms.txt` — no extra plugin r
 
 ## What's in it
 
-A Markdown list of your published Pages and Posts (most-recently-updated first), each with its title, URL, and a short excerpt — plus your site name and tagline.
+A Markdown list of your published Posts (most-recently-updated first), each with its title, URL, and a short excerpt — plus your site name and tagline.
+
+## Choosing which content types are covered
+
+**Content Pipelines → Review Portal settings → Answer-engine publishing → Content types** decides which content your AI files describe. It covers all of them at once: `llms.txt`, the questions feed, FAQ structured data, and the LLMS Amplifier index.
+
+Out of the box only **Posts** are covered. Pages are usually site furniture — your contact page, your privacy policy, a landing page — rather than content that answers a question worth citing, so listing them mostly pads the file. Tick **Pages**, or any other public content type, if your site is the exception.
+
+At least one type is always covered, so clearing every box puts you back to Posts.
+
+Changing this rebuilds your AI files right away, so the change is live within a couple of minutes rather than at the next scheduled rebuild.
+
+:::note If you use LLMS Amplifier with a separate front end
+LLMS Amplifier can serve a decoupled ("headless") front end, in which case it works out each article's public address from its own **public routing** settings. A content type with no route there has no address Amplifier can publish, so its entries appear without a link. SyteOps tells you when that happens — beside the **Content types** setting, and in Amplifier's own health panel — so you can either add the route in Amplifier or untick the type here.
+:::
 
 ## Publishing the questions your articles answer
 
@@ -59,6 +73,36 @@ This requirement is skipped automatically when no answer-engine option is switch
 Only information that is already public: the question, its short answer, and the URLs of **published** articles. Draft articles, password-protected articles, and any article you have excluded from `llms.txt` are all left out, and the internal readiness score is never published.
 
 An article shows up on these surfaces only after its GEO analysis has run. Articles analyzed before this release have questions but no answers — they will gain answers the next time they are analyzed.
+
+### Pillar articles
+
+The AI files can only hold so much, and by default they keep whatever was published or edited most
+recently. That means a routine news post can push your definitive guide off the end of the list.
+
+Ticking **Pillar article (cornerstone)** in the portal's GEO panel says which articles your site's
+authority actually rests on. It does three things:
+
+- Its questions and answers are kept **ahead of** other articles' when the index has to choose which
+  to publish, and when several articles answer the same question, the pillar is the one an AI tool is
+  pointed to. This applies whichever generator you use.
+- With **LLMS Amplifier** generating your files, a pillar is listed first — and in the index file
+  (`llms-index.json`) that means it survives the file's size limit rather than being trimmed. In
+  `llms.txt` itself the ordering gives it prominence, but the size limit is applied before SyteOps can
+  intervene, so it does not rescue an article from trimming there.
+- If you use **Squirrly SEO**, the same tick marks the article as cornerstone content there.
+
+Use it for a handful of pages, not for everything — the point is to say which few to trust first.
+
+### Keeping the files current
+
+SyteOps rebuilds your AI files shortly afterwards, on its own, whenever something changes what they
+should say: editing an article's answers, marking it as a pillar, excluding it from `llms.txt`,
+publishing a page, or unpublishing, trashing or deleting an article. That last group matters most —
+without it, a retracted article's title, address and answers would stay in your AI files indefinitely.
+
+Rebuilds are batched, so a run of edits produces one rebuild rather than one per save, and they happen
+in the background — you never wait for one. If something else rebuilt the files in the meantime,
+SyteOps skips its own pass rather than repeating the work.
 
 ## Notes
 
