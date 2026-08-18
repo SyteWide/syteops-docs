@@ -8,6 +8,16 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.5.152
+
+- Fixed: on a phone or a small tablet the review portal showed all of the review panels above the article. The title and article now come first, with feedback, reviewers, SEO, GEO and categories underneath.
+- Changed: feedback and reviewers now sit at the top of the review panels, above SEO, GEO and categories.
+- Fixed: tables and other formatting in the article body are now shown the way they will look on the published site, instead of falling back to plain browser defaults.
+- Added: click an image in the article to see and change the link it loads from, and import it into your media library.
+- Added: publishing now imports any article images that are still hosted elsewhere, so a published article no longer depends on another site keeping the file. An image that cannot be fetched is left as a link rather than blocking the publish.
+- Fixed: an image that is repointed or imported no longer keeps loading the old file from its previous host.
+- Fixed: backslashes in an article — a Windows file path, or a regular expression in a code block — are no longer stripped when the article is saved. Previously each save removed another one until they were gone.
+
 ## v1.5.151
 
 - Fixed: the content calendar in the review portal sat off to the left instead of lining up with the rest of the page.
