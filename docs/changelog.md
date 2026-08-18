@@ -8,6 +8,17 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.000
+
+- Fixed: the featured image now sits at the top of the review panel instead of below the article, so it is visible without scrolling past a long piece.
+- Added: an **Import images** checkbox beside the publish button, so you can decide per article whether its borrowed pictures are copied into your media library. The site-wide default is set in Content Pipelines.
+- Added: settings for what comes across with each copied picture — its alt text and title, its caption, a record of where it came from, and optionally the metadata embedded in the file itself.
+- Added: a **Revert images** button that puts an article's pictures back on the links they came from. Nothing is removed from your media library, and an image someone has changed by hand since it was copied is left alone rather than overwritten. Reverting also switches Import images off for that article, so the next publish leaves the links alone.
+- Improved: an article with more pictures than one publish can safely fetch now finishes copying them in the background over the following minutes.
+- Fixed: copied images are recorded under your own site address rather than a content-delivery network's, so they keep working if that network is ever changed or switched off.
+- Fixed: changing an image's link and clicking Apply now saves straight away instead of waiting for the next automatic save.
+- Fixed: uninstalling the plugin now removes every background job it had scheduled. Jobs created for a specific article — social posts and answer-engine file rebuilds among them — were left behind and kept firing at a plugin that was no longer there.
+
 ## v1.5.152
 
 - Fixed: on a phone or a small tablet the review portal showed all of the review panels above the article. The title and article now come first, with feedback, reviewers, SEO, GEO and categories underneath.
