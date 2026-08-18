@@ -102,13 +102,19 @@ Each post appears as a chip with a colored bar on the left showing its status:
 | Amber | Pending review |
 | Gray | Draft |
 
-Drafts that don't have a publish date yet appear in the **Unscheduled drafts** list next to the grid, instead of on a specific day.
+Drafts that don't have a publish date yet appear in the **Unscheduled drafts** list beside the grid, instead of on a specific day. On a narrower screen that list moves below the grid.
 
 ### Rescheduling and scheduling posts
 
-- **Move a scheduled post** — drag its chip from one day to another to change when it goes live.
+- **Pick a date and time** — select any post to open a picker and choose exactly when it goes live. This works on every device, including phones and tablets.
+- **Move a scheduled post** — drag its chip from one day to another. Dragging needs a mouse or trackpad; on a touchscreen, select the post instead.
 - **Schedule a draft** — drag a post from the **Unscheduled drafts** list onto a day to give it a publish date.
-- **Pick an exact time** — click a post to open a small picker where you can choose the exact date and time instead of dragging.
+
+### On a phone or tablet
+
+- On a **smaller tablet screen** (and in portrait), the Unscheduled drafts list moves below the month grid so the grid keeps its full width. On a large tablet in landscape it stays beside the grid, just narrower.
+- On any **touchscreen**, buttons and posts grow to comfortable tap sizes.
+- On a **phone**, the month grid becomes a compact overview — each day with something scheduled is marked with a dot — and a **schedule list** appears below it with every post for that month, plus your unscheduled drafts. The date picker opens from the bottom of the screen.
 
 A few rules apply:
 

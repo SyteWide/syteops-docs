@@ -220,7 +220,7 @@ Activate (status on) or deactivate (off) a FlowMattic workflow by "id" or "key".
 
 ## `fflow_trigger_workflow`
 
-Trigger a FlowMattic workflow on demand by numeric "id" or "key", posting an optional JSON "payload" to its webhook capture URL. The workflow must be active (status on) and its trigger must be a webhook — event-triggered workflows fire on their own event, not on demand. Returns a run acknowledgement; the workflow then runs asynchronously in the background.
+Trigger a FlowMattic workflow on demand by numeric "id" or "key", posting an optional JSON "payload" to its webhook capture URL. The workflow must be active (status on) and its trigger must be a webhook — event-triggered workflows fire on their own event, not on demand. Returns a run acknowledgment; the workflow then runs asynchronously in the background.
 
 **🔴 Destructive** — supports a `dry_run` preview flag.  
 **Profiles:** `full`, `flowmattic`

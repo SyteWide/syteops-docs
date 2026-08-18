@@ -245,9 +245,16 @@ The portal includes a **Calendar** button that opens a month view of your recent
 
 From the calendar you can:
 
-- **Drag a scheduled post to a new day** to move it to a different publish date.
+- **Select a post** to open a picker and choose an exact date and time. This works on every device, including phones and tablets.
+- **Drag a scheduled post to a new day** to move it to a different publish date. Dragging needs a mouse or trackpad — on a touchscreen, select the post instead.
 - **Drag a post from Unscheduled drafts onto a day** to give it a publish date.
-- **Click a post** to open a picker and choose an exact date and time instead of dragging.
+
+### On a phone or tablet
+
+The calendar adapts to the screen you are on:
+
+- On a **smaller tablet screen** (and in portrait), the Unscheduled drafts list moves below the month grid so the grid keeps its full width. On a large tablet in landscape it stays beside the grid, just narrower. On any touchscreen, buttons and posts grow to comfortable tap sizes.
+- On a **phone**, the month grid becomes a compact overview — each day with something scheduled is marked with a dot — and a **schedule list** appears below it, showing every post for that month with its time, title and status, plus your unscheduled drafts. That list is where you read and tap; the date picker opens from the bottom of the screen.
 
 A few rules apply:
 

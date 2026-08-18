@@ -317,8 +317,8 @@ Update a booking's status via a single-field status update (PUT /schedules/&#123
 | `booking_id` | integer | yes | Booking (schedule) ID. |
 | `status` | string | yes | New status. |
 | `reason` | string | no | Reason used as cancel_reason (cancelled) or reject_reason (rejected). |
-| `refund_payment` | boolean | no | Trigger a payment refund; only honoured for cancelled/rejected. |
-| `update_all` | boolean | no | Bulk-update all guests in a multi-guest group; only honoured for no_show/completed. |
+| `refund_payment` | boolean | no | Trigger a payment refund; only honored for cancelled/rejected. |
+| `update_all` | boolean | no | Bulk-update all guests in a multi-guest group; only honored for no_show/completed. |
 
 
 ## `fbook_update_booking_field`
