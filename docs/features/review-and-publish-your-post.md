@@ -43,6 +43,10 @@ If your site runs a security plugin that challenges a sign-in — asking for a t
 
 Once you are signed in, the portal shows the full draft. You can edit the core article fields as well as the SEO details, AI visibility settings, and categories and tags.
 
+On a wide screen the article sits on the left with the review panels beside it. On a phone or a smaller tablet the two columns stack, and the **title and article come first** — feedback, reviewers, SEO, GEO and categories follow underneath, so you can start reading straight away.
+
+Tables and other formatting in the article body are shown the way they will look once published, so you can judge the article as your readers will see it.
+
 ### Core article fields
 
 | Field | What it is |
@@ -75,6 +79,18 @@ The **Featured image** panel shows the image currently set for the post. If your
 The preview updates as soon as the new image is set. If your account does not have media-upload permission, the Replace button is disabled and explains that the permission is required.
 
 **Image alt text** describes the image for screen readers and search engines. The **Image alt text** field below the preview is filled in with the current description, and you can edit it at any time — it saves with the rest of your changes. If a featured image is set but has no alt text, you'll be prompted to add it before you can publish.
+
+### Images inside the article
+
+Click any image in the article body to open its details. You can set the **alt text** and a **caption**, and you can see and change the **image link** — the web address the picture loads from.
+
+Many drafts arrive with their images still hosted by whatever tool wrote the article. That works, but only for as long as that other site keeps the file: if it is moved or deleted, the picture disappears from your article. Images in that situation are labeled **"Linked from another site — not in your media library"**, and an **Import to media library** button appears next to the label. Click it to bring the file onto your own site; the picture is added to your media library with its alt text, and the article is pointed at your copy.
+
+You don't have to do this by hand for every image. **When you publish, images that are still hosted elsewhere are copied across automatically**, so a published article no longer depends on another site keeping the file.
+
+Two things to know about that automatic copy. If an image cannot be fetched — the other site is down, or the address is wrong — publishing still goes ahead and that image stays as a link, so one unreachable picture never blocks your article. And a single publish copies up to 25 images; on an unusually picture-heavy article the rest are left for the next publish. Either way you are told afterwards, so you know which articles still have borrowed pictures in them.
+
+Importing needs permission to add media to the site. If your account does not have it, the Import button does not appear and images are left exactly as they are.
 
 ### SEO — keyword and meta description
 
