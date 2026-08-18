@@ -92,6 +92,11 @@ Two things to know about that automatic copy. If an image cannot be fetched — 
 
 Importing needs permission to add media to the site. If your account does not have it, the Import button does not appear and images are left exactly as they are.
 
+**Turning it off for one article.** Next to the publish controls there is an **Import images** checkbox. It starts from your site's setting and applies to the article you are looking at, so you can leave one article's pictures where they are without changing anything for everyone else.
+
+**Putting the original links back.** If an article's images were copied across and you would rather they were not, a **Revert images** button appears beside the publish controls. It points the pictures back at the addresses they came from. Nothing is deleted from your media library — the copies stay there, in case another article is using them. If someone has changed one of the images by hand since it was copied, that one is left alone and you are told, rather than having your change overwritten. Reverting a live article asks you to confirm first, since the published page will go back to loading its pictures from somewhere else. Reverting also switches **Import images** off for that article, so the next publish leaves the original links alone — turn it back on if you change your mind.
+
+
 ### SEO — keyword and meta description
 
 The **SEO** panel lets you control how the post appears in Google and other search engines.
@@ -352,6 +357,17 @@ Site owners can configure the Review Portal from **SyteOps → Content Pipelines
 By default the portal uses the same logo, company name, and colors you have set in your general site branding. If you want the review emails and portal page to display different branding — for example, a client-facing brand rather than your internal agency name — enable **Override branding for the Review Portal** and fill in the alternative company name, logo URL, and color pickers. When you turn the override on, the color fields start from your current branding so you can adjust from there instead of from blank.
 
 Use the **Preview Portal** button to open a read-only preview of the portal — with your current branding applied — right inside the admin, so you can see exactly how it looks before sending a review link. The preview is read-only: nothing in it can save, publish, or change a post. In the preview window's title bar you can click the **expand** icon to grow the preview to fill your whole screen (click again to shrink it back), or the **open-in-new-tab** icon to view the portal as a standalone full page.
+
+### Article images
+
+Under **Article images** you decide what happens to pictures an article is still borrowing from another site.
+
+- **Import images on publish** — copy them into your media library when an article publishes. On by default; reviewers can override it per article.
+- **Keep alt text and title**, **Keep captions** — carry what the article says about a picture across to its media library entry. Both on by default.
+- **Record where each image came from** — store the import date and the article that triggered it. The original address is always kept regardless of this setting; that is what makes reverting possible.
+- **Read metadata from the image file** — also read any title or description embedded in the file. Off by default, because pictures made by AI tools rarely carry anything useful there. Worth turning on for photography.
+
+If an article has more pictures than one publish can safely fetch, the rest are copied in the background over the following minutes, and the reviewer is told that copying is continuing.
 
 ### Pre-publish requirements
 
