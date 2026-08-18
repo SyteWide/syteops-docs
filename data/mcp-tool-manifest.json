@@ -3319,11 +3319,11 @@
                     },
                     "refund_payment": {
                         "type": "boolean",
-                        "description": "Trigger a payment refund; only honoured for cancelled/rejected."
+                        "description": "Trigger a payment refund; only honored for cancelled/rejected."
                     },
                     "update_all": {
                         "type": "boolean",
-                        "description": "Bulk-update all guests in a multi-guest group; only honoured for no_show/completed."
+                        "description": "Bulk-update all guests in a multi-guest group; only honored for no_show/completed."
                     },
                     "dry_run": {
                         "type": "boolean",
@@ -9891,7 +9891,7 @@
         {
             "name": "fflow_trigger_workflow",
             "provider": "flowmattic",
-            "description": "Trigger a FlowMattic workflow on demand by numeric \"id\" or \"key\", posting an optional JSON \"payload\" to its webhook capture URL. The workflow must be active (status on) and its trigger must be a webhook — event-triggered workflows fire on their own event, not on demand. Returns a run acknowledgement; the workflow then runs asynchronously in the background.",
+            "description": "Trigger a FlowMattic workflow on demand by numeric \"id\" or \"key\", posting an optional JSON \"payload\" to its webhook capture URL. The workflow must be active (status on) and its trigger must be a webhook — event-triggered workflows fire on their own event, not on demand. Returns a run acknowledgment; the workflow then runs asynchronously in the background.",
             "inputSchema": {
                 "type": "object",
                 "properties": {
