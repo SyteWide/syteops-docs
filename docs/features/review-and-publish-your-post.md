@@ -71,14 +71,21 @@ To remove a link, select the linked text and click the **remove-link** button. I
 
 ### Featured image
 
-The **Featured image** panel shows the image currently set for the post. If your account can manage media on the site, a **Replace image** button lets you change it in two ways:
+The **Featured image** panel shows the image currently set for the post. **Click the image** — or the **Edit image** button below it — to open the image details, the same panel you get by clicking a picture inside the article. From there you can:
 
-- **Paste an image URL** — enter the web address of an image plus alt text, then click **Set from URL**. SyteOps fetches the image, adds it to your media library, and sets it as the featured image.
-- **Choose / upload image** — open your site's media library to pick an existing image or upload a new one from your computer, then click **Use this image**.
+- **See where the image comes from.** The **Image link** field shows the web address the picture loads from, and a line underneath tells you whether it is already in your media library.
+- **Replace it with a picture from somewhere else.** Paste the new web address into the Image link field and click **Apply**. SyteOps fetches the image, adds it to your media library, and sets it as the featured image — so the published article never depends on someone else's site keeping the file.
+- **Replace it from your own library.** Click **Choose from library** to pick an image you already have, or upload a new one from your computer.
+- **Describe it.** The **Alt text** and **Caption** fields are here too.
 
-The preview updates as soon as the new image is set. If your account does not have media-upload permission, the Replace button is disabled and explains that the permission is required.
+The preview updates as soon as the new image is set. If your account cannot manage media on the site, the Edit image button is disabled and says why.
 
-**Image alt text** describes the image for screen readers and search engines. The **Image alt text** field below the preview is filled in with the current description, and you can edit it at any time — it saves with the rest of your changes. If a featured image is set but has no alt text, you'll be prompted to add it before you can publish.
+**Image alt text** describes the image for screen readers and search engines. The **Image alt text** field below the preview is filled in with the current description, and you can edit it there without opening the details panel — it saves with the rest of your changes. If a featured image is set but has no alt text, you'll be prompted to add it before you can publish.
+
+Two things worth knowing when you swap the image:
+
+- You'll be asked to write **new alt text**. The box still holds the description of the picture you are replacing, and publishing that against a different photo describes the wrong thing to anyone using a screen reader.
+- **Alt text and captions are shared.** They belong to the image in your media library, not to this one article — so changing them changes how that picture is described everywhere it is used. SyteOps only saves them when you actually edit them, so simply opening an article never rewrites anything.
 
 ### Images inside the article
 
