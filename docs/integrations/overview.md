@@ -111,6 +111,18 @@ Automatic keyword linking and internal cross-linking. When enabled, SyteOps scan
 
 SEO field mapping and metadata control. When enabled, SyteOps can coordinate with Squirrly SEO for metadata management. See the dedicated [Squirrly SEO Integration](squirrly-seo) page for setup.
 
+### Yoast SEO
+
+SEO field mapping and metadata control through Yoast. Content Pipelines and the Review Portal write the meta description, focus keyword and cornerstone flag into Yoast's own fields. See the dedicated [Yoast SEO Integration](yoast-seo) page for setup.
+
+### Rank Math
+
+SEO field mapping and metadata control through Rank Math. Content Pipelines and the Review Portal write the meta description, focus keyword and pillar-content flag into Rank Math's own fields. See the dedicated [Rank Math Integration](rank-math) page for setup.
+
+:::important One SEO plugin at a time
+Squirrly SEO, Yoast SEO and Rank Math are mutually exclusive — SyteOps connects to one at a time, and turning one on turns the others off. Two plugins writing the same page's title is how a site ends up with a `<title>` nobody can account for.
+:::
+
 ### LLMS Amplifier
 
 AI-discovery file generation (`llms.txt` and `llms-full.txt`) for AI search engines. Enabling the LLMS Amplifier integration makes it the engine for the GEO step in Content Pipelines instead of the built-in generator — an either/or choice you flip from the GEO card, with no separate setup step. See the dedicated [LLMS Amplifier Integration](llms-amplifier) page for setup.

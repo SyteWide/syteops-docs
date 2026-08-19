@@ -8,7 +8,11 @@ description: How SyteOps writes SEO title/description/keywords into Squirrly SEO
 
 **Tier: Basic** — Plugin-based toggle integration. When Squirrly SEO is installed and the integration is enabled, SyteOps writes SEO metadata into Squirrly's native storage and applies a small wp-admin fix.
 
-SyteOps uses Squirrly SEO as the SEO engine for **Content Pipelines** and the **Review & Publish Portal**. When the integration is on, the SEO **title**, **description**, and **keywords** that a pipeline generates — or that a reviewer sets in the portal — are written to Squirrly's native post meta (`_sq_title` / `_sq_description` / `_sq_keywords`) and to the canonical `wp_qss` snippet row that renders your page `<title>`. There is no separate settings screen to configure: enabling the integration is all that's required.
+SyteOps can use Squirrly SEO as the SEO engine for **Content Pipelines** and the **Review & Publish Portal**. When the integration is on, the SEO **title**, **description**, and **keywords** that a pipeline generates — or that a reviewer sets in the portal — are written to Squirrly's native post meta (`_sq_title` / `_sq_description` / `_sq_keywords`) and to the canonical `wp_qss` snippet row that renders your page `<title>`. There is no separate settings screen to configure: enabling the integration is all that's required.
+
+:::important One SEO plugin at a time
+SyteOps connects to **one** SEO plugin at a time. Turning on [Yoast SEO](yoast-seo) or [Rank Math](rank-math) automatically turns Squirrly SEO off, and vice versa. This is deliberate: two plugins writing the same page's title is how a site ends up with a `<title>` nobody can account for.
+:::
 
 :::note Removed in a recent release
 Earlier versions exposed a **"Squirrly SEO Custom Settings"** card on the System/API tab — ACF field mapping, social-image dimensions, post-type targeting, and meta-field guards. That card and the **ACF field mapping** have been **removed**: Content Pipelines now own SEO end-to-end and write Squirrly's native fields directly. Existing `_sq_*` data is unaffected (it was already the source of truth).
