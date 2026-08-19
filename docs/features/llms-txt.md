@@ -89,7 +89,7 @@ authority actually rests on. It does three things:
   (`llms-index.json`) that means it survives the file's size limit rather than being trimmed. In
   `llms.txt` itself the ordering gives it prominence, but the size limit is applied before SyteOps can
   intervene, so it does not rescue an article from trimming there.
-- If you use **Squirrly SEO**, the same tick marks the article as cornerstone content there.
+- If you have an SEO plugin connected, the same tick marks the article there too — cornerstone content in **Squirrly SEO** and **Yoast SEO**, pillar content in **Rank Math**.
 
 Use it for a handful of pages, not for everything — the point is to say which few to trust first.
 

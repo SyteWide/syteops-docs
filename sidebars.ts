@@ -58,6 +58,8 @@ const sidebars: SidebarsConfig = {
         'integrations/cloudflare',
         'integrations/linkcentral',
         'integrations/squirrly-seo',
+        'integrations/yoast-seo',
+        'integrations/rank-math',
         'integrations/llms-amplifier',
         'integrations/ringtonic',
         'integrations/slack',

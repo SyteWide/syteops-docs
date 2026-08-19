@@ -8,6 +8,28 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.007
+
+- Added: Yoast SEO and Rank Math can now be connected the same way Squirrly SEO already could. With one of them switched on, the meta description, focus keyword and cornerstone/pillar flag your articles get in the review portal are written straight into that plugin's own fields.
+- Added: Only one SEO plugin can be connected at a time. Switching one on switches the others off, in the browser as well as on save, so two plugins can never be writing the same page's title.
+- Note: With Yoast SEO or Rank Math connected, SyteOps leaves the per-article SEO title empty unless you type one yourself. That is deliberate — both plugins use your own title template (usually “Title | Site Name”) only while that field is blank, so filling it in automatically would quietly drop the site name from every article's search result.
+
+## v1.6.006
+
+- Added: A listing image for blog and archive cards. SyteOps prepares a second copy of each picture, already cut to the shape your cards use, so nothing is cropped away at display time — you choose which part of the picture survives, and a corner logo can be kept out of the crop entirely. Article pages keep the original picture untouched. Existing pictures are prepared the first time a listing asks for them, so there is no batch job to run.
+- Fixed: The five image settings on the Review Portal panel — importing images on publish, and the four choices about what metadata comes with them — could be changed but never saved. They reverted to their previous state on the next page load.
+
+## v1.6.005
+
+- Fixed: Posts published through the review portal now show their optimization score in the WordPress post list when Squirrly SEO is active. The score is calculated by Squirrly from the article’s keyword, and the portal was not passing the keyword along — so posts it published showed no score at all.
+
+## v1.6.004
+
+- Added: Clicking an article on the calendar now opens a details card — its full title and featured image, when it publishes, who is reviewing it, and a checklist of what it still needs before it can go live.
+- Improved: The calendar opens faster and stepping between months is instant. Months you have already looked at are remembered, the months either side are fetched ahead of you, and the calendar starts loading the moment you reach for the button rather than after you click it.
+- Fixed: An article you cannot reschedule can now be clicked to read its details. It previously did nothing at all.
+- Fixed: The "This article is live" banner sits evenly between the top of the page and the panel below it.
+
 ## v1.6.003
 
 - Fixed: The "Received" date in your review queue now stays correct after a post is scheduled, moved, or has its schedule cancelled. It previously showed the moment the schedule was cancelled, and a scheduled post showed no received date at all.

@@ -61,10 +61,10 @@ The builder walks you through four sections:
 | Stage | What it does |
 |---|---|
 | **Link Engines** | Adds cross-links to published content based on your LinkCentral keyword index |
-| **SEO** | Applies Squirrly SEO metadata using your configured settings |
+| **SEO** | Writes SEO metadata into whichever SEO plugin you have connected — Squirrly SEO, Yoast SEO or Rank Math |
 | **GEO** | Regenerates your llms.txt file to reflect the new content |
 
-Stages that depend on other integrations (LinkCentral, Squirrly SEO) are available only when those integrations are active and configured.
+Stages that depend on other integrations (LinkCentral, and your SEO plugin) are available only when those integrations are active and configured. Only one SEO plugin can be connected at a time, and the SEO stage follows whichever one that is.
 
 ### Choosing a GEO engine
 
@@ -292,3 +292,45 @@ Expand **Forward to workflow** on a source's card to also send each mapped artic
 4. Click **Save forwarding settings**.
 
 Forwarding is optional and never gets in the way: SyteOps always creates the Review & Publish draft first, then sends a copy of the mapped content to your workflow in the background. A slow or unreachable workflow endpoint never delays or blocks the draft.
+
+## Listing image
+
+Blog and archive pages show each article as a card, and every card forces the picture into one fixed shape. When your pictures are a different shape from the card, the browser crops away whatever does not fit — often about a quarter of the width, split between the two sides. That is enough to slice a logo sitting in a corner clean in half. At the same time the card downloads the full-size picture even though it only ever displays it small.
+
+**Listing image** solves both at once. SyteOps prepares a second, smaller copy of each picture, already cut to the shape your cards use, and hands the cards that copy instead. There is nothing left for the browser to crop, you decide which part of the picture survives the cut, and the file is sized for the space it actually appears in.
+
+Article pages are not affected. They keep the original picture exactly as it is — only listing and archive cards use the cropped copy.
+
+You will find it on the **Content Pipelines** tab, under **Review Portal → Article images**.
+
+### Setting it up
+
+1. Turn on **Crop a copy for listings**.
+2. Set the **Card size**. Measure how wide and tall one card's picture is on your own site, then double both numbers so it still looks sharp on high-resolution screens. If a card's picture area is 410 by 308 pixels, enter **820** by **616**.
+3. Choose **Keep this part** — which portion of the picture to keep when there is more of it than the card can show. Leave it centered unless you have a reason not to. If your pictures carry a logo or watermark in one corner, pick the opposite side and it will fall outside the crop entirely.
+4. Save.
+
+### One more step, in your theme
+
+SyteOps prepares the cropped copy, but your theme decides which picture its cards ask for — SyteOps cannot make that choice for it. Go to your theme's settings and do two things:
+
+- Set the blog card's **image size** to the listing size SyteOps added. On Blocksy this is **Customizer → Blog → post card → Featured Image → Image Size**.
+- Set the card's **image ratio** to match the size you entered above. If you used 820 × 616, the card's ratio is 4/3.
+
+Until both are set, cards carry on using whichever size the theme was already asking for.
+
+### Existing pictures
+
+You do not need to regenerate anything. Pictures already in your media library are cropped the first time a listing asks for them, one at a time, and reused from then on. A site with ten pictures and a site with ten thousand behave identically — there is no batch job to start and nothing to wait for.
+
+If you later change the size or the part you keep, existing copies are replaced the next time each one is shown. A picture is only ever cropped when it is at least as large as your card in **both** directions — so a wide, short banner is left alone even though it is not "small", because cropping it to a taller shape would mean stretching it. Those cards keep behaving exactly as they do now. Vector images (SVG) are always left alone too, since they resize by themselves.
+
+If a picture was uploaded at a very large size, WordPress keeps a full-resolution copy of it alongside the one it normally uses. SyteOps will fall back to that copy when your card size is larger than the everyday one — so asking for a big card still works. The one exception is a photo that carries rotation information from a camera or phone: those are skipped rather than risk cropping a portrait photo sideways.
+
+Copies are prepared a few at a time — a handful per page view rather than all at once, so the first few visits to a large archive warm it up gradually instead of making one visitor wait for everything. Cards still waiting their turn show the full-size picture in the meantime — exactly what they showed before you turned this on — so nothing looks broken while it catches up.
+
+### If you turn it off again
+
+Switching **Crop a copy for listings** off stops SyteOps preparing any more copies, but it does not remove the ones already made — and your theme is still set to ask for that size. WordPress will keep handing cards the copy it already has, while pictures added from then on have none and fall back to a larger file. The result is a mix of sizes across your cards.
+
+So if you turn it off, change your theme's blog card back to whichever image size it used before. That single change is what actually returns the cards to their previous behavior.

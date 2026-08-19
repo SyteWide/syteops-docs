@@ -108,7 +108,11 @@ Importing needs permission to add media to the site. If your account does not ha
 
 The **SEO** panel lets you control how the post appears in Google and other search engines.
 
-- **SEO title** _(shown only when your site uses a supported SEO plugin, such as Squirrly SEO)_ — The search-result headline. It is **auto-generated** from the post title by default; type your own to set a **custom title that overrides** the automatic one. Leaving it as shown (or clearing it) keeps the automatic title, so it stays in sync with how your editors manage SEO in the post itself. When no SEO plugin is active, this field is hidden.
+- **SEO title** _(shown only when your site has an SEO plugin connected — Squirrly SEO, Yoast SEO or Rank Math)_ — The search-result headline. What happens when you leave it alone depends on which plugin is connected, and the difference matters:
+  - **Squirrly SEO** — the title is **auto-generated** from the post title. Type your own to override it; clearing the field returns it to automatic.
+  - **Yoast SEO or Rank Math** — the field stays **empty** unless you type something, and that is correct. Both plugins build the title from your own site-wide template (usually something like `Title | Site Name`), and they use that template only while this field is blank. Filling it in automatically would quietly drop the site name from every article. Type a title here only when one specific article needs to differ; clearing it hands the article back to your template.
+
+  When no SEO plugin is connected, this field is hidden.
 - **Primary keyword** — The main search phrase this article is targeting. Your content source pre-fills this from the keyword used to generate the post. You can change it at any time.
 - **Secondary keywords** — Supporting search phrases for the article, pre-filled from your content source when provided. Enter them comma-separated. They are saved with the post and available to your SEO tools.
 - **Meta description** — The short sentence that appears under the page title in search results. Keep it to one or two clear sentences that summarize the article. Click **Generate with AI** to have the AI draft a meta description from the current title and body — the result fills the field for you to review and edit. (This requires a Content AI provider to be configured in the Review Portal settings.)
@@ -154,8 +158,9 @@ edited most recently. Marking an article as a pillar changes that in three ways:
 - If your site uses LLMS Amplifier, the article is listed **first** in its index file, so it survives
   even when that list is trimmed.
 
-If you use Squirrly SEO, ticking this also marks the article as **cornerstone content** there, so you
-only have to say it once.
+If you have an SEO plugin connected, ticking this also marks the article there — **cornerstone
+content** in Squirrly SEO and Yoast SEO, **pillar content** in Rank Math — so you only have to say
+it once.
 
 Use it sparingly. If everything is a pillar, nothing is — the point is to tell AI tools which handful
 of pages to trust first.
@@ -302,7 +307,7 @@ The portal includes a **Calendar** button that opens a month view of your recent
 
 From the calendar you can:
 
-- **Select a post** to open a picker and choose an exact date and time. This works on every device, including phones and tablets.
+- **Select a post** to open its details card — the full title, its featured image, when it publishes, who is reviewing it, how much feedback it has, and a checklist of what it still needs before it can go live. From the same card you can pick an exact date and time. This works on every device, including phones and tablets.
 - **Drag a scheduled post to a new day** to move it to a different publish date. Dragging needs a mouse or trackpad — on a touchscreen, select the post instead.
 - **Drag a post from Unscheduled drafts onto a day** to give it a publish date.
 - **Unschedule a scheduled post** — select it and click **Unschedule** in the picker. It returns to the **Unscheduled drafts** list and will not publish until you give it a new date.
@@ -319,10 +324,11 @@ A few rules apply:
 - You can only move posts you're allowed to edit.
 - Scheduling a draft (giving it a publish date) requires publish permission, following the same **Who can publish** setting described below. So does unscheduling one.
 - Published posts can't be moved or unscheduled.
+- **You can open any post's details, even one you can't move.** Reading isn't editing. For a post that isn't yours to change, the card shows what it is and when it publishes, and leaves out the working detail — who's reviewing it, its feedback, and its readiness checklist.
 
 :::note Reviewers see the full calendar
 
-As a reviewer, you see the full upcoming calendar so you have context on everything coming up — but you can only drag or reschedule the posts you have permission to edit. Everything else appears for reference only.
+As a reviewer, you see the full upcoming calendar so you have context on everything coming up — but you can only drag or reschedule the posts you have permission to edit. You can open any post to see what it is and when it publishes; everything beyond that is shown only for posts you're on.
 
 :::
 
