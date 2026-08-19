@@ -8,6 +8,18 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.001
+
+- Added: Click the featured image to open the same details panel the article's own images use — change where it loads from, choose one from your media library, and set its alt text and caption in one place.
+- Fixed: The publish bar no longer leaves "Approve & Publish" stranded on its own line, and no longer covers the last panel when you scroll to the bottom on a phone or tablet.
+- Fixed: An image's alt text and caption are now saved only when you actually edit them. Opening an article can no longer change how a picture is described everywhere else it is used.
+- Fixed: Replacing the featured image now asks you to describe the new picture, instead of carrying over the description of the one you replaced.
+- Fixed: Pasting a link to a picture that is already in your media library now reuses it, instead of storing a second copy of the same file.
+- Fixed: An image already in your media library that you set by pasting its link now keeps its own description, and you're told that is what happened, instead of your typed description being silently discarded.
+- Fixed: Correcting a description back to its original wording now saves. Previously the change was recognized as "no change" and quietly skipped.
+- Fixed: Saving while an image is still being fetched now says so, instead of appearing to do nothing.
+- Changed: The sign-in screen drops a line of technical wording that meant nothing to a reviewer.
+
 ## v1.6.000
 
 - Fixed: the featured image now sits at the top of the review panel instead of below the article, so it is visible without scrolling past a long piece.
