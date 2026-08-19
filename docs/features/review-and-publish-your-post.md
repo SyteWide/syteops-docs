@@ -181,8 +181,37 @@ Once you have finished reviewing all panels, choose one of the action buttons:
 - **Save draft** — Saves all your edits (including SEO, GEO settings, and categories/tags) and keeps the post as a draft. The portal stays open so you or a colleague can continue reviewing later.
 - **Preview** _(reviewers with editor access)_ — Saves your current edits and opens the post in a new browser tab exactly as it will look on your site, rendered by your theme — so you can check the layout before publishing. The Preview button is shown only to reviewers whose WordPress account can edit the post (Editor role or above).
 - **Approve & Publish** — Saves all your edits and publishes the post to your site immediately. The portal then shows a confirmation that the post has been published and is live on your site. By default, the author and reviewers receive an email confirming the post went live (site owners can turn this off — see the rules table below).
-- **Schedule** _(if enabled by the site owner)_ — Check the **Schedule** box to pick a future date and time, then click **Approve & Publish**. The post will go live automatically at the time you selected rather than immediately.
+- **Schedule** _(if enabled by the site owner)_ — Check the **Schedule** box to pick a future date and time, then click **Approve & Schedule**. The post goes live automatically at the time you chose rather than immediately. **Scheduling is not final** — see [Changing or cancelling a schedule](#changing-or-cancelling-a-schedule) below.
 - **Request changes** — Opens a short note prompt where you can describe what needs updating. Your current edits are saved to the draft, the author and co-reviewers are notified by email, and your note is added to the portal's **Feedback** panel. See [Step 5](#step-5-request-changes) for the full walkthrough.
+
+### Changing or cancelling a schedule
+
+A scheduled post is still yours right up until it publishes. Nothing about scheduling is one-way.
+
+When you open a scheduled post, the portal shows you exactly where it stands:
+
+- The badge at the top reads **Scheduled** with the date and time it will go live.
+- A banner under it repeats the date and reminds you the schedule can still be changed.
+- The **Schedule** box is already ticked and the date field already filled in with the time you chose.
+- The main button reads **Update schedule** rather than **Approve & Publish**.
+
+From there you can:
+
+- **Keep editing.** Save as often as you like — your changes are picked up automatically and the post still goes live at the scheduled time.
+- **Move it.** Change the date and time, then click **Update schedule**.
+- **Publish it now instead.** Untick **Schedule** and click **Approve & Publish**. The portal will warn you first that this cancels the schedule and makes the post live immediately.
+- **Cancel it.** Click **Unschedule**. The post goes back to being a draft and will not publish until you schedule or publish it again. The date you had chosen is kept in the date field, so scheduling it again is one click away.
+
+You can also cancel a schedule from the calendar — select the post and choose **Unschedule** in the picker.
+
+A few related behaviors worth knowing:
+
+- **Requesting changes cancels the schedule.** If you send a scheduled post back to its author, it returns to a draft so it cannot publish itself while they are still working on it. If you do not have permission to cancel schedules and the post is about to publish, the portal will not accept the request at all — ask an approver rather than risk the post going out mid-rejection.
+- **Cancelling needs publish permission.** Stopping a post from going out is treated the same way as sending it out, so it follows the site's **Who can publish** setting. Reviewers who cannot publish will not see the **Unschedule** button, in the portal or on the calendar.
+- **If the site owner turns scheduling off** while a post is already scheduled, you can still **Unschedule** it — you just cannot move it to a different time. The post keeps its existing date until you cancel it or publish it.
+- **A post publishes when its time arrives, even while you are editing.** If you are still working on a post in the last minute before it is due, saving will publish it — its scheduled moment has come. The portal tells you when this happens and updates the badge, so you are never left looking at a "Scheduled" label on a post that is already live.
+
+Scheduled posts also stay in your review queue (**See all my reviews**), marked with a **Scheduled** label and their publication time — so you can always find one again even if your original email link has expired.
 
 ### Before you can publish
 
@@ -276,6 +305,7 @@ From the calendar you can:
 - **Select a post** to open a picker and choose an exact date and time. This works on every device, including phones and tablets.
 - **Drag a scheduled post to a new day** to move it to a different publish date. Dragging needs a mouse or trackpad — on a touchscreen, select the post instead.
 - **Drag a post from Unscheduled drafts onto a day** to give it a publish date.
+- **Unschedule a scheduled post** — select it and click **Unschedule** in the picker. It returns to the **Unscheduled drafts** list and will not publish until you give it a new date.
 
 ### On a phone or tablet
 
@@ -287,8 +317,8 @@ The calendar adapts to the screen you are on:
 A few rules apply:
 
 - You can only move posts you're allowed to edit.
-- Scheduling a draft (giving it a publish date) requires publish permission, following the same **Who can publish** setting described below.
-- Published posts can't be moved.
+- Scheduling a draft (giving it a publish date) requires publish permission, following the same **Who can publish** setting described below. So does unscheduling one.
+- Published posts can't be moved or unscheduled.
 
 :::note Reviewers see the full calendar
 
@@ -305,6 +335,7 @@ Every reviewer-facing email — a new draft, an updated draft, a change request,
 - **Sign in required.** Like the portal itself, you must be signed in to your WordPress account to see the queue — SyteOps checks your account against the reviewers assigned to each draft, so you only ever see articles you're actually on.
 - **Administrators see everything.** A WordPress administrator opening the queue sees every draft currently assigned to any reviewer, not just their own.
 - **No link expiry.** Once you're signed in, opening a draft from your review queue always works, even past the normal review-link expiry window — your WordPress session is what proves who you are, not the link.
+- **"Received" means received.** Each row shows the date the article arrived for review, and it keeps showing that date no matter what happens to the article afterwards — scheduling it, moving it, or cancelling the schedule. A scheduled article shows both: when it arrived, and when it will publish.
 - **The newest items first.** The queue lists up to 100 articles, drawn from the most recently updated drafts on the site. If there are more than that, or if the site has a very large backlog of drafts awaiting review, the page tells you so with a note reading *"Older items may not be listed."* When you see that note, older articles may be waiting on you even though they aren't shown — open them from their original review email, or ask your site administrator.
 
 Bookmark the queue page, or just click the footer link in your next review email, to check what's waiting on you at any time. Site owners can also reach it from **Content Pipelines → Runs**, using the **Open my review queue** button.
@@ -405,7 +436,7 @@ These are the same provider and model settings used by the Content AI and GEO ar
 | **Who can publish** | Choose **Any selected reviewer** to let any team member who received the review link publish the post, or choose **Author or designated approver only** to restrict publishing to the post's author and a named approver. |
 | **Soft lock** | When enabled, a reviewer who opens a draft while a teammate is already editing it will see a warning banner. This prevents accidental overwrites. |
 | **Offer passkey sign-in** | Adds a "Sign in with a passkey" button to the portal sign-in card. Signing in with a password still works. Available only when the Secure Passkeys plugin is active, and **on by default wherever it is**. See below. |
-| **Scheduled publishing** | When enabled, reviewers see a **Schedule** option in the portal so they can publish the post at a future date and time instead of immediately. When disabled, the schedule option is hidden and all approvals publish immediately. |
+| **Scheduled publishing** | When enabled, reviewers see a **Schedule** option in the portal so they can publish the post at a future date and time instead of immediately. A scheduled post can be edited, moved to another time, or unscheduled at any point before it publishes. When disabled, the schedule option is hidden and all approvals publish immediately. |
 | **Review link expiry** | How long the secure review link in each email stays valid. Options are 3, 7, 14, or 30 days. The default is **7 days**. After a link expires, re-send it from the draft — the post itself is unaffected. |
 
 :::info What "Review link expiry" does and doesn't cover

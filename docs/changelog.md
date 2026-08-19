@@ -8,6 +8,24 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.003
+
+- Fixed: The "Received" date in your review queue now stays correct after a post is scheduled, moved, or has its schedule cancelled. It previously showed the moment the schedule was cancelled, and a scheduled post showed no received date at all.
+- Changed: The per-article history now records what a save actually changed, and writes nothing for a save that changed nothing — so an afternoon of editing no longer pushes the record of who published, scheduled or cancelled the article out of that history.
+
+## v1.6.002
+
+- Fixed: Scheduling a post no longer says it "cannot be undone". A scheduled post can be edited, moved to another time, or cancelled at any point before it publishes, and the portal now says so.
+- Fixed: Reopening a scheduled post no longer shows the Schedule box unticked and the date blank. The post's badge, the Schedule box, and the date and time all come back exactly as you left them.
+- Added: An Unschedule button on scheduled posts, in the review portal and in the calendar picker. It returns the post to a draft and keeps the date you had chosen, so scheduling it again is one click.
+- Fixed: Choosing to publish a scheduled post immediately now actually publishes it. It previously reported success and quietly left the post scheduled.
+- Changed: Scheduling a post no longer ends your session with it. The action bar stays live so you can keep editing, move the date, or cancel.
+- Fixed: Requesting changes on a scheduled post now cancels its schedule, so it cannot publish itself while the author is still rewriting it.
+- Fixed: Scheduled posts now appear in your review queue, labeled with the date they will publish. They were previously missing from it entirely.
+- Fixed: A post that reaches its scheduled time while you are still editing now says so and updates its badge, instead of leaving a "Scheduled" label on a post that is already live.
+- Fixed: With scheduling turned off, an already-scheduled post can still be cancelled — and no longer offers to "update" a schedule it would in fact publish immediately.
+- Changed: The publish button now names what it will do — Approve & Publish, Approve & Schedule, or Update schedule — and warns you before publishing now would cancel an existing schedule.
+
 ## v1.6.001
 
 - Added: Click the featured image to open the same details panel the article's own images use — change where it loads from, choose one from your media library, and set its alt text and caption in one place.
