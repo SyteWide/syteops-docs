@@ -24,6 +24,7 @@ The Runs dashboard shows every pipeline execution:
 - **Filter pills** let you filter by recipe, status (OK, Errors, Skipped, Held), or source (**Direct** — post-processing runs you trigger or that fire on publish/schedule — or each content source you've registered).
 - **Run now** lets you trigger a pipeline manually for any post — choose a recipe, enter a Post ID, and optionally enable dry-run mode to preview changes without writing them.
 - **Runs table** lists each execution with the source (**Direct** for post-processing runs, or a content source), the recipe used, post, status, which stages ran, whether the post was changed, and the trigger type. A delivery that couldn't be mapped shows an amber **Held** status rather than a misleading "OK," and a **Reprocess** button appears on held rows once you've fixed and re-approved the source's mapping — see [Reprocess last payload](#reprocess-last-payload) below.
+- Every row carries a **Delete** button that removes just that entry from the history, after asking you to confirm. Use it to clear a test delivery or a failure you've already dealt with without losing the rest of the record — **Clear all run history**, at the top of the view, still empties everything at once.
 - Click a row to expand the **stage drawer**, which shows the result of each stage with its message and duration.
 
 ### Provider status cards
@@ -181,6 +182,18 @@ Before content flows automatically, SyteOps needs to learn how the app's JSON ma
 3. Click **Test with sample** to preview what each field would receive.
 4. When the mapping looks right, click **Approve mapping**.
 
+If a source doesn't send a summary, you don't have to map one. When an article arrives without an
+excerpt, SyteOps writes a short summary of it and stores that as both the excerpt and the meta
+description — otherwise WordPress falls back to the first words of the article, which for most
+sources means the card repeats the opening heading. A summary already written for an article is
+never replaced. And once an article exists, a source that maps an excerpt field of its own keeps
+control of it: SyteOps fills the gap on the first delivery, then stops competing with the app
+sending the article. Scheduled articles are left alone entirely.
+
+This needs the **Content** AI area configured. Without it the excerpt is left empty for a reviewer
+to write by hand; the **Generate with AI** button in the review portal uses the same AI area, so it
+will not work either until that is set up.
+
 Once approved, the source goes **active**: every future post to its Ingest URL becomes a Review & Publish draft automatically, using the same mapping. Any field the mapping doesn't fill — because that particular delivery genuinely has no value at the mapped location — is simply left blank for the reviewer to complete. SyteOps only pauses (holds) the source when an entire delivery doesn't match the mapping at all, so one article missing a single field never blocks the ones behind it.
 
 Categories and tags are not part of the mapping: SyteOps reads each incoming article and chooses them with AI, preferring your site's existing categories and tags and adding new ones only when nothing fits. Reviewers can adjust the suggestions in the Review & Publish portal before publishing, and the source's **Target tag** (if set) is always added on top.
@@ -313,11 +326,15 @@ You will find it on the **Content Pipelines** tab, under **Review Portal → Art
 ### Removing a watermark
 
 Cropping a watermark out of frame costs you a quarter of every picture. If you would rather keep the
-whole composition, SyteOps can repair the corner on the cropped copy instead — filling it in from the
-picture around it, so the watermark is gone and the framing is untouched.
+whole composition, SyteOps can repair the corner on the cropped copy instead, so the watermark is gone
+and the framing is untouched.
 
 The article page, the media library and social previews all keep the watermark. Only the card loses
 it, so your branding still appears wherever the picture is seen at full size.
+
+**This is done by SyteHero's image AI**, which reconstructs what the background behind the watermark
+should look like. Without SyteHero installed and an image AI key saved in it, the setting is switched
+off and tells you what is missing.
 
 1. Turn on **Remove a watermark**.
 2. Choose **Where the watermark sits** — which corner of the picture carries it.
@@ -325,12 +342,14 @@ it, so your branding still appears wherever the picture is seen at full size.
    small leaves an edge of it showing; far too large starts repairing picture you wanted to keep.
 4. Save, then look at a few cards.
 
-Whether this works depends on what is behind the watermark. It fills the corner in from the surrounding
-picture, so it is convincing on a continuous background — a table, a wall, sky, a blurred backdrop —
-and unconvincing where a hard edge runs through the corner. It is off unless you turn it on, because
-only you know what your pictures look like.
+**What it costs.** Each picture is one image request against your own SyteHero balance, charged once
+per picture rather than once per visit — a card that has been repaired stays repaired. Repairs happen
+in the background, so a card may show its original crop for a minute after you turn this on, and a
+busy archive warms up over a few page loads rather than all at once.
 
-With this on you can set **Keep this part** back to centered and keep the full composition.
+It is off unless you turn it on, because only you know what your pictures look like and what you are
+willing to spend. With it on you can set **Keep this part** back to centered and keep the full
+composition.
 
 ### One more step, in your theme
 
@@ -371,6 +390,8 @@ If you later change the size or the part you keep, existing copies are replaced 
 If a picture was uploaded at a very large size, WordPress keeps a full-resolution copy of it alongside the one it normally uses. SyteOps will fall back to that copy when your card size is larger than the everyday one — so asking for a big card still works. The one exception is a photo that carries rotation information from a camera or phone: those are skipped rather than risk cropping a portrait photo sideways.
 
 Copies are prepared a few at a time — a handful per page view rather than all at once, so the first few visits to a large archive warm it up gradually instead of making one visitor wait for everything. Cards still waiting their turn show the full-size picture in the meantime — exactly what they showed before you turned this on — so nothing looks broken while it catches up.
+
+With **Remove a watermark** on, this happens in two stages. The cropped copy is still prepared while the page loads, so the card is correct straight away; the watermark repair is a request to an image model, which is far too slow to make a visitor wait for, so it runs in the background afterwards. A card therefore shows its ordinary crop first and the repaired one once the job has run — usually within a minute or two on a site with normal traffic.
 
 ### If you turn it off again
 

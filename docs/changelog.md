@@ -8,6 +8,16 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.012
+
+- Changed: Watermark removal on blog and archive cards is now done by SyteHero's image AI, which reconstructs the background behind the watermark instead of smudging it in from the picture around it. The old fill was only convincing on a plain background and looked wrong on anything else. This needs SyteHero installed with an image AI key — without it the setting is switched off and says so. Each picture costs one image request against your own SyteHero balance, once per picture rather than once per visit, and repairs run in the background so a card may show its original crop for a minute after you turn it on. Fixed: A repair that could not run was recorded as if it had succeeded, so it was never tried again. On a server missing the image library that meant every picture was reprocessed once, nothing changed, and nothing said why.
+## v1.6.011
+
+- Added: Articles that arrive without a summary now get one written for them. When a source sends no excerpt, SyteOps writes a short summary of the article and stores it as the excerpt and the meta description, so blog and archive cards stop showing the article's opening heading twice. A summary you or a reviewer has already written is never overwritten, and if your source sends an excerpt field of its own that field stays in charge. The Generate with AI button in the review portal now produces exactly the same kind of sentence.
+## v1.6.010
+
+- Added: You can now delete a single entry from the pipeline run history. Until now the only way to remove anything was to clear the whole history, so tidying away one test delivery meant losing the record of everything else. Every row now carries its own Delete button, and it asks you to confirm before it removes anything.
+
 ## v1.6.009
 
 - Added: The listing image setting now tells you whether your theme is actually using it. SyteOps watches which picture size your cards ask for and reports what it saw on the same settings screen, naming the page and the size. Visit a listing page after you change your theme, then reload the settings screen — the reading updates itself, so it confirms the fix rather than needing to be cleared.
