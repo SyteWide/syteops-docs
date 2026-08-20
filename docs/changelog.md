@@ -8,6 +8,16 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.014
+
+- Changed: The Review Portal settings screen now places each label directly above its control, so settings no longer float across a wide empty gap on large screens.
+- Changed: The reviewer and CC selection lists are taller, so more than two names are visible at once.
+
+## v1.6.013
+
+- Fixed: Deleting a pipeline run now removes the row and updates the page's counts immediately, instead of graying the row out until the page is refreshed.
+- Changed: The run history's row actions (Resend email, Re-run, Open in portal, Delete) now stack vertically, so the rest of the row has room to breathe.
+
 ## v1.6.012
 
 - Changed: Watermark removal on blog and archive cards is now done by SyteHero's image AI, which reconstructs the background behind the watermark instead of smudging it in from the picture around it. The old fill was only convincing on a plain background and looked wrong on anything else. This needs SyteHero installed with an image AI key — without it the setting is switched off and says so. Each picture costs one image request against your own SyteHero balance, once per picture rather than once per visit, and repairs run in the background so a card may show its original crop for a minute after you turn it on. Fixed: A repair that could not run was recorded as if it had succeeded, so it was never tried again. On a server missing the image library that meant every picture was reprocessed once, nothing changed, and nothing said why.
