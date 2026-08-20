@@ -8,6 +8,16 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.009
+
+- Added: The listing image setting now tells you whether your theme is actually using it. SyteOps watches which picture size your cards ask for and reports what it saw on the same settings screen, naming the page and the size. Visit a listing page after you change your theme, then reload the settings screen — the reading updates itself, so it confirms the fix rather than needing to be cleared.
+- Note: SyteOps never changes a theme setting for you — it only reads your pages and reports what it saw, and it says so plainly when a theme renders its cards in a way it cannot follow. It also names the one case no theme setting can fix: a card that asks for an exact pixel size instead of a named one.
+
+## v1.6.008
+
+- Added: A blog and archive card can now drop a watermark from its picture. SyteOps already prepares a second copy of each picture cut to your cards' shape; it can now repair the watermark's corner on that copy, filling it in from the picture around it. The article page, the media library and social previews all keep the watermark — only the card loses it, so branding stays where it is seen at full size and cards read as clean photographs. Choose the corner and how much of it to repair.
+- Fixed: On sites using an image CDN, the prepared listing copy was being ignored. The CDN built its own responsive versions from the original picture and the browser preferred one of those, so cards silently went back to a center crop of the untouched file — undoing the crop you chose and re-cropping any watermark. Cards now always use the copy SyteOps prepared.
+
 ## v1.6.007
 
 - Added: Yoast SEO and Rank Math can now be connected the same way Squirrly SEO already could. With one of them switched on, the meta description, focus keyword and cornerstone/pillar flag your articles get in the review portal are written straight into that plugin's own fields.

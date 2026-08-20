@@ -307,8 +307,30 @@ You will find it on the **Content Pipelines** tab, under **Review Portal → Art
 
 1. Turn on **Crop a copy for listings**.
 2. Set the **Card size**. Measure how wide and tall one card's picture is on your own site, then double both numbers so it still looks sharp on high-resolution screens. If a card's picture area is 410 by 308 pixels, enter **820** by **616**.
-3. Choose **Keep this part** — which portion of the picture to keep when there is more of it than the card can show. Leave it centered unless you have a reason not to. If your pictures carry a logo or watermark in one corner, pick the opposite side and it will fall outside the crop entirely.
+3. Choose **Keep this part** — which portion of the picture to keep when there is more of it than the card can show. Leave it centered unless you have a reason not to. If your pictures carry a watermark in one corner, pick the opposite side and it will fall outside the crop entirely — or leave the framing alone and use **Remove a watermark** below.
 4. Save.
+
+### Removing a watermark
+
+Cropping a watermark out of frame costs you a quarter of every picture. If you would rather keep the
+whole composition, SyteOps can repair the corner on the cropped copy instead — filling it in from the
+picture around it, so the watermark is gone and the framing is untouched.
+
+The article page, the media library and social previews all keep the watermark. Only the card loses
+it, so your branding still appears wherever the picture is seen at full size.
+
+1. Turn on **Remove a watermark**.
+2. Choose **Where the watermark sits** — which corner of the picture carries it.
+3. Set the **Area to repair** as a share of the card. Give the watermark a little room on every side. Too
+   small leaves an edge of it showing; far too large starts repairing picture you wanted to keep.
+4. Save, then look at a few cards.
+
+Whether this works depends on what is behind the watermark. It fills the corner in from the surrounding
+picture, so it is convincing on a continuous background — a table, a wall, sky, a blurred backdrop —
+and unconvincing where a hard edge runs through the corner. It is off unless you turn it on, because
+only you know what your pictures look like.
+
+With this on you can set **Keep this part** back to centered and keep the full composition.
 
 ### One more step, in your theme
 
@@ -318,6 +340,27 @@ SyteOps prepares the cropped copy, but your theme decides which picture its card
 - Set the card's **image ratio** to match the size you entered above. If you used 820 × 616, the card's ratio is 4/3.
 
 Until both are set, cards carry on using whichever size the theme was already asking for.
+
+### Checking whether it took
+
+SyteOps watches your own pages to see which picture size your cards actually ask for, and reports what it saw on the same **One more step** row — so you never have to guess whether the theme change worked. After you save, visit your blog or an archive page, then reload the settings screen. You will see one of:
+
+- **Not yet checked.** No card has been seen asking for anything yet. Visit a listing page and come back.
+- **Seen in use.** A card asked for the listing size, and the message names where. The theme change worked on that page.
+- **Seen in use … but your cards also asked for something else.** One page is using the listing size and another is not — the message names both, and the size the other one asked for.
+- **Not seen in use.** A card was seen asking for a different size, and never for the listing size. The message names the size it found; look for the theme setting currently holding that size and change it to the listing size.
+
+The message calls out one case separately, naming the page it means: a card asking for an exact pixel size rather than a named one. There is no setting to change in that situation, because there is no size name for the theme to point at the listing size — unless those pixels happen to match your card size above, in which case SyteOps counts it as working and says so.
+
+A few things worth knowing about the reading:
+
+- **It reports what it saw, not a verdict on your site.** It can only tell you about pages it managed to watch, so "seen in use on your blog page" does not mean every template is wired — only that one.
+- **Some themes cannot be followed.** A featured post above the grid, a recent-posts widget, or a page builder that prepares its images in advance can all hide the real card request. On those themes the reading may name the wrong page or stay quiet. SyteOps errs toward saying "not seen" rather than claiming success it cannot back up — so if you see that on a site you believe is set up correctly, check the theme setting directly.
+- **It updates itself.** Once you fix your theme and load the page again, the reading changes. It does not need clearing, and there is nothing to reset.
+- **Only blog posts count.** Product, portfolio and other custom content types are laid out by their own plugin rather than by your blog card setting, so they are left out — naming them here would send you looking for a setting that does not exist.
+- **A static front page is not watched.** If your only listing is a "latest posts" section on your home page, the reading stays on "Not yet checked". Check the theme setting directly in that case.
+
+SyteOps never changes a theme setting for you. It only reads your pages and reports what it saw.
 
 ### Existing pictures
 
