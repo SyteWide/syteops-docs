@@ -8,6 +8,31 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.021
+
+- Fixed: Blog cards on block-theme Query Loop layouts and on a static home page now get the cropped listing picture and the theme-wiring reading the same way as the blog index.
+
+## v1.6.020
+
+- Changed: Related-post and post-grid cards below an article now use the cropped listing picture when that setting is on. The article's own featured image stays the full, branded original.
+- Fixed: Large imports and WP-CLI featured-image sets now queue corner cleanup for every picture instead of stopping after the first few in one process.
+
+## v1.6.019
+
+
+- Fixed: A blog card whose cropped copy had not been prepared yet was served the full-size original with its watermark intact. Cards now keep the size your theme asked for until the copy actually exists.
+- Fixed: Product and other custom archives were being given the blog card's crop and shape. Only blog posts are affected now, matching what the settings screen reports.
+
+## v1.6.018
+
+- Added: The listing image now reaches themes that build their blog cards their own way, and cards that ask for an exact pixel size instead of a named one, so those cards get the cropped copy without you editing your theme. Article pages are still untouched.
+- Added: The settings screen now warns when your theme's cards expect a different shape from the card size you entered, naming both — a mismatch quietly re-crops the copy you just arranged to have cropped correctly.
+
+## v1.6.017
+
+- Added: Rebuild a picture's listing version on demand, from the review portal or the media library, and have listing pages use it automatically without editing your theme. Newly featured pictures now have their corner cleaned straight away instead of waiting for the first visitor to a listing page.
+- Added: Make a clean full-size copy of a picture for use inside the article, leaving the original and everywhere else it appears untouched. Imported pictures now arrive with a real name instead of their filename.
+
 ## v1.6.016
 
 - Added: Review Portal settings groups now have an open/closed arrow, jump links at the top, and Open all / Close all, so you can reach a section without scrolling the whole page.

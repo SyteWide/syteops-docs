@@ -351,6 +351,14 @@ It is off unless you turn it on, because only you know what your pictures look l
 willing to spend. With it on you can set **Keep this part** back to centered and keep the full
 composition.
 
+### Using it on listing pages automatically
+
+Turning on **Use it on listing pages automatically** asks for the cropped copy on your blog, archive and search pages without you changing a theme setting at all. Article pages are untouched, so a picture still appears full and unaltered on the article itself.
+
+This covers themes two different ways, so it works on more of them than a single setting would. Most themes render their cards through WordPress's own featured-image function, and those are handled directly. For a theme that builds its cards some other way — and for a theme that asks for an exact pixel size instead of a named one, which no theme setting can ever redirect — SyteOps identifies the card by recognizing the article's own featured image and supplies the cropped copy anyway.
+
+It is off unless you turn it on, because it changes what your live pages render. If you would rather set this in your theme, leave it off and follow the next section instead. Either way the reading further down tells you where you stand.
+
 ### One more step, in your theme
 
 SyteOps prepares the cropped copy, but your theme decides which picture its cards ask for — SyteOps cannot make that choice for it. Go to your theme's settings and do two things:
@@ -369,7 +377,15 @@ SyteOps watches your own pages to see which picture size your cards actually ask
 - **Seen in use … but your cards also asked for something else.** One page is using the listing size and another is not — the message names both, and the size the other one asked for.
 - **Not seen in use.** A card was seen asking for a different size, and never for the listing size. The message names the size it found; look for the theme setting currently holding that size and change it to the listing size.
 
-The message calls out one case separately, naming the page it means: a card asking for an exact pixel size rather than a named one. There is no setting to change in that situation, because there is no size name for the theme to point at the listing size — unless those pixels happen to match your card size above, in which case SyteOps counts it as working and says so.
+The message calls out one case separately, naming the page it means: a card asking for an exact pixel size rather than a named one. There is no theme setting to change in that situation, because there is no size name to point anywhere — so if **Use it on listing pages automatically** is on, SyteOps supplies the cropped copy there itself and the message says so. With it off, the message tells you that turning it on covers the case. Either way, if those pixels happen to match your card size above, SyteOps counts it as working and says so.
+
+### When your theme expects a different shape
+
+Because a fixed pixel request states the shape your theme is expecting, SyteOps can compare it against the card size you entered. When the two disagree it says so, naming both — for example a theme asking for 1920 × 1080 (1.78:1) against a card set to 820 × 616 (1.33:1).
+
+This matters because the shapes have to agree. If they do not, the browser crops or letterboxes the copy you just arranged to have cropped correctly, and the card looks wrong for a reason nothing else on the screen would explain. Fix it from whichever end you prefer: change the card size here to match your theme, or change the card's ratio in your theme to match the size you entered.
+
+The warning only appears when there is a real disagreement. The same shape at a different size — 410 × 308 against a card of 820 × 616 — is exactly what you get by following the advice to double your measurement, so it is not flagged. And a theme asking for a named size is never flagged, because a name says nothing about shape.
 
 A few things worth knowing about the reading:
 
@@ -377,9 +393,43 @@ A few things worth knowing about the reading:
 - **Some themes cannot be followed.** A featured post above the grid, a recent-posts widget, or a page builder that prepares its images in advance can all hide the real card request. On those themes the reading may name the wrong page or stay quiet. SyteOps errs toward saying "not seen" rather than claiming success it cannot back up — so if you see that on a site you believe is set up correctly, check the theme setting directly.
 - **It updates itself.** Once you fix your theme and load the page again, the reading changes. It does not need clearing, and there is nothing to reset.
 - **Only blog posts count.** Product, portfolio and other custom content types are laid out by their own plugin rather than by your blog card setting, so they are left out — naming them here would send you looking for a setting that does not exist.
-- **A static front page is not watched.** If your only listing is a "latest posts" section on your home page, the reading stays on "Not yet checked". Check the theme setting directly in that case.
+- **A static front page is watched as "on your home page".** If your home page shows latest posts (for example in a Query Loop), load that page once so the reading can record what size those cards asked for.
 
 SyteOps never changes a theme setting for you. It only reads your pages and reports what it saw.
+
+### Using the same cropped copy elsewhere
+
+The listing size is a normal WordPress image size, so once it is switched on you can choose it anywhere WordPress offers you a size. Look for it by the name shown on the settings screen — it appears in:
+
+- Your theme's blog or archive card image size — the setting the reading above is about.
+- The **Image** block in the editor, under **Image size**.
+- The media picker, under **Attachment display settings**.
+- Any related-posts or recent-posts block that lets you choose an image size.
+- Related-post and post-grid cards **below an article** also use this copy when **Use the listing size on blog and archive cards** is on — the article's own featured image stays the full original.
+
+Wherever you choose it, it is the same file — cropped once and reused, watermark repair included.
+
+### Rebuilding one picture
+
+Sometimes a single picture comes out wrong: the repaired corner looks smudged, or the repair could not run at the moment it was tried. SyteOps records that attempt so it does not keep retrying and charging you for the same failure — which also means it will not try again on its own.
+
+**Reprocess** is how you ask it to. It throws away the cropped copy, forgets the previous attempt, and starts over.
+
+- **In the review portal**, the **Reprocess images** button beside the publish bar does this for the article's featured image and every picture it imported.
+- **In your media library**, each picture has a **Reprocess listing image** link in its row, and you can select several and use **Reprocess listing image** from the bulk actions menu.
+
+With **Remove a watermark** on, the work runs in the background and the message says so — the card updates a minute or two later rather than the moment you click. It also gives a picture still named after its file a real name, taken from the article it belongs to.
+
+### A clean copy at full size
+
+Watermarks on the article itself are usually what you want — that is where the picture is seen at full size. But occasionally one particular picture would be better without it.
+
+**Make a clean copy** does that. It adds a second picture to your media library at the original size, with the corner repaired, and leaves the original completely untouched — so nothing you have already published changes, and the picture keeps its watermark everywhere else it appears.
+
+- **In the review portal**, click a picture in the article and choose **Use a clean copy**. The article is pointed at the new copy; save to keep it.
+- **In your media library**, each picture has a **Make a clean copy** link in its row.
+
+Two things to know. It costs one image request, the same as any other repair. And the repair works on a small window around the corner, which is invisible at card size but can read slightly softer than its surroundings at full resolution — so look at the result before you publish. That is why this is offered one picture at a time rather than as something you switch on for the whole site.
 
 ### Existing pictures
 
