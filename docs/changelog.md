@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.022
+
+- Added: Social Publishing is now its own settings group on the Review Portal panel, with a jump button next to Workflow, What gets sent, and Setup.
+- Improved: those jump links now use the same pill buttons as the other settings tabs.
+
 ## v1.6.021
 
 - Fixed: Blog cards on block-theme Query Loop layouts and on a static home page now get the cropped listing picture and the theme-wiring reading the same way as the blog index.
