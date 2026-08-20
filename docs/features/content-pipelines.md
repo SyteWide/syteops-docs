@@ -24,8 +24,8 @@ The Runs dashboard shows every pipeline execution:
 - **Filter pills** let you filter by recipe, status (OK, Errors, Skipped, Held), or source (**Direct** — post-processing runs you trigger or that fire on publish/schedule — or each content source you've registered).
 - **Run now** lets you trigger a pipeline manually for any post — choose a recipe, enter a Post ID, and optionally enable dry-run mode to preview changes without writing them.
 - **Runs table** lists each execution with the source (**Direct** for post-processing runs, or a content source), the recipe used, post, status, which stages ran, whether the post was changed, and the trigger type. A delivery that couldn't be mapped shows an amber **Held** status rather than a misleading "OK," and a **Reprocess** button appears on held rows once you've fixed and re-approved the source's mapping — see [Reprocess last payload](#reprocess-last-payload) below.
-- Every row carries a **Delete** button that removes just that entry from the history, after asking you to confirm. Use it to clear a test delivery or a failure you've already dealt with without losing the rest of the record — **Clear all run history**, at the top of the view, still empties everything at once.
-- Click a row to expand the **stage drawer**, which shows the result of each stage with its message and duration.
+- Each processed row keeps its actions in a stacked list on the right: **Resend email**, **Re-run**, **Open in portal** (when the portal can open that article), and **Delete**. The labels line up on the left so the rest of the row has room. **Delete** asks you to confirm, then removes just that entry and updates the counts on the page. Use it to clear a test delivery or a failure you've already dealt with without losing the rest of the record — **Clear all run history**, at the top of the view, still empties everything at once.
+- Click the expand arrow beside the actions to open the **stage drawer**, which shows the result of each stage with its message and duration.
 
 ### Provider status cards
 

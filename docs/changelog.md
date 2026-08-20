@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.016
+
+- Added: Review Portal settings groups now have an open/closed arrow, jump links at the top, and Open all / Close all, so you can reach a section without scrolling the whole page.
+
+## v1.6.015
+
+- Fixed: The stacked actions on each pipeline run (Resend email, Re-run, Open in portal, Delete) now line up on one left edge, and the expand arrow sits at the top of the row instead of floating over the links.
+
 ## v1.6.014
 
 - Changed: The Review Portal settings screen now places each label directly above its control, so settings no longer float across a wide empty gap on large screens.

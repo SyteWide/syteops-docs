@@ -379,7 +379,7 @@ Changes to these lists take effect on the next draft that arrives from your cont
 
 ## Email notifications
 
-Every automated portal email is controlled from one place: **SyteOps → Content Pipelines → Review Portal → Email notifications**. Each can be switched on or off independently:
+Every automated portal email is controlled from one place: **SyteOps → Content Pipelines → Review Portal**, in the **What gets sent & published** group, under **Email notifications**. Each can be switched on or off independently:
 
 - **New draft received** *(on by default)* — emails the author and reviewers when a new article arrives and its review draft is created. This is the main review email, with the article preview, who can review it, and the secure editor link.
 - **Draft updated by source** *(off by default)* — emails the author and reviewers when your content source re-delivers an article **with changed content**, so nobody reviews a stale version. Identical re-deliveries (delivery retries) never send an email.
@@ -394,9 +394,21 @@ You can also see each email's outcome in the run history: each draft-creation ro
 
 ## Review Portal settings (for site owners)
 
-Site owners can configure the Review Portal from **SyteOps → Content Pipelines**, then clicking the **Review Portal** settings view. The panel is organized into several areas.
+Site owners can configure the Review Portal from **SyteOps → Content Pipelines**, then the **Review Portal** settings view.
+
+The panel is split into three groups so everyday settings stay near the top:
+
+- **Workflow** — who can publish, pre-publish checks, article images, and reviewer permissions. Starts open.
+- **What gets sent & published** — review emails and what your AI files publish. Starts open.
+- **Setup** — branding and AI providers. Starts closed, because you usually set these once.
+
+Each group shows an arrow on its colored bar. Click the bar (or press Enter or Space when it is focused) to open or close it. Jump links at the top of the panel take you to a group and open it without closing the others. **Open all** and **Close all** sit on the same row.
+
+Closing a group only hides it on screen. Settings inside a closed group still save when you click **Save settings**.
 
 ### Branding
+
+This lives under **Setup**. Open that group (or use the jump link at the top) if you don't see it.
 
 By default the portal uses the same logo, company name, and colors you have set in your general site branding. If you want the review emails and portal page to display different branding — for example, a client-facing brand rather than your internal agency name — enable **Override branding for the Review Portal** and fill in the alternative company name, logo URL, and color pickers. When you turn the override on, the color fields start from your current branding so you can adjust from there instead of from blank.
 
@@ -427,6 +439,8 @@ Turn one off if your workflow legitimately publishes without it — for example,
 A requirement is never enforced against a reviewer who could not satisfy it. If they lack permission for that panel, or the AI provider behind the fix is not configured, the requirement is skipped for them automatically rather than leaving them unable to publish.
 
 ### AI assistance
+
+This lives under **Setup**. Open that group (or use the jump link at the top) if you don't see it.
 
 This section lets you choose the AI provider and model used by two features inside the portal:
 
