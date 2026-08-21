@@ -335,14 +335,26 @@ The article page, the media library and social previews all keep the watermark. 
 it, so your branding still appears wherever the picture is seen at full size.
 
 **This is done by SyteHero's image AI**, which reconstructs what the background behind the watermark
-should look like. Without SyteHero installed and an image AI key saved in it, the setting is switched
-off and tells you what is missing.
+should look like. **Crop a copy for listings** must be on first — the watermark controls stay gray until
+it is. Without SyteHero installed and an image AI key saved in it, the setting is switched off and
+tells you what is missing.
 
 1. Turn on **Remove a watermark**.
 2. Choose **Where the watermark sits** — which corner of the picture carries it.
 3. Set the **Area to repair** as a share of the card. Give the watermark a little room on every side. Too
    small leaves an edge of it showing; far too large starts repairing picture you wanted to keep.
-4. Save, then look at a few cards.
+4. If more than one image API is connected in SyteHero, choose **Image API**. With only one connected,
+   that row stays hidden. API keys stay in SyteHero either way — SyteOps does not store them.
+5. Choose a **Repair model**. The list is only the models that edit the picture you already have and
+   leave the rest of it alone. Models that reinvent the whole picture are not offered. A cost line
+   under the list names the per-picture estimate when SyteHero can provide one.
+6. **Quality** and **Seed** appear only when the chosen model supports them. Quality is Standard, High,
+   or Ultra. Seed `0` lets the model pick at random; any other number makes the same repair
+   repeatable.
+7. Save, then look at a few cards.
+
+Changing the model, quality, or seed later rebuilds the cropped copies, which is another image
+request per picture. Saving the rest of this panel without changing those choices does not.
 
 **What it costs.** Each picture is one image request against your own SyteHero balance, charged once
 per picture rather than once per visit — a card that has been repaired stays repaired. Repairs happen

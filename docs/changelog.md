@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.027
+
+- Added: Watermark repair on listing cards lets you pick which connected image API and high-fidelity model to use, with quality and seed when the model supports them.
+
 ## v1.6.026
 
 - Changed: Listing cards keep the theme image until a repaired crop exists, Reprocess no longer deletes the current crop first, and the full-size clean-copy action is removed.
