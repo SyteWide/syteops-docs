@@ -310,19 +310,15 @@ Forwarding is optional and never gets in the way: SyteOps always creates the Rev
 
 ## Listing image
 
-Blog and archive pages show each article as a card, and every card forces the picture into one fixed shape. When your pictures are a different shape from the card, the browser crops away whatever does not fit — often about a quarter of the width, split between the two sides. That is enough to slice a logo sitting in a corner clean in half. At the same time the card downloads the full-size picture even though it only ever displays it small.
-
-**Listing image** solves both at once. SyteOps prepares a second, smaller copy of each picture, already cut to the shape your cards use, and hands the cards that copy instead. There is nothing left for the browser to crop, you decide which part of the picture survives the cut, and the file is sized for the space it actually appears in.
-
-Article pages are not affected. They keep the original picture exactly as it is — only listing and archive cards use the cropped copy.
+Blog and archive cards force pictures into a fixed shape and still download the full-size file. **Listing image** crops a card-sized copy so those cards do not stretch or clip the original. Article pages keep the original.
 
 You will find it on the **Content Pipelines** tab, under **Review Portal → Article images**.
 
 ### Setting it up
 
 1. Turn on **Crop a copy for listings**.
-2. Set the **Card size**. Measure how wide and tall one card's picture is on your own site, then double both numbers so it still looks sharp on high-resolution screens. If a card's picture area is 410 by 308 pixels, enter **820** by **616**.
-3. Choose **Keep this part** — which portion of the picture to keep when there is more of it than the card can show. Leave it centered unless you have a reason not to. If your pictures carry a watermark in one corner, pick the opposite side and it will fall outside the crop entirely — or leave the framing alone and use **Remove a watermark** below.
+2. Set the **Card size**. Measure your card and double it for retina screens. If a card is 410 by 308 pixels, enter **820** by **616**. Smaller pictures are not stretched.
+3. Choose **Keep this part**. For a corner watermark, crop the opposite side — or use **Remove a watermark** below.
 4. Save.
 
 ### Removing a watermark
@@ -341,8 +337,7 @@ tells you what is missing.
 
 1. Turn on **Remove a watermark**.
 2. Choose **Where the watermark sits** — which corner of the picture carries it.
-3. Set the **Area to repair** as a share of the card. Give the watermark a little room on every side. Too
-   small leaves an edge of it showing; far too large starts repairing picture you wanted to keep.
+3. Set the **Area to repair**. Leave a little room around the watermark.
 4. If more than one image API is connected in SyteHero, choose **Image API**. With only one connected,
    that row stays hidden. API keys stay in SyteHero either way — SyteOps does not store them.
 5. Choose a **Repair model**. The list is only the models that edit the picture you already have and
@@ -352,6 +347,10 @@ tells you what is missing.
    or Ultra. Seed `0` lets the model pick at random; any other number makes the same repair
    repeatable.
 7. Save, then look at a few cards.
+
+**Already-repaired pictures.** Turning this on, or updating SyteOps after a repair already ran, does
+not rebuild pictures that already have a cropped copy. Use **Reprocess** (below) on those so they
+pick up the current repair.
 
 Changing the model, quality, or seed later rebuilds the cropped copies, which is another image
 request per picture. Saving the rest of this panel without changing those choices does not.
@@ -367,29 +366,24 @@ composition.
 
 ### Using it on listing pages automatically
 
-Turning on **Use it on listing pages automatically** asks for the cropped copy on your blog, archive and search pages without you changing a theme setting at all. Article pages are untouched, so a picture still appears full and unaltered on the article itself.
+Turning on **Use it on listing pages automatically** uses the cropped copy on blog, archive, and search pages. Article pages keep the original.
 
-This covers themes two different ways, so it works on more of them than a single setting would. Most themes render their cards through WordPress's own featured-image function, and those are handled directly. For a theme that builds its cards some other way — and for a theme that asks for an exact pixel size instead of a named one, which no theme setting can ever redirect — SyteOps identifies the card by recognizing the article's own featured image and supplies the cropped copy anyway.
+This covers themes two different ways. Most themes render cards through WordPress's featured-image function; those are handled directly. For a theme that builds cards some other way — or asks for an exact pixel size, which no theme setting can redirect — the cropped copy is supplied by recognizing the article's featured image.
 
-It is off unless you turn it on, because it changes what your live pages render. If you would rather set this in your theme, leave it off and follow the next section instead. Either way the reading further down tells you where you stand.
+It is off unless you turn it on, because it changes what live pages render.
 
-### One more step, in your theme
+### Where cards use this copy
 
-SyteOps prepares the cropped copy, but your theme decides which picture its cards ask for — SyteOps cannot make that choice for it. Go to your theme's settings and do two things:
+The settings screen reports whether listing cards on the pages it has checked are using the cropped copy. Visit your blog, home, or an archive page once, then reload the settings screen.
 
-- Set the blog card's **image size** to the listing size SyteOps added. On Blocksy this is **Customizer → Blog → post card → Featured Image → Image Size**.
-- Set the card's **image ratio** to match the size you entered above. If you used 820 × 616, the card's ratio is 4/3.
+- **Not checked yet.** No listing page has been seen. Visit one and come back.
+- **Using the cropped copy.** The pages checked are serving the cropped copy. If automatic use is on, leftover theme sizes (for example Thumbnail on the blog page) are a note, not a warning — visitors already see the cropped copy. You can still point those pages at the listing size in the theme if you want them to keep working with automatic use off.
+- **Not using the cropped copy yet.** Automatic use is off, and those pages asked for a different size. Turn automatic use on, or set those pages to the listing size in your theme.
+- **Some listing pages use it; others do not.** Automatic use is off, and only some checked pages are on the listing size. The note names both.
 
-Until both are set, cards carry on using whichever size the theme was already asking for.
+Home page is the front of the site. Blog page is the posts list — often `/blog/`.
 
-### Checking whether it took
-
-SyteOps watches your own pages to see which picture size your cards actually ask for, and reports what it saw on the same **One more step** row — so you never have to guess whether the theme change worked. After you save, visit your blog or an archive page, then reload the settings screen. You will see one of:
-
-- **Not yet checked.** No card has been seen asking for anything yet. Visit a listing page and come back.
-- **Seen in use.** A card asked for the listing size, and the message names where. The theme change worked on that page.
-- **Seen in use … but your cards also asked for something else.** One page is using the listing size and another is not — the message names both, and the size the other one asked for.
-- **Not seen in use.** A card was seen asking for a different size, and never for the listing size. The message names the size it found; look for the theme setting currently holding that size and change it to the listing size.
+On Blocksy the theme setting is **Customizer → Blog → post card → Featured Image → Image Size**. If you used 820 × 616, the card's ratio is 4/3.
 
 The message calls out one case separately, naming the page it means: a card asking for an exact pixel size rather than a named one. There is no theme setting to change in that situation, because there is no size name to point anywhere — so if **Use it on listing pages automatically** is on, SyteOps supplies the cropped copy there itself and the message says so. With it off, the message tells you that turning it on covers the case. Either way, if those pixels happen to match your card size above, SyteOps counts it as working and says so.
 
@@ -403,8 +397,8 @@ The warning only appears when there is a real disagreement. The same shape at a 
 
 A few things worth knowing about the reading:
 
-- **It reports what it saw, not a verdict on your site.** It can only tell you about pages it managed to watch, so "seen in use on your blog page" does not mean every template is wired — only that one.
-- **Some themes cannot be followed.** A featured post above the grid, a recent-posts widget, or a page builder that prepares its images in advance can all hide the real card request. On those themes the reading may name the wrong page or stay quiet. SyteOps errs toward saying "not seen" rather than claiming success it cannot back up — so if you see that on a site you believe is set up correctly, check the theme setting directly.
+- **It reports what it saw, not a verdict on your site.** It can only tell you about pages it managed to watch, so "using the cropped copy" does not mean every template is wired — only those it checked.
+- **Some themes cannot be followed.** A featured post above the grid, a recent-posts widget, or a page builder that prepares its images in advance can all hide the real card request. On those themes the reading may name the wrong page or stay quiet. SyteOps errs toward saying the cropped copy is not in use rather than claiming success it cannot back up — so if you see that on a site you believe is set up correctly, check the theme setting directly.
 - **It updates itself.** Once you fix your theme and load the page again, the reading changes. It does not need clearing, and there is nothing to reset.
 - **Only blog posts count.** Product, portfolio and other custom content types are laid out by their own plugin rather than by your blog card setting, so they are left out — naming them here would send you looking for a setting that does not exist.
 - **A static front page is watched as "on your home page".** If your home page shows latest posts (for example in a Query Loop), load that page once so the reading can record what size those cards asked for.
@@ -425,7 +419,10 @@ Wherever you choose it, it is the same file — cropped once and reused, waterma
 
 ### Rebuilding one picture
 
-Sometimes a single picture comes out wrong: the repaired corner looks smudged, or the repair could not run at the moment it was tried. SyteOps records that attempt so it does not keep retrying and charging you for the same failure — which also means it will not try again on its own.
+Sometimes a single picture comes out wrong: the repaired corner looks smudged, a leftover logo
+fragment sits on the true rim, or the repair could not run at the moment it was tried. SyteOps
+records that attempt so it does not keep retrying and charging you for the same failure — which also
+means it will not try again on its own.
 
 **Reprocess** is how you ask it to. It forgets the previous failed attempt and starts over, keeping the current cropped copy on cards until the new one is ready.
 

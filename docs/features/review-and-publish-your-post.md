@@ -419,27 +419,28 @@ Use the **Preview Portal** button to open a read-only preview of the portal — 
 
 Under **Article images** you decide what happens to pictures an article is still borrowing from another site.
 
-- **Import images on publish** — copy them into your media library when an article publishes. On by default; reviewers can override it per article.
-- **Keep alt text and title**, **Keep captions** — carry what the article says about a picture across to its media library entry. Both on by default.
-- **Record where each image came from** — store the import date and the article that triggered it. The original address is always kept regardless of this setting; that is what makes reverting possible.
-- **Read metadata from the image file** — also read any title or description embedded in the file. Off by default, because pictures made by AI tools rarely carry anything useful there. Worth turning on for photography.
+- **Import images on publish** — copy remote images into your media library. On by default; reviewers can override per article or revert.
+- **Keep alt text and title**, **Keep captions** — copy those from the article. Both on by default.
+- **Record where each image came from** — store import date and article. The original URL is always kept so revert works.
+- **Read metadata from the image file** — read title and description from the file. Off by default — AI images rarely have useful metadata.
 
 If an article has more pictures than one publish can safely fetch, the rest are copied in the background over the following minutes, and the reviewer is told that copying is continuing.
 
 ### Pre-publish requirements
 
-Four switches control what **Approve & Publish** insists on before an article can go live. All four are **on** by default:
+Publish is blocked until these are met. All of the following are **on** by default:
 
-- **GEO analysis has run** — require an AI-engine readiness analysis.
-- **GEO analysis is current** — also require a fresh analysis when the article changed after it was last analyzed. Formatting-only edits are ignored, so a reviewer fixing a typo is not sent back for another analysis.
-- **Meta description present** — require a meta description.
-- **Categories & tags assigned** — require at least one category and one tag.
+- **GEO analysis has run**
+- **GEO analysis is current** — required after the article changes. Formatting-only edits are ignored.
+- **Meta description present**
+- **Categories & tags assigned**
+- **AI answers reviewed** — required when answers are published
 
-A separate optional switch, **Analyze GEO when a draft is first created**, is **off** by default. When it is on (and a GEO AI provider is configured), a new article is analyzed the first time it arrives, the same work as **Analyze GEO** in the portal. Later deliveries of that article are not re-analyzed.
+A requirement is skipped when the reviewer cannot act on it (no permission for that area, or the AI behind it is not configured).
 
-Turn one off if your workflow legitimately publishes without it — for example, if you do not use tags. Whatever you leave on is enforced both in the portal and on the server, so it holds even if a reviewer leaves a browser tab open for a long time.
+**Analyze GEO when a draft is first created** is **off** by default. When it is on (and a GEO AI provider is configured), analysis runs once when the article first arrives. Later deliveries of that article are not re-analyzed.
 
-A requirement is never enforced against a reviewer who could not satisfy it. If they lack permission for that panel, or the AI provider behind the fix is not configured, the requirement is skipped for them automatically rather than leaving them unable to publish.
+Turn a requirement off if your workflow publishes without it — for example, if you do not use tags. Whatever you leave on is enforced in the portal and on the server.
 
 ### AI assistance
 
@@ -456,11 +457,14 @@ These are the same provider and model settings used by the Content AI and GEO ar
 
 | Setting | What it controls |
 |---|---|
-| **Who can publish** | Choose **Any selected reviewer** to let any team member who received the review link publish the post, or choose **Author or designated approver only** to restrict publishing to the post's author and a named approver. |
-| **Soft lock** | When enabled, a reviewer who opens a draft while a teammate is already editing it will see a warning banner. This prevents accidental overwrites. |
-| **Offer passkey sign-in** | Adds a "Sign in with a passkey" button to the portal sign-in card. Signing in with a password still works. Available only when the Secure Passkeys plugin is active, and **on by default wherever it is**. See below. |
-| **Scheduled publishing** | When enabled, reviewers see a **Schedule** option in the portal so they can publish the post at a future date and time instead of immediately. A scheduled post can be edited, moved to another time, or unscheduled at any point before it publishes. When disabled, the schedule option is hidden and all approvals publish immediately. |
-| **Review link expiry** | How long the secure review link in each email stays valid. Options are 3, 7, 14, or 30 days. The default is **7 days**. After a link expires, re-send it from the draft — the post itself is unaffected. |
+| **Who can publish** | **Any selected reviewer**, or **Author or designated approver only**. |
+| **Default publish type** | Pre-selected type in the portal's publish picker. |
+| **Soft lock** | Warns before concurrent edits. |
+| **Offer passkey sign-in** | Adds a passkey option at sign-in. Password sign-in still works. Gray until Secure Passkeys is active; **on by default** once it is. See below. |
+| **Scheduled publishing** | Allows a future publish date. When off, approvals publish immediately. |
+| **Review link expiry** | How long the emailed review link stays valid (3, 7, 14, or 30 days; default **7**). Re-send an expired link from the draft — the post is unaffected. |
+| **Default reviewers** | Emailed and given edit access on every new draft, plus the author. |
+| **Default CC reviewers** | Copied on the email, with the same edit access. |
 
 :::info What "Review link expiry" does and doesn't cover
 
@@ -471,8 +475,6 @@ Anyone who **is** signed in to a WordPress account that's on the draft's reviewe
 So if you want to remove someone's access to a draft entirely, take them off the reviewer list or deactivate their WordPress account. Setting a shorter expiry won't do it on its own.
 
 :::
-
-You can also update the **Default reviewers** and **Default CC reviewers** lists here — these are the same fields described in [Who receives the review email](#who-receives-the-review-email) above.
 
 ### Offering passkey sign-in
 
@@ -505,7 +507,7 @@ tell at a glance how an edit or a publish was authenticated.
 
 ### Editing permissions
 
-The **Reviewer editing permissions** section lets you control which parts of the portal each reviewer type can change. By default every reviewer type has full edit access to every area — you only need to configure this section when you want to lock something down.
+**Reviewer editing permissions** default to full edit. Change a cell to restrict an area. Admins are never restricted.
 
 **How it works**
 
