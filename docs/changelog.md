@@ -8,6 +8,20 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.030
+
+- Fixed: Listing-card watermark repair now edits the whole cropped picture and the true corner, so leftover logo fragments no longer survive. After this update, reprocess pictures that already had a repair.
+- Fixed: Saving or publishing from the review portal now sends the current SEO keyword to Squirrly on that same save, and the published confirmation email no longer calls a live article a draft.
+
+## v1.6.029
+
+- Changed: Listing-image settings now say whether blog cards are using the cropped copy.
+- Changed: Leftover theme sizes are a note, not a warning, when automatic use is on.
+
+## v1.6.028
+
+- Changed: Review Portal Workflow settings descriptions are shorter.
+
 ## v1.6.027
 
 - Added: Watermark repair on listing cards lets you pick which connected image API and high-fidelity model to use, with quality and seed when the model supports them.
