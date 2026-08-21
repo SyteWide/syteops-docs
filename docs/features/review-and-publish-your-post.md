@@ -132,7 +132,7 @@ Click **Analyze GEO readiness** to run an AI analysis of the post. Within a few 
 - A **readiness score** indicating how well the article is structured to be picked up and cited by AI answer engines.
 - A list of the **questions your article answers** — these are the kinds of questions an AI search tool might recognize your article as a source for.
 
-You can run the analysis as many times as you like; it does not change the article itself. The score and the questions are stored as soon as the analysis finishes, and re-running never discards answers you have edited yourself.
+You can run the analysis as many times as you like; it does not change the article itself. The score and the questions are stored as soon as the analysis finishes, and re-running never discards answers you have edited yourself. If you turn on **Analyze GEO when a draft is first created** on the Review Portal settings, that same analysis also runs once when a new article first arrives, so reviewers do not have to click the button for every new draft. It is off by default, and later deliveries of the same article are not re-analyzed.
 
 **AI answer feed toggle**
 
@@ -434,6 +434,8 @@ Four switches control what **Approve & Publish** insists on before an article ca
 - **GEO analysis is current** — also require a fresh analysis when the article changed after it was last analyzed. Formatting-only edits are ignored, so a reviewer fixing a typo is not sent back for another analysis.
 - **Meta description present** — require a meta description.
 - **Categories & tags assigned** — require at least one category and one tag.
+
+A separate optional switch, **Analyze GEO when a draft is first created**, is **off** by default. When it is on (and a GEO AI provider is configured), a new article is analyzed the first time it arrives, the same work as **Analyze GEO** in the portal. Later deliveries of that article are not re-analyzed.
 
 Turn one off if your workflow legitimately publishes without it — for example, if you do not use tags. Whatever you leave on is enforced both in the portal and on the server, so it holds even if a reviewer leaves a browser tab open for a long time.
 

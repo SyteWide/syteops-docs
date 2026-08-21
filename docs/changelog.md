@@ -8,6 +8,19 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.026
+
+- Changed: Listing cards keep the theme image until a repaired crop exists, Reprocess no longer deletes the current crop first, and the full-size clean-copy action is removed.
+- Changed: Watermark, card size, and force-on-blog stay gray until Crop a copy for listings is on.
+
+## v1.6.025
+
+- Added: GEO analysis can run automatically the first time a new article arrives. Off by default, and it needs a GEO AI provider.
+
+## v1.6.024
+
+- Fixed: The featured-image picker in the review portal no longer stacks screen-reader labels over its chrome.
+
 ## v1.6.023
 
 - Changed: Save settings sits under Social Publishing and saves it with the rest of the Review Portal panel.

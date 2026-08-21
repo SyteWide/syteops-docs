@@ -80,6 +80,8 @@ Turning LLMS Amplifier on takes care of the rest of the setup for you — it aut
 
 Switching engines doesn't change the per-article **Analyze GEO readiness** check in the [Review & Publish portal](./review-and-publish-your-post.md#geo--ai-search-and-answer-engine-visibility) — that readiness score and the **Include in llms.txt / AI answer feed** toggle work the same way no matter which engine generates the file.
 
+You can also have GEO analysis run automatically the first time a new article arrives (Review Portal settings → **Analyze GEO when a draft is first created**). It is **off** by default, it needs a GEO AI provider, and later deliveries of the same article are not re-analyzed.
+
 ## Social Publishing
 
 Social Publishing's **Enable Social Publishing** switch and its full configuration — AI provider, voice profiles, and destinations — live together in one place on this tab. See [Social Publishing](./social-publishing.md) for setup.
@@ -413,23 +415,12 @@ Wherever you choose it, it is the same file — cropped once and reused, waterma
 
 Sometimes a single picture comes out wrong: the repaired corner looks smudged, or the repair could not run at the moment it was tried. SyteOps records that attempt so it does not keep retrying and charging you for the same failure — which also means it will not try again on its own.
 
-**Reprocess** is how you ask it to. It throws away the cropped copy, forgets the previous attempt, and starts over.
+**Reprocess** is how you ask it to. It forgets the previous failed attempt and starts over, keeping the current cropped copy on cards until the new one is ready.
 
 - **In the review portal**, the **Reprocess images** button beside the publish bar does this for the article's featured image and every picture it imported.
 - **In your media library**, each picture has a **Reprocess listing image** link in its row, and you can select several and use **Reprocess listing image** from the bulk actions menu.
 
 With **Remove a watermark** on, the work runs in the background and the message says so — the card updates a minute or two later rather than the moment you click. It also gives a picture still named after its file a real name, taken from the article it belongs to.
-
-### A clean copy at full size
-
-Watermarks on the article itself are usually what you want — that is where the picture is seen at full size. But occasionally one particular picture would be better without it.
-
-**Make a clean copy** does that. It adds a second picture to your media library at the original size, with the corner repaired, and leaves the original completely untouched — so nothing you have already published changes, and the picture keeps its watermark everywhere else it appears.
-
-- **In the review portal**, click a picture in the article and choose **Use a clean copy**. The article is pointed at the new copy; save to keep it.
-- **In your media library**, each picture has a **Make a clean copy** link in its row.
-
-Two things to know. It costs one image request, the same as any other repair. And the repair works on a small window around the corner, which is invisible at card size but can read slightly softer than its surroundings at full resolution — so look at the result before you publish. That is why this is offered one picture at a time rather than as something you switch on for the whole site.
 
 ### Existing pictures
 
@@ -439,9 +430,9 @@ If you later change the size or the part you keep, existing copies are replaced 
 
 If a picture was uploaded at a very large size, WordPress keeps a full-resolution copy of it alongside the one it normally uses. SyteOps will fall back to that copy when your card size is larger than the everyday one — so asking for a big card still works. The one exception is a photo that carries rotation information from a camera or phone: those are skipped rather than risk cropping a portrait photo sideways.
 
-Copies are prepared a few at a time — a handful per page view rather than all at once, so the first few visits to a large archive warm it up gradually instead of making one visitor wait for everything. Cards still waiting their turn show the full-size picture in the meantime — exactly what they showed before you turned this on — so nothing looks broken while it catches up.
+With **Remove a watermark** off, copies are prepared a few at a time — a handful per page view rather than all at once, so the first few visits to a large archive warm it up gradually instead of making one visitor wait for everything. Cards still waiting their turn show the full-size picture in the meantime — exactly what they showed before you turned this on — so nothing looks broken while it catches up.
 
-With **Remove a watermark** on, this happens in two stages. The cropped copy is still prepared while the page loads, so the card is correct straight away; the watermark repair is a request to an image model, which is far too slow to make a visitor wait for, so it runs in the background afterwards. A card therefore shows its ordinary crop first and the repaired one once the job has run — usually within a minute or two on a site with normal traffic.
+With **Remove a watermark** on, the cropped copy is prepared in the background together with the repair — listing pages keep your theme's usual image until that repaired file exists. **Use the listing size on blog and archive cards** stays gray until **Crop a copy for listings** is on, so it cannot look like it works on its own.
 
 ### If you turn it off again
 
