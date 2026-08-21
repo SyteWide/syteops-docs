@@ -400,12 +400,12 @@ The panel is split into four groups so everyday settings stay near the top:
 
 - **Workflow** — who can publish, pre-publish checks, article images, and reviewer permissions. Starts open.
 - **What gets sent & published** — review emails and what your AI files publish. Starts open.
-- **Social Publishing** — voice profiles and destinations for posting to social. Starts open. This group has its own Save.
+- **Social Publishing** — voice profiles and destinations for posting to social. Starts open.
 - **Setup** — branding and AI providers. Starts closed, because you usually set these once.
 
 Each group shows an arrow on its colored bar. Click the bar (or press Enter or Space when it is focused) to open or close it. Jump links at the top of the panel take you to a group and open it without closing the others. **Open all** and **Close all** sit on the same row.
 
-Closing a group only hides it on screen. Settings inside a closed group still save when you click **Save settings**, except **Social Publishing**, which has its own **Save Social Publishing** button.
+Closing a group only hides it on screen. Settings inside a closed group still save when you click **Save settings** at the bottom of the panel, including Social Publishing. That group also has its own **Save Social Publishing** button if you only changed those fields.
 
 ### Branding
 
