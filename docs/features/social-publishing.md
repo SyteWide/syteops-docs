@@ -54,7 +54,7 @@ A voice profile tells the AI how to write your update. In the Social Publishing 
    - **Voice / tone** — a short instruction describing the style you want, for example *"witty and concise"* or *"formal, no exclamation points."*
    - **Max chars** — the maximum length of the generated update (50–3,000 characters).
    - **Link** — check this box to automatically append the post's web address to the end of the generated text.
-3. Click **Save Social Publishing**.
+3. Click **Save settings** at the bottom of the panel, or **Save Social Publishing** on that group.
 
 Add as many profiles as you like — for example, a punchy version for LinkedIn and a more relaxed one for an internal Slack channel — and pick the right one each time you send.
 
@@ -70,7 +70,7 @@ A destination is where the generated update is sent. Under **Destinations** in t
    - **Webhook URL** — the address the update will be sent to.
    - **Auth** — how the destination expects to be authenticated: **none**, **bearer** (an `Authorization: Bearer` header), **basic** (a basic-auth header), or **both**.
    - **Secret** — the token, key, or credential your webhook requires, if any. Leave this blank when editing an existing destination to keep the value that's already saved — only fill it in when setting a new secret. It's stored encrypted and is never shown back to you in the field.
-3. Click **Save Social Publishing**.
+3. Click **Save settings** at the bottom of the panel, or **Save Social Publishing** on that group.
 
 **For LinkedIn:** SyteOps doesn't post to LinkedIn directly. Set the Webhook URL to a trigger in Make, Zapier, or n8n, and build the rest of the automation (the LinkedIn post step, with its own LinkedIn connection) inside that tool.
 
