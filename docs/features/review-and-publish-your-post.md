@@ -185,8 +185,8 @@ Once you have finished reviewing all panels, choose one of the action buttons:
 
 - **Save draft** — Saves all your edits (including SEO, GEO settings, and categories/tags) and keeps the post as a draft. The portal stays open so you or a colleague can continue reviewing later.
 - **Preview** _(reviewers with editor access)_ — Saves your current edits and opens the post in a new browser tab exactly as it will look on your site, rendered by your theme — so you can check the layout before publishing. The Preview button is shown only to reviewers whose WordPress account can edit the post (Editor role or above).
-- **Approve & Publish** — Saves all your edits and publishes the post to your site immediately. The portal then shows a confirmation that the post has been published and is live on your site. By default, the author and reviewers receive an email confirming the post went live (site owners can turn this off — see the rules table below).
-- **Schedule** _(if enabled by the site owner)_ — Check the **Schedule** box to pick a future date and time, then click **Approve & Schedule**. The post goes live automatically at the time you chose rather than immediately. **Scheduling is not final** — see [Changing or cancelling a schedule](#changing-or-cancelling-a-schedule) below.
+- **Approve & Publish** — Saves all your edits and publishes the post to your site immediately. The portal first asks you to confirm. After you confirm, it shows a live progress list — checking the article is ready, copying images to this site if needed (with a count such as "3 of 12"), publishing, and sending the notification — until the work finishes. When it is done, you can close the dialog or open the live article. By default, the author and reviewers receive an email confirming the post went live (site owners can turn this off — see the rules table below).
+- **Schedule** _(if enabled by the site owner)_ — Check the **Schedule** box to pick a future date and time, then click **Approve & Schedule**. The same confirm-then-progress dialog tracks the scheduling. The post goes live automatically at the time you chose rather than immediately. **Scheduling is not final** — see [Changing or cancelling a schedule](#changing-or-cancelling-a-schedule) below.
 - **Request changes** — Opens a short note prompt where you can describe what needs updating. Your current edits are saved to the draft, the author and co-reviewers are notified by email, and your note is added to the portal's **Feedback** panel. See [Step 5](#step-5-request-changes) for the full walkthrough.
 
 ### Changing or cancelling a schedule
@@ -203,8 +203,8 @@ When you open a scheduled post, the portal shows you exactly where it stands:
 From there you can:
 
 - **Keep editing.** Save as often as you like — your changes are picked up automatically and the post still goes live at the scheduled time.
-- **Move it.** Change the date and time, then click **Update schedule**.
-- **Publish it now instead.** Untick **Schedule** and click **Approve & Publish**. The portal will warn you first that this cancels the schedule and makes the post live immediately.
+- **Move it.** Change the date and time, then click **Update schedule**. The same confirm-then-progress dialog tracks the update.
+- **Publish it now instead.** Untick **Schedule** and click **Approve & Publish**. The portal will warn you first that this cancels the schedule and makes the post live immediately, then show progress while it publishes.
 - **Cancel it.** Click **Unschedule**. The post goes back to being a draft and will not publish until you schedule or publish it again. The date you had chosen is kept in the date field, so scheduling it again is one click away.
 
 You can also cancel a schedule from the calendar — select the post and choose **Unschedule** in the picker.
