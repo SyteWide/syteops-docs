@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.031
+
+- Added: Approve and Publish now confirms in a dialog, then shows live progress (including image copy counts) until it finishes.
+- Changed: Scheduling and publishing use that same progress dialog instead of the browser confirm box.
+
 ## v1.6.030
 
 - Fixed: Listing-card watermark repair now edits the whole cropped picture and the true corner, so leftover logo fragments no longer survive. After this update, reprocess pictures that already had a repair.
