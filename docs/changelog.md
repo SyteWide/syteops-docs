@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.032
+
+- Added: Reprocess listing images now shows a spinner and one picture at a time while each one rebuilds.
+- Changed: Closing the progress window leaves remaining pictures queued in the background. Reload the listing after it finishes so cached copies update.
+
 ## v1.6.031
 
 - Added: Approve and Publish now confirms in a dialog, then shows live progress (including image copy counts) until it finishes.

@@ -429,7 +429,9 @@ means it will not try again on its own.
 - **In the review portal**, the **Reprocess images** button beside the publish bar does this for the article's featured image and every picture it imported.
 - **In your media library**, each picture has a **Reprocess listing image** link in its row, and you can select several and use **Reprocess listing image** from the bulk actions menu.
 
-With **Remove a watermark** on, the work runs in the background and the message says so — the card updates a minute or two later rather than the moment you click. It also gives a picture still named after its file a real name, taken from the article it belongs to.
+A progress window shows a spinner and one picture at a time while that image rebuilds. Reload the listing page when it finishes so cached copies update. If you close the window before every picture is done, remaining work continues in the background. Unattended archive visits still prepare listing copies in the background the first time a page asks for them.
+
+It also gives a picture still named after its file a real name, taken from the article it belongs to.
 
 ### Existing pictures
 
