@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.035
+
+- Added: Rebuild selected posts on listing-image settings opens a searchable list of posts so you can rebuild only the cards that look wrong.
+- Added: The picker shows how many pictures each post has and how many already have a copy, remembers ticks while you search, and confirms the exact number before it starts.
+
 ## v1.6.034
 
 - Added: Delete listing copies on listing-image settings restores original photos on cards.

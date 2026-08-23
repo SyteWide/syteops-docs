@@ -458,6 +458,19 @@ A progress window shows one picture at a time, the same way **Reprocess** does i
 
 If you turn **Remove a watermark** off and save while listing copies still exist, the card offers **Delete listing copies** with the count so you do not have to hunt for the buttons. Saving never deletes files on its own.
 
+### Rebuild only the posts you pick
+
+Most of the time only one or two cards look wrong, and rebuilding the whole library to fix them is slow — and, with **Remove a watermark** on, expensive. **Rebuild selected posts** on the same card opens a list of your posts so you can choose.
+
+Each row shows the date, the title, and how many card pictures that post has alongside how many already have a rebuilt copy. A post marked **no copy yet** has none — often because an earlier rebuild failed — and picking it is how you get SyteOps to try again. Drafts and scheduled posts are listed too, so you can fix a card before the article goes out.
+
+- Type in the search box to narrow the list by title, and use **Load more** to go further back.
+- Ticks are remembered while you search, so you can gather posts from several searches before starting.
+- The line above the buttons keeps a running count of selected posts and pictures. There is a limit of 50 pictures per rebuild; past that, **Rebuild selected** switches off until you deselect some posts.
+- **Rebuild selected** confirms with the exact number of pictures, then shows the same progress window as the site-wide rebuild.
+
+Only the pictures belonging to the posts you picked are touched — their featured image and any pictures SyteOps imported into the article. Everything else is left alone.
+
 ### If you turn it off again
 
 Switching **Crop a copy for listings** off stops SyteOps preparing any more copies, but it does not remove the ones already made — and your theme may still be set to ask for that size. WordPress will keep handing cards the copy it already has, while pictures added from then on have none and fall back to a larger file. The result is a mix of sizes across your cards.
