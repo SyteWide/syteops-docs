@@ -8,6 +8,22 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.038
+
+- Changed: Watermark removal on listing cards now repaints only the marked corner and cannot alter the rest of the picture. Previously the whole image was sent to the AI with a written request to change one part of it, which is not something a picture model can promise.
+- Fixed: A repair that does not match the surrounding picture is now refused, and the card keeps the original photo. A corner could come back as a flat gray block, or a photo with no watermark at all could come back blurred.
+- Fixed: The whole marked corner is now replaced. The edge of the area was previously blended back toward the original, which left the top of a logo behind.
+- Changed: The default height of the watermark area is now 16%, up from 12%, which cleared the reference logo by only three pixels. Your saved setting is unchanged.
+
+## v1.6.037
+
+- Fixed: Rebuilding a card image now reaches visitors right away. Each rebuild is saved as a new file, so browsers and image CDNs can no longer go on serving the copy you just replaced.
+
+## v1.6.036
+
+- Added: Delete selected posts on listing-image settings deletes listing copies for only the articles you pick, so cards go back to the original photo without deleting every copy on the site.
+- Added: Deleting copies for selected posts has no 50-picture limit; posts with no copy to remove are grayed out, and the count is of copies rather than pictures. The confirmation says whether those copies will be prepared again, and whether doing so is billed.
+
 ## v1.6.035
 
 - Added: Rebuild selected posts on listing-image settings opens a searchable list of posts so you can rebuild only the cards that look wrong.

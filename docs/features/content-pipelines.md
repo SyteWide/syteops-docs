@@ -331,22 +331,30 @@ The article page, the media library and social previews all keep the watermark. 
 it, so your branding still appears wherever the picture is seen at full size.
 
 **This is done by SyteHero's image AI**, which reconstructs what the background behind the watermark
-should look like. **Crop a copy for listings** must be on first — the watermark controls stay gray until
-it is. Without SyteHero installed and an image AI key saved in it, the setting is switched off and
-tells you what is missing.
+should look like. It repaints only the area you mark and cannot alter the rest of the picture.
+**Crop a copy for listings** must be on first — the watermark controls stay gray until it is. Without
+SyteHero installed and an image AI key saved in it, the setting is switched off and tells you what is
+missing.
 
 1. Turn on **Remove a watermark**.
 2. Choose **Where the watermark sits** — which corner of the picture carries it.
-3. Set the **Area to repair**. Leave a little room around the watermark.
+3. Set the **Area to repair**. Leave a little room around the watermark — the default allows for
+   this, and a box sized tightly to the logo tends to leave its top edge behind.
 4. If more than one image API is connected in SyteHero, choose **Image API**. With only one connected,
    that row stays hidden. API keys stay in SyteHero either way — SyteOps does not store them.
-5. Choose a **Repair model**. The list is only the models that edit the picture you already have and
-   leave the rest of it alone. Models that reinvent the whole picture are not offered. A cost line
+5. Choose a **Repair model**. The list is only the models that repaint a marked area and leave every
+   pixel outside it untouched. Models that redraw the whole picture are not offered. A cost line
    under the list names the per-picture estimate when SyteHero can provide one.
 6. **Quality** and **Seed** appear only when the chosen model supports them. Quality is Standard, High,
    or Ultra. Seed `0` lets the model pick at random; any other number makes the same repair
    repeatable.
 7. Save, then look at a few cards.
+
+**When a repair is refused.** SyteOps checks the result against the picture around it before using it.
+If the repair does not belong there — a flat block of color where the corner should continue, or a
+patch much blurrier than its surroundings — it is thrown away and the card keeps the original photo.
+A picture that has no watermark is normally refused this way, so it is checked once and then left
+alone rather than being altered and charged for on every pass.
 
 **Already-repaired pictures.** Turning this on, or updating SyteOps after a repair already ran, does
 not rebuild pictures that already have a cropped copy. Use **Reprocess** (below) on those so they
@@ -454,27 +462,35 @@ On **Content Pipelines → Review Portal**, the listing-image card has two site-
 - **Delete listing copies** removes every listing-size file. Cards go back to the original photo (logo included). Article pages are unchanged — they never used this copy.
 - **Rebuild listing copies** makes new card-sized files from the original using the settings currently on that card. If **Remove a watermark** is still on, confirm first: this bills the image-AI repair again for each picture. If it is off, you get a plain crop and the logo is kept.
 
-A progress window shows one picture at a time, the same way **Reprocess** does in the media library. After either action, reload the listing so cached copies update. If a CDN serves the same filename (an in-place rebuild keeps `820x616` in the URL), purge that CDN or the cards can keep showing the old bytes.
+A progress window shows one picture at a time, the same way **Reprocess** does in the media library. After either action, reload the listing to see the new copies. Each rebuild is saved under its own filename, so browsers and CDNs pick it up on their own — there is nothing to purge.
 
 If you turn **Remove a watermark** off and save while listing copies still exist, the card offers **Delete listing copies** with the count so you do not have to hunt for the buttons. Saving never deletes files on its own.
 
-### Rebuild only the posts you pick
+### Delete or rebuild only the posts you pick
 
-Most of the time only one or two cards look wrong, and rebuilding the whole library to fix them is slow — and, with **Remove a watermark** on, expensive. **Rebuild selected posts** on the same card opens a list of your posts so you can choose.
+Most of the time only one or two cards look wrong, and acting on the whole library to fix them is heavy-handed — and, for a rebuild with **Remove a watermark** on, expensive. **Delete selected posts** and **Rebuild selected posts** on the same card each open a list of your posts so you can choose.
 
-Each row shows the date, the title, and how many card pictures that post has alongside how many already have a rebuilt copy. A post marked **no copy yet** has none — often because an earlier rebuild failed — and picking it is how you get SyteOps to try again. Drafts and scheduled posts are listed too, so you can fix a card before the article goes out.
+Each row shows the date, the title, and how many card pictures that post has alongside how many already have a rebuilt copy. Drafts and scheduled posts are listed too, so you can fix a card before the article goes out.
 
 - Type in the search box to narrow the list by title, and use **Load more** to go further back.
 - Ticks are remembered while you search, so you can gather posts from several searches before starting.
-- The line above the buttons keeps a running count of selected posts and pictures. There is a limit of 50 pictures per rebuild; past that, **Rebuild selected** switches off until you deselect some posts.
-- **Rebuild selected** confirms with the exact number of pictures, then shows the same progress window as the site-wide rebuild.
+- The line above the buttons keeps a running count of what you have selected.
+- Each button confirms with the exact number before anything happens.
 
 Only the pictures belonging to the posts you picked are touched — their featured image and any pictures SyteOps imported into the article. Everything else is left alone.
+
+**Rebuild selected posts** remakes those pictures from the original using the settings on the card, then shows the same progress window as the site-wide rebuild. A post marked **no copy yet** has none — often because an earlier rebuild failed — and picking it is how you get SyteOps to try again. There is a limit of 50 pictures per rebuild; past that, **Rebuild selected** switches off until you deselect some posts.
+
+**Delete selected posts** removes those posts' listing copies so their cards go back to the original photo, logo included. It is quick and there is no 50-picture limit — so putting a season of articles back the way they were does not mean deleting every copy on the site. Here a post marked **no copy yet** has nothing to remove, so its row is grayed out and cannot be ticked, and the running count is of copies to delete rather than pictures. The count in the confirmation is the number of copies that will actually go.
+
+Deleting is only free if you have already switched **Crop a copy for listings** off. While it is on, SyteOps prepares a fresh copy the next time someone views those cards — and while **Remove a watermark** is also on, preparing each of those copies is a paid call. The confirmation tells you which of the three situations you are in before anything is deleted, so read it if you are not sure. To delete copies without paying to make them again, switch **Crop a copy for listings** off first.
 
 ### If you turn it off again
 
 Switching **Crop a copy for listings** off stops SyteOps preparing any more copies, but it does not remove the ones already made — and your theme may still be set to ask for that size. WordPress will keep handing cards the copy it already has, while pictures added from then on have none and fall back to a larger file. The result is a mix of sizes across your cards.
 
 **Delete listing copies** is the immediate revert: cards request the original (or your theme's other size) as soon as those files are gone. Then change your theme's blog card back to whichever image size it used before if you do not want it asking for the listing size again.
+
+Order matters. Deleting copies while **Crop a copy for listings** is still on is temporary — SyteOps prepares a fresh copy the next time a visitor loads a page asking for that size, and with **Remove a watermark** on that fresh copy is a paid call. Switch the setting off first, then delete, and the copies stay gone at no cost. The same applies to **Delete selected posts**.
 
 Turning off **Use the listing size on blog and archive cards** only stops automatic substitution. If the theme itself is saved as the listing size, cards still request the remixed file until you delete those copies or change the theme setting.
