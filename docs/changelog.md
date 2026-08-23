@@ -8,6 +8,16 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.034
+
+- Added: Delete listing copies on listing-image settings restores original photos on cards.
+- Added: Rebuild listing copies from the original, with a warning if watermark repair is still on. Turning that repair off no longer leaves remixed card files in place with no way to drop them.
+
+## v1.6.033
+
+- Added: Choosing LLMS Amplifier as the GEO engine now turns on its JSON index when questions or business identity publish into it.
+- Added: Apply recommended Amplifier settings on the Answer-engine publishing card turns on the JSON index, sitemap, robots, and meta-tag discovery without leaving that card.
+
 ## v1.6.032
 
 - Added: Reprocess listing images now shows a spinner and one picture at a time while each one rebuilds.

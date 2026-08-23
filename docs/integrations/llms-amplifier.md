@@ -47,6 +47,7 @@ Turning it on automatically:
 
 - Sets LLMS Amplifier's own **Update Frequency** to **Manual**, so it regenerates only when a Content Pipeline runs — never on a separate schedule of its own.
 - Turns **AI Search Discovery** (GEO) on, if it wasn't already.
+- Turns on LLMS Amplifier's JSON index (`llms-index.json`) when questions or business identity publish into it.
 - Makes LLMS Amplifier the engine behind `/llms.txt` and `/llms-full.txt`, standing the built-in generator down.
 
 The GEO provider card on the Content Pipelines Runs dashboard reads **LLMS Amplifier** once this is done.
@@ -76,7 +77,9 @@ Two SyteOps options — **Questions in the LLMS Amplifier index** and **Business
 :::caution The JSON index has to be switched on
 Those two options can only publish if LLMS Amplifier is generating `llms-index.json` in the first place. If its JSON index is off, both options sit there switched on and publish nothing.
 
-SyteOps tells you when that is the case: a warning appears above the two options on the Answer-engine publishing card, and an entry appears in LLMS Amplifier's own health panel. Switch the JSON index on in LLMS Amplifier's settings and both start publishing.
+Choosing LLMS Amplifier as the GEO engine (or turning one of those two options on) now turns the JSON index on automatically. On a site that already had LLMS Amplifier selected with the index off, use **Apply recommended Amplifier settings** on the Answer-engine publishing card — that also turns on sitemap, robots, and meta-tag discovery, and leaves your content types, limits, and identity copy alone.
+
+A warning still appears above the two options when the index is off, and an entry appears in LLMS Amplifier's own health panel.
 :::
 
 Articles you have marked as **Pillar article (cornerstone)** are listed first in that index and carry a `content_role` of `pillar`, so they survive LLMS Amplifier's maximum-pages limit and are the ones an AI tool is pointed to.

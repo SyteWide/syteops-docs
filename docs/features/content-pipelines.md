@@ -441,12 +441,27 @@ If you later change the size or the part you keep, existing copies are replaced 
 
 If a picture was uploaded at a very large size, WordPress keeps a full-resolution copy of it alongside the one it normally uses. SyteOps will fall back to that copy when your card size is larger than the everyday one — so asking for a big card still works. The one exception is a photo that carries rotation information from a camera or phone: those are skipped rather than risk cropping a portrait photo sideways.
 
-With **Remove a watermark** off, copies are prepared a few at a time — a handful per page view rather than all at once, so the first few visits to a large archive warm it up gradually instead of making one visitor wait for everything. Cards still waiting their turn show the full-size picture in the meantime — exactly what they showed before you turned this on — so nothing looks broken while it catches up.
+With **Remove a watermark** off, *new* copies are a plain crop — a handful per page view rather than all at once — so the first few visits to a large archive warm it up gradually. Cards still waiting for a first crop show the full-size picture in the meantime.
+
+Turning **Remove a watermark** off does **not** delete listing copies that already exist. Cards that already use the listing size keep showing the repaired corner until you delete those copies (see below). Waiting for a page view will not restore the original photo.
 
 With **Remove a watermark** on, the cropped copy is prepared in the background together with the repair — listing pages keep your theme's usual image until that repaired file exists. **Use the listing size on blog and archive cards** stays gray until **Crop a copy for listings** is on, so it cannot look like it works on its own.
 
+### Delete or rebuild every listing copy
+
+On **Content Pipelines → Review Portal**, the listing-image card has two site-wide actions (SyteOps administrators only):
+
+- **Delete listing copies** removes every listing-size file. Cards go back to the original photo (logo included). Article pages are unchanged — they never used this copy.
+- **Rebuild listing copies** makes new card-sized files from the original using the settings currently on that card. If **Remove a watermark** is still on, confirm first: this bills the image-AI repair again for each picture. If it is off, you get a plain crop and the logo is kept.
+
+A progress window shows one picture at a time, the same way **Reprocess** does in the media library. After either action, reload the listing so cached copies update. If a CDN serves the same filename (an in-place rebuild keeps `820x616` in the URL), purge that CDN or the cards can keep showing the old bytes.
+
+If you turn **Remove a watermark** off and save while listing copies still exist, the card offers **Delete listing copies** with the count so you do not have to hunt for the buttons. Saving never deletes files on its own.
+
 ### If you turn it off again
 
-Switching **Crop a copy for listings** off stops SyteOps preparing any more copies, but it does not remove the ones already made — and your theme is still set to ask for that size. WordPress will keep handing cards the copy it already has, while pictures added from then on have none and fall back to a larger file. The result is a mix of sizes across your cards.
+Switching **Crop a copy for listings** off stops SyteOps preparing any more copies, but it does not remove the ones already made — and your theme may still be set to ask for that size. WordPress will keep handing cards the copy it already has, while pictures added from then on have none and fall back to a larger file. The result is a mix of sizes across your cards.
 
-So if you turn it off, change your theme's blog card back to whichever image size it used before. That single change is what actually returns the cards to their previous behavior.
+**Delete listing copies** is the immediate revert: cards request the original (or your theme's other size) as soon as those files are gone. Then change your theme's blog card back to whichever image size it used before if you do not want it asking for the listing size again.
+
+Turning off **Use the listing size on blog and archive cards** only stops automatic substitution. If the theme itself is saved as the listing size, cards still request the remixed file until you delete those copies or change the theme setting.
