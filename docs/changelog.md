@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.044
+
+- Fixed: Icons inside buttons sat about a pixel above their label across the whole plugin, so text and icon never quite lined up. They now share one center line on every button — including the pagination controls in Content Pipelines, where the icon sat noticeably low.
+
 ## v1.6.043
 
 - Fixed: The SyteHero image provider in the AI balances popup had no logo, so its name sat out of line with every other provider on the list. It now shows the provider's mark like the rest, and any future image provider without one gets a matching placeholder rather than a gap.
