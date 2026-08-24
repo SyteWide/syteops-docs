@@ -319,7 +319,52 @@ You will find it on the **Content Pipelines** tab, under **Review Portal → Art
 1. Turn on **Crop a copy for listings**.
 2. Set the **Card size**. Measure your card and double it for retina screens. If a card is 410 by 308 pixels, enter **820** by **616**. Smaller pictures are not stretched.
 3. Choose **Keep this part**. For a corner watermark, crop the opposite side — or use **Remove a watermark** below.
-4. Save.
+4. Decide **Which pictures get a copy** and **When copies are made** (below).
+5. Save.
+
+### Choosing what gets a copy, and when
+
+Two settings decide how much work — and, with **Remove a watermark** on, how much spending — SyteOps
+does on its own. Both start switched on.
+
+**Which pictures get a copy → Featured images only.** A post's featured image is the one a card
+shows. Pictures inside the article body never appear on a card, so cropping them buys nothing, and
+with the watermark repair on it costs a picture request each. Turn this off if you also choose the
+listing size by hand for images inside articles.
+
+It applies wherever SyteOps works out a post's pictures for you: **Reprocess images** in the review
+portal, **Rebuild selected posts**, and **Rebuild listing copies**. It does not override a file you
+pick by name in the media library — that is you asking for that exact picture.
+
+Deleting is never narrowed. **Delete listing copies** and **Delete selected posts** still reach every
+copy a post has, including ones made before you switched this on. Otherwise those files would have
+nothing left that could remove them.
+
+**When copies are made → Only rebuild existing pictures when I ask.** Visits to your blog and archive
+pages will not remake copies on their own. This is the setting that stops a surprise bill: with the
+watermark repair on, every copy an unattended page view remakes is another picture request, a few per
+visit, so deleting your copies and then loading the blog page a handful of times can quietly repair —
+and re-charge for — the whole first page.
+
+Two things still happen on their own, because neither is unbounded and both are how new work stays
+correct:
+
+- WordPress crops every **new upload** to the card size itself. That has always been WordPress's job,
+  not SyteOps', and it costs nothing.
+- Setting a **featured image** on an article queues that one picture's watermark repair. It is one
+  request, caused by you publishing, not by traffic — and without it every article you publish from
+  now on would keep its watermark on the card while your older ones did not.
+
+The trade is that changing the card size, the crop, or the repair settings no longer fixes existing
+pictures by itself. SyteOps tells you when that has happened: save a change that affects how copies
+are cropped or repaired, and a note appears under the buttons saying how many copies were made with
+your previous settings, with **Rebuild listing copies** beside it. You can also rebuild a handful of
+articles instead with **Rebuild selected posts**.
+
+The note only appears when a change actually reached the pictures. Saving the panel after editing
+something else — including the two settings on this page, which decide *which* pictures get a copy
+rather than what they look like — leaves it alone. Turn this setting off to go back to copies being
+remade as pages are visited.
 
 ### Removing a watermark
 
@@ -434,26 +479,37 @@ means it will not try again on its own.
 
 **Reprocess** is how you ask it to. It forgets the previous failed attempt and starts over, keeping the current cropped copy on cards until the new one is ready.
 
-- **In the review portal**, the **Reprocess images** button beside the publish bar does this for the article's featured image and every picture it imported.
+- **In the review portal**, the **Reprocess images** button beside the publish bar does this for the article's featured image — and, if you switched **Featured images only** off, every picture it imported as well.
 - **In your media library**, each picture has a **Reprocess listing image** link in its row, and you can select several and use **Reprocess listing image** from the bulk actions menu.
 
-A progress window shows a spinner and one picture at a time while that image rebuilds. Reload the listing page when it finishes so cached copies update. If you close the window before every picture is done, remaining work continues in the background. Unattended archive visits still prepare listing copies in the background the first time a page asks for them.
+A progress window shows a spinner and one picture at a time while that image rebuilds. Reload the listing page when it finishes so cached copies update. If you close the window before every picture is done, remaining work continues in the background. With **Only rebuild existing pictures when I ask** turned off, unattended archive visits also prepare listing copies in the background the first time a page asks for them.
 
 It also gives a picture still named after its file a real name, taken from the article it belongs to.
 
 ### Existing pictures
 
-You do not need to regenerate anything. Pictures already in your media library are cropped the first time a listing asks for them, one at a time, and reused from then on. A site with ten pictures and a site with ten thousand behave identically — there is no batch job to start and nothing to wait for.
+With **Only rebuild existing pictures when I ask** on — the default — pictures already in your media
+library are left alone until you ask for them, with **Rebuild listing copies** or **Rebuild selected
+posts**. Cards that have no copy yet show your theme's usual image in the meantime.
 
-If you later change the size or the part you keep, existing copies are replaced the next time each one is shown. A picture is only ever cropped when it is at least as large as your card in **both** directions — so a wide, short banner is left alone even though it is not "small", because cropping it to a taller shape would mean stretching it. Those cards keep behaving exactly as they do now. Vector images (SVG) are always left alone too, since they resize by themselves.
+**Rebuild listing copies** covers pictures that have no copy yet as well as ones that do, so it is
+how you get started on a library that predates the feature — and how you get copies back after
+deleting them.
+
+Turn that setting off and the older behavior returns: pictures are cropped the first time a listing
+asks for them, a handful per page view, and reused from then on. A site with ten pictures and a site
+with ten thousand then behave identically — there is no batch job to start and nothing to wait for.
+
+If you later change the size or the part you keep, existing copies are replaced on the next rebuild —
+or, with that setting off, the next time each one is shown. A picture is only ever cropped when it is at least as large as your card in **both** directions — so a wide, short banner is left alone even though it is not "small", because cropping it to a taller shape would mean stretching it. Those cards keep behaving exactly as they do now. Vector images (SVG) are always left alone too, since they resize by themselves.
 
 If a picture was uploaded at a very large size, WordPress keeps a full-resolution copy of it alongside the one it normally uses. SyteOps will fall back to that copy when your card size is larger than the everyday one — so asking for a big card still works. The one exception is a photo that carries rotation information from a camera or phone: those are skipped rather than risk cropping a portrait photo sideways.
 
-With **Remove a watermark** off, *new* copies are a plain crop — a handful per page view rather than all at once — so the first few visits to a large archive warm it up gradually. Cards still waiting for a first crop show the full-size picture in the meantime.
+With **Remove a watermark** off, copies are a plain crop with nothing to pay for. If you also turn **Only rebuild existing pictures when I ask** off, they are made a handful per page view rather than all at once, so the first few visits to a large archive warm it up gradually. Cards still waiting for a first crop show the full-size picture in the meantime.
 
 Turning **Remove a watermark** off does **not** delete listing copies that already exist. Cards that already use the listing size keep showing the repaired corner until you delete those copies (see below). Waiting for a page view will not restore the original photo.
 
-With **Remove a watermark** on, the cropped copy is prepared in the background together with the repair — listing pages keep your theme's usual image until that repaired file exists. **Use the listing size on blog and archive cards** stays gray until **Crop a copy for listings** is on, so it cannot look like it works on its own.
+With **Remove a watermark** on, the cropped copy is prepared in the background together with the repair — listing pages keep your theme's usual image until that repaired file exists. With **Only rebuild existing pictures when I ask** on, that background work happens for a newly uploaded featured image but not for pictures already in your library; use **Rebuild** for those. **Use the listing size on blog and archive cards** stays gray until **Crop a copy for listings** is on, so it cannot look like it works on its own.
 
 ### Delete or rebuild every listing copy
 
@@ -477,13 +533,19 @@ Each row shows the date, the title, and how many card pictures that post has alo
 - The line above the buttons keeps a running count of what you have selected.
 - Each button confirms with the exact number before anything happens.
 
-Only the pictures belonging to the posts you picked are touched — their featured image and any pictures SyteOps imported into the article. Everything else is left alone.
+Only the pictures belonging to the posts you picked are touched. For a rebuild that is their featured
+image, plus any pictures SyteOps imported into the article if you switched **Featured images only**
+off. A delete always reaches every copy those posts have. Everything else is left alone.
+
+Because the two act on different pictures, the list itself differs: a post whose only pictures are
+inside the article body has nothing to rebuild, so it is offered when you are deleting and not when
+you are rebuilding.
 
 **Rebuild selected posts** remakes those pictures from the original using the settings on the card, then shows the same progress window as the site-wide rebuild. A post marked **no copy yet** has none — often because an earlier rebuild failed — and picking it is how you get SyteOps to try again. There is a limit of 50 pictures per rebuild; past that, **Rebuild selected** switches off until you deselect some posts.
 
 **Delete selected posts** removes those posts' listing copies so their cards go back to the original photo, logo included. It is quick and there is no 50-picture limit — so putting a season of articles back the way they were does not mean deleting every copy on the site. Here a post marked **no copy yet** has nothing to remove, so its row is grayed out and cannot be ticked, and the running count is of copies to delete rather than pictures. The count in the confirmation is the number of copies that will actually go.
 
-Deleting is only free if you have already switched **Crop a copy for listings** off. While it is on, SyteOps prepares a fresh copy the next time someone views those cards — and while **Remove a watermark** is also on, preparing each of those copies is a paid call. The confirmation tells you which of the three situations you are in before anything is deleted, so read it if you are not sure. To delete copies without paying to make them again, switch **Crop a copy for listings** off first.
+With **Only rebuild existing pictures when I ask** on — the default — deleting is free and it sticks: no visit to your blog or archive pages remakes those copies. (Setting an article's featured image again still prepares that one picture, as it always does for new articles.) If you have turned that setting off, SyteOps prepares a fresh copy the next time someone views those cards, and while **Remove a watermark** is also on, preparing each of those copies is a paid call. The confirmation tells you which of the three situations you are in before anything is deleted, so read it if you are not sure.
 
 ### If you turn it off again
 

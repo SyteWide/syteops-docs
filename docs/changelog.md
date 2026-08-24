@@ -8,6 +8,17 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.041
+
+- Added: After you change the card size, the crop, or the watermark settings, the Listing image panel now tells you how many copies were made with your previous settings and offers a Rebuild button beside the message.
+- Fixed: Saving the Listing image panel after editing something that does not affect how pictures are cropped no longer suggests a rebuild. Only a change that actually reached the pictures raises the message.
+
+## v1.6.040
+
+- Added: Two new listing-image settings control how much work SyteOps does on its own. Featured images only skips pictures inside an article, which never appear on a card. Only rebuild existing pictures when I ask stops blog and archive visits remaking copies — the setting to keep on if watermark removal is billing you per picture.
+- Fixed: Deleting every listing copy and then rebuilding one article no longer quietly rebuilds others as pages are visited. Both new settings are on after this update, so rebuilds now happen when you ask for them.
+- Changed: Deleting listing copies is never narrowed by the new setting, so a copy made before you switched it on can still be removed. Newly uploaded pictures are still cropped, and a new article's featured image is still repaired.
+
 ## v1.6.039
 
 - Fixed: Replacing a listing card image no longer leaves a broken card for anyone whose page was already cached. The copy it replaces is now kept until the next rebuild, so a page held by a cache or CDN goes on working until it refreshes.
