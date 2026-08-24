@@ -390,9 +390,8 @@ missing.
 5. Choose a **Repair model**. The list is only the models that repaint a marked area and leave every
    pixel outside it untouched. Models that redraw the whole picture are not offered. A cost line
    under the list names the per-picture estimate when SyteHero can provide one.
-6. **Quality** and **Seed** appear only when the chosen model supports them. Quality is Standard, High,
-   or Ultra. Seed `0` lets the model pick at random; any other number makes the same repair
-   repeatable.
+6. **Seed** appears only when the chosen model supports it. `0` lets the model pick at random; any
+   other number makes the same repair repeatable.
 7. Save, then look at a few cards.
 
 **When a repair is refused.** SyteOps checks the result against the picture around it before using it.
@@ -401,12 +400,33 @@ patch much blurrier than its surroundings — it is thrown away and the card kee
 A picture that has no watermark is normally refused this way, so it is checked once and then left
 alone rather than being altered and charged for on every pass.
 
+**You are told when it happens.** A rebuild used to report success whenever the cropped copy was
+written, which it is even when the repair itself did not happen — so a card could come back with its
+watermark still on it and nothing on screen said why. Now the rebuild window names the reason, and the
+Media Library has a **Listing copy** column showing the same thing after you close it:
+
+- **Repair declined — retrying.** The image service timed out, errored, or refused the request.
+  SyteOps tries once more on its own; nothing to do.
+- **Repair declined.** Either the safety check above rejected the result, or something needs your
+  attention — no image API key saved in SyteHero, a repair model that cannot repaint a marked area, a
+  picture in a format that cannot be repaired. The message says which.
+
+**Repair anyway.** When the safety check was what stopped it — and only then — a **Repair anyway**
+link appears beside that picture in the Media Library. It runs the repair once more and uses whatever
+comes back without checking it. That is another image request, and the check exists because a bad
+result reaches every visitor, so look at the card afterwards. The permission is spent on that one
+repair: the check is back on for the next.
+
 **Already-repaired pictures.** Turning this on, or updating SyteOps after a repair already ran, does
 not rebuild pictures that already have a cropped copy. Use **Reprocess** (below) on those so they
 pick up the current repair.
 
-Changing the model, quality, or seed later rebuilds the cropped copies, which is another image
-request per picture. Saving the rest of this panel without changing those choices does not.
+Changing the model or seed later rebuilds the cropped copies, which is another image request per
+picture. Saving the rest of this panel without changing those choices does not.
+
+**Watching what it costs.** The balances popup in the top right of the SyteOps screens lists your AI
+providers, and with SyteHero installed it also shows the balance of the image API these repairs are
+charged to — so you can check it before starting a rebuild rather than afterwards.
 
 **What it costs.** Each picture is one image request against your own SyteHero balance, charged once
 per picture rather than once per visit — a card that has been repaired stays repaired. Repairs happen
