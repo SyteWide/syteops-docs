@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.039
+
+- Fixed: Replacing a listing card image no longer leaves a broken card for anyone whose page was already cached. The copy it replaces is now kept until the next rebuild, so a page held by a cache or CDN goes on working until it refreshes.
+
 ## v1.6.038
 
 - Changed: Watermark removal on listing cards now repaints only the marked corner and cannot alter the rest of the picture. Previously the whole image was sent to the AI with a written request to change one part of it, which is not something a picture model can promise.
