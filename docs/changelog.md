@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.042
+
+- Fixed: Rebuilding a listing image reported success even when the watermark could not be removed, so the card came back unchanged with nothing explaining why. The rebuild now says what went wrong in plain language, retries on its own when the image service timed out or errored, and offers a "Repair anyway" button when the safety check was what stopped it.
+- Added: A "Listing copy" column on the Media Library, so you can see which pictures still need attention after you close the rebuild window.
+- Added: When SyteHero is installed, its image API balance now appears in the balances popup beside your other AI providers. That is the account watermark removal is charged to.
+- Fixed: When a provider balance could not be read, the list showed only "Error" with no explanation. Hovering over it now tells you why — a missing key, an unreadable response, or the provider's own message.
+- Changed: The Quality setting has been removed from the Listing image panel. None of the available repair models used it, so the control could never do anything.
+
 ## v1.6.041
 
 - Added: After you change the card size, the crop, or the watermark settings, the Listing image panel now tells you how many copies were made with your previous settings and offers a Rebuild button beside the message.
