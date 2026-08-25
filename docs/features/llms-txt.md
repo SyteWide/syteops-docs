@@ -104,6 +104,50 @@ Rebuilds are batched, so a run of edits produces one rebuild rather than one per
 in the background — you never wait for one. If something else rebuilt the files in the meantime,
 SyteOps skips its own pass rather than repeating the work.
 
+### When another plugin also makes an llms.txt
+
+Only one plugin can answer `https://yoursite.com/llms.txt`. Some SEO plugins — Squirrly SEO from
+version 14.2 onward, for example — have added their own llms.txt feature, and because of when it runs
+it takes the address before SyteOps gets a chance. When that happens, your visitors and any AI tool
+asking for the file receive that plugin's version instead of the one SyteOps builds for you, and
+nothing on screen would otherwise tell you.
+
+So when GEO is switched on and SyteOps is generating your AI files, **SyteOps switches the other
+plugin's llms.txt feature off for you.** Your file is the one that gets served. Nothing else in that
+plugin is changed — its own AI usage rules are left exactly as you wrote them, and every other setting
+is untouched.
+
+If you later switch GEO off, or deactivate SyteOps, the other plugin's feature is switched **back on**
+automatically, so your site is never left without an `llms.txt` at all. And if you had already turned
+that feature off yourself, SyteOps leaves it that way — it only gives back what it took.
+
+If the switch cannot be made for some reason, you'll see a warning naming the plugin on the
+**Answer-engine publishing** card, so you can turn it off yourself.
+
+### When another plugin removes your FAQ answers
+
+The same kind of clash affects structured data. Several SEO plugins offer a setting along the lines of
+*"remove other Json-LD from page"*, which deletes every other plugin's structured data from the page
+before it reaches a search engine. If that setting is on, the reviewed questions and answers SyteOps
+publishes are deleted too — so FAQ schema looks switched on in SyteOps, is built correctly, and never
+arrives anywhere.
+
+When SyteOps is actually publishing FAQ structured data, it switches that setting off for you as well.
+It only touches the *"remove other people's data"* setting — the other plugin keeps publishing its own
+structured data exactly as before. Turn FAQ schema back off, or deactivate SyteOps, and the setting is
+handed back.
+
+### SyteOps tells you when it does this
+
+Each time SyteOps switches one of these settings off, you get a message in your dashboard saying which
+setting it was and where to find it. If someone later switches it back on, SyteOps switches it off
+again and shows you a warning, so a change that would quietly stop your AI files working is never
+silent.
+
+You'll also see a note on the other plugin's own settings screen explaining why the switch is off and
+what to do if you want it back — turning off the matching SyteOps feature, rather than fighting the
+switch.
+
 ## Notes
 
 - If a real `llms.txt` file already exists at your site root (from another plugin or a static file), your web server serves that one instead.
