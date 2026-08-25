@@ -8,6 +8,18 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.047
+
+- Improved: Applying the recommended answer-engine settings now also raises the amount of each article published to AI crawlers. The default of 500 words was quietly cutting most articles short — a 1,900-word post reached answer engines as 500 words. Sites already publishing more than the recommended amount are left exactly as they are.
+
+## v1.6.046
+
+Fixed: Some SEO plugins have added their own llms.txt feature, and because of when it runs it takes the /llms.txt address before SyteOps can answer it — so visitors and AI tools received that plugin's file instead of the one SyteOps builds, with nothing on screen to say so. When GEO is on, SyteOps now switches that feature off for you and takes the address back, leaving the other plugin's own AI usage rules and every other setting untouched. Switch GEO off, or deactivate SyteOps, and the feature is handed back automatically so your site is never left without an llms.txt. Added: A warning on the Answer-engine publishing card naming any plugin still holding the address. Fixed: The same class of clash affects FAQ structured data — an SEO plugin set to remove other plugins' structured data was silently deleting the reviewed questions and answers SyteOps publishes, so the feature looked switched on and reached no search engine. SyteOps now switches that setting off too, and only while it is actually publishing FAQ data. Added: SyteOps tells you each time it switches one of these settings off, warns you if one is switched back on, and explains the change on the other plugin's own settings screen. Added: Turning GEO on now finishes configuring the answer-engine files, so a site whose integration was already enabled no longer ends up publishing nothing.
+
+## v1.6.045
+
+Fixed: The review portal page was being marked publicly cacheable, so a per-reviewer link carrying a private draft could be stored by a CDN or page cache — the reviewer queue beside it was already protected, but the article page itself was not. It now tells every cache not to store it, and tells search engines not to index it.
+
 ## v1.6.044
 
 - Fixed: Icons inside buttons sat about a pixel above their label across the whole plugin, so text and icon never quite lined up. They now share one center line on every button — including the pagination controls in Content Pipelines, where the icon sat noticeably low.
