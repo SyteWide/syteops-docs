@@ -4,7 +4,7 @@ description: All Manage API resources and operation counts.
 sidebar_position: 0
 ---
 
-<!-- GENERATED — do not edit by hand; run `npm run docs:generate` -->
+{/* GENERATED — do not edit by hand; run `npm run docs:generate` */}
 
 # Manage API Reference
 

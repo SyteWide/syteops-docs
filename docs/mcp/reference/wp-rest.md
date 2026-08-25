@@ -3,7 +3,7 @@ title: WordPress REST
 description: MCP tools provided by WordPress REST (provider id wp-rest).
 ---
 
-<!-- GENERATED — do not edit by hand; run `npm run docs:generate` -->
+{/* GENERATED — do not edit by hand; run `npm run docs:generate` */}
 
 # WordPress REST
 

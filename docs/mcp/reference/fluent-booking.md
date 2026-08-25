@@ -3,7 +3,7 @@ title: FluentBooking
 description: MCP tools provided by FluentBooking (provider id fluent-booking).
 ---
 
-<!-- GENERATED — do not edit by hand; run `npm run docs:generate` -->
+{/* GENERATED — do not edit by hand; run `npm run docs:generate` */}
 
 # FluentBooking
 

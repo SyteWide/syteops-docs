@@ -3,7 +3,7 @@ title: Squirrly SEO
 description: MCP tools provided by Squirrly SEO (provider id squirrly).
 ---
 
-<!-- GENERATED — do not edit by hand; run `npm run docs:generate` -->
+{/* GENERATED — do not edit by hand; run `npm run docs:generate` */}
 
 # Squirrly SEO
 

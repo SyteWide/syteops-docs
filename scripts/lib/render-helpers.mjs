@@ -1,4 +1,7 @@
-export const BANNER = '<!-- GENERATED — do not edit by hand; run `npm run docs:generate` -->';
+// CONSTRAINT: an MDX comment, not an HTML one. Docusaurus parses .md as MDX, and from 3.10 its
+// stricter parser rejects `<!-- -->` outright ("Unexpected character `!` ... to create a comment
+// in MDX, use {/* text */}"), which failed the build on all 32 generated reference pages.
+export const BANNER = '{/* GENERATED — do not edit by hand; run `npm run docs:generate` */}';
 
 export function frontmatter({ title, description, sidebar_label, sidebar_position }) {
   const lines = ['---', `title: ${jsonish(title)}`];

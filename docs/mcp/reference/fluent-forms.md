@@ -3,7 +3,7 @@ title: Fluent Forms
 description: MCP tools provided by Fluent Forms (provider id fluent-forms).
 ---
 
-<!-- GENERATED — do not edit by hand; run `npm run docs:generate` -->
+{/* GENERATED — do not edit by hand; run `npm run docs:generate` */}
 
 # Fluent Forms
 

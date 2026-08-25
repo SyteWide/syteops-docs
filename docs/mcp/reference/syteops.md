@@ -3,7 +3,7 @@ title: SyteOps
 description: MCP tools provided by SyteOps (provider id syteops).
 ---
 
-<!-- GENERATED — do not edit by hand; run `npm run docs:generate` -->
+{/* GENERATED — do not edit by hand; run `npm run docs:generate` */}
 
 # SyteOps
 

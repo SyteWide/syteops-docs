@@ -4,7 +4,7 @@ sidebar_label: CRM
 description: Manage API operations for the crm resource.
 ---
 
-<!-- GENERATED — do not edit by hand; run `npm run docs:generate` -->
+{/* GENERATED — do not edit by hand; run `npm run docs:generate` */}
 
 # `crm`
 

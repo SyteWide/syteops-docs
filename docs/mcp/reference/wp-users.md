@@ -3,7 +3,7 @@ title: WordPress Users
 description: MCP tools provided by WordPress Users (provider id wp-users).
 ---
 
-<!-- GENERATED — do not edit by hand; run `npm run docs:generate` -->
+{/* GENERATED — do not edit by hand; run `npm run docs:generate` */}
 
 # WordPress Users
 

@@ -3,7 +3,7 @@ title: WordPress Media
 description: MCP tools provided by WordPress Media (provider id wp-media).
 ---
 
-<!-- GENERATED — do not edit by hand; run `npm run docs:generate` -->
+{/* GENERATED — do not edit by hand; run `npm run docs:generate` */}
 
 # WordPress Media
 
