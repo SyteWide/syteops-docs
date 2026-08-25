@@ -76,9 +76,9 @@ To remove a stored credential, use the "Clear on save" toggle and save. The old 
 
 The **Notice Management** module (available separately) takes admin cleanliness a step further:
 
-- Suppresses third-party plugin admin notices for non-SyteOps Admin users
+- Hides the third-party plugin admin notices you pick, for non-SyteOps Admin users
 - Keeps the client admin free of developer-facing alerts and nag banners
-- Monitors and surfaces notices to SyteOps Admins only, via sticky monitoring toasts
+- Leaves each hidden notice visible to SyteOps Admins, so you keep operational awareness
 
 This is particularly useful when running many plugins: clients get a clean workspace, SyteOps Admins get operational awareness.
 
