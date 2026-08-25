@@ -3,7 +3,7 @@ title: FluentCart
 description: MCP tools provided by FluentCart (provider id fluent-cart).
 ---
 
-<!-- GENERATED — do not edit by hand; run `npm run docs:generate` -->
+{/* GENERATED — do not edit by hand; run `npm run docs:generate` */}
 
 # FluentCart
 

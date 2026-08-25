@@ -3,7 +3,7 @@ title: FluentCommunity
 description: MCP tools provided by FluentCommunity (provider id fluent-community).
 ---
 
-<!-- GENERATED — do not edit by hand; run `npm run docs:generate` -->
+{/* GENERATED — do not edit by hand; run `npm run docs:generate` */}
 
 # FluentCommunity
 

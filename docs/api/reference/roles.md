@@ -4,7 +4,7 @@ sidebar_label: Roles
 description: Manage API operations for the roles resource.
 ---
 
-<!-- GENERATED — do not edit by hand; run `npm run docs:generate` -->
+{/* GENERATED — do not edit by hand; run `npm run docs:generate` */}
 
 # `roles`
 

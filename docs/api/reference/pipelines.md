@@ -4,7 +4,7 @@ sidebar_label: Pipelines
 description: Manage API operations for the pipelines resource.
 ---
 
-<!-- GENERATED — do not edit by hand; run `npm run docs:generate` -->
+{/* GENERATED — do not edit by hand; run `npm run docs:generate` */}
 
 # `pipelines`
 

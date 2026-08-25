@@ -4,7 +4,7 @@ sidebar_label: Variables
 description: Manage API operations for the variables resource.
 ---
 
-<!-- GENERATED — do not edit by hand; run `npm run docs:generate` -->
+{/* GENERATED — do not edit by hand; run `npm run docs:generate` */}
 
 # `variables`
 

@@ -3,7 +3,7 @@ title: WordPress Content & Taxonomies
 description: MCP tools provided by WordPress Content & Taxonomies (provider id wp-content).
 ---
 
-<!-- GENERATED — do not edit by hand; run `npm run docs:generate` -->
+{/* GENERATED — do not edit by hand; run `npm run docs:generate` */}
 
 # WordPress Content & Taxonomies
 

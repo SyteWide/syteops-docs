@@ -3,7 +3,7 @@ title: FluentCRM
 description: MCP tools provided by FluentCRM (provider id fluent-crm).
 ---
 
-<!-- GENERATED — do not edit by hand; run `npm run docs:generate` -->
+{/* GENERATED — do not edit by hand; run `npm run docs:generate` */}
 
 # FluentCRM
 

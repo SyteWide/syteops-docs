@@ -148,6 +148,22 @@ You'll also see a note on the other plugin's own settings screen explaining why 
 what to do if you want it back — turning off the matching SyteOps feature, rather than fighting the
 switch.
 
+### When another plugin serves your robots.txt
+
+Some SEO plugins also take over `robots.txt`, and for the same timing reason they replace the version
+WordPress builds rather than adding to it. That quietly drops the lines pointing AI crawlers at your
+answer-engine files — including the one that tells them where your questions and business details
+live. Your files are still there and still correct; nothing is telling anyone about them.
+
+**SyteOps does not switch that setting off.** Your robots.txt holds your own crawling rules, and they
+are yours to keep — turning the feature off would take them out of the served file along with
+everything else. Instead, the **Answer-engine publishing** card shows you the exact lines that are
+missing and names the screen to add them on. Paste them into that plugin's own robots file and the
+message clears itself.
+
+SyteOps checks what that plugin is already serving before it asks, so it only ever lists lines you do
+not already have — if you added one of them a while ago, you will only be asked for the rest.
+
 ## Notes
 
 - If a real `llms.txt` file already exists at your site root (from another plugin or a static file), your web server serves that one instead.

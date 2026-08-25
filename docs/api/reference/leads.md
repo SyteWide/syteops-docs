@@ -4,7 +4,7 @@ sidebar_label: Leads
 description: Manage API operations for the leads resource.
 ---
 
-<!-- GENERATED — do not edit by hand; run `npm run docs:generate` -->
+{/* GENERATED — do not edit by hand; run `npm run docs:generate` */}
 
 # `leads`
 

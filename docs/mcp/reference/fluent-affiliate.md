@@ -3,7 +3,7 @@ title: Fluent Affiliate
 description: MCP tools provided by Fluent Affiliate (provider id fluent-affiliate).
 ---
 
-<!-- GENERATED — do not edit by hand; run `npm run docs:generate` -->
+{/* GENERATED — do not edit by hand; run `npm run docs:generate` */}
 
 # Fluent Affiliate
 

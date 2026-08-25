@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.049
+
+- Fixed: Some SEO plugins serve your site's robots.txt file themselves, and because of when that runs it replaces the version WordPress builds — silently dropping the lines that tell AI crawlers where to find your answer-engine files. SyteOps now spots this and shows you the exact lines that are missing, along with the screen to add them on. It checks what that plugin is already serving, so it only ever asks for lines you do not have, and the message clears itself once you have added them. SyteOps does not switch the other plugin's robots feature off — that file holds your own crawling rules, and they are yours to keep.
+
 ## v1.6.048
 
 - Fixed: A reminder that one of your hidden admin notices no longer appears on the page it was hidden on arrived as a stray line of text at the foot of an unrelated admin screen instead of a corner notification. It now appears as a proper notification that clears itself. Changed: The confirmation that a notice was hidden is now shown only while you are managing the hiding rules, so everyday admin screens stay quiet.

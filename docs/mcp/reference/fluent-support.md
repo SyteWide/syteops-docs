@@ -3,7 +3,7 @@ title: Fluent Support
 description: MCP tools provided by Fluent Support (provider id fluent-support).
 ---
 
-<!-- GENERATED — do not edit by hand; run `npm run docs:generate` -->
+{/* GENERATED — do not edit by hand; run `npm run docs:generate` */}
 
 # Fluent Support
 

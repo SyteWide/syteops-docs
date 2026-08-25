@@ -3,7 +3,7 @@ title: Core / Diagnostics
 description: MCP tools provided by Core / Diagnostics (provider id core).
 ---
 
-<!-- GENERATED — do not edit by hand; run `npm run docs:generate` -->
+{/* GENERATED — do not edit by hand; run `npm run docs:generate` */}
 
 # Core / Diagnostics
 

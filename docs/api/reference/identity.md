@@ -4,7 +4,7 @@ sidebar_label: Identity
 description: Manage API operations for the identity resource.
 ---
 
-<!-- GENERATED — do not edit by hand; run `npm run docs:generate` -->
+{/* GENERATED — do not edit by hand; run `npm run docs:generate` */}
 
 # `identity`
 

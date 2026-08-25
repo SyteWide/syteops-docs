@@ -4,7 +4,7 @@ description: All MCP providers and tool counts.
 sidebar_position: 0
 ---
 
-<!-- GENERATED — do not edit by hand; run `npm run docs:generate` -->
+{/* GENERATED — do not edit by hand; run `npm run docs:generate` */}
 
 # Tool Reference
 

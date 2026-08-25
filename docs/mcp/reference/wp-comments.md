@@ -3,7 +3,7 @@ title: WordPress Comments
 description: MCP tools provided by WordPress Comments (provider id wp-comments).
 ---
 
-<!-- GENERATED — do not edit by hand; run `npm run docs:generate` -->
+{/* GENERATED — do not edit by hand; run `npm run docs:generate` */}
 
 # WordPress Comments
 

@@ -3,7 +3,7 @@ title: FlowMattic
 description: MCP tools provided by FlowMattic (provider id flowmattic).
 ---
 
-<!-- GENERATED — do not edit by hand; run `npm run docs:generate` -->
+{/* GENERATED — do not edit by hand; run `npm run docs:generate` */}
 
 # FlowMattic
 

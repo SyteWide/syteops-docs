@@ -3,7 +3,7 @@ title: FluentSMTP
 description: MCP tools provided by FluentSMTP (provider id fluent-smtp).
 ---
 
-<!-- GENERATED — do not edit by hand; run `npm run docs:generate` -->
+{/* GENERATED — do not edit by hand; run `npm run docs:generate` */}
 
 # FluentSMTP
 

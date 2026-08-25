@@ -4,7 +4,7 @@ sidebar_label: Content Sources
 description: Manage API operations for the content_sources resource.
 ---
 
-<!-- GENERATED — do not edit by hand; run `npm run docs:generate` -->
+{/* GENERATED — do not edit by hand; run `npm run docs:generate` */}
 
 # `content_sources`
 

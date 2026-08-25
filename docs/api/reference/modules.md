@@ -4,7 +4,7 @@ sidebar_label: Modules
 description: Manage API operations for the modules resource.
 ---
 
-<!-- GENERATED — do not edit by hand; run `npm run docs:generate` -->
+{/* GENERATED — do not edit by hand; run `npm run docs:generate` */}
 
 # `modules`
 
