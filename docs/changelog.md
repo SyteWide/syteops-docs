@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.048
+
+- Fixed: A reminder that one of your hidden admin notices no longer appears on the page it was hidden on arrived as a stray line of text at the foot of an unrelated admin screen instead of a corner notification. It now appears as a proper notification that clears itself. Changed: The confirmation that a notice was hidden is now shown only while you are managing the hiding rules, so everyday admin screens stay quiet.
+
 ## v1.6.047
 
 - Improved: Applying the recommended answer-engine settings now also raises the amount of each article published to AI crawlers. The default of 500 words was quietly cutting most articles short — a 1,900-word post reached answer engines as 500 words. Sites already publishing more than the recommended amount are left exactly as they are.

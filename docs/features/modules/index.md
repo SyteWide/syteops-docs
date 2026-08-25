@@ -63,7 +63,7 @@ These SyteWide-built modules are available separately. See [First-Party Module G
 
 | Module | Purpose |
 |---|---|
-| **Notice Management** | Suppresses third-party admin notices for non-SyteOps users. Clients get a clean admin; SyteOps Admins see notices as monitoring toasts. |
+| **Notice Management** | Hides third-party admin notices you pick, for non-SyteOps users. Clients get a clean admin; SyteOps Admins keep seeing the real notice. |
 | **Banners** | Admin banner scheduling and display configuration. |
 | **LiteSpeed CF Token Fix** | Patches a known issue where LiteSpeed Cache sends the wrong Cloudflare authentication token. Toggle off when the vendor ships the fix. |
 | **Fluent Forms GDPR Fix** | Rebuilds the FlowMattic payload correctly when GDPR-triggered database deletions occur in Fluent Forms. |

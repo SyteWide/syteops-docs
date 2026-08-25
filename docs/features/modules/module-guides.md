@@ -37,25 +37,25 @@ Enable Banners if you want to schedule and manage admin-area banners -- for exam
 
 ## Notice Management
 
-Suppresses third-party admin notices (from other plugins) for non-SyteOps Admin users. Instead of cluttering the WordPress admin with full-page notice banners from every installed plugin, Notice Management intercepts those notices and presents them to SyteOps Admins as compact monitoring toasts.
-
-The result: your clients see a clean, focused WordPress admin with no distracting banners. You, as a SyteOps Admin, still have visibility into every notice -- just in a less intrusive format.
+Hides third-party admin notices (from other plugins) so your clients see a clean, focused WordPress admin instead of a stack of banners from every installed plugin. You choose which notices to hide by capturing their wording, so nothing disappears that you did not pick.
 
 ### When you need it
 
-Enable Notice Management on any site where non-technical users (clients, content editors) access the WordPress admin. It immediately declutters their experience without hiding anything from administrators.
+Enable Notice Management on any site where non-technical users (clients, content editors) access the WordPress admin. It declutters their experience without hiding anything from you.
 
 ### Getting started
 
 1. Upload the Notice Management module package via **Admin > Modules > Upload**
 2. Toggle the module **ON** in the modules list
-3. Third-party notices are immediately suppressed for non-SyteOps Admin users
+3. Open the **Notice Management** tab, then capture or paste the wording of a notice you want gone and save it
 
 ### Key behaviors and settings
 
-- **No settings tab** -- Notice Management is a toggle-on/toggle-off module. There is no configuration beyond activating it.
-- **SyteOps Admins** see third-party notices surfaced as monitoring toasts rather than full-page banners.
-- **All other users** see a clean admin with third-party notices suppressed entirely.
+- **Notice Management has its own tab**, listing every notice you have chosen to hide -- its label, a short fingerprint, when it was last seen, and a preview of the wording it matches.
+- **Capture instead of typing.** "Capture Last Notice" and "Pick From Notices On Page" read the notices currently on screen, so visit the page showing the notice you want gone, then come back and pick it.
+- **Show to SyteOps Admins only** -- switched on for each notice you save. You keep seeing the real banner; everyone else gets the clean admin. Switch it off for a notice to hide it from yourself as well.
+- **Confirmation stays on the tab.** While you are on the Notice Management tab, each rule that matched the page reports itself as a notification, so you can see your choices working. Everyday admin screens stay quiet.
+- **Stale rules speak up.** If a notice you hid stops appearing on the screen it used to appear on -- the other plugin fixed it, or reworded it -- a notification on that screen invites you to remove the rule you no longer need.
 - Works alongside the White Label and Client Protection features for a fully curated admin environment.
 
 ---
