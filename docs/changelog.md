@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.053
+
+- Fixed: the answer-engine setup review can be re-opened at any time from the **Review answer-engine setup** button. It previously disappeared once every issue was resolved, so on a correctly configured site the documented button was simply absent — indistinguishable from the settings panel failing to load.
+- Improved: opening the review when nothing is wrong now tells you so, rather than showing an empty dialog.
+
 ## v1.6.052
 
 - Added: a setup review appears when answer-engine publishing is switched on. It separates what SyteOps has already handled for you from what still needs your say-so, and you can re-open it any time from the **Answer-engine publishing** card.
