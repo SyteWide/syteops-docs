@@ -155,14 +155,47 @@ WordPress builds rather than adding to it. That quietly drops the lines pointing
 answer-engine files — including the one that tells them where your questions and business details
 live. Your files are still there and still correct; nothing is telling anyone about them.
 
-**SyteOps does not switch that setting off.** Your robots.txt holds your own crawling rules, and they
-are yours to keep — turning the feature off would take them out of the served file along with
-everything else. Instead, the **Answer-engine publishing** card shows you the exact lines that are
-missing and names the screen to add them on. Paste them into that plugin's own robots file and the
-message clears itself.
+**SyteOps does not switch that plugin's robots feature off.** Your robots.txt holds your own crawling
+rules, and they are yours to keep — turning the feature off would take them out of the served file
+along with everything else.
 
-SyteOps checks what that plugin is already serving before it asks, so it only ever lists lines you do
-not already have — if you added one of them a while ago, you will only be asked for the rest.
+Instead, the **Answer-engine publishing** card shows you exactly which lines are missing and offers
+to **add them for you**. SyteOps adds only those lines. Every rule you wrote stays exactly where it
+is, and there is an **Undo this change** button that puts the file back the way it was.
+
+If you would rather do it yourself, the same card links straight to that plugin's robots editor.
+
+A few things worth knowing:
+
+- SyteOps checks what that plugin is already serving first, so it only ever adds lines you do not
+  already have.
+- If you later switch off the feature those lines point at, SyteOps takes them back out on its own —
+  you are never left advertising a file that is no longer published.
+- If you edit one of the lines yourself, SyteOps treats it as yours and leaves it alone.
+- If one of your own rules blocks the file a line points at, SyteOps tells you, because adding the
+  line would otherwise look like it worked while changing nothing.
+- robots.txt is usually cached by your CDN, so SyteOps clears it where it can and tells you when it
+  could not — a change at your site is not the same as a change a crawler can see.
+
+### A setup review when you switch answer-engine publishing on
+
+The clashes above are all detected the same way, and none of them announces itself. So when
+answer-engine publishing is switched on and LLMS Amplifier is producing your files, SyteOps shows
+you a short review of what it found — in two halves, because they need different things from you.
+
+**Already handled** lists what SyteOps has done on its own: taking back your `llms.txt` address, and
+switching off another plugin's *"remove other Json-LD from page"* setting so your FAQ answers
+survive. Both are reversible and both are handed back if you turn the feature off.
+
+**Needs your approval** lists what SyteOps will not do without being asked: adding the discovery
+lines to another plugin's robots file, and switching on the LLMS Amplifier settings that publish the
+index file your answer surfaces write into. Each has a button.
+
+The review never blocks anything — answer-engine publishing is already on by the time you see it, and
+closing it changes nothing. **Not now** is remembered against *what the review said*, not as a
+permanent "never show this", so if a new problem appears later you will be told about that one. You
+can re-open it any time from the **Review answer-engine setup** button on the **Answer-engine
+publishing** card.
 
 ## Notes
 

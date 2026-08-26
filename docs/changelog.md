@@ -8,6 +8,21 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.052
+
+- Added: a setup review appears when answer-engine publishing is switched on. It separates what SyteOps has already handled for you from what still needs your say-so, and you can re-open it any time from the **Answer-engine publishing** card.
+
+## v1.6.051
+
+- Added: SyteOps can add the answer-engine discovery lines to your SEO plugin's robots file for you — one click, and a one-click undo. Your own crawl rules are never changed.
+- Added: those lines are removed automatically if you switch off the feature they point at, so you are never left advertising a file that is no longer published.
+- Added: a warning when one of your own crawl rules blocks a file the discovery lines point at.
+- Improved: robots.txt is cleared from your CDN cache after a change, and you are told when it could not be.
+
+## v1.6.050
+
+- Internal improvements and maintenance.
+
 ## v1.6.049
 
 - Fixed: Some SEO plugins serve your site's robots.txt file themselves, and because of when that runs it replaces the version WordPress builds — silently dropping the lines that tell AI crawlers where to find your answer-engine files. SyteOps now spots this and shows you the exact lines that are missing, along with the screen to add them on. It checks what that plugin is already serving, so it only ever asks for lines you do not have, and the message clears itself once you have added them. SyteOps does not switch the other plugin's robots feature off — that file holds your own crawling rules, and they are yours to keep.
