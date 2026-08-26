@@ -134,6 +134,8 @@ Click **Analyze GEO readiness** to run an AI analysis of the post. Within a few 
 
 You can run the analysis as many times as you like; it does not change the article itself. The score and the questions are stored as soon as the analysis finishes, and re-running never discards answers you have edited yourself. If you turn on **Analyze GEO when a draft is first created** on the Review Portal settings, that same analysis also runs once when a new article first arrives, so reviewers do not have to click the button for every new draft. It is off by default, and later deliveries of the same article are not re-analyzed.
 
+Running the analysis writes a short answer for each question, but those answers stay held back from your answer-engine surfaces until a reviewer ticks **I have reviewed these answers** in this panel. See [Publishing the questions your articles answer](./llms-txt.md#publishing-the-questions-your-articles-answer) for the full walkthrough of what that switch does and where the answers get published.
+
 **AI answer feed toggle**
 
 The **Include in llms.txt / AI answer feed** toggle controls whether this specific post is listed in your site's AI content feed — the file that AI systems read to discover what your site covers.
@@ -228,12 +230,13 @@ To stop half-finished articles going live, **Approve & Publish** first checks th
 | GEO analysis is current | The article was edited after it was last analyzed, so the score is out of date. Formatting-only edits — bolding a word, re-wrapping a paragraph — do not count. | **Re-analyze GEO** |
 | Meta description | The meta description is empty. | **Generate with AI** |
 | Categories & tags | The article has no category, or no tag. "Uncategorized" does not count. | **Suggest categories & tags** |
+| AI answers reviewed | Nobody has confirmed the AI-written questions and answers for this article. Until someone does, they are held back from your answer-engine surfaces. | **Review the answers** |
 
 Some items finish as soon as you click the button. Others — accepting a generated meta description, or choosing which suggested categories and tags to keep — hand back to you, and the list closes so you can make the choice. Once everything is clear, click **Publish now** and the article goes live.
 
 A requirement is skipped automatically whenever you could not act on it — if you do not have permission to edit that panel, or if the site's AI provider is not set up, it will never block you.
 
-Site owners can switch any of the four requirements off individually — see [Review Portal settings](#review-portal-settings-for-site-owners).
+Site owners can switch any of the five requirements off individually — see [Review Portal settings](#review-portal-settings-for-site-owners). Switching **AI answers reviewed** off removes it from this checklist only; the answers are still held back until someone reviews them.
 
 :::tip Open the full WordPress editor
 
@@ -312,6 +315,23 @@ From the calendar you can:
 - **Drag a post from Unscheduled drafts onto a day** to give it a publish date.
 - **Unschedule a scheduled post** — select it and click **Unschedule** in the picker. It returns to the **Unscheduled drafts** list and will not publish until you give it a new date.
 
+### Cadence warnings
+
+If your site has a publishing rhythm, the calendar can tell you when a date breaks it. You describe the rhythm once — which days you publish on, your usual time, the most articles you want in a single day, and the smallest gap you want between two of them — and after that, choosing a date that clashes brings up a short warning before anything is scheduled.
+
+The warning tells you what the problem is, names any articles already booked nearby, and offers the next date and time that fits. (Choosing a day you do not normally publish on is flagged on its own, with nothing to name.) You then choose:
+
+- **Use suggested time** fills the date field with that slot. Nothing is scheduled until you confirm.
+- **Schedule anyway** goes ahead with the date you picked.
+
+**It never blocks you.** A cadence warning is advice, not a rule — every date you could schedule before, you can still schedule. If the check itself cannot run for any reason, the schedule simply goes through as normal. And if you close the card before the check has answered, your article is still scheduled — if the date turned out to clash, you get a short note saying so rather than a silent cancellation.
+
+The same check runs when you drag an article onto a day, where it appears as a short confirmation instead of a panel.
+
+Cadence warnings apply to the **calendar**. Setting a date from the article's own Schedule control does not raise one.
+
+Cadence warnings are **off** until someone turns them on. See [Publishing cadence](content-pipelines.md#publishing-cadence) for the settings.
+
 ### On a phone or tablet
 
 The calendar adapts to the screen you are on:
@@ -356,7 +376,7 @@ These behave differently from drafts, and the page says so:
 
 - **Changes go live immediately.** There's no approval step — opening one of these in the portal and saving publishes the change straight away.
 - **Answer coverage.** Each row shows the same question and answer counts as a draft.
-- **"Answers not signed off".** If your site publishes AI-written answers to search engines and nobody has confirmed the answers on that article, the row says so. Those answers are already public, so this is worth acting on.
+- **"Answers not signed off".** If your site publishes AI-written answers to search engines and nobody has confirmed the answers on that article, the row says so. Those answers are held back from every answer-engine surface until someone reviews them in the article's GEO panel, so this is worth acting on if you want them live.
 - **View live article.** A link to the published article as your readers see it. If your site is set up to exclude internal traffic, this link carries that exclusion, so checking your own work doesn't show up in your site's analytics.
 
 ---
@@ -393,6 +413,12 @@ You can also see each email's outcome in the run history: each draft-creation ro
 ---
 
 ## Review Portal settings (for site owners)
+
+:::tip Publishing cadence
+
+This panel also holds the **Publishing cadence** card, which drives the [cadence warnings](#cadence-warnings) on the calendar. Its settings are described with that feature.
+
+:::
 
 Site owners can configure the Review Portal from **SyteOps → Content Pipelines**, then the **Review Portal** settings view.
 
@@ -437,6 +463,8 @@ Publish is blocked until these are met. All of the following are **on** by defau
 - **AI answers reviewed** — required when answers are published
 
 A requirement is skipped when the reviewer cannot act on it (no permission for that area, or the AI behind it is not configured).
+
+Turning **AI answers reviewed** off here only removes it from the publish checklist — it does not change what appears on your answer-engine surfaces. An article's questions and answers are held back from every one of those surfaces until someone ticks **I have reviewed these answers** in the article's GEO panel, whether or not this requirement is switched on. See [Reviewing the answers before they go live](./llms-txt.md#reviewing-the-answers-before-they-go-live).
 
 **Analyze GEO when a draft is first created** is **off** by default. When it is on (and a GEO AI provider is configured), analysis runs once when the article first arrives. Later deliveries of that article are not re-analyzed.
 

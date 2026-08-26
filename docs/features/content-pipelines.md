@@ -129,6 +129,24 @@ A few rules apply:
 
 By default, the calendar shows only content your pipeline has touched — posts imported from a content source, plus posts a recipe has run against. Turn on **Show all content** at the top of the calendar to also include every post, page, or other content type, whether or not the pipeline has touched it, so you can see everything on your editorial schedule in one view.
 
+## Publishing cadence
+
+Describe how often your site publishes, and the [content calendar](review-and-publish-your-post.md#cadence-warnings) will warn anyone who schedules an article that breaks the rhythm. The settings live on the **Content Pipelines** tab, in the **Review Portal** settings view, under **Workflow** — in the **Publishing cadence** card. If you type a value outside the range a setting accepts, it is ignored and the previous value is kept.
+
+| Setting | What it does |
+| --- | --- |
+| **Cadence warnings** ("Warn when a schedule breaks the rhythm") | Turns the whole feature on. Off by default — with it off, the calendar behaves exactly as it always has. |
+| **Publishing days** | The days you normally publish on. Leave every box unchecked if any day is fine; the per-day limit and the minimum gap still apply. |
+| **Usual publishing time** | Used only to build the suggested slot the warning offers. Picking a different time is never itself a conflict. |
+| **Most articles in one day** (1–10) | Scheduling beyond this on a single day raises the warning. Counts articles already published or scheduled that day. Drafts are not counted — an unscheduled draft has no publication date. |
+| **Smallest gap between articles** (in **hours**, 0–168) | Two articles closer together than this many hours raise the warning, even on different days — 11:55pm and 12:05am are ten minutes apart. Set it to 0 to switch this rule off. |
+
+The warning is **always advisory**. It reports what it found and offers the next clean slot; whether to take it is your call, and nothing here can prevent a schedule.
+
+Reviewers working in the portal see warnings about the articles their own calendar shows; as the site owner you see them across all your content, so the two can differ for the same date.
+
+If the warning cannot find a free slot ahead, it says so rather than suggesting one. And if your site has more scheduled articles than the check can read at once, it tells you the answer may be incomplete.
+
 ## Content Sources
 
 Content Sources let **any** external application — not just ContentPen — send finished articles into SyteOps as review-ready drafts. Each source you register gets its own **Ingest URL** and a **webhook secret**. When the app posts an article to that URL, SyteOps maps the incoming fields onto the editor and creates a draft in the [Review & Publish portal](./review-and-publish-your-post.md), where your team reviews and publishes it.
