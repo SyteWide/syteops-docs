@@ -8,6 +8,30 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.056
+
+- Added: describe your publishing rhythm once — which days you publish on, your usual time, the most articles you want in a single day, and the smallest gap you want between two of them.
+- Added: the content calendar now warns you when a date breaks that rhythm. It says what the problem is, names any articles already booked nearby, and offers the next date and time that fits. (Choosing a day you do not normally publish on is flagged on its own, with nothing to name.)
+- Added: the warning offers **Use suggested time** and **Schedule anyway**. It is advice, never a block — every date you could schedule before, you still can, and if the check itself cannot run the schedule simply goes through.
+- Added: the same check runs when you drag an article onto a day, where it appears as a short confirmation instead of a panel.
+- Note: cadence warnings are **off** until someone turns them on, in the **Publishing cadence** card on the Content Pipelines screen.
+
+## v1.6.055
+
+- Added: a new **Coverage** view on the Content Pipelines screen lists every article the answer engines describe, alongside what has actually been run against it — the content that predates your pipeline included.
+- Added: each row shows whether the answer-engine analysis has **never run**, is **stale**, is **current**, or **failed**, plus the article's meta description, SEO title, focus keyword, and how many of its answers are still waiting for review.
+- Added: filter the list by any of those states, or by the gap you are chasing — answers awaiting review, no meta description, no focus keyword, no SEO title — and optionally include drafts and scheduled posts.
+- Added: select articles and analyze them together, up to 25 per run. Before anything is spent, a confirmation names the AI provider, the model and the per-article token ceiling, and reminds you that the "waiting for review" count will rise, because new answers are held back until someone checks them.
+- Improved: articles someone currently has open, and articles whose exact current text already failed, are skipped with the reason shown. Editing the article makes it eligible again.
+- Improved: every bulk run is recorded as one entry in the Runs list under a new **Coverage** source filter, with how many articles were analyzed, failed or skipped and which model was billed.
+
+## v1.6.054
+
+- Changed: the questions and answers the AI writes for an article are now published to your answer-engine surfaces only after someone has ticked **answers reviewed** for that article. Before this, four of the five surfaces published them as soon as the analysis finished. This covers the per-article blocks in `llms.txt`, the site-wide questions section, FAQ structured data, the questions feed, and the answer-engine index.
+- Added: the **Answer-engine publishing** card now shows how many articles have answers waiting to be checked. If LLMS Amplifier is installed, its own health panel shows the same count.
+- Improved: ticking **answers reviewed** rebuilds your answer-engine files on its own, so the answers appear without any further step — and un-ticking it removes them again.
+- Improved: if an answer changes after it was checked — for example because the analysis was re-run — that article returns to waiting for review. A tick only ever covers the exact wording it was given for.
+
 ## v1.6.053
 
 - Fixed: the answer-engine setup review can be re-opened at any time from the **Review answer-engine setup** button. It previously disappeared once every issue was resolved, so on a correctly configured site the documented button was simply absent — indistinguishable from the settings panel failing to load.

@@ -64,7 +64,7 @@ The built-in generator serves `llms.txt` *virtually* — it does not write a fil
 
 When a pipeline runs the GEO stage with LLMS Amplifier as the engine, SyteOps asks LLMS Amplifier to rebuild its files for the whole site. Because GEO runs after the cross-linking and SEO stages, the rebuilt files reflect those changes. Dry-run (preview) mode is not available for LLMS Amplifier — preview runs report that the step was skipped.
 
-SyteOps also rebuilds LLMS Amplifier's files on its own when something changes what they should say but no pipeline run would have fired: editing an article's answers after it is live, marking it as a pillar, excluding it from `llms.txt`, changing which content types are covered, publishing content of a type either side covers, or unpublishing, trashing or deleting an article. Those rebuilds are batched, so a run of edits produces one rebuild, they happen in the background, and if something else rebuilt the files in the meantime SyteOps skips its own pass.
+SyteOps also rebuilds LLMS Amplifier's files on its own when something changes what they should say but no pipeline run would have fired: editing an article's answers after it is live, reviewing or un-reviewing an article's answers, marking it as a pillar, excluding it from `llms.txt`, changing which content types are covered, publishing content of a type either side covers, or unpublishing, trashing or deleting an article. Those rebuilds are batched, so a run of edits produces one rebuild, they happen in the background, and if something else rebuilt the files in the meantime SyteOps skips its own pass.
 
 "Either side" matters here: SyteOps watches both its own **Content types** setting and LLMS Amplifier's own **Post Types** list. Because SyteOps switches LLMS Amplifier to Manual, it is the only thing left that rebuilds those files — so it has to cover everything they describe, not only the types it analyzes itself.
 
@@ -73,6 +73,8 @@ Setting **Update Frequency** to Manual stops LLMS Amplifier scheduling its own r
 ## Publishing into llms-index.json
 
 Two SyteOps options — **Questions in the LLMS Amplifier index** and **Business identity in the LLMS Amplifier index**, both under Content Pipelines → Review Portal → Answer-engine publishing — write into LLMS Amplifier's `llms-index.json` file.
+
+An article's questions and answers only reach the index once a reviewer has ticked **I have reviewed these answers** in the article's GEO panel — until then they're held back, the same as on every other answer-engine surface. LLMS Amplifier's health panel shows how many articles currently have answers waiting for review, matching the count shown on SyteOps' own **Answer-engine publishing** settings card. See [Reviewing the answers before they go live](../features/llms-txt.md#reviewing-the-answers-before-they-go-live).
 
 :::caution The JSON index has to be switched on
 Those two options can only publish if LLMS Amplifier is generating `llms-index.json` in the first place. If its JSON index is off, both options sit there switched on and publish nothing.

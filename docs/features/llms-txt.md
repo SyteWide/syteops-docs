@@ -48,6 +48,10 @@ Each one has its own switch under **Content Pipelines → Review Portal settings
 
 Both `llms.txt` options work the same whether the built-in generator or LLMS Amplifier is producing your `llms.txt`. The questions feed and the FAQ structured data are served by SyteOps either way, so they keep working no matter which generator you use.
 
+:::note None of these switches publish anything by themselves
+Turning a switch above on does not put an article's questions and answers on that surface right away. They stay held back until a reviewer confirms them — see [Reviewing the answers before they go live](#reviewing-the-answers-before-they-go-live) below. Once confirmed, they appear on every surface you've switched on, without you doing anything else.
+:::
+
 ### Leaving an article out
 
 The Review Portal lets you exclude an individual article from `llms.txt`. That exclusion now applies no matter which generator you use — including every file LLMS Amplifier produces, such as its knowledge bundle. Previously it applied only while SyteOps generated the file, so an excluded article reappeared once LLMS Amplifier took over.
@@ -64,15 +68,17 @@ The questions and answers appear in the **GEO** panel of the [review portal](rev
 
 - **Analyze GEO** never overwrites your work. It keeps the wording and answers you have written, fills in only the blanks, and adds anything new it finds.
 - **Draft answer** writes a short answer to a single question straight from the article. If the article genuinely does not answer that question, it tells you instead of inventing something — edit the article, reword the question, or remove the row.
-- **I have reviewed these answers** confirms someone has checked them. By default, Approve & Publish waits for this. Re-running the analysis changes the answers, so the confirmation clears and is asked for again.
+- **I have reviewed these answers** confirms someone has checked them — and this is also what releases them. An article's questions and answers stay held back from all five answer-engine surfaces until this box is ticked. Tick it and SyteOps rebuilds your AI files right away, so the answers appear without you doing anything else; untick it and they're pulled back out. Re-running the analysis changes the answers, so the confirmation clears automatically and the answers go back to waiting for review until someone checks them again.
 
-This requirement is skipped automatically when no answer-engine option is switched on, or when an article has no questions. You can switch it off entirely under **Pre-publish requirements**.
+By default, **Approve & Publish** also waits for this box before letting an article publish — that requirement is skipped automatically when no answer-engine option is switched on, or when an article has no questions, and you can switch it off entirely under **Pre-publish requirements**. Doing so only removes the check from the publish step; it does not change what appears on your answer-engine surfaces. An article's answers still wait for review before they show up anywhere, whether or not the pre-publish check is switched on.
+
+The **Answer-engine publishing** settings card shows how many articles currently have answers waiting for review — for example *"3 articles have answers waiting for review. Until someone checks them, those answers are held back from every surface below."* On a very large backlog the check stops counting once it has seen enough, and shows *"At least 200 articles…"* instead of an exact number. If you use LLMS Amplifier, its own health panel shows the same count.
 
 ### What gets published
 
 Only information that is already public: the question, its short answer, and the URLs of **published** articles. Draft articles, password-protected articles, and any article you have excluded from `llms.txt` are all left out, and the internal readiness score is never published.
 
-An article shows up on these surfaces only after its GEO analysis has run. Articles analyzed before this release have questions but no answers — they will gain answers the next time they are analyzed.
+An article shows up on these surfaces only after its GEO analysis has run **and** a reviewer has ticked **I have reviewed these answers**. Articles analyzed before this release have questions but no answers — they will gain answers the next time they are analyzed.
 
 ### Pillar articles
 
@@ -96,8 +102,9 @@ Use it for a handful of pages, not for everything — the point is to say which 
 ### Keeping the files current
 
 SyteOps rebuilds your AI files shortly afterwards, on its own, whenever something changes what they
-should say: editing an article's answers, marking it as a pillar, excluding it from `llms.txt`,
-publishing a page, or unpublishing, trashing or deleting an article. That last group matters most —
+should say: editing an article's answers, reviewing or un-reviewing an article's answers, marking it
+as a pillar, excluding it from `llms.txt`, publishing a page, or unpublishing, trashing or deleting an
+article. That last group matters most —
 without it, a retracted article's title, address and answers would stay in your AI files indefinitely.
 
 Rebuilds are batched, so a run of edits produces one rebuild rather than one per save, and they happen
