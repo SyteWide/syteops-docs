@@ -20,3 +20,9 @@ yarn-debug.log*
 yarn-error.log*
 docs-site/static/img/syteops-logo-full.png
 static/img/syteops-logo-full.png
+
+# Operator-local Claude Code tooling. The plugin-parity sync drops this into the
+# published mirror, where sync-docs.yml's `rsync --delete` removes it again on every
+# release (it deleted the whole directory in sytehero-docs 6f21bcf). Ignore it in both
+# the source and the mirror rather than fighting the publisher.
+.claude/
