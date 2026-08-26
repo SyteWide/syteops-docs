@@ -193,9 +193,13 @@ index file your answer surfaces write into. Each has a button.
 
 The review never blocks anything — answer-engine publishing is already on by the time you see it, and
 closing it changes nothing. **Not now** is remembered against *what the review said*, not as a
-permanent "never show this", so if a new problem appears later you will be told about that one. You
-can re-open it any time from the **Review answer-engine setup** button on the **Answer-engine
-publishing** card.
+permanent "never show this", so if a new problem appears later you will be told about that one.
+
+The **Review answer-engine setup** button on the **Answer-engine publishing** card opens it again
+whenever you want it. It stays on the card once answer-engine publishing is on with LLMS Amplifier,
+including when everything is in order — open it on a healthy site and it tells you so, rather than
+disappearing and leaving you to guess whether there was nothing to report or nothing loaded. The
+review only opens *by itself* when something is actually outstanding.
 
 ## Notes
 
