@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.057
+
+- Fixed: the **Usual publishing time** field showed only a clock icon with no visible time. The time you set is now readable in the field.
+- Fixed: the article coverage screen reads correctly — filters are grouped under headings, table headings line up with the columns they describe, the row checkboxes and column headings are labeled for screen readers, and the list now tells you how many articles you are viewing.
+
 ## v1.6.056
 
 - Added: describe your publishing rhythm once — which days you publish on, your usual time, the most articles you want in a single day, and the smallest gap you want between two of them.
