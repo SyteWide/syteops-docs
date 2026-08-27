@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.066
+
+- Fixed: titles in colored window headers stay white and readable, including larger heading sizes.
+
 ## v1.6.065
 
 - Fixed: FAQ questions stay on the article page, not in RSS or inside other posts on the same page.
