@@ -34,7 +34,7 @@ LLMS Amplifier can serve a decoupled ("headless") front end, in which case it wo
 
 ## Publishing the questions your articles answer
 
-When an article goes through the [Review Portal](review-and-publish-your-post.md), the GEO analysis records the specific questions it answers well — and a short answer for each. Those question-and-answer pairs are what an AI answer engine actually quotes, so SyteOps can publish them in five places.
+When an article goes through the [Review Portal](review-and-publish-your-post.md), the GEO analysis records the specific questions it answers well — and an answer for each, drawn from the article. Those question-and-answer pairs are what an AI answer engine actually quotes, so SyteOps can publish them in five places.
 
 Each one has its own switch under **Content Pipelines → Review Portal settings → Answer-engine publishing**:
 
@@ -42,7 +42,7 @@ Each one has its own switch under **Content Pipelines → Review Portal settings
 | --- | --- |
 | **Questions in llms.txt entries** | Lists each article's questions and answers directly under its `llms.txt` entry. On by default. |
 | **Site-wide questions section** | Adds a **Questions this site answers** section to `llms.txt`, combining every article's questions into one deduplicated list with the pages that answer them. On by default. |
-| **FAQ structured data** | Adds FAQ structured data to the published article, which Google and Bing read today. **Off by default** — see the warning below. |
+| **FAQ structured data** | Adds FAQ structured data to the published article, which Google and Bing read today, and shows the same questions and answers in a visible block on the page. **Off by default** — see the warning below. |
 | **Questions feed** | Publishes the whole question set as JSON at `https://yoursite.com/llms-questions.json`. On by default. |
 | **Questions in the LLMS Amplifier index** | Adds the question set to the FAQ section of LLMS Amplifier's `llms-index.json`. On by default. This switch appears only when LLMS Amplifier is installed and switched on. Any FAQ entries you uploaded to Amplifier yourself are kept, and take precedence over these. |
 
@@ -59,15 +59,16 @@ The Review Portal lets you exclude an individual article from `llms.txt`. That e
 If you use LLMS Amplifier, note that its own **Include metadata** option controls whether the per-article block appears — with that switched off in Amplifier, there is no metadata section for the questions to attach to.
 
 :::warning Check before turning on FAQ structured data
-Many SEO plugins (Yoast, Rank Math, Squirrly) can already add FAQ structured data to a page. Two FAQ blocks on one page is invalid and search engines may flag it. Turn this on only if nothing else on your site is adding FAQ markup.
+Many SEO plugins (Yoast, Rank Math, Squirrly) can already add FAQ structured data to a page. Two FAQ blocks on one page is invalid and search engines may flag it. Turn this on only if nothing else on your site is adding FAQ markup. The visible questions on the page use the same reviewed answers as the structured data — they are not a separate toggle.
 :::
 
 ### Reviewing the answers before they go live
 
-The questions and answers appear in the **GEO** panel of the [review portal](review-and-publish-your-post.md), where a reviewer can edit any of them, add a question the analysis missed, or remove one.
+The questions and answers appear in the **GEO** panel of the [review portal](review-and-publish-your-post.md), where a reviewer can edit any of them, add a question the analysis missed, or remove one. Answers are shown in full — they are never cut off — and can be up to 2000 characters.
 
 - **Analyze GEO** never overwrites your work. It keeps the wording and answers you have written, fills in only the blanks, and adds anything new it finds.
-- **Draft answer** writes a short answer to a single question straight from the article. If the article genuinely does not answer that question, it tells you instead of inventing something — edit the article, reword the question, or remove the row.
+- **Draft answer** writes an answer to a single question straight from the article, kept in full so you can review it before it is published. If the article genuinely does not answer that question, it tells you instead of inventing something — edit the article, reword the question, or remove the row.
+- If an answer already looks cut off from an earlier review, edit it or tap **Draft answer** again. Re-running the analysis keeps your existing wording, so it will not replace a cut-off answer on its own.
 - **I have reviewed these answers** confirms someone has checked them — and this is also what releases them. An article's questions and answers stay held back from all five answer-engine surfaces until this box is ticked. Tick it and SyteOps rebuilds your AI files right away, so the answers appear without you doing anything else; untick it and they're pulled back out. Re-running the analysis changes the answers, so the confirmation clears automatically and the answers go back to waiting for review until someone checks them again.
 
 By default, **Approve & Publish** also waits for this box before letting an article publish — that requirement is skipped automatically when no answer-engine option is switched on, or when an article has no questions, and you can switch it off entirely under **Pre-publish requirements**. Doing so only removes the check from the publish step; it does not change what appears on your answer-engine surfaces. An article's answers still wait for review before they show up anywhere, whether or not the pre-publish check is switched on.
@@ -76,7 +77,7 @@ The **Answer-engine publishing** settings card shows how many articles currently
 
 ### What gets published
 
-Only information that is already public: the question, its short answer, and the URLs of **published** articles. Draft articles, password-protected articles, and any article you have excluded from `llms.txt` are all left out, and the internal readiness score is never published.
+Only information that is already public: the question, its answer, and the URLs of **published** articles. Draft articles, password-protected articles, and any article you have excluded from `llms.txt` are all left out, and the internal readiness score is never published.
 
 An article shows up on these surfaces only after its GEO analysis has run **and** a reviewer has ticked **I have reviewed these answers**. Articles analyzed before this release have questions but no answers — they will gain answers the next time they are analyzed.
 

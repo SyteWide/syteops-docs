@@ -8,7 +8,7 @@ description: Audit every article your answer engines describe — what the AI an
 
 The **Coverage** view answers one question: across all the articles your AI answer files describe, what has actually been run against each one?
 
-It puts every one of those articles in a single table — whether the GEO analysis has ever run, how the article scored, how many questions and answers it has, whether anyone has reviewed those answers, and whether its meta description, SEO title, focus keyword and pillar mark are filled in. From the same table you can run the GEO analysis over a batch of articles at once, instead of opening them one at a time.
+It puts every one of those articles in a single table — whether the GEO analysis has ever run, how the article scored, how many questions and answers it has, whether anyone has reviewed those answers, and whether its meta description, SEO title, focus keyword and pillar mark are filled in. From the same table you can run the GEO analysis over a batch of articles at once, or mark existing stored answers as reviewed in a batch without re-running AI.
 
 ## Where to find it
 
@@ -83,22 +83,41 @@ A run writes new questions and answers, and new answers are held back until a pe
 That is the review gate working exactly as designed, not a fault. Work through those articles in the [Review Portal](review-and-publish-your-post.md) and tick **I have reviewed these answers** on each; the answers reach your answer-engine surfaces at that point. See [Reviewing the answers before they go live](llms-txt.md#reviewing-the-answers-before-they-go-live).
 :::
 
-## What a run will and will not do
+## Accepting stored answers as reviewed
 
-The limits are deliberate, and each one is visible to you rather than silent:
+Use **Accept answers as reviewed** when articles already have stored question-and-answer pairs and you only need to confirm them for publication. It uses the same row selection and **Select all on this page** control as bulk analysis.
 
-- **At most 25 articles per run.** Ask for more and the run is **refused outright** — it is not quietly trimmed to the first 25, because then you would believe articles had been analyzed when they had not.
-- **Articles are analyzed one at a time**, so the progress you see is real progress, not a guess. The button reports which article it is on.
-- **Clicking the button a second time stops the run** after the article in progress finishes. You never lose a call you have already paid for, and you never have to wait out a batch you changed your mind about.
-- **Only one bulk run can be in flight at a time**, across the whole site. If someone else is already running one, you are told to wait rather than doubling up the AI calls.
+Before the run starts, a confirmation dialog explains that this **publishes answers that were held back for review** onto your answer-engine surfaces. It does **not** run AI and does **not** spend against your AI account.
+
+The run works the same way as analysis — one article at a time, a **Stop** control, and at most one bulk Coverage run at a time across the site. Articles with **no stored answers** are skipped, as are articles **somebody currently has open in the Review Portal**.
+
+When the run finishes you get a summary of what was accepted, what failed and what was skipped. Reload the page to see the updated **Reviewed** column. Until answers are reviewed this way (or in the Review Portal), they stay off public answer-engine surfaces.
+
+## What a bulk run will and will not do
+
+Both **Analyze** and **Accept** share the same run mechanics — one article at a time, a **Stop** control on the button you started, and at most one bulk Coverage run at a time across the site. If someone else is already running one, you are told to wait.
+
+The limits below apply to **both** run types unless a bullet says otherwise:
+
+- **At most 25 articles per run.** Ask for more and the run is **refused outright** — it is not quietly trimmed to the first 25.
+- **Articles are processed one at a time**, so the progress you see is real progress.
+- **Clicking Stop** on the active button halts the run after the article in progress finishes.
+- **Only one bulk run can be in flight at a time** on the site.
 - **Some articles are skipped**, and every skip is reported with its reason:
-  - An article **somebody currently has open in the Review Portal** is skipped, so a bulk run cannot overwrite work happening under a reviewer's hands.
-  - An article whose **exact current text already failed** is skipped, rather than being sent to the provider to fail identically and bill you again. **Editing the article makes it eligible again** — different text is a different attempt. The **Retry** link on a failed row clears that block for a single article when you want to try it as-is.
+  - An article **somebody currently has open in the Review Portal** is skipped.
+  - **Analyze only:** an article whose **exact current text already failed** is skipped rather than being sent to the provider to fail identically and bill you again. **Editing the article makes it eligible again.** The **Retry** link on a failed row clears that block for a single article.
+  - **Accept only:** an article with **no stored answers** is skipped.
 
-When the run finishes you get a summary of what was analyzed, what failed and what was skipped. Reload the page to see the updated table.
+### After an Analyze run
+
+When an analyze run finishes you get a summary of what was analyzed, what failed and what was skipped. Reload the page to see the updated table. You may lose a paid completion you have already started if you stop mid-run, but you never have to wait out a batch you changed your mind about.
+
+### After an Accept run
+
+When an accept run finishes you get a summary of what was accepted, what failed and what was skipped. Reload the page to see the updated **Reviewed** column. Accept does not spend against your AI account.
 
 ## Where the run is recorded
 
 Every bulk run writes **one row** in the Content Pipelines [Runs dashboard](content-pipelines.md#runs-dashboard) — one row for the run, not one per article, so a 25-article batch does not bury the rest of your history.
 
-Filter the Runs table with the **Coverage** source pill to see only these runs. Each row records how many articles were **analyzed**, how many **failed** and how many were **skipped**, along with the model that was billed — so the spending is answerable after the fact, not just at the moment you approved it.
+Filter the Runs table with the **Coverage** source pill to see only these runs. Each row records how many articles were **analyzed** or **accepted**, how many **failed** and how many were **skipped**. Analyze runs also record the model that was billed — so AI spending is answerable after the fact, not just at the moment you approved it.

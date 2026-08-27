@@ -134,7 +134,7 @@ Click **Analyze GEO readiness** to run an AI analysis of the post. Within a few 
 
 You can run the analysis as many times as you like; it does not change the article itself. The score and the questions are stored as soon as the analysis finishes, and re-running never discards answers you have edited yourself. If you turn on **Analyze GEO when a draft is first created** on the Review Portal settings, that same analysis also runs once when a new article first arrives, so reviewers do not have to click the button for every new draft. It is off by default, and later deliveries of the same article are not re-analyzed.
 
-Running the analysis writes a short answer for each question, but those answers stay held back from your answer-engine surfaces until a reviewer ticks **I have reviewed these answers** in this panel. See [Publishing the questions your articles answer](./llms-txt.md#publishing-the-questions-your-articles-answer) for the full walkthrough of what that switch does and where the answers get published.
+Running the analysis writes an answer for each question. Answers are shown in full in this panel (up to 2000 characters) and are never cut off. They stay held back from your answer-engine surfaces until a reviewer ticks **I have reviewed these answers**. If an answer already looks cut off from an earlier review, edit it or tap **Draft answer** again — re-running the analysis keeps your existing wording and will not replace it. See [Publishing the questions your articles answer](./llms-txt.md#publishing-the-questions-your-articles-answer) for the full walkthrough of what that switch does and where the answers get published.
 
 **AI answer feed toggle**
 
@@ -186,7 +186,6 @@ The final set of categories and tags is saved when you click the panel's **Save*
 Once you have finished reviewing all panels, choose one of the action buttons:
 
 - **Save draft** — Saves all your edits (including SEO, GEO settings, and categories/tags) and keeps the post as a draft. The portal stays open so you or a colleague can continue reviewing later.
-- **Preview** _(reviewers with editor access)_ — Saves your current edits and opens the post in a new browser tab exactly as it will look on your site, rendered by your theme — so you can check the layout before publishing. The Preview button is shown only to reviewers whose WordPress account can edit the post (Editor role or above).
 - **Approve & Publish** — Saves all your edits and publishes the post to your site immediately. The portal first asks you to confirm. After you confirm, it shows a live progress list — checking the article is ready, copying images to this site if needed (with a count such as "3 of 12"), publishing, and sending the notification — until the work finishes. When it is done, you can close the dialog or open the live article. By default, the author and reviewers receive an email confirming the post went live (site owners can turn this off — see the rules table below).
 - **Schedule** _(if enabled by the site owner)_ — Check the **Schedule** box to pick a future date and time, then click **Approve & Schedule**. The same confirm-then-progress dialog tracks the scheduling. The post goes live automatically at the time you chose rather than immediately. **Scheduling is not final** — see [Changing or cancelling a schedule](#changing-or-cancelling-a-schedule) below.
 - **Request changes** — Opens a short note prompt where you can describe what needs updating. Your current edits are saved to the draft, the author and co-reviewers are notified by email, and your note is added to the portal's **Feedback** panel. See [Step 5](#step-5-request-changes) for the full walkthrough.
@@ -238,9 +237,14 @@ A requirement is skipped automatically whenever you could not act on it — if y
 
 Site owners can switch any of the five requirements off individually — see [Review Portal settings](#review-portal-settings-for-site-owners). Switching **AI answers reviewed** off removes it from this checklist only; the answers are still held back until someone reviews them.
 
-:::tip Open the full WordPress editor
+:::tip Open the live article or the full WordPress editor
 
-If you have WordPress editing access for the post (Editor role or above), the portal's top bar shows an **Edit in WordPress** link. It opens the post in the full WordPress block editor in a new tab — handy when you need a capability the streamlined portal doesn't offer, such as reordering blocks or adding an advanced layout. Your portal tab stays open so you can return to it to approve or publish.
+The portal's top bar has two jumps, next to each other:
+
+- **View Live** (once the post is published) or **View Preview** (while it is still a draft or scheduled) — Opens the post in a new tab, rendered by your theme, so you can check the layout. On a draft, **View Preview** saves your current edits first. Preview is shown only to reviewers whose WordPress account can edit the post (Editor role or above). **View Live** is available to anyone already in the portal.
+- **Edit in WordPress** _(Editor role or above)_ — Opens the post in the full WordPress block editor in a new tab — handy when you need a capability the streamlined portal doesn't offer, such as reordering blocks or adding an advanced layout.
+
+Your portal tab stays open so you can return to it to keep reviewing or to approve and publish.
 
 :::
 

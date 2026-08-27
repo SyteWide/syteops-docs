@@ -8,6 +8,45 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.065
+
+- Fixed: FAQ questions stay on the article page, not in RSS or inside other posts on the same page.
+- Fixed: complete answers that do not end with a period still publish, and declining Coverage waits for the run lock to release.
+
+## v1.6.064
+
+- Added: Coverage can mark existing answers as reviewed in a batch without re-running AI.
+
+## v1.6.063
+
+- Added: articles with FAQ structured data now also show those questions and answers on the page.
+- Changed: duplicate questions that share the same answer are listed once in FAQ structured data and on the page.
+
+## v1.6.062
+
+- Fixed: AI listing descriptions no longer append an internal field dump.
+
+## v1.6.061
+
+- Fixed: newest published articles stay in the advertised AI index FAQ instead of dropping off the 100-question cap.
+- Fixed: incomplete mid-word answers are no longer listed on public question feeds.
+
+## v1.6.060
+
+- Added: a **View Live** jump next to **Edit in WordPress** in the review portal. It says **View Preview** while the post is still a draft or scheduled.
+- Changed: lists and quoted blocks in the review portal have clearer spacing above, below, and between items.
+
+## v1.6.059
+
+- Fixed: review portal answers are no longer cut off at 300 characters.
+- Changed: answers can be up to 2000 characters and are never truncated.
+- Note: answers that were already cut off stay that way until you edit them or tap **Draft answer** again.
+
+## v1.6.058
+
+- Changed: on the article coverage screen, answers waiting for review now say they **need approval** (or **needs approval** when there is only one).
+- Changed: article titles on the coverage screen open the review portal instead of the WordPress editor.
+
 ## v1.6.057
 
 - Fixed: the **Usual publishing time** field showed only a clock icon with no visible time. The time you set is now readable in the field.
