@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.070
+
+- Added: Reviewers can modify a picture in the review editor with AI when the companion image plugin is installed.
+- Added: Incoming articles can map image prompts so Generate is pre-filled; the original picture is kept for Revert.
+
 ## v1.6.069
 
 - Added: Command-click or Ctrl-click a link in a review article to open it in a new tab without leaving the editor.

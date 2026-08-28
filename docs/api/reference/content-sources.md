@@ -71,6 +71,7 @@ Create a content source; generates its id and slug, and (unless a secret is prov
 | `taxonomy_apply_mode` | string | no |  |
 | `strip_uncategorized` | boolean | no |  |
 | `content_cleanup` | boolean | no |  |
+| `image_modify` | object | no |  |
 
 
 **Returns**
@@ -103,7 +104,8 @@ data: &#123;id, name, slug, secret, secret_source, ...} — secret is plaintext 
     "target_tag_slug": "string",
     "taxonomy_apply_mode": "string",
     "strip_uncategorized": true,
-    "content_cleanup": true
+    "content_cleanup": true,
+    "image_modify": {}
   }
 }
 ```
@@ -259,6 +261,7 @@ Update editable fields on an existing content source (slug is not editable; secr
 | `taxonomy_apply_mode` | string | no |  |
 | `strip_uncategorized` | boolean | no |  |
 | `content_cleanup` | boolean | no |  |
+| `image_modify` | object | no |  |
 
 
 **Returns**
@@ -296,7 +299,8 @@ data: &#123;id, name, slug, ...} (no secret, no forward_secret)
     "target_tag_slug": "string",
     "taxonomy_apply_mode": "string",
     "strip_uncategorized": true,
-    "content_cleanup": true
+    "content_cleanup": true,
+    "image_modify": {}
   }
 }
 ```
