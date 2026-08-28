@@ -105,7 +105,7 @@ Importing needs permission to add media to the site. If your account does not ha
 
 **Putting the original links back.** If an article's images were copied across and you would rather they were not, a **Revert images** button appears beside the publish controls. It points the pictures back at the addresses they came from. Nothing is deleted from your media library — the copies stay there, in case another article is using them. If someone has changed one of the images by hand since it was copied, that one is left alone and you are told, rather than having your change overwritten. Reverting a live article asks you to confirm first, since the published page will go back to loading its pictures from somewhere else. Reverting also switches **Import images** off for that article, so the next publish leaves the original links alone — turn it back on if you change your mind.
 
-**Modify with AI.** When SyteHero is installed and ready, the image details panel and the featured-image card include **Modify with AI**. Type a prompt (often pre-filled from the incoming article) and click **Generate**. The original picture is kept so you can **Revert**. Generate with a blank prompt is refused. This never runs when the article is ingested — only when a reviewer asks.
+**Modify with AI.** When SyteHero is installed and ready, the image details panel and the featured-image card include **Modify with AI**. Type a prompt (often pre-filled from the incoming article) and click **Generate**. Model, Quality, and Strength are labeled on those controls. The original picture is kept so you can **Revert**. Generate with a blank prompt is refused. This never runs when the article is ingested — only when a reviewer asks. An operator can hide Modify with AI from specific reviewer types in **Reviewer editing permissions**.
 
 ### SEO — keyword and meta description
 
@@ -555,6 +555,7 @@ Permissions are set by reviewer type (role). The panel shows a row for each role
 | **SEO** | Edit (full) or View only |
 | **GEO** | Edit (full) or View only |
 | **Reviewers** | Allow (can add/remove reviewers) or Hide (reviewer panel not shown) |
+| **Modify with AI** | Allow or Hide (the whole Modify with AI block). This column only appears when SyteHero is installed and active. |
 | **Categories & tags** | Edit and create new terms, Edit using existing terms only, or View only |
 
 Choosing **View only** makes the area visible in the portal but all controls are disabled so the reviewer can read but not change it. Choosing **existing terms only** for categories and tags lets reviewers choose from your site's existing terms but prevents them from creating new ones — the add-term field shows a suggestion list of matching existing terms.

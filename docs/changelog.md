@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.071
+
+- Changed: Modify with AI now shows Model, Quality, and Strength labels.
+- Added: Operators can hide Modify with AI from specific reviewers when the companion image plugin is active.
+
 ## v1.6.070
 
 - Added: Reviewers can modify a picture in the review editor with AI when the companion image plugin is installed.
