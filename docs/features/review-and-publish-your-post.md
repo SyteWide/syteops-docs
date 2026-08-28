@@ -60,6 +60,8 @@ Tables and other formatting in the article body are shown the way they will look
 
 The body editor has a formatting toolbar for **bold**, **italic**, **underline**, **headings** (H2/H3), **bulleted** and **numbered** lists, and **block quotes**. It also includes **clear formatting** (removes styling from the selected text) and **undo**/**redo** buttons.
 
+To check that a link in the article goes where it should, hold **Command** (Mac) or **Ctrl** (Windows) and click it. The address opens in a new tab so you stay in the review portal. A regular click still lets you edit the linked words.
+
 The **link** button (🔗) lets you add a hyperlink, and the **remove-link** button (🔗✕) strips the link from selected text:
 
 1. Select the words you want to turn into a link (or place your cursor where the link should go).

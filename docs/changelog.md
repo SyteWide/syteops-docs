@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.069
+
+- Added: Command-click or Ctrl-click a link in a review article to open it in a new tab without leaving the editor.
+
 ## v1.6.068
 
 - Fixed: incomplete answers cut at the old 300-character limit are no longer listed on public question feeds.
