@@ -8,6 +8,15 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.068
+
+- Fixed: incomplete answers cut at the old 300-character limit are no longer listed on public question feeds.
+- Changed: Coverage analysis can replace those leftover answers with a new draft.
+
+## v1.6.067
+
+- Changed: Coverage metric columns are centered from GEO analysis onward.
+
 ## v1.6.066
 
 - Fixed: titles in colored window headers stay white and readable, including larger heading sizes.
