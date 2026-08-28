@@ -1,6 +1,6 @@
 {
     "schema_version": 1,
-    "syteops_version": "1.6.069",
+    "syteops_version": "1.6.070",
     "operations": [
         {
             "resource": "users",
@@ -1054,6 +1054,9 @@
                 },
                 "content_cleanup": {
                     "type": "boolean"
+                },
+                "image_modify": {
+                    "type": "object"
                 }
             },
             "destructive": false,
@@ -1140,6 +1143,9 @@
                 },
                 "content_cleanup": {
                     "type": "boolean"
+                },
+                "image_modify": {
+                    "type": "object"
                 }
             },
             "destructive": false,

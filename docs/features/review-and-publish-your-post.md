@@ -105,6 +105,7 @@ Importing needs permission to add media to the site. If your account does not ha
 
 **Putting the original links back.** If an article's images were copied across and you would rather they were not, a **Revert images** button appears beside the publish controls. It points the pictures back at the addresses they came from. Nothing is deleted from your media library — the copies stay there, in case another article is using them. If someone has changed one of the images by hand since it was copied, that one is left alone and you are told, rather than having your change overwritten. Reverting a live article asks you to confirm first, since the published page will go back to loading its pictures from somewhere else. Reverting also switches **Import images** off for that article, so the next publish leaves the original links alone — turn it back on if you change your mind.
 
+**Modify with AI.** When SyteHero is installed and ready, the image details panel and the featured-image card include **Modify with AI**. Type a prompt (often pre-filled from the incoming article) and click **Generate**. The original picture is kept so you can **Revert**. Generate with a blank prompt is refused. This never runs when the article is ingested — only when a reviewer asks.
 
 ### SEO — keyword and meta description
 
