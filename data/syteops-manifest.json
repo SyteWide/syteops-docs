@@ -1,6 +1,6 @@
 {
     "schema_version": 1,
-    "syteops_version": "1.6.075",
+    "syteops_version": "1.6.076",
     "operations": [
         {
             "resource": "users",
@@ -1200,6 +1200,40 @@
             "destructive": false,
             "capability": "manage_options",
             "returns": "data: {id, status, mapping_status, mapping}"
+        },
+        {
+            "resource": "content_sources",
+            "action": "export",
+            "summary": "Export one content source as a portable setup package (no secrets, no posts).",
+            "params": {
+                "id": {
+                    "type": "string",
+                    "required": true
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: envelope {format, schema_version, payload, ...} — never includes secret or forward_secret"
+        },
+        {
+            "resource": "content_sources",
+            "action": "import",
+            "summary": "Import a content source setup package; creates when the slug is free, overwrites when overwrite+confirm.",
+            "params": {
+                "envelope": {
+                    "type": "object",
+                    "required": true
+                },
+                "overwrite": {
+                    "type": "boolean"
+                },
+                "confirm": {
+                    "type": "boolean"
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {id, name, slug, mode, secret, secret_source, ...} — secret is plaintext and NON-EMPTY only when secret_source is \"generated\""
         },
         {
             "resource": "identity",

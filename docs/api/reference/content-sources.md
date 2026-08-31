@@ -8,7 +8,7 @@ description: Manage API operations for the content_sources resource.
 
 # `content_sources`
 
-7 operation(s). All run through `POST /syteops/v1/manage/dispatch` (reads may use the documented GET form).
+9 operation(s). All run through `POST /syteops/v1/manage/dispatch` (reads may use the documented GET form).
 
 ## `approve_mapping`
 
@@ -143,6 +143,35 @@ data: &#123;id, deleted: true}
 }
 ```
 
+## `export`
+
+Export one content source as a portable setup package (no secrets, no posts).
+
+**Capability:** `manage_options`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `id` | string | yes |  |
+
+
+**Returns**
+
+data: envelope &#123;format, schema_version, payload, ...} — never includes secret or forward_secret
+
+**Request**
+
+```json
+{
+  "resource": "content_sources",
+  "action": "export",
+  "params": {
+    "id": "string"
+  }
+}
+```
+
 ## `get`
 
 Get a single content source by id (never includes the secret).
@@ -168,6 +197,39 @@ data: &#123;id, name, slug, enabled, status, auth_mode, mapping, mapping_status,
   "action": "get",
   "params": {
     "id": "string"
+  }
+}
+```
+
+## `import`
+
+Import a content source setup package; creates when the slug is free, overwrites when overwrite+confirm.
+
+**Capability:** `manage_options`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `envelope` | object | yes |  |
+| `overwrite` | boolean | no |  |
+| `confirm` | boolean | no |  |
+
+
+**Returns**
+
+data: &#123;id, name, slug, mode, secret, secret_source, ...} — secret is plaintext and NON-EMPTY only when secret_source is "generated"
+
+**Request**
+
+```json
+{
+  "resource": "content_sources",
+  "action": "import",
+  "params": {
+    "envelope": {},
+    "overwrite": true,
+    "confirm": true
   }
 }
 ```
