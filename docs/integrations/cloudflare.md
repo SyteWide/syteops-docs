@@ -16,7 +16,7 @@ SyteOps uses several URL paths for webhooks and background tasks. Cloudflare's f
 
 | Path | Purpose |
 |---|---|
-| `/wp-json/syteops/v1/pipelines/ingest/*` | Content source webhook delivery |
+| `/wp-json/syteops/v1/pipelines/ingest/*` | Content source webhook delivery (and GET/HEAD URL checks) |
 | `/wp-cron.php` | WordPress scheduled tasks (backups, sync) |
 | `/wp-json` | REST API discovery |
 
@@ -33,10 +33,9 @@ If a content source delivers articles from an external app (such as ContentPen),
    - **Rule name:** `Allow SyteOps Content Ingest`
    - **Expression:**
      ```
-     (starts_with(http.request.uri.path, "/wp-json/syteops/v1/pipelines/ingest/")) and
-     (http.request.method eq "POST")
+     starts_with(http.request.uri.path, "/wp-json/syteops/v1/pipelines/ingest/")
      ```
-   - **Action:** Allow
+   - **Action:** Skip (or add the same path to Allow Good Bots). Match the path only — not POST, not a specific signature header, and not a User-Agent. Sending apps often check the URL with GET or HEAD before they POST, and they may sign with their own header name.
 3. Save and deploy
 
 SyteOps verifies the webhook signature after the request reaches your server, so the Cloudflare rule only needs to let the request through.
