@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.075
+
+- Fixed: Checking a content source ingest URL with GET or HEAD no longer looks like the endpoint is missing.
+- Changed: The Cloudflare skip for that ingest path should match the path for any method, not POST or a specific signature header.
+
 ## v1.6.074
 
 - Internal improvements and maintenance

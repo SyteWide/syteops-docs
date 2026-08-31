@@ -183,7 +183,11 @@ What SyteOps shows next depends on how the secret was set:
 
 ### Point your app at the Ingest URL
 
-Configure the sending application's webhook to POST its article as JSON to the source's **Ingest URL**. How it authenticates depends on the **Auth mode** you chose:
+Configure the sending application's webhook to POST its article as JSON to the source's **Ingest URL**. How it authenticates depends on the **Auth mode** you chose.
+
+Some sending apps check the URL with GET or HEAD before the first POST. SyteOps answers those checks with a short "use POST" response and does not require a signature for them. Real article deliveries must still POST.
+
+If you need to paste a signing secret or switch to a custom signature header after the source exists, expand **Settings** on the source card (Verification secret and Inbound signature header).
 
 | Auth mode | What the app sends |
 |---|---|
