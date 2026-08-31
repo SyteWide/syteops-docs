@@ -8,6 +8,19 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.074
+
+- Internal improvements and maintenance
+
+## v1.6.073
+
+- Added: WordPress avatars use the profile photo from the associated user slot when one is set.
+
+## v1.6.072
+
+- Changed: Modify with AI sits under Caption in image details.
+- Changed: The Strength hint spans the panel instead of wrapping under the Strength field.
+
 ## v1.6.071
 
 - Changed: Modify with AI now shows Model, Quality, and Strength labels.
