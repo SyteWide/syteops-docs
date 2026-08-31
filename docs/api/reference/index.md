@@ -13,7 +13,7 @@ Every operation runs through the single dispatch endpoint. See [Dispatch contrac
 | Resource | Operations | Has destructive |
 |---|---|---|
 | [`ai`](./ai) | 4 | no |
-| [`content_sources`](./content-sources) | 7 | yes |
+| [`content_sources`](./content-sources) | 9 | yes |
 | [`crm`](./crm) | 6 | yes |
 | [`identity`](./identity) | 2 | no |
 | [`integrations`](./integrations) | 3 | yes |

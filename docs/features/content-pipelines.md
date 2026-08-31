@@ -181,6 +181,17 @@ What SyteOps shows next depends on how the secret was set:
 - **SyteOps generated the secret** — a highlighted box labeled **Save this secret now — it is shown only once** displays the **Ingest URL** and the **Webhook secret**. Copy the secret and store it somewhere safe (a password manager, or the sending app's settings). If you ever lose it, use **Rotate secret** on the source to generate a new one — the old secret stops working immediately.
 - **You pasted your own secret, or chose None** — there's no secret to reveal (you already have it, or there isn't one), so the box shows just the **Ingest URL** and a **Done** button.
 
+### Export and import a content source
+
+You can copy a source's **setup** (name, mapping, custom fields, forwarding, and related settings) onto another WordPress site that also runs this plugin.
+
+1. On the source card, click **Export**. Your browser downloads a JSON file. It does **not** include webhook secrets, assigned authors or reviewers, or already-ingested posts.
+2. On the destination site, open **Content Sources** and click **Import**, then choose that file.
+3. If a source with the same slug already exists, confirm overwrite. The destination keeps its own identity; a **new** webhook secret is issued (unless the source uses no verification). Paste a new forwarding credential if outbound forwarding is still needed.
+4. Copy the new Ingest URL (and secret, when shown) into the sending app.
+
+An imported mapping that was already approved stays live when it still maps at least one field.
+
 ### Point your app at the Ingest URL
 
 Configure the sending application's webhook to POST its article as JSON to the source's **Ingest URL**. How it authenticates depends on the **Auth mode** you chose.
