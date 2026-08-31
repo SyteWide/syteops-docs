@@ -14,7 +14,7 @@ Each user slot has 31+ fields organized into categories:
 - **Identity** — Name, email, phone
 - **Contact Information** — Address, additional contacts
 - **CRM IDs** — Identifiers across 15 supported CRM systems
-- **Profile Pictures** — Upload or link to user avatars
+- **Profile Pictures** — Upload or link to user avatars. When Associate WP User is set and the slot has a photo, that photo is used as the WordPress avatar (admin bar, Users list, comments, and author boxes) instead of Gravatar.
 - **Module Data** — Additional per-user data from active modules
 
 SyteOps supports up to 20 user slots. All user data syncs to FlowMattic as named variables — `syteops_user_001_name`, `syteops_user_001_email`, etc. — making user data available to every workflow without manual maintenance.
