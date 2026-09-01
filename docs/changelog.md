@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.080
+
+- **Content Pipelines — heading anchors.** A new per-source option gives each heading in an ingested article a short, predictable anchor name ("What is DSCR?" becomes `what-is-dscr`), so a table-of-contents widget links to stable, shareable anchors instead of inventing its own. Repeated headings get `-2`, `-3`; a heading that already has a name keeps it. Applied when the page is displayed — your stored article is never changed, so switching it off leaves nothing behind.
+- The FAQ block SyteOps adds to an article now has a stable anchor of its own, so a page showing two tables of contents no longer produces conflicting links.
+
 ## v1.6.079
 
 - Added: A content source can hide a table of contents that the sending app embedded in the article body, for sites that render their own.

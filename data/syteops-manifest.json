@@ -1,6 +1,6 @@
 {
     "schema_version": 1,
-    "syteops_version": "1.6.079",
+    "syteops_version": "1.6.080",
     "operations": [
         {
             "resource": "users",
@@ -1061,6 +1061,9 @@
                 "strip_inbody_faq": {
                     "type": "boolean"
                 },
+                "add_heading_anchors": {
+                    "type": "boolean"
+                },
                 "image_modify": {
                     "type": "object"
                 }
@@ -1154,6 +1157,9 @@
                     "type": "boolean"
                 },
                 "strip_inbody_faq": {
+                    "type": "boolean"
+                },
+                "add_heading_anchors": {
                     "type": "boolean"
                 },
                 "image_modify": {

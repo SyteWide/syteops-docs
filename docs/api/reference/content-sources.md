@@ -73,6 +73,7 @@ Create a content source; generates its id and slug, and (unless a secret is prov
 | `content_cleanup` | boolean | no |  |
 | `strip_inbody_toc` | boolean | no |  |
 | `strip_inbody_faq` | boolean | no |  |
+| `add_heading_anchors` | boolean | no |  |
 | `image_modify` | object | no |  |
 
 
@@ -109,6 +110,7 @@ data: &#123;id, name, slug, secret, secret_source, ...} — secret is plaintext 
     "content_cleanup": true,
     "strip_inbody_toc": true,
     "strip_inbody_faq": true,
+    "add_heading_anchors": true,
     "image_modify": {}
   }
 }
@@ -329,6 +331,7 @@ Update editable fields on an existing content source (slug is not editable; secr
 | `content_cleanup` | boolean | no |  |
 | `strip_inbody_toc` | boolean | no |  |
 | `strip_inbody_faq` | boolean | no |  |
+| `add_heading_anchors` | boolean | no |  |
 | `image_modify` | object | no |  |
 
 
@@ -370,6 +373,7 @@ data: &#123;id, name, slug, ...} (no secret, no forward_secret)
     "content_cleanup": true,
     "strip_inbody_toc": true,
     "strip_inbody_faq": true,
+    "add_heading_anchors": true,
     "image_modify": {}
   }
 }

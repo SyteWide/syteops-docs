@@ -163,9 +163,42 @@ You can tailor how each source proves and processes its content, and every optio
 - **Signature header** — choose which request header the sending app signs with, so a source can match whatever your app already sends.
 - **Author matching** — match the article's stated author to one of your registered team members (by email or last name). On a **new** article, if that value is blank or does not match a WordPress user, the source's **Default author** is used (instead of the first administrator). On an **update** of an existing draft, a blank inbound author leaves the credited author as it is, unless you tick **Always use this author**. That pin ignores the payload author on every delivery.
 - **Target tag** — automatically add a tag of your choosing to every post from this source, so you can find and group its content later.
-- **Display cleanup** — tidy the article's markup when the post is shown on your site.
-- **Strip in-body contents list** — hide a table of contents the sending app placed inside the article body, for sites that show their own.
-- **Strip in-body FAQ** — hide an FAQ section the sending app placed inside the article body, for sites that show their own. The section is found by its heading: the whole heading must read "Frequently asked questions" (at any level) or the shorter "FAQ"/"FAQs" (top-level headings only). A heading that only mentions the words in passing ("FAQs about pricing") is left alone, and an anchor id such as `faq` is ignored — only the exact id `frequently-asked-questions` counts. Everything from that heading down to the next heading of the same or higher level is removed, so a call-to-action written as a sub-heading after the FAQ goes with it; keep anything that must survive above the FAQ heading.
+### How the article is displayed
+
+These four options change **only how the article is shown on your site**. Your stored article is
+never modified, so you can switch any of them on or off at any time and nothing is left behind —
+turn one off and the page goes straight back to how it looked before.
+
+- **Display cleanup** — tidies the article's markup when the post is shown, for example wrapping a
+  bare image so it sits correctly in your theme.
+
+- **Strip in-body contents list** — hides a contents list the sending app placed inside the article,
+  for sites that already show their own. Turn this on if a post shows two tables of contents.
+
+- **Strip in-body FAQ** — hides an FAQ section the sending app placed inside the article, for sites
+  that already show their own. Turn this on if a post shows the same questions twice.
+
+  The section is found by its heading. The whole heading must read "Frequently asked questions" (at
+  any size) or the shorter "FAQ" / "FAQs" (main headings only). A heading that merely mentions the
+  words — "FAQs about pricing" — is left alone. Everything from that heading down to the next
+  heading of the same or larger size is hidden, so a call-to-action written as a smaller heading
+  after the FAQ is hidden too. Keep anything that must stay visible **above** the FAQ heading.
+
+- **Add heading anchors** — gives each heading a short, predictable name so a contents list can link
+  straight to it.
+
+  Without this, most contents-list widgets invent their own names. Those names are unpredictable,
+  they change whenever headings are added or reordered (so a shared link quietly stops working), and
+  if your page shows two contents lists both widgets invent the **same** name — which can confuse
+  browsers and break "jump to section" links.
+
+  The names come from the heading text, so "What is DSCR?" becomes `what-is-dscr` — readable, and
+  stable enough to share. Two headings with the same wording get `-2`, `-3` after them. A heading
+  that already has a name keeps it, so anything you set by hand is safe. Main headings and their
+  first two levels of sub-heading are covered.
+
+  The FAQ block SyteOps adds to an article always carries its own stable name, whether or not this
+  option is on.
 
 ### Register a content source
 
