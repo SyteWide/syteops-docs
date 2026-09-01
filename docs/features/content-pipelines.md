@@ -164,6 +164,8 @@ You can tailor how each source proves and processes its content, and every optio
 - **Author matching** — match the article's stated author to one of your registered team members (by email or last name). On a **new** article, if that value is blank or does not match a WordPress user, the source's **Default author** is used (instead of the first administrator). On an **update** of an existing draft, a blank inbound author leaves the credited author as it is, unless you tick **Always use this author**. That pin ignores the payload author on every delivery.
 - **Target tag** — automatically add a tag of your choosing to every post from this source, so you can find and group its content later.
 - **Display cleanup** — tidy the article's markup when the post is shown on your site.
+- **Strip in-body contents list** — hide a table of contents the sending app placed inside the article body, for sites that show their own.
+- **Strip in-body FAQ** — hide an FAQ section the sending app placed inside the article body, for sites that show their own. The section is found by its heading: the whole heading must read "Frequently asked questions" (at any level) or the shorter "FAQ"/"FAQs" (top-level headings only). A heading that only mentions the words in passing ("FAQs about pricing") is left alone, and an anchor id such as `faq` is ignored — only the exact id `frequently-asked-questions` counts. Everything from that heading down to the next heading of the same or higher level is removed, so a call-to-action written as a sub-heading after the FAQ goes with it; keep anything that must survive above the FAQ heading.
 
 ### Register a content source
 
