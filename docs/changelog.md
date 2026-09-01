@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.077
+
+- Fixed: New-draft review emails now go to everyone in Default reviewers and Default CC reviewers when the content source does not set its own list.
+- Changed: Article date on review emails uses 12-hour AM/PM in the site timezone.
+
 ## v1.6.076
 
 - Added: Export a content source setup and import it on another site.
