@@ -1,6 +1,6 @@
 {
     "schema_version": 1,
-    "syteops_version": "1.6.078",
+    "syteops_version": "1.6.079",
     "operations": [
         {
             "resource": "users",
@@ -1055,6 +1055,12 @@
                 "content_cleanup": {
                     "type": "boolean"
                 },
+                "strip_inbody_toc": {
+                    "type": "boolean"
+                },
+                "strip_inbody_faq": {
+                    "type": "boolean"
+                },
                 "image_modify": {
                     "type": "object"
                 }
@@ -1142,6 +1148,12 @@
                     "type": "boolean"
                 },
                 "content_cleanup": {
+                    "type": "boolean"
+                },
+                "strip_inbody_toc": {
+                    "type": "boolean"
+                },
+                "strip_inbody_faq": {
                     "type": "boolean"
                 },
                 "image_modify": {

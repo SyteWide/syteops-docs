@@ -8,6 +8,12 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.079
+
+- Added: A content source can hide a table of contents that the sending app embedded in the article body, for sites that render their own.
+- Added: A content source can hide an FAQ section that the sending app embedded in the article body, for sites that render their own. The section is recognized whether it is headed "Frequently asked questions" (any level) or the shorter "FAQ"/"FAQs" (top-level headings only).
+- Both settings default to off and apply only to the article being viewed. Nothing about how existing content renders changes until a content source opts in.
+
 ## v1.6.078
 
 - Fixed: Default author is used when the mapped webhook author is blank or does not match a WordPress user.
