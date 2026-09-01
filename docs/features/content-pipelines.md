@@ -161,7 +161,7 @@ You can tailor how each source proves and processes its content, and every optio
 
 - **Verification secret** — the shared secret used to check each request. Leave it blank and SyteOps generates one for you (shown once), or paste the sending app's own signing secret if it supplies one (for example, a ContentPen webhook secret). If a sender can't sign at all, you can turn verification off entirely (see **None** below).
 - **Signature header** — choose which request header the sending app signs with, so a source can match whatever your app already sends.
-- **Author matching** — match the article's stated author to one of your registered team members (by email or last name), falling back to a default author when there's no match.
+- **Author matching** — match the article's stated author to one of your registered team members (by email or last name). On a **new** article, if that value is blank or does not match a WordPress user, the source's **Default author** is used (instead of the first administrator). On an **update** of an existing draft, a blank inbound author leaves the credited author as it is, unless you tick **Always use this author**. That pin ignores the payload author on every delivery.
 - **Target tag** — automatically add a tag of your choosing to every post from this source, so you can find and group its content later.
 - **Display cleanup** — tidy the article's markup when the post is shown on your site.
 
@@ -233,6 +233,8 @@ Once approved, the source goes **active**: every future post to its Ingest URL b
 
 Categories and tags are not part of the mapping: SyteOps reads each incoming article and chooses them with AI, preferring your site's existing categories and tags and adding new ones only when nothing fits. Reviewers can adjust the suggestions in the Review & Publish portal before publishing, and the source's **Target tag** (if set) is always added on top.
 
+The **Author** mapping row also has a **Default author** picker (the same list as in Settings). Use it when the mapped author is often blank or does not match a WordPress user. Changing it there saves immediately and stays in sync with Settings.
+
 ### Reprocess last payload
 
 If a source's field mapping stops matching what the sending app is actually delivering — for example, the app changes its JSON structure — SyteOps holds further deliveries rather than creating incomplete drafts from them, and (if the "Source held" email is switched on) alerts the site admin. Once you've fixed and re-approved the mapping, you don't have to wait for the app to send another article to confirm it worked:
@@ -276,7 +278,7 @@ Expand **Settings** on a source card to control:
 | Setting | What it does |
 |---|---|
 | **Source name** | The label shown for this source. |
-| **Default author** | The WordPress user credited as the post author. Tick **Always use this author** to override whatever the payload suggests. |
+| **Default author** | The WordPress user credited when the mapped author is blank or does not match a user. Tick **Always use this author** to override whatever the payload suggests. The same picker also sits under the Author mapping row. |
 | **Default post status** | **Draft** or **Publish**. This is set here only — the incoming payload can never publish content on its own. |
 | **Auth mode** | Change the accepted authentication style (**HMAC**, **Bearer**, **HMAC or bearer**, or **None**). |
 | **Verification secret** | Paste a new secret to replace the current one (for example, when the sending app rotates its own key). Leave it blank to keep the existing secret — for security it's never shown here, only a **(configured)** or **(not set)** indicator. Ignored when Auth mode is **None**. |

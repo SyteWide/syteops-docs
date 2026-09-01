@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.078
+
+- Fixed: Default author is used when the mapped webhook author is blank or does not match a WordPress user.
+- Added: Reviewers can change the post author in Review and Publish.
+
 ## v1.6.077
 
 - Fixed: New-draft review emails now go to everyone in Default reviewers and Default CC reviewers when the content source does not set its own list.

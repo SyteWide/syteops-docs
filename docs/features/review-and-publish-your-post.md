@@ -89,6 +89,12 @@ Two things worth knowing when you swap the image:
 - You'll be asked to write **new alt text**. The box still holds the description of the picture you are replacing, and publishing that against a different photo describes the wrong thing to anyone using a screen reader.
 - **Alt text and captions are shared.** They belong to the image in your media library, not to this one article — so changing them changes how that picture is described everywhere it is used. SyteOps only saves them when you actually edit them, so simply opening an article never rewrites anything.
 
+### Author
+
+The **Author** panel sits just under Featured image. It lists the same WordPress users as the content source Default author picker. Change who is credited on the article and click **Save** (or wait for autosave). The new author is added to the reviewer list so they can open the portal; the previous author stays on that list too. This does not rebuild who receives review emails.
+
+If an operator has set Author to **View only** for your reviewer type, you can still see who is credited, but the list is disabled. The same happens when **Who can publish** is **Author or designated approver only** and you are a co-reviewer — only the credited author (and administrators) can change the byline, so a co-reviewer cannot assign themselves and then publish.
+
 ### Images inside the article
 
 Click any image in the article body to open its details. You can set the **alt text** and a **caption**, and you can see and change the **image link** — the web address the picture loads from.
@@ -494,7 +500,7 @@ These are the same provider and model settings used by the Content AI and GEO ar
 
 | Setting | What it controls |
 |---|---|
-| **Who can publish** | **Any selected reviewer**, or **Author or designated approver only**. |
+| **Who can publish** | **Any selected reviewer**, or **Author or designated approver only**. Under the second option, co-reviewers cannot change the credited author (that would let them become the publisher). |
 | **Default publish type** | Pre-selected type in the portal's publish picker. |
 | **Soft lock** | Warns before concurrent edits. |
 | **Offer passkey sign-in** | Adds a passkey option at sign-in. Password sign-in still works. Gray until Secure Passkeys is active; **on by default** once it is. See below. |
@@ -553,6 +559,7 @@ Permissions are set by reviewer type (role). The panel shows a row for each role
 | Area | Restrictions available |
 |---|---|
 | **Featured image** | Edit (full) or View only |
+| **Author** | Edit (full) or View only |
 | **Permalink** | Edit (full) or View only |
 | **SEO** | Edit (full) or View only |
 | **GEO** | Edit (full) or View only |
