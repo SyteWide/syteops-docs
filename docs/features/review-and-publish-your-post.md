@@ -400,6 +400,8 @@ To configure the default list, go to **SyteOps → Content Pipelines**, open the
 - **Default reviewers** are the primary recipients of the email and can edit the draft.
 - **Default CC reviewers** are copied on the email and can also edit the draft.
 
+A content source can set its own reviewer or CC list. When that list is empty, the Review Portal defaults above are used. When it is not empty, it replaces the defaults for that source only (it does not merge).
+
 Changes to these lists take effect on the next draft that arrives from your content source — existing drafts already sent are not affected.
 
 ---
@@ -408,7 +410,7 @@ Changes to these lists take effect on the next draft that arrives from your cont
 
 Every automated portal email is controlled from one place: **SyteOps → Content Pipelines → Review Portal**, in the **What gets sent & published** group, under **Email notifications**. Each can be switched on or off independently:
 
-- **New draft received** *(on by default)* — emails the author and reviewers when a new article arrives and its review draft is created. This is the main review email, with the article preview, who can review it, and the secure editor link.
+- **New draft received** *(on by default)* — emails the author and reviewers when a new article arrives and its review draft is created. This is the main review email, with the article preview, who can review it, and the secure editor link. The article date in that email uses the site timezone in 12-hour AM/PM (for example, 7:33 PM), independent of WordPress's 24-hour time setting.
 - **Draft updated by source** *(off by default)* — emails the author and reviewers when your content source re-delivers an article **with changed content**, so nobody reviews a stale version. Identical re-deliveries (delivery retries) never send an email.
 - **Published or scheduled** *(on by default)* — confirms to the author and reviewers when a draft goes live or is scheduled.
 - **Source held (needs attention)** *(on by default)* — alerts the **site admin** (not the reviewers) when a live content source stops matching its approved field mapping: incoming articles are put safely on hold, and this email tells you to re-approve the mapping, then use **Reprocess last payload** on the source to bring in the article that triggered the hold. It sends once per incident, not on every held delivery.
