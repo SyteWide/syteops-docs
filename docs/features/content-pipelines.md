@@ -138,7 +138,8 @@ Describe how often your site publishes, and the [content calendar](review-and-pu
 | **Cadence warnings** ("Warn when a schedule breaks the rhythm") | Turns the whole feature on. Off by default — with it off, the calendar behaves exactly as it always has. |
 | **Publishing days** | The days you normally publish on. Leave every box unchecked if any day is fine; the per-day limit and the minimum gap still apply. |
 | **Usual publishing time** | Used only to build the suggested slot the warning offers. Picking a different time is never itself a conflict. |
-| **Most articles in one day** (1–10) | Scheduling beyond this on a single day raises the warning. Counts articles already published or scheduled that day. Drafts are not counted — an unscheduled draft has no publication date. |
+| **Most articles in one day** (1–10) | Scheduling beyond this on a single day raises the warning. Counts articles already published or scheduled that day, plus any draft holding a reserved slot. An ordinary draft is not counted — it has no publication date. |
+| **Reserve publishing slots** ("Give each new article the next open slot") | Off by default. See [Reserving slots for new articles](#reserving-slots-for-new-articles) below. |
 | **Smallest gap between articles** (in **hours**, 0–168) | Two articles closer together than this many hours raise the warning, even on different days — 11:55pm and 12:05am are ten minutes apart. Set it to 0 to switch this rule off. |
 
 The warning is **always advisory**. It reports what it found and offers the next clean slot; whether to take it is your call, and nothing here can prevent a schedule.
@@ -146,6 +147,28 @@ The warning is **always advisory**. It reports what it found and offers the next
 Reviewers working in the portal see warnings about the articles their own calendar shows; as the site owner you see them across all your content, so the two can differ for the same date.
 
 If the warning cannot find a free slot ahead, it says so rather than suggesting one. And if your site has more scheduled articles than the check can read at once, it tells you the answer may be incomplete.
+
+### Reserving slots for new articles
+
+The cadence settings above only warn you when *you* pick a date. Turn on **Reserve publishing slots** and they start doing the work for you: each newly arriving article is given the next moment that fits your rhythm, across all your sources at once. (Slots are given to articles as they *arrive*; a later update to one keeps the date it already has. Nothing is reserved while Content Pipelines is in **Setup** mode.)
+
+So if you publish Monday, Wednesday and Friday at 10:00 and five articles arrive on a Tuesday morning, they are handed five different dates rather than piling up on one afternoon.
+
+**What you will see as a reviewer.** The email letting you know an article is ready shows its **Publishing slot**, marked *held until you approve* — because nothing publishes on its own; the date is simply waiting for you. Open the article and the **Schedule** box is already ticked with that date filled in. Approve it and it goes out then.
+
+You are never locked into it:
+
+- **Change the date.** Type a different one. Your choice wins, and you get the usual warning if it clashes with something.
+- **Publish immediately.** Untick **Schedule** and approve. The article goes live right away.
+- **Change your mind later.** A scheduled article can be moved or cancelled from the calendar at any time before it publishes.
+
+**If the slot has already passed** — say the article sat unreviewed for a week — approving it publishes straight away. The date field is left empty in that case rather than offering a moment that has gone by, so you can either publish now or pick a new date yourself. If publishing right then would break your rhythm, the article still goes out — nothing here blocks you — and the fact is recorded in the article's history so you can see later why two articles landed close together.
+
+**Sources that publish on arrival.** If a content source is set to publish immediately rather than send articles for review, its articles are *scheduled* for their slot instead of going live the moment they arrive. This is where the setting does the most work: an automated feed spaces itself out with nobody watching it.
+
+**Before you can turn it on**, two things must already be set: **Cadence warnings** (above) and **Scheduled publishing** in the Review Portal settings. Until both are on, the checkbox stays grayed out and tells you which one is missing. Scheduling matters because it is also what gives reviewers the buttons to move or cancel a schedule — without it, they would receive scheduled articles they could not change.
+
+If your rhythm is so tight that no free moment can be found in the months ahead, nothing is reserved and the article behaves exactly as it would have before the setting existed — a review-bound article waits as an ordinary draft, and a source set to publish on arrival still publishes on arrival.
 
 ## Content Sources
 

@@ -8,6 +8,40 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.092
+
+- SyteHero is now a recognized integration, with its own tile alongside every other plugin SyteOps knows about.
+- SyteHero's consent and attribution endpoints keep working whenever SyteHero is installed, even with REST API restriction turned on. Previously they were blocked, and because SyteHero stops tracking when it cannot confirm a visitor's privacy rules, that quietly switched off all of its front-end analytics.
+- Only those two public endpoints are opened. SyteHero's settings, backup, slide and sales endpoints stay behind the restriction.
+- Because a blocked endpoint is invisible until someone notices the missing data, this does not wait on the new toggle: activate SyteHero and the endpoints work.
+
+## v1.6.091
+
+- Articles arriving from a content source can now be given the next open slot in your publishing schedule, so posts space themselves out instead of arriving in clusters. Off by default; turn it on under Publishing cadence.
+- A source set to publish on arrival is scheduled for its slot instead of going live immediately.
+- The review email shows the reserved slot, and the reviewer opens the article with that date already filled in — they can still change it or publish right away.
+- The scheduled confirmation email now says exactly when the article goes live.
+
+## v1.6.090
+
+- Notification emails now follow your dark mode setting instead of staying stubbornly light. Headings, cards, status pills, detail tables and the footer all shift together, so nothing is left as an unreadable bright slab. Your logo keeps its light plate so it stays legible whatever it is designed for.
+- Article photos in notification emails are no longer attached to the message, so they still appear when you **forward** an email or **reply** to one. Previously every picture collapsed to a filename placeholder, because no mail app carries attachments into a reply.
+- Notification emails are dramatically smaller as a result, which also stops longer ones being cut short by Gmail's size limit. Your logo is still attached, so it shows even in apps that block remote images.
+
+## v1.6.089
+
+- Review Portal: a live article can now be taken back to **draft** from the portal. The button appears for reviewers who can publish, and the article keeps its original publication date and address, so putting it back restores it rather than re-launching it.
+- Review Portal: taking an article down also cancels any social posts scheduled for it, so nothing broadcasts a link to an article that is no longer there. Posts already sent are not recalled, and posts set to go out "on publish" are kept for when the article goes back up.
+- Review Portal: an article published with private visibility comes back private when you republish it straight away, instead of quietly becoming public.
+
+## v1.6.088
+
+- Content Pipelines: the **Coverage** shortcut now sits before **Calendar** in the quick navigation, grouping it with the analysis views it belongs to.
+
+## v1.6.087
+
+- Review emails: the **Edit/View this article** and **See all my reviews** buttons now sit directly under the article title and summary, instead of below the full-width photo. On a phone the action was previously pushed off the first screen by the image.
+
 ## v1.6.086
 
 - **llms.txt — a held publication no longer fails in silence.** When you edit an article's answers after it is published, SyteOps rebuilds the AI files in the background rather than through a pipeline run — so there is no row in the Runs table to look at. If LLMS Amplifier was holding publication until its headless settings are confirmed, those background rebuilds did nothing at all, and nothing anywhere said so: the files simply went stale. SyteOps now reports the hold as a note on the LLMS Amplifier settings screen, counting how many rebuilds it has attempted, and clears the note on the first one that completes. It deliberately does not keep retrying — a hold is cleared by confirming the settings, and retrying every couple of minutes would rebuild your whole site for nothing.

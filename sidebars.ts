@@ -71,6 +71,7 @@ const sidebars: SidebarsConfig = {
         'integrations/contact-form-7',
         'integrations/sendy',
         'integrations/wp-full-picture',
+        'integrations/sytehero',
         'integrations/the-events-calendar',
         'integrations/woocommerce',
         'integrations/wordfence',
