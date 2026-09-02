@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.094
+
+- Fixed a path where importing a saved configuration could drop the on/off state of the newer integrations. The import now always reads the current integration list rather than an internal copy that had fallen behind.
+- Internal maintenance: shared plugin-detection logic and a new build check that keeps the integration registries in step, so an integration can no longer be added in one place and forgotten in another.
+
 ## v1.6.093
 
 - Security: REST API restriction now identifies a request by the route WordPress will actually serve, rather than by the address the request was sent to. A request could previously present an allowed address while asking for a different, restricted endpoint — the restriction judged the address and let it through. The endpoint's own permission checks still applied, so this bypassed the pre-emptive block rather than granting access, but the restriction now holds on its own.
