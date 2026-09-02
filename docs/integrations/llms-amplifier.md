@@ -64,6 +64,10 @@ The built-in generator serves `llms.txt` *virtually* — it does not write a fil
 
 When a pipeline runs the GEO stage with LLMS Amplifier as the engine, SyteOps asks LLMS Amplifier to rebuild its files for the whole site. Because GEO runs after the cross-linking and SEO stages, the rebuilt files reflect those changes. Dry-run (preview) mode is not available for LLMS Amplifier — preview runs report that the step was skipped.
 
+If LLMS Amplifier is pausing publication until you confirm a setting — it does this on sites using its headless mode, when it cannot verify what it saved — the GEO stage shows an amber **Held** status with the reason, instead of an error. Held means a person has to act: LLMS Amplifier is not retrying, and re-running the pipeline will not clear it. Open the LLMS Amplifier settings screen, confirm the **Public Site URL** and **Published Files** values, and save. The next run proceeds normally.
+
+Edits you make to an article's answers *after* it is published do not go through a pipeline run at all — SyteOps rebuilds the files for those in the background, and that path has no row in the Runs table. So if publication is being held, those background rebuilds are quietly doing nothing. SyteOps reports that as a status note on the LLMS Amplifier settings screen itself, counting how many rebuilds it has attempted. The note clears on the first rebuild that completes.
+
 SyteOps also rebuilds LLMS Amplifier's files on its own when something changes what they should say but no pipeline run would have fired: editing an article's answers after it is live, reviewing or un-reviewing an article's answers, marking it as a pillar, excluding it from `llms.txt`, changing which content types are covered, publishing content of a type either side covers, or unpublishing, trashing or deleting an article. Those rebuilds are batched, so a run of edits produces one rebuild, they happen in the background, and if something else rebuilt the files in the meantime SyteOps skips its own pass.
 
 "Either side" matters here: SyteOps watches both its own **Content types** setting and LLMS Amplifier's own **Post Types** list. Because SyteOps switches LLMS Amplifier to Manual, it is the only thing left that rebuilds those files — so it has to cover everything they describe, not only the types it analyzes itself.
@@ -80,6 +84,14 @@ An article's questions and answers only reach the index once a reviewer has tick
 Those two options can only publish if LLMS Amplifier is generating `llms-index.json` in the first place. If its JSON index is off, both options sit there switched on and publish nothing.
 
 Choosing LLMS Amplifier as the GEO engine (or turning one of those two options on) now turns the JSON index on automatically. On a site that already had LLMS Amplifier selected with the index off, use **Apply recommended Amplifier settings** on the Answer-engine publishing card — that also turns on sitemap, robots, and meta-tag discovery, and leaves your content types, limits, and identity copy alone.
+
+### If you update LLMS Amplifier
+
+SyteOps is checked against a specific range of LLMS Amplifier versions. When you update past that range, a note appears in LLMS Amplifier's own settings screen, alongside its other status messages, saying the version is newer than the one this integration was last checked against.
+
+**Nothing is switched off and nothing stops working.** In practice a version bump has never removed anything SyteOps depends on. The note exists so that if the answer-engine files or the robots.txt guidance ever do start looking wrong, you know which detail to mention when you report it. You do not need to act on it, and you should not delay an LLMS Amplifier update because of it.
+
+Newer versions of LLMS Amplifier can refuse a settings change while one of its own screens is saving. If that happens, SyteOps tells you the write was declined and asks you to try again in a moment — it no longer reports the change as applied. The same applies to the **Update frequency** control below. Your **Published Files** selection is never changed on your behalf: if you deliberately removed the JSON index there, SyteOps leaves that decision alone.
 
 A warning still appears above the two options when the index is off, and an entry appears in LLMS Amplifier's own health panel.
 :::
