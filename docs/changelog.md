@@ -8,6 +8,32 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.086
+
+- **llms.txt — a held publication no longer fails in silence.** When you edit an article's answers after it is published, SyteOps rebuilds the AI files in the background rather than through a pipeline run — so there is no row in the Runs table to look at. If LLMS Amplifier was holding publication until its headless settings are confirmed, those background rebuilds did nothing at all, and nothing anywhere said so: the files simply went stale. SyteOps now reports the hold as a note on the LLMS Amplifier settings screen, counting how many rebuilds it has attempted, and clears the note on the first one that completes. It deliberately does not keep retrying — a hold is cleared by confirming the settings, and retrying every couple of minutes would rebuild your whole site for nothing.
+
+## v1.6.085
+
+- **llms.txt — you are told when LLMS Amplifier moves ahead of us.** SyteOps is checked against a specific range of LLMS Amplifier versions, and until now that range was recorded only in code comments nobody could see. If you update LLMS Amplifier past it, a note now appears in its own settings screen saying so. **Nothing is switched off and nothing stops working** — a version update has never removed anything SyteOps relies on. The note exists so that if the answer-engine files or the robots.txt guidance ever do look wrong, you know which detail to mention when reporting it. Do not delay an LLMS Amplifier update because of it.
+
+## v1.6.084
+
+- **llms.txt — the robots.txt advice no longer withholds a line you owe.** A newer LLMS Amplifier decides each robots.txt line separately, so a site that publishes its AI index but not its sitemap gets the `LLMS-Index:` line and nothing else. SyteOps assumed the two always travel together and, on such a site, told you nothing was missing. It now checks each line independently. Sites with the sitemap turned on are unaffected — the advice there was already correct.
+- **Content Pipelines — a held publication says so.** When LLMS Amplifier pauses publishing until you verify a setting, it does no work and schedules no retry. That arrived as a plain failure, so the pipeline showed an error on every publish that retrying could never clear and that named the wrong problem. It now shows as **Held**, in amber, with the reason — so you know a person has to act, not a machine.
+- **Content Pipelines — settings written to LLMS Amplifier are confirmed.** A newer LLMS Amplifier can decline a settings change while another process is saving. SyteOps assumed its writes succeeded, so a declined change was reported as saved and could also trigger repeated rebuilds. Writes are now read back and a declined one is reported, with a suggestion to try again in a moment.
+
+## v1.6.083
+
+- **Review Portal — reviewers added later now get the email.** The reviewer list for an article was fixed at the moment it arrived, so anyone you added to your **Default reviewers** or **Default CC reviewers** afterwards silently received none of that article's notifications and could not open it. Notifications for articles still awaiting review now use your current lists. Two limits are deliberate: articles that have already been published are never changed, so adding someone never hands them your published back catalog; and removing someone does not revoke access to drafts they were already assigned to.
+
+## v1.6.082
+
+- **Review Portal — open it from the live article.** The **Open review portal** link now also appears in the WordPress toolbar while you are signed in and reading a published post on your own site. Previously it only appeared while editing the post, so spotting something wrong on the live page meant navigating back to the editor first. Who can see the link is unchanged — it still only appears for people who can already edit that post.
+
+## v1.6.081
+
+- **Review Portal — sign-in fixed.** Opening a review link from an email and signing in could fail with "cookies are blocked or not supported by your browser", even when cookies were switched on. It affected any browser that had not already visited the WordPress sign-in page recently, which is why it appeared to strike some people and not others. The sign-in card now prepares the check correctly, so the message only appears when cookies really are blocked.
+
 ## v1.6.080
 
 - **Content Pipelines — heading anchors.** A new per-source option gives each heading in an ingested article a short, predictable anchor name ("What is DSCR?" becomes `what-is-dscr`), so a table-of-contents widget links to stable, shareable anchors instead of inventing its own. Repeated headings get `-2`, `-3`; a heading that already has a name keeps it. Applied when the page is displayed — your stored article is never changed, so switching it off leaves nothing behind.

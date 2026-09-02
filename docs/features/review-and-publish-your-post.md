@@ -408,7 +408,16 @@ To configure the default list, go to **SyteOps → Content Pipelines**, open the
 
 A content source can set its own reviewer or CC list. When that list is empty, the Review Portal defaults above are used. When it is not empty, it replaces the defaults for that source only (it does not merge).
 
-Changes to these lists take effect on the next draft that arrives from your content source — existing drafts already sent are not affected.
+### When you change these lists
+
+Adding someone to the reviewer or CC list applies to **articles still awaiting review**, not only to future ones. The next time SyteOps emails about an unpublished article — a resend, or a **changes requested** notification — anyone you have added since it arrived is included, and gains access to that draft. This is what makes adding a new team member work as you would expect: they start receiving the drafts that are still in flight, rather than only articles that arrive afterwards.
+
+This happens when the email is sent, so there is one thing to know: a newly added reviewer will not see those in-flight drafts in **See all my reviews** until one of those emails has gone out for them. If you want someone brought up to date immediately, use **Resend review email** on the articles concerned.
+
+Two limits are deliberate:
+
+- **Published articles are never changed.** An article that has already gone live keeps the reviewer list it had. Adding someone to your defaults never hands them access to your published back catalog.
+- **Removing someone does not revoke their access.** Taking a person off the default lists stops them being added to new articles, but it does not remove them from drafts they were already assigned to — SyteOps cannot tell that apart from someone a colleague deliberately invited to that specific article with **Send to a colleague**. To remove someone from a particular draft, use the reviewer list in the portal for that article.
 
 ---
 
@@ -583,12 +592,17 @@ Click **Save settings** at the bottom of the panel to apply your changes. The ne
 
 ### Open the portal for any post
 
-You don't have to wait for a draft from your content source to use the portal. There are two ways in:
+You don't have to wait for a draft from your content source to use the portal. There are three ways in:
 
 - **From the posts list.** In the WordPress **Posts** (or **Pages**) list, hover over any post you can edit and click the **Review portal** link in its row of actions.
 - **From the post itself.** While editing a post, click **Open review portal** in the toolbar at the top of the screen.
+- **From the live article.** While signed in and reading the published post on your own site, click **Open review portal** in the toolbar at the top of the page.
 
-Either way, SyteOps issues a fresh secure link for that post and opens the portal in a new tab — the same review window contributors see, with the same expiry window as an emailed link. This lets you put an existing post (or one written by hand) through the same review-and-approve flow.
+:::tip Can't see the toolbar while editing?
+The WordPress editor's **fullscreen mode** hides the toolbar, and with it the **Open review portal** link. Open the editor's options menu (the three dots, top right) and switch **Fullscreen mode** off, or use the posts-list row action instead.
+:::
+
+Any of them issues a fresh secure link for that post and opens the portal in a new tab — the same review window contributors see, with the same expiry window as an emailed link. This lets you put an existing post (or one written by hand) through the same review-and-approve flow.
 
 The **Review portal** action appears on posts and pages, and on any other content type your content sources publish into. It won't appear on unrelated content types added by other plugins.
 
