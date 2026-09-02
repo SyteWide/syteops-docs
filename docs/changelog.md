@@ -8,6 +8,12 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.093
+
+- Security: REST API restriction now identifies a request by the route WordPress will actually serve, rather than by the address the request was sent to. A request could previously present an allowed address while asking for a different, restricted endpoint — the restriction judged the address and let it through. The endpoint's own permission checks still applied, so this bypassed the pre-emptive block rather than granting access, but the restriction now holds on its own.
+- A request whose target cannot be determined is refused rather than allowed.
+- No configuration changes are needed, and no legitimate request shape is affected.
+
 ## v1.6.092
 
 - SyteHero is now a recognized integration, with its own tile alongside every other plugin SyteOps knows about.
