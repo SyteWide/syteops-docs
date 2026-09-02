@@ -139,6 +139,10 @@ Google Site Kit support for sites that use Google's analytics and search-insight
 
 Analytics data sender support for sites using WP Full Picture (free or premium). The toggle allowlists the `fupi/v1/sender` endpoint so analytics events keep flowing under SyteOps REST restriction. See the dedicated [WP Full Picture Integration](wp-full-picture) page for setup.
 
+### SyteHero
+
+Recognition for the SyteHero sister plugin, which runs hero sliders, visitor consent, and front-end attribution. Its two public endpoints — `sytehero/v1/jurisdiction` and `sytehero/v1/touch` — are allowlisted **whenever SyteHero is active**, not when the toggle is enabled: SyteHero's consent layer fails closed, so a blocked endpoint would silently switch off all of its analytics. The toggle itself is for visibility. See the dedicated [SyteHero Integration](sytehero) page.
+
 ---
 
 ## Security
@@ -232,5 +236,6 @@ SyteOps automatically allows REST API access for key services when REST restrict
 | Google Site Kit | `/wp-json/google-site-kit/*` |
 | Wordfence | `/wp-json/wordfence/v1/*` |
 | WooCommerce | `/wc-auth/v1/*` |
+| SyteHero | `/wp-json/sytehero/v1/jurisdiction`, `/wp-json/sytehero/v1/touch` |
 
 See [REST API Restriction](../features/rest-api-restriction) for details.

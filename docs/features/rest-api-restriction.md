@@ -36,7 +36,7 @@ Path rules:
 
 ## Built-In Allowlist
 
-These endpoints are always allowed when REST restriction (not Block All) is enabled:
+These endpoints stay reachable when REST restriction (not Block All) is enabled. Rows marked conditional apply only when their integration is enabled or their plugin is active:
 
 | Endpoint | Purpose |
 |---|---|
@@ -46,6 +46,8 @@ These endpoints are always allowed when REST restriction (not Block All) is enab
 | `/wp-json/google-site-kit/*` | Google Site Kit |
 | `/wp-json/wordfence/v1/*` | Wordfence security |
 | `/wc-auth/v1/*` | WooCommerce OAuth |
+| `/wp-json/sytehero/v1/jurisdiction` | SyteHero consent — conditional: allowed whenever SyteHero is active |
+| `/wp-json/sytehero/v1/touch` | SyteHero attribution — conditional: allowed whenever SyteHero is active |
 
 ## What Gets Blocked
 

@@ -23,7 +23,9 @@ As soon as a new draft arrives from your content source, SyteOps sends a notific
 - The **post's author** (the WordPress user the post will be attributed to).
 - Anyone listed as a **Default reviewer** or **Default CC reviewer** in your Review Portal settings (see [Who receives the review email](#who-receives-the-review-email) below).
 
-The email comes from your site, uses your site's logo, and includes a summary of the article title and source keyword. At the bottom there are two buttons: **Edit/View this article**, which opens this particular draft, and **See all my reviews**, which opens your full review queue.
+The email comes from your site, uses your site's logo, and includes a summary of the article title and source keyword. Two buttons sit directly under that summary, above the article photo: **Edit/View this article**, which opens this particular draft, and **See all my reviews**, which opens your full review queue.
+
+The email follows your device's appearance setting, so it renders in dark mode if that is what you use. Your logo keeps a light backing so it stays legible either way. Article photos are loaded from your site rather than attached to the message, which means they still appear when you forward the email or reply to it.
 
 ---
 
@@ -199,6 +201,8 @@ Once you have finished reviewing all panels, choose one of the action buttons:
 - **Schedule** _(if enabled by the site owner)_ — Check the **Schedule** box to pick a future date and time, then click **Approve & Schedule**. The same confirm-then-progress dialog tracks the scheduling. The post goes live automatically at the time you chose rather than immediately. **Scheduling is not final** — see [Changing or cancelling a schedule](#changing-or-cancelling-a-schedule) below.
 - **Request changes** — Opens a short note prompt where you can describe what needs updating. Your current edits are saved to the draft, the author and co-reviewers are notified by email, and your note is added to the portal's **Feedback** panel. See [Step 5](#step-5-request-changes) for the full walkthrough.
 
+On an article that is **already live**, the buttons are different: the main one reads **Save changes**, because there is nothing left to approve, and next to it sits **Revert to draft** for taking the article back off your site. See [Taking a live article back to draft](#taking-a-live-article-back-to-draft).
+
 ### Changing or cancelling a schedule
 
 A scheduled post is still yours right up until it publishes. Nothing about scheduling is one-way.
@@ -225,6 +229,7 @@ A few related behaviors worth knowing:
 - **Cancelling needs publish permission.** Stopping a post from going out is treated the same way as sending it out, so it follows the site's **Who can publish** setting. Reviewers who cannot publish will not see the **Unschedule** button, in the portal or on the calendar.
 - **If the site owner turns scheduling off** while a post is already scheduled, you can still **Unschedule** it — you just cannot move it to a different time. The post keeps its existing date until you cancel it or publish it.
 - **A post publishes when its time arrives, even while you are editing.** If you are still working on a post in the last minute before it is due, saving will publish it — its scheduled moment has come. The portal tells you when this happens and updates the badge, so you are never left looking at a "Scheduled" label on a post that is already live.
+- **Publishing is not one-way either.** If a post has already gone live — because its schedule ran out, or because someone published it by hand — you can still take it back to a draft. See [Taking a live article back to draft](#taking-a-live-article-back-to-draft).
 
 Scheduled posts also stay in your review queue (**See all my reviews**), marked with a **Scheduled** label and their publication time — so you can always find one again even if your original email link has expired.
 
@@ -387,10 +392,27 @@ Beneath the drafts awaiting you, the queue lists any **published** articles you'
 
 These behave differently from drafts, and the page says so:
 
-- **Changes go live immediately.** There's no approval step — opening one of these in the portal and saving publishes the change straight away.
+- **Changes go live immediately.** There's no approval step — opening one of these in the portal and saving publishes the change straight away. If the article shouldn't be live at all, you can take it back to a draft instead — see [below](#taking-a-live-article-back-to-draft).
 - **Answer coverage.** Each row shows the same question and answer counts as a draft.
 - **"Answers not signed off".** If your site publishes AI-written answers to search engines and nobody has confirmed the answers on that article, the row says so. Those answers are held back from every answer-engine surface until someone reviews them in the article's GEO panel, so this is worth acting on if you want them live.
 - **View live article.** A link to the published article as your readers see it. If your site is set up to exclude internal traffic, this link carries that exclusion, so checking your own work doesn't show up in your site's analytics.
+
+### Taking a live article back to draft
+
+Sometimes an article goes live before it should have — a claim needs checking, a client asks for it to come down, or it simply wasn't ready. You don't have to delete it or scramble to edit it in place.
+
+Open the article in the portal and click **Revert to draft** in the action bar. The portal asks you to confirm, then takes the article off your site and turns it back into an ordinary draft you can keep working on. When it's ready again, publish it exactly the way you'd publish any other draft.
+
+A few things worth knowing before you use it:
+
+- **You need permission to publish.** Taking an article down is treated the same way as putting it up, so it follows the site's **Who can publish** setting. Reviewers who can't publish don't see the button at all.
+- **The article keeps its date and its web address.** Reverting doesn't reset the publication date, so publishing it again puts the *same* article back at the *same* address — it isn't relaunched as a brand-new post. Anyone who linked to it or bookmarked it still lands in the right place.
+- **Your site tidies up after itself.** The article drops out of your blog listings, and the AI files your site publishes — llms.txt and your answer-engine surfaces — are rebuilt without it automatically. There's nothing extra for you to clean up.
+- **Save before you revert.** The page reloads once the article comes down, so anything you've typed but not saved is lost. Click **Save changes** first if you want to keep your edits.
+- **A private article comes back private — but only if you publish it immediately.** If the article was published privately, so only signed-in staff could read it, publishing it again straight away puts it back exactly that way, and the confirmation email says plainly that it went out privately rather than describing it as live on the site. Scheduling it for a later date does not: WordPress itself handles scheduled publishing, and it publishes to everyone. **Choosing a schedule is the moment the private setting is given up.** Cancelling that schedule afterwards will not bring it back, and neither will publishing by hand from there — your site stops keeping the note as soon as the schedule is accepted. So if the article needs to stay private, publish it immediately rather than scheduling it, and if one has already gone out to everyone, set its visibility back to private in WordPress.
+- **Social posts timed for a later date are cancelled; ones set to go out on publishing are kept.** If an announcement for this article was queued for a particular date and time, reverting cancels it, so nothing points your followers at a page that isn't there any more. The confirmation box tells you before you commit, and cancelling can't be undone from here — if you publish the article again, queue that announcement again too. An announcement set to go out *when the article publishes* is left alone instead: it hasn't been sent, it can't go out while the article is a draft, and it will simply go out when you publish the article again — so the wording somebody already wrote isn't thrown away.
+- **Social posts already sent are not pulled back.** If publishing the article announced it to a social account, that announcement stays up — it was sent at the time and can't be recalled from here. Remove it on the social network itself if you need it gone.
+- **Nobody is emailed.** Like cancelling a schedule, reverting is a quiet action — no notification goes out to the author or the other reviewers. Let them know yourself if they're expecting the article to be live.
 
 ---
 
@@ -427,7 +449,7 @@ Every automated portal email is controlled from one place: **SyteOps → Content
 
 - **New draft received** *(on by default)* — emails the author and reviewers when a new article arrives and its review draft is created. This is the main review email, with the article preview, who can review it, and the secure editor link. The article date in that email uses the site timezone in 12-hour AM/PM (for example, 7:33 PM), independent of WordPress's 24-hour time setting.
 - **Draft updated by source** *(off by default)* — emails the author and reviewers when your content source re-delivers an article **with changed content**, so nobody reviews a stale version. Identical re-deliveries (delivery retries) never send an email.
-- **Published or scheduled** *(on by default)* — confirms to the author and reviewers when a draft goes live or is scheduled.
+- **Published or scheduled** *(on by default)* — confirms to the author and reviewers when a draft goes live or is scheduled. If the article was published with private visibility, the email says so and links to it as a private post, rather than describing it as live on the site.
 - **Source held (needs attention)** *(on by default)* — alerts the **site admin** (not the reviewers) when a live content source stops matching its approved field mapping: incoming articles are put safely on hold, and this email tells you to re-approve the mapping, then use **Reprocess last payload** on the source to bring in the article that triggered the hold. It sends once per incident, not on every held delivery.
 
 A **Reply-To address** field lets replies to the reviewer-facing emails (review requests, update notices, colleague invites, change requests, and published confirmations) go to a person (for example, your editor) instead of the site's sending address — leave it blank to keep the default. The administrator "payload held" alert always replies to the sending address. Two optional fields polish the emails' footer: a **Footer tagline** (a short line about your business) and a **Footer phone** (shown as a click-to-call link). Both appear in the dark footer bar of every portal email, alongside your company name. All emails carry your portal branding — logo, company name, and colors — from the Branding settings below.
