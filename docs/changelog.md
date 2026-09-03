@@ -8,6 +8,12 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.101
+
+- **A publishing time you set on a draft now shows up on the calendar.** Ticking **Schedule**, choosing a time and pressing **Save draft** stored your choice — the portal filled the field back in every time you reopened the article — but the calendar never knew about it, so the article stayed under **Unscheduled drafts** and the day you picked was drawn empty. It now appears on that day, in the provisional style, and leaves the unscheduled list. Nothing about approval changes: the article is still a draft and an approver still has to publish it.
+- **The portal no longer credits your publishing cadence for a time you chose yourself.** The note beside the date said "Slot reserved by your cadence" whichever way the time got there. It now says which it was, and the calendar's article card makes the same distinction — **Planned** for a time a person named, **Slot held** for one the cadence reserved.
+- **Save draft moved next to the approve button and has its own color.** At the far left of the bar it was separated from the action most reviewers take next by every toggle in between, and being white it read as one more of those toggles rather than a button.
+
 ## v1.6.100
 
 - **The calendar on the review page is wider, and unscheduled drafts moved underneath it.** The month grid used to share a narrow column with a side panel listing drafts that have no date, which left each day too small to show anything but a clock time. The grid now takes the full width and the undated drafts sit in a strip below it, so a day can show which article is going out as well as when. The strip appears only when something is actually waiting.
