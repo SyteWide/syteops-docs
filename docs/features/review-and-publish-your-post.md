@@ -25,7 +25,9 @@ As soon as a new draft arrives from your content source, SyteOps sends a notific
 
 The email comes from your site, uses your site's logo, and includes a summary of the article title and source keyword. Two buttons sit directly under that summary, above the article photo: **Edit/View this article**, which opens this particular draft, and **See all my reviews**, which opens your full review queue.
 
-The email follows your device's appearance setting, so it renders in dark mode if that is what you use. Your logo keeps a light backing so it stays legible either way. Article photos are loaded from your site rather than attached to the message, which means they still appear when you forward the email or reply to it.
+The email follows your device's appearance setting, so it renders in dark mode if that is what you use. Your logo keeps a light backing so it stays legible either way.
+
+The article photo is sent along with the message rather than linked from your site, so it appears even in mail apps that block or fail to load linked images. One trade-off comes with that: if you forward the email or reply to it, most mail apps do not carry the attached photo across, so the recipient of that forward sees a placeholder where the picture was. The article itself is unaffected — the **Edit/View this article** button still opens the full draft, photo included. Unusually large photos are still linked rather than attached, so a message never becomes needlessly heavy.
 
 ---
 
@@ -324,14 +326,28 @@ The **Feedback** panel collects every change request submitted for this draft, o
 
 ## Step 6: Use the content calendar
 
-The portal includes a **Calendar** button that opens a month view of your recent, draft, scheduled, and published posts. Each post shows as a chip with a colored bar on the left: teal for scheduled, green for published, amber for pending review, and gray for draft. Drafts without a publish date yet appear in an **Unscheduled drafts** list next to the grid.
+The portal includes a **Calendar** button that opens a month view of your recent, draft, scheduled, and published posts. Each post shows as a chip with a colored bar on the left, and a **color key** above the grid spells out what each color means: gray for draft, amber for pending review, teal for scheduled, and green for published — plus violet with a dashed edge for **Slot held**, an article holding a reserved publishing slot. That last row appears in the key only when slot reservation is switched on. Drafts with no date of any kind appear in an **Unscheduled drafts** list next to the grid.
+
+You don't have to open an article to reach the calendar. The same **Calendar** button also sits on your [review queue](#your-review-queue) page, beside **Sign out**, and opens exactly the month view described below.
 
 From the calendar you can:
 
 - **Select a post** to open its details card — the full title, its featured image, when it publishes, who is reviewing it, how much feedback it has, and a checklist of what it still needs before it can go live. From the same card you can pick an exact date and time. This works on every device, including phones and tablets.
 - **Drag a scheduled post to a new day** to move it to a different publish date. Dragging needs a mouse or trackpad — on a touchscreen, select the post instead.
 - **Drag a post from Unscheduled drafts onto a day** to give it a publish date.
+- **Drag an article that is holding a slot to a new day** to turn that hold into a real schedule. It keeps the time the slot reserved — only the day moves.
 - **Unschedule a scheduled post** — select it and click **Unschedule** in the picker. It returns to the **Unscheduled drafts** list and will not publish until you give it a new date.
+
+### Articles holding a publishing slot
+
+If your site reserves a publishing slot for each arriving article, those articles are drawn on the grid on the day they are holding, in violet with a dashed left edge. The dashes are there on purpose: the date is provisional. Nothing publishes on its own — the moment is simply being kept for the article until someone approves it. These articles are not in the **Unscheduled drafts** list, because an article holding a date is not unscheduled.
+
+- **Select one** and its card opens with the held date already filled in, labeled **Slot held**. There is no **Unschedule** button, because there is no schedule to cancel yet — approve the article to publish it then, or type a different date.
+- **Drag one onto another day** to turn the hold into a real schedule on that day. It keeps the time the slot reserved, so only the day moves. This needs the same publish permission, and raises the same cadence warning, as scheduling any other draft.
+- **A slot that has already gone by is not shown on the grid.** Once its moment has passed, nothing will publish the article at that time, so it goes back to the **Unscheduled drafts** list — approving it then publishes right away, or you can pick a new date.
+- **A slot in another month** isn't visible on this month's grid, exactly like a post scheduled for next month. It stays out of **Unscheduled drafts** either way, so the same article never appears and disappears as you page between months.
+
+This applies only when **Reserve publishing slots** is switched on. With it off, the calendar behaves exactly as it always has. See [Reserving slots for new articles](content-pipelines.md#reserving-slots-for-new-articles).
 
 ### Cadence warnings
 
@@ -360,8 +376,9 @@ The calendar adapts to the screen you are on:
 A few rules apply:
 
 - You can only move posts you're allowed to edit.
-- Scheduling a draft (giving it a publish date) requires publish permission, following the same **Who can publish** setting described below. So does unscheduling one.
+- Scheduling a draft (giving it a publish date) requires publish permission, following the same **Who can publish** setting described below. So does unscheduling one, and so does turning a held slot into a real schedule.
 - Published posts can't be moved or unscheduled.
+- An article holding a publishing slot can be dragged like a scheduled one, but it isn't scheduled until you drop it on a day or approve it.
 - **You can open any post's details, even one you can't move.** Reading isn't editing. For a post that isn't yours to change, the card shows what it is and when it publishes, and leaves out the working detail — who's reviewing it, its feedback, and its readiness checklist.
 
 :::note Reviewers see the full calendar
@@ -380,6 +397,7 @@ Every reviewer-facing email — a new draft, an updated draft, a change request,
 - **Administrators see everything.** A WordPress administrator opening the queue sees every draft currently assigned to any reviewer, not just their own.
 - **No link expiry.** Once you're signed in, opening a draft from your review queue always works, even past the normal review-link expiry window — your WordPress session is what proves who you are, not the link.
 - **"Received" means received.** Each row shows the date the article arrived for review, and it keeps showing that date no matter what happens to the article afterwards — scheduling it, moving it, or cancelling the schedule. A scheduled article shows both: when it arrived, and when it will publish.
+- **The calendar is here too.** A **Calendar** button sits at the top of the page, next to **Sign out**. It opens the same month view described in [Use the content calendar](#step-6-use-the-content-calendar) — the same grid, the same **Unscheduled drafts** list, color key, phone view, details card and drag-to-reschedule — so you can see what else is coming up without opening an article first. The button appears only for accounts that are allowed to use the calendar; if you don't see it, ask your site administrator. The same permission rules apply once it's open: you can only move articles you're allowed to edit, and scheduling or unscheduling one follows the site's **Who can publish** setting.
 - **The newest items first.** The queue lists up to 100 articles, drawn from the most recently updated drafts on the site. If there are more than that, or if the site has a very large backlog of drafts awaiting review, the page tells you so with a note reading *"Older items may not be listed."* When you see that note, older articles may be waiting on you even though they aren't shown — open them from their original review email, or ask your site administrator.
 
 Bookmark the queue page, or just click the footer link in your next review email, to check what's waiting on you at any time. Site owners can also reach it from **Content Pipelines → Runs**, using the **Open my review queue** button.
