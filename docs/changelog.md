@@ -8,6 +8,12 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.100
+
+- **The calendar on the review page is wider, and unscheduled drafts moved underneath it.** The month grid used to share a narrow column with a side panel listing drafts that have no date, which left each day too small to show anything but a clock time. The grid now takes the full width and the undated drafts sit in a strip below it, so a day can show which article is going out as well as when. The strip appears only when something is actually waiting.
+- **Clock times read as "3:08pm" rather than "15:08".** The calendar used to show whatever 24-hour or 12-hour format the site itself was set to. Reviewers do not see that setting, so times are now always written the plain way, matching the review emails.
+- **A review email now spells out the weekday of a held publishing slot** — "Thursday, September 3, 2026 @ 9:00am". A held slot is a deadline you are being asked to act on, and a date on its own does not tell you whether that is tomorrow or next week.
+
 ## v1.6.099
 
 - **Rescheduling no longer fails while a save is running.** The calendar refuses to run two writes at once on the same article, which is right — but it used to report **"Reschedule failed"** without contacting the site at all. Since typing arms an automatic save, editing an article and then moving it on the calendar could lose the change to an error about a request that was never sent. The write now waits for the save to finish and then goes through.
