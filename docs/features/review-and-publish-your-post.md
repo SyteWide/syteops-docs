@@ -203,6 +203,26 @@ Once you have finished reviewing all panels, choose one of the action buttons:
 - **Schedule** _(if enabled by the site owner)_ — Check the **Schedule** box to pick a future date and time, then click **Approve & Schedule**. The same confirm-then-progress dialog tracks the scheduling. The post goes live automatically at the time you chose rather than immediately. **Scheduling is not final** — see [Changing or cancelling a schedule](#changing-or-cancelling-a-schedule) below.
 - **Request changes** — Opens a short note prompt where you can describe what needs updating. Your current edits are saved to the draft, the author and co-reviewers are notified by email, and your note is added to the portal's **Feedback** panel. See [Step 5](#step-5-request-changes) for the full walkthrough.
 
+#### Setting a time without publishing yet
+
+You do not have to approve a post to record when it should go out. Tick **Schedule**, pick a date
+and time, and click **Save draft** — the time is kept with the post, and it is still a draft. Open
+it again tomorrow and the time you chose is waiting in the field.
+
+This matters when your site reserves publishing slots automatically. If the site's publishing
+cadence has already earmarked a moment for the article, the date field opens filled in with that
+reserved time. **A time you set by hand replaces it** — yours is what the post publishes at when it
+is approved. Clearing the box hands the article back to its reserved slot.
+
+Because the time is a saved value like any other, it counts as an unsaved change: it autosaves
+while you work, and the portal warns you before you navigate away with it unsaved.
+
+Recording a time is an edit, not an approval, so you can do it even if you are not allowed to
+publish. The post stays a draft until somebody with publish permission approves it. This works from
+the calendar too — drag your own draft onto a day and the calendar confirms it saved your preferred
+time rather than scheduling it. Moving an article that is **already scheduled** is different, and
+still needs publish permission: that changes when something already approved goes live.
+
 On an article that is **already live**, the buttons are different: the main one reads **Save changes**, because there is nothing left to approve, and next to it sits **Revert to draft** for taking the article back off your site. See [Taking a live article back to draft](#taking-a-live-article-back-to-draft).
 
 ### Changing or cancelling a schedule
