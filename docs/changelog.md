@@ -8,6 +8,26 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.097
+
+- The **review queue** page — the one the **Open my review queue** button and your review emails link to — now has a **Calendar** button of its own. Until now the calendar lived only inside an individual article's review page, so seeing what else was coming up meant opening an article you may not have wanted to work on.
+- It is the same calendar, with the same color key and the same drag-to-reschedule behavior, and it respects the same permissions: you can only move articles you are allowed to edit.
+- The button appears only for people whose account can see the calendar. Signing in to the queue page as an ordinary site member shows no calendar rather than a button that fails when clicked.
+
+## v1.6.096
+
+- Articles holding a reserved publishing slot now appear on the **content calendar** on the day they are holding. Until now they sat in the **Unscheduled drafts** list, dated by the day they arrived, so the moment the cadence had set aside for them was invisible — the only way to find it was to try scheduling something else into that day and read the warning.
+- A held article is drawn in its own color with a dashed edge, deliberately distinct from a scheduled one: a hold is waiting for your approval, and nothing publishes on its own.
+- **Drag a held article to a different day** to turn its hold into a real schedule. It keeps the time it was holding, and the usual cadence warning still applies.
+- A held article whose moment has already passed stays in **Unscheduled drafts**, because approving it then simply publishes it.
+- The calendar now shows a **key** explaining what each color means, on both the admin calendar and the one in the review portal.
+
+## v1.6.095
+
+- Review notification emails now send the article's photo along with the message instead of linking to it. Some mail apps will not load a linked image, which left a broken-image placeholder where the photo should be. Sending the picture with the message removes that failure.
+- Trade-off worth knowing: forwarding or replying to a review email no longer carries the photo across in most mail apps, so whoever receives that forward sees a placeholder where the picture was. The **Edit/View this article** button still opens the full draft.
+- An unusually large photo is still sent as a link, so a message never becomes needlessly heavy.
+
 ## v1.6.094
 
 - Fixed a path where importing a saved configuration could drop the on/off state of the newer integrations. The import now always reads the current integration list rather than an internal copy that had fallen behind.

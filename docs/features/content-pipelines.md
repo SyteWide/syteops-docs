@@ -96,22 +96,28 @@ The **Calendar** view gives you a month-at-a-glance look at your content: recent
 
 Open it from the quick-nav pills at the top of the Content Pipelines tab, alongside Runs, Recipes, and Content Sources.
 
-Each post appears as a chip with a colored bar on the left showing its status:
+Reviewers reach the same calendar from two places of their own: the **Calendar** button inside an article's [review portal](review-and-publish-your-post.md#step-6-use-the-content-calendar), and a matching button on the [review queue](review-and-publish-your-post.md#your-review-queue) page — the page the **Open my review queue** button on **Runs** opens, and the one every reviewer email links to. That queue button shows only for accounts allowed to use the calendar, and what a reviewer can move there follows the same permissions as anywhere else.
 
-| Color | Status |
-|---|---|
-| Teal | Scheduled |
-| Green | Published |
-| Amber | Pending review |
-| Gray | Draft |
+Each post appears as a chip with a colored bar on the left showing where it is in its life. A **color key** is shown on the calendar itself, above the grid, in the same order:
 
-Drafts that don't have a publish date yet appear in the **Unscheduled drafts** list beside the grid, instead of on a specific day. On a narrower screen that list moves below the grid.
+| Color | Key label | What it means |
+|---|---|---|
+| Gray | Draft | Not submitted for review yet |
+| Amber | Pending review | Waiting on a reviewer |
+| Violet, dashed edge | Slot held | Holding a reserved publishing slot — the date is provisional until someone approves the article, which is what the dashes say |
+| Teal | Scheduled | Will publish on its own at that time |
+| Green | Published | Already live |
+
+The **Slot held** row appears in the key only when [Reserve publishing slots](#reserving-slots-for-new-articles) is switched on — with it off, there is nothing on the calendar that color could describe.
+
+Drafts that don't have a publish date yet appear in the **Unscheduled drafts** list beside the grid, instead of on a specific day. On a narrower screen that list moves below the grid. An article holding a reserved publishing slot is the exception: it is drawn on the grid on the day it is holding, not in that list, because an article holding a date is not unscheduled.
 
 ### Rescheduling and scheduling posts
 
 - **Pick a date and time** — select any post to open a picker and choose exactly when it goes live. This works on every device, including phones and tablets.
 - **Move a scheduled post** — drag its chip from one day to another. Dragging needs a mouse or trackpad; on a touchscreen, select the post instead.
 - **Schedule a draft** — drag a post from the **Unscheduled drafts** list onto a day to give it a publish date.
+- **Turn a held slot into a schedule** — drag an article that is holding a publishing slot onto a day. It keeps the time the slot reserved, so only the day moves. Selecting one instead opens its card with the held date filled in, labeled **Slot held**; there is no **Unschedule** button, because there is no schedule to cancel yet.
 
 ### On a phone or tablet
 
@@ -124,6 +130,8 @@ A few rules apply:
 - You can only move posts you have permission to edit.
 - Scheduling a draft (turning it into a scheduled post) requires permission to publish, following the same **Who can publish** rule used in the [Review & Publish portal](./review-and-publish-your-post.md#review--approval-rules).
 - Published posts are read-only on the calendar — they can't be dragged or rescheduled.
+- Turning a held slot into a real schedule needs that same publish permission, and raises the same cadence warning as any other date you pick.
+- A slot whose moment has already gone by is never drawn on the grid — nothing will publish the article at that time any more, so it waits in **Unscheduled drafts** instead.
 
 ### Showing all content
 
@@ -155,6 +163,8 @@ The cadence settings above only warn you when *you* pick a date. Turn on **Reser
 So if you publish Monday, Wednesday and Friday at 10:00 and five articles arrive on a Tuesday morning, they are handed five different dates rather than piling up on one afternoon.
 
 **What you will see as a reviewer.** The email letting you know an article is ready shows its **Publishing slot**, marked *held until you approve* — because nothing publishes on its own; the date is simply waiting for you. Open the article and the **Schedule** box is already ticked with that date filled in. Approve it and it goes out then.
+
+**And you will see it on the calendar.** The article sits on the day it is holding, in violet with a dashed left edge — dashed because the date is provisional until somebody approves it — rather than in the **Unscheduled drafts** list. Select it to open its card with the held date already filled in, or drag it to a different day to turn the hold into a real schedule, keeping the time the slot reserved. A slot whose moment has already passed is not drawn at all; that article waits in **Unscheduled drafts**, and approving it publishes right away. A slot further ahead than the month you are looking at simply isn't on screen that month, exactly like a post scheduled for next month.
 
 You are never locked into it:
 
