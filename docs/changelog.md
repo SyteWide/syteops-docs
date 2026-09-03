@@ -8,6 +8,20 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.099
+
+- **Rescheduling no longer fails while a save is running.** The calendar refuses to run two writes at once on the same article, which is right — but it used to report **"Reschedule failed"** without contacting the site at all. Since typing arms an automatic save, editing an article and then moving it on the calendar could lose the change to an error about a request that was never sent. The write now waits for the save to finish and then goes through.
+- **Reviewers who cannot publish can now set a preferred time.** Choosing a date for your own draft is a note about when you would like it to go out, not a decision to publish it — so it no longer needs publish permission. The article stays a draft, and an approver still has to publish it; when they do, your time is the one it uses. Moving an article that is *already* scheduled still needs publish permission, because that changes when something approved goes live.
+
+## v1.6.098
+
+- **A publishing time you set on a draft now saves.** Adjusting the time and clicking **Save** used to discard it silently — the panel said "Saved", and the next time you opened the article the field had gone back to the time reserved for it automatically. The time was only ever sent when you pressed **Schedule**. It is now saved like any other field.
+- **Your own time beats the automatic one.** If the publishing cadence reserved a slot for an article and you choose a different time, yours is what the article publishes at. Clearing the box hands it back to the reserved slot.
+- **The schedule field now behaves like the rest of the form** — it autosaves, it counts toward "Unsaved changes", and you are warned before navigating away with it unsaved.
+- **The Publishing cadence card now tells you when a value was not accepted.** A time box left half-filled reports an empty value, which the site declines to store; it used to keep the previous time and still say "Saved", which read as your edit reverting. Incomplete values are now caught before saving, and anything the server declines is named in the message.
+- **Fixed:** saving the Content Pipelines settings could discard unrelated settings on some sites.
+- **Fixed:** publishing with a malformed schedule value published the article immediately instead of refusing the request.
+
 ## v1.6.097
 
 - The **review queue** page — the one the **Open my review queue** button and your review emails link to — now has a **Calendar** button of its own. Until now the calendar lived only inside an individual article's review page, so seeing what else was coming up meant opening an article you may not have wanted to work on.
