@@ -146,7 +146,7 @@ Describe how often your site publishes, and the [content calendar](review-and-pu
 | **Cadence warnings** ("Warn when a schedule breaks the rhythm") | Turns the whole feature on. Off by default — with it off, the calendar behaves exactly as it always has. |
 | **Publishing days** | The days you normally publish on. Leave every box unchecked if any day is fine; the per-day limit and the minimum gap still apply. |
 | **Usual publishing time** | Used only to build the suggested slot the warning offers. Picking a different time is never itself a conflict. |
-| **Most articles in one day** (1–10) | Scheduling beyond this on a single day raises the warning. Counts articles already published or scheduled that day, plus any draft holding a reserved slot. An ordinary draft is not counted — it has no publication date. |
+| **Most articles in one day** (1–10) | Scheduling beyond this on a single day raises the warning. Counts articles already published or scheduled that day, any draft holding a reserved slot, and any draft where a reviewer has already typed in a publishing time — even before it's approved (see [Setting a time without publishing yet](review-and-publish-your-post.md#setting-a-time-without-publishing-yet)). A draft with no date at all is not counted. |
 | **Reserve publishing slots** ("Give each new article the next open slot") | Off by default. See [Reserving slots for new articles](#reserving-slots-for-new-articles) below. |
 | **Smallest gap between articles** (in **hours**, 0–168) | Two articles closer together than this many hours raise the warning, even on different days — 11:55pm and 12:05am are ten minutes apart. Set it to 0 to switch this rule off. |
 
@@ -179,6 +179,16 @@ You are never locked into it:
 **Before you can turn it on**, two things must already be set: **Cadence warnings** (above) and **Scheduled publishing** in the Review Portal settings. Until both are on, the checkbox stays grayed out and tells you which one is missing. Scheduling matters because it is also what gives reviewers the buttons to move or cancel a schedule — without it, they would receive scheduled articles they could not change.
 
 If your rhythm is so tight that no free moment can be found in the months ahead, nothing is reserved and the article behaves exactly as it would have before the setting existed — a review-bound article waits as an ordinary draft, and a source set to publish on arrival still publishes on arrival.
+
+### Rescheduling a slot nobody reviewed in time
+
+A reserved slot can pass with the article still unreviewed. Nothing publishes late on its own — but left alone, the article would simply keep pointing at a moment that has already gone by. Turn on **Auto-defer stale drafts**, in the same **Publishing cadence** card, and SyteOps rolls a missed reservation forward for you: on an hourly check, any reservation whose moment has passed is moved to the next open slot that still fits your rhythm, so the article keeps a place on the calendar without anyone having to notice it slipped. This only does anything once **Reserve publishing slots** is also on — there is nothing to roll forward without a reservation to begin with.
+
+A few things worth knowing:
+
+- **It only ever moves reservations, never approves or publishes anything.** An article you or a colleague has already scheduled, or given your own publishing time (see [Setting a time without publishing yet](review-and-publish-your-post.md#setting-a-time-without-publishing-yet)), is left alone — auto-defer never overrides a time a person chose.
+- **Maximum automatic deferrals** (1–20, default 3) caps how many times a single article can be rolled forward this way. Once it hits that limit, SyteOps stops trying: the reservation is released, and the article goes back to being an ordinary draft with no publishing date — waiting for someone to give it a new one.
+- **Draft auto-rescheduled emails aren't sent on every roll-forward** — only when an article reaches that limit and is handed back to a person. Turn this on or off under **Email notifications** in the Review Portal settings (it's labeled **Auto-defer limit reached**, and is on by default); when it fires, the author and reviewers get an email explaining that the article missed its slot too many times and needs to be scheduled again by hand.
 
 ## Content Sources
 
