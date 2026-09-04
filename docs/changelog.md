@@ -8,6 +8,44 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.116
+
+- **The publish confirmation now says how many notes are still unresolved.** Approving or scheduling an article is the moment somebody walks away from it, and an open note is the thing nobody comes back to. The confirmation names the count before you commit — and that is all it does: notes have never blocked publishing and still do not, so you can read it and confirm straight past.
+- **The count is the Feedback panel's own.** It reads the list you are looking at rather than asking the server a second time, so resolving a note and pressing Publish reflects it immediately, and the sentence can never contradict the panel beside it.
+- **The formatting toolbar stays put as you scroll.** On a long article it used to scroll off the top, so making a heading halfway down meant traveling back up, applying it, and then finding your place again. It now pins below the top bar and follows you down the article. On phone-sized screens it still scrolls away with the article — pinned there it would take up more of the screen than the article itself.
+
+## v1.6.115
+
+- **Notify has moved to the article.** The button used to sit inside the panel for one picture, while the email it sent had always covered every note on the whole article — so its position said one thing and its behavior did another. It now sits in the action bar beside **Request changes**, where it belongs. Nothing about the send changed; only the place you press it.
+- **Notify takes a message of your own.** Choose who should hear about it, type a note if you want to, and send. The message is optional in both directions: you can send the notes with no message, or a message with no notes — a hand-off at the end of your shift, for example.
+- **Your message is kept with the article.** It joins the **Feedback** panel, so the next person to open the article can see the hand-off happened rather than taking your word for it in an email they may never have seen.
+- **The email now reports both directions.** As well as the notes still open, it lists the ones dealt with since that person was last told — so somebody who heard about three problems last week can see that two are now fixed, instead of receiving the same three again.
+- **Notify still saves the note you are looking at first**, and a failed save still cancels the send. Pressing it no longer closes the image panel out from under you, which had quietly defeated that safeguard.
+- **Every note can be resolved now, change requests included.** Only notes about a picture could be marked handled before; a change request had no way to be closed at all. Anyone with access can resolve or reopen any note in the **Feedback** panel.
+- **Resolving the last change request clears the queue flag with it.** The review queue shows a **Changes requested** flag beside a count of outstanding notes, and the two were read from different places — so resolving a change request cleared the count and left the flag lit, and the same draft read as handled and not handled at once. Reopening one lights it again, and a second request still waiting keeps it lit.
+- **Administrators can be told about an article's notes.** They can already open every draft, so naming one grants them nothing — but until now a reviewer literally could not send their notes to an administrator who was not listed on the article. Everybody else who does not already have access is still refused.
+- The **Image feedback** email setting is now called **Reviewer notes**, since the control it governs covers the whole article.
+
+## v1.6.114
+
+- **Notes on a picture now lead its panel.** Writing a note about the image is what most people open that panel to do, and it used to sit at the bottom, under three fields that are already correct on nearly every arriving picture. It now comes first, on a panel of its own.
+- **The notes heading counts what is still unresolved** on that picture, so you can tell at a glance whether it has something outstanding without reading the list. A picture with nothing outstanding says nothing at all.
+- **The image link, alt text and caption are now a collapsed "Image details" section.** Open it once and it stays open as you move from picture to picture, so working through a batch of images costs one click rather than one per image.
+- **Nothing is removed by that — those three fields are one click away rather than in front of you.** The alt text and the caption are still edited in this panel and nowhere else, and they still save the same way. The section opens itself whenever the panel has something to say back about one of those fields, such as asking you to describe a replacement image or reporting that a change to the picture failed. See [Images inside the article](features/review-and-publish-your-post.md#images-inside-the-article).
+
+## v1.6.113
+
+- **A note you type about an image is no longer destroyed.** The box had no memory at all: closing the popover, or clicking a second picture, discarded whatever was in it with no warning and nothing to recover it from. Text now waits on the picture it was written about until you save it — or clear it yourself.
+- **The box says when a note is unsaved**, and the browser warns before you leave the page with one outstanding. A note is stored by its own **Save note** button and never rides along with a draft save, so nothing else was ever going to catch it.
+- **A started note follows its picture.** Import an image, replace it, or change it with AI, and the text you were writing is still there against the new version — including when the change finishes after you have closed the panel. If the picture is removed from the article, the note goes with it and the page stops warning you about work it can no longer show you. Point two pictures at the same file and their started notes are joined rather than one being dropped, with a line marking the text that was carried over.
+- **Notify saves the note you are looking at before it sends.** Otherwise the email listing "the notes on this article" went out without the one you had just written. If that save fails, the send is cancelled and says so rather than going out incomplete. Pressing **Save note** and then **Notify** now files the note once instead of twice, and the confirmation counts the notes still waiting on other pictures accurately.
+## v1.6.112
+
+- **Resolve and reopen a note from the Feedback panel.** An image note could only be marked handled from inside the picture's own panel, so clearing a list of notes meant hunting down every photo they were about — while the Feedback panel already dimmed the ones that were resolved, with no way to get them there or bring them back. Each image note in the panel now carries its own **Resolve** link, and **Reopen** once it is resolved. See [The Feedback panel](features/review-and-publish-your-post.md#step-5-request-changes).
+- **The two places agree.** Resolving in the picture panel updates the Feedback panel and the other way round, so a note is never shown as open in one and handled in the other.
+- **Change requests about the article itself are unchanged.** Those are the record of the Request-changes conversation and do not carry the link.
+- **A resolve that does not go through now says so.** The link used to gray for an instant and come back reading exactly what it read before, whether the site had refused the change, the note was already gone, or the connection had dropped. The panel now says which it was.
+
 ## v1.6.111
 
 - **Changing an image with AI no longer reshapes it.** Nothing told the image model what shape the picture was, so it applied its own default of widescreen — a square or portrait photo came back cropped. It is now sent the picture's own proportions.

@@ -115,7 +115,11 @@ If an operator has set Author to **View only** for your reviewer type, you can s
 
 ### Images inside the article
 
-Click any image in the article body to open its details. You can set the **alt text** and a **caption**, and you can see and change the **image link** — the web address the picture loads from.
+Click any image in the article body — or the featured image — to open its panel. **Notes on this image** comes first, because a note about the picture is what most people open the panel to write. If any note on that picture is still unresolved, the heading tells you how many.
+
+Below the notes is **Image details**, a section that starts closed. It holds the **image link** — the web address the picture loads from — along with the **alt text** and the **caption**. Click **Image details** to open it, and it stays open as you move from picture to picture, so working through a batch of images costs one click rather than one per image.
+
+Nothing is removed by this, but it does put those three fields one click away rather than in front of you. The alt text and the caption are still edited here and nowhere else, and they still save exactly as before — you open **Image details** to reach them. The panel opens the section for you whenever it has something to say back about one of those fields — when it asks you to describe a replacement image, and while it reports how a change to the picture went. It will not open itself just to mention that a picture is still hosted somewhere else; that label is waiting inside when you look.
 
 Many drafts arrive with their images still hosted by whatever tool wrote the article. That works, but only for as long as that other site keeps the file: if it is moved or deleted, the picture disappears from your article. Images in that situation are labeled **"Linked from another site — not in your media library"**, and an **Import to media library** button appears next to the label. Click it to bring the file onto your own site; the picture is added to your media library with its alt text, and the article is pointed at your copy.
 
@@ -129,11 +133,11 @@ Importing needs permission to add media to the site. If your account does not ha
 
 **Putting the original links back.** If an article's images were copied across and you would rather they were not, a **Revert images** button appears beside the publish controls. It points the pictures back at the addresses they came from. Nothing is deleted from your media library — the copies stay there, in case another article is using them. If someone has changed one of the images by hand since it was copied, that one is left alone and you are told, rather than having your change overwritten. Reverting a live article asks you to confirm first, since the published page will go back to loading its pictures from somewhere else. Reverting also switches **Import images** off for that article, so the next publish leaves the original links alone — turn it back on if you change your mind.
 
-**Modify with AI.** When SyteHero is installed and ready, **Modify with AI** sits under the caption in the image details panel, and also on the featured-image card. Type a prompt (often pre-filled from the incoming article) and click **Generate**. Model and Quality are labeled on those controls, and Strength appears only for the one model that uses it. The original picture is kept so you can **Revert**. Generate with a blank prompt is refused. This never runs when the article is ingested — only when a reviewer asks. An operator can hide Modify with AI from specific reviewer types in **Reviewer editing permissions**.
+**Modify with AI.** When SyteHero is installed and ready, **Modify with AI** sits below the **Image details** section in the image panel, and also on the featured-image card. Type a prompt (often pre-filled from the incoming article) and click **Generate**. Model and Quality are labeled on those controls, and Strength appears only for the one model that uses it. The original picture is kept so you can **Revert**. Generate with a blank prompt is refused. This never runs when the article is ingested — only when a reviewer asks. An operator can hide Modify with AI from specific reviewer types in **Reviewer editing permissions**.
 
 ### Changing an image with AI
 
-The details panel also has a **Modify with AI** section: describe the change you want and press **Generate**. The original is kept, so **Revert** always brings it back.
+The image panel also has a **Modify with AI** section, below **Image details**: describe the change you want and press **Generate**. The original is kept, so **Revert** always brings it back.
 
 Two things decide whether the picture comes back looking like itself:
 
@@ -148,17 +152,41 @@ Your site administrator sets the defaults under **Content Pipelines → Review P
 
 ### Notes on an image
 
-Click any picture in the article — or the featured image — and the details panel now has a **Notes on this image** box. Type what is wrong with the picture and click **Save note**.
+Click any picture in the article — or the featured image — and **Notes on this image** is the first thing in the panel. Type what is wrong with the picture and click **Save note**.
+
+The heading carries a count of the notes on that picture nobody has resolved yet, so you can tell at a glance whether a picture still has something outstanding without reading the list. A picture with nothing outstanding says nothing.
 
 **Saving a note emails nobody.** The note is attached to that picture, everyone who can open the article sees it, and nothing else happens. That is deliberate: most notes are a record, not an interruption.
 
-When you do want somebody to know, choose a name from the dropdown beside the box and click **Notify**. That sends **one** email covering every note that has not been sent yet — so if you work through six photos and then hit Notify, the recipient gets a single message listing all six, not six messages.
+**A note you have started is kept until you save it.** Close the panel, or click a different picture, and the text is still waiting on that picture when you come back — the box says **Unsaved note — press Save note** while it is holding something, and your browser warns you before you leave the page with one outstanding. That warning applies after you publish too, because the notes panel keeps working on a live article. Nothing is saved on your behalf: a note is only filed when you press **Save note**.
 
-The list only offers people already on this article. Telling somebody who is not on it would also be giving them access to an unpublished draft, and that is what **Send to a colleague** is for.
+**A started note follows its picture.** Import it, replace it, or change it with AI, and the text you were writing is still there against the new version — even if the change finishes after you have closed the panel. If the picture itself is removed from the article, the note goes with it and the page stops warning you about it. If two pictures end up pointing at the same file, their started notes are joined rather than one being thrown away, and the text that moved is introduced by a line saying it was carried over from another picture — so you can see what you are about to file before you press **Save note**.
 
-Each note has a **Resolve** link. Anyone can resolve a note, not just whoever wrote it — the person who fixes the picture is usually the one who knows it is handled. Resolved notes stay in the record, grayed out, and can be reopened. Notes never block publishing.
+When you do want somebody to know, use **Notify** in the action bar at the bottom of the portal — see [Sending the notes to somebody](#sending-the-notes-to-somebody) below.
 
-If your site administrator has turned image-feedback emails off, the Notify control simply is not there; you can still write and resolve notes.
+Each note has a **Resolve** link, in the image panel and again in the Feedback panel further down the page — so you can work through a list of notes without reopening every picture. Anyone can resolve a note, not just whoever wrote it — the person who fixes the picture is usually the one who knows it is handled. Resolved notes stay in the record, grayed out, and can be reopened from either place. Notes never block publishing.
+
+### Sending the notes to somebody
+
+**Notify** sits in the action bar at the bottom of the portal, beside **Request changes**. It is an article-level action because it always was one: the email it sends covers every note on the whole article, not just the picture you happen to be looking at.
+
+Click it, choose who should hear about it, optionally type a message, and press **Send**.
+
+**One email, to one person.** If you work through six photos and then press Send, the recipient gets a single message listing all six, not six messages. Nobody else is emailed — Notify is not a broadcast, and it does not touch the article. Nothing is saved, no schedule changes, and nothing is published.
+
+**The message is optional, in both directions.** You can send the notes with no message at all, or send a message with no notes — a hand-off to a colleague at the end of your shift, for example.
+
+**Your message is kept with the article.** It joins the **Feedback** panel as a note, so the next person to open the article can see the hand-off happened rather than having to take your word for it in an email they may not have.
+
+**The email tells them what changed, not just what is outstanding.** It lists the notes still open, and separately the notes that have been dealt with since you last told them — so somebody who heard about three problems last week can see that two of them are now fixed, instead of receiving the same three again.
+
+**A note you have not saved is saved first.** If the image panel still holds a note you were typing, Send files it so it goes out with the rest; if that save fails, nothing is sent and the modal says so. Notes you started on *other* pictures are not sent — only you can decide a note is finished — so the confirmation tells you how many are still waiting.
+
+**Who you can choose.** The list offers the people already on this article, plus site administrators, who can already open every draft. Telling anybody else would also be giving them access to an unpublished draft, and that is what **Send to a colleague** is for.
+
+**Nothing new to say?** If that person has already been sent every note on the article, Send tells you so rather than mailing them a duplicate — add a message if you want to reach them anyway.
+
+If your site administrator has turned reviewer-note emails off, the **Notify** button simply is not there; you can still write and resolve notes.
 
 ### SEO — keyword and meta description
 
@@ -245,6 +273,7 @@ Once you have finished reviewing all panels, choose one of the action buttons:
 - **Approve & Publish** — Saves all your edits and publishes the post to your site immediately. The portal first asks you to confirm. After you confirm, it shows a live progress list — checking the article is ready, copying images to this site if needed (with a count such as "3 of 12"), publishing, and sending the notification — until the work finishes. When it is done, you can close the dialog or open the live article. By default, the author and reviewers receive an email confirming the post went live (site owners can turn this off — see the rules table below).
 - **Schedule** _(if enabled by the site owner)_ — Check the **Schedule** box to pick a future date and time, then click **Approve & Schedule**. The same confirm-then-progress dialog tracks the scheduling. The post goes live automatically at the time you chose rather than immediately. **Scheduling is not final** — see [Changing or cancelling a schedule](#changing-or-cancelling-a-schedule) below.
 - **Request changes** — Opens a short note prompt where you can describe what needs updating. Your current edits are saved to the draft, the author and co-reviewers are notified by email, and your note is added to the portal's **Feedback** panel. See [Step 5](#step-5-request-changes) for the full walkthrough.
+- **Notify** — Sends this article's notes, and an optional message, to one person who already has the article. Unlike **Request changes** it saves nothing, changes no schedule and emails nobody else. See [Sending the notes to somebody](#sending-the-notes-to-somebody).
 
 #### Setting a time without publishing yet
 
@@ -381,7 +410,11 @@ The post stays as a draft throughout — nothing is published until someone clic
 
 :::note Feedback panel
 
-The **Feedback** panel collects every change request submitted for this draft, oldest first, together with any [notes left on individual images](#notes-on-an-image) — those carry the picture they are about, and a resolved one is dimmed rather than removed. It is visible to everyone who has access to the portal, so it keeps an honest record of the review conversation. If you posted a note by mistake, click the **×** next to your own note to remove it (you can only delete notes you wrote; site administrators can remove any note).
+The **Feedback** panel collects every change request submitted for this draft, oldest first, together with any [notes left on individual images](#notes-on-an-image) and any message sent with **Notify** — image notes carry the picture they are about, and a resolved one is dimmed rather than removed. It is visible to everyone who has access to the portal, so it keeps an honest record of the review conversation.
+
+**Every note in the panel has a Resolve link**, change requests included. Anyone with access can resolve a note — the person who acts on it is usually the one who knows it is done — and a resolved note can be reopened. Resolving the last outstanding change request also clears the **Changes requested** flag on the review queue, so a draft never shows as handled and not handled at the same time.
+
+If you posted a note by mistake, click the **×** next to your own note to remove it (you can only delete notes you wrote; site administrators can remove any note).
 
 :::
 
@@ -536,7 +569,7 @@ Every automated portal email is controlled from one place: **SyteOps → Content
 - **Publishing reminder** *(off by default)* — emails the article's author and the reviewers already on it when a publishing time is coming up, whether or not the article has been reviewed yet. How far ahead it looks is set by **Reminder lead time** (1–168 hours, default 24); the check runs hourly, so the email arrives up to that far ahead rather than exactly that far. Each row says which kind of article it is: **Publishing** means it is scheduled and will go out on its own, and **Planned** means it is still a draft that somebody has to approve before that time means anything. Each person hears about a given publishing time once — changing the time arms the reminder again.
 
   These two emails go only to people already on the article — its author, and the reviewers it was sent to. Standing CC addresses from **Default CCs** are not added on top, so on a site that relies on a standing CC list these two emails reach fewer people than the ones sent when a draft first arrives. That is deliberate: everyone on that list can open the article, and anybody else would get a link that asks them to sign in and then turns them away.
-- **Image feedback** *(on by default)* — lets a reviewer send their [notes about the article's pictures](#notes-on-an-image) to one person already on that article. Nothing is sent automatically: the reviewer picks a name and presses **Notify**, and one email covers every note that person has not been sent yet. Turning this off removes the Notify control from the portal, so nobody presses a button that would go nowhere; reviewers can still write and resolve notes.
+- **Reviewer notes** *(on by default)* — lets a reviewer send [this article's notes](#sending-the-notes-to-somebody), and a message of their own, to one person who already has the article. Nothing is sent automatically: the reviewer picks a name and presses **Send**, and one email covers every note that person has not been sent yet plus anything handled since they were last told. Turning this off removes the **Notify** control from the portal, so nobody presses a button that would go nowhere; reviewers can still write and resolve notes.
 - **Include alternate work email** and **Include personal email** *(both off by default)* — widen every email above to also reach a reviewer's other stored addresses (set on the **Users** tab) in addition to their WordPress account email.
 
 A **Reply-To address** field lets replies to the reviewer-facing emails (review requests, update notices, colleague invites, change requests, and published confirmations) go to a person (for example, your editor) instead of the site's sending address — leave it blank to keep the default. The administrator "payload held" alert always replies to the sending address. Two optional fields polish the emails' footer: a **Footer tagline** (a short line about your business) and a **Footer phone** (shown as a click-to-call link). Both appear in the dark footer bar of every portal email, alongside your company name. All emails carry your portal branding — logo, company name, and colors — from the Branding settings below.
