@@ -62,7 +62,21 @@ Tables and other formatting in the article body are shown the way they will look
 
 ### Formatting and links
 
-The body editor has a formatting toolbar for **bold**, **italic**, **underline**, **headings** (H2/H3), **bulleted** and **numbered** lists, and **block quotes**. It also includes **clear formatting** (removes styling from the selected text) and **undo**/**redo** buttons.
+The body editor has a formatting toolbar for **bold**, **italic**, **underline** and **strikethrough**, **headings** (H2/H3), **bulleted** and **numbered** lists, **clear formatting** (removes styling from the selected text), and **undo**/**redo**.
+
+A button lights up when the text you have selected already has that formatting — so you can tell at a glance whether a word is bold, and click the same button again to remove it. This works on text that arrived from your content source, not only on text you typed yourself.
+
+**How much formatting is offered** is set once for the site, under **Content Pipelines → Review Portal → Formatting controls**:
+
+| Setting | What the toolbar offers |
+| --- | --- |
+| **Minimal** | Bold, italic, underline, strikethrough, remove link, clear formatting, undo and redo. Pasted pictures are kept at every level. |
+| **Editorial** (default) | The above, plus links, bulleted and numbered lists, and H2/H3 headings |
+| **Full** | The above, plus block quotes, inline code, superscript, subscript and text alignment |
+
+Choose **Full** if your articles routinely need code snippets or pull quotes. Choose **Minimal** if you would rather reviewers only correct emphasis and leave the structure alone — they can still remove a link that came in with the article, they just cannot add one.
+
+**Pasting from Word or Google Docs** no longer brings that document's fonts, colors and spacing with it. The words, and the formatting your chosen level allows, come through; the rest is dropped. This affects only what you paste in — it never changes formatting that is already in the article.
 
 To check that a link in the article goes where it should, hold **Command** (Mac) or **Ctrl** (Windows) and click it. The address opens in a new tab so you stay in the review portal. A regular click still lets you edit the linked words.
 
@@ -115,7 +129,36 @@ Importing needs permission to add media to the site. If your account does not ha
 
 **Putting the original links back.** If an article's images were copied across and you would rather they were not, a **Revert images** button appears beside the publish controls. It points the pictures back at the addresses they came from. Nothing is deleted from your media library — the copies stay there, in case another article is using them. If someone has changed one of the images by hand since it was copied, that one is left alone and you are told, rather than having your change overwritten. Reverting a live article asks you to confirm first, since the published page will go back to loading its pictures from somewhere else. Reverting also switches **Import images** off for that article, so the next publish leaves the original links alone — turn it back on if you change your mind.
 
-**Modify with AI.** When SyteHero is installed and ready, **Modify with AI** sits under the caption in the image details panel, and also on the featured-image card. Type a prompt (often pre-filled from the incoming article) and click **Generate**. Model, Quality, and Strength are labeled on those controls; the Strength hint spans the panel. The original picture is kept so you can **Revert**. Generate with a blank prompt is refused. This never runs when the article is ingested — only when a reviewer asks. An operator can hide Modify with AI from specific reviewer types in **Reviewer editing permissions**.
+**Modify with AI.** When SyteHero is installed and ready, **Modify with AI** sits under the caption in the image details panel, and also on the featured-image card. Type a prompt (often pre-filled from the incoming article) and click **Generate**. Model and Quality are labeled on those controls, and Strength appears only for the one model that uses it. The original picture is kept so you can **Revert**. Generate with a blank prompt is refused. This never runs when the article is ingested — only when a reviewer asks. An operator can hide Modify with AI from specific reviewer types in **Reviewer editing permissions**.
+
+### Changing an image with AI
+
+The details panel also has a **Modify with AI** section: describe the change you want and press **Generate**. The original is kept, so **Revert** always brings it back.
+
+Two things decide whether the picture comes back looking like itself:
+
+- **Model.** The list now names each model and says which ones *keep text and logos*. If a picture has words in it — a sign, a label, packaging — choose one of those. The others are better at reimagining a scene than at preserving one, and they are the reason text has come back garbled.
+- **Keep text and logos exactly as they are.** On by default. Turn it off only when you want a genuine reinterpretation rather than an edit.
+
+**Quality** is Standard, High or Ultra. Several of the models that best preserve text ignore it entirely — they always return their own size — so it applies mainly to the more generative ones. **Strength** only appears for the one model that actually uses it.
+
+The picture also keeps its own proportions. A square or portrait photo used to come back cropped to widescreen, because nothing told the image service what shape it started as.
+
+Your site administrator sets the defaults under **Content Pipelines → Review Portal → Modify images with AI**; each Generate can override them.
+
+### Notes on an image
+
+Click any picture in the article — or the featured image — and the details panel now has a **Notes on this image** box. Type what is wrong with the picture and click **Save note**.
+
+**Saving a note emails nobody.** The note is attached to that picture, everyone who can open the article sees it, and nothing else happens. That is deliberate: most notes are a record, not an interruption.
+
+When you do want somebody to know, choose a name from the dropdown beside the box and click **Notify**. That sends **one** email covering every note that has not been sent yet — so if you work through six photos and then hit Notify, the recipient gets a single message listing all six, not six messages.
+
+The list only offers people already on this article. Telling somebody who is not on it would also be giving them access to an unpublished draft, and that is what **Send to a colleague** is for.
+
+Each note has a **Resolve** link. Anyone can resolve a note, not just whoever wrote it — the person who fixes the picture is usually the one who knows it is handled. Resolved notes stay in the record, grayed out, and can be reopened. Notes never block publishing.
+
+If your site administrator has turned image-feedback emails off, the Notify control simply is not there; you can still write and resolve notes.
 
 ### SEO — keyword and meta description
 
@@ -332,13 +375,13 @@ When you submit the note, three things happen at once:
 
 - **Your current edits are saved.** Any changes you made to the title, body, SEO fields, or any other panel are preserved on the draft — just as if you had clicked **Save draft**.
 - **An email notification is sent** to the post author and all other reviewers with your note, so they know exactly what to work on.
-- **Your note is added to the Feedback panel** on the left side of the portal. Anyone who opens the draft can read the full history of change requests.
+- **Your note is added to the Feedback panel** on the left side of the portal. Anyone who opens the draft can read the full history of change requests, alongside any [notes left on individual images](#notes-on-an-image) — those are marked with the picture they are about.
 
 The post stays as a draft throughout — nothing is published until someone clicks **Approve & Publish**.
 
 :::note Feedback panel
 
-The **Feedback** panel collects every change request submitted for this draft, oldest first. It is visible to everyone who has access to the portal, so it keeps an honest record of the review conversation. If you posted a note by mistake, click the **×** next to your own note to remove it (you can only delete notes you wrote; site administrators can remove any note).
+The **Feedback** panel collects every change request submitted for this draft, oldest first, together with any [notes left on individual images](#notes-on-an-image) — those carry the picture they are about, and a resolved one is dimmed rather than removed. It is visible to everyone who has access to the portal, so it keeps an honest record of the review conversation. If you posted a note by mistake, click the **×** next to your own note to remove it (you can only delete notes you wrote; site administrators can remove any note).
 
 :::
 
@@ -382,7 +425,7 @@ The warning tells you what the problem is, names any articles already booked nea
 
 The same check runs when you drag an article onto a day, where it appears as a short confirmation instead of a panel.
 
-Cadence warnings apply to the **calendar**. Setting a date from the article's own Schedule control does not raise one.
+Cadence warnings also apply to the article's own **Schedule** control, not just the calendar: clicking **Approve & Schedule** or **Update schedule** with a new or moved time raises the same warning if it clashes. Just recording a time without approving — see [Setting a time without publishing yet](#setting-a-time-without-publishing-yet) — does not, because nothing is actually being scheduled yet.
 
 Cadence warnings are **off** until someone turns them on. See [Publishing cadence](content-pipelines.md#publishing-cadence) for the settings.
 
@@ -411,7 +454,7 @@ As a reviewer, you see the full upcoming calendar so you have context on everyth
 
 ## Your review queue
 
-Every reviewer-facing email — a new draft, an updated draft, a change request, or an invitation from a colleague — includes a footer link to **Articles awaiting your review**: a single page listing every draft currently waiting on you, so you don't have to hunt through your inbox for the right email.
+Every reviewer-facing email — a new draft, an updated draft, a change request, or an invitation from a colleague — includes a footer link to **Articles awaiting your review**: a single page listing every draft currently waiting on you, so you don't have to hunt through your inbox for the right email. Like every other portal page, it carries your site's logo, name, and colors in a topbar at the top.
 
 - **Sign in required.** Like the portal itself, you must be signed in to your WordPress account to see the queue — SyteOps checks your account against the reviewers assigned to each draft, so you only ever see articles you're actually on.
 - **Administrators see everything.** A WordPress administrator opening the queue sees every draft currently assigned to any reviewer, not just their own.
@@ -489,6 +532,12 @@ Every automated portal email is controlled from one place: **SyteOps → Content
 - **Draft updated by source** *(off by default)* — emails the author and reviewers when your content source re-delivers an article **with changed content**, so nobody reviews a stale version. Identical re-deliveries (delivery retries) never send an email.
 - **Published or scheduled** *(on by default)* — confirms to the author and reviewers when a draft goes live or is scheduled. If the article was published with private visibility, the email says so and links to it as a private post, rather than describing it as live on the site.
 - **Source held (needs attention)** *(on by default)* — alerts the **site admin** (not the reviewers) when a live content source stops matching its approved field mapping: incoming articles are put safely on hold, and this email tells you to re-approve the mapping, then use **Reprocess last payload** on the source to bring in the article that triggered the hold. It sends once per incident, not on every held delivery.
+- **Auto-defer limit reached** *(on by default)* — emails the article's author and the reviewers already on it when the [auto-defer](content-pipelines.md#rescheduling-a-slot-nobody-reviewed-in-time) feature runs out of moves for a reserved time and hands the article back for scheduling by hand. This is not sent on every ordinary move forward — only when the article reaches the limit, and nothing is published when it does.
+- **Publishing reminder** *(off by default)* — emails the article's author and the reviewers already on it when a publishing time is coming up, whether or not the article has been reviewed yet. How far ahead it looks is set by **Reminder lead time** (1–168 hours, default 24); the check runs hourly, so the email arrives up to that far ahead rather than exactly that far. Each row says which kind of article it is: **Publishing** means it is scheduled and will go out on its own, and **Planned** means it is still a draft that somebody has to approve before that time means anything. Each person hears about a given publishing time once — changing the time arms the reminder again.
+
+  These two emails go only to people already on the article — its author, and the reviewers it was sent to. Standing CC addresses from **Default CCs** are not added on top, so on a site that relies on a standing CC list these two emails reach fewer people than the ones sent when a draft first arrives. That is deliberate: everyone on that list can open the article, and anybody else would get a link that asks them to sign in and then turns them away.
+- **Image feedback** *(on by default)* — lets a reviewer send their [notes about the article's pictures](#notes-on-an-image) to one person already on that article. Nothing is sent automatically: the reviewer picks a name and presses **Notify**, and one email covers every note that person has not been sent yet. Turning this off removes the Notify control from the portal, so nobody presses a button that would go nowhere; reviewers can still write and resolve notes.
+- **Include alternate work email** and **Include personal email** *(both off by default)* — widen every email above to also reach a reviewer's other stored addresses (set on the **Users** tab) in addition to their WordPress account email.
 
 A **Reply-To address** field lets replies to the reviewer-facing emails (review requests, update notices, colleague invites, change requests, and published confirmations) go to a person (for example, your editor) instead of the site's sending address — leave it blank to keep the default. The administrator "payload held" alert always replies to the sending address. Two optional fields polish the emails' footer: a **Footer tagline** (a short line about your business) and a **Footer phone** (shown as a click-to-call link). Both appear in the dark footer bar of every portal email, alongside your company name. All emails carry your portal branding — logo, company name, and colors — from the Branding settings below.
 

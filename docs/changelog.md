@@ -8,6 +8,74 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.111
+
+- **Changing an image with AI no longer reshapes it.** Nothing told the image model what shape the picture was, so it applied its own default of widescreen — a square or portrait photo came back cropped. It is now sent the picture's own proportions.
+- **The model list names each model, and marks the ones that keep text and logos.** It used to show raw technical identifiers, and the model chosen by default was one of the *worst* at preserving detail. Garbled signage and labels were largely a consequence of that choice being invisible.
+- **New "Keep text and logos exactly as they are" option**, on by default, under **Content Pipelines → Review Portal → Modify images with AI**. A reviewer can turn it off for one image when they want a genuine reinterpretation rather than an edit. See [Changing an image with AI](features/review-and-publish-your-post.md#changing-an-image-with-ai).
+- **The source picture is sent at higher resolution.** It was being sent a downscaled, recompressed copy — which is what destroys small text before the model has even started.
+- **Quality now offers Standard, High and Ultra.** The old **HD** setting was not a value the image service recognized, so it was quietly ignored — most models treated it as Standard — and the level you picked was never the one applied.
+- **Strength is shown only where it does something** — it is ignored by every model but one, while the description beside it claimed otherwise.
+
+## v1.6.110
+
+- **A note containing a backslash can be deleted again.** Writing a Windows path or a network share into a note made it impossible to retract — by its author or by an administrator.
+- **A note follows its picture through every change.** Previously only the one-at-a-time **Import** button carried it across; importing on publish, remixing an image with AI, or reverting a remix all left the note describing a picture the article no longer showed.
+- **"Sent" now means sent to the person you chose.** It used to appear on every note as soon as anybody was notified, so reviewers stopped pressing Notify and a second colleague heard nothing.
+- **The reviewer queue and the calendar card agree.** Both now count only notes nobody has resolved.
+
+## v1.6.109
+
+- **An image-feedback email now credits the person who wrote each note.** It previously headed the message with whoever pressed **Notify** — who is often not the author, since the send covers every note on the article.
+- **Each person you notify gets their own copy.** Telling the photographer and then the editor about the same notes now works; previously the first send consumed them for everyone.
+- **A note about a picture hosted elsewhere survives importing that picture.** Bringing the image onto your own site used to lose the note that said it needed bringing.
+- **Notes stay attached to the picture you were looking at** — editing the link box, or clicking another image while a note is saving, no longer moves it.
+- Resolving a note now tells you when it fails, notes show whether they have already been sent, and a colleague added to the article mid-session can be notified straight away.
+
+## v1.6.108
+
+- **Leave a note about a picture.** Click any image in a draft — or the featured image — and the details panel now has a **Notes on this image** box. Saving a note emails nobody: it is attached to that picture for everyone who can open the article, which is what most notes are for.
+- **One email, however many notes.** When you do want somebody to know, pick a name and press **Notify**. That sends a single email covering every note not yet sent, so working through six photos produces one message rather than six. See [Notes on an image](features/review-and-publish-your-post.md#notes-on-an-image).
+- **Only people already on the article can be picked.** Telling somebody else would also be giving them access to an unpublished draft, which is what **Send to a colleague** is for.
+- **Anyone can resolve a note**, not only whoever wrote it — the person who fixes the picture is usually the one who knows it is handled. Resolved notes stay in the record and can be reopened, and notes never block publishing.
+- A new **Image feedback** setting under Email notifications turns those emails off; the Notify control then disappears rather than accepting a press that would go nowhere.
+
+## v1.6.107
+
+- **The review portal saves more sensibly while you write.** It was posting the entire article after every keystroke. It now waits until you pause for a moment, and — new — saves at least once every few seconds even if you never pause, so a long uninterrupted stretch of writing is checkpointed rather than sitting unsaved in the browser.
+
+## v1.6.106
+
+- **Pasting from Microsoft Word keeps its formatting.** Word marks bold text in a way the previous release read backwards, so bold was being stripped on paste — and text Word had only hinted at was arriving bold. Both directions are fixed.
+- **Marking several paragraphs as inline code no longer breaks them apart.** Selecting across a paragraph boundary and clicking Inline code previously merged and duplicated the paragraphs; it now marks each one cleanly and leaves no stray marks in the gaps.
+- **The formatting buttons no longer act on the wrong text after you revert images.** Replacing the article's pictures used to leave the toolbar pointed at the top of the article; it now waits for you to select something again, and Undo keeps working throughout.
+- **A picture pasted from a page that loads images lazily arrives as the real picture**, rather than the blank placeholder that page was showing while it loaded.
+- **Screen readers get an accurate description of the toolbar** — buttons that are not on/off toggles no longer announce themselves as unpressed toggles, and the link button reports whether its picker is open.
+
+## v1.6.105
+
+- **The review portal's formatting buttons now work.** Bold, italic, underline, headings, lists and the rest act on the text you have selected. Previously, pressing a button moved the cursor and did nothing else — the button took focus away from the article before the formatting could be applied.
+- **A button shows you what is already applied.** Select some text and the matching buttons light up, so you can tell at a glance whether a word is bold and click again to remove it. This is what makes it possible to strip formatting off text that arrived from a content source, rather than guessing.
+- **A new setting chooses how much formatting the portal offers.** Under **Content Pipelines → Review Portal → Formatting controls**: *Minimal* for emphasis only, *Editorial* (the default) for links, lists and headings, or *Full* to add block quotes, inline code, superscript, subscript and alignment. See [Formatting and links](features/review-and-publish-your-post.md#formatting-and-links).
+- **Pasting from Word or Google Docs is cleaned up.** The words come through, and so does the formatting your chosen level allows — but that document's own fonts, colors and spacing no longer travel into the article. This applies only to what you paste; formatting already in the article is never changed by this setting.
+
+## v1.6.104
+
+- **Publishing reminders and automatic rescheduling for the Review Portal.** Reviewers and authors can now get a reminder email as an article's publishing time approaches, and — if a reserved time is missed too many times — a separate email saying the article needs a new one. A new **Auto-defer stale drafts** option moves a missed reservation forward on its own first, so a slipped review doesn't quietly leave an article pointing at a time that has already gone by. Nothing is ever published late either way: a reserved article stays a draft until somebody approves it. Both are off by default; see [Rescheduling a slot nobody reviewed in time](features/content-pipelines.md#rescheduling-a-slot-nobody-reviewed-in-time) and [Email notifications](features/review-and-publish-your-post.md#email-notifications).
+- **Who those two new emails reach.** The reminder and the auto-defer notice go to the article's author and the reviewers it was already sent to — not to standing **Default CCs**. On a site that relies on a standing CC list, these two emails therefore reach fewer people than the ones sent when a draft first arrives. Everyone on an article's own list can open it; anybody else would get a link that asks them to sign in and then turns them away.
+- **The reminder says which articles still need approving.** Each row is marked either **Publishing** — already scheduled, going out on its own — or **Planned**, meaning it is still a draft and somebody has to approve it before that time means anything.
+- **Cadence warnings now catch more collisions.** The publishing-rhythm check that warns about a crowded day now also counts a reviewer's own chosen publishing time, not just already-reserved slots and scheduled articles — and it runs from the article's own **Schedule** control when you approve, not only from the calendar.
+- **Notification emails can reach more addresses.** Review Portal emails can now also be sent to a reviewer's alternate work or personal email address on file, in addition to their WordPress account email.
+- **The reviewer queue and expired-link pages now carry your branding**, matching the rest of the Review Portal.
+
+## v1.6.103
+
+- **The last dates that still followed the site's own display setting now match the rest.** The **Article date** row in review emails and the date on the content calendar's article card were the two remaining hold-outs, so a single email could show two different date styles in one table. Every date a reviewer sees is now written the same way, wherever it appears.
+
+## v1.6.102
+
+- **Dates in the review queue now read the same way as the ones in your emails.** The queue was rendering dates using the site's own display setting, so the same article could be "2 September 2026" on the queue and "Wednesday, September 2, 2026" in the review email it arrived with. Both now spell out the weekday, which is the part that tells you whether a deadline is tomorrow or next week. A scheduled article's time reads as "1:00pm" rather than "13:00".
+
 ## v1.6.101
 
 - **A publishing time you set on a draft now shows up on the calendar.** Ticking **Schedule**, choosing a time and pressing **Save draft** stored your choice — the portal filled the field back in every time you reopened the article — but the calendar never knew about it, so the article stayed under **Unscheduled drafts** and the day you picked was drawn empty. It now appears on that day, in the provisional style, and leaves the unscheduled list. Nothing about approval changes: the article is still a draft and an approver still has to publish it.
