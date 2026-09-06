@@ -11,7 +11,7 @@ When your content source finishes generating a new article, SyteOps sends a bran
 This page explains the full workflow from the moment that email arrives to the moment the post is published.
 
 :::note Part of Content Pipelines
-The Review & Publish portal is part of the **Content Pipelines** feature. It becomes available once you have at least one **content source** set up to deliver articles into your site — each incoming article opens as a draft in the secure editor for your team to review before it goes live.
+The Review Portal is part of the **Content Pipelines** feature. It becomes available once you have at least one **content source** set up to deliver articles into your site — each incoming article opens as a draft in the secure editor for your team to review before it goes live.
 :::
 
 ---
@@ -33,13 +33,15 @@ The article photo is sent along with the message rather than linked from your si
 
 ## Step 2: Open the secure editor and sign in
 
-Click **Edit/View this article** in the email. Your browser opens the Review & Publish portal — a page on your own WordPress site.
+Click **Edit/View this article** in the email. Your browser opens the Review Portal — a page on your own WordPress site.
 
 **The link alone cannot publish or change anything.** It simply takes you to the portal. To make any edits or approve the post, you must be signed in to your WordPress account.
 
 If you are not already logged in, the portal shows its own branded sign-in card. Enter your usual WordPress username and password there and you are taken straight to the draft — you never leave the portal for the WordPress login screen. If your site owner has passkeys switched on, the card also offers a **Sign in with a passkey** button; a password still works either way.
 
 If your site runs a security plugin that challenges a sign-in — asking for a two-factor code, or emailing you a link to verify a login from an unfamiliar device or location — you are taken to the standard WordPress sign-in screen so that plugin can tell you what it needs. Complete the check there and you land on the draft as usual. The portal's own card only reports a wrong username or password, so a message about your credentials always means exactly that.
+
+The first time you open an article is recorded, so the site's owners can see the review email was acted on. Only that first open is listed — later visits add nothing — and nothing is recorded unless you are signed in with permission to edit that article.
 
 ---
 
@@ -78,7 +80,7 @@ Choose **Full** if your articles routinely need code snippets or pull quotes. Ch
 
 **Pasting from Word or Google Docs** no longer brings that document's fonts, colors and spacing with it. The words, and the formatting your chosen level allows, come through; the rest is dropped. This affects only what you paste in — it never changes formatting that is already in the article.
 
-To check that a link in the article goes where it should, hold **Command** (Mac) or **Ctrl** (Windows) and click it. The address opens in a new tab so you stay in the review portal. A regular click still lets you edit the linked words.
+To check that a link in the article goes where it should, hold **Command** (Mac) or **Ctrl** (Windows) and click it. The address opens in a new tab so you stay in the Review Portal. A regular click still lets you edit the linked words.
 
 The **link** button (🔗) lets you add a hyperlink, and the **remove-link** button (🔗✕) strips the link from selected text:
 
@@ -133,11 +135,11 @@ Importing needs permission to add media to the site. If your account does not ha
 
 **Putting the original links back.** If an article's images were copied across and you would rather they were not, a **Revert images** button appears beside the publish controls. It points the pictures back at the addresses they came from. Nothing is deleted from your media library — the copies stay there, in case another article is using them. If someone has changed one of the images by hand since it was copied, that one is left alone and you are told, rather than having your change overwritten. Reverting a live article asks you to confirm first, since the published page will go back to loading its pictures from somewhere else. Reverting also switches **Import images** off for that article, so the next publish leaves the original links alone — turn it back on if you change your mind.
 
-**Modify with AI.** When SyteHero is installed and ready, **Modify with AI** sits below the **Image details** section in the image panel, and also on the featured-image card. Type a prompt (often pre-filled from the incoming article) and click **Generate**. Model and Quality are labeled on those controls, and Strength appears only for the one model that uses it. The original picture is kept so you can **Revert**. Generate with a blank prompt is refused. This never runs when the article is ingested — only when a reviewer asks. An operator can hide Modify with AI from specific reviewer types in **Reviewer editing permissions**.
+**Modify with AI.** When SyteHero is installed and ready, **Modify with AI** sits below the **Image details** section in the image panel, and also on the featured-image card. Type a prompt (often pre-filled from the incoming article) and click **Generate**. Model and Quality are labeled on those controls, and Strength appears only for the one model that uses it. **Generating no longer swaps the picture in your article** — it makes a new version and puts it in a row of thumbnails for you to [choose between](#choosing-between-versions). The original picture is kept so you can **Revert**. Generate with a blank prompt is refused. This never runs when the article is ingested — only when a reviewer asks. An operator can hide Modify with AI from specific reviewer types in **Reviewer editing permissions**.
 
 ### Changing an image with AI
 
-The image panel also has a **Modify with AI** section, below **Image details**: describe the change you want and press **Generate**. The original is kept, so **Revert** always brings it back.
+The image panel also has a **Modify with AI** section, below **Image details**: describe the change you want and press **Generate**. Pressing Generate makes a new version and leaves your article alone — you decide afterwards which version the article uses. The original is kept, so **Revert** always brings it back.
 
 Two things decide whether the picture comes back looking like itself:
 
@@ -149,6 +151,74 @@ Two things decide whether the picture comes back looking like itself:
 The picture also keeps its own proportions. A square or portrait photo used to come back cropped to widescreen, because nothing told the image service what shape it started as.
 
 Your site administrator sets the defaults under **Content Pipelines → Review Portal → Modify images with AI**; each Generate can override them.
+
+**While it runs.** A progress bar appears under the controls and fills as the image service works.
+It deliberately sits near the end for a while — that is where the service holds an unfinished job —
+so the bar keeps moving rather than looking stuck. A **Stop** button sits beside **Generate** while
+a picture is being made; pressing it abandons the job and gives the controls straight back. (The
+**Cancel** button lower down still just closes the panel.)
+
+**If it goes wrong, you are told why.** A refusal now shows the image service's own words — a prompt
+it would not accept, a picture it could not read, a request that timed out — instead of a single
+"could not modify this image" for every possible cause. Where the reason has a fix you can act on
+yourself, such as a permission you do not have, you still get the plain-language version.
+
+**If somebody else is already changing that picture**, you are told so, shown how far along their
+job is, and offered **Stop** — so you are not left waiting out a job you cannot see.
+
+### Choosing between versions
+
+Every time you press **Generate** you get another version of that picture, and they all stay. They
+appear as a row of thumbnails at the top of **Modify with AI**: the picture the article arrived with
+first, then each version you have made, in the order you made them. The one your article is using
+carries the label **In the article**, and the first one carries **Original**. The row appears once
+there is more than one picture to choose between — with a single picture there is no choice to make,
+so nothing is shown.
+
+Click a thumbnail to highlight it and read the prompt that produced it. Clicking is only looking:
+nothing is written and your article does not change.
+
+Three buttons sit under each thumbnail.
+
+- **Replace** puts that version into the article. It is the only thing that changes the picture your
+  readers will see, and you can press it as often as you like — including on the original, to put
+  things back exactly as they were. The one version you cannot replace with is the one the article
+  is already showing: there is no **Replace** button on that thumbnail, and asking for it anyway is
+  refused rather than quietly recorded as a change nobody made.
+- **Keep** marks a version worth holding on to, and pressing it again releases it. Versions you have
+  not kept are tidied away on your behalf once a picture's row has grown past seven thumbnails — the
+  picture the article arrived with, plus six versions — oldest first, so a long session of
+  experimenting does not fill your media library. A version you have kept is never tidied away, and
+  neither is the newest one — the picture you just asked for is always still there when you look at
+  it.
+- **Delete** removes that version from your media library for good. It asks you to confirm first,
+  because this one cannot be undone. Any notes left on that version move to the picture your article
+  is showing, so a note never outlives the picture it is about.
+
+Some versions carry fewer than three buttons, because some of them are refused on purpose. Three
+things are never deleted, however the deletion came about — whether you pressed **Delete** or the
+tidying did it for you:
+
+- the picture the article arrived with;
+- the version your article is currently showing — replace it with another one first;
+- a picture another article is also using.
+
+Two more refusals apply to the **Delete** button only, because they are about you and about this
+moment rather than about the picture:
+
+- nothing is deleted at all if your account is not allowed to delete media on this site;
+- and a picture a remix is still running on is left alone — wait for that to finish.
+
+Whenever it is you doing the deleting, you are told which of those applies rather than simply being
+refused. The automatic tidying says nothing either way — it only ever passes over a picture it is
+not allowed to take.
+
+If a version has already been removed from your media library some other way — from the Media
+Library screen, say, while your row was open — pressing **Delete** on it simply tidies it out of the
+row instead of failing.
+
+If you would rather not choose between versions at all, **Revert** still does what it always did: it
+puts the original picture back in one click.
 
 ### Notes on an image
 
@@ -496,7 +566,7 @@ Every reviewer-facing email — a new draft, an updated draft, a change request,
 - **The calendar is here too.** A **Calendar** button sits at the top of the page, next to **Sign out**. It opens the same month view described in [Use the content calendar](#step-6-use-the-content-calendar) — the same grid, the same **Unscheduled drafts** list, color key, phone view, details card and drag-to-reschedule — so you can see what else is coming up without opening an article first. The button appears only for accounts that are allowed to use the calendar; if you don't see it, ask your site administrator. The same permission rules apply once it's open: you can only move articles you're allowed to edit, and scheduling or unscheduling one follows the site's **Who can publish** setting.
 - **The newest items first.** The queue lists up to 100 articles, drawn from the most recently updated drafts on the site. If there are more than that, or if the site has a very large backlog of drafts awaiting review, the page tells you so with a note reading *"Older items may not be listed."* When you see that note, older articles may be waiting on you even though they aren't shown — open them from their original review email, or ask your site administrator.
 
-Bookmark the queue page, or just click the footer link in your next review email, to check what's waiting on you at any time. Site owners can also reach it from **Content Pipelines → Runs**, using the **Open my review queue** button.
+Bookmark the queue page, or just click the footer link in your next review email, to check what's waiting on you at any time. Site owners can also reach it from **Content Pipelines → Log**, using the **Open my review queue** button.
 
 Each row also shows how many questions the AI search analysis recorded for that article and how many of them have answers — for example *12 Q · 9 answered* — so you can tell at a glance whether an article's answers still need finishing.
 
@@ -574,7 +644,7 @@ Every automated portal email is controlled from one place: **SyteOps → Content
 
 A **Reply-To address** field lets replies to the reviewer-facing emails (review requests, update notices, colleague invites, change requests, and published confirmations) go to a person (for example, your editor) instead of the site's sending address — leave it blank to keep the default. The administrator "payload held" alert always replies to the sending address. Two optional fields polish the emails' footer: a **Footer tagline** (a short line about your business) and a **Footer phone** (shown as a click-to-call link). Both appear in the dark footer bar of every portal email, alongside your company name. All emails carry your portal branding — logo, company name, and colors — from the Branding settings below.
 
-You can also see each email's outcome in the run history: each draft-creation row on the Runs dashboard notes whether the notification was sent, skipped (and why — for example, when no recipients could be resolved), or failed, and held rows note when the admin was alerted — so a missing email is never a mystery.
+You can also see each email's outcome in the run history: each draft-creation row on the Log notes whether the notification was sent, skipped (and why — for example, when no recipients could be resolved), or failed, and held rows note when the admin was alerted — so a missing email is never a mystery.
 
 ---
 
@@ -736,21 +806,21 @@ Click **Save settings** at the bottom of the panel to apply your changes. The ne
 
 You don't have to wait for a draft from your content source to use the portal. There are three ways in:
 
-- **From the posts list.** In the WordPress **Posts** (or **Pages**) list, hover over any post you can edit and click the **Review portal** link in its row of actions.
-- **From the post itself.** While editing a post, click **Open review portal** in the toolbar at the top of the screen.
-- **From the live article.** While signed in and reading the published post on your own site, click **Open review portal** in the toolbar at the top of the page.
+- **From the posts list.** In the WordPress **Posts** (or **Pages**) list, hover over any post you can edit and click the **Review Portal** link in its row of actions.
+- **From the post itself.** While editing a post, click **Open Review Portal** in the toolbar at the top of the screen.
+- **From the live article.** While signed in and reading the published post on your own site, click **Open Review Portal** in the toolbar at the top of the page.
 
 :::tip Can't see the toolbar while editing?
-The WordPress editor's **fullscreen mode** hides the toolbar, and with it the **Open review portal** link. Open the editor's options menu (the three dots, top right) and switch **Fullscreen mode** off, or use the posts-list row action instead.
+The WordPress editor's **fullscreen mode** hides the toolbar, and with it the **Open Review Portal** link. Open the editor's options menu (the three dots, top right) and switch **Fullscreen mode** off, or use the posts-list row action instead.
 :::
 
 Any of them issues a fresh secure link for that post and opens the portal in a new tab — the same review window contributors see, with the same expiry window as an emailed link. This lets you put an existing post (or one written by hand) through the same review-and-approve flow.
 
-The **Review portal** action appears on posts and pages, and on any other content type your content sources publish into. It won't appear on unrelated content types added by other plugins.
+The **Review Portal** action appears on posts and pages, and on any other content type your content sources publish into. It won't appear on unrelated content types added by other plugins.
 
 ---
 
 ## Related pages
 
 - [Content Pipelines](./content-pipelines.md) — The feature that drives content ingest and post-publish processing.
-- [Content Sources](./content-pipelines.md#content-sources) — How external content apps deliver articles into the review portal.
+- [Content Sources](./content-pipelines.md#content-sources) — How external content apps deliver articles into the Review Portal.

@@ -64,7 +64,7 @@ Many SEO plugins (Yoast, Rank Math, Squirrly) can already add FAQ structured dat
 
 ### Reviewing the answers before they go live
 
-The questions and answers appear in the **GEO** panel of the [review portal](review-and-publish-your-post.md), where a reviewer can edit any of them, add a question the analysis missed, or remove one. Answers are shown in full — they are never cut off — and can be up to 2000 characters.
+The questions and answers appear in the **GEO** panel of the [Review Portal](review-and-publish-your-post.md), where a reviewer can edit any of them, add a question the analysis missed, or remove one. Answers are shown in full — they are never cut off — and can be up to 2000 characters.
 
 - **Analyze GEO** never overwrites your work. It keeps the wording and answers you have written, fills in only the blanks, and adds anything new it finds.
 - **Draft answer** writes an answer to a single question straight from the article, kept in full so you can review it before it is published. If the article genuinely does not answer that question, it tells you instead of inventing something — edit the article, reword the question, or remove the row.
@@ -161,7 +161,9 @@ switch.
 Some SEO plugins also take over `robots.txt`, and for the same timing reason they replace the version
 WordPress builds rather than adding to it. That quietly drops the lines pointing AI crawlers at your
 answer-engine files — including the one that tells them where your questions and business details
-live. Your files are still there and still correct; nothing is telling anyone about them.
+live. Your files are still there and still correct; nothing is telling anyone about them. One of
+those two lines is a `Sitemap:` line, pointing at the sitemap of your AI files — not your ordinary
+search-engine sitemap, which is a separate file that another plugin looks after.
 
 **SyteOps does not switch that plugin's robots feature off.** Your robots.txt holds your own crawling
 rules, and they are yours to keep — turning the feature off would take them out of the served file
@@ -184,6 +186,11 @@ A few things worth knowing:
   line would otherwise look like it worked while changing nothing.
 - robots.txt is usually cached by your CDN, so SyteOps clears it where it can and tells you when it
   could not — a change at your site is not the same as a change a crawler can see.
+- SyteOps has no opinion about your ordinary search-engine sitemap and never changes that setting. If
+  it says nothing about your XML sitemap, that is on purpose, not an oversight — the only sitemap it
+  ever adds a line for is the one holding your AI files. If your SEO plugin is serving `robots.txt`
+  with its own sitemap feature switched off, so that file lists no sitemap at all, the
+  **Answer-engine publishing** card will point that out and leave the fix to you.
 
 ### A setup review when you switch answer-engine publishing on
 

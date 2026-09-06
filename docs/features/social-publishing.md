@@ -84,7 +84,7 @@ Once the feature is enabled with at least one voice profile and one destination,
 
 ### From the Review Portal
 
-While reviewing a post in the secure Review & Publish portal, click **Post to Social** in the action bar at the bottom of the page.
+While reviewing a post in the secure Review Portal, click **Post to Social** in the action bar at the bottom of the page.
 
 ### From the Posts list
 
@@ -125,7 +125,7 @@ Because the text is generated and approved up front, "at a time" and "when the p
 
 ### Choosing a post type when publishing
 
-The Review & Publish portal's **Publish as** control lets a reviewer choose which post type a draft is published under, instead of always publishing to the type it was created as. An administrator sets the type that's pre-selected for reviewers under **SyteOps → Content Pipelines → Review & Approval Rules → Default publish type**; a reviewer can still change it per-post at publish time if they hold the publish capability for the target type.
+The Review Portal's **Publish as** control lets a reviewer choose which post type a draft is published under, instead of always publishing to the type it was created as. An administrator sets the type that's pre-selected for reviewers under **SyteOps → Content Pipelines → Review & Approval Rules → Default publish type**; a reviewer can still change it per-post at publish time if they hold the publish capability for the target type.
 
 :::caution Changing post type doesn't move type-specific data
 Switching a draft to a different post type at publish time changes only the post's type — it does **not** migrate taxonomies, terms, or custom fields that only apply to the original type. If the original type has its own categories/tags or custom fields, review and re-set anything type-specific after switching, since it won't carry over automatically.

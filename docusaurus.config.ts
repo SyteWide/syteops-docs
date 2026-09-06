@@ -18,6 +18,11 @@ const config: Config = {
   projectName: 'syteops-docs',
 
   onBrokenLinks: 'throw',
+  // CONSTRAINT: 'throw', not the Docusaurus default of 'warn'. A cross-reference to a heading
+  // that does not exist is as broken as one to a page that does not exist, and the repo's own
+  // scripts/docs/validate-doc-links.sh cannot catch it: that script scopes to docs/ and strips
+  // the anchor before resolving, so this build is the ONLY gate that reads a docs-site anchor.
+  onBrokenAnchors: 'throw',
 
   i18n: {
     defaultLocale: 'en',
@@ -55,6 +60,11 @@ const config: Config = {
           routeBasePath: 'docs',
         },
         blog: false,
+        sitemap: {
+          // WHY: the client-side search page carries no unique content and was the
+          // only non-doc URL the default sitemap emitted.
+          ignorePatterns: ['/search'],
+        },
         theme: {
           customCss: './src/css/custom.css',
         },

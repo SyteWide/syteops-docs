@@ -16,20 +16,38 @@ Content Pipelines is built in to SyteOps — there's nothing to upload or activa
 
 Open Content Pipelines from the **Content Pipelines** link in the SyteOps admin sidebar (or the Content Pipelines tab in SyteOps settings). The tab has several views, accessible from the quick-nav pills at the top.
 
-### Runs dashboard
+### Log
 
-The Runs dashboard shows every pipeline execution:
+The Log is the tab's landing view, and it keeps two records, one above the other: every pipeline run, and beneath it everything the people reviewing your articles did to them.
+
+The first card covers the automated half — one entry each time a pipeline processed a post:
 
 - **Stat cards** show total runs, runs in the last 7 days, posts that were changed, and error counts.
-- **Filter pills** let you filter by recipe, status (OK, Errors, Skipped, Held), or source (**Direct** — post-processing runs you trigger or that fire on publish/schedule — or each content source you've registered).
+- **Filter pills** let you filter by recipe, status (OK, Errors, Skipped, Held), or source (**Direct** — post-processing runs you trigger or that fire on publish/schedule — or each content source you've registered). Recipe and Source narrow the runs list only. **Status** narrows both cards, so picking one also filters the Editorial activity below.
 - **Run now** lets you trigger a pipeline manually for any post — choose a recipe, enter a Post ID, and optionally enable dry-run mode to preview changes without writing them.
-- **Runs table** lists each execution with the source (**Direct** for post-processing runs, or a content source), the recipe used, post, status, which stages ran, whether the post was changed, and the trigger type. A delivery that couldn't be mapped shows an amber **Held** status rather than a misleading "OK," and a **Reprocess** button appears on held rows once you've fixed and re-approved the source's mapping — see [Reprocess last payload](#reprocess-last-payload) below. An amber **Held** can also appear against an individual stage inside the drawer, which means something different: that stage is waiting on a setting only you can fix, and re-running will not clear it. The stage's message says what to fix. Held stages have no **Reprocess** button, because there is nothing to reprocess until the setting is corrected.
-- Each processed row keeps its actions in a stacked list on the right: **Resend email**, **Re-run**, **Open in portal** (when the portal can open that article), and **Delete**. The labels line up on the left so the rest of the row has room. **Delete** asks you to confirm, then removes just that entry and updates the counts on the page. Use it to clear a test delivery or a failure you've already dealt with without losing the rest of the record — **Clear all run history**, at the top of the view, still empties everything at once.
-- Click the expand arrow beside the actions to open the **stage drawer**, which shows the result of each stage with its message and duration.
+- **Recent runs** lists each execution with the source (**Direct** for post-processing runs, or a content source), the recipe used, post, status, which stages ran, whether the post was changed, and the trigger type. A delivery that couldn't be mapped shows an amber **Held** status rather than a misleading "OK," and a **Reprocess** button appears on held rows once you've fixed and re-approved the source's mapping — see [Reprocess last payload](#reprocess-last-payload) below. An amber **Held** can also appear against an individual stage inside the drawer, which means something different: that stage is waiting on a setting only you can fix, and re-running will not clear it. The stage's message says what to fix. Held stages have no **Reprocess** button, because there is nothing to reprocess until the setting is corrected.
+- Each processed row keeps its actions in a stacked list on the right: **Resend email**, **Re-run**, **Open in portal** (when the portal can open that article), and **Delete**. The labels line up on the left so the rest of the row has room. **Delete** asks you to confirm, then removes just that entry and updates the counts on the page. Use it to clear a test delivery or a failure you've already dealt with without losing the rest of the record — **Clear all history**, at the top of the view, still empties everything at once — both the run record and the editorial activity recorded alongside it.
+- Click the expand arrow beside the actions to open the **stage drawer**, which shows the result of each stage with its message and duration. Its **View full log** button reopens this view narrowed to that one article, so you get its whole history — the runs and the editorial activity together. A run that never produced an article has nothing to narrow by, so the button is switched off on those rows.
+
+#### Editorial activity
+
+Underneath the runs, the **Editorial activity** card lists what people did to your articles, newest first: **When** it happened, **Who** did it, which **Article** it was, **What happened**, and any **Details** recorded alongside it.
+
+It covers publishing decisions — published, reverted to draft, changes requested, sent to a colleague — along with notes raised, resolved and reopened, schedule changes, image work, and the refusals in between: a publish declined because the article wasn't ready, or because the person who pressed the button wasn't allowed to. Every entry keeps the name the person had at the time, so renaming or removing an account later never rewrites the record.
+
+Two things on a row filter the list: the person's name, and what happened. Clicking either narrows the **Editorial activity** card to that person or that kind of event — the runs list above it is left as it was — and the choice stays with you as you page through. Whenever anything is filtered, a summary line near the top of the view names every filter that is on — including the ones set from a row rather than from a pill — and lets you drop them one at a time or clear the lot. To pull the whole view down to one article instead, use **View full log** in a run's stage drawer, which scopes the runs and the activity together.
+
+Not every row offers both. Work that ran on a schedule rather than by hand has nobody behind it, so its **Who** column reads **System** as plain text — that is the record being accurate, not a name that failed to load. An event SyteOps has no name of its own for is shown as plain text too. Rows whose article the portal can open also carry an **Open in portal** button, which opens that article in a new tab rather than filtering anything.
+
+The first time somebody opens an article's Review Portal is listed here too, so you can tell whether a review email was ever acted on. Only that first open is listed — later visits by the same person deliberately add nothing, so one reviewer working through an article over a week is a single entry rather than a row for every reload.
+
+The two cards page independently — moving to page 2 of the activity leaves the runs above it where they were — and each keeps its own limit: the most recent 500 runs, and the most recent 2,000 activity entries. When the activity list is full, routine autosaves are dropped first, so the records of what was actually decided are the last to go.
+
+**While you're in Setup mode, this reads oddly on purpose.** Setup records no new pipeline runs, but it does record editorial activity — so **Recent runs** stands still, or sits empty on a site that has never left Setup, directly above a filling activity list. Nothing already recorded is removed. The card says so on screen for as long as Setup is on. It's expected, not a fault.
 
 ### Provider status cards
 
-At the very top of the Runs view, above the stat cards, a row of cards shows whether each pipeline provider is wired up:
+At the very top of the Log, above the stat cards, a row of cards shows whether each pipeline provider is wired up:
 
 - **Content sources** — one card for each content source you've registered, shown by its name, indicating whether it's connected and receiving content.
 - **Link Engines**, **SEO**, and **GEO** — the processing stages.
@@ -74,11 +92,11 @@ GEO is an either/or step — your site's `llms.txt` is generated by exactly one 
 - **Native** — the built-in generator. On by default.
 - **LLMS Amplifier** — a richer alternative (`llms.txt` plus `llms-full.txt`, drawing from more content sources) from the [LLMS Amplifier](../integrations/llms-amplifier) integration, once its plugin is installed.
 
-You don't pick the engine per recipe — it's one site-wide switch on the **GEO** provider status card at the top of the Runs dashboard. When the LLMS Amplifier plugin is installed, the card shows a button to switch engines: **Use LLMS Amplifier engine** (or **Use native engine** to switch back). Turning the LLMS Amplifier integration on or off from the Integrations tab has the same effect.
+You don't pick the engine per recipe — it's one site-wide switch on the **GEO** provider status card at the top of the Log. When the LLMS Amplifier plugin is installed, the card shows a button to switch engines: **Use LLMS Amplifier engine** (or **Use native engine** to switch back). Turning the LLMS Amplifier integration on or off from the Integrations tab has the same effect.
 
 Turning LLMS Amplifier on takes care of the rest of the setup for you — it automatically sets Amplifier's own update frequency to **Manual** (so it regenerates only when your pipeline tells it to, not on a separate schedule of its own) and turns AI Search Discovery on. Turning it off switches straight back to the native engine; AI Search Discovery itself is never turned off as a side effect of switching engines.
 
-Switching engines doesn't change the per-article **Analyze GEO readiness** check in the [Review & Publish portal](./review-and-publish-your-post.md#geo--ai-search-and-answer-engine-visibility) — that readiness score and the **Include in llms.txt / AI answer feed** toggle work the same way no matter which engine generates the file.
+Switching engines doesn't change the per-article **Analyze GEO readiness** check in the [Review Portal](./review-and-publish-your-post.md#geo--ai-search-and-answer-engine-visibility) — that readiness score and the **Include in llms.txt / AI answer feed** toggle work the same way no matter which engine generates the file.
 
 You can also have GEO analysis run automatically the first time a new article arrives (Review Portal settings → **Analyze GEO when a draft is first created**). It is **off** by default, it needs a GEO AI provider, and later deliveries of the same article are not re-analyzed.
 
@@ -88,15 +106,15 @@ Social Publishing's **Enable Social Publishing** switch and its full configurati
 
 ## Dry-Run Mode
 
-Enable **dry-run** on a recipe or on a manual run to preview what would change without actually writing to the database. Dry-run results appear in the Runs dashboard with a "Preview" badge.
+Enable **dry-run** on a recipe or on a manual run to preview what would change without actually writing to the database. Dry-run results appear in the Log with a "Preview" badge.
 
 ## Content Calendar
 
 The **Calendar** view gives you a month-at-a-glance look at your content: recent, draft, scheduled, and published posts, all in one place.
 
-Open it from the quick-nav pills at the top of the Content Pipelines tab, alongside Runs, Recipes, and Content Sources.
+Open it from the quick-nav pills at the top of the Content Pipelines tab, alongside Log, Recipes, and Content Sources.
 
-Reviewers reach the same calendar from two places of their own: the **Calendar** button inside an article's [review portal](review-and-publish-your-post.md#step-6-use-the-content-calendar), and a matching button on the [review queue](review-and-publish-your-post.md#your-review-queue) page — the page the **Open my review queue** button on **Runs** opens, and the one every reviewer email links to. That queue button shows only for accounts allowed to use the calendar, and what a reviewer can move there follows the same permissions as anywhere else.
+Reviewers reach the same calendar from two places of their own: the **Calendar** button inside an article's [Review Portal](review-and-publish-your-post.md#step-6-use-the-content-calendar), and a matching button on the [review queue](review-and-publish-your-post.md#your-review-queue) page — the page the **Open my review queue** button on **Log** opens, and the one every reviewer email links to. That queue button shows only for accounts allowed to use the calendar, and what a reviewer can move there follows the same permissions as anywhere else.
 
 Each post appears as a chip with a colored bar on the left showing where it is in its life. A **color key** is shown on the calendar itself, above the grid, in the same order:
 
@@ -128,7 +146,7 @@ Drafts that don't have a publish date yet appear in the **Unscheduled drafts** l
 A few rules apply:
 
 - You can only move posts you have permission to edit.
-- Scheduling a draft (turning it into a scheduled post) requires permission to publish, following the same **Who can publish** rule used in the [Review & Publish portal](./review-and-publish-your-post.md#review--approval-rules).
+- Scheduling a draft (turning it into a scheduled post) requires permission to publish, following the same **Who can publish** rule used in the [Review Portal](./review-and-publish-your-post.md#review--approval-rules).
 - Published posts are read-only on the calendar — they can't be dragged or rescheduled.
 - Turning a held slot into a real schedule needs that same publish permission, and raises the same cadence warning as any other date you pick.
 - A slot whose moment has already gone by is never drawn on the grid — nothing will publish the article at that time any more, so it waits in **Unscheduled drafts** instead.
@@ -192,13 +210,13 @@ A few things worth knowing:
 
 ## Content Sources
 
-Content Sources let **any** external application — not just ContentPen — send finished articles into SyteOps as review-ready drafts. Each source you register gets its own **Ingest URL** and a **webhook secret**. When the app posts an article to that URL, SyteOps maps the incoming fields onto the editor and creates a draft in the [Review & Publish portal](./review-and-publish-your-post.md), where your team reviews and publishes it.
+Content Sources let **any** external application — not just ContentPen — send finished articles into SyteOps as review-ready drafts. Each source you register gets its own **Ingest URL** and a **webhook secret**. When the app posts an article to that URL, SyteOps maps the incoming fields onto the editor and creates a draft in the [Review Portal](./review-and-publish-your-post.md), where your team reviews and publishes it.
 
 Open the **Content Sources** view from the quick-nav pills at the top of the Content Pipelines tab.
 
 ### Receiving content from an external app
 
-Any external content app can deliver finished articles straight into a content source — **ContentPen** is the built-in example, and existing ContentPen setups are carried over for you automatically. The app posts each article to the source's **Ingest URL**; unless you turn verification off, it signs each request with the source's **webhook secret** so SyteOps can confirm the request is genuine before mapping the fields onto the editor and creating a [Review & Publish](./review-and-publish-your-post.md) draft for your team — nothing is published without a human approving it.
+Any external content app can deliver finished articles straight into a content source — **ContentPen** is the built-in example, and existing ContentPen setups are carried over for you automatically. The app posts each article to the source's **Ingest URL**; unless you turn verification off, it signs each request with the source's **webhook secret** so SyteOps can confirm the request is genuine before mapping the fields onto the editor and creating a [Review Portal](./review-and-publish-your-post.md) draft for your team — nothing is published without a human approving it.
 
 You can tailor how each source proves and processes its content, and every option below is set per source, so different apps can be handled differently:
 
@@ -304,12 +322,12 @@ control of it: SyteOps fills the gap on the first delivery, then stops competing
 sending the article. Scheduled articles are left alone entirely.
 
 This needs the **Content** AI area configured. Without it the excerpt is left empty for a reviewer
-to write by hand; the **Generate with AI** button in the review portal uses the same AI area, so it
+to write by hand; the **Generate with AI** button in the Review Portal uses the same AI area, so it
 will not work either until that is set up.
 
-Once approved, the source goes **active**: every future post to its Ingest URL becomes a Review & Publish draft automatically, using the same mapping. Any field the mapping doesn't fill — because that particular delivery genuinely has no value at the mapped location — is simply left blank for the reviewer to complete. SyteOps only pauses (holds) the source when an entire delivery doesn't match the mapping at all, so one article missing a single field never blocks the ones behind it.
+Once approved, the source goes **active**: every future post to its Ingest URL becomes a Review Portal draft automatically, using the same mapping. Any field the mapping doesn't fill — because that particular delivery genuinely has no value at the mapped location — is simply left blank for the reviewer to complete. SyteOps only pauses (holds) the source when an entire delivery doesn't match the mapping at all, so one article missing a single field never blocks the ones behind it.
 
-Categories and tags are not part of the mapping: SyteOps reads each incoming article and chooses them with AI, preferring your site's existing categories and tags and adding new ones only when nothing fits. Reviewers can adjust the suggestions in the Review & Publish portal before publishing, and the source's **Target tag** (if set) is always added on top.
+Categories and tags are not part of the mapping: SyteOps reads each incoming article and chooses them with AI, preferring your site's existing categories and tags and adding new ones only when nothing fits. Reviewers can adjust the suggestions in the Review Portal before publishing, and the source's **Target tag** (if set) is always added on top.
 
 The **Author** mapping row also has a **Default author** picker (the same list as in Settings). Use it when the mapped author is often blank or does not match a WordPress user. Changing it there saves immediately and stays in sync with Settings.
 
@@ -319,7 +337,7 @@ If a source's field mapping stops matching what the sending app is actually deli
 
 - **From the source card** — a **Reprocess last payload** button appears whenever SyteOps has a remembered payload for that source (see [Visual payload mapper](#visual-payload-mapper) below) and it isn't too large to replay. Click it to run that payload through the corrected mapping and create the draft right away.
 - **Right after approving a mapping** — clicking **Approve mapping** offers to reprocess the last captured payload immediately, so you can confirm the fix worked without leaving the page.
-- **From the Runs view** — a held row's **Reprocess** button (see [Runs dashboard](#runs-dashboard) above) does the same thing from the run history.
+- **From the Log** — a held row's **Reprocess** button (see [Log](#log) above) does the same thing from the run history.
 
 Each reprocessed draft is recorded in the run history as a **manual** trigger, separate from the automatic deliveries the source normally receives.
 
@@ -412,14 +430,14 @@ Each FlowMattic config variable row has a **Source** setting, so its value can e
 
 ### Forward to a workflow
 
-Expand **Forward to workflow** on a source's card to also send each mapped article to a FlowMattic workflow webhook, in addition to creating the Review & Publish draft.
+Expand **Forward to workflow** on a source's card to also send each mapped article to a FlowMattic workflow webhook, in addition to creating the Review Portal draft.
 
 1. Turn on **Enable forwarding**.
 2. Enter the **Workflow webhook URL** from FlowMattic.
 3. Pick an **Auth mode** — **None**, **Bearer token**, **Basic auth**, or **Bearer + Basic** — to match what the workflow expects, and enter the matching **Auth secret** (leave it blank to keep whatever secret is already saved).
 4. Click **Save forwarding settings**.
 
-Forwarding is optional and never gets in the way: SyteOps always creates the Review & Publish draft first, then sends a copy of the mapped content to your workflow in the background. A slow or unreachable workflow endpoint never delays or blocks the draft.
+Forwarding is optional and never gets in the way: SyteOps always creates the Review Portal draft first, then sends a copy of the mapped content to your workflow in the background. A slow or unreachable workflow endpoint never delays or blocks the draft.
 
 ## Listing image
 
@@ -466,7 +484,15 @@ correct:
   not SyteOps', and it costs nothing.
 - Setting a **featured image** on an article queues that one picture's watermark repair. It is one
   request, caused by you publishing, not by traffic — and without it every article you publish from
-  now on would keep its watermark on the card while your older ones did not.
+  now on would keep its watermark on the card while your older ones did not. This includes a
+  reviewer swapping the featured image for a new version in the review portal: the replacement is
+  cropped and repaired exactly like the picture it replaced, and neither setting on this page
+  changes that.
+
+Swapping a picture **inside the article body** is the one case that waits. The replacement is
+cropped to the card size by WordPress straight away, but its watermark is only removed the next time
+that picture is rebuilt — with **Rebuild selected posts**, or with this setting switched off. Body
+pictures are not what a card shows, so there is usually nothing to do.
 
 The trade is that changing the card size, the crop, or the repair settings no longer fixes existing
 pictures by itself. SyteOps tells you when that has happened: save a change that affects how copies
@@ -562,6 +588,8 @@ It is off unless you turn it on, because it changes what live pages render.
 
 The settings screen reports whether listing cards on the pages it has checked are using the cropped copy. Visit your blog, home, or an archive page once, then reload the settings screen.
 
+This reading only appears while **Crop a copy for listings** is on. With it off there is no cropped copy for a card to be using, so the whole reading is hidden rather than left standing with nothing to say. Switch it back on and save, then reload the screen to see the reading again.
+
 - **Not checked yet.** No listing page has been seen. Visit one and come back.
 - **Using the cropped copy.** The pages checked are serving the cropped copy. If automatic use is on, leftover theme sizes (for example Thumbnail on the blog page) are a note, not a warning — visitors already see the cropped copy. You can still point those pages at the listing size in the theme if you want them to keep working with automatic use off.
 - **Not using the cropped copy yet.** Automatic use is off, and those pages asked for a different size. Turn automatic use on, or set those pages to the listing size in your theme.
@@ -612,7 +640,7 @@ means it will not try again on its own.
 
 **Reprocess** is how you ask it to. It forgets the previous failed attempt and starts over, keeping the current cropped copy on cards until the new one is ready.
 
-- **In the review portal**, the **Reprocess images** button beside the publish bar does this for the article's featured image — and, if you switched **Featured images only** off, every picture it imported as well.
+- **In the Review Portal**, the **Reprocess images** button beside the publish bar does this for the article's featured image — and, if you switched **Featured images only** off, every picture it imported as well.
 - **In your media library**, each picture has a **Reprocess listing image** link in its row, and you can select several and use **Reprocess listing image** from the bulk actions menu.
 
 A progress window shows a spinner and one picture at a time while that image rebuilds. Reload the listing page when it finishes so cached copies update. If you close the window before every picture is done, remaining work continues in the background. With **Only rebuild existing pictures when I ask** turned off, unattended archive visits also prepare listing copies in the background the first time a page asks for them.

@@ -8,6 +8,66 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.126
+
+- **Two people working on the same article's pictures no longer undo each other.** A version you keep, a replacement someone else makes and a version arriving from a finishing remix could land on top of one another, so one of the changes quietly vanished — and a version that had just been tidied away could reappear in the row. Each change is now applied to what the picture panel actually holds at that moment, and if it cannot be applied you are told, instead of being shown a row of thumbnails that does not match what was saved.
+- **Pressing Replace on the picture your article is already showing is refused**, even when a colleague put it there a moment earlier. Before, that could be recorded in the log as a swap nobody made.
+- **Delete recognizes more of the places a picture can be in use.** Alongside a page builder's own layout, it now also finds a picture referred to by nothing but its ID — in another page's layout, and in a gallery or shortcode in another article's text — so a picture something else is displaying can no longer be deleted by mistake.
+- **A picture used in two places in the same article is protected from both.** Deleting a version through one of them no longer destroys what the other is still listing.
+- **A delete is refused, not allowed, when the check cannot be completed.** If the article itself cannot be read, or the search for other uses runs out of room, the answer is now "this picture may be in use". When a busy site keeps reaching that limit, it is written to the debug log, so the reason a Delete never seems to work is visible rather than silent.
+- **A remix that is turned down no longer leaves anything behind.** A picture fetched for a generation you were not permitted to run is removed again, instead of sitting unused in your media library with your article quietly claiming it.
+
+## v1.6.125
+
+- **Remixing a picture now keeps every version you make.** They line up as a row of thumbnails in the image panel — the picture the article arrived with first, then each version in the order you made them — so you can compare them instead of losing the last one each time.
+- **Generating no longer changes your article.** Press **Replace** on the version you want, whenever you want, including on the original to put things back exactly as they were — the only one you cannot pick is the version the article is already showing, which is refused rather than recorded as a change nobody made.
+- **Versions you do not choose are tidied out of your media library for you**, oldest first, so a long session of experimenting does not leave clutter behind. **Keep** holds on to one you want to save, and the version you just made is never tidied away.
+- **A reviewer who is not allowed to change the featured image can no longer change it by remixing.** Three of the image actions decided the permission from what the request claimed rather than from the picture it actually named, so the restriction could be stepped around in one direction or the other. All three now work it out from the picture, the same way.
+- **A remix of a picture in the article body stays with the body picture**, even when the same photo is also the featured image. Its versions used to be filed under the featured image, so pressing **Replace** moved the picture at the top of the article and left the one you were looking at untouched.
+- **Delete removes a version for good**, after asking you to confirm. It refuses — and says which reason applies — when the picture is the original, the one your article is showing, one another page is also using, or one a remix is still running on. That in-use check now recognizes pictures placed by a page builder, which name an image by its address rather than by an ID, so a picture another page is displaying can no longer be deleted by mistake. Notes left on a deleted version move to the picture your article is showing, rather than being left pointing at something nobody can see.
+
+## v1.6.124
+
+- **The robots panel now tells you when the file being served lists no sitemap at all**, so a missing line is visible instead of silent.
+
+## v1.6.123
+
+- **The robots panel now offers the AI sitemap line only when that address is actually being served**, instead of suggesting one that would lead nowhere.
+
+## v1.6.122
+
+- **A failed remix now says why.** When a picture cannot be modified, the portal names the actual cause — the content policy refused the prompt, the account is out of credit, the source image could not be fetched — instead of showing one generic sentence for roughly eleven different failures.
+- **A remix in progress shows a real progress bar**, and can be stopped. Previously a run that went wrong left the picture locked for two minutes with a spinner and no way out.
+- **Asking for a second remix while one is running now tells you which job it is refusing for**, and offers to stop that one.
+- **Finished remix records no longer build up** on a picture without limit.
+
+## v1.6.121
+
+- **The Review Portal is named consistently everywhere it appears.** On the Posts list, in the admin bar, in the settings descriptions, on the portal page itself, and in the button in every review notification email. It had been written several different ways.
+- **The documentation matches the product.** The longer "Review & Publish Portal" wording is gone; the docs now use the one name the interface actually shows.
+
+## v1.6.120
+
+- **"Runs" is now "Log", and it holds two records instead of one.** The view still lists every pipeline run exactly as before. Underneath it, a new **Editorial activity** card shows what people did to your articles — published, reverted to draft, changes requested, notes raised and resolved, schedule changes, image work, and the refusals in between. Newest first, with who did it and when.
+- **Every entry keeps the name the person had at the time**, so renaming or removing an account later never rewrites the record of what they did.
+- **Filter by person, or by what happened.** Click a name or an event on any row and the **Editorial activity** card narrows to it — the runs list above is left as it was — and the choice follows you as you page. The two cards also page independently, so moving through the activity leaves the runs where they were.
+- **Every filter that is on now says so.** A summary line near the top of the view names each one — including the ones you set by clicking a row rather than a pill — and lets you drop them one at a time or clear the lot. Until now a filter could narrow a list with nothing on screen to undo it.
+- **You can now see whether a review email was ever acted on.** The first time somebody opens an article's review portal appears on the **Editorial activity** feed. Only that first open is listed — later visits by the same person deliberately add nothing, so a reviewer reloading the page never fills the feed with repeats.
+- **"View full log" works.** The button in a run's stage drawer had never done anything. It now reopens the view narrowed to that one article, giving you its whole history — runs and editorial activity together. A run that produced no article has nothing to narrow by, so the button is switched off on those rows.
+- **Setup mode explains itself.** Setup records no new pipeline runs but does record editorial activity, so the runs list stands still above a filling activity list — empty, on a site that has never left Setup. Nothing already recorded is removed. The card now says so for as long as Setup is on, instead of leaving the screen looking broken.
+
+## v1.6.119
+
+- **The theme-wiring reading no longer leaves an empty heading behind.** With **Crop a copy for listings** switched off, "Where cards use this copy" printed its heading over an empty space — the one row on that card that said nothing at all, while every other control beside it at least grayed out to show it was off. The reading is now hidden entirely while the cropped copy is off, and comes back when you switch it on.
+- **Switching the cropped copy off clears the reading immediately.** The reading describes what was saved, so leaving it on screen after the switch went off meant a line saying cards were using the cropped copy sitting beside a row of freshly grayed controls. It now follows the switch as you click it.
+
+## v1.6.118
+
+- **"Clear all run history" is now "Clear all history" — and there is now more for it to clear.** The button on **Content Pipelines → Runs** empties everything that view records, and as of this release that includes editorial activity as well as pipeline runs. The button and its confirmation both say so before you agree. There is no undo, and no way to clear only one of the two.
+- **Editorial actions are now recorded alongside pipeline runs.** Edits, notes, publishes, schedules and the refusals in between are kept with the run history, so a later update can show both on one screen. Apart from the renamed button, nothing on the page looks different yet.
+- **Editorial activity is kept during Setup too.** Pipeline runs are still held back while you configure a content source, but the review portal is fully usable in Setup, so the work people do there is no longer discarded.
+- **Run history and editorial history each keep their own limit**, so a busy week of editing can never push older pipeline runs out of the list. When the editorial history reaches its limit, routine autosaves are dropped first — the records of what was actually decided (published, scheduled, changes requested, a publish refused) are the last to go.
+
 ## v1.6.116
 
 - **The publish confirmation now says how many notes are still unresolved.** Approving or scheduling an article is the moment somebody walks away from it, and an open note is the thing nobody comes back to. The confirmation names the count before you commit — and that is all it does: notes have never blocked publishing and still do not, so you can read it and confirm straight past.

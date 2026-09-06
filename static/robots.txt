@@ -1,0 +1,9 @@
+# Robots policy for https://syteops.sytewide.com — the SyteOps documentation site
+# (Cloudflare Pages). A subdomain carries its own robots namespace, so the policy
+# served at https://sytewide.com/robots.txt does not cover this host.
+
+User-agent: *
+Allow: /
+Disallow: /search
+
+Sitemap: https://syteops.sytewide.com/sitemap.xml

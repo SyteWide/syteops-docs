@@ -8,7 +8,7 @@ description: How SyteOps writes the SEO title, meta description, focus keyword a
 
 **Tier: Basic** — Plugin-based toggle integration. When Yoast SEO is installed and the integration is enabled, SyteOps writes SEO metadata into Yoast's own fields. There is no separate settings screen.
 
-SyteOps can use [Yoast SEO](https://yoast.com) as the SEO engine for **Content Pipelines** and the **Review & Publish Portal**. With the integration on, the SEO **title**, **meta description**, **focus keyword** and **cornerstone** flag that a pipeline produces — or that a reviewer sets in the portal — are written into the fields Yoast already reads, so they appear in the Yoast sidebar and metabox exactly as if they had been typed there.
+SyteOps can use [Yoast SEO](https://yoast.com) as the SEO engine for **Content Pipelines** and the **Review Portal**. With the integration on, the SEO **title**, **meta description**, **focus keyword** and **cornerstone** flag that a pipeline produces — or that a reviewer sets in the portal — are written into the fields Yoast already reads, so they appear in the Yoast sidebar and metabox exactly as if they had been typed there.
 
 :::important One SEO plugin at a time
 SyteOps connects to **one** SEO plugin at a time. Turning on Yoast SEO automatically turns off Squirrly SEO or Rank Math if either was on. This is deliberate: two plugins writing the same page's title is how a site ends up with a `<title>` nobody can account for.
