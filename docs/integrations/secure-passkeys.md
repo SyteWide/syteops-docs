@@ -25,7 +25,7 @@ The Secure Passkeys integration in SyteOps exists so the plugin's authentication
 
 When SyteOps REST API restriction is off, the allowlist entry has no practical effect — Secure Passkeys endpoints are reachable either way. The integration matters when restriction is on.
 
-## Passkey sign-in for the review portal
+## Passkey sign-in for the Review Portal
 
 Separately from this toggle, the Review Portal can show reviewers a **Sign in with a
 passkey** button on its sign-in card. That switch lives on the Review Portal settings, not here — it

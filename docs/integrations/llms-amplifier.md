@@ -39,7 +39,7 @@ Turning LLMS Amplifier on makes it your GEO engine — there's no separate engin
 Either of these does the same thing:
 
 - **From the Integrations tab** — go to **Integrations**, toggle **LLMS Amplifier** ON, and save.
-- **From the Content Pipelines tab** — open the **GEO** provider card on the Runs dashboard and click **Use LLMS Amplifier engine**.
+- **From the Content Pipelines tab** — open the **GEO** provider card on the Log and click **Use LLMS Amplifier engine**.
 
 If the toggle shows **Not Installed** (or the GEO card shows no engine-switch button), install and activate the LLMS Amplifier plugin first.
 
@@ -50,7 +50,7 @@ Turning it on automatically:
 - Turns on LLMS Amplifier's JSON index (`llms-index.json`) when questions or business identity publish into it.
 - Makes LLMS Amplifier the engine behind `/llms.txt` and `/llms-full.txt`, standing the built-in generator down.
 
-The GEO provider card on the Content Pipelines Runs dashboard reads **LLMS Amplifier** once this is done.
+The GEO provider card on the Content Pipelines Log reads **LLMS Amplifier** once this is done.
 
 ### Turn it off
 
@@ -66,7 +66,7 @@ When a pipeline runs the GEO stage with LLMS Amplifier as the engine, SyteOps as
 
 If LLMS Amplifier is pausing publication until you confirm a setting — it does this on sites using its headless mode, when it cannot verify what it saved — the GEO stage shows an amber **Held** status with the reason, instead of an error. Held means a person has to act: LLMS Amplifier is not retrying, and re-running the pipeline will not clear it. Open the LLMS Amplifier settings screen, confirm the **Public Site URL** and **Published Files** values, and save. The next run proceeds normally.
 
-Edits you make to an article's answers *after* it is published do not go through a pipeline run at all — SyteOps rebuilds the files for those in the background, and that path has no row in the Runs table. So if publication is being held, those background rebuilds are quietly doing nothing. SyteOps reports that as a status note on the LLMS Amplifier settings screen itself, counting how many rebuilds it has attempted. The note clears on the first rebuild that completes.
+Edits you make to an article's answers *after* it is published do not go through a pipeline run at all — SyteOps rebuilds the files for those in the background, and that path has no row in the Log's runs list. So if publication is being held, those background rebuilds are quietly doing nothing. SyteOps reports that as a status note on the LLMS Amplifier settings screen itself, counting how many rebuilds it has attempted. The note clears on the first rebuild that completes.
 
 SyteOps also rebuilds LLMS Amplifier's files on its own when something changes what they should say but no pipeline run would have fired: editing an article's answers after it is live, reviewing or un-reviewing an article's answers, marking it as a pillar, excluding it from `llms.txt`, changing which content types are covered, publishing content of a type either side covers, or unpublishing, trashing or deleting an article. Those rebuilds are batched, so a run of edits produces one rebuild, they happen in the background, and if something else rebuilt the files in the meantime SyteOps skips its own pass.
 

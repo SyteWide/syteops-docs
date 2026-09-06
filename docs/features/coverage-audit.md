@@ -118,6 +118,6 @@ When an accept run finishes you get a summary of what was accepted, what failed 
 
 ## Where the run is recorded
 
-Every bulk run writes **one row** in the Content Pipelines [Runs dashboard](content-pipelines.md#runs-dashboard) — one row for the run, not one per article, so a 25-article batch does not bury the rest of your history.
+Every bulk run writes **one row** in the Content Pipelines [Log](content-pipelines.md#log) — one row for the run, not one per article, so a 25-article batch does not bury the rest of your history.
 
-Filter the Runs table with the **Coverage** source pill to see only these runs. Each row records how many articles were **analyzed** or **accepted**, how many **failed** and how many were **skipped**. Analyze runs also record the model that was billed — so AI spending is answerable after the fact, not just at the moment you approved it.
+Filter the runs list with the **Coverage** source pill to see only these runs. Each row records how many articles were **analyzed** or **accepted**, how many **failed** and how many were **skipped**. Analyze runs also record the model that was billed — so AI spending is answerable after the fact, not just at the moment you approved it.

@@ -21,7 +21,7 @@ When you trigger the LinkCentral integration on a post, SyteOps:
 - Finds related posts on your site and adds internal cross-links to strengthen your SEO
 - Respects density limits so your content reads naturally — no link spam
 
-Your managed links are also available in the [Review & Publish portal](../features/review-and-publish-your-post.md#formatting-and-links): a reviewer editing a draft can search the library and drop a managed link straight into the body text.
+Your managed links are also available in the [Review Portal](../features/review-and-publish-your-post.md#formatting-and-links): a reviewer editing a draft can search the library and drop a managed link straight into the body text.
 
 ## Requirements
 

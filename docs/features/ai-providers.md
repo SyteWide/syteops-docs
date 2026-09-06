@@ -65,7 +65,7 @@ Each AI-using feature stores its own provider, model, and max-tokens values. You
 Features that have per-feature AI configuration:
 
 - **LinkCentral** — three independent AI areas (Cross-Link, Keyword, Context). See the [LinkCentral integration page](../integrations/linkcentral.md) for detail.
-- **Content** — AI-suggested categories, tags, and meta descriptions for content sources and the Review & Publish portal. See [Content Pipelines](./content-pipelines.md).
+- **Content** — AI-suggested categories, tags, and meta descriptions for content sources and the Review Portal. See [Content Pipelines](./content-pipelines.md).
 - **GEO** — AI readiness analysis that scores how well a post is positioned for AI answer engines. See [Content Pipelines](./content-pipelines.md).
 - **Ingest** — proposes how an inbound content-source payload maps to your post fields when you set up a new content source. See [Content Pipelines](./content-pipelines.md).
 - **Social** — AI-generated social posts from your published content.
