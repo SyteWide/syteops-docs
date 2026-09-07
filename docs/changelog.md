@@ -8,6 +8,26 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.130
+
+- **You can now tell the image AI what the article is about.** A prompt like "make the text on the screen readable" gave the AI no way to know what that text should say, because it was never told anything about the article. A new tickbox, **Tell the AI what this article is about**, sends the article's title and summary alongside your prompt. It is **off unless you tick it**, and it applies to that one generation — these AI models are editing a photograph rather than drawing a new one, so extra description is not always wanted. The row of versions still shows the prompt in your own words; the added context never appears there as something you typed.
+
+## v1.6.129
+
+- **Choose any picture from your media library, for article images too.** Only the featured image offered this; a picture inside the article could be changed only by pasting a link to it. Both now offer **Choose from library**. A picture chosen this way stays properly linked to your media library — something pasting a link could never do — and brings its own alt text with it. Its caption is left as you wrote it, since that is your words rather than the picture's.
+- **The row of versions no longer mislabels a picture.** After changing the thumbnail to something that was not made by remixing, one of the versions still carried **In the article** even though the article had stopped showing it. The label now follows the picture the article is actually using.
+
+## v1.6.128
+
+- **Clicking a remixed picture now shows it.** Picking one from the row of versions only drew a dashed outline around the thumbnail and wrote its prompt underneath — there was no larger view anywhere in the panel, so there was no way to tell whether a remix had actually fixed what you asked about, and clicking the same one again took even the outline away. A picked version now appears at full width with the prompt that produced it beneath, and clicking it again closes it. Looking is still only looking: the article changes only when you press Replace.
+- **The empty progress bar no longer sits in the picture panel.** It was meant to appear only while a picture was being generated, but it stayed on screen permanently.
+- **"Keep text and logos exactly as they are" reads as one line again**, instead of the tickbox stranding on its own line above the words.
+- **"Generating…" is no longer printed twice** while a picture is being made.
+
+## v1.6.127
+
+- **Underlined text can be un-underlined again.** When an article arrived carrying underlining from its own original styling rather than from the review editor, selecting the words and pressing Underline did nothing at all — and the button lit up as though it had worked, so the only way out was to delete the text and retype it. Pressing Underline now removes it, on a whole sentence or just part of one, and on a link too. Other styling on the same words, such as color, is left exactly as it was.
+
 ## v1.6.126
 
 - **Two people working on the same article's pictures no longer undo each other.** A version you keep, a replacement someone else makes and a version arriving from a finishing remix could land on top of one another, so one of the changes quietly vanished — and a version that had just been tidied away could reappear in the row. Each change is now applied to what the picture panel actually holds at that moment, and if it cannot be applied you are told, instead of being shown a row of thumbnails that does not match what was saved.

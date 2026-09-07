@@ -66,7 +66,9 @@ Tables and other formatting in the article body are shown the way they will look
 
 The body editor has a formatting toolbar for **bold**, **italic**, **underline** and **strikethrough**, **headings** (H2/H3), **bulleted** and **numbered** lists, **clear formatting** (removes styling from the selected text), and **undo**/**redo**.
 
-A button lights up when the text you have selected already has that formatting — so you can tell at a glance whether a word is bold, and click the same button again to remove it. This works on text that arrived from your content source, not only on text you typed yourself.
+A button lights up when the text you have selected already has that formatting — so you can tell at a glance whether a word is bold, and click the same button again to remove it. This works on text that arrived from your content source, not only on text you typed yourself, and it includes underlining that came from the original article's own styling rather than from this editor. You can take the underline off a whole sentence or just a few words of one, and off a link, without disturbing anything else about how those words look.
+
+One case is deliberately left alone: where an entire paragraph is underlined as a block and you select only part of it, the underline stays, because removing it would mean splitting one paragraph into three. Select the whole paragraph and it comes off.
 
 **How much formatting is offered** is set once for the site, under **Content Pipelines → Review Portal → Formatting controls**:
 
@@ -131,11 +133,17 @@ Two things to know about that automatic copy. If an image cannot be fetched — 
 
 Importing needs permission to add media to the site. If your account does not have it, the Import button does not appear and images are left exactly as they are.
 
+**Swapping a picture for one from your media library.** Next to the image link is a **Choose from library** button, which opens your media library so you can pick a different picture. This works for pictures inside the article as well as for the featured image. Picking one keeps the article properly linked to that library item — something pasting a link cannot do — and the picture brings its own alt text with it, since alt text describes the picture rather than the article.
+
+Its **caption is left exactly as you wrote it**. A caption is your own words about the article, so it is never silently replaced; if it no longer suits the new picture, edit it yourself. The button appears only if your account has permission to add media to the site.
+
 **Turning it off for one article.** Next to the publish controls there is an **Import images** checkbox. It starts from your site's setting and applies to the article you are looking at, so you can leave one article's pictures where they are without changing anything for everyone else.
 
 **Putting the original links back.** If an article's images were copied across and you would rather they were not, a **Revert images** button appears beside the publish controls. It points the pictures back at the addresses they came from. Nothing is deleted from your media library — the copies stay there, in case another article is using them. If someone has changed one of the images by hand since it was copied, that one is left alone and you are told, rather than having your change overwritten. Reverting a live article asks you to confirm first, since the published page will go back to loading its pictures from somewhere else. Reverting also switches **Import images** off for that article, so the next publish leaves the original links alone — turn it back on if you change your mind.
 
-**Modify with AI.** When SyteHero is installed and ready, **Modify with AI** sits below the **Image details** section in the image panel, and also on the featured-image card. Type a prompt (often pre-filled from the incoming article) and click **Generate**. Model and Quality are labeled on those controls, and Strength appears only for the one model that uses it. **Generating no longer swaps the picture in your article** — it makes a new version and puts it in a row of thumbnails for you to [choose between](#choosing-between-versions). The original picture is kept so you can **Revert**. Generate with a blank prompt is refused. This never runs when the article is ingested — only when a reviewer asks. An operator can hide Modify with AI from specific reviewer types in **Reviewer editing permissions**.
+**Modify with AI.** When SyteHero is installed and ready, **Modify with AI** sits below the **Image details** section in the image panel, and also on the featured-image card. Type a prompt (often pre-filled from the incoming article) and click **Generate**. Model and Quality are labeled on those controls, and Strength appears only for the one model that uses it. **Generating no longer swaps the picture in your article** — it makes a new version and puts it in a row of thumbnails for you to [choose between](#choosing-between-versions). The original picture is kept so you can **Revert**. Generate with a blank prompt is refused.
+
+**Telling the AI what the article is about.** Under the prompt is a tickbox, **Tell the AI what this article is about**. Ticked, it sends the article's title and summary alongside your prompt, which is what lets an instruction like "make the text on the screen readable" produce text about the right subject rather than plausible-looking nonsense. It is **off unless you tick it**, and it applies only to the generation you are about to run — these models are editing your photograph rather than drawing a new picture, and extra description is not always wanted. The row of versions still labels each picture with the prompt in your own words; the added context is never shown there as something you typed. This never runs when the article is ingested — only when a reviewer asks. An operator can hide Modify with AI from specific reviewer types in **Reviewer editing permissions**.
 
 ### Changing an image with AI
 
@@ -175,8 +183,10 @@ carries the label **In the article**, and the first one carries **Original**. Th
 there is more than one picture to choose between — with a single picture there is no choice to make,
 so nothing is shown.
 
-Click a thumbnail to highlight it and read the prompt that produced it. Clicking is only looking:
-nothing is written and your article does not change.
+Click a thumbnail to see that version at full size, with the prompt that produced it underneath — big
+enough to judge whether it actually fixed what you asked for, which a small thumbnail cannot tell
+you. Click the same thumbnail again to close it. Clicking is only looking: nothing is written and
+your article does not change.
 
 Three buttons sit under each thumbnail.
 
