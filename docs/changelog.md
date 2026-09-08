@@ -8,6 +8,23 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.143
+
+- **Housekeeping, with nothing to see.** One of the steps that strips server addresses out of error messages had no test covering the shape only it can catch, and was very nearly removed as unused. It is now covered. Nothing about what the plugin does has changed.
+
+## v1.6.142
+
+- **Two more kinds of credential are hidden from error messages.** When something goes wrong with a picture, the message you see has secrets stripped out of it first. Two shapes were getting through: an access key written entirely in capitals, and a server address written with the full-width dots used in Chinese, Japanese and Korean typing. Both are now caught.
+- **Setting names stay readable.** The new rule deliberately leaves alone anything written in capitals with underscores, because that is what a setting name looks like and you need to be able to read the one an error is telling you about.
+
+## v1.6.141
+
+- **Housekeeping, with nothing to see.** The permission checks in front of the picture tools were written out six times, once per tool. They now live in one place. Each tool keeps its own separate answer for what to say when the picture service itself is unavailable, because those answers genuinely differ. Nothing changes about who can do what.
+
+## v1.6.140
+
+- **Housekeeping, with nothing to see.** A step in the image progress reporting that could never run has been removed, and the cleanup that happens when the plugin is uninstalled now names the saved credit-balance readings explicitly rather than relying only on a broad sweep. Neither changes what the plugin does.
+
 ## v1.6.139
 
 - **A picture waiting its turn now says so.** The image service can now tell us that your request is queued rather than being worked on, and where it sits in line. Before, "queued" and "started but nothing measurable yet" looked identical — both drew a bar at zero, which reads as a job that has stopped. There are now three honest states: waiting its turn, working with nothing to measure yet, and working with a real amount done. When the service tells us your place in line you are shown it; when it doesn't, you are told you are waiting without a number being invented.
