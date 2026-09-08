@@ -8,6 +8,45 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.139
+
+- **A picture waiting its turn now says so.** The image service can now tell us that your request is queued rather than being worked on, and where it sits in line. Before, "queued" and "started but nothing measurable yet" looked identical — both drew a bar at zero, which reads as a job that has stopped. There are now three honest states: waiting its turn, working with nothing to measure yet, and working with a real amount done. When the service tells us your place in line you are shown it; when it doesn't, you are told you are waiting without a number being invented.
+
+## v1.6.138
+
+- **The progress bar while a picture is being made now knows when it has a real reading.** Until now it decided by looking at the number: anything at or below zero was treated as "no reading yet", which was right, because the image service reports zero for the whole run on the kinds of work it cannot measure. It stops being right the moment that service starts reporting a genuine queue position, because a truthful "queued, nothing done yet" would have been mistaken for no reading at all and the bar would have gone back to moving without meaning. The answer now travels with the reading instead of being guessed from it.
+
+## v1.6.137
+
+- **Pictures stop inheriting their own file name as a title.** A picture whose title was nothing more than its file name could pass that file name on as the title of every copy made from it. That was already fixed for pictures changed with AI; it is now fixed everywhere else too — when an article is brought in, when a picture is imported, and when an archive image is rebuilt. It recognizes the names your site makes up on your behalf, including the smaller copy it saves of a very large photo and the turned-the-right-way-up copy.
+- **Rebuilding an archive image can now reach photos it never could.** The check that decided whether a rebuild should rename a picture compared the title against the file on disk — but for any photo large enough that your site saved a smaller copy, those two never match, so the rebuild always declined. It has therefore never renamed one of those photos. It can now.
+- **A title you chose is never overwritten by any of this.** Anywhere the code decides whether to replace a title that already exists, it will only do so when your site's own records say the title came from the file name — never on a guess. A title you typed, or one your photographer embedded in the image, is left alone.
+
+## v1.6.136
+
+- **A row of image versions now follows the picture it belongs to.** If you started making a version of one picture and then swapped that picture for a different one while the work was still running, the finished row could be offered under the new picture — and choosing from it replaced your article's picture with an unrelated one. The row now stays with the picture it was made from, both straight away and when you reopen the panel later.
+- **Actions on a picture you have since deleted no longer change the article.** Replacing, reverting or importing a picture that is no longer in the article used to write into it anyway and mark your work unsaved. Those now stop, and each says what actually happened — including that the site still records the version you chose, so you can put it back.
+
+## v1.6.135
+
+- **Error messages from the image service no longer reveal your internal network.** When an image edit fails, the reason shown to reviewers comes from the image service itself, which is what makes it useful — but that text could carry your server's internal host name and port, the email address on your billing account, or your account identifier. Reviewers include people you invite from outside your organization, so those details are now removed before the message is shown, while the explanation you actually need is kept. The image service's own name is deliberately preserved, so a message still reads as what it is rather than as an anonymous address.
+
+## v1.6.134
+
+- **See how much image-AI credit is left, from the image card.** The Modify with AI section now shows the image service's remaining balance with a Refresh button beside it — the same figure your site administrator sees — so you can tell whether there is credit to spend before pressing Generate, rather than learning it from a generation that fails. Refresh re-checks every image service at once. If a balance cannot be read you are told why, instead of being shown a misleading $0.00, because a zero would read as an empty account rather than a lookup that did not work. The balance appears only where Modify with AI is available to you.
+
+## v1.6.133
+
+- **A remixed picture keeps its name and description.** Pictures made by remixing arrived in your media library under a made-up name with no description, losing the wording you had given the original. A remix now inherits the original's title, alt text, caption and description. One deliberate exception: a title that is nothing more than the picture's own file name is not carried over, because a file name is not a name anyone chose. That covers the file names WordPress makes up for you as well as the one you uploaded — the numbered copy when the name is already taken, the smaller copy it saves of a very large photo, the turned-the-right-way-up copy, and the copy it saves when a picture is cropped. When the title is refused this way, the new picture is named after the original's alt text, and failing that after the article it belongs to. If the article itself has no title, there is nothing left to borrow, and the picture keeps its generated name.
+
+## v1.6.132
+
+- **Clicking a remixed picture no longer closes the panel.** Picking one from the row of versions closed the whole panel, and reopening it lost both the picture you had picked and, for a picture not yet placed in the article, sometimes the row itself. The panel now stays open, remembers your pick, and finds the row again. The message shown when a new version is ready also now names the right picture to go back to, instead of pointing at whichever one you happen to be looking at.
+
+## v1.6.131
+
+- **The progress bar shown while a picture is being remixed now moves.** It used to sit empty at zero for the entire wait, sometimes a minute or more, because the image service only reports how far along it is for certain kinds of work and reports nothing at all for the rest. An empty bar reads as a job that has stopped. When there is no reading to show, the bar now moves steadily rather than presenting the missing answer as zero, so work in progress is distinguishable from something that has gone wrong.
+
 ## v1.6.130
 
 - **You can now tell the image AI what the article is about.** A prompt like "make the text on the screen readable" gave the AI no way to know what that text should say, because it was never told anything about the article. A new tickbox, **Tell the AI what this article is about**, sends the article's title and summary alongside your prompt. It is **off unless you tick it**, and it applies to that one generation — these AI models are editing a photograph rather than drawing a new one, so extra description is not always wanted. The row of versions still shows the prompt in your own words; the added context never appears there as something you typed.

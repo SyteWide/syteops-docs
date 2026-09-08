@@ -158,12 +158,27 @@ Two things decide whether the picture comes back looking like itself:
 
 The picture also keeps its own proportions. A square or portrait photo used to come back cropped to widescreen, because nothing told the image service what shape it started as.
 
+The new version also keeps the original picture's title, alt text, caption and description, rather than arriving in your media library with a made-up name and nothing written about it. The one exception: if the original's title is nothing more than its file name — something like `IMG_4471` — that isn't carried over, since a file name isn't a title anyone chose. This looks past the file names WordPress makes up on your behalf, too: when a name is already taken it adds a number, it saves a smaller copy of a very large photo, it turns a sideways photo the right way up, and it saves a separate copy when you crop. A picture still titled `IMG_4471` is recognized in all of those cases. When the title is refused this way, the new version is named after the original's alt text instead, or after the article if there is no alt text. If the article has no title of its own either, there is nothing left to borrow, and the picture keeps its generated name. The file itself still gets a generated name on your server either way; it's the title, alt text, caption and description shown in the media library that come from the original.
+
 Your site administrator sets the defaults under **Content Pipelines → Review Portal → Modify images with AI**; each Generate can override them.
 
-**While it runs.** A progress bar appears under the controls and fills as the image service works.
-It deliberately sits near the end for a while — that is where the service holds an unfinished job —
-so the bar keeps moving rather than looking stuck. A **Stop** button sits beside **Generate** while
-a picture is being made; pressing it abandons the job and gives the controls straight back. (The
+**How much credit is left.** Beside the **Modify with AI** heading is the image service's remaining
+balance, with a **Refresh** button next to it. It is the same figure your site administrator sees in the
+plugin information panel, which opens from the logo in the top corner of the settings screen — the
+image services are listed there rather than on the API Keys screen, because they bill through a key
+this plugin does not hold. It lets you tell whether there is credit to spend before you press Generate,
+rather than finding out from a generation that fails. Refresh re-checks every image service at once.
+If a balance cannot be read, you are told why instead of being shown a misleading $0.00 — a zero
+would read as an empty account rather than a lookup that did not work. The balance appears only when
+Modify with AI is available to you.
+
+**While it runs.** A progress bar appears under the controls. Some models report how far along they
+are, and the bar fills to match — it deliberately sits near the end for a while, because that is
+where the image service holds a job it has not quite finished. Many models say nothing at all while
+they work, and for those the bar shows a moving sliver rather than a percentage: the job is running,
+but there is no honest number to put on it. It no longer sits frozen at zero, which used to look
+like a picture that was never going to arrive. A **Stop** button sits beside **Generate** while a
+picture is being made; pressing it abandons the job and gives the controls straight back. (The
 **Cancel** button lower down still just closes the panel.)
 
 **If it goes wrong, you are told why.** A refusal now shows the image service's own words — a prompt

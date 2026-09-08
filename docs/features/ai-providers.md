@@ -81,14 +81,13 @@ Each provider's card on the **API Keys** tile shows your current balance (or cre
 
 - The balance row only appears once you've saved a key for that provider — providers with no key entered don't show a balance (and won't surface a balance-lookup error).
 - Click the refresh icon to re-fetch the balance.
-- The last-updated timestamp shows when the balance was most recently pulled.
 - If a provider doesn't expose a balance endpoint, the field shows "—".
 
 Use this to catch low-balance states before an enrichment run or content-pipeline batch exhausts your credit.
 
 ## Provider branding modal
 
-Clicking a provider's logo on the **API Keys** tile opens a small branding modal with:
+Clicking the plugin logo in the top corner of the settings screen opens a small information panel with:
 
 - Link to the provider's primary documentation
 - Link to the provider's pricing / models page
