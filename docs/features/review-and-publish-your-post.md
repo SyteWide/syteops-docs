@@ -227,15 +227,15 @@ you open a picture, so it can never carry over from the last one you were lookin
 
 It is a tidy-up rather than a shortcut, and every refusal below still applies to it. When one of them
 stops the deletion the picture is simply kept, you are told which reason it was, and the replacement
-itself still stands — a swap is never undone because the tidying was refused. The first time you
-replace a picture this usually means it is kept: what you are moving off is the picture the article
-arrived with, and that one is never deleted.
+itself still stands — a swap is never undone because the tidying was refused. After a first Replace,
+ticking the box can delete the picture the article arrived with, once the article is no longer
+showing it. That original then leaves the filmstrip, and **Restore original** is no longer offered
+for that picture.
 
-Some versions carry fewer than three buttons, because some of them are refused on purpose. Three
+Some versions carry fewer than three buttons, because some of them are refused on purpose. Two
 things are never deleted, however the deletion came about — whether you pressed **Delete** or the
 tidying did it for you:
 
-- the picture the article arrived with;
 - the version your article is currently showing — replace it with another one first;
 - a picture another article is also using.
 
@@ -253,8 +253,9 @@ If a version has already been removed from your media library some other way —
 Library screen, say, while your row was open — pressing **Delete** on it simply tidies it out of the
 row instead of failing.
 
-If you would rather not choose between versions at all, **Revert** still does what it always did: it
-puts the original picture back in one click.
+If you would rather not choose between versions at all, **Restore original** puts the original
+picture back in one click — while that file is still on the strip. Once it has been deleted, the
+button is hidden.
 
 ### Notes on an image
 
@@ -518,9 +519,9 @@ The post stays as a draft throughout — nothing is published until someone clic
 
 The **Feedback** panel collects every change request submitted for this draft, oldest first, together with any [notes left on individual images](#notes-on-an-image) and any message sent with **Notify** — image notes carry the picture they are about, and a resolved one is dimmed rather than removed. It is visible to everyone who has access to the portal, so it keeps an honest record of the review conversation.
 
-**Every note in the panel has a Resolve link**, change requests included. Anyone with access can resolve a note — the person who acts on it is usually the one who knows it is done — and a resolved note can be reopened. Resolving the last outstanding change request also clears the **Changes requested** flag on the review queue, so a draft never shows as handled and not handled at the same time.
+**Every note in the panel has a Resolve chip**, change requests included. Anyone with access can resolve a note — the person who acts on it is usually the one who knows it is done — and a resolved note can be reopened. Resolving the last outstanding change request also clears the **Changes requested** flag on the review queue, so a draft never shows as handled and not handled at the same time.
 
-**Every note also has a Reply link.** Click it to type an answer in a box that opens under the note; your reply is added to the panel, indented beneath the note it answers, so the answer and the question stay together instead of the answer ending up in an email nobody can find later. The person who wrote the note is emailed that you have answered it — unless you are answering your own note, in which case nobody is emailed.
+**Every note also has a Reply chip.** Click it to type an answer in a box that opens under the note; your reply is added to the panel, indented beneath the note it answers, so the answer and the question stay together instead of the answer ending up in an email nobody can find later. The person who wrote the note is emailed that you have answered it — unless you are answering your own note, in which case nobody is emailed.
 
 **Reply and Resolve** does both at once: it posts your answer and marks the note handled in a single step. If the note cannot be marked handled for any reason, your reply is still posted and the panel tells you the note is still open, rather than showing you a note as done when it is not.
 
@@ -530,7 +531,7 @@ If you posted a note by mistake, click the **×** next to your own note to remov
 
 :::note Describing a picture for search
 
-Open a picture, expand **Image details**, and click **Generate SEO with AI**. It looks at the actual photo — not at the words around it — and suggests alt text and a caption, which appear in the boxes for you to edit. Nothing is saved until you press **Apply**, the same as everywhere else in the portal.
+Open a picture, expand **Image details**, and click **Generate SEO with AI**. It looks at the actual photo — not at the words around it — and suggests alt text and a caption, which appear in the boxes for you to edit. That includes a remixed version of the photo, even when the remix file is not attached to the article the usual way. Nothing is saved until you press **Apply**, the same as everywhere else in the portal. If it cannot run, the portal names the reason instead of a generic failure.
 
 Alt text written from the surrounding article rather than from the picture is confidently wrong about what is in the frame, and a screen reader reads it out as fact. That is why this needs a provider whose model can actually see an image; if none is set up, the button is not shown at all. See [AI Providers](./ai-providers.md).
 
