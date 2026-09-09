@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.154
+
+- **Review portal CSS and JS refresh after an update** even when the version number did not change, without a CDN purge.
+- **Replaced article images show the new file.** Saving does not bake a cache-buster into the article.
+
 ## v1.6.153
 
 - **Feedback Reply and Reopen chips use brand color.** Reply is a light teal pill; Reopen is filled teal, so they no longer look like empty outlines next to the filename chip. There is a little space under those pills before the filename.
