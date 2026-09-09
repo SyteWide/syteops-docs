@@ -8,6 +8,12 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.152
+
+- **Generate SEO with AI works on a remixed picture.** A remix is still this article's photo even when the file was saved unattached. If it cannot run, the portal now names the reason instead of a generic failure.
+- **Deleting the picture a Replace moved off can now include the original.** Tick the box after a first Replace and the original leaves the media library and the filmstrip; Restore original hides once that row is gone. A picture the article still shows is still refused.
+- **Feedback notes use compact chip actions** for Reply, Resolve and delete, instead of underlined text.
+
 ## v1.6.151
 
 - **Every AI area is reachable from the management API again.** The provider, model and token limit for an AI area could be read and changed remotely — but only for some areas. Five of them answered "Unknown AI area" to every request, so the one place meant to configure AI settings for you could not touch most of them.
