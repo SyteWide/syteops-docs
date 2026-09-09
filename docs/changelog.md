@@ -8,6 +8,16 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.157
+
+- **Replaced pictures on the review portal show the new file even when an image CDN is on**, without waiting for a purge. The portal page itself is not rewritten onto the CDN, so the cache-buster on a replaced image reaches the browser.
+- **Scheduling an article, or publishing one from ingest when no slot is free, no longer strips page-builder markup.** A status or date change used to re-filter the stored body, which deleted embeds and builder stubs on the way through.
+
+## v1.6.156
+
+- **Generate SEO with AI describes the picture in your media library**, even when the page is showing a CDN copy of it. Saving stores the original media URL, so a replaced image still shows after you reload.
+- **A library picture served through a CDN is labeled already in your media library**, and Import is hidden. If Generate SEO does not finish, you see "The server did not finish looking at that picture. Try again." instead of "That did not work." Review portal headings use Title Case (Article Image, Featured Image, Image Details, Notes on This Image); buttons stay sentence case.
+
 ## v1.6.155
 
 - **Opening the review portal on a page no longer empties that page.** The portal is built around an article's body, and a page has no body field for it to read — so its first automatic save wrote an empty one over whatever was stored. On a page built with a page builder that stored content is only a stub, so the page kept rendering correctly and the loss left nothing to notice. The portal now refuses to write a page's body at all, from the automatic save and from Approve & Publish alike.
