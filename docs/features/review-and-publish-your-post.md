@@ -43,6 +43,10 @@ If your site runs a security plugin that challenges a sign-in — asking for a t
 
 The first time you open an article is recorded, so the site's owners can see the review email was acted on. Only that first open is listed — later visits add nothing — and nothing is recorded unless you are signed in with permission to edit that article.
 
+:::tip After a plugin update, or after you replace a picture
+The review portal brings its own look and scripts. After you install a SyteOps update, reviewers see the new design and behavior the next time they open the portal — you do not have to purge a CDN. Replacing a picture works the same way: the portal shows the new file, and saving does not change the picture's web address in the article.
+:::
+
 ---
 
 ## Step 3: Review and edit the draft
