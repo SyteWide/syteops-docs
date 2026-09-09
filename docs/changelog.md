@@ -8,6 +8,12 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.155
+
+- **Opening the review portal on a page no longer empties that page.** The portal is built around an article's body, and a page has no body field for it to read — so its first automatic save wrote an empty one over whatever was stored. On a page built with a page builder that stored content is only a stub, so the page kept rendering correctly and the loss left nothing to notice. The portal now refuses to write a page's body at all, from the automatic save and from Approve & Publish alike.
+- **The portal tells a page from an article.** A page opens on a read-only canvas where an article shows its editable body, and the formatting toolbar, paste handling and image tools stand down rather than half-appearing beside a region nobody can edit.
+- **The Preview Portal button finds something on a site built only from pages.** It looked for posts and nothing else, so on a pages-only site it had nothing to show. It now offers the most recent thing the portal would actually open — and only something the portal is allowed to open.
+
 ## v1.6.154
 
 - **Review portal CSS and JS refresh after an update** even when the version number did not change, without a CDN purge.
