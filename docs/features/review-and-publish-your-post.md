@@ -533,7 +533,9 @@ If you posted a note by mistake, click the **×** next to your own note to remov
 
 Open a picture, expand **Image details**, and click **Generate SEO with AI**. It looks at the actual photo — not at the words around it — and suggests alt text and a caption, which appear in the boxes for you to edit. That includes a remixed version of the photo, even when the remix file is not attached to the article the usual way. Nothing is saved until you press **Apply**, the same as everywhere else in the portal. If it cannot run, the portal names the reason instead of a generic failure.
 
-Alt text written from the surrounding article rather than from the picture is confidently wrong about what is in the frame, and a screen reader reads it out as fact. That is why this needs a provider whose model can actually see an image; if none is set up, the button is not shown at all. See [AI Providers](./ai-providers.md).
+**This is not Modify with AI.** Generate SEO uses **Image SEO AI** — a vision-capable provider and model under Content Pipelines → Review Portal → Setup → AI assistance, plus that provider's key on **System / API**. Modify with AI uses SyteHero and remakes the picture. The two are independent: remixing can work while Generate SEO still fails, and the other way around. If Image SEO AI is not set up, the button is not shown at all.
+
+Alt text written from the surrounding article rather than from the picture is confidently wrong about what is in the frame, and a screen reader reads it out as fact. That is why Image SEO AI must point at a model that can actually see an image. See [AI Providers](./ai-providers.md).
 
 **A pass over every photo.** Generating a meta description, analyzing answer readiness or refreshing categories and tags each end by offering to run SEO on the article's photos too. You get a list of every picture with a checkbox — ticked in advance only where there is no alt text at all, including where the alt box just holds the file's own name, which is not a description of anything. A picture you leave unticked is not touched. Each ticked picture is one AI call, and the count is shown before you start.
 
@@ -768,7 +770,7 @@ This section lets you choose the AI provider and model used by four features ins
 - **Content AI** — the model that generates and refines article content.
 - **GEO AI** — the model that runs the AI readiness analysis in the GEO panel.
 - **Ingest AI** — the model that proposes how an inbound content-source payload maps to your post fields.
-- **Image SEO AI** — the provider and model configured for image alt text, title, and caption, ahead of the feature that will call it. This one has to point at a model that can read images, so any provider that cannot is shown here as unselectable — see [AI Providers](./ai-providers.md) for which providers those are.
+- **Image SEO AI** — the provider and model **Generate SEO with AI** uses for image alt text, title, and caption. This is not SyteHero and not Modify with AI. It has to point at a model that can read images, so any provider that cannot is shown here as unselectable — see [AI Providers](./ai-providers.md) for which providers those are.
 
 These are the same provider and model settings used by the Content, GEO, Ingest, and Image SEO areas elsewhere in SyteOps. Changing them here updates the same underlying values.
 
