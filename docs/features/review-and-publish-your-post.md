@@ -220,6 +220,17 @@ Three buttons sit under each thumbnail.
   because this one cannot be undone. Any notes left on that version move to the picture your article
   is showing, so a note never outlives the picture it is about.
 
+**Replace can tidy up after itself.** Above the buttons sits a checkbox — **Delete the picture it
+replaces from the media library** — that applies to **Replace** and to nothing else. Tick it and the
+swap is saved first, then the picture your article moved off is deleted. It starts off every time
+you open a picture, so it can never carry over from the last one you were looking at.
+
+It is a tidy-up rather than a shortcut, and every refusal below still applies to it. When one of them
+stops the deletion the picture is simply kept, you are told which reason it was, and the replacement
+itself still stands — a swap is never undone because the tidying was refused. The first time you
+replace a picture this usually means it is kept: what you are moving off is the picture the article
+arrived with, and that one is never deleted.
+
 Some versions carry fewer than three buttons, because some of them are refused on purpose. Three
 things are never deleted, however the deletion came about — whether you pressed **Delete** or the
 tidying did it for you:
@@ -509,7 +520,23 @@ The **Feedback** panel collects every change request submitted for this draft, o
 
 **Every note in the panel has a Resolve link**, change requests included. Anyone with access can resolve a note — the person who acts on it is usually the one who knows it is done — and a resolved note can be reopened. Resolving the last outstanding change request also clears the **Changes requested** flag on the review queue, so a draft never shows as handled and not handled at the same time.
 
+**Every note also has a Reply link.** Click it to type an answer in a box that opens under the note; your reply is added to the panel, indented beneath the note it answers, so the answer and the question stay together instead of the answer ending up in an email nobody can find later. The person who wrote the note is emailed that you have answered it — unless you are answering your own note, in which case nobody is emailed.
+
+**Reply and Resolve** does both at once: it posts your answer and marks the note handled in a single step. If the note cannot be marked handled for any reason, your reply is still posted and the panel tells you the note is still open, rather than showing you a note as done when it is not.
+
+Replies go one level deep — you can answer a note, but not answer an answer. A reply belongs to the note it is under, so it never counts as its own outstanding note in the warning shown when you publish: dealing with the note deals with the whole conversation.
+
 If you posted a note by mistake, click the **×** next to your own note to remove it (you can only delete notes you wrote; site administrators can remove any note).
+
+:::note Describing a picture for search
+
+Open a picture, expand **Image details**, and click **Generate SEO with AI**. It looks at the actual photo — not at the words around it — and suggests alt text and a caption, which appear in the boxes for you to edit. Nothing is saved until you press **Apply**, the same as everywhere else in the portal.
+
+Alt text written from the surrounding article rather than from the picture is confidently wrong about what is in the frame, and a screen reader reads it out as fact. That is why this needs a provider whose model can actually see an image; if none is set up, the button is not shown at all. See [AI Providers](./ai-providers.md).
+
+**A pass over every photo.** Generating a meta description, analyzing answer readiness or refreshing categories and tags each end by offering to run SEO on the article's photos too. You get a list of every picture with a checkbox — ticked in advance only where there is no alt text at all, including where the alt box just holds the file's own name, which is not a description of anything. A picture you leave unticked is not touched. Each ticked picture is one AI call, and the count is shown before you start.
+
+:::
 
 :::
 
@@ -735,12 +762,14 @@ Turn a requirement off if your workflow publishes without it — for example, if
 
 This lives under **Setup**. Open that group (or use the jump link at the top) if you don't see it.
 
-This section lets you choose the AI provider and model used by two features inside the portal:
+This section lets you choose the AI provider and model used by four features inside the portal:
 
 - **Content AI** — the model that generates and refines article content.
 - **GEO AI** — the model that runs the AI readiness analysis in the GEO panel.
+- **Ingest AI** — the model that proposes how an inbound content-source payload maps to your post fields.
+- **Image SEO AI** — the provider and model configured for image alt text, title, and caption, ahead of the feature that will call it. This one has to point at a model that can read images, so any provider that cannot is shown here as unselectable — see [AI Providers](./ai-providers.md) for which providers those are.
 
-These are the same provider and model settings used by the Content AI and GEO areas elsewhere in SyteOps. Changing them here updates the same underlying values.
+These are the same provider and model settings used by the Content, GEO, Ingest, and Image SEO areas elsewhere in SyteOps. Changing them here updates the same underlying values.
 
 ### Review & approval rules
 

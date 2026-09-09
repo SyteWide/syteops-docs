@@ -69,11 +69,14 @@ Features that have per-feature AI configuration:
 - **GEO** — AI readiness analysis that scores how well a post is positioned for AI answer engines. See [Content Pipelines](./content-pipelines.md).
 - **Ingest** — proposes how an inbound content-source payload maps to your post fields when you set up a new content source. See [Content Pipelines](./content-pipelines.md).
 - **Social** — AI-generated social posts from your published content.
+- **Image SEO** — configures the provider and model that will generate an image's alt text, title, and caption from the picture itself rather than the surrounding words; the setting is available now, ahead of the feature that will call it. This area must point at a model that accepts image input; a text-only model is refused rather than asked to guess, so the provider list here shows a provider that cannot take an image as unselectable.
 
 There are two ways to set per-feature AI configuration:
 
-1. **From the feature's settings card** — the AI Providers / Enrichment Settings / similar section on the System / API tab.
+1. **From the feature's own settings card** — for example the **AI assistance** card on the Content Pipelines → Review Portal view, which is where the Content, GEO, Ingest, and Image SEO areas are set, or the Enrichment Settings section on the System / API tab for LinkCentral.
 2. **From the integration or module tile** — click **Configure AI Provider** on the integration card (Integrations tab) or the dropdown on the Modules tab. A modal opens with provider, model, and max-tokens fields. Saving the modal writes directly via AJAX — you don't need to navigate to the feature's settings tab first.
+
+Not every feature offers both routes: the **Configure AI Provider** modal appears only on tiles that carry that control, so features whose controls already render on their own settings card — Content, GEO, Ingest, and Image SEO among them — are set there.
 
 ## Live balance display
 

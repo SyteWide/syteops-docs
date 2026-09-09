@@ -8,6 +8,60 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.151
+
+- **Every AI area is reachable from the management API again.** The provider, model and token limit for an AI area could be read and changed remotely — but only for some areas. Five of them answered "Unknown AI area" to every request, so the one place meant to configure AI settings for you could not touch most of them.
+- **The list of areas is no longer kept by hand.** It is now taken from the same registry the features themselves read, so an AI area added in a future release is reachable the moment it ships instead of waiting for someone to remember a second list.
+- **A full reset clears the last two AI areas by name.** Resetting all settings already cleared them; the list the reset checks against simply did not say so, which is the sort of gap that turns into a real one after a refactor.
+
+## v1.6.150
+
+- **"I want something like this instead."** Modify with AI has always remixed the picture already on the article. Now you can hand it a different one: **Use a different image as the source** opens your media library — with its Upload tab — and whatever you choose becomes the thing the AI remixes from, under your own prompt. The block says so plainly while a reference is chosen, so there is never a question about which picture your prompt is about to be applied to.
+- **The result still fits where it is going.** The shape is taken from the picture on the article, not from your reference. Without that, a tall reference dropped into a wide slot would come back tall — a correct answer to the wrong question.
+- **A picture you upload just for this is treated as scratch.** Clear it, or close the panel, and it is removed again; a daily tidy-up catches any left behind by a browser that never came back. **A picture that was already in your library is never touched** — only something uploaded during this flow is ever cleaned up, and that is decided by the site, not by your browser.
+- **Only PNG, JPEG and WebP.** Those are the three the image service accepts, so anything else is refused straight away with a clear message instead of failing partway through somebody else's system.
+
+## v1.6.149
+
+- **An imported picture is filed under a name that describes it.** A photo arriving from a content source is usually called something like `IMG_4821.jpg` or `shutterstock-1043882.jpg`, and that name ends up in the article's HTML, in the image's URL, and in what a search engine reads. Importing now renames the file from the title the picture already has, so it arrives as `a-brown-dog-on-a-porch.jpg` instead.
+- **It only ever happens at import, and only when nothing points at the picture yet.** Renaming a picture that is already in use means rewriting every place the old name appears — the article's HTML, the page builder's stored layout and its separate rendered copy, and the generated CSS — against an image CDN that cannot be cleared. So it does not do that. A picture that is already used anywhere, or one on an article that is no longer a draft, is left exactly as it is, and the import carries on normally.
+- **EWWW Image Optimizer keeps up.** EWWW records an optimized image by its file path, so a rename would orphan that record and the picture would be optimized — and billed — a second time. The rename tells EWWW the file moved, using the hook EWWW provides for exactly this.
+
+## v1.6.148
+
+- **A picture can now describe itself.** Open a picture in the review portal, expand **Image details**, and **Generate SEO with AI** looks at the actual photo — not at the words around it — and suggests alt text and a caption. Alt text written from the surrounding article is confidently wrong about what is in the frame, which is worse than none: a screen reader reads it out as fact. The suggestions land in the boxes for you to edit, and nothing reaches the article or the media library until you press Apply, exactly like the meta description and the category suggestions.
+- **Running SEO on the article now offers to run it on the photos.** Generating a meta description, analyzing answer readiness or refreshing categories and tags all end with the same question: also run SEO on this article's photos? It lists every picture on the article with a checkbox, and unticking one leaves it completely alone.
+- **Only pictures with no alt text at all are ticked in advance.** A file name sitting in the alt box counts as no alt text, because it is — nobody chose it, it arrived with the file. Wording somebody actually wrote is never ticked for you, so a pass can never quietly replace a description a reviewer took the trouble to write.
+- **You see the cost before you spend it.** Each picture is one AI call, and the count updates as you tick and untick, so the number of calls is on screen before you start rather than on the bill afterwards.
+
+## v1.6.147
+
+- **You can answer a note without leaving the page.** The Feedback panel has only ever let you mark a note handled or delete it, so the reply that belongs with it — "rewritten, take a look" — had to go somewhere else, usually email, where it stopped being attached to the note it answered. Reply opens a box under the note and puts your answer in the thread, indented under what it answers.
+- **Reply and Resolve is one press, and one request.** Answering a note and marking it handled were two separate acts, and doing them as two requests has a gap in it: a dropped connection between them leaves your answer posted under a note still counted as outstanding, with nothing on screen to say which half landed. Both now happen in a single request, and the panel paints what the server actually did rather than what it was asked to do — so if the note could not be closed, you are told, and your answer is still there.
+- **The person you are answering is told.** A reply emails the author of the note, using the same branded message the panel's existing notifications use. Answering your own note emails nobody, and a reply can never mail the same person about the same answer twice.
+- **A reply no longer holds the article open.** The publish warning counts notes that still need dealing with. A reply is part of the note it answers, not a second thing to deal with, so answering a note no longer makes the article look like it has MORE outstanding work than before you answered.
+- **The Feedback panel reads more like a conversation.** The author and the actions now sit together on one line, with the file name and the date on a quieter second line — they used to run together as one sentence that wrapped in the middle of a long file name. Replies are indented under what they answer, and a run of replies from the same person does not repeat their initials.
+- **Two long-standing panel glitches are fixed.** A note added without reloading the page did not show which picture it was about until you reloaded; it does now. And a name beginning with an accented letter produced a broken or wrong initial in the circle, because the panel counted bytes where the rest of the plugin counts characters.
+
+## v1.6.146
+
+- **You can now pick which AI describes your pictures.** The Content Pipelines settings gained an Image SEO AI section — its own provider, model and length limit, saved and reset alongside the others. It ships ahead of the feature that will use it, so there is nothing new to click yet; setting it up now means the feature works the moment it arrives.
+- **Only providers that can actually see a picture are offered.** A provider whose models read text alone is listed but cannot be selected. This was the point of the setting: a text-only model handed a picture answers from the words around it and invents a confident description of something it never saw, which is exactly the caption a reviewer would trust.
+- **A picture that cannot be sent is refused with a reason.** Too large, or a file whose contents do not match the type it claims to be — a photo saved with the wrong extension, say — is now caught before the request goes out, and you are told which. Previously an oversized picture could exhaust the server's memory partway through.
+- **Provider errors are put in our own words.** When a provider turns a request away you now see a plain sentence and the status it returned, rather than the provider's raw reply — which has been known to carry account details and server addresses in it.
+- **OpenAI's newest models now work at all.** Picking a GPT-5, GPT-6 or o-series model used to make every request in that area fail outright, because those models refuse the creativity setting the rest of them accept. The setting is now left off for them, so they answer normally. This affected every AI area, not just the new one.
+- **A blank answer is now explained.** A provider that returns nothing at all used to leave you looking at the reason the PREVIOUS picture failed. Each attempt now reports its own outcome.
+- **The picture size limit adapts to the server.** The limit is now whichever is smaller: what the providers accept, or what your server has memory to send. On a small hosting plan a picture that would have crashed the request is refused with a message instead.
+
+## v1.6.145
+
+- **Replacing an image no longer gets lost when it lands while the article is saving.** Pressing Replace on an AI thumbnail swaps the picture into the article body and then saves. If a save was already in flight, that save was carrying the older version of the body, and finishing it marked the article clean again — which cancelled the save the Replace had just asked for. The record said the article used the new picture while the article went on showing the old one, and there was nothing on screen to say so. Replace now waits for a save in progress rather than racing it, tells you when it is waiting, and puts the article back the way it was if the swap fails.
+- **Replace can now delete the picture it replaces.** A new checkbox in the thumbnail strip, off by default and reset for every image you open, deletes the picture the article moved off once the swap is safely saved. It is a tidy-up and never a shortcut: the picture is kept, and you are told why, whenever the article still shows it, another image on the article uses it, another article uses it, a remix of it is still running, or it is the picture the article arrived with. The replacement itself always stands either way.
+
+## v1.6.144
+
+- **The image review popover no longer traps its own buttons off screen.** The popover is fixed to the screen and used to measure where it should sit only once, at the moment it opened. Anything that made it taller afterward — opening "Image details," a new row of AI thumbnails arriving, a preview image loading in, or the progress bar appearing — pushed its bottom edge past the bottom of the viewport, taking the Apply and Cancel buttons with it, and scrolling could not bring them back. It now re-measures itself whenever its size changes and caps its own height to the space actually available below it, so the buttons stay reachable no matter what it grows to show.
+
 ## v1.6.143
 
 - **Housekeeping, with nothing to see.** One of the steps that strips server addresses out of error messages had no test covering the shape only it can catch, and was very nearly removed as unused. It is now covered. Nothing about what the plugin does has changed.
