@@ -44,7 +44,7 @@ If your site runs a security plugin that challenges a sign-in — asking for a t
 The first time you open an article is recorded, so the site's owners can see the review email was acted on. Only that first open is listed — later visits add nothing — and nothing is recorded unless you are signed in with permission to edit that article.
 
 :::tip After a plugin update, or after you replace a picture
-The review portal brings its own look and scripts. After you install a SyteOps update, reviewers see the new design and behavior the next time they open the portal — you do not have to purge a CDN. Replacing a picture works the same way: the portal shows the new file, and saving does not change the picture's web address in the article.
+The review portal brings its own look and scripts. After you install a SyteOps update, reviewers see the new design and behavior the next time they open the portal — you do not have to purge a CDN. Replacing a picture works the same way: the portal shows the new file. Saving stores the original media URL rather than a CDN copy, so the replaced picture still shows after you reload, and it does not bake a cache-buster into the article.
 :::
 
 ---
@@ -97,11 +97,11 @@ The **link** button (🔗) lets you add a hyperlink, and the **remove-link** but
 
 To remove a link, select the linked text and click the **remove-link** button. If LinkCentral is not connected on your site, the picker simply shows the paste-a-URL field.
 
-### Featured image
+### Featured Image
 
-The **Featured image** panel shows the image currently set for the post. **Click the image** — or the **Edit image** button below it — to open the image details, the same panel you get by clicking a picture inside the article. From there you can:
+The **Featured Image** panel shows the image currently set for the post. **Click the image** — or the **Edit image** button below it — to open **Image Details**, the same panel you get by clicking a picture inside the article. From there you can:
 
-- **See where the image comes from.** The **Image link** field shows the web address the picture loads from, and a line underneath tells you whether it is already in your media library.
+- **See where the image comes from.** The **Image link** field shows the web address the picture loads from, and a line underneath tells you whether it is already in your media library. A library picture stays labeled **Already in your media library** even when that address is a CDN copy of the file.
 - **Replace it with a picture from somewhere else.** Paste the new web address into the Image link field and click **Apply**. SyteOps fetches the image, adds it to your media library, and sets it as the featured image — so the published article never depends on someone else's site keeping the file.
 - **Replace it from your own library.** Click **Choose from library** to pick an image you already have, or upload a new one from your computer.
 - **Describe it.** The **Alt text** and **Caption** fields are here too.
@@ -117,19 +117,21 @@ Two things worth knowing when you swap the image:
 
 ### Author
 
-The **Author** panel sits just under Featured image. It lists the same WordPress users as the content source Default author picker. Change who is credited on the article and click **Save** (or wait for autosave). The new author is added to the reviewer list so they can open the portal; the previous author stays on that list too. This does not rebuild who receives review emails.
+The **Author** panel sits just under Featured Image. It lists the same WordPress users as the content source Default author picker. Change who is credited on the article and click **Save** (or wait for autosave). The new author is added to the reviewer list so they can open the portal; the previous author stays on that list too. This does not rebuild who receives review emails.
 
 If an operator has set Author to **View only** for your reviewer type, you can still see who is credited, but the list is disabled. The same happens when **Who can publish** is **Author or designated approver only** and you are a co-reviewer — only the credited author (and administrators) can change the byline, so a co-reviewer cannot assign themselves and then publish.
 
 ### Images inside the article
 
-Click any image in the article body — or the featured image — to open its panel. **Notes on this image** comes first, because a note about the picture is what most people open the panel to write. If any note on that picture is still unresolved, the heading tells you how many.
+Click any image in the article body — or the featured image — to open its panel. The panel title reads **Article Image**, or **Featured Image** when you opened the featured one. **Notes on This Image** comes first, because a note about the picture is what most people open the panel to write. If any note on that picture is still unresolved, the heading tells you how many.
 
-Below the notes is **Image details**, a section that starts closed. It holds the **image link** — the web address the picture loads from — along with the **alt text** and the **caption**. Click **Image details** to open it, and it stays open as you move from picture to picture, so working through a batch of images costs one click rather than one per image.
+Below the notes is **Image Details**, a section that starts closed. It holds the **image link** — the web address the picture loads from — along with the **alt text** and the **caption**. Click **Image Details** to open it, and it stays open as you move from picture to picture, so working through a batch of images costs one click rather than one per image.
 
-Nothing is removed by this, but it does put those three fields one click away rather than in front of you. The alt text and the caption are still edited here and nowhere else, and they still save exactly as before — you open **Image details** to reach them. The panel opens the section for you whenever it has something to say back about one of those fields — when it asks you to describe a replacement image, and while it reports how a change to the picture went. It will not open itself just to mention that a picture is still hosted somewhere else; that label is waiting inside when you look.
+Nothing is removed by this, but it does put those three fields one click away rather than in front of you. The alt text and the caption are still edited here and nowhere else, and they still save exactly as before — you open **Image Details** to reach them. The panel opens the section for you whenever it has something to say back about one of those fields — when it asks you to describe a replacement image, and while it reports how a change to the picture went. It will not open itself just to mention that a picture is still hosted somewhere else; that label is waiting inside when you look.
 
 Many drafts arrive with their images still hosted by whatever tool wrote the article. That works, but only for as long as that other site keeps the file: if it is moved or deleted, the picture disappears from your article. Images in that situation are labeled **"Linked from another site — not in your media library"**, and an **Import to media library** button appears next to the label. Click it to bring the file onto your own site; the picture is added to your media library with its alt text, and the article is pointed at your copy.
+
+A picture that is already in your media library is labeled **"Already in your media library"**, and **Import to media library** is hidden — even when Image link shows a CDN copy of that file rather than the original media URL. Do not Import those; they are already yours. Saving stores the original media URL, so a picture you replaced still shows after you reload.
 
 You don't have to do this by hand for every image. **When you publish, images that are still hosted elsewhere are copied across automatically**, so a published article no longer depends on another site keeping the file.
 
@@ -145,13 +147,13 @@ Its **caption is left exactly as you wrote it**. A caption is your own words abo
 
 **Putting the original links back.** If an article's images were copied across and you would rather they were not, a **Revert images** button appears beside the publish controls. It points the pictures back at the addresses they came from. Nothing is deleted from your media library — the copies stay there, in case another article is using them. If someone has changed one of the images by hand since it was copied, that one is left alone and you are told, rather than having your change overwritten. Reverting a live article asks you to confirm first, since the published page will go back to loading its pictures from somewhere else. Reverting also switches **Import images** off for that article, so the next publish leaves the original links alone — turn it back on if you change your mind.
 
-**Modify with AI.** When SyteHero is installed and ready, **Modify with AI** sits below the **Image details** section in the image panel, and also on the featured-image card. Type a prompt (often pre-filled from the incoming article) and click **Generate**. Model and Quality are labeled on those controls, and Strength appears only for the one model that uses it. **Generating no longer swaps the picture in your article** — it makes a new version and puts it in a row of thumbnails for you to [choose between](#choosing-between-versions). The original picture is kept so you can **Revert**. Generate with a blank prompt is refused.
+**Modify with AI.** When SyteHero is installed and ready, **Modify with AI** sits below the **Image Details** section in the image panel, and also on the featured-image card. Type a prompt (often pre-filled from the incoming article) and click **Generate**. Model and Quality are labeled on those controls, and Strength appears only for the one model that uses it. **Generating no longer swaps the picture in your article** — it makes a new version and puts it in a row of thumbnails for you to [choose between](#choosing-between-versions). The original picture is kept so you can **Revert**. Generate with a blank prompt is refused.
 
 **Telling the AI what the article is about.** Under the prompt is a tickbox, **Tell the AI what this article is about**. Ticked, it sends the article's title and summary alongside your prompt, which is what lets an instruction like "make the text on the screen readable" produce text about the right subject rather than plausible-looking nonsense. It is **off unless you tick it**, and it applies only to the generation you are about to run — these models are editing your photograph rather than drawing a new picture, and extra description is not always wanted. The row of versions still labels each picture with the prompt in your own words; the added context is never shown there as something you typed. This never runs when the article is ingested — only when a reviewer asks. An operator can hide Modify with AI from specific reviewer types in **Reviewer editing permissions**.
 
 ### Changing an image with AI
 
-The image panel also has a **Modify with AI** section, below **Image details**: describe the change you want and press **Generate**. Pressing Generate makes a new version and leaves your article alone — you decide afterwards which version the article uses. The original is kept, so **Revert** always brings it back.
+The image panel also has a **Modify with AI** section, below **Image Details**: describe the change you want and press **Generate**. Pressing Generate makes a new version and leaves your article alone — you decide afterwards which version the article uses. The original is kept, so **Revert** always brings it back.
 
 Two things decide whether the picture comes back looking like itself:
 
@@ -263,7 +265,7 @@ button is hidden.
 
 ### Notes on an image
 
-Click any picture in the article — or the featured image — and **Notes on this image** is the first thing in the panel. Type what is wrong with the picture and click **Save note**.
+Click any picture in the article — or the featured image — and **Notes on This Image** is the first thing in the panel. Type what is wrong with the picture and click **Save note**.
 
 The heading carries a count of the notes on that picture nobody has resolved yet, so you can tell at a glance whether a picture still has something outstanding without reading the list. A picture with nothing outstanding says nothing.
 
@@ -535,7 +537,7 @@ If you posted a note by mistake, click the **×** next to your own note to remov
 
 :::note Describing a picture for search
 
-Open a picture, expand **Image details**, and click **Generate SEO with AI**. It looks at the actual photo — not at the words around it — and suggests alt text and a caption, which appear in the boxes for you to edit. That includes a remixed version of the photo, even when the remix file is not attached to the article the usual way. Nothing is saved until you press **Apply**, the same as everywhere else in the portal. If it cannot run, the portal names the reason instead of a generic failure.
+Open a picture, expand **Image Details**, and click **Generate SEO with AI**. It looks at the actual photo — not at the words around it — and suggests alt text and a caption, which appear in the boxes for you to edit. That includes a remixed version of the photo, even when the remix file is not attached to the article the usual way. When the page is showing a CDN copy, it still describes the file in your media library: the portal sends both the library id and the address on screen, and the server uses the library file. Nothing is saved until you press **Apply**, the same as everywhere else in the portal. If it cannot run, the portal names the reason instead of a generic failure. If the server does not finish looking at the picture, you see **The server did not finish looking at that picture. Try again.** rather than **That did not work.**
 
 **This is not Modify with AI.** Generate SEO uses **Image SEO AI** — a vision-capable provider and model under Content Pipelines → Review Portal → Setup → AI assistance, plus that provider's key on **System / API**. Modify with AI uses SyteHero and remakes the picture. The two are independent: remixing can work while Generate SEO still fails, and the other way around. If Image SEO AI is not set up, the button is not shown at all.
 
@@ -840,7 +842,7 @@ Permissions are set by reviewer type (role). The panel shows a row for each role
 
 | Area | Restrictions available |
 |---|---|
-| **Featured image** | Edit (full) or View only |
+| **Featured Image** | Edit (full) or View only |
 | **Author** | Edit (full) or View only |
 | **Permalink** | Edit (full) or View only |
 | **SEO** | Edit (full) or View only |
