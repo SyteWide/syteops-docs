@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.153
+
+- **Feedback Reply and Reopen chips use brand color.** Reply is a light teal pill; Reopen is filled teal, so they no longer look like empty outlines next to the filename chip. There is a little space under those pills before the filename.
+- **Generate SEO with AI names leftover failures.** A timed-out call or a page that needs a reload now says so, instead of "That did not work."
+
 ## v1.6.152
 
 - **Generate SEO with AI works on a remixed picture.** A remix is still this article's photo even when the file was saved unattached. If it cannot run, the portal now names the reason instead of a generic failure.

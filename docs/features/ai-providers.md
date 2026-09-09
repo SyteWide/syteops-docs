@@ -69,7 +69,7 @@ Features that have per-feature AI configuration:
 - **GEO** — AI readiness analysis that scores how well a post is positioned for AI answer engines. See [Content Pipelines](./content-pipelines.md).
 - **Ingest** — proposes how an inbound content-source payload maps to your post fields when you set up a new content source. See [Content Pipelines](./content-pipelines.md).
 - **Social** — AI-generated social posts from your published content.
-- **Image SEO** — configures the provider and model that will generate an image's alt text, title, and caption from the picture itself rather than the surrounding words; the setting is available now, ahead of the feature that will call it. This area must point at a model that accepts image input; a text-only model is refused rather than asked to guess, so the provider list here shows a provider that cannot take an image as unselectable.
+- **Image SEO** — **Generate SEO with AI** in the Review Portal. It writes an image's alt text, title, and caption from the picture itself rather than the surrounding words. It uses that provider's key on **System / API**, not SyteHero (SyteHero is **Modify with AI**). This area must point at a model that accepts image input; a text-only model is refused rather than asked to guess, so the provider list here shows a provider that cannot take an image as unselectable. See [Review & Publish Your Post](./review-and-publish-your-post.md).
 
 There are two ways to set per-feature AI configuration:
 
