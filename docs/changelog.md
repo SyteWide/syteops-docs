@@ -8,6 +8,16 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.163
+
+- **Add heading anchors now sticks when a content source is created through the management API.** The setting was accepted and then dropped, so the new source started with it off; only a later edit saved it.
+- **Exporting and importing a content source now carries Add heading anchors.** A source moved to another site used to arrive with it off.
+
+## v1.6.162
+
+- **An image the sending app framed itself now looks like the rest.** With Content cleanup on, a bare image is wrapped so your theme styles it as an image, but an image the app had already put in its own frame, which usually happens when it has a caption, was skipped and shown plain, with no spacing around it. It now gets the same styling, and its caption is styled like the other image captions on your site.
+- **A frame that already has its own styling is left alone**, as are galleries and a table that contains a picture. Your stored article is not changed; each post shows the fix the next time it is viewed.
+
 ## v1.6.161
 
 - **Every AI model choice now sits in one place.** The Review Portal settings had its AI scattered across four cards — the writing models in one, the picture describer in another, the two that remake and repair pictures buried inside Article images, and social's own model in the Social Publishing card. They are now one **AI Models** card under Setup, in three labeled groups: reading and writing words, looking at pictures, and making pictures.
