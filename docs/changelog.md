@@ -8,6 +8,53 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.172
+
+- **An open reply no longer keeps a note's "Changes requested" status lit.** Resolving or withdrawing the last change request now clears the status even while someone's reply in a thread is still open, and a reply is never counted as a change request of its own.
+- **Deleting a note re-asks when someone replied meanwhile.** If a reply arrives after you open the delete confirmation, nothing is deleted: the confirmation stays open, says someone replied, and gives the new number of replies. Confirm again to delete the note with them.
+- **The activity record for a deleted note lists the replies removed with it**, and who wrote each one.
+- **The pre-publish checklist item for the article description is now labeled "Description."**
+- **Remove buttons on categories, tags, and question rows added in the browser now follow the site's language**, matching the ones the page loads with.
+- **Amber status text is darker** so it is easier to read.
+
+## v1.6.171
+
+- **Deleting a reply in a feedback thread now removes only that reply.** Before, its delete button asked to delete the whole note and every reply under it, and someone who replied to another person's note could not delete their own reply. The confirmation now appears below the reply instead of squeezed beside it, and reply cards line up.
+- **Deleting a note now removes the note and its replies together in one step**, so a delete that fails partway can no longer leave the replies gone while the note stays. A reply left behind by a note deleted in an earlier version now shows as its own reply you can delete, with no Reply button that could not work, and it no longer counts as an open note.
+- **The "Required to publish" label on the reviewed-answers checkbox now appears only when the site actually requires that check**, and question and answer fields you cannot edit look read-only again.
+- **Status messages in the social post dialog show their error and success colors again**, and the dialog's field spacing is even.
+- **The delete confirmation's wording now follows the site's language instead of switching to English**, and the alt text and SEO title hints describe what those fields do more accurately.
+
+## v1.6.170
+
+- **The review queue list now matches the rest of the Review Portal.** Article cards and status chips use the same corners and type as the editor fields.
+- **Sign out on the queue is a quiet button** next to Calendar, not a separate pill shape.
+
+## v1.6.169
+
+- **The Review Portal top bar groups the brand mark with the title**, then Draft, with Calendar on the right. Save draft and Approve keep their places.
+- **The lock banner now says who is editing this draft**, and still warns that your changes may overwrite theirs. The live and scheduled banners use the same 8px corners as the rest of the editor.
+
+## v1.6.168
+
+- **Review Portal dialogs now match the image panel.** Each field has a short name with a quieter hint underneath — Who, Message, What to change, and URL.
+- **On a live article the social overlay no longer offers to send when the post publishes.** That option cannot fire after the article is already live, and it is now actually hidden.
+
+## v1.6.167
+
+- **Feedback notes are nested cards.** Each note sits in its own card, replies nest under the parent, and Reply, Resolve, and delete sit on their own row so they stay readable on a resolved note. Deleting a note asks in the card before it sends; confirming a parent with replies removes the whole thread.
+- **Reviewers is the name of the list**, with a hint for who can edit this draft. Send to a colleague and Note for them use a short label plus a quieter hint underneath.
+
+## v1.6.166
+
+- **SEO, GEO, and Categories & Tags fields now match the image panel.** Each has a short name with a quieter hint underneath. Description is the search-result sentence and the WordPress excerpt. GEO is the acronym, with Generative Engine Optimization as the hint.
+- **I have reviewed these answers now sits under Pillar** in a Required to publish box. Analyze GEO, Generate with AI, and Describe selected on photos are soft filled buttons with the spark icon.
+
+## v1.6.165
+
+- **Featured image and author fields now match the image panel.** Each has a short name with a quieter hint underneath — Alt text is shown when the picture cannot load, Post author is shown as the byline.
+- **Modify with AI on the featured image is a soft filled button** with the same spark icon as Generate SEO with AI.
+
 ## v1.6.164
 
 - **The review portal's image panel is easier to read and use.** Each field has a short name with a gray hint under it, the Image Details header shows whether the picture is in your media library while the section is collapsed, and the underlined text links are now buttons.

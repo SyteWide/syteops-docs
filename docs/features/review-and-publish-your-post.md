@@ -93,7 +93,7 @@ The **link** button (🔗) lets you add a hyperlink, and the **remove-link** but
 1. Select the words you want to turn into a link (or place your cursor where the link should go).
 2. Click the **link** button to open the link picker.
 3. If your site uses **LinkCentral** to manage links, the picker lists your managed links — start typing in the search box to filter, then click one to insert it. The portal inserts the managed link so clicks are tracked and routed by LinkCentral.
-4. To link to any other web address, paste it into the **Or paste a URL** field and click **Insert link**.
+4. To link to any other web address, paste it into the **URL** field and click **Insert link**.
 
 To remove a link, select the linked text and click the **remove-link** button. If LinkCentral is not connected on your site, the picker simply shows the paste-a-URL field.
 
@@ -108,7 +108,7 @@ The **Featured Image** panel shows the image currently set for the post. **Click
 
 The preview updates as soon as the new image is set. If your account cannot manage media on the site, the Edit image button is disabled and says why.
 
-**Image alt text** describes the image for screen readers and search engines. The **Image alt text** field below the preview is filled in with the current description, and you can edit it there without opening the details panel — it saves with the rest of your changes. If a featured image is set but has no alt text, you'll be prompted to add it before you can publish.
+**Alt text** describes the image for screen readers and search engines. The **Alt text** field below the preview is filled in with the current description — with a hint that it is read by screen readers, and shown when the picture cannot load — and you can edit it there without opening the details panel. It saves with the rest of your changes. If a featured image is set but has no alt text, you'll be prompted to add it before you can publish.
 
 Two things worth knowing when you swap the image:
 
@@ -117,7 +117,7 @@ Two things worth knowing when you swap the image:
 
 ### Author
 
-The **Author** panel sits just under Featured Image. It lists the same WordPress users as the content source Default author picker. Change who is credited on the article and click **Save** (or wait for autosave). The new author is added to the reviewer list so they can open the portal; the previous author stays on that list too. This does not rebuild who receives review emails.
+The **Author** panel sits just under Featured Image. It lists the same WordPress users as the content source Default author picker. The field is labeled **Post author**, with a hint that it is shown as the byline. Change who is credited on the article and click **Save** (or wait for autosave). The new author is added to the reviewer list so they can open the portal; the previous author stays on that list too. This does not rebuild who receives review emails.
 
 If an operator has set Author to **View only** for your reviewer type, you can still see who is credited, but the list is disabled. The same happens when **Who can publish** is **Author or designated approver only** and you are a co-reviewer — only the credited author (and administrators) can change the byline, so a co-reviewer cannot assign themselves and then publish.
 
@@ -315,33 +315,33 @@ If your site administrator has turned reviewer-note emails off, the **Notify** b
 
 The **SEO** panel lets you control how the post appears in Google and other search engines.
 
-- **SEO title** _(shown only when your site has an SEO plugin connected — Squirrly SEO, Yoast SEO or Rank Math)_ — The search-result headline. What happens when you leave it alone depends on which plugin is connected, and the difference matters:
+- **SEO title** _(shown only when your site has an SEO plugin connected — Squirrly SEO, Yoast SEO or Rank Math)_ — The search-result headline. The hint under the field is **Shown in search results. Leave blank to use your SEO plugin's default title.** What happens when you leave it alone depends on which plugin is connected, and the difference matters:
   - **Squirrly SEO** — the title is **auto-generated** from the post title. Type your own to override it; clearing the field returns it to automatic.
   - **Yoast SEO or Rank Math** — the field stays **empty** unless you type something, and that is correct. Both plugins build the title from your own site-wide template (usually something like `Title | Site Name`), and they use that template only while this field is blank. Filling it in automatically would quietly drop the site name from every article. Type a title here only when one specific article needs to differ; clearing it hands the article back to your template.
 
   When no SEO plugin is connected, this field is hidden.
 - **Primary keyword** — The main search phrase this article is targeting. Your content source pre-fills this from the keyword used to generate the post. You can change it at any time.
 - **Secondary keywords** — Supporting search phrases for the article, pre-filled from your content source when provided. Enter them comma-separated. They are saved with the post and available to your SEO tools.
-- **Meta description** — The short sentence that appears under the page title in search results. Keep it to one or two clear sentences that summarize the article. Click **Generate with AI** to have the AI draft a meta description from the current title and body — the result fills the field for you to review and edit. (This requires a Content provider to be configured in the Review Portal settings.)
+- **Description** — The short sentence that appears under the page title in search results, and the WordPress excerpt. Keep it to one or two clear sentences that summarize the article. Click **Generate with AI** to have the AI draft it from the current title and body — the result fills the field for you to review and edit. (This requires a Content provider to be configured in the Review Portal settings.)
 
-Each of the SEO, GEO and Categories & tags panels has its own **Save** button at the foot of the panel, so you never have to scroll to the bottom of the page to keep your work. It saves everything on the page exactly as shown, not just that one panel. The portal also saves on its own a few seconds after you stop typing — and immediately after any of the AI buttons fills something in — so generated text is never left sitting only in your browser.
+Each of the SEO, GEO and Categories & Tags panels has its own **Save** button at the foot of the panel, so you never have to scroll to the bottom of the page to keep your work. It saves everything on the page exactly as shown, not just that one panel. The portal also saves on its own a few seconds after you stop typing — and immediately after any of the AI buttons fills something in — so generated text is never left sitting only in your browser.
 
 As you type, a **search-result preview** updates in real time so you can see exactly how the title and meta description will look to someone finding your post on Google before you publish. When an SEO title is set, the preview uses it as the headline.
 
 ### GEO — AI search and answer engine visibility
 
-The **GEO** panel (Generative Engine Optimization) helps you understand how well your article is positioned for AI-powered search tools — such as those that read your site and use the content to answer user questions directly.
+The **GEO** panel helps you understand how well your article is positioned for AI-powered search tools — such as those that read your site and use the content to answer user questions directly. The heading is **GEO**; the hint under it is **Generative Engine Optimization**.
 
 **Checking your AI readiness score**
 
-Click **Analyze GEO readiness** to run an AI analysis of the post. Within a few seconds the panel shows:
+Click **Analyze GEO** to run an AI analysis of the post. Within a few seconds the panel shows:
 
 - A **readiness score** indicating how well the article is structured to be picked up and cited by AI answer engines.
 - A list of the **questions your article answers** — these are the kinds of questions an AI search tool might recognize your article as a source for.
 
 You can run the analysis as many times as you like; it does not change the article itself. The score and the questions are stored as soon as the analysis finishes, and re-running never discards answers you have edited yourself. If you turn on **Analyze GEO when a draft is first created** on the Review Portal settings, that same analysis also runs once when a new article first arrives, so reviewers do not have to click the button for every new draft. It is off by default, and later deliveries of the same article are not re-analyzed.
 
-Running the analysis writes an answer for each question. Answers are shown in full in this panel (up to 2000 characters) and are never cut off. They stay held back from your answer-engine surfaces until a reviewer ticks **I have reviewed these answers**. If an answer already looks cut off from an earlier review, edit it or tap **Draft answer** again — re-running the analysis keeps your existing wording and will not replace it. See [Publishing the questions your articles answer](./llms-txt.md#publishing-the-questions-your-articles-answer) for the full walkthrough of what that switch does and where the answers get published.
+Running the analysis writes an answer for each question. Answers are shown in full in this panel (up to 2000 characters) and are never cut off. They stay held back from your answer-engine surfaces until a reviewer ticks **I have reviewed these answers**, which sits under **Pillar article (cornerstone)**. On a site where **AI answers reviewed** is required before publishing, that checkbox sits in a **Required to publish** box; where the requirement is switched off, the checkbox is still there but the box is not labeled required. If an answer already looks cut off from an earlier review, edit it or tap **Draft answer** again — re-running the analysis keeps your existing wording and will not replace it. See [Publishing the questions your articles answer](./llms-txt.md#publishing-the-questions-your-articles-answer) for the full walkthrough of what that switch does and where the answers get published.
 
 **AI answer feed toggle**
 
@@ -378,7 +378,7 @@ This setting is saved when you click the panel's **Save** button, **Save draft**
 
 ### Categories and tags
 
-The **Categories & tags** panel shows the categories and tags that will be applied to the post when it is published. They appear as individual chips that you can manage directly in the portal.
+The **Categories & Tags** panel shows the categories and tags that will be applied to the post when it is published. They appear as individual chips that you can manage directly in the portal.
 
 - **Add a category or tag** — Type into the field and press Enter, or click a suggestion to add it.
 - **Remove a category or tag** — Click the × on any chip to remove it.
@@ -458,7 +458,7 @@ To stop half-finished articles going live, **Approve & Publish** first checks th
 | --- | --- | --- |
 | GEO analysis | The article has never been analyzed for AI-engine readiness. | **Analyze GEO** |
 | GEO analysis is current | The article was edited after it was last analyzed, so the score is out of date. Formatting-only edits — bolding a word, re-wrapping a paragraph — do not count. | **Re-analyze GEO** |
-| Meta description | The meta description is empty. | **Generate with AI** |
+| Description | The description is empty. | **Generate with AI** |
 | Categories & tags | The article has no category, or no tag. "Uncategorized" does not count. | **Suggest categories & tags** |
 | AI answers reviewed | Nobody has confirmed the AI-written questions and answers for this article. Until someone does, they are held back from your answer-engine surfaces. | **Review the answers** |
 
@@ -533,7 +533,7 @@ The post stays as a draft throughout — nothing is published until someone clic
 
 :::note Feedback panel
 
-The **Feedback** panel collects every change request submitted for this draft, oldest first, together with any [notes left on individual images](#notes-on-an-image) and any message sent with **Notify** — image notes carry the picture they are about, and a resolved one is dimmed rather than removed. It is visible to everyone who has access to the portal, so it keeps an honest record of the review conversation.
+The **Feedback** panel collects every change request submitted for this draft, oldest first, together with any [notes left on individual images](#notes-on-an-image) and any message sent with **Notify** — image notes carry the picture they are about, and a resolved one is dimmed rather than removed. Replies sit in a nested card under the note they answer. It is visible to everyone who has access to the portal, so it keeps an honest record of the review conversation.
 
 **Every note in the panel has a Resolve chip**, change requests included. Anyone with access can resolve a note — the person who acts on it is usually the one who knows it is done — and a resolved note can be reopened. Resolving the last outstanding change request also clears the **Changes requested** flag on the review queue, so a draft never shows as handled and not handled at the same time.
 
@@ -543,7 +543,9 @@ The **Feedback** panel collects every change request submitted for this draft, o
 
 Replies go one level deep — you can answer a note, but not answer an answer. A reply belongs to the note it is under, so it never counts as its own outstanding note in the warning shown when you publish: dealing with the note deals with the whole conversation.
 
-If you posted a note by mistake, click the **×** next to your own note to remove it (you can only delete notes you wrote; site administrators can remove any note).
+If you posted a note by mistake, click the trash control on your own note. The card outlines in red and asks you to confirm before it is removed (you can only delete notes you wrote; site administrators can remove any note). Confirming delete on a note that has replies removes the note and every reply under it together, in one step. If someone replies to the note after you open the confirmation, nothing is deleted: the confirmation stays open, says someone replied meanwhile, and gives the new number of replies. Confirm again to delete the note with them, or cancel.
+
+**A reply has its own trash control**, separate from the note it answers. Deleting a reply removes only that reply — the note and any other replies stay in place — and works on your own reply even when someone else wrote the note it answers. The confirmation appears under the reply you are deleting.
 
 :::note Describing a picture for search
 
@@ -765,7 +767,7 @@ Publish is blocked until these are met. All of the following are **on** by defau
 
 - **GEO analysis has run**
 - **GEO analysis is current** — required after the article changes. Formatting-only edits are ignored.
-- **Meta description present**
+- **Description present**
 - **Categories & tags assigned**
 - **AI answers reviewed** — required when answers are published
 

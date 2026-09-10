@@ -14,7 +14,7 @@ It puts every one of those articles in a single table — whether the GEO analys
 
 Open the **Content Pipelines** tab and click the **Coverage** pill in the row of view links at the top.
 
-Coverage is for SyteOps administrators only. It is deliberately **not** part of the [Review Portal](review-and-publish-your-post.md) — a reviewer working on one article already has an **Analyze GEO readiness** button in that article's GEO panel, and that is a different, one-article-at-a-time action. Coverage is the whole-library view.
+Coverage is for SyteOps administrators only. It is deliberately **not** part of the [Review Portal](review-and-publish-your-post.md) — a reviewer working on one article already has an **Analyze GEO** button in that article's GEO panel, and that is a different, one-article-at-a-time action. Coverage is the whole-library view.
 
 ## Which articles are listed
 
