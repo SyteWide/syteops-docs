@@ -101,10 +101,10 @@ To remove a link, select the linked text and click the **remove-link** button. I
 
 The **Featured Image** panel shows the image currently set for the post. **Click the image** — or the **Edit image** button below it — to open **Image Details**, the same panel you get by clicking a picture inside the article. From there you can:
 
-- **See where the image comes from.** The **Image link** field shows the web address the picture loads from, and a line underneath tells you whether it is already in your media library. A library picture stays labeled **Already in your media library** even when that address is a CDN copy of the file.
+- **See where the image comes from.** The **Image link** field carries a short hint underneath it — *Paste a new link to replace this image* — and while **Image Details** is collapsed, its heading shows the picture's status at a glance: **In your media library** (with a check), **Not in your media library**, **Hosted on this site**, **Embedded in the article**, or **Check the image link**. Open the section and the full sentence takes its place, same as before — a library picture reads **Already in your media library** even when that address is a CDN copy of the file.
 - **Replace it with a picture from somewhere else.** Paste the new web address into the Image link field and click **Apply**. SyteOps fetches the image, adds it to your media library, and sets it as the featured image — so the published article never depends on someone else's site keeping the file.
-- **Replace it from your own library.** Click **Choose from library** to pick an image you already have, or upload a new one from your computer.
-- **Describe it.** The **Alt text** and **Caption** fields are here too.
+- **Replace it from your own library.** Click **Choose from library** (marked with a folder icon) to pick an image you already have, or upload a new one from your computer.
+- **Describe it.** The **Alt text** and **Caption** fields are here too, each with a short hint underneath — Alt text: *Describes the image for screen readers and search engines*; Caption: *Stored with the image in your media library*.
 
 The preview updates as soon as the new image is set. If your account cannot manage media on the site, the Edit image button is disabled and says why.
 
@@ -125,9 +125,9 @@ If an operator has set Author to **View only** for your reviewer type, you can s
 
 Click any image in the article body — or the featured image — to open its panel. The panel title reads **Article Image**, or **Featured Image** when you opened the featured one. **Notes on This Image** comes first, because a note about the picture is what most people open the panel to write. If any note on that picture is still unresolved, the heading tells you how many.
 
-Below the notes is **Image Details**, a section that starts closed. It holds the **image link** — the web address the picture loads from — along with the **alt text** and the **caption**. Click **Image Details** to open it, and it stays open as you move from picture to picture, so working through a batch of images costs one click rather than one per image.
+Below the notes is **Image Details**, a section that starts closed — click its heading, or the chevron beside it, to open it, and the chevron turns to show the section is expanded. It holds three short fields — **Image link**, **Alt text** and **Caption** — each with its own gray hint line underneath explaining what it is for, in place of a dash-separated explanation. It stays open as you move from picture to picture, so working through a batch of images costs one click rather than one per image.
 
-Nothing is removed by this, but it does put those three fields one click away rather than in front of you. The alt text and the caption are still edited here and nowhere else, and they still save exactly as before — you open **Image Details** to reach them. The panel opens the section for you whenever it has something to say back about one of those fields — when it asks you to describe a replacement image, and while it reports how a change to the picture went. It will not open itself just to mention that a picture is still hosted somewhere else; that label is waiting inside when you look.
+Nothing is removed by this, but it does put those three fields one click away rather than in front of you. The alt text and the caption are still edited here and nowhere else, and they still save exactly as before — you open **Image Details** to reach them. The panel opens the section for you whenever it has something to say back about one of those fields — when it asks you to describe a replacement image, and while it reports how a change to the picture went. It won't open itself just to report where the picture is hosted, but you don't need it to: even while the section is collapsed, its heading shows a short status at a glance — **In your media library**, **Linked from another site**, **Hosted on this site**, **Embedded in the article**, or **Check the image link** — and opening the section swaps in the full sentence, as before.
 
 Many drafts arrive with their images still hosted by whatever tool wrote the article. That works, but only for as long as that other site keeps the file: if it is moved or deleted, the picture disappears from your article. Images in that situation are labeled **"Linked from another site — not in your media library"**, and an **Import to media library** button appears next to the label. Click it to bring the file onto your own site; the picture is added to your media library with its alt text, and the article is pointed at your copy.
 
@@ -147,20 +147,22 @@ Its **caption is left exactly as you wrote it**. A caption is your own words abo
 
 **Putting the original links back.** If an article's images were copied across and you would rather they were not, a **Revert images** button appears beside the publish controls. It points the pictures back at the addresses they came from. Nothing is deleted from your media library — the copies stay there, in case another article is using them. If someone has changed one of the images by hand since it was copied, that one is left alone and you are told, rather than having your change overwritten. Reverting a live article asks you to confirm first, since the published page will go back to loading its pictures from somewhere else. Reverting also switches **Import images** off for that article, so the next publish leaves the original links alone — turn it back on if you change your mind.
 
-**Modify with AI.** When SyteHero is installed and ready, **Modify with AI** sits below the **Image Details** section in the image panel, and also on the featured-image card. Type a prompt (often pre-filled from the incoming article) and click **Generate**. Model and Quality are labeled on those controls, and Strength appears only for the one model that uses it. **Generating no longer swaps the picture in your article** — it makes a new version and puts it in a row of thumbnails for you to [choose between](#choosing-between-versions). The original picture is kept so you can **Revert**. Generate with a blank prompt is refused.
+**Modify with AI.** When SyteHero is installed and ready, **Modify with AI** sits below the **Image Details** section in the image panel, and also on the featured-image card. Type a prompt (often pre-filled from the incoming article) — the same box also holds a **Use another picture** pill if you would rather start the remix from a different picture — and click **Generate**. Model and Quality now share one row at equal width, so the model name is never cut off; Strength, for the one model that uses it, wraps onto its own line below with a hint. **Generating no longer swaps the picture in your article** — it makes a new version and puts it in a grid of version cards for you to [choose between](#choosing-between-versions). The original picture is kept so you can **Revert**. Generate with a blank prompt is refused.
 
-**Telling the AI what the article is about.** Under the prompt is a tickbox, **Tell the AI what this article is about**. Ticked, it sends the article's title and summary alongside your prompt, which is what lets an instruction like "make the text on the screen readable" produce text about the right subject rather than plausible-looking nonsense. It is **off unless you tick it**, and it applies only to the generation you are about to run — these models are editing your photograph rather than drawing a new picture, and extra description is not always wanted. The row of versions still labels each picture with the prompt in your own words; the added context is never shown there as something you typed. This never runs when the article is ingested — only when a reviewer asks. An operator can hide Modify with AI from specific reviewer types in **Reviewer editing permissions**.
+**Telling the AI what the article is about.** Under the prompt is a tickbox, **Tell the AI what this article is about**. Ticked, it sends the article's title and summary alongside your prompt, which is what lets an instruction like "make the text on the screen readable" produce text about the right subject rather than plausible-looking nonsense. It is **off unless you tick it**, and it applies only to the generation you are about to run — these models are editing your photograph rather than drawing a new picture, and extra description is not always wanted. The grid of versions still labels each picture with the prompt in your own words; the added context is never shown there as something you typed. This never runs when the article is ingested — only when a reviewer asks. An operator can hide Modify with AI from specific reviewer types in **Reviewer editing permissions**.
 
 ### Changing an image with AI
 
 The image panel also has a **Modify with AI** section, below **Image Details**: describe the change you want and press **Generate**. Pressing Generate makes a new version and leaves your article alone — you decide afterwards which version the article uses. The original is kept, so **Revert** always brings it back.
+
+The prompt box and the reference-picture control now share one box. Click the **Use another picture** pill at the bottom of the box to remix from a different picture instead of the one you opened — once you pick one, the pill turns into a chip showing its thumbnail and **Starting from &lt;file name&gt;**. Click the **×** on the chip (its accessible name is **Stop using a different source image**) to drop it and go back to remixing the picture you opened.
 
 Two things decide whether the picture comes back looking like itself:
 
 - **Model.** The list now names each model and says which ones *keep text and logos*. If a picture has words in it — a sign, a label, packaging — choose one of those. The others are better at reimagining a scene than at preserving one, and they are the reason text has come back garbled.
 - **Keep text and logos exactly as they are.** On by default. Turn it off only when you want a genuine reinterpretation rather than an edit.
 
-**Quality** is Standard, High or Ultra. Several of the models that best preserve text ignore it entirely — they always return their own size — so it applies mainly to the more generative ones. **Strength** only appears for the one model that actually uses it.
+**Model** and **Quality** now share one row at equal width, so the model name is never cut off. **Quality** is Standard, High or Ultra; several of the models that best preserve text ignore it entirely — they always return their own size — so it applies mainly to the more generative ones. **Strength**, for the one model that actually uses it, wraps onto its own line below Model and Quality, with its own hint. **Generate** (with a sparkle icon), **Revert** and **Stop** sit together on their own row below both checkboxes on this panel — this one and **Tell the AI what this article is about** above — with Generate filling the row.
 
 The picture also keeps its own proportions. A square or portrait photo used to come back cropped to widescreen, because nothing told the image service what shape it started as.
 
@@ -168,13 +170,18 @@ The new version also keeps the original picture's title, alt text, caption and d
 
 Your site administrator sets the defaults under **Content Pipelines → Review Portal → Setup → AI Models → Making pictures**; each Generate can override them.
 
-**How much credit is left.** Beside the **Modify with AI** heading is the image service's remaining
-balance, with a **Refresh** button next to it. It is the same figure your site administrator sees in the
-plugin information panel, which opens from the logo in the top corner of the settings screen — the
-image services are listed there rather than on the API Keys screen, because they bill through a key
-this plugin does not hold. It lets you tell whether there is credit to spend before you press Generate,
-rather than finding out from a generation that fails. Refresh re-checks every image service at once.
-If a balance cannot be read, you are told why instead of being shown a misleading $0.00 — a zero
+**How much credit is left.** At the end of the **Modify with AI** heading row sits a small pill showing
+the image service's remaining balance, with a **Refresh** icon button built into it — its hover title
+reads **Refresh**, and screen readers still hear it as **Refresh image AI credit**. With one image
+provider configured, the pill reads simply as an amount, something like **$30.01 credit**, and the
+provider's name appears only when you hover the pill; with two or more providers, each keeps its own
+name in the pill, for example **fal: $30.01 · other: $5.00**. It is the same figure your site
+administrator sees in the plugin information panel, which opens from the logo in the top corner of the
+settings screen — the image services are listed there rather than on the API Keys screen, because they
+bill through a key this plugin does not hold. It lets you tell whether there is credit to spend before
+you press Generate, rather than finding out from a generation that fails. Refresh re-checks every image
+service at once, and hovering the pill still tells you when it was last checked (**Checked N minutes
+ago**). If a balance cannot be read, you are told why instead of being shown a misleading $0.00 — a zero
 would read as an empty account rather than a lookup that did not work. The balance appears only when
 Modify with AI is available to you.
 
@@ -184,8 +191,9 @@ where the image service holds a job it has not quite finished. Many models say n
 they work, and for those the bar shows a moving sliver rather than a percentage: the job is running,
 but there is no honest number to put on it. It no longer sits frozen at zero, which used to look
 like a picture that was never going to arrive. A **Stop** button sits beside **Generate** while a
-picture is being made; pressing it abandons the job and gives the controls straight back. (The
-**Cancel** button lower down still just closes the panel.)
+picture is being made; pressing it abandons the job and gives the controls straight back. (**Apply**
+and **Cancel** now sit together in a footer bar pinned to the bottom of the panel, so both stay
+reachable however far the popover scrolls; **Cancel** still just closes the panel.)
 
 **If it goes wrong, you are told why.** A refusal now shows the image service's own words — a prompt
 it would not accept, a picture it could not read, a request that timed out — instead of a single
@@ -198,51 +206,53 @@ job is, and offered **Stop** — so you are not left waiting out a job you canno
 ### Choosing between versions
 
 Every time you press **Generate** you get another version of that picture, and they all stay. They
-appear as a row of thumbnails at the top of **Modify with AI**: the picture the article arrived with
-first, then each version you have made, in the order you made them. The one your article is using
-carries the label **In the article**, and the first one carries **Original**. The row appears once
+appear as a grid of version cards at the top of **Modify with AI**, each an equal size with a larger
+thumbnail than before: the picture the article arrived with first, then each version you have made, in
+the order you made them. The original's thumbnail carries the **Original** label. The grid appears once
 there is more than one picture to choose between — with a single picture there is no choice to make,
 so nothing is shown.
 
-Click a thumbnail to see that version at full size, with the prompt that produced it underneath — big
-enough to judge whether it actually fixed what you asked for, which a small thumbnail cannot tell
-you. Click the same thumbnail again to close it. Clicking is only looking: nothing is written and
-your article does not change.
+Click a card's thumbnail to see that version at full size, with the prompt that produced it underneath
+— big enough to judge whether it actually fixed what you asked for, which a small thumbnail cannot tell
+you. Click the same thumbnail again to close it. Clicking is only looking: nothing is written and your
+article does not change.
 
-Three buttons sit under each thumbnail.
+Up to three controls sit on each card.
 
-- **Replace** puts that version into the article. It is the only thing that changes the picture your
-  readers will see, and you can press it as often as you like — including on the original, to put
-  things back exactly as they were. The one version you cannot replace with is the one the article
-  is already showing: there is no **Replace** button on that thumbnail, and asking for it anyway is
-  refused rather than quietly recorded as a change nobody made.
-- **Keep** marks a version worth holding on to, and pressing it again releases it. Versions you have
-  not kept are tidied away on your behalf once a picture's row has grown past seven thumbnails — the
-  picture the article arrived with, plus six versions — oldest first, so a long session of
-  experimenting does not fill your media library. A version you have kept is never tidied away, and
-  neither is the newest one — the picture you just asked for is always still there when you look at
-  it.
-- **Delete** removes that version from your media library for good. It asks you to confirm first,
-  because this one cannot be undone. Any notes left on that version move to the picture your article
-  is showing, so a note never outlives the picture it is about.
+- **Put in article** — formerly labeled **Replace** — puts that version into the article. It is the
+  only thing that changes the picture your readers will see, and you can press it as often as you like
+  — including on the original, to put things back exactly as they were. The one version you cannot put
+  in the article is the one the article is already showing: instead of the button, that card shows
+  **In the article** with a check, and asking for it anyway is refused rather than quietly recorded as
+  a change nobody made.
+- **Keep** (now with a bookmark icon) marks a version worth holding on to, and pressing it again
+  releases it — the button reads **Kept** while it is on. Versions you have not kept are tidied away on
+  your behalf once a picture's grid has grown past seven cards — the picture the article arrived with,
+  plus six versions — oldest first, so a long session of experimenting does not fill your media
+  library. A version you have kept is never tidied away, and neither is the newest one — the picture
+  you just asked for is always still there when you look at it.
+- **Delete** is now a trash-icon button (its accessible name is **Delete this version**) that removes
+  that version from your media library for good. It asks you to confirm first, because this one cannot
+  be undone. Any notes left on that version move to the picture your article is showing, so a note
+  never outlives the picture it is about.
 
-**Replace can tidy up after itself.** Above the buttons sits a checkbox — **Delete the picture it
-replaces from the media library** — that applies to **Replace** and to nothing else. Tick it and the
-swap is saved first, then the picture your article moved off is deleted. It starts off every time
-you open a picture, so it can never carry over from the last one you were looking at.
+**Put in article can tidy up after itself.** Above the controls sits a checkbox — **Delete the picture
+it replaces from the media library** — that applies to **Put in article** and to nothing else. Tick it
+and the swap is saved first, then the picture your article moved off is deleted. It starts off every
+time you open a picture, so it can never carry over from the last one you were looking at.
 
 It is a tidy-up rather than a shortcut, and every refusal below still applies to it. When one of them
 stops the deletion the picture is simply kept, you are told which reason it was, and the replacement
-itself still stands — a swap is never undone because the tidying was refused. After a first Replace,
-ticking the box can delete the picture the article arrived with, once the article is no longer
-showing it. That original then leaves the filmstrip, and **Restore original** is no longer offered
-for that picture.
+itself still stands — a swap is never undone because the tidying was refused. After you first put a
+version in the article, ticking the box can delete the picture the article arrived with, once the
+article is no longer showing it. That original then leaves the grid, and **Restore original** is no
+longer offered for that picture.
 
-Some versions carry fewer than three buttons, because some of them are refused on purpose. Two
+Some versions carry fewer than three controls, because some of them are refused on purpose. Two
 things are never deleted, however the deletion came about — whether you pressed **Delete** or the
 tidying did it for you:
 
-- the version your article is currently showing — replace it with another one first;
+- the version your article is currently showing — put another one in the article first;
 - a picture another article is also using.
 
 Two more refusals apply to the **Delete** button only, because they are about you and about this
@@ -256,11 +266,11 @@ refused. The automatic tidying says nothing either way — it only ever passes o
 not allowed to take.
 
 If a version has already been removed from your media library some other way — from the Media
-Library screen, say, while your row was open — pressing **Delete** on it simply tidies it out of the
-row instead of failing.
+Library screen, say, while your grid was open — pressing **Delete** on it simply tidies it out of the
+grid instead of failing.
 
 If you would rather not choose between versions at all, **Restore original** puts the original
-picture back in one click — while that file is still on the strip. Once it has been deleted, the
+picture back in one click — while that file is still in the grid. Once it has been deleted, the
 button is hidden.
 
 ### Notes on an image
@@ -537,7 +547,7 @@ If you posted a note by mistake, click the **×** next to your own note to remov
 
 :::note Describing a picture for search
 
-Open a picture, expand **Image Details**, and click **Generate SEO with AI**. It looks at the actual photo — not at the words around it — and suggests alt text and a caption, which appear in the boxes for you to edit. That includes a remixed version of the photo, even when the remix file is not attached to the article the usual way. When the page is showing a CDN copy, it still describes the file in your media library: the portal sends both the library id and the address on screen, and the server uses the library file. Nothing is saved until you press **Apply**, the same as everywhere else in the portal. If it cannot run, the portal names the reason instead of a generic failure. If the server does not finish looking at the picture, you see **The server did not finish looking at that picture. Try again.** rather than **That did not work.**
+Open a picture, expand **Image Details**, and click **Generate SEO with AI** (a soft-filled button with a sparkle icon). It looks at the actual photo — not at the words around it — and suggests alt text and a caption, which appear in the boxes for you to edit. That includes a remixed version of the photo, even when the remix file is not attached to the article the usual way. When the page is showing a CDN copy, it still describes the file in your media library: the portal sends both the library id and the address on screen, and the server uses the library file. Nothing is saved until you press **Apply**, the same as everywhere else in the portal. If it cannot run, the portal names the reason instead of a generic failure. If the server does not finish looking at the picture, you see **The server did not finish looking at that picture. Try again.** rather than **That did not work.**
 
 **This is not Modify with AI.** Generate SEO uses **Image SEO** — a vision-capable provider and model under Content Pipelines → Review Portal → Setup → AI Models, plus that provider's key on **System / API**. Modify with AI uses SyteHero and remakes the picture. The two are independent: remixing can work while Generate SEO still fails, and the other way around. If Image SEO is not set up, the button is not shown at all.
 

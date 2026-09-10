@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.164
+
+- **The review portal's image panel is easier to read and use.** Each field has a short name with a gray hint under it, the Image Details header shows whether the picture is in your media library while the section is collapsed, and the underlined text links are now buttons.
+- **Picking a different picture to remix from is a proper button.** "Use another picture" sits inside the prompt box; once you choose one it shows as a chip with the picture's thumbnail and "Starting from" its file name.
+- **Version cards line up.** The original and every remix are equal cards in a grid with larger thumbnails. Replace is now labeled **Put in article**, Delete is a trash icon that still asks before deleting, and the card already in the article says so in the spot where the others offer to go in.
+- **The credit reads as one figure.** With one image provider it shows as "$30.01 credit", with the provider's name in its tooltip; with more than one, each keeps its name.
+- **Apply and Cancel stay reachable.** They sit in a footer pinned to the bottom of the panel, and Generate has a row of its own after the options it uses, so the model name is no longer cut off.
+
 ## v1.6.163
 
 - **Add heading anchors now sticks when a content source is created through the management API.** The setting was accepted and then dropped, so the new source started with it off; only a later edit saved it.
