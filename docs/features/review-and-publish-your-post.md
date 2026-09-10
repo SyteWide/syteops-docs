@@ -166,7 +166,7 @@ The picture also keeps its own proportions. A square or portrait photo used to c
 
 The new version also keeps the original picture's title, alt text, caption and description, rather than arriving in your media library with a made-up name and nothing written about it. The one exception: if the original's title is nothing more than its file name — something like `IMG_4471` — that isn't carried over, since a file name isn't a title anyone chose. This looks past the file names WordPress makes up on your behalf, too: when a name is already taken it adds a number, it saves a smaller copy of a very large photo, it turns a sideways photo the right way up, and it saves a separate copy when you crop. A picture still titled `IMG_4471` is recognized in all of those cases. When the title is refused this way, the new version is named after the original's alt text instead, or after the article if there is no alt text. If the article has no title of its own either, there is nothing left to borrow, and the picture keeps its generated name. The file itself still gets a generated name on your server either way; it's the title, alt text, caption and description shown in the media library that come from the original.
 
-Your site administrator sets the defaults under **Content Pipelines → Review Portal → Modify images with AI**; each Generate can override them.
+Your site administrator sets the defaults under **Content Pipelines → Review Portal → Setup → AI Models → Making pictures**; each Generate can override them.
 
 **How much credit is left.** Beside the **Modify with AI** heading is the image service's remaining
 balance, with a **Refresh** button next to it. It is the same figure your site administrator sees in the
@@ -312,7 +312,7 @@ The **SEO** panel lets you control how the post appears in Google and other sear
   When no SEO plugin is connected, this field is hidden.
 - **Primary keyword** — The main search phrase this article is targeting. Your content source pre-fills this from the keyword used to generate the post. You can change it at any time.
 - **Secondary keywords** — Supporting search phrases for the article, pre-filled from your content source when provided. Enter them comma-separated. They are saved with the post and available to your SEO tools.
-- **Meta description** — The short sentence that appears under the page title in search results. Keep it to one or two clear sentences that summarize the article. Click **Generate with AI** to have the AI draft a meta description from the current title and body — the result fills the field for you to review and edit. (This requires a Content AI provider to be configured in the Review Portal settings.)
+- **Meta description** — The short sentence that appears under the page title in search results. Keep it to one or two clear sentences that summarize the article. Click **Generate with AI** to have the AI draft a meta description from the current title and body — the result fills the field for you to review and edit. (This requires a Content provider to be configured in the Review Portal settings.)
 
 Each of the SEO, GEO and Categories & tags panels has its own **Save** button at the foot of the panel, so you never have to scroll to the bottom of the page to keep your work. It saves everything on the page exactly as shown, not just that one panel. The portal also saves on its own a few seconds after you stop typing — and immediately after any of the AI buttons fills something in — so generated text is never left sitting only in your browser.
 
@@ -539,7 +539,7 @@ If you posted a note by mistake, click the **×** next to your own note to remov
 
 Open a picture, expand **Image Details**, and click **Generate SEO with AI**. It looks at the actual photo — not at the words around it — and suggests alt text and a caption, which appear in the boxes for you to edit. That includes a remixed version of the photo, even when the remix file is not attached to the article the usual way. When the page is showing a CDN copy, it still describes the file in your media library: the portal sends both the library id and the address on screen, and the server uses the library file. Nothing is saved until you press **Apply**, the same as everywhere else in the portal. If it cannot run, the portal names the reason instead of a generic failure. If the server does not finish looking at the picture, you see **The server did not finish looking at that picture. Try again.** rather than **That did not work.**
 
-**This is not Modify with AI.** Generate SEO uses **Image SEO AI** — a vision-capable provider and model under Content Pipelines → Review Portal → Setup → AI assistance, plus that provider's key on **System / API**. Modify with AI uses SyteHero and remakes the picture. The two are independent: remixing can work while Generate SEO still fails, and the other way around. If Image SEO AI is not set up, the button is not shown at all.
+**This is not Modify with AI.** Generate SEO uses **Image SEO** — a vision-capable provider and model under Content Pipelines → Review Portal → Setup → AI Models, plus that provider's key on **System / API**. Modify with AI uses SyteHero and remakes the picture. The two are independent: remixing can work while Generate SEO still fails, and the other way around. If Image SEO is not set up, the button is not shown at all.
 
 Alt text written from the surrounding article rather than from the picture is confidently wrong about what is in the frame, and a screen reader reads it out as fact. That is why Image SEO AI must point at a model that can actually see an image. See [AI Providers](./ai-providers.md).
 
@@ -763,22 +763,33 @@ A requirement is skipped when the reviewer cannot act on it (no permission for t
 
 Turning **AI answers reviewed** off here only removes it from the publish checklist — it does not change what appears on your answer-engine surfaces. An article's questions and answers are held back from every one of those surfaces until someone ticks **I have reviewed these answers** in the article's GEO panel, whether or not this requirement is switched on. See [Reviewing the answers before they go live](./llms-txt.md#reviewing-the-answers-before-they-go-live).
 
-**Analyze GEO when a draft is first created** is **off** by default. When it is on (and a GEO AI provider is configured), analysis runs once when the article first arrives. Later deliveries of that article are not re-analyzed.
+**Analyze GEO when a draft is first created** is **off** by default. When it is on (and a GEO provider is configured), analysis runs once when the article first arrives. Later deliveries of that article are not re-analyzed.
 
 Turn a requirement off if your workflow publishes without it — for example, if you do not use tags. Whatever you leave on is enforced in the portal and on the server.
 
-### AI assistance
+### AI Models
 
 This lives under **Setup**. Open that group (or use the jump link at the top) if you don't see it.
 
-This section lets you choose the AI provider and model used by four features inside the portal:
+Every AI choice the portal makes is here, in three groups.
 
-- **Content AI** — the model that generates and refines article content.
-- **GEO AI** — the model that runs the AI readiness analysis in the GEO panel.
-- **Ingest AI** — the model that proposes how an inbound content-source payload maps to your post fields.
-- **Image SEO AI** — the provider and model **Generate SEO with AI** uses for image alt text, title, and caption. This is not SyteHero and not Modify with AI. It has to point at a model that can read images, so any provider that cannot is shown here as unselectable — see [AI Providers](./ai-providers.md) for which providers those are.
+**Reading and writing words.** Any capable text model works for these.
 
-These are the same provider and model settings used by the Content, GEO, Ingest, and Image SEO areas elsewhere in SyteOps. Changing them here updates the same underlying values.
+- **Content** — rewrites, meta descriptions and taxonomy suggestions inside the portal.
+- **GEO** — the answer-engine analysis in the GEO panel.
+- **Ingest** — proposes how an inbound content-source payload maps to your post fields.
+- **Social** — composes the post text for **Post to Social**. Saved by the Social Publishing card further down, not by this one.
+
+**Looking at pictures.** These need a model that accepts image input, so any provider that cannot take one is shown unselectable — see [AI Providers](./ai-providers.md) for which those are.
+
+- **Image SEO** — what **Generate SEO with AI** uses for alt text and captions. This is not SyteHero and not Modify with AI.
+
+**Making pictures.** These are billed per picture. Each appears only when its provider is available, so you may see one, both, or neither.
+
+- **Modify images with AI** — the model, quality, detail preservation and strength used when a reviewer remakes a picture.
+- **Listing image** — the provider, repair model and seed used to repair a watermark on the cropped listing copy. The switch that turns that repair on stays with the rest of the listing-image settings, under **Article images**.
+
+These are the same provider and model settings used by those areas elsewhere in SyteOps. Changing them here updates the same underlying values.
 
 ### Review & approval rules
 

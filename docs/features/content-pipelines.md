@@ -98,7 +98,7 @@ Turning LLMS Amplifier on takes care of the rest of the setup for you — it aut
 
 Switching engines doesn't change the per-article **Analyze GEO readiness** check in the [Review Portal](./review-and-publish-your-post.md#geo--ai-search-and-answer-engine-visibility) — that readiness score and the **Include in llms.txt / AI answer feed** toggle work the same way no matter which engine generates the file.
 
-You can also have GEO analysis run automatically the first time a new article arrives (Review Portal settings → **Analyze GEO when a draft is first created**). It is **off** by default, it needs a GEO AI provider, and later deliveries of the same article are not re-analyzed.
+You can also have GEO analysis run automatically the first time a new article arrives (Review Portal settings → **Analyze GEO when a draft is first created**). It is **off** by default, it needs a GEO provider, and later deliveries of the same article are not re-analyzed.
 
 ## Social Publishing
 
@@ -443,7 +443,7 @@ Forwarding is optional and never gets in the way: SyteOps always creates the Rev
 
 Blog and archive cards force pictures into a fixed shape and still download the full-size file. **Listing image** crops a card-sized copy so those cards do not stretch or clip the original. Article pages keep the original.
 
-You will find it on the **Content Pipelines** tab, under **Review Portal → Article images**.
+You will find it on the **Content Pipelines** tab, under **Review Portal → Setup → AI Models → Making pictures**.
 
 ### Setting it up
 
@@ -524,12 +524,12 @@ missing.
 2. Choose **Where the watermark sits** — which corner of the picture carries it.
 3. Set the **Area to repair**. Leave a little room around the watermark — the default allows for
    this, and a box sized tightly to the logo tends to leave its top edge behind.
-4. If more than one image API is connected in SyteHero, choose **Image API**. With only one connected,
+4. If more than one image API is connected in SyteHero, choose **Image API** under **Making pictures**. With only one connected,
    that row stays hidden. API keys stay in SyteHero either way — SyteOps does not store them.
-5. Choose a **Repair model**. The list is only the models that repaint a marked area and leave every
+5. Choose a **Repair model** under **Making pictures**. The list is only the models that repaint a marked area and leave every
    pixel outside it untouched. Models that redraw the whole picture are not offered. A cost line
    under the list names the per-picture estimate when SyteHero can provide one.
-6. **Seed** appears only when the chosen model supports it. `0` lets the model pick at random; any
+6. **Seed** appears only when the chosen model supports it under **Making pictures**. `0` lets the model pick at random; any
    other number makes the same repair repeatable.
 7. Save, then look at a few cards.
 
