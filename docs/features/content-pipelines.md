@@ -230,8 +230,10 @@ These four options change **only how the article is shown on your site**. Your s
 never modified, so you can switch any of them on or off at any time and nothing is left behind —
 turn one off and the page goes straight back to how it looked before.
 
-- **Display cleanup** — tidies the article's markup when the post is shown, for example wrapping a
-  bare image so it sits correctly in your theme.
+- **Content cleanup** — tidies the article's markup when the post is shown. A bare image is wrapped
+  so your theme styles it like any other image, and an image the sending app already framed itself
+  (usually one with a caption) is given the same styling rather than being left plain. A frame that
+  already has its own styling, holds more than the picture, or sits in a gallery or a list is left as it is.
 
 - **Strip in-body contents list** — hides a contents list the sending app placed inside the article,
   for sites that already show their own. Turn this on if a post shows two tables of contents.
