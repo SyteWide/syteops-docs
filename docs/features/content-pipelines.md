@@ -96,7 +96,7 @@ You don't pick the engine per recipe — it's one site-wide switch on the **GEO*
 
 Turning LLMS Amplifier on takes care of the rest of the setup for you — it automatically sets Amplifier's own update frequency to **Manual** (so it regenerates only when your pipeline tells it to, not on a separate schedule of its own) and turns AI Search Discovery on. Turning it off switches straight back to the native engine; AI Search Discovery itself is never turned off as a side effect of switching engines.
 
-Switching engines doesn't change the per-article **Analyze GEO readiness** check in the [Review Portal](./review-and-publish-your-post.md#geo--ai-search-and-answer-engine-visibility) — that readiness score and the **Include in llms.txt / AI answer feed** toggle work the same way no matter which engine generates the file.
+Switching engines doesn't change the per-article **Analyze GEO** check in the [Review Portal](./review-and-publish-your-post.md#geo--ai-search-and-answer-engine-visibility) — that readiness score and the **Include in llms.txt / AI answer feed** toggle work the same way no matter which engine generates the file.
 
 You can also have GEO analysis run automatically the first time a new article arrives (Review Portal settings → **Analyze GEO when a draft is first created**). It is **off** by default, it needs a GEO provider, and later deliveries of the same article are not re-analyzed.
 
