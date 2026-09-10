@@ -8,6 +8,21 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.161
+
+- **Every AI model choice now sits in one place.** The Review Portal settings had its AI scattered across four cards — the writing models in one, the picture describer in another, the two that remake and repair pictures buried inside Article images, and social's own model in the Social Publishing card. They are now one **AI Models** card under Setup, in three labeled groups: reading and writing words, looking at pictures, and making pictures.
+- **Each area now says what it is for**, instead of leaving you to infer it from a name, and the two that are billed per picture say so where you choose them. A group appears only when there is something in it to set.
+
+## v1.6.160
+
+- **"Use a different image as the source" is a text action again**, and Clear only appears after you have chosen a picture.
+- **A Generate SEO failure the portal cannot name now says the server did not finish looking**, rather than a bare "That did not work."
+
+## v1.6.159
+
+- **Generate SEO with AI now reaches the server.** The button had no address to call, so pressing it posted the review page back to itself; the request never arrived and every press ended in a generic failure.
+- **A control the review portal means to hide now stays hidden.** Two controls set their own layout, which overrode the instruction to hide them — so they sat on screen and still acted when pressed.
+
 ## v1.6.157
 
 - **Replaced pictures on the review portal show the new file even when an image CDN is on**, without waiting for a purge. The portal page itself is not rewritten onto the CDN, so the cache-buster on a replaced image reaches the browser.
