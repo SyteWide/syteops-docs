@@ -1,6 +1,6 @@
 {
     "schema_version": 1,
-    "syteops_version": "1.6.172",
+    "syteops_version": "1.6.194",
     "operations": [
         {
             "resource": "users",
@@ -28,7 +28,7 @@
         {
             "resource": "users",
             "action": "create",
-            "summary": "Create a SyteOps team-member record in the next free slot and fill its fields.",
+            "summary": "Create a SyteOps team-member record in the next free slot and fill its fields. A slot reused after a delete starts with Model consent off and no Model photos.",
             "params": {
                 "first_name": {
                     "type": "string"
@@ -65,6 +65,18 @@
                 },
                 "link_profile_pic_attachment_id": {
                     "type": "integer"
+                },
+                "model_photo_ids": {
+                    "type": "object",
+                    "description": "Curated Model photo attachment ids. Site-local; not portable to another site."
+                },
+                "model_photo_exclude_profile": {
+                    "type": "string",
+                    "description": "'1' excludes the profile picture from the curated Model photo set; '' includes it."
+                },
+                "model_consent_granted": {
+                    "type": "string",
+                    "description": "The Model consent flag and the only consent signal: '1' or ''."
                 }
             },
             "destructive": false,
@@ -115,6 +127,18 @@
                 },
                 "link_profile_pic_attachment_id": {
                     "type": "integer"
+                },
+                "model_photo_ids": {
+                    "type": "object",
+                    "description": "Curated Model photo attachment ids. Site-local; not portable to another site."
+                },
+                "model_photo_exclude_profile": {
+                    "type": "string",
+                    "description": "'1' excludes the profile picture from the curated Model photo set; '' includes it."
+                },
+                "model_consent_granted": {
+                    "type": "string",
+                    "description": "The Model consent flag and the only consent signal: '1' or ''."
                 }
             },
             "destructive": false,

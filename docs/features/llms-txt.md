@@ -86,7 +86,7 @@ An article shows up on these surfaces only after its GEO analysis has run **and*
 The AI files can only hold so much, and by default they keep whatever was published or edited most
 recently. That means a routine news post can push your definitive guide off the end of the list.
 
-Ticking **Pillar article (cornerstone)** in the portal's GEO panel says which articles your site's
+Ticking **Pillar Article (Cornerstone)** in the portal's GEO panel says which articles your site's
 authority actually rests on. It does three things:
 
 - Its questions and answers are kept **ahead of** other articles' when the index has to choose which

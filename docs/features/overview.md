@@ -46,7 +46,7 @@ Add or remove a user from a role and every workflow that references that role va
 
 ## User and CRM Management
 
-Up to 20 structured user slots with 31+ fields each, including identity, contact details, profile images, and CRM IDs across up to 15 supported CRM systems.
+Up to 20 structured user slots with 31+ fields each, including identity, contact details, profile images, optional [Model photos](user-management.md#model-photos) for Review Portal remixes, and CRM IDs across up to 15 supported CRM systems.
 
 - **System roles** — Site Owner, Technical Contact, Marketing Contact
 - **Custom roles** — Define your own with user assignment and FlowMattic aggregation

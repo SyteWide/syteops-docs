@@ -23,7 +23,7 @@ As soon as a new draft arrives from your content source, SyteOps sends a notific
 - The **post's author** (the WordPress user the post will be attributed to).
 - Anyone listed as a **Default reviewer** or **Default CC reviewer** in your Review Portal settings (see [Who receives the review email](#who-receives-the-review-email) below).
 
-The email comes from your site, uses your site's logo, and includes a summary of the article title and source keyword. Two buttons sit directly under that summary, above the article photo: **Edit/View this article**, which opens this particular draft, and **See all my reviews**, which opens your full review queue.
+The email comes from your site, uses your site's logo, and includes a summary of the article title and source keyword. Two buttons sit directly under that summary, above the article photo: **Edit/View this article**, which opens this particular draft, and **See all my reviews**, which opens your full review queue. On a phone the two buttons stack one above the other so both stay readable and tappable.
 
 The email follows your device's appearance setting, so it renders in dark mode if that is what you use. Your logo keeps a light backing so it stays legible either way.
 
@@ -51,11 +51,27 @@ The review portal brings its own look and scripts. After you install a SyteOps u
 
 ## Step 3: Review and edit the draft
 
-Once you are signed in, the portal shows the full draft. You can edit the core article fields as well as the SEO details, AI visibility settings, and categories and tags.
+Once you are signed in, the portal shows the full draft. The header brand (logo and company name) opens the WordPress Dashboard in a new tab when you click it. In the article editor, **See all my reviews** in the top bar opens your full review queue without leaving the portal session.
+
+You can edit the core article fields as well as the SEO details, AI visibility settings, and categories and tags.
 
 On a wide screen the article sits on the left with the review panels beside it. On a phone or a smaller tablet the two columns stack, and the **title and article come first** — feedback, reviewers, SEO, GEO and categories follow underneath, so you can start reading straight away.
 
 Tables and other formatting in the article body are shown the way they will look once published, so you can judge the article as your readers will see it.
+
+### Review how it looks on the site
+
+Some reviews open as they will look on your live site, instead of as a body you type into. That is how a **page** is reviewed, and it is also how an article opens when you choose **Review appearance**.
+
+You can switch among three widths — a wide screen (1440), a tablet (768), and a phone (390) — without leaving the portal. Use **Refresh** if the preview needs to load again. If it cannot load inside the portal, you will see **couldn't embed this preview** and an **Open in a new tab** link.
+
+Saving from this view never changes the page or article body. Title, summary, and the other review fields still save as usual.
+
+Click a page element in the preview to leave a note. A pin on the preview and its Feedback row share the same color. If that element has moved, the row is marked Moved rather than guessed. Handling or deleting a note in Feedback updates the pin on the preview at the same time — you do not need to refresh.
+
+You can also send **one review link for several pages or posts**. Under **Content Pipelines → Review Portal → Package**, name the package, add the items in the order they should be walked, pick the reviewers, then **Save package**. **Send package** emails those reviewers. **Copy link** copies the same walk link without emailing anyone. The reviewer opens a single link and uses the strip above the preview to move to the next or previous item. Comments stay on the item they are looking at.
+
+A copied link is for looking at the site and leaving notes. It does not let that person change the article body or invite someone else with **Send to a Colleague**. **Send package** is what gives the listed reviewers their usual editing rights on those items.
 
 ### Core article fields
 
@@ -101,23 +117,23 @@ To remove a link, select the linked text and click the **remove-link** button. I
 
 The **Featured Image** panel shows the image currently set for the post. **Click the image** — or the **Edit image** button below it — to open **Image Details**, the same panel you get by clicking a picture inside the article. From there you can:
 
-- **See where the image comes from.** The **Image link** field carries a short hint underneath it — *Paste a new link to replace this image* — and while **Image Details** is collapsed, its heading shows the picture's status at a glance: **In your media library** (with a check), **Not in your media library**, **Hosted on this site**, **Embedded in the article**, or **Check the image link**. Open the section and the full sentence takes its place, same as before — a library picture reads **Already in your media library** even when that address is a CDN copy of the file.
-- **Replace it with a picture from somewhere else.** Paste the new web address into the Image link field and click **Apply**. SyteOps fetches the image, adds it to your media library, and sets it as the featured image — so the published article never depends on someone else's site keeping the file.
+- **See where the image comes from.** The **Image Link** field carries a short hint underneath it — *Paste a new link to replace this image* — and while **Image Details** is collapsed, its heading shows the picture's status at a glance: **In your media library** (with a check), **Not in your media library**, **Hosted on this site**, **Embedded in the article**, or **Check the image link**. Open the section and the full sentence takes its place, same as before — a library picture reads **Already in your media library** even when that address is a CDN copy of the file.
+- **Replace it with a picture from somewhere else.** Paste the new web address into the Image Link field and click **Apply**. SyteOps fetches the image, adds it to your media library, and sets it as the featured image — so the published article never depends on someone else's site keeping the file.
 - **Replace it from your own library.** Click **Choose from library** (marked with a folder icon) to pick an image you already have, or upload a new one from your computer.
-- **Describe it.** The **Alt text** and **Caption** fields are here too, each with a short hint underneath — Alt text: *Describes the image for screen readers and search engines*; Caption: *Stored with the image in your media library*.
+- **Describe it.** The **Alt Text** and **Caption** fields are here too, each with a short hint underneath — Alt Text: *Describes the image for screen readers and search engines*; Caption: *Stored with the image in your media library*.
 
 The preview updates as soon as the new image is set. If your account cannot manage media on the site, the Edit image button is disabled and says why.
 
-**Alt text** describes the image for screen readers and search engines. The **Alt text** field below the preview is filled in with the current description — with a hint that it is read by screen readers, and shown when the picture cannot load — and you can edit it there without opening the details panel. It saves with the rest of your changes. If a featured image is set but has no alt text, you'll be prompted to add it before you can publish.
+**Alt Text** describes the image for screen readers and search engines. The **Alt Text** field below the preview is filled in with the current description — with a hint that it is read by screen readers, and shown when the picture cannot load — and you can edit it there without opening the details panel. It saves with the rest of your changes. If a featured image is set but has no alt text, you'll be prompted to add it before you can publish.
 
 Two things worth knowing when you swap the image:
 
 - You'll be asked to write **new alt text**. The box still holds the description of the picture you are replacing, and publishing that against a different photo describes the wrong thing to anyone using a screen reader.
-- **Alt text and captions are shared.** They belong to the image in your media library, not to this one article — so changing them changes how that picture is described everywhere it is used. SyteOps only saves them when you actually edit them, so simply opening an article never rewrites anything.
+- **Alt Text and captions are shared.** They belong to the image in your media library, not to this one article — so changing them changes how that picture is described everywhere it is used. SyteOps only saves them when you actually edit them, so simply opening an article never rewrites anything.
 
 ### Author
 
-The **Author** panel sits just under Featured Image. It lists the same WordPress users as the content source Default author picker. The field is labeled **Post author**, with a hint that it is shown as the byline. Change who is credited on the article and click **Save** (or wait for autosave). The new author is added to the reviewer list so they can open the portal; the previous author stays on that list too. This does not rebuild who receives review emails.
+The **Author** panel sits just under Featured Image. It lists the same WordPress users as the content source Default author picker. The field is labeled **Post Author**, with a hint that it is shown as the byline. Change who is credited on the article and click **Save** (or wait for autosave). The new author is added to the reviewer list so they can open the portal; the previous author stays on that list too. This does not rebuild who receives review emails.
 
 If an operator has set Author to **View only** for your reviewer type, you can still see who is credited, but the list is disabled. The same happens when **Who can publish** is **Author or designated approver only** and you are a co-reviewer — only the credited author (and administrators) can change the byline, so a co-reviewer cannot assign themselves and then publish.
 
@@ -125,13 +141,15 @@ If an operator has set Author to **View only** for your reviewer type, you can s
 
 Click any image in the article body — or the featured image — to open its panel. The panel title reads **Article Image**, or **Featured Image** when you opened the featured one. **Notes on This Image** comes first, because a note about the picture is what most people open the panel to write. If any note on that picture is still unresolved, the heading tells you how many.
 
-Below the notes is **Image Details**, a section that starts closed — click its heading, or the chevron beside it, to open it, and the chevron turns to show the section is expanded. It holds three short fields — **Image link**, **Alt text** and **Caption** — each with its own gray hint line underneath explaining what it is for, in place of a dash-separated explanation. It stays open as you move from picture to picture, so working through a batch of images costs one click rather than one per image.
+Below the notes is **Image Details**, a section that starts closed — click its heading, or the chevron beside it, to open it, and the chevron turns to show the section is expanded. It holds three short fields — **Image Link**, **Alt Text** and **Caption** — each with its own gray hint line underneath explaining what it is for, in place of a dash-separated explanation. It stays open as you move from picture to picture, so working through a batch of images costs one click rather than one per image.
 
 Nothing is removed by this, but it does put those three fields one click away rather than in front of you. The alt text and the caption are still edited here and nowhere else, and they still save exactly as before — you open **Image Details** to reach them. The panel opens the section for you whenever it has something to say back about one of those fields — when it asks you to describe a replacement image, and while it reports how a change to the picture went. It won't open itself just to report where the picture is hosted, but you don't need it to: even while the section is collapsed, its heading shows a short status at a glance — **In your media library**, **Linked from another site**, **Hosted on this site**, **Embedded in the article**, or **Check the image link** — and opening the section swaps in the full sentence, as before.
 
 Many drafts arrive with their images still hosted by whatever tool wrote the article. That works, but only for as long as that other site keeps the file: if it is moved or deleted, the picture disappears from your article. Images in that situation are labeled **"Linked from another site — not in your media library"**, and an **Import to media library** button appears next to the label. Click it to bring the file onto your own site; the picture is added to your media library with its alt text, and the article is pointed at your copy.
 
-A picture that is already in your media library is labeled **"Already in your media library"**, and **Import to media library** is hidden — even when Image link shows a CDN copy of that file rather than the original media URL. Do not Import those; they are already yours. Saving stores the original media URL, so a picture you replaced still shows after you reload.
+A picture that is already in your media library is labeled **"Already in your media library"**, and **Import to media library** is hidden — even when Image Link shows a CDN copy of that file rather than the original media URL. Do not Import those; they are already yours. Saving stores the original media URL, so a picture you replaced still shows after you reload.
+
+You can delete any picture in this panel from your media library — including the original, and including the one the article is showing. A picture the article is showing is removed from the article first, then deleted from the library; you are asked to confirm, because this cannot be undone. If another article is using the same file, the delete is refused and the picture stays in the library.
 
 You don't have to do this by hand for every image. **When you publish, images that are still hosted elsewhere are copied across automatically**, so a published article no longer depends on another site keeping the file.
 
@@ -156,6 +174,20 @@ Its **caption is left exactly as you wrote it**. A caption is your own words abo
 The image panel also has a **Modify with AI** section, below **Image Details**: describe the change you want and press **Generate**. Pressing Generate makes a new version and leaves your article alone — you decide afterwards which version the article uses. The original is kept, so **Revert** always brings it back.
 
 The prompt box and the reference-picture control now share one box. Click the **Use another picture** pill at the bottom of the box to remix from a different picture instead of the one you opened — once you pick one, the pill turns into a chip showing its thumbnail and **Starting from &lt;file name&gt;**. Click the **×** on the chip (its accessible name is **Stop using a different source image**) to drop it and go back to remixing the picture you opened.
+
+#### Using a Model
+
+A **Use a Model** control appears in this same Modify with AI block — not under Generate SEO with AI — but only once your administrator has granted **Model consent** for at least one person on a Users card. With nobody consented, the control does not appear at all. Open it, pick the person, then check which of their photos to send with **this** generate. Nothing starts checked, and closing the popover forgets the checks. You can send up to four Model photos with one generate — fewer when the remix model you picked takes fewer pictures. The limit follows the model as you switch, and any checks past a lower limit are cleared. The article picture (or **Use another picture**) stays the picture being edited; Model photos are extra references so the result can match that person.
+
+The photo list only shows pictures that can actually be sent with the generate — other file types and pictures you do not have permission to see are left out. It shows every curated photo and the 24 newest tagged files. People without consent never appear in the person list either.
+
+If you switch to a remix model that can only take one picture, the control stays visible and disabled with a reason, and any person you had chosen is cleared — pick them again once you switch back to a model that accepts Model photos.
+
+If a person's photos fail to load, you are told so and asked to choose them again, rather than being left with a picker that looks stuck.
+
+The new file is tagged with the person's current display name when it is created. Those tagged files show up on the Users cards. Promoting a tagged file into the curated set is an administrator action on the Users card — see [Model photos](user-management.md#model-photos).
+
+Model photos reach the image service only when SyteHero on this site is a release that accepts extra reference photos — see [SyteHero Integration](../integrations/sytehero.md#review-portal-model-photos).
 
 Two things decide whether the picture comes back looking like itself:
 
@@ -231,10 +263,11 @@ Up to three controls sit on each card.
   plus six versions — oldest first, so a long session of experimenting does not fill your media
   library. A version you have kept is never tidied away, and neither is the newest one — the picture
   you just asked for is always still there when you look at it.
-- **Delete** is now a trash-icon button (its accessible name is **Delete this version**) that removes
-  that version from your media library for good. It asks you to confirm first, because this one cannot
-  be undone. Any notes left on that version move to the picture your article is showing, so a note
-  never outlives the picture it is about.
+- **Delete** is a trash-icon button (its accessible name is **Delete this version**) on every card,
+  including the original and the one the article is showing. It removes that picture from your media
+  library for good. If the article is showing it, it is taken out of the article first, and the
+  confirm says so. Any notes left on that version move to the picture your article is showing, so a
+  note never outlives the picture it is about.
 
 **Put in article can tidy up after itself.** Above the controls sits a checkbox — **Delete the picture
 it replaces from the media library** — that applies to **Put in article** and to nothing else. Tick it
@@ -248,12 +281,10 @@ version in the article, ticking the box can delete the picture the article arriv
 article is no longer showing it. That original then leaves the grid, and **Restore original** is no
 longer offered for that picture.
 
-Some versions carry fewer than three controls, because some of them are refused on purpose. Two
-things are never deleted, however the deletion came about — whether you pressed **Delete** or the
-tidying did it for you:
-
-- the version your article is currently showing — put another one in the article first;
-- a picture another article is also using.
+Some versions carry fewer than three controls, because some of them are refused on purpose. A
+picture another article is also using is never deleted from the library — whether you pressed
+**Delete** or the tidying did it for you. The version your article is currently showing can be
+deleted: it is removed from this article first.
 
 Two more refusals apply to the **Delete** button only, because they are about you and about this
 moment rather than about the picture:
@@ -305,7 +336,7 @@ Click it, choose who should hear about it, optionally type a message, and press 
 
 **A note you have not saved is saved first.** If the image panel still holds a note you were typing, Send files it so it goes out with the rest; if that save fails, nothing is sent and the modal says so. Notes you started on *other* pictures are not sent — only you can decide a note is finished — so the confirmation tells you how many are still waiting.
 
-**Who you can choose.** The list offers the people already on this article, plus site administrators, who can already open every draft. Telling anybody else would also be giving them access to an unpublished draft, and that is what **Send to a colleague** is for.
+**Who you can choose.** The list offers the people already on this article, plus site administrators, who can already open every draft. Telling anybody else would also be giving them access to an unpublished draft, and that is what **Send to a Colleague** is for.
 
 **Nothing new to say?** If that person has already been sent every note on the article, Send tells you so rather than mailing them a duplicate — add a message if you want to reach them anyway.
 
@@ -315,13 +346,13 @@ If your site administrator has turned reviewer-note emails off, the **Notify** b
 
 The **SEO** panel lets you control how the post appears in Google and other search engines.
 
-- **SEO title** _(shown only when your site has an SEO plugin connected — Squirrly SEO, Yoast SEO or Rank Math)_ — The search-result headline. The hint under the field is **Shown in search results. Leave blank to use your SEO plugin's default title.** What happens when you leave it alone depends on which plugin is connected, and the difference matters:
+- **SEO Title** _(shown only when your site has an SEO plugin connected — Squirrly SEO, Yoast SEO or Rank Math)_ — The search-result headline. The hint under the field is **Shown in search results. Leave blank to use your SEO plugin's default title.** What happens when you leave it alone depends on which plugin is connected, and the difference matters:
   - **Squirrly SEO** — the title is **auto-generated** from the post title. Type your own to override it; clearing the field returns it to automatic.
   - **Yoast SEO or Rank Math** — the field stays **empty** unless you type something, and that is correct. Both plugins build the title from your own site-wide template (usually something like `Title | Site Name`), and they use that template only while this field is blank. Filling it in automatically would quietly drop the site name from every article. Type a title here only when one specific article needs to differ; clearing it hands the article back to your template.
 
   When no SEO plugin is connected, this field is hidden.
-- **Primary keyword** — The main search phrase this article is targeting. Your content source pre-fills this from the keyword used to generate the post. You can change it at any time.
-- **Secondary keywords** — Supporting search phrases for the article, pre-filled from your content source when provided. Enter them comma-separated. They are saved with the post and available to your SEO tools.
+- **Primary Keyword** — The main search phrase this article is targeting. Your content source pre-fills this from the keyword used to generate the post. You can change it at any time.
+- **Secondary Keywords** — Supporting search phrases for the article, pre-filled from your content source when provided. Enter them comma-separated. They are saved with the post and available to your SEO tools.
 - **Description** — The short sentence that appears under the page title in search results, and the WordPress excerpt. Keep it to one or two clear sentences that summarize the article. Click **Generate with AI** to have the AI draft it from the current title and body — the result fills the field for you to review and edit. (This requires a Content provider to be configured in the Review Portal settings.)
 
 Each of the SEO, GEO and Categories & Tags panels has its own **Save** button at the foot of the panel, so you never have to scroll to the bottom of the page to keep your work. It saves everything on the page exactly as shown, not just that one panel. The portal also saves on its own a few seconds after you stop typing — and immediately after any of the AI buttons fills something in — so generated text is never left sitting only in your browser.
@@ -341,20 +372,20 @@ Click **Analyze GEO** to run an AI analysis of the post. Within a few seconds th
 
 You can run the analysis as many times as you like; it does not change the article itself. The score and the questions are stored as soon as the analysis finishes, and re-running never discards answers you have edited yourself. If you turn on **Analyze GEO when a draft is first created** on the Review Portal settings, that same analysis also runs once when a new article first arrives, so reviewers do not have to click the button for every new draft. It is off by default, and later deliveries of the same article are not re-analyzed.
 
-Running the analysis writes an answer for each question. Answers are shown in full in this panel (up to 2000 characters) and are never cut off. They stay held back from your answer-engine surfaces until a reviewer ticks **I have reviewed these answers**, which sits under **Pillar article (cornerstone)**. On a site where **AI answers reviewed** is required before publishing, that checkbox sits in a **Required to publish** box; where the requirement is switched off, the checkbox is still there but the box is not labeled required. If an answer already looks cut off from an earlier review, edit it or tap **Draft answer** again — re-running the analysis keeps your existing wording and will not replace it. See [Publishing the questions your articles answer](./llms-txt.md#publishing-the-questions-your-articles-answer) for the full walkthrough of what that switch does and where the answers get published.
+Running the analysis writes an answer for each question. Answers are shown in full in this panel (up to 2000 characters) and are never cut off. They stay held back from your answer-engine surfaces until a reviewer ticks **I have reviewed these answers**, which sits under **Pillar Article (Cornerstone)**. On a site where **AI Answers Reviewed** is required before publishing, that checkbox sits in a **Required to publish** box; where the requirement is switched off, the checkbox is still there but the box is not labeled required. If an answer already looks cut off from an earlier review, edit it or tap **Draft answer** again — re-running the analysis keeps your existing wording and will not replace it. See [Publishing the questions your articles answer](./llms-txt.md#publishing-the-questions-your-articles-answer) for the full walkthrough of what that switch does and where the answers get published.
 
 **AI answer feed toggle**
 
-The **Include in llms.txt / AI answer feed** toggle controls whether this specific post is listed in your site's AI content feed — the file that AI systems read to discover what your site covers.
+The **Include in llms.txt / AI Answer Feed** toggle controls whether this specific post is listed in your site's AI content feed — the file that AI systems read to discover what your site covers.
 
 - The toggle is **on by default** for every published post, meaning all of your published content is included automatically.
 - Turn the toggle **off** if you want to keep a particular post out of the AI feed (for example, a time-sensitive or confidential article).
 
 This setting is saved when you click the panel's **Save** button, **Save draft**, or **Approve & Publish**.
 
-**Pillar article (cornerstone)**
+**Pillar Article (Cornerstone)**
 
-Tick **Pillar article (cornerstone)** to mark this as one of the articles your site's authority rests
+Tick **Pillar Article (Cornerstone)** to mark this as one of the articles your site's authority rests
 on — the definitive guide on its topic, rather than a routine update.
 
 Your AI files can only hold so much, and without this they simply keep whatever was published or
@@ -456,17 +487,17 @@ To stop half-finished articles going live, **Approve & Publish** first checks th
 
 | Requirement | What it means | Button |
 | --- | --- | --- |
-| GEO analysis | The article has never been analyzed for AI-engine readiness. | **Analyze GEO** |
-| GEO analysis is current | The article was edited after it was last analyzed, so the score is out of date. Formatting-only edits — bolding a word, re-wrapping a paragraph — do not count. | **Re-analyze GEO** |
+| GEO Analysis | The article has never been analyzed for AI-engine readiness. | **Analyze GEO** |
+| GEO Analysis Is Current | The article was edited after it was last analyzed, so the score is out of date. Formatting-only edits — bolding a word, re-wrapping a paragraph — do not count. | **Re-analyze GEO** |
 | Description | The description is empty. | **Generate with AI** |
-| Categories & tags | The article has no category, or no tag. "Uncategorized" does not count. | **Suggest categories & tags** |
-| AI answers reviewed | Nobody has confirmed the AI-written questions and answers for this article. Until someone does, they are held back from your answer-engine surfaces. | **Review the answers** |
+| Categories & Tags | The article has no category, or no tag. "Uncategorized" does not count. | **Suggest categories & tags** |
+| AI Answers Reviewed | Nobody has confirmed the AI-written questions and answers for this article. Until someone does, they are held back from your answer-engine surfaces. | **Review the answers** |
 
 Some items finish as soon as you click the button. Others — accepting a generated meta description, or choosing which suggested categories and tags to keep — hand back to you, and the list closes so you can make the choice. Once everything is clear, click **Publish now** and the article goes live.
 
 A requirement is skipped automatically whenever you could not act on it — if you do not have permission to edit that panel, or if the site's AI provider is not set up, it will never block you.
 
-Site owners can switch any of the five requirements off individually — see [Review Portal settings](#review-portal-settings-for-site-owners). Switching **AI answers reviewed** off removes it from this checklist only; the answers are still held back until someone reviews them.
+Site owners can switch any of the five requirements off individually — see [Review Portal settings](#review-portal-settings-for-site-owners). Switching **AI Answers Reviewed** off removes it from this checklist only; the answers are still held back until someone reviews them.
 
 :::tip Open the live article or the full WordPress editor
 
@@ -502,16 +533,18 @@ If another team member currently has the draft open for editing, you will see a 
 
 ---
 
-## Step 4: Send to a colleague (optional)
+## Step 4: Send to a Colleague (optional)
 
-If you would like another team member to review or edit the draft before you approve it, use the **Send to a colleague** option in the portal.
+If you would like another team member to review or edit the draft before you approve it, use the **Send to a Colleague** option in the portal.
 
-1. Click **Send to a colleague**.
+1. Click **Send to a Colleague**.
 2. A panel opens showing the team members who are available as reviewers on your site.
 3. Pick the colleague you want to involve, and optionally type a short note to explain what you need from them.
 4. Click **Send**.
 
 Your colleague receives an email with a link to the same draft portal. They will also need to sign in with their WordPress account. Once added, they have the same editing rights as you — they can save edits and approve the post.
+
+**Send to a Colleague** is not available when you opened the draft from a copied appearance-package link that has not been sent yet. Ask the site owner to **Send package** if you need to invite someone else, or if you need to edit the article body.
 
 ---
 
@@ -533,7 +566,7 @@ The post stays as a draft throughout — nothing is published until someone clic
 
 :::note Feedback panel
 
-The **Feedback** panel collects every change request submitted for this draft, oldest first, together with any [notes left on individual images](#notes-on-an-image) and any message sent with **Notify** — image notes carry the picture they are about, and a resolved one is dimmed rather than removed. Replies sit in a nested card under the note they answer. It is visible to everyone who has access to the portal, so it keeps an honest record of the review conversation.
+The **Feedback** panel collects every change request submitted for this draft, oldest first, together with any [notes left on individual images](#notes-on-an-image), notes attached to a page element on the appearance preview, and any message sent with **Notify** — image notes carry the picture they are about, each reviewer's notes use a matching color, and a resolved one is dimmed rather than removed. Handling or deleting a preview note updates its pin on the appearance preview at the same time. Replies sit in a nested card under the note they answer. It is visible to everyone who has access to the portal, so it keeps an honest record of the review conversation.
 
 **Every note in the panel has a Resolve chip**, change requests included. Anyone with access can resolve a note — the person who acts on it is usually the one who knows it is done — and a resolved note can be reopened. Resolving the last outstanding change request also clears the **Changes requested** flag on the review queue, so a draft never shows as handled and not handled at the same time.
 
@@ -603,6 +636,8 @@ The same check runs when you drag an article onto a day, where it appears as a s
 
 Cadence warnings also apply to the article's own **Schedule** control, not just the calendar: clicking **Approve & Schedule** or **Update schedule** with a new or moved time raises the same warning if it clashes. Just recording a time without approving — see [Setting a time without publishing yet](#setting-a-time-without-publishing-yet) — does not, because nothing is actually being scheduled yet.
 
+A reviewer can uncheck **Respect publishing cadence** on a draft to publish that article outside the site rhythm. The checkbox appears only when publishing cadence or reserved slots are on, and never on a live article.
+
 Cadence warnings are **off** until someone turns them on. See [Publishing cadence](content-pipelines.md#publishing-cadence) for the settings.
 
 ### On a phone or tablet
@@ -630,7 +665,7 @@ As a reviewer, you see the full upcoming calendar so you have context on everyth
 
 ## Your review queue
 
-Every reviewer-facing email — a new draft, an updated draft, a change request, or an invitation from a colleague — includes a footer link to **Articles awaiting your review**: a single page listing every draft currently waiting on you, so you don't have to hunt through your inbox for the right email. Like every other portal page, it carries your site's logo, name, and colors in a topbar at the top.
+Every reviewer-facing email — a new draft, an updated draft, a change request, or an invitation from a colleague — includes a footer link to **Articles Awaiting Your Review**: a single page listing every draft currently waiting on you, so you don't have to hunt through your inbox for the right email. Like every other portal page, it carries your site's logo, name, and colors in a topbar at the top.
 
 - **Sign in required.** Like the portal itself, you must be signed in to your WordPress account to see the queue — SyteOps checks your account against the reviewers assigned to each draft, so you only ever see articles you're actually on.
 - **Administrators see everything.** A WordPress administrator opening the queue sees every draft currently assigned to any reviewer, not just their own.
@@ -643,9 +678,9 @@ Bookmark the queue page, or just click the footer link in your next review email
 
 Each row also shows how many questions the AI search analysis recorded for that article and how many of them have answers — for example *12 Q · 9 answered* — so you can tell at a glance whether an article's answers still need finishing.
 
-### Live articles you can edit
+### Live Articles You Can Edit
 
-Beneath the drafts awaiting you, the queue lists any **published** articles you're assigned to, under **Live articles you can edit**. If you have none, the section doesn't appear at all.
+Beneath the drafts awaiting you, the queue lists any **published** articles you're assigned to, under **Live Articles You Can Edit**. If you have none, the section doesn't appear at all.
 
 These behave differently from drafts, and the page says so:
 
@@ -696,7 +731,7 @@ This happens when the email is sent, so there is one thing to know: a newly adde
 Two limits are deliberate:
 
 - **Published articles are never changed.** An article that has already gone live keeps the reviewer list it had. Adding someone to your defaults never hands them access to your published back catalog.
-- **Removing someone does not revoke their access.** Taking a person off the default lists stops them being added to new articles, but it does not remove them from drafts they were already assigned to — SyteOps cannot tell that apart from someone a colleague deliberately invited to that specific article with **Send to a colleague**. To remove someone from a particular draft, use the reviewer list in the portal for that article.
+- **Removing someone does not revoke their access.** Taking a person off the default lists stops them being added to new articles, but it does not remove them from drafts they were already assigned to — SyteOps cannot tell that apart from someone a colleague deliberately invited to that specific article with **Send to a Colleague**. To remove someone from a particular draft, use the reviewer list in the portal for that article.
 
 ---
 
@@ -765,15 +800,15 @@ If an article has more pictures than one publish can safely fetch, the rest are 
 
 Publish is blocked until these are met. All of the following are **on** by default:
 
-- **GEO analysis has run**
-- **GEO analysis is current** — required after the article changes. Formatting-only edits are ignored.
+- **GEO Analysis has run**
+- **GEO Analysis Is Current** — required after the article changes. Formatting-only edits are ignored.
 - **Description present**
-- **Categories & tags assigned**
-- **AI answers reviewed** — required when answers are published
+- **Categories & Tags assigned**
+- **AI Answers Reviewed** — required when answers are published
 
 A requirement is skipped when the reviewer cannot act on it (no permission for that area, or the AI behind it is not configured).
 
-Turning **AI answers reviewed** off here only removes it from the publish checklist — it does not change what appears on your answer-engine surfaces. An article's questions and answers are held back from every one of those surfaces until someone ticks **I have reviewed these answers** in the article's GEO panel, whether or not this requirement is switched on. See [Reviewing the answers before they go live](./llms-txt.md#reviewing-the-answers-before-they-go-live).
+Turning **AI Answers Reviewed** off here only removes it from the publish checklist — it does not change what appears on your answer-engine surfaces. An article's questions and answers are held back from every one of those surfaces until someone ticks **I have reviewed these answers** in the article's GEO panel, whether or not this requirement is switched on. See [Reviewing the answers before they go live](./llms-txt.md#reviewing-the-answers-before-they-go-live).
 
 **Analyze GEO when a draft is first created** is **off** by default. When it is on (and a GEO provider is configured), analysis runs once when the article first arrives. Later deliveries of that article are not re-analyzed.
 
@@ -892,9 +927,9 @@ Click **Save settings** at the bottom of the panel to apply your changes. The ne
 
 You don't have to wait for a draft from your content source to use the portal. There are three ways in:
 
-- **From the posts list.** In the WordPress **Posts** (or **Pages**) list, hover over any post you can edit and click the **Review Portal** link in its row of actions.
-- **From the post itself.** While editing a post, click **Open Review Portal** in the toolbar at the top of the screen.
-- **From the live article.** While signed in and reading the published post on your own site, click **Open Review Portal** in the toolbar at the top of the page.
+- **From the posts list.** In the WordPress **Posts** (or **Pages**) list, hover over any post you can edit and click the **Review Portal** link in its row of actions. On **Posts** only, you also get **Review appearance** for the themed site preview; **Pages** use a single **Review Portal** link, which already opens that preview.
+- **From the post itself.** While editing a **post**, the toolbar offers **Open Review Portal** (the editor) and **Open Review appearance** (the themed preview). While editing a **page**, only **Open Review Portal** appears — it opens the themed preview.
+- **From the live article.** While signed in and reading a published **post** on your own site, the toolbar offers both **Open Review Portal** and **Open Review appearance**. On a **page**, only **Open Review Portal** appears.
 
 :::tip Can't see the toolbar while editing?
 The WordPress editor's **fullscreen mode** hides the toolbar, and with it the **Open Review Portal** link. Open the editor's options menu (the three dots, top right) and switch **Fullscreen mode** off, or use the posts-list row action instead.
@@ -902,7 +937,7 @@ The WordPress editor's **fullscreen mode** hides the toolbar, and with it the **
 
 Any of them issues a fresh secure link for that post and opens the portal in a new tab — the same review window contributors see, with the same expiry window as an emailed link. This lets you put an existing post (or one written by hand) through the same review-and-approve flow.
 
-The **Review Portal** action appears on posts and pages, and on any other content type your content sources publish into. It won't appear on unrelated content types added by other plugins.
+The **Review Portal** action appears on posts and pages, and on any other content type your content sources publish into. **Review appearance** is offered only for standard **Posts**. It won't appear on unrelated content types added by other plugins.
 
 ---
 

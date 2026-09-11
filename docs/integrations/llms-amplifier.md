@@ -96,7 +96,7 @@ Newer versions of LLMS Amplifier can refuse a settings change while one of its o
 A warning still appears above the two options when the index is off, and an entry appears in LLMS Amplifier's own health panel.
 :::
 
-Articles you have marked as **Pillar article (cornerstone)** are listed first in that index and carry a `content_role` of `pillar`, so they survive LLMS Amplifier's maximum-pages limit and are the ones an AI tool is pointed to.
+Articles you have marked as **Pillar Article (Cornerstone)** are listed first in that index and carry a `content_role` of `pillar`, so they survive LLMS Amplifier's maximum-pages limit and are the ones an AI tool is pointed to.
 
 ## A separate front end (headless)
 

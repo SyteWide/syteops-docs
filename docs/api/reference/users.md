@@ -12,7 +12,7 @@ description: Manage API operations for the users resource.
 
 ## `create`
 
-Create a SyteOps team-member record in the next free slot and fill its fields.
+Create a SyteOps team-member record in the next free slot and fill its fields. A slot reused after a delete starts with Model consent off and no Model photos.
 
 **Capability:** `manage_options`
 
@@ -32,6 +32,9 @@ Create a SyteOps team-member record in the next free slot and fill its fields.
 | `email_personal` | email | no |  |
 | `link_profile_pic` | url | no |  |
 | `link_profile_pic_attachment_id` | integer | no |  |
+| `model_photo_ids` | object | no | Curated Model photo attachment ids. Site-local; not portable to another site. |
+| `model_photo_exclude_profile` | string | no | '1' excludes the profile picture from the curated Model photo set; '' includes it. |
+| `model_consent_granted` | string | no | The Model consent flag and the only consent signal: '1' or ''. |
 
 
 **Returns**
@@ -56,7 +59,10 @@ data: &#123;user_num, ...fields}
     "email_alternate": "name@example.com",
     "email_personal": "name@example.com",
     "link_profile_pic": "https://example.com",
-    "link_profile_pic_attachment_id": 0
+    "link_profile_pic_attachment_id": 0,
+    "model_photo_ids": {},
+    "model_photo_exclude_profile": "string",
+    "model_consent_granted": "string"
   }
 }
 ```
@@ -171,6 +177,9 @@ Update fields on an existing SyteOps team-member record.
 | `email_personal` | email | no |  |
 | `link_profile_pic` | url | no |  |
 | `link_profile_pic_attachment_id` | integer | no |  |
+| `model_photo_ids` | object | no | Curated Model photo attachment ids. Site-local; not portable to another site. |
+| `model_photo_exclude_profile` | string | no | '1' excludes the profile picture from the curated Model photo set; '' includes it. |
+| `model_consent_granted` | string | no | The Model consent flag and the only consent signal: '1' or ''. |
 
 
 **Returns**
@@ -196,7 +205,10 @@ data: &#123;user_num, ...fields}
     "email_alternate": "name@example.com",
     "email_personal": "name@example.com",
     "link_profile_pic": "https://example.com",
-    "link_profile_pic_attachment_id": 0
+    "link_profile_pic_attachment_id": 0,
+    "model_photo_ids": {},
+    "model_photo_exclude_profile": "string",
+    "model_consent_granted": "string"
   }
 }
 ```

@@ -33,6 +33,12 @@ SyteHero's two endpoints are the exception. **They are allowed based on whether 
 
 Only those two exact routes are opened. SyteHero's other endpoints — settings, backups, slides, sales data — stay behind the restriction, protected by their own permission checks (and, for most of them, a license check as well). SyteOps never opens the `sytehero/v1` namespace as a whole.
 
+## Review Portal Model photos
+
+When SyteHero is installed, the Review Portal's **Modify with AI** control can send extra reference photos of a consented person along with the picture being edited. That needs a SyteHero release that accepts those extras. An older SyteHero still remakes the scene; the extra photos are ignored until you update. When SyteHero also reports how many pictures a remix model accepts, the Review Portal limits the Model photos you can check to fit that model; without it, the limit is four.
+
+See [Using a Model](../features/review-and-publish-your-post.md#using-a-model) and [Model photos](../features/user-management.md#model-photos).
+
 ## What the toggle does
 
 - Marks SyteHero as a sanctioned, recognized integration on this site.
