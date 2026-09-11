@@ -8,6 +8,122 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.194
+
+- Canvas pins stay in sync when a note is handled or deleted
+- A copied appearance-package link cannot change the article body or add colleagues
+
+## v1.6.193
+
+- Switching items in an appearance package reloads so edits stay on the current item
+- Listed package reviewers can still open the themed preview when a single-item link window has lapsed
+
+## v1.6.192
+
+- Internal improvements and maintenance
+
+## v1.6.191
+
+- Create a package of pages and posts and send one review link that walks them in order
+- Reviewers move between items with the strip above the preview; comments stay on the current item
+
+## v1.6.190
+
+- Posts in wp-admin get Review appearance for the themed preview alongside Review Portal for the editor
+- Pages keep a single Review Portal entry, which already opens the themed preview
+
+## v1.6.189
+
+- Click a page element in the appearance preview to leave a note
+- Pins and Feedback rows share the same color; a moved element is marked, not guessed
+
+## v1.6.188
+
+- Comments on a site-appearance preview can attach to a page element
+- Each reviewer's notes use a matching color in the Feedback panel
+
+## v1.6.187
+
+- Pages and posts can be reviewed as they appear on the site, at three preview widths
+- When a preview cannot load inside the portal, reviewers can open it in a new tab
+
+## v1.6.186
+
+- Reviewers can delete any picture in Image Details from the media library, including the one the article is showing
+- A picture the article is showing is removed from the article first; a picture another article uses is refused
+
+## v1.6.185
+
+- Reviewers can uncheck Respect publishing cadence on a draft to publish that article outside the site rhythm
+- An opted-out draft no longer holds a reserved slot or draws as a reserved calendar chip
+
+## v1.6.184
+
+- Review email action buttons now stack on phones so both stay tappable
+- The buttons keep their filled look in dark mode instead of becoming plain text
+
+## v1.6.183
+
+- Unchanged and already-published re-ingest deliveries no longer appear in Recent runs, so the Log stays usable
+- The Skipped status filter is gone from the Log; older skipped rows stay stored but hidden by default
+
+## v1.6.182
+
+- The Review Portal brand header opens the WordPress Dashboard in a new tab when you click the logo or company name
+- The article editor top bar adds **See all my reviews** so you can open your full review queue without hunting for the email link
+
+## v1.6.181
+
+- Swap Users in the remote Users editor now really swaps the two people's details and keeps rebuilt author-id and link values on Save; before, it reported success while moving nothing
+- A remote swap clears Model consent for both people, because Model photos stay with the slot
+- The Model photos preview in the remote Users editor is locked as soon as it loads, instead of by a watcher running on every admin page
+
+## v1.6.180
+
+- Changing a user's profile picture keeps their Model photos in order: the new picture starts in the curated set, and the old one stays curated unless it had been removed from it
+- Deleting a profile picture clears it from the user card for good, so it no longer comes back on the next save
+- The Model photos gallery updates as soon as you select, clear, replace, or delete a profile picture
+- Select from Media, Clear, and Delete image for profile pictures now work on the Roles & Users page
+- Swapping two users no longer leaves one person's Model consent or Model photos on the other person's slot
+- Associating a profile picture no longer fails when debug logging is on
+- Model photos set through the Manage API are cleaned up on uninstall like photos added on the Users card
+- The Review Portal's Model photo picker announces loading and errors to screen readers
+- The Profile, Curated, Tagged, and Excluded photo labels are translated on every screen, including the Review Portal
+
+## v1.6.179
+
+- Only pictures the Review Portal made with a person selected as the Model count as that person's tagged Model photos; a picture tagged by hand in the media library does not
+- Model consent is no longer carried by a user export; check it again on the site that imports the user
+- Users cards show the newest 48 tagged Model photos with a Show older button, and the Review Portal lists the newest 24
+- How many Model photos you can send with a remix now follows that remix model's own picture limit
+
+## v1.6.178
+
+- Model photos in the remote Users editor are a preview; add and promote stay on that site's Users card
+
+## v1.6.177
+
+- Review Portal Modify with AI can send a consented person's photos with a remix, and the new file is tagged with that person's name
+- People without Model consent stay off the picker; unchecking consent does not remove existing photos
+
+## v1.6.176
+
+- Internal improvements and maintenance
+
+## v1.6.175
+
+- Users cards can keep several Model photos for a person, with a consent checkbox required before they can be used in the Review Portal.
+
+## v1.6.174
+
+- **GEO questions and answers grow to fit their text.** A long question wraps instead of scrolling inside a one-line box, and the answer shows in full.
+- **GEO question cards stand apart more clearly**, with a darker border, a light tint and more space between them.
+
+## v1.6.173
+
+- **The SEO search preview looks like a search listing again.** The address is green and the title is search-result blue, instead of taking the site's brand color.
+- **Review Portal field labels and headings use Title Case**, for example "Alt Text" and "Primary Keyword".
+
 ## v1.6.172
 
 - **An open reply no longer keeps a note's "Changes requested" status lit.** Resolving or withdrawing the last change request now clears the status even while someone's reply in a thread is still open, and a reply is never counted as a change request of its own.
