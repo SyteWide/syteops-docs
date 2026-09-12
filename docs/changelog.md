@@ -8,6 +8,26 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.235
+
+- Roles and Users Users area matches the Users tab: centered title, description, and Quick Navigation chips
+- Count, Add User, and Edit in Admin sit on one centered line under that card
+
+## v1.6.234
+
+- Roles and Users heading sits on one line with the count and buttons
+- Feedback notes drop the left rails beside the avatar and trash; preview toolbar says Device Preview and separates Height from the canvas
+
+## v1.6.233
+
+- Drafts with a planned publishing time show that date on the Posts list
+- Quick Edit adds a read-only Publishes line so it is not confused with Last Modified
+
+## v1.6.232
+
+- Posts list, editor, and toolbar now say Review Content next to Review Appearance
+- Appearance notes quote the text you select; Escape drops the selection and closes the note
+
 ## v1.6.231
 
 - Review Appearance Window labels; posts open Review Appearance from the editor

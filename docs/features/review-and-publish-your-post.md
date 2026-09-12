@@ -63,11 +63,11 @@ Tables and other formatting in the article body are shown the way they will look
 
 Some reviews open as they will look on your live site, instead of as a body you type into. That is how a **page** is reviewed, and it is also how an article opens when you choose **Review Appearance**.
 
-The preview is a private full-page view (no WordPress admin bar). The toolbar is **Window** (Desktop / Tablet / Mobile), then **Height** (Auto / 800 / 1200 / Full), then **Refresh**. Height **Auto** matches the page content; Tablet and Mobile sit centered. If the preview cannot load inside the portal, you will see **couldn't embed this preview** and an **Open in a new tab** link.
+The preview is a private full-page view (no WordPress admin bar). The toolbar is **Device Preview** (Desktop / Tablet / Mobile), then **Height** (Auto / 800 / 1200 / Full), then **Refresh**. Height **Auto** matches the page content; Tablet and Mobile sit centered. If the preview cannot load inside the portal, you will see **couldn't embed this preview** and an **Open in a new tab** link.
 
 Saving from this view never changes the page or article body. Title, summary, and the other review fields still save as usual.
 
-Click a page element in the preview to leave a note. The click opens a note dialog instead of following the page. Clicking an image shows that it is an image, its name, and a small thumbnail. A pin on the preview and its Feedback row share the same color. If that element has moved, the row is marked Moved rather than guessed. Handling or deleting a note in Feedback updates the pin on the preview at the same time — you do not need to refresh.
+Click a page element in the preview to leave a note. The click opens a note dialog instead of following the page. Drag across words first if you want the note to quote that phrase; a click with nothing selected still comments on the whole element. Press Escape to drop the highlight and close the note. Clicking an image shows that it is an image, its name, and a small thumbnail. A pin on the preview and its Feedback row share the same color. If that element has moved, the row is marked Moved rather than guessed. Handling or deleting a note in Feedback updates the pin on the preview at the same time — you do not need to refresh.
 
 You can also send **one review link for several pages or posts**. Under **Content Pipelines → Review Portal → Page Reviews**, name the bundle, add the items in the order they should be walked, pick the reviewers, then **Save bundle**. **Send bundle** emails those reviewers a card for every item; **See all my reviews** on that mail opens the review queue filtered to the bundle. Click a page in the list to select it, then **Send page** emails that one page or post as a page review without saving it into a bundle. **Copy link** copies the same walk link without emailing anyone. The reviewer opens a single link and uses the strip above the preview to move to the next or previous item. Comments stay on the item they are looking at.
 
@@ -934,19 +934,19 @@ Click **Save settings** at the bottom of the panel to apply your changes. The ne
 
 You don't have to wait for a draft from your content source to use the portal. There are three ways in:
 
-- **From the posts list.** In the WordPress **Posts** (or **Pages**) list, hover over any post you can edit and click the **Review Portal** link in its row of actions. For **Posts** and any content type your pipelines publish into, you also get **Review Appearance** for the themed site preview; **Pages** use a single **Review Portal** link, which already opens that preview.
-- **From the post itself.** While editing a **post** or a pipeline-target content type in the **classic editor**, the area above the editor offers **Open Review Portal** (the editor) and **Open Review Appearance** (the themed preview). In the **block editor**, those same links sit in the **Status & visibility** panel, and the toolbar still offers them. While editing a **page**, only **Open Review Portal** appears — it opens the themed preview.
+- **From the posts list.** In the WordPress **Posts** (or **Pages**) list, hover over any post you can edit and click the **Review Content** link in its row of actions. For **Posts** and any content type your pipelines publish into, you also get **Review Appearance** for the themed site preview; **Pages** use a single **Review Content** link, which already opens that preview. A draft that already has a publishing time shows that moment in the **Date** column as **Planned** (you chose it) or **Slot held** (cadence reserved it). **Quick Edit** adds a read-only **Publishes** line for the same moment — WordPress **Date** on a draft is still last modified, not that publishing time.
+- **From the post itself.** While editing a **post** or a pipeline-target content type in the **classic editor**, the area above the editor offers **Open Review Content** (the editor) and **Open Review Appearance** (the themed preview). In the **block editor**, those same links sit in the **Status & visibility** panel, and the toolbar still offers them. While editing a **page**, only **Open Review Content** appears — it opens the themed preview.
 - **From the review editor.** For a post (not a page), use **Review Appearance** in the top bar to open the themed preview.
 - **From Review Appearance.** When you are in the themed preview for a post (not a page), use **Review Content** in the top bar to jump back to the full review editor.
-- **From the live article.** While signed in and reading a published **post** on your own site, the toolbar offers both **Open Review Portal** and **Open Review Appearance**. On a **page**, only **Open Review Portal** appears.
+- **From the live article.** While signed in and reading a published **post** on your own site, the toolbar offers both **Open Review Content** and **Open Review Appearance**. On a **page**, only **Open Review Content** appears.
 
 :::tip Can't see the toolbar while editing?
-The WordPress editor's **fullscreen mode** hides the toolbar. Use **Open Review Portal** in the **Status & visibility** panel (block editor), the area above the editor (classic editor), or the posts-list row action.
+The WordPress editor's **fullscreen mode** hides the toolbar. Use **Open Review Content** in the **Status & visibility** panel (block editor), the area above the editor (classic editor), or the posts-list row action.
 :::
 
 Any of them issues a fresh secure link for that post and opens the portal in a new tab — the same review window contributors see, with the same expiry window as an emailed link. This lets you put an existing post (or one written by hand) through the same review-and-approve flow.
 
-The **Review Portal** action appears on posts and pages, and on any other content type your content sources publish into. **Review Appearance** is offered for **Posts** and those same pipeline-target types, not for **Pages** or unrelated content types added by other plugins.
+The **Review Content** action appears on posts and pages, and on any other content type your content sources publish into. **Review Appearance** is offered for **Posts** and those same pipeline-target types, not for **Pages** or unrelated content types added by other plugins.
 
 ---
 
