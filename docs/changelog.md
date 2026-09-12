@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.236
+
+- AI Models blurbs for Content, Ingest, and Social match how those areas actually work
+- Vision models is visually separate from the area above it; Modify images with AI matches the other area headings
+
 ## v1.6.235
 
 - Roles and Users Users area matches the Users tab: centered title, description, and Quick Navigation chips
