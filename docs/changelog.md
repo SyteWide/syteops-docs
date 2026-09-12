@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.231
+
+- Review Appearance Window labels; posts open Review Appearance from the editor
+- Clicking a preview image shows its name and thumbnail; Saved sits in the header; review emails keep their edit buttons
+
 ## v1.6.230
 
 - Users keep Model photos on an AI Model subtab; Review Portal AI Models, header, and Appearance Window and Height
