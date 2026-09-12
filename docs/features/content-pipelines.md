@@ -148,6 +148,7 @@ A few rules apply:
 - You can only move posts you have permission to edit.
 - Scheduling a draft (turning it into a scheduled post) requires permission to publish, following the same **Who can publish** rule used in the [Review Portal](./review-and-publish-your-post.md#review--approval-rules).
 - Published posts are read-only on the calendar — they can't be dragged or rescheduled.
+- A past date publishes immediately and keeps that date as the post's publish date. A time less than a minute away publishes now. Cadence warnings apply only to times at least a minute in the future.
 - Turning a held slot into a real schedule needs that same publish permission, and raises the same cadence warning as any other date you pick.
 - A slot whose moment has already gone by is never drawn on the grid — nothing will publish the article at that time any more, so it waits in **Unscheduled drafts** instead.
 

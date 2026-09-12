@@ -8,6 +8,159 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.224
+
+- Reviewers who cannot publish are asked to save a preferred time, not to go live
+- The review portal editor switches to Published when the calendar publishes immediately
+- Notes Pick refuses pictures that are not PNG, JPEG, or WebP
+- Page review emails use a Page review subject
+- Review links in the block editor Status panel appear after the first save, without a reload
+
+## v1.6.223
+
+- A past date on the publishing calendar goes live immediately and keeps that publish date
+- Click a page in Page Reviews to select it before Send page; page review emails use page wording, not draft
+
+## v1.6.222
+
+- Roles and Users and the Users tab now share the same roster heading count and Add User styling
+- Roster quick-navigation chips use shared layout styling on both admin surfaces
+
+## v1.6.221
+
+- Model photo consent checkbox stays compact on the Users card instead of stretching to the full field width
+- WordPress media library pickers keep native styling when opened from admin screens
+
+## v1.6.220
+
+- Notes reference picture chips resolve attachment URLs through the review portal local helper
+- Fixes architecture enforcement for attachment URL calls in the review pipeline
+
+## v1.6.219
+
+- Send page now resets the review link clock so reviewers are not sent an already-expired link
+- Page review emails re-arm the shared review link the same way bundle send does for each item
+
+## v1.6.218
+
+- Bundle review emails now include a card for every item, and See all my reviews opens that bundle's queue
+- Send page emails one page as a page review without saving it into a bundle
+
+## v1.6.217
+
+- See all my reviews from a page-review bundle opens your existing review queue filtered to that bundle
+- A bundle queue you are not listed on stays empty instead of showing every draft you can review
+
+## v1.6.216
+
+- Renamed the Review Portal Package settings group to Page Reviews with clearer bundle labels
+- Save, send, and delete actions and status messages now say bundle instead of package
+
+## v1.6.215
+
+- Review Appearance no longer shows Review Content while you walk through an appearance package
+- Single-article appearance review still offers Review Content to return to the full editor
+
+## v1.6.214
+
+- The post editor and Review Appearance now link to each other, including pipeline content types
+- Review Appearance shows a Review Content control to return to the full review editor
+
+## v1.6.213
+
+- The appearance preview keeps the WordPress admin bar hidden for the whole page view
+- Draft access granted for that preview still ends as soon as the page query finishes
+
+## v1.6.212
+
+- The site appearance preview is a private full-page view without the WordPress admin bar
+- Height Auto matches the page, and tablet and phone widths sit centered
+
+## v1.6.211
+
+- Picking an existing library picture as an image-notes reference no longer overwrites its title or alt
+- A brand-new untitled upload can still be labeled Reference Image; a picture you cannot read is refused
+
+## v1.6.210
+
+- Remix model lists now say which ones take Model photos and which are scene-only
+- Generate keeps Model photos at the model's limit and never sends the picture you are already editing
+
+## v1.6.209
+
+- A stored image-notes reference picture is a clickable link when you reopen the article
+- Pick and Clear stay hidden unless you can change that reference
+
+## v1.6.208
+
+- The image notes panel can attach a tagged reference picture for later remixes
+- Modify with AI uses that picture unless you choose a different source for one generate
+
+## v1.6.207
+
+- Fixed: Review Portal page and appearance views no longer show the Featured Image side card or load the media picker stack
+- Article review still includes the Featured Image card with edit, alt text, and library picker
+
+## v1.6.206
+
+- Fixed: Review Portal AI Models group band headings keep proper spacing above later groups after the zebra tbody layout
+- The first group under the card title still sits tight to the AI Models heading
+
+## v1.6.205
+
+- Review Portal AI Models groups each text and vision area with alternating background bands so provider settings are easier to scan
+- Group band headings stay separate from the tinted areas so section labels stay clear
+
+## v1.6.204
+
+- wp-admin row actions and toolbar links for the themed preview now read Review Appearance and Open Review Appearance
+- Proper-noun casing is enforced for Review Appearance alongside Review Portal in translatable strings
+
+## v1.6.203
+
+- The review queue page frames the logo area with a border matching other portal controls
+- Calendar and Sign out sit with more space below the branded header
+
+## v1.6.202
+
+- A Schedule time less than a minute away publishes immediately instead of being treated as a cancellable schedule
+- Confirming that near time no longer fails as if the confirmation dialog sat open too long
+
+## v1.6.201
+
+- Reviewers can pick a past date on Schedule; the article goes live immediately and keeps that publish date
+- The portal confirms that a past date publishes now with that historical date, instead of blocking it
+
+## v1.6.200
+
+- Dropping a remix reference image in the review portal no longer shows a false upload failure while the file is still uploading
+- The Modify line briefly shows an uploading status while a dropped reference image is sent to the media library
+
+## v1.6.199
+
+- When a dropped remix reference image fails to upload in the review portal, the Modify area now shows a clear status message instead of failing silently
+- A drop that never reaches the media uploader no longer looks like a successful pick
+
+## v1.6.198
+
+- In the review portal, you can drop an image onto the Modify prompt box to use it as the remix reference instead of opening the media library
+- The Modify prompt box shows a highlight while you drag an image over it
+
+## v1.6.197
+
+- Reviewers who use the standard sign-in page after a security check are no longer told cookies are blocked when they are not
+- The review link now prepares WordPress sign-in cookies before that page loads, and returns reviewers to their review if the check still fails
+
+## v1.6.196
+
+- Review portal editor header keeps 8px spacing between wrapped top-bar rows
+- Internal improvements and maintenance
+
+## v1.6.195
+
+- Review portal editor header stacks brand and status on the first row with session tools on a second row so logos and names are not clipped
+- Secure session badge in the review header now uses the same outlined style as other top-bar pills
+
 ## v1.6.194
 
 - Canvas pins stay in sync when a note is handled or deleted

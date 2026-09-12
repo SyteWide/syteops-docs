@@ -51,7 +51,7 @@ The review portal brings its own look and scripts. After you install a SyteOps u
 
 ## Step 3: Review and edit the draft
 
-Once you are signed in, the portal shows the full draft. The header brand (logo and company name) opens the WordPress Dashboard in a new tab when you click it. In the article editor, **See all my reviews** in the top bar opens your full review queue without leaving the portal session.
+Once you are signed in, the portal shows the full draft. The header brand (logo and company name) opens the WordPress Dashboard in a new tab when you click it. In the article editor, the top bar uses two rows—brand and draft status on the first row, calendar, queue, WordPress links, secure session, and your account on the second—so logos and names are not squeezed on narrow screens. **See all my reviews** in that bar opens your full review queue without leaving the portal session.
 
 You can edit the core article fields as well as the SEO details, AI visibility settings, and categories and tags.
 
@@ -61,17 +61,17 @@ Tables and other formatting in the article body are shown the way they will look
 
 ### Review how it looks on the site
 
-Some reviews open as they will look on your live site, instead of as a body you type into. That is how a **page** is reviewed, and it is also how an article opens when you choose **Review appearance**.
+Some reviews open as they will look on your live site, instead of as a body you type into. That is how a **page** is reviewed, and it is also how an article opens when you choose **Review Appearance**.
 
-You can switch among three widths — a wide screen (1440), a tablet (768), and a phone (390) — without leaving the portal. Use **Refresh** if the preview needs to load again. If it cannot load inside the portal, you will see **couldn't embed this preview** and an **Open in a new tab** link.
+The preview is a private full-page view (no WordPress admin bar). Height **Auto** matches the page; tablet and phone widths sit centered. You can switch among three widths — a wide screen (1440), a tablet (768), and a phone (390) — without leaving the portal. Use **Refresh** if the preview needs to load again. If it cannot load inside the portal, you will see **couldn't embed this preview** and an **Open in a new tab** link.
 
 Saving from this view never changes the page or article body. Title, summary, and the other review fields still save as usual.
 
 Click a page element in the preview to leave a note. A pin on the preview and its Feedback row share the same color. If that element has moved, the row is marked Moved rather than guessed. Handling or deleting a note in Feedback updates the pin on the preview at the same time — you do not need to refresh.
 
-You can also send **one review link for several pages or posts**. Under **Content Pipelines → Review Portal → Package**, name the package, add the items in the order they should be walked, pick the reviewers, then **Save package**. **Send package** emails those reviewers. **Copy link** copies the same walk link without emailing anyone. The reviewer opens a single link and uses the strip above the preview to move to the next or previous item. Comments stay on the item they are looking at.
+You can also send **one review link for several pages or posts**. Under **Content Pipelines → Review Portal → Page Reviews**, name the bundle, add the items in the order they should be walked, pick the reviewers, then **Save bundle**. **Send bundle** emails those reviewers a card for every item; **See all my reviews** on that mail opens the review queue filtered to the bundle. Click a page in the list to select it, then **Send page** emails that one page or post as a page review without saving it into a bundle. **Copy link** copies the same walk link without emailing anyone. The reviewer opens a single link and uses the strip above the preview to move to the next or previous item. Comments stay on the item they are looking at.
 
-A copied link is for looking at the site and leaving notes. It does not let that person change the article body or invite someone else with **Send to a Colleague**. **Send package** is what gives the listed reviewers their usual editing rights on those items.
+A copied link is for looking at the site and leaving notes. It does not let that person change the article body or invite someone else with **Send to a Colleague**. **Send bundle** is what gives the listed reviewers their usual editing rights on those items.
 
 ### Core article fields
 
@@ -177,7 +177,7 @@ The prompt box and the reference-picture control now share one box. Click the **
 
 #### Using a Model
 
-A **Use a Model** control appears in this same Modify with AI block — not under Generate SEO with AI — but only once your administrator has granted **Model consent** for at least one person on a Users card. With nobody consented, the control does not appear at all. Open it, pick the person, then check which of their photos to send with **this** generate. Nothing starts checked, and closing the popover forgets the checks. You can send up to four Model photos with one generate — fewer when the remix model you picked takes fewer pictures. The limit follows the model as you switch, and any checks past a lower limit are cleared. The article picture (or **Use another picture**) stays the picture being edited; Model photos are extra references so the result can match that person.
+A **Use a Model** control appears in this same Modify with AI block — not under Generate SEO with AI — but only once your administrator has granted **Model consent** for at least one person on a Users card. With nobody consented, the control does not appear at all. Open it, pick the person, then check which of their photos to send with **this** generate. Nothing starts checked, and closing the popover forgets the checks. Some remix models take Model photos (up to a number the model list shows) and others are scene-only. You can send up to four Model photos with one generate — fewer when the remix model you picked takes fewer pictures. The limit follows the model as you switch, and any checks past a lower limit are cleared. The article picture (or **Use another picture**) stays the picture being edited and does not take a Model-photo slot; Model photos are extra references so the result can match that person.
 
 The photo list only shows pictures that can actually be sent with the generate — other file types and pictures you do not have permission to see are left out. It shows every curated photo and the 24 newest tagged files. People without consent never appear in the person list either.
 
@@ -306,7 +306,7 @@ button is hidden.
 
 ### Notes on an image
 
-Click any picture in the article — or the featured image — and **Notes on This Image** is the first thing in the panel. Type what is wrong with the picture and click **Save note**.
+Click any picture in the article — or the featured image — and **Notes on This Image** is the first thing in the panel. Type what is wrong with the picture and click **Save note**. Under that heading you can attach a **Reference image** so later Modify with AI remixes start from that tagged picture unless you pick a one-off source for a single generate.
 
 The heading carries a count of the notes on that picture nobody has resolved yet, so you can tell at a glance whether a picture still has something outstanding without reading the list. A picture with nothing outstanding says nothing.
 
@@ -425,7 +425,7 @@ Once you have finished reviewing all panels, choose one of the action buttons:
 
 - **Save draft** — Saves all your edits (including SEO, GEO settings, and categories/tags) and keeps the post as a draft. The portal stays open so you or a colleague can continue reviewing later.
 - **Approve & Publish** — Saves all your edits and publishes the post to your site immediately. The portal first asks you to confirm. After you confirm, it shows a live progress list — checking the article is ready, copying images to this site if needed (with a count such as "3 of 12"), publishing, and sending the notification — until the work finishes. When it is done, you can close the dialog or open the live article. By default, the author and reviewers receive an email confirming the post went live (site owners can turn this off — see the rules table below).
-- **Schedule** _(if enabled by the site owner)_ — Check the **Schedule** box to pick a future date and time, then click **Approve & Schedule**. The same confirm-then-progress dialog tracks the scheduling. The post goes live automatically at the time you chose rather than immediately. **Scheduling is not final** — see [Changing or cancelling a schedule](#changing-or-cancelling-a-schedule) below.
+- **Schedule** _(if enabled by the site owner)_ — Check the **Schedule** box to pick a date and time, then click **Approve & Schedule**. The same confirm-then-progress dialog tracks the scheduling. A future time publishes automatically at the moment you chose. A past time publishes immediately and keeps that date as the post's publish date. **Scheduling is not final** — see [Changing or cancelling a schedule](#changing-or-cancelling-a-schedule) below.
 - **Request changes** — Opens a short note prompt where you can describe what needs updating. Your current edits are saved to the draft, the author and co-reviewers are notified by email, and your note is added to the portal's **Feedback** panel. See [Step 5](#step-5-request-changes) for the full walkthrough.
 - **Notify** — Sends this article's notes, and an optional message, to one person who already has the article. Unlike **Request changes** it saves nothing, changes no schedule and emails nobody else. See [Sending the notes to somebody](#sending-the-notes-to-somebody).
 
@@ -544,7 +544,7 @@ If you would like another team member to review or edit the draft before you app
 
 Your colleague receives an email with a link to the same draft portal. They will also need to sign in with their WordPress account. Once added, they have the same editing rights as you — they can save edits and approve the post.
 
-**Send to a Colleague** is not available when you opened the draft from a copied appearance-package link that has not been sent yet. Ask the site owner to **Send package** if you need to invite someone else, or if you need to edit the article body.
+**Send to a Colleague** is not available when you opened the draft from a copied appearance-package link that has not been sent yet. Ask the site owner to **Send bundle** if you need to invite someone else, or if you need to edit the article body.
 
 ---
 
@@ -604,7 +604,7 @@ You don't have to open an article to reach the calendar. The same **Calendar** b
 
 From the calendar you can:
 
-- **Select a post** to open its details card — the full title, its featured image, when it publishes, who is reviewing it, how much feedback it has, and a checklist of what it still needs before it can go live. From the same card you can pick an exact date and time. This works on every device, including phones and tablets.
+- **Select a post** to open its details card — the full title, its featured image, when it publishes, who is reviewing it, how much feedback it has, and a checklist of what it still needs before it can go live. From the same card you can pick an exact date and time. A past date publishes immediately and keeps that date as the post's publish date; a time less than a minute away publishes now. This works on every device, including phones and tablets.
 - **Drag a scheduled post to a new day** to move it to a different publish date. Dragging needs a mouse or trackpad — on a touchscreen, select the post instead.
 - **Drag a post from Unscheduled drafts onto a day** to give it a publish date.
 - **Drag an article that is holding a slot to a new day** to turn that hold into a real schedule. It keeps the time the slot reserved — only the day moves.
@@ -673,6 +673,7 @@ Every reviewer-facing email — a new draft, an updated draft, a change request,
 - **"Received" means received.** Each row shows the date the article arrived for review, and it keeps showing that date no matter what happens to the article afterwards — scheduling it, moving it, or cancelling the schedule. A scheduled article shows both: when it arrived, and when it will publish.
 - **The calendar is here too.** A **Calendar** button sits at the top of the page, next to **Sign out**. It opens the same month view described in [Use the content calendar](#step-6-use-the-content-calendar) — the same grid, the same **Unscheduled drafts** list, color key, phone view, details card and drag-to-reschedule — so you can see what else is coming up without opening an article first. The button appears only for accounts that are allowed to use the calendar; if you don't see it, ask your site administrator. The same permission rules apply once it's open: you can only move articles you're allowed to edit, and scheduling or unscheduling one follows the site's **Who can publish** setting.
 - **The newest items first.** The queue lists up to 100 articles, drawn from the most recently updated drafts on the site. If there are more than that, or if the site has a very large backlog of drafts awaiting review, the page tells you so with a note reading *"Older items may not be listed."* When you see that note, older articles may be waiting on you even though they aren't shown — open them from their original review email, or ask your site administrator.
+- **A page-review bundle uses the same queue.** **See all my reviews** from a bundle opens this same page filtered to that bundle's remaining items, with the bundle name under **Your Reviews**. If the bundle is missing or you are not listed on it, the page stays empty — it does not fall back to every draft you can review. A bundle list is not limited to the site-wide newest 100 drafts, so older items in that bundle still appear.
 
 Bookmark the queue page, or just click the footer link in your next review email, to check what's waiting on you at any time. Site owners can also reach it from **Content Pipelines → Log**, using the **Open my review queue** button.
 
@@ -927,17 +928,18 @@ Click **Save settings** at the bottom of the panel to apply your changes. The ne
 
 You don't have to wait for a draft from your content source to use the portal. There are three ways in:
 
-- **From the posts list.** In the WordPress **Posts** (or **Pages**) list, hover over any post you can edit and click the **Review Portal** link in its row of actions. On **Posts** only, you also get **Review appearance** for the themed site preview; **Pages** use a single **Review Portal** link, which already opens that preview.
-- **From the post itself.** While editing a **post**, the toolbar offers **Open Review Portal** (the editor) and **Open Review appearance** (the themed preview). While editing a **page**, only **Open Review Portal** appears — it opens the themed preview.
-- **From the live article.** While signed in and reading a published **post** on your own site, the toolbar offers both **Open Review Portal** and **Open Review appearance**. On a **page**, only **Open Review Portal** appears.
+- **From the posts list.** In the WordPress **Posts** (or **Pages**) list, hover over any post you can edit and click the **Review Portal** link in its row of actions. For **Posts** and any content type your pipelines publish into, you also get **Review Appearance** for the themed site preview; **Pages** use a single **Review Portal** link, which already opens that preview.
+- **From the post itself.** While editing a **post** or a pipeline-target content type in the **classic editor**, the area above the editor offers **Open Review Portal** (the editor) and **Open Review Appearance** (the themed preview). In the **block editor**, those same links sit in the **Status & visibility** panel, and the toolbar still offers them. While editing a **page**, only **Open Review Portal** appears — it opens the themed preview.
+- **From Review Appearance.** When you are in the themed preview for a post (not a page), use **Review Content** in the top bar to jump back to the full review editor.
+- **From the live article.** While signed in and reading a published **post** on your own site, the toolbar offers both **Open Review Portal** and **Open Review Appearance**. On a **page**, only **Open Review Portal** appears.
 
 :::tip Can't see the toolbar while editing?
-The WordPress editor's **fullscreen mode** hides the toolbar, and with it the **Open Review Portal** link. Open the editor's options menu (the three dots, top right) and switch **Fullscreen mode** off, or use the posts-list row action instead.
+The WordPress editor's **fullscreen mode** hides the toolbar. Use **Open Review Portal** in the **Status & visibility** panel (block editor), the area above the editor (classic editor), or the posts-list row action.
 :::
 
 Any of them issues a fresh secure link for that post and opens the portal in a new tab — the same review window contributors see, with the same expiry window as an emailed link. This lets you put an existing post (or one written by hand) through the same review-and-approve flow.
 
-The **Review Portal** action appears on posts and pages, and on any other content type your content sources publish into. **Review appearance** is offered only for standard **Posts**. It won't appear on unrelated content types added by other plugins.
+The **Review Portal** action appears on posts and pages, and on any other content type your content sources publish into. **Review Appearance** is offered for **Posts** and those same pipeline-target types, not for **Pages** or unrelated content types added by other plugins.
 
 ---
 
