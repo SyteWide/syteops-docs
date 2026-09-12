@@ -73,7 +73,7 @@ Features that have per-feature AI configuration:
 
 There are two ways to set per-feature AI configuration:
 
-1. **From the feature's own settings card** — for example the **AI Models** card on the Content Pipelines → Review Portal view, which is where the Content, GEO, Ingest, Social and Image SEO areas are set, or the Enrichment Settings section on the System / API tab for LinkCentral.
+1. **From the feature's own settings card** — for example the **AI Models** group on the Content Pipelines → Review Portal view, which is where the Content, GEO, Ingest, Social and Image SEO areas are set, or the Enrichment Settings section on the System / API tab for LinkCentral.
 2. **From the integration or module tile** — click **Configure AI Provider** on the integration card (Integrations tab) or the dropdown on the Modules tab. A modal opens with provider, model, and max-tokens fields. Saving the modal writes directly via AJAX — you don't need to navigate to the feature's settings tab first.
 
 Not every feature offers both routes: the **Configure AI Provider** modal appears only on tiles that carry that control, so features whose controls already render on their own settings card — Content, GEO, Ingest, Image SEO, and Social among them — are set there.

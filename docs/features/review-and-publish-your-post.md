@@ -51,7 +51,7 @@ The review portal brings its own look and scripts. After you install a SyteOps u
 
 ## Step 3: Review and edit the draft
 
-Once you are signed in, the portal shows the full draft. The header brand (logo and company name) opens the WordPress Dashboard in a new tab when you click it. In the article editor, the top bar uses two rows—brand and draft status on the first row, calendar, queue, WordPress links, secure session, and your account on the second—so logos and names are not squeezed on narrow screens. **See all my reviews** in that bar opens your full review queue without leaving the portal session.
+Once you are signed in, the portal shows the full draft. The header brand (logo and company name) opens the WordPress Dashboard in a new tab when you click it. In the article editor, the top bar uses two rows — logo and status pill on the first row (status on the far right), nav pills under the logo and **Signed in as** on the right of the second — so logos and names are not squeezed on narrow screens. **See all my reviews** in that bar opens your full review queue without leaving the portal session.
 
 You can edit the core article fields as well as the SEO details, AI visibility settings, and categories and tags.
 
@@ -63,11 +63,11 @@ Tables and other formatting in the article body are shown the way they will look
 
 Some reviews open as they will look on your live site, instead of as a body you type into. That is how a **page** is reviewed, and it is also how an article opens when you choose **Review Appearance**.
 
-The preview is a private full-page view (no WordPress admin bar). Height **Auto** matches the page; tablet and phone widths sit centered. You can switch among three widths — a wide screen (1440), a tablet (768), and a phone (390) — without leaving the portal. Use **Refresh** if the preview needs to load again. If it cannot load inside the portal, you will see **couldn't embed this preview** and an **Open in a new tab** link.
+The preview is a private full-page view (no WordPress admin bar). The toolbar is **Window** (1440 / 768 / 390), then **Height** (Auto / 800 / 1200 / Full), then **Refresh**. Height **Auto** matches the page content; tablet and phone widths sit centered. If the preview cannot load inside the portal, you will see **couldn't embed this preview** and an **Open in a new tab** link.
 
 Saving from this view never changes the page or article body. Title, summary, and the other review fields still save as usual.
 
-Click a page element in the preview to leave a note. A pin on the preview and its Feedback row share the same color. If that element has moved, the row is marked Moved rather than guessed. Handling or deleting a note in Feedback updates the pin on the preview at the same time — you do not need to refresh.
+Click a page element in the preview to leave a note. The click opens a note dialog instead of following the page. A pin on the preview and its Feedback row share the same color. If that element has moved, the row is marked Moved rather than guessed. Handling or deleting a note in Feedback updates the pin on the preview at the same time — you do not need to refresh.
 
 You can also send **one review link for several pages or posts**. Under **Content Pipelines → Review Portal → Page Reviews**, name the bundle, add the items in the order they should be walked, pick the reviewers, then **Save bundle**. **Send bundle** emails those reviewers a card for every item; **See all my reviews** on that mail opens the review queue filtered to the bundle. Click a page in the list to select it, then **Send page** emails that one page or post as a page review without saving it into a bundle. **Copy link** copies the same walk link without emailing anyone. The reviewer opens a single link and uses the strip above the preview to move to the next or previous item. Comments stay on the item they are looking at.
 
@@ -200,7 +200,7 @@ The picture also keeps its own proportions. A square or portrait photo used to c
 
 The new version also keeps the original picture's title, alt text, caption and description, rather than arriving in your media library with a made-up name and nothing written about it. The one exception: if the original's title is nothing more than its file name — something like `IMG_4471` — that isn't carried over, since a file name isn't a title anyone chose. This looks past the file names WordPress makes up on your behalf, too: when a name is already taken it adds a number, it saves a smaller copy of a very large photo, it turns a sideways photo the right way up, and it saves a separate copy when you crop. A picture still titled `IMG_4471` is recognized in all of those cases. When the title is refused this way, the new version is named after the original's alt text instead, or after the article if there is no alt text. If the article has no title of its own either, there is nothing left to borrow, and the picture keeps its generated name. The file itself still gets a generated name on your server either way; it's the title, alt text, caption and description shown in the media library that come from the original.
 
-Your site administrator sets the defaults under **Content Pipelines → Review Portal → Setup → AI Models → Making pictures**; each Generate can override them.
+Your site administrator sets the defaults under **Content Pipelines → Review Portal → AI Models → Image generation**; each Generate can override them.
 
 **How much credit is left.** At the end of the **Modify with AI** heading row sits a small pill showing
 the image service's remaining balance, with a **Refresh** icon button built into it — its hover title
@@ -306,7 +306,7 @@ button is hidden.
 
 ### Notes on an image
 
-Click any picture in the article — or the featured image — and **Notes on This Image** is the first thing in the panel. Type what is wrong with the picture and click **Save note**. Under that heading you can attach a **Reference image** so later Modify with AI remixes start from that tagged picture unless you pick a one-off source for a single generate.
+Click any picture in the article — or the featured image — and **Notes on This Image** is the first thing in the panel. Type what is wrong with the picture and click **Save note**. Under **Save note**, on every one of those panels, is **Attach reference image**, so later Modify with AI remixes start from that tagged picture unless you pick a one-off source for a single generate. If the picture is still only a web address and has not been imported into your media library, **Pick** stays disabled and the panel tells you to import the picture first.
 
 The heading carries a count of the notes on that picture nobody has resolved yet, so you can tell at a glance whether a picture still has something outstanding without reading the list. A picture with nothing outstanding says nothing.
 
@@ -433,7 +433,10 @@ Once you have finished reviewing all panels, choose one of the action buttons:
 
 You do not have to approve a post to record when it should go out. Tick **Schedule**, pick a date
 and time, and click **Save draft** — the time is kept with the post, and it is still a draft. Open
-it again tomorrow and the time you chose is waiting in the field.
+it again tomorrow and the time you chose is waiting in the field. A date in the past is kept the
+same way: **Save draft** does not snap it to now or drop it. If you later click **Approve & Publish**
+without changing that time, the article goes live and keeps the past date. Unticking **Schedule**
+before you publish still means live now, with today's date.
 
 This matters when your site reserves publishing slots automatically. If the site's publishing
 cadence has already earmarked a moment for the article, the date field opens filled in with that
@@ -450,6 +453,8 @@ time rather than scheduling it. Moving an article that is **already scheduled** 
 still needs publish permission: that changes when something already approved goes live.
 
 On an article that is **already live**, the buttons are different: the main one reads **Save changes**, because there is nothing left to approve, and next to it sits **Revert to draft** for taking the article back off your site. See [Taking a live article back to draft](#taking-a-live-article-back-to-draft).
+
+If you are allowed to publish, a **Published date** field sits with those buttons. Change it to a past or current time and click **Save changes** — the live article keeps that date and stays on your site. A future time is refused: a live article cannot be put back on the schedule. Reviewers who cannot publish do not see the field.
 
 ### Changing or cancelling a schedule
 
@@ -584,7 +589,7 @@ If you posted a note by mistake, click the trash control on your own note. The c
 
 Open a picture, expand **Image Details**, and click **Generate SEO with AI** (a soft-filled button with a sparkle icon). It looks at the actual photo — not at the words around it — and suggests alt text and a caption, which appear in the boxes for you to edit. That includes a remixed version of the photo, even when the remix file is not attached to the article the usual way. When the page is showing a CDN copy, it still describes the file in your media library: the portal sends both the library id and the address on screen, and the server uses the library file. Nothing is saved until you press **Apply**, the same as everywhere else in the portal. If it cannot run, the portal names the reason instead of a generic failure. If the server does not finish looking at the picture, you see **The server did not finish looking at that picture. Try again.** rather than **That did not work.**
 
-**This is not Modify with AI.** Generate SEO uses **Image SEO** — a vision-capable provider and model under Content Pipelines → Review Portal → Setup → AI Models, plus that provider's key on **System / API**. Modify with AI uses SyteHero and remakes the picture. The two are independent: remixing can work while Generate SEO still fails, and the other way around. If Image SEO is not set up, the button is not shown at all.
+**This is not Modify with AI.** Generate SEO uses **Image SEO** — a vision-capable provider and model under Content Pipelines → Review Portal → AI Models, plus that provider's key on **System / API**. Modify with AI uses SyteHero and remakes the picture. The two are independent: remixing can work while Generate SEO still fails, and the other way around. If Image SEO is not set up, the button is not shown at all.
 
 Alt text written from the surrounding article rather than from the picture is confidently wrong about what is in the frame, and a screen reader reads it out as fact. That is why Image SEO AI must point at a model that can actually see an image. See [AI Providers](./ai-providers.md).
 
@@ -605,6 +610,7 @@ You don't have to open an article to reach the calendar. The same **Calendar** b
 From the calendar you can:
 
 - **Select a post** to open its details card — the full title, its featured image, when it publishes, who is reviewing it, how much feedback it has, and a checklist of what it still needs before it can go live. From the same card you can pick an exact date and time. A past date publishes immediately and keeps that date as the post's publish date; a time less than a minute away publishes now. This works on every device, including phones and tablets.
+- **Move a live article** to a past or current day — it stays on your site with that new published date. A future day is refused, so a live article cannot be pulled back onto the schedule. This needs publish permission, same as taking the article back to a draft.
 - **Drag a scheduled post to a new day** to move it to a different publish date. Dragging needs a mouse or trackpad — on a touchscreen, select the post instead.
 - **Drag a post from Unscheduled drafts onto a day** to give it a publish date.
 - **Drag an article that is holding a slot to a new day** to turn that hold into a real schedule. It keeps the time the slot reserved — only the day moves.
@@ -817,22 +823,22 @@ Turn a requirement off if your workflow publishes without it — for example, if
 
 ### AI Models
 
-This lives under **Setup**. Open that group (or use the jump link at the top) if you don't see it.
+This is its own group, **AI Models**, with a jump link at the top. Setup is branding only.
 
 Every AI choice the portal makes is here, in three groups.
 
-**Reading and writing words.** Any capable text model works for these.
+**Text models.** Any capable text model works for these.
 
 - **Content** — rewrites, meta descriptions and taxonomy suggestions inside the portal.
 - **GEO** — the answer-engine analysis in the GEO panel.
 - **Ingest** — proposes how an inbound content-source payload maps to your post fields.
 - **Social** — composes the post text for **Post to Social**. Saved by the Social Publishing card further down, not by this one.
 
-**Looking at pictures.** These need a model that accepts image input, so any provider that cannot take one is shown unselectable — see [AI Providers](./ai-providers.md) for which those are.
+**Vision models.** These need a model that accepts image input, so any provider that cannot take one is shown unselectable — see [AI Providers](./ai-providers.md) for which those are.
 
 - **Image SEO** — what **Generate SEO with AI** uses for alt text and captions. This is not SyteHero and not Modify with AI.
 
-**Making pictures.** These are billed per picture. Each appears only when its provider is available, so you may see one, both, or neither.
+**Image generation.** These are billed per picture. Each appears only when its provider is available, so you may see one, both, or neither.
 
 - **Modify images with AI** — the model, quality, detail preservation and strength used when a reviewer remakes a picture.
 - **Listing image** — the provider, repair model and seed used to repair a watermark on the cropped listing copy. The switch that turns that repair on stays with the rest of the listing-image settings, under **Article images**.

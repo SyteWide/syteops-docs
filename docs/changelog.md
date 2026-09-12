@@ -8,6 +8,36 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.230
+
+- Users keep Model photos on an AI Model subtab; Review Portal AI Models, header, and Appearance Window and Height
+- Saving a draft keeps a past date; attach a reference image under Save note; media library chrome stays readable
+
+## v1.6.229
+
+- Saving a Review Portal draft keeps a past publish date
+- A live article can change its published date without coming off the site
+
+## v1.6.228
+
+- Review Appearance splits Window and Height on the preview toolbar
+- Clicking the preview opens a note instead of following the page
+
+## v1.6.227
+
+- Review Portal header puts the status pill opposite the logo
+- Nav pills sit under the logo, with Signed in as on the right
+
+## v1.6.226
+
+- Review Portal AI Models is its own settings group, not under Setup
+- Text models, Vision models, and Image generation bands use short names and full-width tints
+
+## v1.6.225
+
+- Users cards keep Model photos and Model consent on an AI Model subtab
+- Roles and Users roster heading, count, and Add User sit centered above the cards
+
 ## v1.6.224
 
 - Reviewers who cannot publish are asked to save a preferred time, not to go live
