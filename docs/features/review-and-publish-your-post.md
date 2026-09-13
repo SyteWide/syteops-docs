@@ -934,7 +934,7 @@ Click **Save settings** at the bottom of the panel to apply your changes. The ne
 
 You don't have to wait for a draft from your content source to use the portal. There are three ways in:
 
-- **From the posts list.** In the WordPress **Posts** (or **Pages**) list, hover over any post you can edit and click the **Review Content** link in its row of actions. For **Posts** and any content type your pipelines publish into, you also get **Review Appearance** for the themed site preview; **Pages** use a single **Review Content** link, which already opens that preview. A draft that already has a publishing time shows that moment in the **Date** column as **Planned** (you chose it) or **Slot held** (cadence reserved it). **Quick Edit** adds a read-only **Publishes** line for the same moment — WordPress **Date** on a draft is still last modified, not that publishing time.
+- **From the posts list.** In the WordPress **Posts** list, hover over any post you can edit and click the **Review Content** link in its row of actions. For **Posts** and any content type your pipelines publish into, you also get **Review Appearance** for the themed site preview. In the **Pages** list the row action is **Review Appearance**. A draft that already has a publishing time shows that moment in the **Date** column as **Planned** (you chose it) or **Slot held** (cadence reserved it). **Quick Edit** adds a read-only **Publishes** line for the same moment — WordPress **Date** on a draft is still last modified, not that publishing time.
 - **From the post itself.** While editing a **post** or a pipeline-target content type in the **classic editor**, the area above the editor offers **Open Review Content** (the editor) and **Open Review Appearance** (the themed preview). In the **block editor**, those same links sit in the **Status & visibility** panel, and the toolbar still offers them. While editing a **page**, only **Open Review Content** appears — it opens the themed preview.
 - **From the review editor.** For a post (not a page), use **Review Appearance** in the top bar to open the themed preview.
 - **From Review Appearance.** When you are in the themed preview for a post (not a page), use **Review Content** in the top bar to jump back to the full review editor.
@@ -946,7 +946,7 @@ The WordPress editor's **fullscreen mode** hides the toolbar. Use **Open Review 
 
 Any of them issues a fresh secure link for that post and opens the portal in a new tab — the same review window contributors see, with the same expiry window as an emailed link. This lets you put an existing post (or one written by hand) through the same review-and-approve flow.
 
-The **Review Content** action appears on posts and pages, and on any other content type your content sources publish into. **Review Appearance** is offered for **Posts** and those same pipeline-target types, not for **Pages** or unrelated content types added by other plugins.
+The **Review Content** action appears on posts and on any other content type your content sources publish into. **Review Appearance** is offered for those same types and for **Pages**. Unrelated content types added by other plugins do not get either action.
 
 ---
 
