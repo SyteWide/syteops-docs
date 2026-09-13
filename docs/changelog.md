@@ -8,6 +8,15 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.238
+
+- Review Portal on a phone shows the full article title and the Content Review line without clipping
+- The header and footer are more compact, and Hide tools frees the screen for editing
+
+## v1.6.237
+
+- Pages list now says Review Appearance, matching the themed preview that link opens
+
 ## v1.6.236
 
 - AI Models blurbs for Content, Ingest, and Social match how those areas actually work
