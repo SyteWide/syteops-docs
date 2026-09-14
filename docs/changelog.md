@@ -8,6 +8,25 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.242
+
+- Internal improvements and maintenance
+
+## v1.6.241
+
+- Assign insert, edit, and link suggestions on the review screen per reviewer type
+- Review screen docs cover editing an existing link, Open in a new tab, and the Links panel
+
+## v1.6.240
+
+- Suggest library and cross-article links from the review screen
+- Check whether those links are live
+
+## v1.6.239
+
+- Insert or edit a Review Portal link without the article jumping to the top
+- Open in a new tab on that insert/edit dialog
+
 ## v1.6.238
 
 - Review Portal on a phone shows the full article title and the Content Review line without clipping
