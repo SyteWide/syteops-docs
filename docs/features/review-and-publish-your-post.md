@@ -256,11 +256,11 @@ article does not change.
 
 Up to three controls sit on each card.
 
-- **Put in article** — formerly labeled **Replace** — puts that version into the article. It is the
+- **Use in article** — formerly labeled **Put in article** — puts that version into the article. It is the
   only thing that changes the picture your readers will see, and you can press it as often as you like
   — including on the original, to put things back exactly as they were. The one version you cannot put
   in the article is the one the article is already showing: instead of the button, that card shows
-  **In the article** with a check, and asking for it anyway is refused rather than quietly recorded as
+  **In use** with a check, and asking for it anyway is refused rather than quietly recorded as
   a change nobody made.
 - **Keep** (now with a bookmark icon) marks a version worth holding on to, and pressing it again
   releases it — the button reads **Kept** while it is on. Versions you have not kept are tidied away on
@@ -274,32 +274,20 @@ Up to three controls sit on each card.
   confirm says so. Any notes left on that version move to the picture your article is showing, so a
   note never outlives the picture it is about.
 
-**Put in article can tidy up after itself.** Above the controls sits a checkbox — **Delete the picture
-it replaces from the media library** — that applies to **Put in article** and to nothing else. Tick it
-and the swap is saved first, then the picture your article moved off is deleted. It starts off every
-time you open a picture, so it can never carry over from the last one you were looking at.
-
-It is a tidy-up rather than a shortcut, and every refusal below still applies to it. When one of them
-stops the deletion the picture is simply kept, you are told which reason it was, and the replacement
-itself still stands — a swap is never undone because the tidying was refused. After you first put a
-version in the article, ticking the box can delete the picture the article arrived with, once the
-article is no longer showing it. That original then leaves the grid, and **Restore original** is no
-longer offered for that picture.
+**Use in article never deletes a file.** It only changes which picture the article shows. To remove
+a version from your media library, use the trash icon on that card.
 
 Some versions carry fewer than three controls, because some of them are refused on purpose. A
-picture another article is also using is never deleted from the library — whether you pressed
-**Delete** or the tidying did it for you. The version your article is currently showing can be
-deleted: it is removed from this article first.
+picture another article is also using is never deleted from the library. The version your article
+is currently showing can be deleted: it is removed from this article first.
 
-Two more refusals apply to the **Delete** button only, because they are about you and about this
-moment rather than about the picture:
+Two more refusals apply to **Delete**, because they are about you and about this moment rather
+than about the picture:
 
 - nothing is deleted at all if your account is not allowed to delete media on this site;
 - and a picture a remix is still running on is left alone — wait for that to finish.
 
-Whenever it is you doing the deleting, you are told which of those applies rather than simply being
-refused. The automatic tidying says nothing either way — it only ever passes over a picture it is
-not allowed to take.
+Whenever Delete is refused, you are told which of those applies rather than simply being refused.
 
 If a version has already been removed from your media library some other way — from the Media
 Library screen, say, while your grid was open — pressing **Delete** on it simply tidies it out of the
