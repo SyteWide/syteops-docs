@@ -8,6 +8,16 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.244
+
+- Review screen Use in article no longer deletes the picture it replaced
+- Use the trash icon on a version card to remove a picture from the media library
+
+## v1.6.243
+
+- Review screen Links fields match the other cards, and View article stays readable on any brand color
+- Remix cards say Use in article; deleting a replaced original works unless another article really uses it
+
 ## v1.6.242
 
 - Internal improvements and maintenance
