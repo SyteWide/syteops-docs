@@ -102,16 +102,21 @@ Choose **Full** if your articles routinely need code snippets or pull quotes. Ch
 
 **Pasting from Word or Google Docs** no longer brings that document's fonts, colors and spacing with it. The words, and the formatting your chosen level allows, come through; the rest is dropped. This affects only what you paste in — it never changes formatting that is already in the article.
 
-To check that a link in the article goes where it should, hold **Command** (Mac) or **Ctrl** (Windows) and click it. The address opens in a new tab so you stay in the Review Portal. A regular click still lets you edit the linked words.
+To check that a link in the article goes where it should, hold **Command** (Mac) or **Ctrl** (Windows) and click it. The address opens in a new tab so you stay in the Review Portal. A regular click still lets you edit the linked words. That gesture does not change how the link is stored.
 
-The **link** button (🔗) lets you add a hyperlink, and the **remove-link** button (🔗✕) strips the link from selected text:
+The **link** button (🔗) lets you add or edit a hyperlink, and the **remove-link** button (🔗✕) strips the link from selected text:
 
-1. Select the words you want to turn into a link (or place your cursor where the link should go).
+1. Select the words you want to turn into a link, or place your cursor inside an existing link.
 2. Click the **link** button to open the link picker.
-3. If your site uses **LinkCentral** to manage links, the picker lists your managed links — start typing in the search box to filter, then click one to insert it. The portal inserts the managed link so clicks are tracked and routed by LinkCentral.
-4. To link to any other web address, paste it into the **URL** field and click **Insert link**.
+3. If your cursor is already in a link, the **URL** field is filled in and the button reads **Update link**. Changing the address updates that link; it does not nest a second one.
+4. If your site uses **LinkCentral** to manage links, the picker lists your managed links — start typing in the search box to filter, then click one to insert it. The portal inserts the managed link so clicks are tracked and routed by LinkCentral.
+5. To link to any other web address, paste it into the **URL** field and click **Insert link** (or **Update link**).
+6. Tick **Open in a new tab** if readers should leave your site in a new tab. Clearing it removes that setting from the link.
+7. **Check** in the dialog tests whether that one address is live. It does not change the article.
 
 To remove a link, select the linked text and click the **remove-link** button. If LinkCentral is not connected on your site, the picker simply shows the paste-a-URL field.
+
+If an operator has set **Insert and edit links** to **View only** for your reviewer type, the link and remove-link buttons stay visible but cannot be used. Command/Ctrl-click still opens a link to test it.
 
 ### Featured Image
 
@@ -406,6 +411,20 @@ Use it sparingly. If everything is a pillar, nothing is — the point is to tell
 of pages to trust first.
 
 This setting is saved when you click the panel's **Save** button, **Save draft**, or **Approve & Publish**.
+
+### Links
+
+The **Links** panel appears when your site uses **LinkCentral** and the article is in the editorial or full editor (not the minimal toolbar, and not a page preview). It sits under GEO.
+
+- **Analyze** scans the article you are looking at and lists suggested library and cross-article links. It does not change the article until you apply.
+- Cherry-pick by ticking the suggestions you want, then **Apply selected**, or use **Apply all** to take every suggestion from a fresh scan.
+- **Check whether links are live** (the **Check** button) tests the addresses already in the article, and any suggestions on the list. Live or dead is shown next to each one. Check does not change the article.
+
+Cross-article suggestions use the categories and tags already saved on the post. Save first if you just changed them.
+
+Linking options (how many cross-article links, keyword matching, and so on) start from your site's LinkCentral settings. Changing them here applies only to this scan; it does not rewrite those site settings.
+
+If an operator has set **Link suggestions** to **View only**, you can see the panel but Analyze, Apply, and Check are disabled. **Hide** removes the panel. You can still insert or edit a single link from the toolbar unless **Insert and edit links** is also View only.
 
 ### Categories and tags
 
@@ -912,6 +931,8 @@ Permissions are set by reviewer type (role). The panel shows a row for each role
 | **Permalink** | Edit (full) or View only |
 | **SEO** | Edit (full) or View only |
 | **GEO** | Edit (full) or View only |
+| **Insert and edit links** | Edit (full) or View only. View only leaves the toolbar buttons visible but disabled. Command/Ctrl-click still opens a link to test it. |
+| **Link suggestions** | Edit (full), View only, or Hide. This column only appears when LinkCentral is installed and active. Hide removes the Links panel. View only shows it with Analyze, Apply, and Check disabled. |
 | **Reviewers** | Allow (can add/remove reviewers) or Hide (reviewer panel not shown) |
 | **Modify with AI** | Allow or Hide (the whole Modify with AI block). This column only appears when SyteHero is installed and active. |
 | **Categories & tags** | Edit and create new terms, Edit using existing terms only, or View only |
