@@ -8,6 +8,16 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.279
+
+- Your private page shows your logo again instead of a letter tile. It resolves the logo in the same order as the review screen: a review portal logo override, then your login logo, then your company logo.
+
+## v1.6.278
+
+- Review rows, bundle headings and content-health items on your private page open in a new tab, as does the calendar card's Edit in WordPress link, so the page stays where you left it.
+- The review screen's top bar chip reads My Portal when it opens your private page.
+- Active filter pills and primary buttons shown as links keep white text on their colored fill.
+
 ## v1.6.277
 
 - Featured images on your review rows now sit vertically centered beside the title and status.
