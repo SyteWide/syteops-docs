@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.286
+
+- The welcome email now shows the person's profile picture when they have one, adds reviewing how their page looks and what it says to the list of things they can do, drops the Welcome tag at the top, and carries the company logo in the footer in place of the name.
+
 ## v1.6.285
 
 - The Debug tool's Clear Normalize Marker card now shows the server's own error message when a request is refused or fails, instead of a generic "Request failed."
