@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.280
+
+- Your private page header shows your logo at its full lockup size, with no tile behind it, no site name beside it, and "powered by" to its right, as it did before.
+
 ## v1.6.279
 
 - Your private page shows your logo again instead of a letter tile. It resolves the logo in the same order as the review screen: a review portal logo override, then your login logo, then your company logo.
