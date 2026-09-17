@@ -21,7 +21,7 @@ Permanently delete a lead and its events (best-effort moves its RingTonic contac
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
-| `id` | integer | yes |  |
+| `id` | integer | yes | Record id, digits only. |
 | `confirm` | boolean | no |  |
 
 
@@ -82,7 +82,7 @@ Get one lead with attribution, event timeline, and chain status.
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
-| `id` | integer | yes |  |
+| `id` | integer | yes | Record id, digits only. |
 
 
 **Returns**
@@ -111,7 +111,7 @@ Store the RingTonic contact id on a lead (the reconcile calls this after matchin
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
-| `id` | integer | yes |  |
+| `id` | integer | yes | Record id, digits only. |
 | `rt_contact_id` | string | yes |  |
 
 
@@ -177,7 +177,7 @@ Set a lead's pipeline status (New/Contacted/Qualified/Unqualified/Customer). Use
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
-| `id` | integer | yes |  |
+| `id` | integer | yes | Record id, digits only. |
 | `status` | string | yes |  |
 
 
@@ -208,7 +208,7 @@ Verify the tamper-evident integrity chain for a lead.
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
-| `id` | integer | yes |  |
+| `id` | integer | yes | Record id, digits only. |
 
 
 **Returns**

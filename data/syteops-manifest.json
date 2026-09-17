@@ -1,6 +1,6 @@
 {
     "schema_version": 1,
-    "syteops_version": "1.6.280",
+    "syteops_version": "1.6.285",
     "operations": [
         {
             "resource": "users",
@@ -18,7 +18,9 @@
             "params": {
                 "user_num": {
                     "type": "string",
-                    "required": true
+                    "format": "slot",
+                    "required": true,
+                    "description": "Slot number, one to three digits, for example 007 or 7."
                 }
             },
             "destructive": false,
@@ -64,7 +66,10 @@
                     "type": "url"
                 },
                 "link_profile_pic_attachment_id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "record_id",
+                    "required": false,
+                    "description": "Record id, digits only."
                 },
                 "model_photo_ids": {
                     "type": "object",
@@ -98,7 +103,9 @@
             "params": {
                 "user_num": {
                     "type": "string",
-                    "required": true
+                    "format": "slot",
+                    "required": true,
+                    "description": "Slot number, one to three digits, for example 007 or 7."
                 },
                 "first_name": {
                     "type": "string"
@@ -134,7 +141,10 @@
                     "type": "url"
                 },
                 "link_profile_pic_attachment_id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "record_id",
+                    "required": false,
+                    "description": "Record id, digits only."
                 },
                 "model_photo_ids": {
                     "type": "object",
@@ -168,7 +178,9 @@
             "params": {
                 "user_num": {
                     "type": "string",
-                    "required": true
+                    "format": "slot",
+                    "required": true,
+                    "description": "Slot number, one to three digits, for example 007 or 7."
                 },
                 "confirm": {
                     "type": "boolean"
@@ -177,6 +189,28 @@
             "destructive": true,
             "capability": "manage_options",
             "returns": "data: {user_num, deleted: true}"
+        },
+        {
+            "resource": "users",
+            "action": "send_welcome_email",
+            "summary": "Email the person their personal page link at their stored work email. Requires a saved work email and a linked WordPress account. dry_run previews eligibility and the destination without sending, and still requires confirm:true. A repeat to the same address within 5 minutes is refused.",
+            "params": {
+                "user_num": {
+                    "type": "string",
+                    "format": "slot",
+                    "required": true,
+                    "description": "Slot number, one to three digits, for example 007 or 7."
+                },
+                "confirm": {
+                    "type": "boolean"
+                },
+                "dry_run": {
+                    "type": "boolean"
+                }
+            },
+            "destructive": true,
+            "capability": "manage_options",
+            "returns": "data: {eligible, outcome, to, retry_after}"
         },
         {
             "resource": "status",
@@ -450,7 +484,9 @@
             "params": {
                 "crm_num": {
                     "type": "string",
-                    "required": true
+                    "format": "slot",
+                    "required": true,
+                    "description": "Slot number, one to three digits, for example 007 or 7."
                 }
             },
             "destructive": false,
@@ -484,7 +520,9 @@
             "params": {
                 "crm_num": {
                     "type": "string",
-                    "required": true
+                    "format": "slot",
+                    "required": true,
+                    "description": "Slot number, one to three digits, for example 007 or 7."
                 },
                 "name": {
                     "type": "string"
@@ -507,7 +545,9 @@
             "params": {
                 "crm_num": {
                     "type": "string",
-                    "required": true
+                    "format": "slot",
+                    "required": true,
+                    "description": "Slot number, one to three digits, for example 007 or 7."
                 },
                 "confirm": {
                     "type": "boolean"
@@ -524,7 +564,9 @@
             "params": {
                 "crm_num": {
                     "type": "string",
-                    "required": true
+                    "format": "slot",
+                    "required": true,
+                    "description": "Slot number, one to three digits, for example 007 or 7."
                 },
                 "api_key": {
                     "type": "string",
@@ -636,7 +678,9 @@
                 },
                 "user_num": {
                     "type": "string",
-                    "required": true
+                    "format": "slot",
+                    "required": true,
+                    "description": "Slot number, one to three digits, for example 007 or 7."
                 }
             },
             "destructive": false,
@@ -654,7 +698,9 @@
                 },
                 "user_num": {
                     "type": "string",
-                    "required": true
+                    "format": "slot",
+                    "required": true,
+                    "description": "Slot number, one to three digits, for example 007 or 7."
                 }
             },
             "destructive": false,
@@ -759,7 +805,9 @@
             "params": {
                 "id": {
                     "type": "integer",
-                    "required": true
+                    "format": "record_id",
+                    "required": true,
+                    "description": "Record id, digits only."
                 }
             },
             "destructive": false,
@@ -786,7 +834,9 @@
             "params": {
                 "id": {
                     "type": "integer",
-                    "required": true
+                    "format": "record_id",
+                    "required": true,
+                    "description": "Record id, digits only."
                 }
             },
             "destructive": false,
@@ -800,7 +850,9 @@
             "params": {
                 "id": {
                     "type": "integer",
-                    "required": true
+                    "format": "record_id",
+                    "required": true,
+                    "description": "Record id, digits only."
                 },
                 "status": {
                     "type": "string",
@@ -818,7 +870,9 @@
             "params": {
                 "id": {
                     "type": "integer",
-                    "required": true
+                    "format": "record_id",
+                    "required": true,
+                    "description": "Record id, digits only."
                 },
                 "rt_contact_id": {
                     "type": "string",
@@ -836,7 +890,9 @@
             "params": {
                 "id": {
                     "type": "integer",
-                    "required": true
+                    "format": "record_id",
+                    "required": true,
+                    "description": "Record id, digits only."
                 },
                 "confirm": {
                     "type": "boolean"
@@ -853,7 +909,9 @@
             "params": {
                 "post_id": {
                     "type": "integer",
-                    "required": true
+                    "format": "record_id",
+                    "required": true,
+                    "description": "Record id, digits only."
                 },
                 "recipe_id": {
                     "type": "string"
@@ -881,7 +939,10 @@
                     "type": "integer"
                 },
                 "post_id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "record_id",
+                    "required": false,
+                    "description": "Record id, digits only."
                 },
                 "recipe_id": {
                     "type": "string"
@@ -901,7 +962,9 @@
             "params": {
                 "id": {
                     "type": "integer",
-                    "required": true
+                    "format": "record_id",
+                    "required": true,
+                    "description": "Record id, digits only."
                 }
             },
             "destructive": false,
@@ -1045,7 +1108,10 @@
                     "type": "string"
                 },
                 "default_author_id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "record_id",
+                    "required": false,
+                    "description": "Record id, digits only."
                 },
                 "pin_author": {
                     "type": "boolean"
@@ -1125,7 +1191,10 @@
                     "type": "string"
                 },
                 "default_author_id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "record_id",
+                    "required": false,
+                    "description": "Record id, digits only."
                 },
                 "pin_author": {
                     "type": "boolean"

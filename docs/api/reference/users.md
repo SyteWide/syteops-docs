@@ -8,7 +8,7 @@ description: Manage API operations for the users resource.
 
 # `users`
 
-5 operation(s). All run through `POST /syteops/v1/manage/dispatch` (reads may use the documented GET form).
+6 operation(s). All run through `POST /syteops/v1/manage/dispatch` (reads may use the documented GET form).
 
 ## `create`
 
@@ -31,7 +31,7 @@ Create a SyteOps team-member record in the next free slot and fill its fields. A
 | `email_alternate` | email | no |  |
 | `email_personal` | email | no |  |
 | `link_profile_pic` | url | no |  |
-| `link_profile_pic_attachment_id` | integer | no |  |
+| `link_profile_pic_attachment_id` | integer | no | Record id, digits only. |
 | `model_photo_ids` | object | no | Curated Model photo attachment ids. Site-local; not portable to another site. |
 | `model_photo_exclude_profile` | string | no | '1' excludes the profile picture from the curated Model photo set; '' includes it. |
 | `model_consent_granted` | string | no | The Model consent flag and the only consent signal: '1' or ''. |
@@ -82,7 +82,7 @@ Soft-delete a SyteOps team-member record and blank its editable fields (frees it
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
-| `user_num` | string | yes |  |
+| `user_num` | string | yes | Slot number, one to three digits, for example 007 or 7. |
 | `confirm` | boolean | no |  |
 
 
@@ -114,7 +114,7 @@ Get one SyteOps team-member record by slot number (e.g. "003").
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
-| `user_num` | string | yes |  |
+| `user_num` | string | yes | Slot number, one to three digits, for example 007 or 7. |
 
 
 **Returns**
@@ -158,6 +158,41 @@ data.users[]: array of &#123;user_num, ...fields}
 }
 ```
 
+## `send_welcome_email`
+
+Email the person their personal page link at their stored work email. Requires a saved work email and a linked WordPress account. dry_run previews eligibility and the destination without sending, and still requires confirm:true. A repeat to the same address within 5 minutes is refused.
+
+**🔴 Destructive** — requires `confirm: true`.  
+**Capability:** `manage_options`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `user_num` | string | yes | Slot number, one to three digits, for example 007 or 7. |
+| `confirm` | boolean | no |  |
+| `dry_run` | boolean | no |  |
+
+
+**Returns**
+
+data: &#123;eligible, outcome, to, retry_after}
+
+**Request**
+
+```json
+{
+  "resource": "users",
+  "action": "send_welcome_email",
+  "params": {
+    "user_num": "string",
+    "confirm": true,
+    "dry_run": true
+  },
+  "confirm": true
+}
+```
+
 ## `update`
 
 Update fields on an existing SyteOps team-member record.
@@ -168,7 +203,7 @@ Update fields on an existing SyteOps team-member record.
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
-| `user_num` | string | yes |  |
+| `user_num` | string | yes | Slot number, one to three digits, for example 007 or 7. |
 | `first_name` | string | no |  |
 | `last_name` | string | no |  |
 | `full_name` | string | no |  |
@@ -180,7 +215,7 @@ Update fields on an existing SyteOps team-member record.
 | `email_alternate` | email | no |  |
 | `email_personal` | email | no |  |
 | `link_profile_pic` | url | no |  |
-| `link_profile_pic_attachment_id` | integer | no |  |
+| `link_profile_pic_attachment_id` | integer | no | Record id, digits only. |
 | `model_photo_ids` | object | no | Curated Model photo attachment ids. Site-local; not portable to another site. |
 | `model_photo_exclude_profile` | string | no | '1' excludes the profile picture from the curated Model photo set; '' includes it. |
 | `model_consent_granted` | string | no | The Model consent flag and the only consent signal: '1' or ''. |

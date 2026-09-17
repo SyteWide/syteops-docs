@@ -54,7 +54,7 @@ Delete a CRM slot: clears fields and secret; crm_count stays as high-water mark.
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
-| `crm_num` | string | yes |  |
+| `crm_num` | string | yes | Slot number, one to three digits, for example 007 or 7. |
 | `confirm` | boolean | no |  |
 
 
@@ -86,7 +86,7 @@ Get a single CRM slot by crm_num (e.g. "003").
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
-| `crm_num` | string | yes |  |
+| `crm_num` | string | yes | Slot number, one to three digits, for example 007 or 7. |
 
 
 **Returns**
@@ -141,7 +141,7 @@ Store (encrypted) the API key for a CRM slot. Key is never returned.
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
-| `crm_num` | string | yes |  |
+| `crm_num` | string | yes | Slot number, one to three digits, for example 007 or 7. |
 | `api_key` | string | yes |  |
 
 
@@ -172,7 +172,7 @@ Update editable fields on an existing CRM slot.
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
-| `crm_num` | string | yes |  |
+| `crm_num` | string | yes | Slot number, one to three digits, for example 007 or 7. |
 | `name` | string | no |  |
 | `url` | url | no |  |
 | `link_admin_only` | boolean | no |  |

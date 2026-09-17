@@ -21,7 +21,7 @@ Assign a user (slot number) to a role.
 | Parameter | Type | Required | Description |
 |---|---|---|---|
 | `slug` | string | yes |  |
-| `user_num` | string | yes |  |
+| `user_num` | string | yes | Slot number, one to three digits, for example 007 or 7. |
 
 
 **Returns**
@@ -149,7 +149,7 @@ Unassign a user (slot number) from a role.
 | Parameter | Type | Required | Description |
 |---|---|---|---|
 | `slug` | string | yes |  |
-| `user_num` | string | yes |  |
+| `user_num` | string | yes | Slot number, one to three digits, for example 007 or 7. |
 
 
 **Returns**
