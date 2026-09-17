@@ -8,6 +8,26 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.285
+
+- The Debug tool's Clear Normalize Marker card now shows the server's own error message when a request is refused or fails, instead of a generic "Request failed."
+
+## v1.6.284
+
+- The management API now rejects a malformed slot number or record id instead of guessing which one was meant.
+
+## v1.6.283
+
+- The Manage API can now trigger a person's welcome email on request, with a preview mode that checks eligibility and the destination without sending anything.
+
+## v1.6.282
+
+- The Debug Tool now has a Welcome Email Test Send card. It mails you the real, rendered person welcome email at your own account address, so you can see exactly what a person receives, without marking anyone as sent or waiting between sends.
+
+## v1.6.281
+
+- Each person's card now has a Send Welcome Email button. It mails them a link to their personal page, their WordPress username, and a link to the "Lost your password?" page where they can set or reset a password — with a note showing when it was last sent, and a warning if the link needs resending.
+
 ## v1.6.280
 
 - Your private page header shows your logo at its full lockup size, with no tile behind it, no site name beside it, and "powered by" to its right, as it did before.

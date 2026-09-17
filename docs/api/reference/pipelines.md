@@ -121,7 +121,7 @@ Get one run-history row by id (includes decoded per-stage results).
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
-| `id` | integer | yes |  |
+| `id` | integer | yes | Record id, digits only. |
 
 
 **Returns**
@@ -177,7 +177,7 @@ List pipeline run-history ledger rows (paginated; filter by post/recipe/status).
 |---|---|---|---|
 | `per_page` | integer | no |  |
 | `page` | integer | no |  |
-| `post_id` | integer | no |  |
+| `post_id` | integer | no | Record id, digits only. |
 | `recipe_id` | string | no |  |
 | `status` | string | no |  |
 
@@ -212,7 +212,7 @@ Run a recipe against one post now (inline; admin-initiated). force bypasses skip
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
-| `post_id` | integer | yes |  |
+| `post_id` | integer | yes | Record id, digits only. |
 | `recipe_id` | string | no |  |
 | `dry_run` | boolean | no |  |
 | `force` | boolean | no |  |

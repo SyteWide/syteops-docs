@@ -54,7 +54,7 @@ Create a content source; generates its id and slug, and (unless a secret is prov
 | `name` | string | yes |  |
 | `auth_mode` | string | no |  |
 | `secret` | string | no |  |
-| `default_author_id` | integer | no |  |
+| `default_author_id` | integer | no | Record id, digits only. |
 | `pin_author` | boolean | no |  |
 | `target_post_type` | string | no |  |
 | `new_cpt` | object | no |  |
@@ -306,7 +306,7 @@ Update editable fields on an existing content source (slug is not editable; secr
 |---|---|---|---|
 | `id` | string | yes |  |
 | `name` | string | no |  |
-| `default_author_id` | integer | no |  |
+| `default_author_id` | integer | no | Record id, digits only. |
 | `pin_author` | boolean | no |  |
 | `default_reviewers` | object | no |  |
 | `default_ccs` | object | no |  |

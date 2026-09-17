@@ -49,6 +49,19 @@ You can target two areas:
 - **Automatic backups** — JSON backup files are created for each batch in the admin storage directory
 - **Cancellation** — You can cancel mid-execution with a progress bar showing current status
 
+## Welcome Email Test Send
+
+Click **Send a Test Welcome Email to Me** to have SyteOps mail the real, rendered person welcome
+email to your own account's email address, so you can see exactly what a person receives.
+
+- It always goes to your own signed-in account email — never a person's stored work email.
+- The subject is prefixed `[Test]` so it's obviously not a real welcome email.
+- If your account is mapped to a person page, the email links to your own page; otherwise it links
+  to the site's home page instead.
+- Sending a test never marks anyone as having received their welcome email, and you can send as
+  many test emails as you like — there is no waiting period between sends.
+- Debug Mode must be enabled to send a test email — the button's request is refused otherwise.
+
 ## Debug Logs
 
 View and manage all SyteOps and WordPress debug log files.

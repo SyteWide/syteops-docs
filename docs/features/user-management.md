@@ -159,3 +159,20 @@ The first user to complete Initial Setup becomes a SyteOps Admin.
 ## Roles & Users Admin Page
 
 For a dedicated role management interface, navigate to **SyteOps > Roles & Users** in the WordPress admin sidebar. This standalone page shows all system and custom roles, their current user assignments, assignment counts, and aggregator variable status.
+
+## Sending a Welcome Email
+
+Every person's card — on the **Users** tab and on the **Roles & Users** page — carries a **Send Welcome Email** button (SyteOps Admins only). It sends that person one email with a link to their personal SyteOps page, their WordPress username, and a link to the "Lost your password?" page where they can set or reset a password.
+
+Two things must be true before the button will send:
+
+- The slot has a saved **work email**.
+- The slot is **linked to a WordPress account** (set via Associate WP User).
+
+If either is missing, the button is disabled and the note beside it explains which one to fix.
+
+If you just changed the work email but have not saved the card yet, the button asks you to save first — it always mails the address currently on file, never an unsaved edit.
+
+Clicking the button asks you to confirm the address and the WordPress account before sending. Once a welcome email has gone out, the button relabels to **Resend** and a note shows when it was last sent and to which address. If that person's page link has since been regenerated, the note warns that the previously sent link no longer works and offers a resend so they get the current one.
+
+To prevent accidental double-sends, a resend to the same address is blocked for five minutes after the last send.
