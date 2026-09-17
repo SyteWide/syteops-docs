@@ -12,7 +12,7 @@ description: Manage API operations for the users resource.
 
 ## `create`
 
-Create a SyteOps team-member record in the next free slot and fill its fields. A slot reused after a delete starts with Model consent off and no Model photos.
+Create a SyteOps team-member record in the next free slot and fill its fields. A slot reused after a delete starts fully blank: no name, contact details, links, Model consent, or Model photos survive from the previous occupant.
 
 **Capability:** `manage_options`
 
@@ -35,6 +35,8 @@ Create a SyteOps team-member record in the next free slot and fill its fields. A
 | `model_photo_ids` | object | no | Curated Model photo attachment ids. Site-local; not portable to another site. |
 | `model_photo_exclude_profile` | string | no | '1' excludes the profile picture from the curated Model photo set; '' includes it. |
 | `model_consent_granted` | string | no | The Model consent flag and the only consent signal: '1' or ''. |
+| `notify_reminders` | string | no | Whether this person receives publishing reminders and deferral escalations: '1' or ''. Absent means on. |
+| `notify_replies` | string | no | Whether this person receives article feedback and reply notifications: '1' or ''. Absent means on. |
 
 
 **Returns**
@@ -62,14 +64,16 @@ data: &#123;user_num, ...fields}
     "link_profile_pic_attachment_id": 0,
     "model_photo_ids": {},
     "model_photo_exclude_profile": "string",
-    "model_consent_granted": "string"
+    "model_consent_granted": "string",
+    "notify_reminders": "string",
+    "notify_replies": "string"
   }
 }
 ```
 
 ## `delete`
 
-Soft-delete a SyteOps team-member record (frees its slot for reuse).
+Soft-delete a SyteOps team-member record and blank its editable fields (frees its slot for reuse).
 
 **🔴 Destructive** — requires `confirm: true`.  
 **Capability:** `manage_options`
@@ -180,6 +184,8 @@ Update fields on an existing SyteOps team-member record.
 | `model_photo_ids` | object | no | Curated Model photo attachment ids. Site-local; not portable to another site. |
 | `model_photo_exclude_profile` | string | no | '1' excludes the profile picture from the curated Model photo set; '' includes it. |
 | `model_consent_granted` | string | no | The Model consent flag and the only consent signal: '1' or ''. |
+| `notify_reminders` | string | no | Whether this person receives publishing reminders and deferral escalations: '1' or ''. Absent means on. |
+| `notify_replies` | string | no | Whether this person receives article feedback and reply notifications: '1' or ''. Absent means on. |
 
 
 **Returns**
@@ -208,7 +214,9 @@ data: &#123;user_num, ...fields}
     "link_profile_pic_attachment_id": 0,
     "model_photo_ids": {},
     "model_photo_exclude_profile": "string",
-    "model_consent_granted": "string"
+    "model_consent_granted": "string",
+    "notify_reminders": "string",
+    "notify_replies": "string"
   }
 }
 ```

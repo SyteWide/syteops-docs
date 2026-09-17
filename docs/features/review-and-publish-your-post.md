@@ -23,7 +23,7 @@ As soon as a new draft arrives from your content source, SyteOps sends a notific
 - The **post's author** (the WordPress user the post will be attributed to).
 - Anyone listed as a **Default reviewer** or **Default CC reviewer** in your Review Portal settings (see [Who receives the review email](#who-receives-the-review-email) below).
 
-The email comes from your site, uses your site's logo, and includes a summary of the article title and source keyword. Two buttons sit directly under that summary, above the article photo: **Edit/View this article**, which opens this particular draft, and **See all my reviews**, which opens your full review queue. On a phone the two buttons stack one above the other so both stay readable and tappable.
+The email comes from your site, uses your site's logo, and includes a summary of the article title and source keyword. Two buttons sit directly under that summary, above the article photo: **Edit/View this article**, which opens this particular draft, and **See all my reviews**, which opens your own private review page. On a phone the two buttons stack one above the other so both stay readable and tappable.
 
 The email follows your device's appearance setting, so it renders in dark mode if that is what you use. Your logo keeps a light backing so it stays legible either way.
 
@@ -51,7 +51,7 @@ The review portal brings its own look and scripts. After you install a SyteOps u
 
 ## Step 3: Review and edit the draft
 
-Once you are signed in, the portal shows the full draft. The header brand (logo and company name) opens the WordPress Dashboard in a new tab when you click it. In the article editor, the top bar uses two rows — logo and status pill on the first row (status on the far right), nav pills under the logo and **Signed in as** on the right of the second — so logos and names are not squeezed on narrow screens. **See all my reviews** in that bar opens your full review queue without leaving the portal session.
+Once you are signed in, the portal shows the full draft. The header brand (logo and company name) opens the WordPress Dashboard in a new tab when you click it. In the article editor, the top bar uses two rows — logo and status pill on the first row (status on the far right), nav pills under the logo and **Signed in as** on the right of the second — so logos and names are not squeezed on narrow screens. **See all my reviews** in that bar opens your own private review page without leaving the portal session.
 
 You can edit the core article fields as well as the SEO details, AI visibility settings, and categories and tags.
 
@@ -63,15 +63,15 @@ Tables and other formatting in the article body are shown the way they will look
 
 Some reviews open as they will look on your live site, instead of as a body you type into. That is how a **page** is reviewed, and it is also how an article opens when you choose **Review Appearance**.
 
-The preview is a private full-page view (no WordPress admin bar). The toolbar is **Device Preview** (Desktop / Tablet / Mobile), then **Height** (Auto / 800 / 1200 / Full), then **Refresh**. Height **Auto** matches the page content; Tablet and Mobile sit centered. If the preview cannot load inside the portal, you will see **couldn't embed this preview** and an **Open in a new tab** link.
+The preview is a private full-page view (no WordPress admin bar). Like the portal, it only opens for someone signed in who is on that review, or an administrator, so a forwarded preview link does not show the draft to anyone else. The toolbar is **Device Preview** (Desktop / Tablet / Mobile), then **Height** (Auto / 800 / 1200 / Full), then **Refresh**. Height **Auto** matches the page content; Tablet and Mobile sit centered. If the preview cannot load inside the portal, you will see **couldn't embed this preview** and an **Open in a new tab** link.
 
 Saving from this view never changes the page or article body. Title, summary, and the other review fields still save as usual.
 
 Click a page element in the preview to leave a note. The click opens a note dialog instead of following the page. Drag across words first if you want the note to quote that phrase; a click with nothing selected still comments on the whole element. Press Escape to drop the highlight and close the note. Clicking an image shows that it is an image, its name, and a small thumbnail. A pin on the preview and its Feedback row share the same color. If that element has moved, the row is marked Moved rather than guessed. Handling or deleting a note in Feedback updates the pin on the preview at the same time — you do not need to refresh.
 
-You can also send **one review link for several pages or posts**. Under **Content Pipelines → Review Portal → Page Reviews**, name the bundle, add the items in the order they should be walked, pick the reviewers, then **Save bundle**. **Send bundle** emails those reviewers a card for every item; **See all my reviews** on that mail opens the review queue filtered to the bundle. Click a page in the list to select it, then **Send page** emails that one page or post as a page review without saving it into a bundle. **Copy link** copies the same walk link without emailing anyone. The reviewer opens a single link and uses the strip above the preview to move to the next or previous item. Comments stay on the item they are looking at.
+You can also send **one review link for several pages or posts**. Under **Content Pipelines → Review Portal → Page Reviews**, name the bundle, add the items in the order they should be walked, pick the reviewers, then **Save bundle**. **Send bundle** emails those reviewers a card for every item; **See all my reviews** on that mail opens your private review page filtered to the bundle. Click a page in the list to select it, then **Send page** emails that one page or post as a page review without saving it into a bundle. **Copy link** copies the same walk link without emailing anyone. The reviewer opens a single link and uses the strip above the preview to move to the next or previous item. Comments stay on the item they are looking at.
 
-A copied link is for looking at the site and leaving notes. It does not let that person change the article body or invite someone else with **Send to a Colleague**. **Send bundle** is what gives the listed reviewers their usual editing rights on those items.
+A copied link is for looking at the site and leaving notes. The people on it can leave notes, reply to them and delete their own, but they cannot edit or publish anything — see [Commenting on someone else's review](#commenting-on-someone-elses-review). **Send bundle** is what gives the listed reviewers their usual editing rights on those items.
 
 ### Core article fields
 
@@ -431,7 +431,7 @@ The final set of categories and tags is saved when you click the panel's **Save*
 Once you have finished reviewing all panels, choose one of the action buttons:
 
 - **Save draft** — Saves all your edits (including SEO, GEO settings, and categories/tags) and keeps the post as a draft. The portal stays open so you or a colleague can continue reviewing later. **Saved** appears next to the logo at the top of the page (beside the powered-by line when the header is cramped).
-- **Approve & Publish** — Saves all your edits and publishes the post to your site immediately. The portal first asks you to confirm. After you confirm, it shows a live progress list — checking the article is ready, copying images to this site if needed (with a count such as "3 of 12"), publishing, and sending the notification — until the work finishes. When it is done, you can close the dialog or open the live article. By default, the author and reviewers receive an email confirming the post went live (site owners can turn this off — see the rules table below).
+- **Approve & Publish** — Saves all your edits and publishes the post to your site immediately. The portal first asks you to confirm. After you confirm, it shows a live progress list — checking the article is ready, copying images to this site if needed (with a count such as "3 of 12"), publishing, and sending the notification — until the work finishes. When it is done, you can close the dialog or open the live article. By default, the author and reviewers receive an email confirming the post went live (site owners can turn this off — see the rules table below). If that email could not be sent, the notification step is marked as failed and the confirmation says so — the post is still published. When the site is going to try again by itself, the step says so too ("We will try again shortly."), so a message that is still on its way isn't reported as lost.
 - **Schedule** _(if enabled by the site owner)_ — Check the **Schedule** box to pick a date and time, then click **Approve & Schedule**. The same confirm-then-progress dialog tracks the scheduling. A future time publishes automatically at the moment you chose. A past time publishes immediately and keeps that date as the post's publish date. **Scheduling is not final** — see [Changing or cancelling a schedule](#changing-or-cancelling-a-schedule) below.
 - **Request changes** — Opens a short note prompt where you can describe what needs updating. Your current edits are saved to the draft, the author and co-reviewers are notified by email, and your note is added to the portal's **Feedback** panel. See [Step 5](#step-5-request-changes) for the full walkthrough.
 - **Notify** — Sends this article's notes, and an optional message, to one person who already has the article. Unlike **Request changes** it saves nothing, changes no schedule and emails nobody else. See [Sending the notes to somebody](#sending-the-notes-to-somebody).
@@ -556,7 +556,17 @@ If you would like another team member to review or edit the draft before you app
 
 Your colleague receives an email with a link to the same draft portal. They will also need to sign in with their WordPress account. Once added, they have the same editing rights as you — they can save edits and approve the post.
 
-**Send to a Colleague** is not available when you opened the draft from a copied appearance-package link that has not been sent yet. Ask the site owner to **Send bundle** if you need to invite someone else, or if you need to edit the article body.
+**Send to a Colleague** is not available when you opened the draft from a copied bundle link that has not been sent yet. Ask the site owner to **Send bundle** if you need to invite someone else, or if you need to edit the article.
+
+### Commenting on someone else's review
+
+Some people can open a draft to comment on it without being one of its reviewers: someone on a copied bundle link that has not been sent yet, and anyone copied on the review email (see [Who receives the review email](#who-receives-the-review-email) below — they're called watchers there). They get a comment-only version of the portal:
+
+- **What they see.** The article to read (it cannot be typed into), the **Preview** of how it looks on the site, and the notes on it.
+- **What they can do.** Click part of the preview to leave a note, reply to a note, delete their own notes, and use **Notify** to pass the notes on.
+- **What is not there.** Saving, publishing, scheduling, the formatting toolbar, the SEO, GEO, category, author and featured-image panels, image replacement and AI tools, **Request changes**, **Send to a Colleague**, and **Resolve**. Marking a note handled stays with the post's reviewers.
+
+When the site owner uses **Send bundle**, or adds the person as a reviewer, their next visit opens the full editor.
 
 ---
 
@@ -582,7 +592,7 @@ The **Feedback** panel collects every change request submitted for this draft, o
 
 **Every note in the panel has a Resolve chip**, change requests included. Anyone with access can resolve a note — the person who acts on it is usually the one who knows it is done — and a resolved note can be reopened. Resolving the last outstanding change request also clears the **Changes requested** flag on the review queue, so a draft never shows as handled and not handled at the same time.
 
-**Every note also has a Reply chip.** Click it to type an answer in a box that opens under the note; your reply is added to the panel, indented beneath the note it answers, so the answer and the question stay together instead of the answer ending up in an email nobody can find later. The person who wrote the note is emailed that you have answered it — unless you are answering your own note, in which case nobody is emailed.
+**Every note also has a Reply chip.** Click it to type an answer in a box that opens under the note; your reply is added to the panel, indented beneath the note it answers, so the answer and the question stay together instead of the answer ending up in an email nobody can find later. **Everyone else in that conversation is emailed** — the note's original author and anyone else who has already replied to it — unless they no longer have access to the article, or you are answering your own note or your own earlier reply, in which case nobody new is told.
 
 **Reply and Resolve** does both at once: it posts your answer and marks the note handled in a single step. If the note cannot be marked handled for any reason, your reply is still posted and the panel tells you the note is still open, rather than showing you a note as done when it is not.
 
@@ -678,30 +688,56 @@ As a reviewer, you see the full upcoming calendar so you have context on everyth
 
 ## Your review queue
 
-Every reviewer-facing email — a new draft, an updated draft, a change request, or an invitation from a colleague — includes a footer link to **Articles Awaiting Your Review**: a single page listing every draft currently waiting on you, so you don't have to hunt through your inbox for the right email. Like every other portal page, it carries your site's logo, name, and colors in a topbar at the top.
+Every reviewer-facing email — a new draft, an updated draft, a change request, or an invitation from a colleague — includes a footer link to **Posts and Pages Awaiting Your Review**: a single page listing every draft currently waiting on you, so you don't have to hunt through your inbox for the right email. Like every other portal page, it carries your site's logo, name, and colors in a topbar at the top.
 
-- **Sign in required.** Like the portal itself, you must be signed in to your WordPress account to see the queue — SyteOps checks your account against the reviewers assigned to each draft, so you only ever see articles you're actually on.
+- **Sign in required.** Like the portal itself, you must be signed in to your WordPress account to see the queue — SyteOps checks your account against the reviewers assigned to each draft, so you only ever see posts and pages you're actually on.
 - **Administrators see everything.** A WordPress administrator opening the queue sees every draft currently assigned to any reviewer, not just their own.
 - **No link expiry.** Once you're signed in, opening a draft from your review queue always works, even past the normal review-link expiry window — your WordPress session is what proves who you are, not the link.
 - **"Received" means received.** Each row shows the date the article arrived for review, and it keeps showing that date no matter what happens to the article afterwards — scheduling it, moving it, or cancelling the schedule. A scheduled article shows both: when it arrived, and when it will publish.
-- **The calendar is here too.** A **Calendar** button sits at the top of the page, next to **Sign out**. It opens the same month view described in [Use the content calendar](#step-6-use-the-content-calendar) — the same grid, the same **Unscheduled drafts** list, color key, phone view, details card and drag-to-reschedule — so you can see what else is coming up without opening an article first. The button appears only for accounts that are allowed to use the calendar; if you don't see it, ask your site administrator. The same permission rules apply once it's open: you can only move articles you're allowed to edit, and scheduling or unscheduling one follows the site's **Who can publish** setting.
+- **The calendar is here too.** A **Calendar** button sits at the top of the page, next to **Sign out**. It opens the same month view described in [Use the content calendar](#step-6-use-the-content-calendar) — the same grid, the same **Unscheduled drafts** list, color key, phone view, details card and drag-to-reschedule — so you can see what else is coming up without opening an article first. The button appears only for accounts that are allowed to use the calendar; if you don't see it, ask your site administrator. The same permission rules apply once it's open: you can only move articles you're allowed to edit, and scheduling or unscheduling one follows the site's **Who can publish** setting. Some links open the page with the calendar already showing, so you don't have to click the button yourself.
+- **Bundle items are grouped.** Drafts and pages sent to you as part of a page-review bundle are listed together under that bundle's name, in the order the bundles were created, with the name linking back to the bundle. Anything not part of a bundle is listed on its own beneath the groups, exactly as before.
 - **The newest items first.** The queue lists up to 100 articles, drawn from the most recently updated drafts on the site. If there are more than that, or if the site has a very large backlog of drafts awaiting review, the page tells you so with a note reading *"Older items may not be listed."* When you see that note, older articles may be waiting on you even though they aren't shown — open them from their original review email, or ask your site administrator.
 - **A page-review bundle uses the same queue.** **See all my reviews** from a bundle opens this same page filtered to that bundle's remaining items, with the bundle name under **Your Reviews**. If the bundle is missing or you are not listed on it, the page stays empty — it does not fall back to every draft you can review. A bundle list is not limited to the site-wide newest 100 drafts, so older items in that bundle still appear.
+- **Older "See all my reviews" links open your private review page.** If you're a team member with a linked WordPress account, a **See all my reviews** link from any email you already have — and the one at the top of every review screen — now takes you to [your own private review page](#each-persons-private-review-page), still filtered to the bundle when the link came from one. If you aren't signed in, you sign in first and then land there. Opening someone else's private link while signed in as yourself is refused, with an option to switch accounts.
+- **Links straight to one item.** A private review page link can point at a single article or page, and at its content or appearance view. If you can still review that item, it opens directly. If you can't, your review page opens with the note *"That item isn't available to you anymore."*
+- **Rows open the view you were asked to review.** A page always opens its appearance view — there's no article body to edit on a page, so that's the only review there is. An article opens its appearance view too once someone has asked you to look at how it renders (for example, after a **Send page** or a page-review bundle); otherwise it opens straight to the content editor, the same way it always has. When an article has an appearance request on file, its row also carries a second, smaller link to the other view, so you can always reach both.
 
 Bookmark the queue page, or just click the footer link in your next review email, to check what's waiting on you at any time. Site owners can also reach it from **Content Pipelines → Log**, using the **Open my review queue** button.
 
 Each row also shows how many questions the AI search analysis recorded for that article and how many of them have answers — for example *12 Q · 9 answered* — so you can tell at a glance whether an article's answers still need finishing.
 
-### Live Articles You Can Edit
+### Filtering the queue
 
-Beneath the drafts awaiting you, the queue lists any **published** articles you're assigned to, under **Live Articles You Can Edit**. If you have none, the section doesn't appear at all.
+A filter bar near the top of the page lets you narrow what's shown, using plain drop-downs and an **Apply** button — no JavaScript required:
+
+- **Type** — posts only, pages only, or everything (the default).
+- **Status** — draft, pending, scheduled, or live only, or every status (the default).
+- **Source** — narrow to one content source, when your site ingests articles from more than one. This drop-down only appears once your site has at least one content source configured.
+
+Filters apply everywhere on the page — **Awaiting Your Review**, **Watching**, **Coming Up**, **Notes & Replies for You**, and **Live Posts and Pages You Can Edit** — and a section that no longer applies disappears rather than showing an empty list. Choosing **Live** for status, for example, hides **Awaiting Your Review** entirely and shows only your live articles. Any items shown always respect the same 100-item display limit as the unfiltered queue. A **Clear filters** link appears once you've narrowed the list, taking you back to everything. Filters are carried in the page's own link, so bookmarking or sharing a filtered view keeps the filter active; if you're using the older "See all my reviews" link, filters still keep your bundle scope.
+
+### Watching
+
+If you're copied as a **Default CC reviewer** on anything, those drafts and scheduled articles appear beneath your **Awaiting Your Review** list, under **Watching** — as long as you don't already have full reviewer access to them (those stay up in **Awaiting Your Review** instead, so nothing is listed twice). Rows open the same way as your other queue rows, and the section simply doesn't appear if you aren't watching anything. It uses the same limit as the rest of the queue: up to 100, newest first, and when there may be more it says *"Older ones may not be listed."* rather than quietly leaving them out — including when nothing at all could be shown within that limit, so the section appears with just that note instead of disappearing. If everything you were watching turned out to be scheduled, the note points you at **Coming Up** where those items are listed, rather than telling you none were found.
+
+### Coming Up
+
+Anything that's already been scheduled — whether it's one of your own drafts or one you're only watching — moves to a **Coming Up** section, soonest first, showing the date and time it's due to go out in your site's own timezone. A scheduled item appears here **only**: it's no longer listed under **Awaiting Your Review** or **Watching**, so nothing you already reviewed and scheduled keeps nagging you as if it still needed a look. The section doesn't appear at all if nothing is scheduled.
+
+### Notes & Replies for You
+
+A **Notes & Replies for You** section collects notes elsewhere on the site that are personally yours to see — even on drafts you aren't actively reviewing today. A note lands here when someone replies to a note you left, when someone leaves a new, still-open note on something you review or watch, or when someone uses **Notify** to point a note directly at you — that last case shows up even if you've since opened the article, since being told about a note is worth seeing regardless. It never lists your own notes or replies. Each row shows the item's title, who wrote it, a short excerpt, when it was left, and a link that opens straight to that note — landing on the on-page appearance view when the note is pinned to an image or an on-page element, or the regular content view otherwise — and scrolls right to it. The list shows the newest 30 and the section doesn't appear at all once you're caught up.
+
+### Live Posts and Pages You Can Edit
+
+Beneath the drafts awaiting you, the queue lists any **published** posts and pages you're assigned to, under **Live Posts and Pages You Can Edit**. If you have none, the section doesn't appear at all.
 
 These behave differently from drafts, and the page says so:
 
 - **Changes go live immediately.** There's no approval step — opening one of these in the portal and saving publishes the change straight away. If the article shouldn't be live at all, you can take it back to a draft instead — see [below](#taking-a-live-article-back-to-draft).
 - **Answer coverage.** Each row shows the same question and answer counts as a draft.
 - **"Answers not signed off".** If your site publishes AI-written answers to search engines and nobody has confirmed the answers on that article, the row says so. Those answers are held back from every answer-engine surface until someone reviews them in the article's GEO panel, so this is worth acting on if you want them live.
-- **View live article.** A link to the published article as your readers see it. If your site is set up to exclude internal traffic, this link carries that exclusion, so checking your own work doesn't show up in your site's analytics.
+- **View live.** A link to the published post or page as your readers see it. If your site is set up to exclude internal traffic, this link carries that exclusion, so checking your own work doesn't show up in your site's analytics.
 
 ### Taking a live article back to draft
 
@@ -731,14 +767,16 @@ The notification list for each new draft is made up of two groups:
 
 To configure the default list, go to **SyteOps → Content Pipelines**, open the **Review Portal** settings, and look for the **Default reviewers** and **Default CC reviewers** fields. Make sure each contributor is also linked to a WordPress author on the **Users** tab — this ensures their articles are published under the correct byline and they appear in the reviewer lists.
 
-- **Default reviewers** are the primary recipients of the email and can edit the draft.
-- **Default CC reviewers** are copied on the email and can also edit the draft.
+- **Default reviewers** are the primary recipients of the email and can edit the draft. Later emails about the article — changes requested, published, and so on — reach each of them separately, and never the person whose action caused the email ([one email per person](#one-email-per-person)).
+- **Default CC reviewers** are copied on the email as **watchers** — they can open the draft and comment on it, but not edit or publish it. Someone who is both a default reviewer and a default CC is a reviewer, full stop.
 
 A content source can set its own reviewer or CC list. When that list is empty, the Review Portal defaults above are used. When it is not empty, it replaces the defaults for that source only (it does not merge).
 
 ### When you change these lists
 
-Adding someone to the reviewer or CC list applies to **articles still awaiting review**, not only to future ones. The next time SyteOps emails about an unpublished article — a resend, or a **changes requested** notification — anyone you have added since it arrived is included, and gains access to that draft. This is what makes adding a new team member work as you would expect: they start receiving the drafts that are still in flight, rather than only articles that arrive afterwards.
+Adding someone to the reviewer or CC list applies to **articles still awaiting review**, not only to future ones. The next time SyteOps emails about an unpublished article — a resend, or a **changes requested** notification — anyone you have added since it arrived is included: a new reviewer gains edit access, and a new CC can open the article and watch it. This is what makes adding a new team member work as you would expect: they start receiving the drafts that are still in flight, rather than only articles that arrive afterwards. A **resend** goes to the reviewers and the author only — CCs are not re-mailed by it.
+
+A CC added to a draft's allowlist before your site supported watchers keeps whatever access it already had — that is not undone automatically.
 
 This happens when the email is sent, so there is one thing to know: a newly added reviewer will not see those in-flight drafts in **See all my reviews** until one of those emails has gone out for them. If you want someone brought up to date immediately, use **Resend review email** on the articles concerned.
 
@@ -747,24 +785,51 @@ Two limits are deliberate:
 - **Published articles are never changed.** An article that has already gone live keeps the reviewer list it had. Adding someone to your defaults never hands them access to your published back catalog.
 - **Removing someone does not revoke their access.** Taking a person off the default lists stops them being added to new articles, but it does not remove them from drafts they were already assigned to — SyteOps cannot tell that apart from someone a colleague deliberately invited to that specific article with **Send to a Colleague**. To remove someone from a particular draft, use the reviewer list in the portal for that article.
 
+The same holds when your content source sends an update to an article it already delivered. The update adds anyone newly on the source's lists, and nobody is taken off: people you invited to that draft yourself — with **Send to a Colleague**, **Send page**, or a bundle send — keep their access and keep receiving its emails. If the update names a different author, the previous author also stays on the draft.
+
 ---
 
 ## Email notifications
 
 Every automated portal email is controlled from one place: **SyteOps → Content Pipelines → Review Portal**, in the **What gets sent & published** group, under **Email notifications**. Each can be switched on or off independently:
 
-- **New draft received** *(on by default)* — emails the author and reviewers when a new article arrives and its review draft is created. This is the main review email, with the article preview, who can review it, and the secure editor link. The article date in that email uses the site timezone in 12-hour AM/PM (for example, 7:33 PM), independent of WordPress's 24-hour time setting.
-- **Draft updated by source** *(off by default)* — emails the author and reviewers when your content source re-delivers an article **with changed content**, so nobody reviews a stale version. Identical re-deliveries (delivery retries) never send an email.
-- **Published or scheduled** *(on by default)* — confirms to the author and reviewers when a draft goes live or is scheduled. If the article was published with private visibility, the email says so and links to it as a private post, rather than describing it as live on the site.
+- **New draft received** *(on by default)* — emails the author, the reviewers and anyone watching the article when a new article arrives and its review draft is created. This is the main review email, with the article preview, who can review it, and the secure editor link. The article date in that email uses the site timezone in 12-hour AM/PM (for example, 7:33 PM), independent of WordPress's 24-hour time setting.
+- **Draft updated by source** *(off by default)* — emails the author, the reviewers and anyone watching the article when your content source re-delivers an article **with changed content**, so nobody reviews a stale version. Identical re-deliveries (delivery retries) never send an email.
+- **Published or scheduled** *(on by default)* — tells the author, the reviewers and anyone watching the article when a draft is scheduled, and again when it goes live. The person who published or scheduled it is not emailed — they already saw it happen. If the article was published with private visibility, the email says so and links to it as a private post, rather than describing it as live on the site.
+
+  The **now live** email goes out however the article went live: from the portal, the content calendar, the WordPress editor, or on its own at its scheduled time (then everyone involved is told). Each go-live sends it once. Saving an article that is already live, or changing a live article's published date, sends nothing; taking it back to draft and publishing it again sends it again. It is only sent for articles that came through review — delivered by a content source, sent to reviewers, or part of a bundle. Posts you write and publish yourself, and articles from a source set to publish as soon as they arrive, stay quiet. While Content Pipelines is in **Setup** mode, articles that go live outside the portal send nothing. The email's main button opens the live article, and **See all my reviews** opens your private review page. If your mail server refuses the notice outright and nobody receives it, the notice is retried once a few minutes later; if that also fails, republishing the article sends it.
 - **Source held (needs attention)** *(on by default)* — alerts the **site admin** (not the reviewers) when a live content source stops matching its approved field mapping: incoming articles are put safely on hold, and this email tells you to re-approve the mapping, then use **Reprocess last payload** on the source to bring in the article that triggered the hold. It sends once per incident, not on every held delivery.
 - **Auto-defer limit reached** *(on by default)* — emails the article's author and the reviewers already on it when the [auto-defer](content-pipelines.md#rescheduling-a-slot-nobody-reviewed-in-time) feature runs out of moves for a reserved time and hands the article back for scheduling by hand. This is not sent on every ordinary move forward — only when the article reaches the limit, and nothing is published when it does.
-- **Publishing reminder** *(off by default)* — emails the article's author and the reviewers already on it when a publishing time is coming up, whether or not the article has been reviewed yet. How far ahead it looks is set by **Reminder lead time** (1–168 hours, default 24); the check runs hourly, so the email arrives up to that far ahead rather than exactly that far. Each row says which kind of article it is: **Publishing** means it is scheduled and will go out on its own, and **Planned** means it is still a draft that somebody has to approve before that time means anything. Each person hears about a given publishing time once — changing the time arms the reminder again.
+- **Publishing reminder** *(off by default)* — emails the article's author and the reviewers already on it when a publishing time is coming up **for an article that went through review**. A hand-written article you scheduled yourself, with no reviewers on it, does not get this email. How far ahead it looks is set by **Reminder lead time** (1–168 hours, default 24); the check runs hourly, so the email arrives up to that far ahead rather than exactly that far. Each row says which kind of article it is: **Publishing** means it is scheduled and will go out on its own, and **Planned** means it is still a draft that somebody has to approve before that time means anything. Each person hears about a given publishing time once — changing the time arms the reminder again.
 
-  These two emails go only to people already on the article — its author, and the reviewers it was sent to. Standing CC addresses from **Default CCs** are not added on top, so on a site that relies on a standing CC list these two emails reach fewer people than the ones sent when a draft first arrives. That is deliberate: everyone on that list can open the article, and anybody else would get a link that asks them to sign in and then turns them away.
-- **Reviewer notes** *(on by default)* — lets a reviewer send [this article's notes](#sending-the-notes-to-somebody), and a message of their own, to one person who already has the article. Nothing is sent automatically: the reviewer picks a name and presses **Send**, and one email covers every note that person has not been sent yet plus anything handled since they were last told. Turning this off removes the **Notify** control from the portal, so nobody presses a button that would go nowhere; reviewers can still write and resolve notes.
+  These two emails go only to people already on the article — its author, and the reviewers it was sent to. Standing CC addresses from **Default CCs** are not added on top, and watchers do not receive either one, so on a site that relies on a standing CC or watcher list these two emails reach fewer people than the ones sent when a draft first arrives. That is deliberate: everyone on that list can open the article, and anybody else would get a link that asks them to sign in and then turns them away.
+- **Reviewer notes** *(on by default)* — lets a reviewer send [this article's notes](#sending-the-notes-to-somebody), and a message of their own, to one person who already has the article. Nothing is sent automatically: the reviewer picks a name and presses **Send**, and one email covers every note that person has not been sent yet plus anything handled since they were last told. Turning this off removes the **Notify** control from the portal, so nobody presses a button that would go nowhere; reviewers can still write and resolve notes. This same setting also governs the email sent when someone replies to a note — turning it off silences both.
 - **Include alternate work email** and **Include personal email** *(both off by default)* — widen every email above to also reach a reviewer's other stored addresses (set on the **Users** tab) in addition to their WordPress account email.
 
+### Batched emails and the batch window
+
+The new draft, draft updated and scheduled notices — including a scheduled article moved to a new time on the content calendar, which says **Schedule changed** — plus the publishing reminder and the auto-defer "still waiting for review" notice, are not sent the moment they happen. They wait a short while so that a burst of activity reaches each person as **one email**: twenty articles arriving together send each reviewer one email listing all twenty, grouped by what happened, rather than twenty emails. A reminder and a give-up notice queued alongside an ordinary draft update land in that same combined email.
+
+- **Batch window** *(0–240 minutes, default 15)* — how long those notices wait. The wait starts with the first notice queued for that person, and everything that arrives before it ends goes out together. Set it to **0** to send each notice right away; it is still sent in the background, so publishing or receiving an article never waits on the mail server.
+- **An article about to publish is never announced late.** A scheduled notice — and a publishing reminder — goes out at least five minutes before the article's publishing time, taking anything else waiting for that person with it.
+- **One waiting notice sends its usual email.** The combined email is used only when two or more notices are waiting.
+- **Notices check again before they go.** If the article was published, deleted or unscheduled in the meantime, or the person no longer has access to it, or the email type was switched off, that notice is dropped rather than sent.
+- **A refused send is retried** after 5, 15 and 60 minutes — it waits out that delay even if other notices for the same person go out in between — and is given up on after five failed attempts. A notice given up on is written to the article's activity, so the loss is visible rather than silent. The **now live** email and the emails sent when someone acts on an article (below) are not batched.
+- **A very large pile is sent in groups.** At most 25 waiting notices go in one email; anything left follows in the next one, a moment later. Only the first few articles in a combined email carry their picture inside the message — the rest link to theirs — so one email can never grow large enough for a mail server to refuse it.
+
+### One email per person
+
+The emails sent when someone acts on an article — a changes request, a colleague hand-off, reviewer notes, a reply to a note, a resend, a page or bundle sent for review, and the published or scheduled notice — go to **each person on their own**, and so do the batched new draft, draft updated, scheduled, publishing reminder and "still waiting for review" notices. Nobody sees who else received the email, and nobody is copied on someone else's — people watching an article get their own copy rather than a CC.
+
+- **You are not emailed about your own actions.** If you request changes, publish, pass on notes or reply to one, everyone else involved hears about it, but you do not. Three emails are the exception, because a resend usually exists precisely because somebody did not receive the first one. **Send page** and **Send bundle** let you choose the recipients by name, so ticking your own name gets you a copy; **Resend** has no picker at all — it goes to the article's current reviewers and its author, so it reaches you whenever you are one of them.
+- **The buttons open your private review page.** For someone linked to a WordPress account on the **Users** tab, the main button of a review request, an update notice, a colleague hand-off, a changes request, a reviewer-notes email, a resend, and a page or bundle send opens the article straight from their [private review page](#each-persons-private-review-page) — in the view it was sent for, such as appearance for a page — and **See all my reviews** opens the whole page. People who are not linked get the article's secure link and the shared review queue, as before. The published or scheduled notice is the one exception: it keeps its single button straight to the article itself.
+- **Large lists finish in the background.** If an email is going to a lot of people, the portal sends as many as it can straight away and the rest follow within a few minutes. Anyone who lost access to the article in the meantime is skipped.
+
+The email sent when a new draft first arrives (and the draft-updated email) still goes out as one message to the author and reviewers, with the CC reviewers copied.
+
 A **Reply-To address** field lets replies to the reviewer-facing emails (review requests, update notices, colleague invites, change requests, and published confirmations) go to a person (for example, your editor) instead of the site's sending address — leave it blank to keep the default. The administrator "payload held" alert always replies to the sending address. Two optional fields polish the emails' footer: a **Footer tagline** (a short line about your business) and a **Footer phone** (shown as a click-to-call link). Both appear in the dark footer bar of every portal email, alongside your company name. All emails carry your portal branding — logo, company name, and colors — from the Branding settings below.
+
+When an email you triggered from the portal — publishing, sending to a colleague, requesting changes, or replying to a note — cannot be sent, the portal tells you instead of reporting success. Whatever you did still happened: the post is published, the colleague has access, your note or reply is saved. When an email was switched off or there was nobody to send it to, the portal says nothing extra, and when a scheduling notice is waiting for the next short batch window the confirmation says it will be sent shortly.
 
 You can also see each email's outcome in the run history: each draft-creation row on the Log notes whether the notification was sent, skipped (and why — for example, when no recipients could be resolved), or failed, and held rows note when the admin was alerted — so a missing email is never a mystery.
 
@@ -863,7 +928,7 @@ These are the same provider and model settings used by those areas elsewhere in 
 | **Scheduled publishing** | Allows a future publish date. When off, approvals publish immediately. |
 | **Review link expiry** | How long the emailed review link stays valid (3, 7, 14, or 30 days; default **7**). Re-send an expired link from the draft — the post is unaffected. |
 | **Default reviewers** | Emailed and given edit access on every new draft, plus the author. |
-| **Default CC reviewers** | Copied on the email, with the same edit access. |
+| **Default CC reviewers** | Copied on the email as watchers — they can open the draft and comment on it, but not edit or publish it. |
 
 :::info What "Review link expiry" does and doesn't cover
 
@@ -938,6 +1003,19 @@ WordPress administrators always have full access to every area regardless of wha
 **Saving changes**
 
 Click **Save settings** at the bottom of the panel to apply your changes. The new permissions take effect the next time a reviewer opens or refreshes a portal link.
+
+### Each person's private review page
+
+Every team member mapped to a WordPress account gets their own private link to their [review queue](#your-review-queue). Find it on the **Users** tab (or the **Roles & Users** page), open a person's card, and switch to the **Links** subtab — a row called **Private review page** shows their link next to a **Copy** button.
+
+- **Signing in is still required.** The link identifies which person's queue to open; it isn't a password. Opening it while signed out asks that person to sign in first, and opening it while signed in as someone else refuses and offers to switch accounts. Only that person's own WordPress account can ever see their own queue this way.
+- **Team members without a linked WordPress account don't have one yet.** The row explains this and offers no link until you associate the person with a WordPress account on the **User IDs** subtab.
+- **Regenerate replaces it.** A **Regenerate** button next to Copy is available to site administrators. Use it if a link may have been shared somewhere it shouldn't have been. The moment you regenerate, the old link stops working completely — even a copy already sitting in someone's inbox — so only share the new one with that person.
+- **You only see the links you're allowed to.** A site administrator sees every team member's link here. Anyone else who can reach this page only ever sees their own.
+
+Opening your own private page shows more than your queue. An **Edit details** card lets you update your own name, company, phone number and email addresses, your booking and LinkedIn links, and — if you're already able to add files to the Media Library — your photo, including whether it can be used as a Model photo elsewhere on the site. A summary shows what's currently on file; click **Edit details** to change it. Whatever you save here changes only your own record.
+
+The same card carries two notification switches: **Reminder emails** (nudges before something you're on is due to go live) and **Reply notifications** (feedback left on your articles, and replies to your own notes). Both are on by default. Turning either off takes effect starting with the next email of that kind — it doesn't cancel anything already on its way.
 
 ### Open the portal for any post
 
