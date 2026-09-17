@@ -8,6 +8,169 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.277
+
+- Featured images on your review rows now sit vertically centered beside the title and status.
+- The Calendar button sits on the same line as your photo and name, with no empty row above them.
+- Your private link moved into the Your details card, directly under Reply notifications.
+
+## v1.6.276
+
+- Your private page's details card is now a drop-down panel, closed by default, with clickable email, phone and link values and a grouped edit form.
+- The Calendar button sits under the page header, your reviews run the full width of the page, and each post or page row shows its featured image.
+- Quick Posts and Pages filters sit beside the review filters, profile links are pills, role badges list every WordPress and site role, and the sign-in button reads Sign In & Open My Portal.
+
+## v1.6.275
+
+- Your private page shows each detail once; the name now lives only in the profile card.
+- Choosing a profile picture by attachment on your private page accepts only images you uploaded or may edit.
+
+## v1.6.274
+
+- A person slot that is deleted or reused through the Manage API no longer keeps the previous occupant's names, contact details, or links.
+
+## v1.6.273
+
+- The reminder and reply notification toggles now appear in the Edit details form on your private page.
+
+## v1.6.272
+
+- You can now update your own name, contact details, links, photo, and photo consent from your private page.
+
+## v1.6.271
+
+- You can turn reminder emails and reply notifications on or off from your private page.
+
+## v1.6.270
+
+- Your private page lists posts that still need a featured image, SEO title, GEO questions, or a feedback reply.
+
+## v1.6.269
+
+- Your private page opens with your profile, your links into WordPress, and your publishing numbers.
+
+## v1.6.268
+
+- Your private page now works on every site, whether or not content review is in use.
+
+## v1.6.267
+
+- The private review page link on the Links tab is now the same width as the other link fields
+
+## v1.6.266
+
+- The review queue no longer says nothing was found beside the scheduled items it did find
+- A publish whose notification email is being retried now says so instead of reporting it lost
+- An article's activity records who a notice could not reach, once per notice rather than once per copy
+
+## v1.6.265
+
+- The review page now tells you when a notification email could not be sent instead of reporting success
+- Your publish, colleague invite, change request or reply still goes through when the email fails
+
+## v1.6.264
+
+- People you add to a draft keep their access when its source sends an update
+- A source update still adds anyone newly on its reviewer or CC lists, and removes nobody
+
+## v1.6.263
+
+- The page-review preview now only opens for signed-in people on that review
+- A forwarded preview link no longer shows an unpublished draft to other accounts
+
+## v1.6.262
+
+- The publishing reminder and the "still waiting for review" notice now wait briefly and batch with any other updates for the same person, the same as new drafts and schedule changes already do
+- A publishing reminder now goes only to articles that actually went through review; a hand-written scheduled post with no reviewers no longer reminds its author
+- Both notices link straight to each person's own private review page
+- A publishing reminder that could not be queued for somebody is tried again on the next hourly check instead of being recorded as already sent
+- A reminder or escalation for somebody with no working email address is now recorded on the article's activity instead of disappearing
+
+## v1.6.261
+
+- New draft, draft updated and scheduled notices now wait briefly and reach each person as one email, so a burst of arriving articles no longer floods reviewers
+- New **Batch window** setting (0–240 minutes, default 15) controls the wait; 0 sends each notice right away in the background
+- A notice for an article about to publish goes out at least five minutes before its publishing time
+- Moving a scheduled article to a new time on the content calendar now tells the author, reviewers and watchers that its schedule changed
+- A notice is dropped rather than sent if the article was published, deleted or unscheduled in the meantime, or the person lost access; a refused send waits out its retry delay before it is tried again, and a notice that still cannot be delivered is recorded on the article's activity rather than disappearing
+- A person with a very large number of waiting notices gets them in batches rather than one enormous email, with the rest following right behind
+- New draft and draft updated notices now go to each person separately, including people watching the article, instead of one shared email with copies
+
+## v1.6.260
+
+- The live notice now goes out however an article goes live, including the content calendar, the WordPress editor and its scheduled time, once per go-live
+- Saving an article that is already live, or changing a live article's published date, no longer sends a published email
+- Posts that never went through review, and articles from a source set to publish on arrival, send no live notice; Setup mode silences notices for articles that go live outside the portal
+- The live email's second button opens each person's private review page
+- If the mail server refuses the live notice outright and nobody receives it, the notice is retried once a few minutes later; if that also fails, republishing the article sends it
+
+## v1.6.259
+
+- Replying to a note now emails everyone else in that conversation, not only the note's original author
+- Reply emails link straight to the note being answered
+
+## v1.6.258
+
+- Review emails such as changes requested, colleague hand-offs, notes, resends, page and bundle sends, and published or scheduled notices now go to each person separately, with no shared recipient list
+- Their buttons open the article from each person's private review page when that person is linked to a WordPress account; the published or scheduled notice keeps its single button to the article
+- You are no longer emailed about your own actions, so the person who publishes or schedules an article no longer receives the confirmation; watchers now receive it
+- Send page and Send bundle still reach you when you tick your own name, and a Resend reaches you when you are on the article's reviewer list or are its author
+- An email to a long list finishes sending in the background, skipping anyone who lost access to the article in the meantime
+
+## v1.6.257
+
+- Your review queue now has a filter bar so you can narrow it by post type, status, or content source
+- A section that no longer applies to your filters, such as Awaiting Your Review under a Live filter, is hidden instead of shown empty
+
+## v1.6.256
+
+- Your review queue now has a Notes & Replies for You section for replies to your notes, open notes on things you review, and anything sent to you with Notify — every row opens, even for an account without its own personal review page
+- Some review links now open straight to one note and scroll it into view
+
+## v1.6.255
+
+- Your review queue now shows a Coming Up section for anything already scheduled, soonest first, so it stops appearing under Awaiting Your Review or Watching
+- Drafts and pages sent to you as part of a review bundle are now grouped together under that bundle's name
+- Some review links now open the queue's calendar automatically instead of requiring an extra click
+
+## v1.6.254
+
+- People copied on a review can now open the draft and comment on it, but no longer become full reviewers with edit and publish rights
+- Your review queue now lists anything you're copied on under a new Watching section, unless you already have full access to it — and when there may be more than the page can show, it says so instead of quietly leaving items out
+- A resend reaches only the reviewers and the author, never the people copied on the review
+
+## v1.6.253
+
+- People reviewing through a shared bundle link can now leave and reply to notes, but can no longer edit or publish; they get the full editor once the bundle is sent
+- People who can only comment on a draft see a read-only version of the review screen with notes, replies and Notify, and no editing, publishing, scheduling or resolve controls
+
+## v1.6.252
+
+- Laid the groundwork for people who follow a post to add, answer and remove their own review notes without being able to edit it; nobody's access changes yet
+
+## v1.6.251
+
+- Review queue rows now open the same view you were actually asked to review, with a link to the other view when both apply
+- Pages always open their appearance view in the review queue and in shared links
+- Renamed review queue sections and links to cover both posts and pages
+- Clarified the label on the review appearance preview
+- Fixed an already-published article sent for appearance review (Send page or a bundle) so it never keeps defaulting to the appearance view if it's later reverted to draft
+
+## v1.6.250
+
+- Older See all my reviews links now open your own private review page, and a private review page link can open one item directly
+- The review screen's See all my reviews opens your private review page
+
+## v1.6.249
+
+- Each team member's Links tab now shows their private review page link, with Copy and, for admins, Regenerate
+- Fixed the Links tab row so it keeps failing closed for any future caller that omits its admin-visibility context
+
+## v1.6.248
+
+- Laid the groundwork for a private review page link for each team member
+- Review queue pages now tell page caches and CDNs never to store one person's page for another
+
 ## v1.6.244
 
 - Review screen Use in article no longer deletes the picture it replaced

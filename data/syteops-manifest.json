@@ -1,6 +1,6 @@
 {
     "schema_version": 1,
-    "syteops_version": "1.6.244",
+    "syteops_version": "1.6.277",
     "operations": [
         {
             "resource": "users",
@@ -28,7 +28,7 @@
         {
             "resource": "users",
             "action": "create",
-            "summary": "Create a SyteOps team-member record in the next free slot and fill its fields. A slot reused after a delete starts with Model consent off and no Model photos.",
+            "summary": "Create a SyteOps team-member record in the next free slot and fill its fields. A slot reused after a delete starts fully blank: no name, contact details, links, Model consent, or Model photos survive from the previous occupant.",
             "params": {
                 "first_name": {
                     "type": "string"
@@ -77,6 +77,14 @@
                 "model_consent_granted": {
                     "type": "string",
                     "description": "The Model consent flag and the only consent signal: '1' or ''."
+                },
+                "notify_reminders": {
+                    "type": "string",
+                    "description": "Whether this person receives publishing reminders and deferral escalations: '1' or ''. Absent means on."
+                },
+                "notify_replies": {
+                    "type": "string",
+                    "description": "Whether this person receives article feedback and reply notifications: '1' or ''. Absent means on."
                 }
             },
             "destructive": false,
@@ -139,6 +147,14 @@
                 "model_consent_granted": {
                     "type": "string",
                     "description": "The Model consent flag and the only consent signal: '1' or ''."
+                },
+                "notify_reminders": {
+                    "type": "string",
+                    "description": "Whether this person receives publishing reminders and deferral escalations: '1' or ''. Absent means on."
+                },
+                "notify_replies": {
+                    "type": "string",
+                    "description": "Whether this person receives article feedback and reply notifications: '1' or ''. Absent means on."
                 }
             },
             "destructive": false,
@@ -148,7 +164,7 @@
         {
             "resource": "users",
             "action": "delete",
-            "summary": "Soft-delete a SyteOps team-member record (frees its slot for reuse).",
+            "summary": "Soft-delete a SyteOps team-member record and blank its editable fields (frees its slot for reuse).",
             "params": {
                 "user_num": {
                     "type": "string",
