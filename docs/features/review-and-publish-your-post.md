@@ -86,6 +86,8 @@ A copied link is for looking at the site and leaving notes. The people on it can
 
 The body editor has a formatting toolbar for **bold**, **italic**, **underline** and **strikethrough**, **headings** (H2/H3), **bulleted** and **numbered** lists, **clear formatting** (removes styling from the selected text), and **undo**/**redo**.
 
+When content AI is set up for your site, the same bar also has **Remix with AI** (it reads **AI**). It rewrites the whole article body from a short instruction — not a selected sentence. The new words stay in the editor until you press **Save**. **Undo remix** puts the last body back. The button is hidden on pages, appearance-only reviews, and comment-only access.
+
 A button lights up when the text you have selected already has that formatting — so you can tell at a glance whether a word is bold, and click the same button again to remove it. This works on text that arrived from your content source, not only on text you typed yourself, and it includes underlining that came from the original article's own styling rather than from this editor. You can take the underline off a whole sentence or just a few words of one, and off a link, without disturbing anything else about how those words look.
 
 One case is deliberately left alone: where an entire paragraph is underlined as a block and you select only part of it, the underline stays, because removing it would mean splitting one paragraph into three. Select the whole paragraph and it comes off.
@@ -126,6 +128,7 @@ The **Featured Image** panel shows the image currently set for the post. **Click
 - **Replace it with a picture from somewhere else.** Paste the new web address into the Image Link field and click **Apply**. SyteOps fetches the image, adds it to your media library, and sets it as the featured image — so the published article never depends on someone else's site keeping the file.
 - **Replace it from your own library.** Click **Choose from library** (marked with a folder icon) to pick an image you already have, or upload a new one from your computer.
 - **Describe it.** The **Alt Text** and **Caption** fields are here too, each with a short hint underneath — Alt Text: *Describes the image for screen readers and search engines*; Caption: *Stored with the image in your media library*.
+- **Remove it from the article.** **Remove from article** clears the featured image. The file stays in your media library. You will be asked: *This removes this image from the article. Are you sure?*
 
 The preview updates as soon as the new image is set. If your account cannot manage media on the site, the Edit image button is disabled and says why.
 
@@ -145,6 +148,12 @@ If an operator has set Author to **View only** for your reviewer type, you can s
 ### Images inside the article
 
 Click any image in the article body — or the featured image — to open its panel. The panel title reads **Article Image**, or **Featured Image** when you opened the featured one. **Notes on This Image** comes first, because a note about the picture is what most people open the panel to write. If any note on that picture is still unresolved, the heading tells you how many.
+
+**Remove from article** takes that picture out of the body (and drops its caption with it). The file stays in your media library. The same confirmation is used as for the featured image. This is not the stronger library-delete confirmation.
+
+**Generate a new picture** (when SyteHero can create images from text) starts from a prompt only — no source photo. The result is not placed until you add it to the article or use it as featured.
+
+**Unused pictures** on this article — files attached to it that the body and featured image are not using — can be deleted from the editor. That deletes the unused file, not a picture still showing in the article. Site administrators can also sweep unused pictures by status and type from the Review Portal settings; preview first, then confirm the list you mean to delete.
 
 Below the notes is **Image Details**, a section that starts closed — click its heading, or the chevron beside it, to open it, and the chevron turns to show the section is expanded. It holds three short fields — **Image Link**, **Alt Text** and **Caption** — each with its own gray hint line underneath explaining what it is for, in place of a dash-separated explanation. It stays open as you move from picture to picture, so working through a batch of images costs one click rather than one per image.
 
@@ -592,7 +601,7 @@ The **Feedback** panel collects every change request submitted for this draft, o
 
 **Every note in the panel has a Resolve chip**, change requests included. Anyone with access can resolve a note — the person who acts on it is usually the one who knows it is done — and a resolved note can be reopened. Resolving the last outstanding change request also clears the **Changes requested** flag on the review queue, so a draft never shows as handled and not handled at the same time.
 
-**Every note also has a Reply chip.** Click it to type an answer in a box that opens under the note; your reply is added to the panel, indented beneath the note it answers, so the answer and the question stay together instead of the answer ending up in an email nobody can find later. **Everyone else in that conversation is emailed** — the note's original author and anyone else who has already replied to it — unless they no longer have access to the article, or you are answering your own note or your own earlier reply, in which case nobody new is told.
+**Every note also has a Reply chip.** Click it to type an answer in a box that opens under the note; your reply is added to the panel, indented beneath the note it answers, so the answer and the question stay together instead of the answer ending up in an email nobody can find later. **Notify recipient via email?** is on unless you clear it. Leave it ticked and everyone else in that conversation is emailed — the note's original author and anyone else who has already replied to it — unless they no longer have access to the article, or you are answering your own note or your own earlier reply, in which case nobody new is told. Clear it and the reply still stores; **Notify later** still sees it, and a later notify can still send the email.
 
 **Reply and Resolve** does both at once: it posts your answer and marks the note handled in a single step. If the note cannot be marked handled for any reason, your reply is still posted and the panel tells you the note is still open, rather than showing you a note as done when it is not.
 
@@ -689,6 +698,8 @@ As a reviewer, you see the full upcoming calendar so you have context on everyth
 ## Your review queue
 
 Every reviewer-facing email — a new draft, an updated draft, a change request, or an invitation from a colleague — includes a footer link to **Posts and Pages Awaiting Your Review**: a single page listing every draft currently waiting on you, so you don't have to hunt through your inbox for the right email. Like every other portal page, it carries your site's logo, name, and colors in a topbar at the top.
+
+The queue can list **posts and pages side by side** so you can scan both at once. The [content calendar](#step-6-use-the-content-calendar) stays one column.
 
 - **Sign in required.** Like the portal itself, you must be signed in to your WordPress account to see the queue — SyteOps checks your account against the reviewers assigned to each draft, so you only ever see posts and pages you're actually on.
 - **Administrators see everything.** A WordPress administrator opening the queue sees every draft currently assigned to any reviewer, not just their own.
@@ -874,6 +885,8 @@ Under **Article images** you decide what happens to pictures an article is still
 - **Read metadata from the image file** — read title and description from the file. Off by default — AI images rarely have useful metadata.
 
 If an article has more pictures than one publish can safely fetch, the rest are copied in the background over the following minutes, and the reviewer is told that copying is continuing.
+
+Site administrators can **sweep unused pictures** by status and type — files attached to matching articles that the article is not showing. Preview the list, then confirm only the files you mean to delete. This is separate from a reviewer deleting unused pictures on one article they are editing.
 
 ### Pre-publish requirements
 

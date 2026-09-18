@@ -8,6 +8,16 @@ description: Settings reference for all SyteOps options, defaults, and what they
 
 This document covers the key settings available in SyteOps and their effects.
 
+## Saving settings
+
+Most settings tabs keep **one Save Changes button** at the bottom of the page. Extra Save buttons on the Integrations, System / API, and CRM tabs are gone — use that footer.
+
+The **Users** and **Backup** tabs hide that footer. On Users, each person card still has its own Save. Backup uses its own backup and restore actions.
+
+Admin connection and domain buttons say what they save, rather than a generic Save.
+
+On the **General** tab, admin buttons, heading bars, and role badges on user cards pick **black or white text** from your brand color so the label stays readable.
+
 ## Admin Tab
 
 The Admin tab is the primary configuration surface. It contains:

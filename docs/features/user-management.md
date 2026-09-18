@@ -176,3 +176,5 @@ If you just changed the work email but have not saved the card yet, the button a
 Clicking the button asks you to confirm the address and the WordPress account before sending. Once a welcome email has gone out, the button relabels to **Resend** and a note shows when it was last sent and to which address. If that person's page link has since been regenerated, the note warns that the previously sent link no longer works and offers a resend so they get the current one.
 
 To prevent accidental double-sends, a resend to the same address is blocked for five minutes after the last send.
+
+The welcome email footer is **white**, so the company logo is not a white box on a dark bar. Review emails still use the dark footer.
