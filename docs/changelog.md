@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.297
+
+- Unused-picture sweep is logged on each article the pictures belonged to. The sweep control stays hidden unless you can upload files.
+
 ## v1.6.296
 
 - Reviewers can delete unused pictures from the article editor. Administrators can sweep unused pictures by status and type.
