@@ -8,6 +8,46 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.296
+
+- Reviewers can delete unused pictures from the article editor. Administrators can sweep unused pictures by status and type.
+
+## v1.6.295
+
+- Reviewers can generate a new picture from a prompt without a source photo. The result is not placed until they add it to the article or use it as featured.
+
+## v1.6.294
+
+- Reviewers can remix the article body with AI from the formatting bar. The change is not saved until they press Save, and Undo remix puts the last body back.
+
+## v1.6.293
+
+- Reply to a note can skip the email. Uncheck Notify recipient via email? The reply still stores, and Notify later still sees it.
+
+## v1.6.292
+
+- The review queue can show posts and pages side by side. Calendar stays one column.
+
+## v1.6.291
+
+- Reviewers can remove a picture from the article without deleting it from the media library.
+- Featured images use a dedicated clear action so an empty id is not treated as a missing file.
+
+## v1.6.290
+
+- The welcome email footer is now white, so the company logo is not a white box on a dark bar.
+- Review emails still use the dark footer.
+
+## v1.6.289
+
+- Settings tabs now keep one Save Changes button at the bottom. Extra Save buttons on Integrations, System/API, and CRM are gone.
+- Users and Backup hide that footer. Users still saves each person card. Admin connection and domain buttons now say what they save.
+
+## v1.6.288
+
+- Admin buttons and heading bars now pick black or white text from the brand color so labels stay readable.
+- Role badges on user cards use the same contrast pick instead of always-black text.
+
 ## v1.6.287
 
 - In the welcome email, the person's profile picture now sits to the right of the greeting instead of above it, and the list item about reviewing pages moves up to second place and reads "Review how Pages look and what they say."
