@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.287
+
+- In the welcome email, the person's profile picture now sits to the right of the greeting instead of above it, and the list item about reviewing pages moves up to second place and reads "Review how Pages look and what they say."
+
 ## v1.6.286
 
 - The welcome email now shows the person's profile picture when they have one, adds reviewing how their page looks and what it says to the list of things they can do, drops the Welcome tag at the top, and carries the company logo in the footer in place of the name.
