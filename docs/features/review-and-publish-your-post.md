@@ -84,9 +84,9 @@ A copied link is for looking at the site and leaving notes. The people on it can
 
 ### Formatting and links
 
-The body editor has a formatting toolbar for **bold**, **italic**, **underline** and **strikethrough**, **headings** (H2/H3), **bulleted** and **numbered** lists, **clear formatting** (removes styling from the selected text), and **undo**/**redo**.
+The body editor has a formatting toolbar for **bold**, **italic**, **underline** and **strikethrough**, **headings** (H2/H3), **bulleted** and **numbered** lists, and **clear formatting** (removes styling from the selected text).
 
-When content AI is set up for your site, the same bar also has **Remix with AI** (it reads **AI**). It rewrites the whole article body from a short instruction — not a selected sentence. The new words stay in the editor until you press **Save**. **Undo remix** puts the last body back. The button is hidden on pages, appearance-only reviews, and comment-only access.
+When content AI is set up for your site, the same bar also has **Remix with AI** (it reads **AI**). It rewrites the whole article body from a short instruction — not a selected sentence. The dialog names the provider and model that will run the rewrite. The new words stay in the editor until you press **Save**. **Undo remix** puts the last body back; **Redo remix** brings that remix back after an undo. The button is hidden on pages, appearance-only reviews, comment-only access, and for anyone whose **Remix text with AI** permission is Hide.
 
 A button lights up when the text you have selected already has that formatting — so you can tell at a glance whether a word is bold, and click the same button again to remove it. This works on text that arrived from your content source, not only on text you typed yourself, and it includes underlining that came from the original article's own styling rather than from this editor. You can take the underline off a whole sentence or just a few words of one, and off a link, without disturbing anything else about how those words look.
 
@@ -96,7 +96,7 @@ One case is deliberately left alone: where an entire paragraph is underlined as 
 
 | Setting | What the toolbar offers |
 | --- | --- |
-| **Minimal** | Bold, italic, underline, strikethrough, remove link, clear formatting, undo and redo. Pasted pictures are kept at every level. |
+| **Minimal** | Bold, italic, underline, strikethrough, remove link, and clear formatting. Pasted pictures are kept at every level. |
 | **Editorial** (default) | The above, plus links, bulleted and numbered lists, and H2/H3 headings |
 | **Full** | The above, plus block quotes, inline code, superscript, subscript and text alignment |
 
@@ -151,9 +151,9 @@ Click any image in the article body — or the featured image — to open its pa
 
 **Remove from article** takes that picture out of the body (and drops its caption with it). The file stays in your media library. The same confirmation is used as for the featured image. This is not the stronger library-delete confirmation.
 
-**Generate a new picture** (when SyteHero can create images from text) starts from a prompt only — no source photo. The result is not placed until you add it to the article or use it as featured.
+**Generate New Image from Text** (when SyteHero can create images from text) starts from a prompt only — no source photo. The result is not placed until you add it to the article or use it as featured.
 
-**Unused pictures** on this article — files attached to it that the body and featured image are not using — can be deleted from the editor. That deletes the unused file, not a picture still showing in the article. Site administrators can also sweep unused pictures by status and type from the Review Portal settings; preview first, then confirm the list you mean to delete.
+**Unused pictures** on this article — files attached to it that the body and featured image are not using — can be deleted from the editor. That deletes the unused file, not a picture still showing in the article. People granted **Sweep unused pictures** can also sweep unused files by status and type from this same image panel; preview first, then confirm the list you mean to delete. That sweep only covers articles they can already edit.
 
 Below the notes is **Image Details**, a section that starts closed — click its heading, or the chevron beside it, to open it, and the chevron turns to show the section is expanded. It holds three short fields — **Image Link**, **Alt Text** and **Caption** — each with its own gray hint line underneath explaining what it is for, in place of a dash-separated explanation. It stays open as you move from picture to picture, so working through a batch of images costs one click rather than one per image.
 
@@ -312,7 +312,7 @@ Click any picture in the article — or the featured image — and **Notes on Th
 
 The heading carries a count of the notes on that picture nobody has resolved yet, so you can tell at a glance whether a picture still has something outstanding without reading the list. A picture with nothing outstanding says nothing.
 
-**Saving a note emails nobody.** The note is attached to that picture, everyone who can open the article sees it, and nothing else happens. That is deliberate: most notes are a record, not an interruption.
+**Saving a note emails nobody.** The note is attached to that picture, everyone who can open the article sees it, and nothing else happens. That is deliberate: most notes are a record, not an interruption. In the Feedback list — and in the Notify picker — a note on a picture shows a small thumbnail next to the filename so you can tell which image it belongs to.
 
 **A note you have started is kept until you save it.** Close the panel, or click a different picture, and the text is still waiting on that picture when you come back — the box says **Unsaved note — press Save note** while it is holding something, and your browser warns you before you leave the page with one outstanding. That warning applies after you publish too, because the notes panel keeps working on a live article. Nothing is saved on your behalf: a note is only filed when you press **Save note**.
 
@@ -326,15 +326,15 @@ Each note has a **Resolve** link, in the image panel and again in the Feedback p
 
 **Notify** sits in the action bar at the bottom of the portal, beside **Request changes**. It is an article-level action because it always was one: the email it sends covers every note on the whole article, not just the picture you happen to be looking at.
 
-Click it, choose who should hear about it, optionally type a message, and press **Send**.
+Click it, choose who should hear about it, optionally type a message, and press **Send**. The dialog lists the notes that person has not been sent yet — open notes, replies, and notes already handled that they were never told about. Every box starts checked; uncheck any you do not want in this email.
 
-**One email, to one person.** If you work through six photos and then press Send, the recipient gets a single message listing all six, not six messages. Nobody else is emailed — Notify is not a broadcast, and it does not touch the article. Nothing is saved, no schedule changes, and nothing is published.
+**One email, to one person.** If you work through six photos and then press Send, the recipient gets a single message listing the notes you left checked, not six messages. Nobody else is emailed — Notify is not a broadcast, and it does not touch the article. Nothing is saved, no schedule changes, and nothing is published.
 
 **The message is optional, in both directions.** You can send the notes with no message at all, or send a message with no notes — a hand-off to a colleague at the end of your shift, for example.
 
 **Your message is kept with the article.** It joins the **Feedback** panel as a note, so the next person to open the article can see the hand-off happened rather than having to take your word for it in an email they may not have.
 
-**The email tells them what changed, not just what is outstanding.** It lists the notes still open, and separately the notes that have been dealt with since you last told them — so somebody who heard about three problems last week can see that two of them are now fixed, instead of receiving the same three again.
+**The email tells them what changed, not just what is outstanding.** It lists the notes still open, the notes that have been dealt with since you last told them, and — in their own section — any already-handled notes you chose to send that they had never heard about. Somebody who heard about three problems last week can see that two of them are now fixed, instead of receiving the same three again.
 
 **A note you have not saved is saved first.** If the image panel still holds a note you were typing, Send files it so it goes out with the rest; if that save fails, nothing is sent and the modal says so. Notes you started on *other* pictures are not sent — only you can decide a note is finished — so the confirmation tells you how many are still waiting.
 
@@ -721,11 +721,11 @@ Each row also shows how many questions the AI search analysis recorded for that 
 
 A filter bar near the top of the page lets you narrow what's shown, using plain drop-downs and an **Apply** button — no JavaScript required:
 
-- **Type** — posts only, pages only, or everything (the default).
+- **Type** — Posts | Pages (the default), posts only, pages only, or all types.
 - **Status** — draft, pending, scheduled, or live only, or every status (the default).
 - **Source** — narrow to one content source, when your site ingests articles from more than one. This drop-down only appears once your site has at least one content source configured.
 
-Filters apply everywhere on the page — **Awaiting Your Review**, **Watching**, **Coming Up**, **Notes & Replies for You**, and **Live Posts and Pages You Can Edit** — and a section that no longer applies disappears rather than showing an empty list. Choosing **Live** for status, for example, hides **Awaiting Your Review** entirely and shows only your live articles. Any items shown always respect the same 100-item display limit as the unfiltered queue. A **Clear filters** link appears once you've narrowed the list, taking you back to everything. Filters are carried in the page's own link, so bookmarking or sharing a filtered view keeps the filter active; if you're using the older "See all my reviews" link, filters still keep your bundle scope.
+Filters apply everywhere on the page — **Awaiting Your Review**, **Watching**, **Coming Up**, **Notes & Replies for You**, and **Live Posts and Pages You Can Edit** — and a section that no longer applies disappears rather than showing an empty list. The queue opens in **Posts | Pages** (two columns) unless you pick Posts, Pages, or All types. Choosing **Live** for status, for example, hides **Awaiting Your Review** entirely and shows only your live articles. Any items shown always respect the same 100-item display limit as the unfiltered queue. A **Clear filters** link appears once you've narrowed the list, taking you back to Posts | Pages. Filters are carried in the page's own link, so bookmarking or sharing a filtered view keeps the filter active; if you're using the older "See all my reviews" link, filters still keep your bundle scope.
 
 ### Watching
 
@@ -886,7 +886,7 @@ Under **Article images** you decide what happens to pictures an article is still
 
 If an article has more pictures than one publish can safely fetch, the rest are copied in the background over the following minutes, and the reviewer is told that copying is continuing.
 
-Site administrators can **sweep unused pictures** by status and type — files attached to matching articles that the article is not showing. Preview the list, then confirm only the files you mean to delete. This is separate from a reviewer deleting unused pictures on one article they are editing.
+People granted **Sweep unused pictures** can **sweep unused pictures** by status and type from the article image panel — files attached to matching articles they can already edit that the article is not showing. Preview the list, then confirm only the files you mean to delete. This is separate from deleting unused pictures on the one article they are editing. The grant is set in Reviewer editing permissions; it defaults to Hide.
 
 ### Pre-publish requirements
 
@@ -984,7 +984,7 @@ tell at a glance how an edit or a publish was authenticated.
 
 ### Editing permissions
 
-**Reviewer editing permissions** default to full edit. Change a cell to restrict an area. Admins are never restricted.
+**Reviewer editing permissions** default to full edit. Change a cell to restrict an area. Administrators are never restricted, except **Sweep unused pictures**.
 
 **How it works**
 
@@ -1001,6 +1001,8 @@ Permissions are set by reviewer type (role). The panel shows a row for each role
 | **Link suggestions** | Edit (full), View only, or Hide. This column only appears when LinkCentral is installed and active. Hide removes the Links panel. View only shows it with Analyze, Apply, and Check disabled. |
 | **Reviewers** | Allow (can add/remove reviewers) or Hide (reviewer panel not shown) |
 | **Modify with AI** | Allow or Hide (the whole Modify with AI block). This column only appears when SyteHero is installed and active. |
+| **Sweep unused pictures** | Allow or Hide (cross-article unused-file sweep from the article image panel). Defaults to Hide. |
+| **Remix text with AI** | Allow or Hide (the Remix with AI toolbar button). Defaults to Allow. |
 | **Categories & tags** | Edit and create new terms, Edit using existing terms only, or View only |
 
 Choosing **View only** makes the area visible in the portal but all controls are disabled so the reviewer can read but not change it. Choosing **existing terms only** for categories and tags lets reviewers choose from your site's existing terms but prevents them from creating new ones — the add-term field shows a suggestion list of matching existing terms.
@@ -1009,9 +1011,9 @@ Choosing **View only** makes the area visible in the portal but all controls are
 
 Below the role rows there is a collapsible **Per-user overrides** section. This lets you grant or restrict individual team members differently from their role — useful if one person on a team should have extra access or a tighter restriction than everyone else in their role.
 
-**Admins are never restricted**
+**Administrators are never restricted, except Sweep unused pictures**
 
-WordPress administrators always have full access to every area regardless of what the permissions matrix says. The restrictions only apply to non-admin reviewers.
+WordPress administrators always have full access to every other area regardless of what the permissions matrix says. Sweep unused pictures is the exception: only SyteOps administrators keep that area. A WordPress administrator without that access stays Hide, and setting the matrix to Allow cannot grant it. The restrictions on every other area apply to non-admin reviewers.
 
 **Saving changes**
 

@@ -8,6 +8,55 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.307
+
+- The Posts | Pages queue no longer says nothing is waiting when a truncated scan left one column empty.
+
+## v1.6.306
+
+- Remix with AI now shows the content AI provider and model.
+- The dialog names the pair that will run the rewrite.
+
+## v1.6.305
+
+- Remix text with AI is now a reviewer permission.
+- Hide turns the button off and the remix request is refused.
+
+## v1.6.304
+
+- Image notes now show a small thumbnail of the stored picture.
+- The Feedback list and Notify picker use the same chip.
+
+## v1.6.303
+
+- Notify lists the notes you can send so you can uncheck any you do not want to include.
+- Replies and already-handled notes can go in that list, and the email keeps already-handled notes in their own section.
+
+## v1.6.302
+
+- The review queue now opens in Posts | Pages.
+- Clear filters returns to that view.
+
+## v1.6.301
+
+- The welcome email light footer now carries the same brand rule as the header.
+
+## v1.6.300
+
+- Remix shows Remixing and offers Redo remix.
+- Formatting toolbar no longer includes undo and redo.
+
+## v1.6.299
+
+- Unused pictures is its own section in the article image panel.
+- Generate New Image from Text is the generate-from-prompt control.
+
+## v1.6.298
+
+- Sweep unused pictures is now a Review Portal permission, default Hide.
+- Reviewers granted Allow can sweep unused pictures only on articles they can already edit.
+- A WordPress administrator without plugin-admin access does not get sweep; the matrix cannot grant it.
+
 ## v1.6.297
 
 - Unused-picture sweep is logged on each article the pictures belonged to. The sweep control stays hidden unless you can upload files.
