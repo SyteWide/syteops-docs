@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.314
+
+- Unused pictures is now its own reviewer permission (Allow or Hide, default Allow). Hide removes that card.
+- Clicking a note thumbnail opens Image Details for that picture.
+
 ## v1.6.313
 
 - Internal improvements and maintenance.
