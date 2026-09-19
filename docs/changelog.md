@@ -8,6 +8,20 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.313
+
+- Internal improvements and maintenance.
+
+## v1.6.312
+
+- Unused picture sweep on a single post or page uses that item. Status and Type filters are gone there.
+- The private portal logo opens the WordPress dashboard in a new tab.
+- Member since dates read month day, year (May 12, 2026).
+
+## v1.6.311
+
+- Note hover previews sit further left, off the whole note so the text stays readable.
+
 ## v1.6.310
 
 - Unused pictures now live in the review sidebar, not on each picture.
