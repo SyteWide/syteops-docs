@@ -8,6 +8,16 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.309
+
+- Unused pictures use their own row layout, not the Modify with AI classes.
+- Thumbnail previews stay visible when moving to the checkbox and sit at the right height after the picture loads.
+
+## v1.6.308
+
+- Unused pictures and Notify note rows now match the other review cards.
+- Hovering a thumbnail shows a larger preview of the picture.
+
 ## v1.6.307
 
 - The Posts | Pages queue no longer says nothing is waiting when a truncated scan left one column empty.
