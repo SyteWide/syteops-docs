@@ -132,6 +132,10 @@ The **Featured Image** panel shows the image currently set for the post. **Click
 
 The preview updates as soon as the new image is set. If your account cannot manage media on the site, the Edit image button is disabled and says why.
 
+**Unused pictures** sits in the same sidebar, just after Featured Image. It lists files attached to this article that the body and featured image are not using. Deleting one of those files deletes the unused file, not a picture still showing in the article. The card follows the **Unused pictures** permission: Allow shows it, Hide removes it. You still need permission to upload files.
+
+**Click the thumbnail** on a Feedback or Notify note to open **Image Details** for that picture, the same panel you get by clicking the picture in the article.
+
 **Alt Text** describes the image for screen readers and search engines. The **Alt Text** field below the preview is filled in with the current description — with a hint that it is read by screen readers, and shown when the picture cannot load — and you can edit it there without opening the details panel. It saves with the rest of your changes. If a featured image is set but has no alt text, you'll be prompted to add it before you can publish.
 
 Two things worth knowing when you swap the image:
@@ -152,8 +156,6 @@ Click any image in the article body — or the featured image — to open its pa
 **Remove from article** takes that picture out of the body (and drops its caption with it). The file stays in your media library. The same confirmation is used as for the featured image. This is not the stronger library-delete confirmation.
 
 **Generate New Image from Text** (when SyteHero can create images from text) starts from a prompt only — no source photo. The result is not placed until you add it to the article or use it as featured.
-
-**Unused pictures** on this article — files attached to it that the body and featured image are not using — can be deleted from the editor. That deletes the unused file, not a picture still showing in the article. People granted **Sweep unused pictures** can also sweep unused files by status and type from this same image panel; preview first, then confirm the list you mean to delete. That sweep only covers articles they can already edit.
 
 Below the notes is **Image Details**, a section that starts closed — click its heading, or the chevron beside it, to open it, and the chevron turns to show the section is expanded. It holds three short fields — **Image Link**, **Alt Text** and **Caption** — each with its own gray hint line underneath explaining what it is for, in place of a dash-separated explanation. It stays open as you move from picture to picture, so working through a batch of images costs one click rather than one per image.
 
@@ -312,7 +314,7 @@ Click any picture in the article — or the featured image — and **Notes on Th
 
 The heading carries a count of the notes on that picture nobody has resolved yet, so you can tell at a glance whether a picture still has something outstanding without reading the list. A picture with nothing outstanding says nothing.
 
-**Saving a note emails nobody.** The note is attached to that picture, everyone who can open the article sees it, and nothing else happens. That is deliberate: most notes are a record, not an interruption. In the Feedback list — and in the Notify picker — a note on a picture shows a small thumbnail next to the filename so you can tell which image it belongs to.
+**Saving a note emails nobody.** The note is attached to that picture, everyone who can open the article sees it, and nothing else happens. That is deliberate: most notes are a record, not an interruption. In the Feedback list — and in the Notify picker — a note on a picture shows a small thumbnail next to the filename so you can tell which image it belongs to. **Click that thumbnail** to open **Image Details** for the picture.
 
 **A note you have started is kept until you save it.** Close the panel, or click a different picture, and the text is still waiting on that picture when you come back — the box says **Unsaved note — press Save note** while it is holding something, and your browser warns you before you leave the page with one outstanding. That warning applies after you publish too, because the notes panel keeps working on a live article. Nothing is saved on your behalf: a note is only filed when you press **Save note**.
 
@@ -886,7 +888,7 @@ Under **Article images** you decide what happens to pictures an article is still
 
 If an article has more pictures than one publish can safely fetch, the rest are copied in the background over the following minutes, and the reviewer is told that copying is continuing.
 
-People granted **Sweep unused pictures** can **sweep unused pictures** by status and type from the article image panel — files attached to matching articles they can already edit that the article is not showing. Preview the list, then confirm only the files you mean to delete. This is separate from deleting unused pictures on the one article they are editing. The grant is set in Reviewer editing permissions; it defaults to Hide.
+The **Unused pictures** permission shows or hides the unused-pictures card (including Delete unused). Hide it if a reviewer should not remove unused files. The grant is set in Reviewer editing permissions; it defaults to Allow.
 
 ### Pre-publish requirements
 
@@ -984,7 +986,7 @@ tell at a glance how an edit or a publish was authenticated.
 
 ### Editing permissions
 
-**Reviewer editing permissions** default to full edit. Change a cell to restrict an area. Administrators are never restricted, except **Sweep unused pictures**.
+**Reviewer editing permissions** default to full edit. Change a cell to restrict an area. Administrators are never restricted.
 
 **How it works**
 
@@ -1001,7 +1003,7 @@ Permissions are set by reviewer type (role). The panel shows a row for each role
 | **Link suggestions** | Edit (full), View only, or Hide. This column only appears when LinkCentral is installed and active. Hide removes the Links panel. View only shows it with Analyze, Apply, and Check disabled. |
 | **Reviewers** | Allow (can add/remove reviewers) or Hide (reviewer panel not shown) |
 | **Modify with AI** | Allow or Hide (the whole Modify with AI block). This column only appears when SyteHero is installed and active. |
-| **Sweep unused pictures** | Allow or Hide (cross-article unused-file sweep from the article image panel). Defaults to Hide. |
+| **Unused pictures** | Allow or Hide (the unused-pictures card, including Delete unused). Defaults to Allow. |
 | **Remix text with AI** | Allow or Hide (the Remix with AI toolbar button). Defaults to Allow. |
 | **Categories & tags** | Edit and create new terms, Edit using existing terms only, or View only |
 
@@ -1011,9 +1013,9 @@ Choosing **View only** makes the area visible in the portal but all controls are
 
 Below the role rows there is a collapsible **Per-user overrides** section. This lets you grant or restrict individual team members differently from their role — useful if one person on a team should have extra access or a tighter restriction than everyone else in their role.
 
-**Administrators are never restricted, except Sweep unused pictures**
+**Administrators are never restricted**
 
-WordPress administrators always have full access to every other area regardless of what the permissions matrix says. Sweep unused pictures is the exception: only SyteOps administrators keep that area. A WordPress administrator without that access stays Hide, and setting the matrix to Allow cannot grant it. The restrictions on every other area apply to non-admin reviewers.
+WordPress administrators always have full access regardless of what the permissions matrix says. The restrictions apply to non-admin reviewers.
 
 **Saving changes**
 
@@ -1028,7 +1030,7 @@ Every team member mapped to a WordPress account gets their own private link to t
 - **Regenerate replaces it.** A **Regenerate** button next to Copy is available to site administrators. Use it if a link may have been shared somewhere it shouldn't have been. The moment you regenerate, the old link stops working completely — even a copy already sitting in someone's inbox — so only share the new one with that person.
 - **You only see the links you're allowed to.** A site administrator sees every team member's link here. Anyone else who can reach this page only ever sees their own.
 
-Opening your own private page shows more than your queue. An **Edit details** card lets you update your own name, company, phone number and email addresses, your booking and LinkedIn links, and — if you're already able to add files to the Media Library — your photo, including whether it can be used as a Model photo elsewhere on the site. A summary shows what's currently on file; click **Edit details** to change it. Whatever you save here changes only your own record.
+Opening your own private page shows more than your queue. The header logo opens the WordPress Dashboard in a new tab. **Member since** uses a month-day-year date (for example, May 12, 2026). An **Edit details** card lets you update your own name, company, phone number and email addresses, your booking and LinkedIn links, and — if you're already able to add files to the Media Library — your photo, including whether it can be used as a Model photo elsewhere on the site. A summary shows what's currently on file; click **Edit details** to change it. Whatever you save here changes only your own record.
 
 The same card carries two notification switches: **Reminder emails** (nudges before something you're on is due to go live) and **Reply notifications** (feedback left on your articles, and replies to your own notes). Both are on by default. Turning either off takes effect starting with the next email of that kind — it doesn't cancel anything already on its way.
 
