@@ -8,6 +8,40 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.324
+
+- Watching still lists older drafts when scheduled copies already sit under Coming Up.
+- A failed Next on a review list says the page could not load, and the calendar pager follows the chosen page size.
+
+## v1.6.323
+
+- When Watching stops scanning early, scheduled items that already sit under Coming Up still get a note that they moved.
+
+## v1.6.322
+
+- Next on a grouped review list keeps the items and loads the next series from the server.
+- Choosing a review-list size no longer changes the calendar pager.
+
+## v1.6.321
+
+- Unscheduled drafts on the calendar show five at a time, with the same 10 / 25 / 100 choices as the review lists.
+
+## v1.6.320
+
+- The review page remembers how many items you want per list. Operators can set a site default.
+
+## v1.6.319
+
+- Review lists show five items at a time, with choices for 10, 25, or 100. Next loads more from the full set you can access, not only the newest few.
+
+## v1.6.318
+
+- Live posts and pages on your review page start collapsed. Open that section when you want them.
+
+## v1.6.317
+
+- Internal improvements and maintenance.
+
 ## v1.6.316
 
 - When a picture is gone from the article, Image Details hides Alt Text, Caption, Generate SEO, and Attach reference.

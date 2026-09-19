@@ -1,6 +1,6 @@
 {
     "schema_version": 1,
-    "syteops_version": "1.6.316",
+    "syteops_version": "1.6.324",
     "operations": [
         {
             "resource": "users",
@@ -90,6 +90,10 @@
                 "notify_replies": {
                     "type": "string",
                     "description": "Whether this person receives article feedback and reply notifications: '1' or ''. Absent means on."
+                },
+                "list_per": {
+                    "type": "string",
+                    "description": "Review list page size for this person: '5', '10', '25', '100', or '' to inherit the site default."
                 }
             },
             "destructive": false,
@@ -165,6 +169,10 @@
                 "notify_replies": {
                     "type": "string",
                     "description": "Whether this person receives article feedback and reply notifications: '1' or ''. Absent means on."
+                },
+                "list_per": {
+                    "type": "string",
+                    "description": "Review list page size for this person: '5', '10', '25', '100', or '' to inherit the site default."
                 }
             },
             "destructive": false,
