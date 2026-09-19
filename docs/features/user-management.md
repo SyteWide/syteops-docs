@@ -177,4 +177,4 @@ Clicking the button asks you to confirm the address and the WordPress account be
 
 To prevent accidental double-sends, a resend to the same address is blocked for five minutes after the last send.
 
-The welcome email footer is **white**, so the company logo is not a white box on a dark bar. Review emails still use the dark footer.
+The welcome email footer is **white**, so the company logo is not a white box on a dark bar, and it carries the same brand-colored line the header uses. Review emails still use the dark footer.
