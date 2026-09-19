@@ -134,7 +134,7 @@ The preview updates as soon as the new image is set. If your account cannot mana
 
 **Unused pictures** sits in the same sidebar, just after Featured Image. It lists files attached to this article that the body and featured image are not using. Deleting one of those files deletes the unused file, not a picture still showing in the article. The card follows the **Unused pictures** permission: Allow shows it, Hide removes it. You still need permission to upload files.
 
-**Click the thumbnail** on a Feedback or Notify note to open **Image Details** for that picture, the same panel you get by clicking the picture in the article.
+**Click the thumbnail** on a Feedback note to open **Image Details** for that picture, the same panel you get by clicking the picture in the article. If a remix of that picture is now in the article, the panel opens on the remix so you can keep editing it. If the picture has been removed entirely, the panel still opens on the original stored picture and its notes, but **Alt Text**, **Caption**, **Generate SEO with AI**, and **Attach reference image** stay hidden until that picture is back in the article. Thumbnails in **Send These Notes to Someone** do not open that panel — they stay with the note you are choosing to include.
 
 **Alt Text** describes the image for screen readers and search engines. The **Alt Text** field below the preview is filled in with the current description — with a hint that it is read by screen readers, and shown when the picture cannot load — and you can edit it there without opening the details panel. It saves with the rest of your changes. If a featured image is set but has no alt text, you'll be prompted to add it before you can publish.
 
@@ -310,11 +310,11 @@ button is hidden.
 
 ### Notes on an image
 
-Click any picture in the article — or the featured image — and **Notes on This Image** is the first thing in the panel. Type what is wrong with the picture and click **Save note**. Under **Save note**, on every one of those panels, is **Attach reference image**, so later Modify with AI remixes start from that tagged picture unless you pick a one-off source for a single generate. If the picture is still only a web address and has not been imported into your media library, **Pick** stays disabled and the panel tells you to import the picture first.
+Click any picture in the article — or the featured image — and **Notes on This Image** is the first thing in the panel. Type what is wrong with the picture and click **Save note**. Under **Save note**, on every one of those panels, is **Attach reference image**, so later Modify with AI remixes start from that tagged picture unless you pick a one-off source for a single generate. If the picture is still only a web address and has not been imported into your media library, **Pick** stays disabled and the panel tells you to import the picture first. If the picture is no longer in the article, **Attach reference image** is hidden.
 
 The heading carries a count of the notes on that picture nobody has resolved yet, so you can tell at a glance whether a picture still has something outstanding without reading the list. A picture with nothing outstanding says nothing.
 
-**Saving a note emails nobody.** The note is attached to that picture, everyone who can open the article sees it, and nothing else happens. That is deliberate: most notes are a record, not an interruption. In the Feedback list — and in the Notify picker — a note on a picture shows a small thumbnail next to the filename so you can tell which image it belongs to. **Click that thumbnail** to open **Image Details** for the picture.
+**Saving a note emails nobody.** The note is attached to that picture, everyone who can open the article sees it, and nothing else happens. That is deliberate: most notes are a record, not an interruption. In the Feedback list — and in the Notify picker — a note on a picture shows a small thumbnail next to the filename so you can tell which image it belongs to. **Click that thumbnail** in the Feedback list to open **Image Details** for the picture. If a remix of it is now in the article, that remix opens so you can keep editing it. If the picture is no longer in the article, the panel still opens on that original picture and its notes, without Alt Text, Caption, Generate SEO, or Attach reference. In **Send These Notes to Someone**, the thumbnail is part of the note row and does not open Image Details.
 
 **A note you have started is kept until you save it.** Close the panel, or click a different picture, and the text is still waiting on that picture when you come back — the box says **Unsaved note — press Save note** while it is holding something, and your browser warns you before you leave the page with one outstanding. That warning applies after you publish too, because the notes panel keeps working on a live article. Nothing is saved on your behalf: a note is only filed when you press **Save note**.
 
@@ -328,7 +328,7 @@ Each note has a **Resolve** link, in the image panel and again in the Feedback p
 
 **Notify** sits in the action bar at the bottom of the portal, beside **Request changes**. It is an article-level action because it always was one: the email it sends covers every note on the whole article, not just the picture you happen to be looking at.
 
-Click it, choose who should hear about it, optionally type a message, and press **Send**. The dialog lists the notes that person has not been sent yet — open notes, replies, and notes already handled that they were never told about. Every box starts checked; uncheck any you do not want in this email.
+Click it, choose who you want us to notify, optionally type a message, and press **Send**. The dialog lists the notes that person has not been sent yet — open notes, replies, and notes already handled that they were never told about. Every box starts checked; uncheck any you do not want in this email. That notes-list hint appears after you pick someone.
 
 **One email, to one person.** If you work through six photos and then press Send, the recipient gets a single message listing the notes you left checked, not six messages. Nobody else is emailed — Notify is not a broadcast, and it does not touch the article. Nothing is saved, no schedule changes, and nothing is published.
 

@@ -8,6 +8,15 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.316
+
+- When a picture is gone from the article, Image Details hides Alt Text, Caption, Generate SEO, and Attach reference.
+- Thumbnails in Send These Notes do not open Image Details. The notes-list hint waits until you pick someone, and the picker asks who you want us to notify.
+
+## v1.6.315
+
+- Clicking a note thumbnail opens Image Details for that picture, including its active remix, and still opens when the picture is gone from the article.
+
 ## v1.6.314
 
 - Unused pictures is now its own reviewer permission (Allow or Hide, default Allow). Hide removes that card.
