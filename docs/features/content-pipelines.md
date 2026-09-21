@@ -650,6 +650,44 @@ A progress window shows a spinner and one picture at a time while that image reb
 
 It also gives a picture still named after its file a real name, taken from the article it belongs to.
 
+### Before you rename a picture
+
+Giving a picture a better file name is easy to ask for and hard to undo. The old web address stops
+working the moment the file moves, and anything still pointing at it — a page you wrote last year, a
+widget, a page-builder layout, another site linking to your image — breaks quietly.
+
+So SyteOps starts with a report instead of a rename. In your media library, each picture has an **SEO
+rename: impact report** link in its row, and you can tick up to ten pictures and run the same report
+from the bulk actions menu. Only administrators see it.
+
+The report tells you the name it would give the picture, lists every place the current name is used,
+says what changing each one would take, and finishes with a plain list of what it cannot promise to
+fix: other sites linking to your image, copies held by caches and content networks, and addresses
+written into your theme's own files.
+
+**Nothing is renamed by the report.** It is a plan you read before deciding.
+
+### Renaming the picture
+
+Under each picture the report says it can handle, there is an **Execute rename** button with a tick
+box beside it. Nothing happens until you tick the box: the button on its own does nothing, and so
+does a link anyone sends you.
+
+When you confirm, SyteOps runs the report again from scratch — the plan you read is a snapshot, and
+the site is live — and only then renames. **The old files stay on the site for 30 days** and the old
+addresses redirect to the new ones, so a page you missed, a cached copy or another site linking to
+your image keeps showing the picture instead of breaking. After 30 days the old files are tidied away
+and the redirect keeps answering. Caches SyteOps can reach are cleared straight away.
+
+If any part of your own content cannot be rewritten, the whole rename is undone and nothing is left
+half-changed. Where the report said someone has to decide — a search that ran out of room, a setting
+stored as a structured record, a row in another plugin's table — that decision gets its own tick box
+and the rename is refused until you tick it. One case cannot be ticked at all: when the media
+registry reports the picture as in use, renaming it could get the file deleted as unused, so SyteOps
+will not do it from here.
+
+You can rename up to ten pictures in one go, and only administrators can do it.
+
 ### Existing pictures
 
 With **Only rebuild existing pictures when I ask** on — the default — pictures already in your media

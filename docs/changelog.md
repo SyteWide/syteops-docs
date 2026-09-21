@@ -8,6 +8,228 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.359
+
+- Fixed: the **Reply, Reply and Resolve, and Resolve** controls under a note in the Review Portal now reach a comfortable touch target on a phone, and the **delete** control gains a larger invisible tap zone without changing its visible size.
+- Fixed: the **reply box** under a note now stays visible above the on-screen keyboard when it opens on a phone.
+- Fixed: **dialogs** in the Review Portal (Notify, Publish, and others) now cap their height and scroll internally on a phone instead of letting their Send or Confirm button get pushed off the bottom of the screen.
+- Fixed: the text **caret** in the article body editor no longer disappears behind the fixed publishing-actions bar while typing on a phone.
+
+## v1.6.358
+
+- Added: the Review Portal's **Remix with AI** dialog now offers instruction-preset chips (**Shorter**, **Longer**, **Simpler**, **More formal**, **More conversational**, **Fix grammar only**) that fill in the instruction box with a ready-made, editable sentence.
+- Added: up to six recent remix attempts per article are kept in a compact list under the dialog — time, scope, and instruction for each — so you can compare them and bring an earlier one back with **Apply**, or remove one with **Discard**.
+
+## v1.6.357
+
+- Fixed: the draft/published **status badge** in the Review Portal no longer causes the whole page to scroll sideways on a phone.
+- Fixed: **text fields and dropdowns** across the Review Portal and the person hub no longer render too small to read — and no longer trigger the browser's zoom-on-focus — on a phone or a tablet. The previous phone-only fix stopped at 600px and missed several field types; this one covers every text field, dropdown and the article body editor up to 768px.
+- Fixed: the fixed **publishing-actions bar** at the bottom of the screen on a phone is now capped so it cannot crowd out most of a small screen.
+
+## v1.6.356
+
+- Added: the Review Portal's **Remix with AI** can now rewrite just a selected paragraph, heading, list, or table instead of the whole article. Select some text first and the dialog offers **Selection** (the default) or **Whole article**; with nothing selected, only the whole article can be rewritten, exactly as before. Selecting part of a list item or table cell rewrites the whole list or table it sits in. The same length limit and missing-picture/link/shortcode/table check apply to just the selected piece.
+
+## v1.6.355
+
+- Fixed: **secondary keywords** are now cleaned up wherever they're saved — from Content Pipelines ingest and from the Review Portal alike. Duplicate entries are removed (case-insensitively), extra whitespace is trimmed, and the list is capped at a sane count and length per entry.
+- Fixed: an incoming article whose secondary keywords carried a keyword-picker's accessibility label (a "Remove &lt;term&gt;" button caption, concatenated onto the term with no separator) now has that artifact stripped out automatically instead of being stored verbatim. An article already affected is repaired the next time it's saved in the Review Portal.
+
+## v1.6.354
+
+- Fixed: the **AI Models** card's **Article writing & remix** row now names everything that AI area powers — **Remix text with AI**, the **AI meta description**, and **taxonomy suggestions** — instead of naming only two of the three.
+- Fixed: the **Custom AI model** label in an expanded Override row no longer stays exposed to screen readers once its input is hidden; both now share the same hidden state.
+- Fixed: the Debug Tool's private-storage nonce-refresh endpoint now uses the shared admin verification helper for consistent nonce and capability checks, matching its sibling endpoint.
+
+## v1.6.353
+
+- The **SEO rename impact report** gained the step it was missing: an **Execute rename** button under each picture it says it can handle. Nothing happens until you tick the confirmation box beside it.
+- On confirming, SyteOps runs the report again from scratch — the plan you read is a snapshot and the site is live — and renames only from the fresh one. Post bodies, page-builder layouts, widgets, theme settings, term and post meta, the SEO plugin's social image and the image optimizer's records are all updated.
+- **The old files stay on the site for 30 days** and the old addresses **redirect** to the new ones, so a page that was missed, a cached copy or another site linking to your image keeps showing the picture. After 30 days the old files are tidied away and the redirect keeps answering. Caches the plugin can reach are cleared straight away.
+- If any part of your own content cannot be rewritten, **the whole rename is undone** and nothing is left half-changed.
+- Anything the report said needed a decision — a search that ran out of room, a setting stored as a structured record, a row in another plugin's table — gets its own tick box, and the rename is refused until it is ticked. A picture the media registry reports as in use cannot be renamed from here at all.
+- Up to ten pictures per run, administrators only.
+
+## v1.6.352
+
+- The **Coverage** view's **SEO mode** gained a **Structure** column — a read-only report on each article's headings, images and links, reading the article body directly.
+- Each row shows a compact summary (H1 count, whether heading levels skip, image count and how many are missing alt text, internal versus external link counts, and word count), with the full list of anything worth a look as the cell's tooltip.
+- Four new filter pills narrow the table to a specific issue: **Multiple H1**, **Heading order**, **Images without alt** and **No internal links**.
+- Nothing is written. The report works even with no SEO tool integration switched on.
+
+## v1.6.351
+
+- The **Coverage** view's **SEO** mode now covers your **pictures**. Two new columns list every library image an article shows — its featured image and every picture in the body — and badge the ones with no alt text, alt text that is only the file's name, or no title on the media record.
+- **Describe pictures** looks at the picture itself and suggests **alt text**, a **caption** and a **title**, using the article around it for context. Nothing is written: each suggestion arrives with a tick box, and a second, unpaid step writes only what is left ticked.
+- The run is **priced and capped by pictures, not articles** — the confirmation dialog names the picture count, and a selection over the per-run maximum is refused outright rather than quietly trimmed.
+- Alt text belongs to the picture, so a picture another article is showing **keeps its alt text** unless you tick **Overwrite shared pictures**, and the confirmation dialog says so before the run starts.
+- A picture the AI could not read is **remembered against that file**, so the next run does not pay to be told the same thing again. Replacing the file makes it eligible once more.
+- A report-only **File name** column flags pictures whose media record says nothing the file name does not already say, and links each one to the Media Library.
+
+## v1.6.350
+
+- The **media library** gained an **SEO rename impact report**. Each picture has an **SEO rename: impact report** link in its row, and you can tick up to ten pictures and run the same report from the bulk actions menu.
+- The report shows the file name the picture would be given, then lists every place the current name is used — post bodies, page-builder layouts, featured images, widgets and theme settings, term and post meta, the SEO plugin's social image, and the image optimizer's own records — and says what changing each one would take.
+- It finishes with a plain list of what it **cannot promise to fix**: other sites linking to your image, copies held by caches and content networks, and addresses written into your theme's own files.
+- **Nothing is renamed.** The report is a plan you read before deciding; acting on it is a separate step that is not available yet.
+- Only administrators can see or run the report.
+
+## v1.6.349
+
+- The **Coverage** view now has two modes. **GEO** is the answer-engine audit it always was; **SEO** turns the same table into a bulk pass over your **SEO titles, meta descriptions and focus keywords**, showing what each article holds today and badging the gaps.
+- **Propose** runs AI over the articles you tick and suggests a headline under 60 characters, a meta description and one focus keyword phrase for every field that is empty. The confirmation dialog names the provider, the model and the token ceiling, and says plainly that **nothing is written yet**.
+- **Review and accept**: each suggestion appears under the current value with a tick box, with **Accept all fields** and **Skip all fields** for the whole page. The accept step writes only what is left ticked, runs no AI, and spends nothing.
+- Two optional switches, both **off** by default: **Re-propose existing keyword** and **Overwrite existing values**. A plain run only fills gaps, so nobody's own wording is proposed over. Whichever you tick is named in the confirmation dialog before the run starts.
+- A suggestion whose value **changed since it was proposed** — because somebody edited it in the Review Portal in between — is refused rather than written, and the article returns to the propose queue.
+- Accepted values go through the same write path the Review Portal uses, and each run is recorded as **one row** in the Log with the fields that moved on each article.
+
+## v1.6.348
+
+- Changed: the Review Portal's REST API routes moved to a new URL path.
+- **Deprecated**: the previous route path keeps working for one release and marks its responses with a deprecation header — any external caller (a custom integration or automation reading the old path directly) should move to the new one before the next release, when the old path stops working.
+
+## v1.6.347
+
+- Every SEO field SyteOps writes — SEO title, meta description, focus keyword and supporting keywords — now goes through **one internal seam**, with the per-tool handling inside it. The Review Portal, an arriving article and a pipeline run now store exactly the same thing for the same input; they had drifted apart.
+- On a site running **Squirrly SEO with the integration toggle off**, the focus keyword and meta description now reach the snippet row Squirrly actually renders from, instead of its mirror fields alone — so a keyword saved there was stored but never shown.
+- Image **alt text, title, caption and description** are now written by a single routine. It never overwrites a description on a picture another article is showing unless a person typed the new one, and it keeps a literal backslash intact on every path (the portal used to drop one).
+
+## v1.6.346
+
+- SyteHero's **fal** image-AI key can now be stored and managed in SyteOps. A new **SyteHero image AI (fal)** tile on the **System / API** AI Keys card carries the toggle, the encrypted key, and a model id per image capability (generate a picture, remix a picture, picture to video, remove background, upscale, extend edges).
+- While the toggle is on, SyteHero borrows that key and disables its own key, enable and clear controls, with a link back to the tile. The Review Portal's image-AI row says "Managed from here" and links there too.
+- Update SyteHero to **1.0.139 or newer** before turning the toggle on — an older version does not know to ask, so the setting would have no effect.
+
+## v1.6.345
+
+- Added a read-only **Image generation & modify (SyteHero)** row at the foot of the Review Portal's AI Models card, showing whether SyteHero is installed and active, whether its image-AI key is configured, and its cached credit balance — with a link to SyteHero's own settings when it's active.
+
+## v1.6.344
+
+- Redesigned the Review Portal's **AI Models** card: one row per feature, named by what it does (Article writing & remix, Answer-engine analysis, Ingest field mapping, Social posts, Image alt & captions, Agent prompts), with a readiness status (Ready / Needs key / Not configured).
+- Each row shows a plain "Uses site default" line with an Override switch — turn it on to pick a provider and model just for that feature, or leave it off to follow the site default.
+- The less-used custom model ID and max-tokens controls now sit in a collapsed **Advanced** section per row.
+- Lead scoring and LinkCentral now show as status rows on this card, linking to their own settings, when active.
+- The Social row's provider and model now save together with the rest of the card, in one Save click.
+
+## v1.6.343
+
+- Remix with AI in the Review Portal now refuses a very long article before sending it, naming the character limit.
+- A rewrite that would have dropped a picture, a link, a shortcode, or a whole table from the article is refused instead of applied, and the message names what would have gone missing.
+- A rewrite now keeps your article's focus keyword and secondary keywords exactly as written when either is on record.
+- Added a **Revert to pre-remix** control that puts the article back exactly as it read before the last rewrite — it works even after you reload the page, unlike Undo remix.
+- The remix dialog is now announced as a dialog to screen readers, opens with focus on the instruction field, closes on Escape, and returns focus to the Remix button on close.
+- Remix failures now show a specific reason — timed out, offline, too long, or would have dropped part of the article — instead of one generic message.
+
+## v1.6.342
+
+- Added a **Site default provider** setting on the AI API Keys card (System / API). Any AI feature you have not pointed at a provider of its own now uses that provider, along with the preferred model and token limit from its tile.
+- Leave it on **Auto-pick** to keep the previous behavior. The hint under the select names the provider Auto-pick would choose, so the fallback is never hidden.
+- Screens that show which provider and model a feature will use — the **Current:** line on the AI Models settings, and the Remix and Agent prompts panels in the Review Portal — now name the inherited provider, marked "(site default)", with the model that will actually run, instead of showing a dash.
+- The **Configure AI Provider** modal and the provider tiles now accept a blank provider as "use the site default", as long as a site default is available.
+
+## v1.6.341
+
+- Generate new picture now refuses a second run while one is still going on the same article, so a double click, a second tab or a second reviewer cannot start two billable generations at once.
+- A generation you walk away from is now stopped on the server rather than left to run to completion.
+- A site whose only connected image models generate from text can now use Generate new picture at all; it was refused there before.
+- A picture is now always generated by the provider that offers the model you picked.
+- A model this site does not offer is now refused with a message naming it, instead of being quietly swapped for a different one.
+
+## v1.6.340
+
+- Fixed a "Powered by" wordmark in the welcome email's light footer that was too faint on white; it now meets accessibility contrast guidelines.
+- The welcome email's footer logo no longer repeats the company name to screen readers a second time right after the header already announces it.
+
+## v1.6.339
+
+- The AI Agent Prompts panel is live on page and appearance reviews: a sidebar card lets you pick which pinned notes to turn into an implementation prompt for a coding agent, adjust the AI-guessed task type per note, then Generate and Copy the result.
+- Each generated task carries its location on the page (element, section, breakpoint), the client's request verbatim with any replies, an interpretation and an acceptance check.
+- Hidden from reviewers by default — grant the AI agent prompts area under Editing permissions.
+
+## v1.6.338
+
+- The Debug Tool's welcome-email test-send card now shows the server's real failure message (a bad nonce, a mail delivery failure) instead of a generic "Unknown error."
+- The Private Storage Browser now reports a message when a signed download/open link fails to generate, instead of silently reloading the page.
+- An unstructured admin error message no longer echoes the server's filesystem path.
+
+## v1.6.337
+
+- Behind-the-scenes groundwork for AI Agent Prompts: the engine that turns the notes you pin on a Page
+  Appearance review into one copyable implementation prompt, plus the per-post record of which notes a
+  prompt covered and whether any have changed since.
+- Nothing changes in the review experience yet — the panel that uses it arrives in a later update.
+
+## v1.6.336
+
+- Review Portal buttons, active pills and badges now pick black or white text based on your configured brand color, instead of always assuming a dark background.
+- Off-site links on your personal page (your website, booking link, LinkedIn, and the dashboard link) now tell screen readers they open in a new tab.
+
+## v1.6.335
+
+- Behind-the-scenes groundwork for AI Agent Prompts: pinning a note on the Page Appearance canvas now records more about the exact spot you pinned (which element, its heading, its position on the page) for a future update. Nothing changes in the review experience yet.
+
+## v1.6.334
+
+- Removed an internal REST capability for bulk-deleting unused pictures across multiple articles at once. It had no control in the admin UI and was reachable only by direct API call; the per-article "Delete unused" card in the Review Portal is unaffected.
+
+## v1.6.333
+
+- The AI Models card gains an Agent prompts row, and a new card next to it lets you customize (or restore) the preamble template used when turning page-review notes into an implementation prompt. The reviewer permissions matrix gains a matching column, hidden from non-admin reviewers until you grant it. The feature these settings power ships in a later update.
+
+## v1.6.332
+
+- The Watching list on your personal page no longer goes blank when you click Next and every remaining item is scheduled rather than a draft.
+- The 5/10/25/100 list-size chooser now updates the view even when your account is not mapped to a person profile, instead of silently doing nothing.
+- Content health can now page past its first 5 issues on sites where the Review Portal is not active.
+- Paging through Content health no longer loses the list's spacing.
+- The calendar's unscheduled-drafts panel no longer disappears on its last page, and clicking Next twice quickly no longer skips or duplicates a page.
+- Links on later pages of a shared review-package list now open the same themed preview as the first page.
+- The Live list's Posts and Pages columns now page correctly on sites with extra content types registered.
+- The "Could not load the next page" message is now translatable.
+- The calendar's unscheduled-drafts panel now says when it could not confirm it found everything, instead of implying the list is complete.
+
+## v1.6.331
+
+- Sending a message-only Notify note with every checkbox cleared now confirms the message went, instead of reporting "0 notes".
+
+## v1.6.330
+
+- Unused pictures now only offers to delete a file you have permission to delete. If a reviewer can upload media but not delete their own posts, the card no longer offers their own uploads either — grant delete permission for posts, or use the Author role, to restore it.
+- Generating a new picture from text now tells the server to cancel a job that takes too long, instead of leaving it to finish unwatched.
+- Reopening a different picture after generating one from text no longer leaves the previous result's Add to article and Use as featured buttons active.
+- Setting a new featured image after removing the old one now shows Modify with AI and the correct button label again, without a page reload.
+- The Generate new picture button no longer appears when no text-to-image model is configured.
+- Add to article and Use as featured on a generated picture can no longer be double-clicked, and a refused featured-image change is now shown in the same panel instead of only on the featured-image card.
+- Deleting unused pictures now shows what happened after the list refreshes, including when some pictures could not be deleted, and a refusal now says why instead of a generic error.
+- Saving Review Portal settings now actually stores the chosen generate-new picture model.
+
+## v1.6.329
+
+- Admin error messages now show what the server actually said instead of a generic failure or a raw response.
+- Text on brand-colored buttons and badges stays readable whichever brand colors are set.
+
+## v1.6.328
+
+- The welcome email's copyright line is now dark enough to read on its white footer.
+- The welcome email footer stays white in dark mode even if the email styles are reordered.
+
+## v1.6.327
+
+- Off-site links on your private page — your website, booking and LinkedIn links — no longer pass that page's address to the site you open.
+- Your private page, the review portal, and the review queue all tell every browser to keep their address to itself when you leave them.
+- Review emails now label the button to your review page correctly: My Portal when you have one, See all my reviews otherwise.
+
+## v1.6.326
+
+- The Notify note picker gained Check all and Uncheck all links, so clearing or restoring every note no longer means clicking each one.
+- Send now disables with a "Pick at least one note, or add a message" hint when nothing is checked and no message is typed.
+
+## v1.6.325
+
+- Added a Published Content heading above live posts and pages you can edit.
+- Posts and Pages labels are larger, and notes emails now say Notes currently open and Previously Resolved Notes.
+
 ## v1.6.324
 
 - Watching still lists older drafts when scheduled copies already sit under Coming Up.

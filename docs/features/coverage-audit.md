@@ -1,18 +1,20 @@
 ---
 sidebar_position: 12.7
 title: Coverage (Answer-Engine Audit)
-description: Audit every article your answer engines describe — what the AI analysis has covered, what is missing, and what is still waiting for review — and analyze a batch of articles in one go.
+description: Audit every article your answer engines describe — what the AI analysis has covered, what is missing, and what is still waiting for review — analyze a batch of articles in one go, and fill in missing SEO titles, meta descriptions, focus keywords and picture alt text with AI suggestions you approve one by one.
 ---
 
 # Coverage — Answer-Engine Audit
 
 The **Coverage** view answers one question: across all the articles your AI answer files describe, what has actually been run against each one?
 
-It puts every one of those articles in a single table — whether the GEO analysis has ever run, how the article scored, how many questions and answers it has, whether anyone has reviewed those answers, and whether its meta description, SEO title, focus keyword and pillar mark are filled in. From the same table you can run the GEO analysis over a batch of articles at once, or mark existing stored answers as reviewed in a batch without re-running AI.
+It has two modes. **GEO** is the answer-engine audit described below. **SEO** turns the same table into a bulk pass over your SEO titles, meta descriptions, focus keywords and the alt text on your pictures — see [Filling in SEO fields in bulk](#filling-in-seo-fields-in-bulk) and [Describing your pictures](#describing-your-pictures).
+
+In GEO mode it puts every one of those articles in a single table — whether the GEO analysis has ever run, how the article scored, how many questions and answers it has, whether anyone has reviewed those answers, and whether its meta description, SEO title, focus keyword and pillar mark are filled in. From the same table you can run the GEO analysis over a batch of articles at once, or mark existing stored answers as reviewed in a batch without re-running AI.
 
 ## Where to find it
 
-Open the **Content Pipelines** tab and click the **Coverage** pill in the row of view links at the top.
+Open the **Content Pipelines** tab and click the **Coverage** pill in the row of view links at the top. The **Mode** pills just under the heading switch between **GEO** and **SEO**.
 
 Coverage is for SyteOps administrators only. It is deliberately **not** part of the [Review Portal](review-and-publish-your-post.md) — a reviewer working on one article already has an **Analyze GEO** button in that article's GEO panel, and that is a different, one-article-at-a-time action. Coverage is the whole-library view.
 
@@ -116,8 +118,97 @@ When an analyze run finishes you get a summary of what was analyzed, what failed
 
 When an accept run finishes you get a summary of what was accepted, what failed and what was skipped. Reload the page to see the updated **Reviewed** column. Accept does not spend against your AI account.
 
+## Filling in SEO fields in bulk
+
+Switch **Mode** to **SEO** and the table changes to four columns — **SEO title**, **Meta description**, **Focus keyword** and **Structure** — showing what each article holds today, with a **Missing** badge where there is nothing. The row picker, **Select all on this page**, the gap filters and the **Include drafts & scheduled** toggle all work exactly as they do in GEO mode. The **Structure** column is a read-only report on the article body itself — nothing here proposes or writes anything — giving a one-line summary of its headings, images and links (hover it for the full list of anything worth a second look), with four filter pills that narrow the table to a specific problem: **Multiple H1** (more than one top-level heading), **Heading order** (a heading level skipped, such as jumping from an H2 straight to an H4), **Images without alt** (a picture in the body with no alt text), and **No internal links** (nothing in the body linking to another page on your own site); because it reads the article's content directly, it works even with no SEO tool integration switched on.
+
+This is a **two-step** workflow, and the split is deliberate: unlike answers, an SEO title appears in a search result the moment it is stored, so nothing is written until you say so.
+
+### Step 1 — Propose
+
+Tick the articles you want and click **Propose for N selected**. A confirmation dialog names the AI provider, the model and the maximum tokens per article, states that this **spends money on your own AI account**, and says plainly that **nothing is written yet**.
+
+The run works one article at a time, with a **Stop** control, and produces a suggestion for each field that is empty:
+
+- **Focus keyword** — one short phrase drawn from the article body.
+- **SEO title** — a search-result headline, kept under 60 characters, and written around the focus keyword when the article has one (or the one just suggested for it).
+- **Meta description** — the same writer the Review Portal's **Generate with AI** button uses.
+
+Two optional tick boxes sit beside the buttons and change what the run is allowed to touch:
+
+- **Re-propose existing keyword** — also suggests a keyword for articles that already have one.
+- **Overwrite existing values** — also suggests for fields that are already filled, in all three columns.
+
+Both are **off** by default, so a plain run only fills gaps and never proposes over work somebody already did. Whichever you tick is named in the confirmation dialog before the run starts.
+
+Articles are skipped, with the reason reported, when somebody currently has them **open in the Review Portal**, when they are **out of scope**, or when **every field the run may touch is already filled**.
+
+### Step 2 — Review and accept
+
+Each suggestion appears under the current value in its own cell, with a tick box. Everything a run proposed starts ticked.
+
+- Untick anything you do not want — that is **Skip** for that field.
+- **Accept all fields** and **Skip all fields** tick or untick everything on the page at once.
+- Click **Accept N selected** to write the ticked fields.
+
+The accept run does **not** run AI and does **not** spend against your AI account. Its confirmation dialog tells you how many fields will be written and reminds you that they appear in search results as soon as they are stored.
+
+Three things are refused rather than written, and each is reported:
+
+- **The value changed since it was proposed.** If somebody edited that SEO title in the Review Portal after the suggestion was made, the suggestion is discarded rather than written over their work. The article goes back into the propose queue.
+- **The field is already filled** and this run was not started with **Overwrite existing values** ticked.
+- **No SEO tool is switched on**, so there is nowhere for the value to be stored. Turn one on under **Integrations** first. (Proposing still works without one — only writing needs it.)
+
+Suggestions are kept with the article, so you can propose today, reload, and accept tomorrow.
+
+### What the SEO mode writes
+
+Accepted values go through exactly the same path the Review Portal uses, so an article filled in here and one filled in by a reviewer end up in the same state. The meta description is stored as the article's excerpt and mirrored into your SEO plugin; the SEO title and focus keyword go into whichever SEO plugin you have connected.
+
+Both SEO runs share the same limits as the GEO ones: **at most 25 articles per run**, one at a time, **one bulk Coverage run at a time** across the whole site, and a **Stop** control that halts after the article in progress. The picture runs share all of that and add a second ceiling of their own: **at most 50 pictures per run**.
+
+## Describing your pictures
+
+The same SEO table has two more columns — **Pictures** and **File name** — and its own pair of buttons below the SEO ones.
+
+**Pictures** lists every image the article shows that also lives in your media library: its featured image and every picture in the body. A badge says how many still need work, meaning the picture has no alt text, has alt text that is really just the file's name, or has no title on its media record. If some of the article's images are hotlinked from another site, a note says so — there is no media record for those, so nothing SyteOps writes can reach them.
+
+Like the SEO fields, this is a **two-step** workflow.
+
+### Step 1 — Describe
+
+Tick the articles you want and click **Describe pictures**. The confirmation dialog tells you how many **pictures** will be described, because that is what you are billed for — one AI call per picture, not per article. It also names the provider, the model and the token ceiling, and says plainly that nothing is written yet.
+
+The AI looks at the picture itself and, using the article around it for context, suggests three things: **alt text** (one plain sentence for someone who cannot see the image), a **caption**, and a **title** for the media record.
+
+- **At most 50 pictures per run.** Ask for more and the run is **refused outright** — it is not quietly trimmed.
+- A picture that is already described is skipped, and so is one that already has a suggestion waiting for you.
+- A picture the AI could not read, or whose file type it does not accept, is **remembered** so the next run does not pay to be told the same thing again. Replacing the file makes it eligible once more.
+
+One optional tick box changes what a run is allowed to touch:
+
+- **Overwrite existing picture text** — also describes pictures that already have alt text or a title.
+
+### Step 2 — Review and accept
+
+Each suggestion appears in the Pictures cell under the picture's file name, with a tick box, already ticked. **Accept all picture fields** and **Skip all picture fields** tick or untick everything on the page. Click **Accept picture text** to write what is left ticked. That step runs no AI and spends nothing.
+
+:::warning Alt text belongs to the picture, not to the article
+If the same picture appears on three articles, changing its alt text changes how all three describe it. SyteOps will **not** replace alt text on a picture another article is showing unless you tick **Overwrite shared pictures** — and the confirmation dialog says so before the run starts.
+:::
+
+Suggestions are refused rather than written, with the reason reported, when:
+
+- **The value changed since it was suggested** — somebody typed real alt text in between, and their wording wins. That picture goes back into the describe queue.
+- **The field is already filled** and the run was not started with **Overwrite existing picture text** ticked. The exception is text that is only the file's own name, which is replaced without asking, because nobody chose it.
+- **Another article shows that picture** and **Overwrite shared pictures** was not ticked.
+
+### The File name column
+
+This column reports pictures whose media record says nothing the file name does not already say — an `IMG_4821.jpg` with no title, for example. It is **report only**. Renaming a file means finding and updating every place it is referenced, so it is not done from this screen; each name links to that picture in the **Media Library**.
+
 ## Where the run is recorded
 
 Every bulk run writes **one row** in the Content Pipelines [Log](content-pipelines.md#log) — one row for the run, not one per article, so a 25-article batch does not bury the rest of your history.
 
-Filter the runs list with the **Coverage** source pill to see only these runs. Each row records how many articles were **analyzed** or **accepted**, how many **failed** and how many were **skipped**. Analyze runs also record the model that was billed — so AI spending is answerable after the fact, not just at the moment you approved it.
+Filter the runs list with the **Coverage** source pill to see only these runs. Each row records how many articles were **analyzed**, **accepted**, **proposed** for, **described** or **written**, how many **failed** and how many were **skipped**, and — for SEO and picture runs — which fields moved on each article. Runs that call AI also record the model that was billed, so AI spending is answerable after the fact, not just at the moment you approved it.
