@@ -105,7 +105,7 @@ Two more rows are status-only, with no controls of their own:
 
 Each row shows:
 
-- **A readiness pill** — **Ready** (fully configured and callable), **Needs key** (a provider is chosen, explicitly or inherited, but its key is missing — or, for Image SEO, the resolved model lost image capability), or **Not configured** (nothing resolves at all — only happens when no provider anywhere on the site holds a key).
+- **A readiness pill, with a tooltip naming the provider it is about** — **Ready** (a provider is chosen, explicitly or inherited, and that provider has an API key on **System / API**), **Needs key** (a provider is chosen but that provider's key is missing — or, for Image SEO, the resolved model lost image capability), or **Not configured** (nothing resolves at all — only happens when no provider anywhere on the site holds a key). This applies to the LinkCentral rows too, reading their own provider choice the same way every other row does.
 - **A "Powers: …" line** — one sentence naming what the area actually does.
 - **"Uses site default (Provider · Model)"** — shown whenever the row has no explicit provider of its own, with the resolved pair that will actually run. An **Override** toggle sits beside it.
 
