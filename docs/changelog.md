@@ -8,6 +8,25 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.364
+
+- Fixed: the AI agent prompts panel's **Copy** button is now always visible beside the generated prompt (disabled until there is text to copy) instead of appearing only after Generate.
+- Changed: the separate **Copy last prompt** button is gone — the prompt box now shows your last generated prompt automatically, with a note of when and by whom, so you can copy it again without regenerating.
+
+## v1.6.363
+
+- Added: choose which instruction chips the Review Portal's **Remix with AI** dialog offers a reviewer, in the **Remix presets** card under Review Portal settings → Workflow. Existing sites see every chip exactly as before; clearing every box hides the chip row entirely.
+
+## v1.6.361
+
+- Fixed: the **SyteHero image AI (fal)** tile on the **System / API → AI API Keys** card now matches the styling of the other provider tiles — its key field is properly labeled and its six per-capability model fields sit in a tidy, bordered two-column grid under a "Capability models" heading.
+- Fixed: the **Fetch Models** button in an AI Models card row's expanded settings no longer renders as an oversized full-width block — it is now a small button next to the model list, matching every other AI settings pane.
+- Fixed: the **LinkCentral** rows on the AI Models card (Cross-Link AI, Keyword AI, Context AI) now correctly show **Ready** when their own AI provider has a saved API key, instead of always showing **Needs key**. Every readiness pill also shows a tooltip naming the provider it is reporting on.
+
+## v1.6.360
+
+- Removed: the Review Portal's previous REST route path, deprecated in v1.6.348, has been removed as promised. Any custom integration or automation still calling it must switch to `/content/review`; the old path now returns a plain not-found response.
+
 ## v1.6.359
 
 - Fixed: the **Reply, Reply and Resolve, and Resolve** controls under a note in the Review Portal now reach a comfortable touch target on a phone, and the **delete** control gains a larger invisible tap zone without changing its visible size.

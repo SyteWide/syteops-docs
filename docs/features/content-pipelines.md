@@ -209,6 +209,10 @@ A few things worth knowing:
 - **Maximum automatic deferrals** (1–20, default 3) caps how many times a single article can be rolled forward this way. Once it hits that limit, SyteOps stops trying: the reservation is released, and the article goes back to being an ordinary draft with no publishing date — waiting for someone to give it a new one.
 - **Draft auto-rescheduled emails aren't sent on every roll-forward** — only when an article reaches that limit and is handed back to a person. Turn this on or off under **Email notifications** in the Review Portal settings (it's labeled **Auto-defer limit reached**, and is on by default); when it fires, the author and reviewers get an email explaining that the article missed its slot too many times and needs to be scheduled again by hand.
 
+## Remix presets
+
+Choose which [instruction chips](review-and-publish-your-post.md#formatting-and-links) the **Remix with AI** dialog offers a reviewer, in the **Content Pipelines** tab, in the **Review Portal** settings view, under **Workflow** — in the **Remix presets** card; a reviewer can always type a free-form instruction instead, and clearing every box hides the chip row entirely.
+
 ## Content Sources
 
 Content Sources let **any** external application — not just ContentPen — send finished articles into SyteOps as review-ready drafts. Each source you register gets its own **Ingest URL** and a **webhook secret**. When the app posts an article to that URL, SyteOps maps the incoming fields onto the editor and creates a draft in the [Review Portal](./review-and-publish-your-post.md), where your team reviews and publishes it.
