@@ -1,6 +1,6 @@
 {
     "schema_version": 1,
-    "syteops_version": "1.6.324",
+    "syteops_version": "1.6.359",
     "operations": [
         {
             "resource": "users",
@@ -416,7 +416,21 @@
             "params": [],
             "destructive": false,
             "capability": "manage_options",
-            "returns": "data: {providers[], default}"
+            "returns": "data: {providers[], default, site_default}"
+        },
+        {
+            "resource": "ai",
+            "action": "set_site_default",
+            "summary": "Set the site-default AI provider every area falls back to (empty clears it).",
+            "params": {
+                "provider": {
+                    "type": "string",
+                    "required": true
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {site_default}"
         },
         {
             "resource": "ai",

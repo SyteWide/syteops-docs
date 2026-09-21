@@ -33,6 +33,20 @@ All five keys are encrypted at rest. They are never displayed in plaintext after
 
 **Test a saved key:** each tile has a **Test key** button (shown once a key is saved). It makes a quick live call to the provider and reports back — "Key valid — N models available", or the provider's error message if the key is rejected. Useful for providers that don't expose a balance you can sanity-check against.
 
+### SyteHero image AI (fal)
+
+Below the provider tiles, an **Image AI** group holds one more tile: **SyteHero image AI (fal)**. SyteHero generates and modifies pictures through fal, and normally holds that key itself. Turn **Manage this key here** on and SyteOps holds it instead — you paste the fal key once, on this card, and SyteHero borrows it.
+
+**Update SyteHero to version 1.0.139 or newer before you turn the toggle on.** An older SyteHero does not know to ask, so the toggle would simply do nothing while its own key controls stayed live. Nothing breaks either way — SyteHero falls back to whatever key it already has — but the setting will not take effect until it is updated.
+
+What changes while the toggle is on:
+
+- SyteHero uses the key from this tile for every image call, and never stores a copy of it.
+- On SyteHero's own Integrations page, the fal card's key field, enable switch, clear checkbox and Test Connection button are disabled, with a "Managed by SyteOps" note and a link back here. Its own stored key is left untouched and comes back the moment you turn the toggle off.
+- Each capability row on the tile — generate a picture, remix a picture, picture to video, remove background, upscale, extend edges — pins a model id for that job. Leave a row blank to let SyteHero choose. When SyteHero is active, the field suggests the model ids it knows about; you can still type one that isn't on the list.
+
+The key is encrypted at rest, never shown again after save ("Leave blank to keep current key" plus a **Clear key on save** checkbox), and excluded from configuration exports and backups, exactly like the provider keys above.
+
 ### Other service keys
 
 Some services SyteOps talks to are not AI providers, so their keys live further down the same **System / API** tab, with the other service credentials rather than in the API Keys tile:
@@ -58,25 +72,56 @@ The model and token-limit fields appear on a provider tile once that provider's 
 
 **Used as a fallback:** when a feature that runs AI in SyteOps (e.g. LinkCentral cross-linking and keyword matching) has no model of its own set, it falls back to the matching provider's default model and token limit here — so you can set a sensible default once per provider instead of per feature.
 
-## Per-feature provider and model selection
+## Site default provider
 
-Each AI-using feature stores its own provider, model, and max-tokens values. You can point different features at different providers — for example, a cheap keyword model via OpenRouter and a reasoning model via Anthropic for content drafting.
+The **API Keys** card carries one **Site default provider** select, above the provider tiles. It lists only providers whose key is saved, and it decides what happens for any AI area you have not pointed at a provider of its own: that area uses the site default, along with that provider's Preferred model and Max tokens from its tile.
 
-Features that have per-feature AI configuration:
+Leave it on **Auto-pick** and SyteOps chooses for you — OpenRouter when its key is saved, otherwise the first provider in the list that has one. The hint under the select names the provider auto-pick would land on, so the fallback is never a mystery.
 
-- **LinkCentral** — three independent AI areas (Cross-Link, Keyword, Context). See the [LinkCentral integration page](../integrations/linkcentral.md) for detail.
-- **Content** — AI-suggested categories, tags, and meta descriptions for content sources and the Review Portal. See [Content Pipelines](./content-pipelines.md).
-- **GEO** — AI readiness analysis that scores how well a post is positioned for AI answer engines. See [Content Pipelines](./content-pipelines.md).
-- **Ingest** — proposes how an inbound content-source payload maps to your post fields when you set up a new content source. See [Content Pipelines](./content-pipelines.md).
-- **Social** — AI-generated social posts from your published content.
-- **Image SEO** — **Generate SEO with AI** in the Review Portal. It writes an image's alt text, title, and caption from the picture itself rather than the surrounding words. It uses that provider's key on **System / API**, not SyteHero (SyteHero is **Modify with AI**). This area must point at a model that accepts image input; a text-only model is refused rather than asked to guess, so the provider list here shows a provider that cannot take an image as unselectable. See [Review & Publish Your Post](./review-and-publish-your-post.md).
+Two things to know:
 
-There are two ways to set per-feature AI configuration:
+- **Setting it changes nothing you have already configured.** An area with its own provider always wins; the site default only fills in for areas you left blank.
+- **It fails safe.** If the chosen provider's key is later cleared, the site default is ignored and areas fall back to auto-pick rather than stopping — the select shows the stale choice flagged "no API key" so you can change it.
 
-1. **From the feature's own settings card** — for example the **AI Models** group on the Content Pipelines → Review Portal view, which is where the Content, GEO, Ingest, Social and Image SEO areas are set, or the Enrichment Settings section on the System / API tab for LinkCentral.
-2. **From the integration or module tile** — click **Configure AI Provider** on the integration card (Integrations tab) or the dropdown on the Modules tab. A modal opens with provider, model, and max-tokens fields. Saving the modal writes directly via AJAX — you don't need to navigate to the feature's settings tab first.
+Where an area is running on the site default, SyteOps says so wherever a provider·model pair is shown — the AI Models card's own line (below), and the provider line on the Review Portal's Remix and Agent prompts panels — as "Anthropic (site default)" with the model that will actually run.
 
-Not every feature offers both routes: the **Configure AI Provider** modal appears only on tiles that carry that control, so features whose controls already render on their own settings card — Content, GEO, Ingest, Image SEO, and Social among them — are set there.
+## Per-feature provider and model selection: the AI Models card
+
+The Content Pipelines → Review Portal view carries one **AI Models** card, one row per feature, named by what it powers rather than by an internal area slug:
+
+- **Article writing & remix** (Content) — AI-suggested categories, tags, and meta descriptions for content sources and the Review Portal, plus the Text AI Remixer. See [Content Pipelines](./content-pipelines.md).
+- **Answer-engine analysis** (GEO) — AI readiness analysis that scores how well a post is positioned for AI answer engines. See [Content Pipelines](./content-pipelines.md).
+- **Ingest field mapping** (Ingest) — proposes how an inbound content-source payload maps to your post fields when you set up a new content source. See [Content Pipelines](./content-pipelines.md).
+- **Social posts** (Social) — AI-generated social posts from your published content. Its provider/model/max-tokens fields render on this card and save with it; the Social Publishing card below keeps its own voice profiles, destinations, and enable toggle.
+- **Image alt & captions** (Image SEO, carries a **Vision** badge) — **Generate SEO with AI** in the Review Portal. It writes an image's alt text, title, and caption from the picture itself rather than the surrounding words. It uses that provider's key on **System / API**, not SyteHero (SyteHero is **Modify with AI**). This area must point at a model that accepts image input; a text-only model is refused rather than asked to guess, so a provider that cannot take an image shows disabled here. See [Review & Publish Your Post](./review-and-publish-your-post.md).
+- **Agent prompts** — turns a page reviewer's notes into an implementation prompt. A per-site preamble template (with a **Restore default** option) sits beside it, in its own card just below.
+
+Two more rows are status-only, with no controls of their own:
+
+- **Lead scoring** — shown when the Leads module is active. Links straight to the Leads page, where its own AI provider/model fields live (used for **Auto-map with AI**).
+- **LinkCentral** — shown when the LinkCentral integration is on, as three rows (Cross-Link AI, Keyword AI, Context AI). Each links to the [LinkCentral integration page](../integrations/linkcentral.md)'s Enrichment Settings on **System / API**, where its own controls live.
+
+### Reading and using a row
+
+Each row shows:
+
+- **A readiness pill** — **Ready** (fully configured and callable), **Needs key** (a provider is chosen, explicitly or inherited, but its key is missing — or, for Image SEO, the resolved model lost image capability), or **Not configured** (nothing resolves at all — only happens when no provider anywhere on the site holds a key).
+- **A "Powers: …" line** — one sentence naming what the area actually does.
+- **"Uses site default (Provider · Model)"** — shown whenever the row has no explicit provider of its own, with the resolved pair that will actually run. An **Override** toggle sits beside it.
+
+Turn **Override** on to reveal the provider and model selects and pick your own. Turn it back off and save: the row's provider and model are cleared back to `''`, which is exactly what "inherit the site default" means everywhere else in SyteOps — the change takes effect on the next Save, not the moment you flip the toggle.
+
+An **Advanced** disclosure under each row holds **Max tokens** — a per-area setting, editable independent of Override. To use a model that isn't in the fetched list, choose **Custom** in the model select (still inside the main row, not inside Advanced) and type the exact model ID.
+
+The card's header links to **API keys & site default**, on **System / API**, for the keys and the site-default provider setting themselves.
+
+### Image generation & modify (SyteHero)
+
+At the foot of the same card sits a read-only **Image generation & modify (SyteHero)** row. It reports whether SyteHero is installed and active, whether its image-AI key is configured, and — once you've checked it from the balance popup or the Review Portal's own image tools — its cached credit balance. When SyteHero is active, the row links straight to **Open SyteHero settings**; when it isn't, the row simply says image AI needs SyteHero. This row has no controls of its own — it powers picture remix, generate-new-picture, and the listing-image watermark repair. Where its key and models are configured depends on one setting: SyteHero's own settings page by default, or the **SyteHero image AI (fal)** tile on **System / API** when you have turned management on there, in which case the row says so and links straight at the tile.
+
+### The other way to set AI configuration
+
+Some integrations and modules also offer a **Configure AI Provider** modal — click it on the integration card (Integrations tab) or the module dropdown (Modules tab). It opens with provider, model, and max-tokens fields and saves directly via AJAX, without navigating to the feature's own settings tab. It is a separate path from the AI Models card above — a feature whose controls already render on that card (Content, GEO, Ingest, Image SEO, Agent prompts, Social) is set there instead.
 
 ## Live balance display
 

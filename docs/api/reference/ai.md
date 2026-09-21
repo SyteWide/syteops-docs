@@ -8,7 +8,7 @@ description: Manage API operations for the ai resource.
 
 # `ai`
 
-4 operation(s). All run through `POST /syteops/v1/manage/dispatch` (reads may use the documented GET form).
+5 operation(s). All run through `POST /syteops/v1/manage/dispatch` (reads may use the documented GET form).
 
 ## `get_area`
 
@@ -52,7 +52,7 @@ _No parameters._
 
 **Returns**
 
-data: &#123;providers[], default}
+data: &#123;providers[], default, site_default}
 
 **Request**
 
@@ -127,6 +127,35 @@ data: &#123;provider, key_set}
   "params": {
     "provider": "string",
     "api_key": "string"
+  }
+}
+```
+
+## `set_site_default`
+
+Set the site-default AI provider every area falls back to (empty clears it).
+
+**Capability:** `manage_options`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `provider` | string | yes |  |
+
+
+**Returns**
+
+data: &#123;site_default}
+
+**Request**
+
+```json
+{
+  "resource": "ai",
+  "action": "set_site_default",
+  "params": {
+    "provider": "string"
   }
 }
 ```
