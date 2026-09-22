@@ -8,7 +8,7 @@ description: Manage API operations for the leads resource.
 
 # `leads`
 
-7 operation(s). All run through `POST /syteops/v1/manage/dispatch` (reads may use the documented GET form).
+8 operation(s). All run through `POST /syteops/v1/manage/dispatch` (reads may use the documented GET form).
 
 ## `delete`
 
@@ -167,9 +167,34 @@ data: &#123;items[]: &#123;id,ref,source,campaign,status,event_count,first_seen}
 }
 ```
 
+## `ringtonic_status`
+
+Report the RingTonic receiver's health: module/integration state, whether it is ready to receive deliveries, observe mode, delivery counters, and stored-secret fingerprints. Never returns a secret value.
+
+**Capability:** `manage_options`
+
+**Parameters**
+
+_No parameters._
+
+
+**Returns**
+
+data: &#123;leads_module_active, integration_enabled, receiver_ready, observe_mode, stats:&#123;counts,last_received_at,last_event,last_status,key_form}, api_key_present, api_key_fingerprint, webhook_secret_present, webhook_secret_fingerprint, plugin_version, leads_module_version}
+
+**Request**
+
+```json
+{
+  "resource": "leads",
+  "action": "ringtonic_status",
+  "params": {}
+}
+```
+
 ## `set_status`
 
-Set a lead's pipeline status (New/Contacted/Qualified/Unqualified/Customer). Used by the RingTonic inbound reconcile; recorded as inbound so it does not echo back to RingTonic.
+Set a lead's pipeline status (New/Contacted/Qualified/Unqualified/Customer). Used by the RingTonic inbound reconcile; recorded as inbound so it does not echo back to RingTonic. Optionally also sets the lead's deal value (value_cents, in the smallest currency unit, plus an optional ISO 4217 currency — defaults to the site's configured deal currency).
 
 **Capability:** `manage_options`
 
@@ -179,11 +204,13 @@ Set a lead's pipeline status (New/Contacted/Qualified/Unqualified/Customer). Use
 |---|---|---|---|
 | `id` | integer | yes | Record id, digits only. |
 | `status` | string | yes |  |
+| `value_cents` | integer | no | Amount in the smallest currency unit (cents), a whole number. |
+| `currency` | string | no |  |
 
 
 **Returns**
 
-data: &#123;id, status, label}
+data: &#123;id, status, label, deal_value_cents?, deal_currency?}
 
 **Request**
 
@@ -193,7 +220,9 @@ data: &#123;id, status, label}
   "action": "set_status",
   "params": {
     "id": 0,
-    "status": "string"
+    "status": "string",
+    "value_cents": 0,
+    "currency": "string"
   }
 }
 ```
