@@ -69,11 +69,69 @@ Once your hub operator has set up the connection (see [Live notifications](#4-li
 | A contact's stage changes | Every lead bound to that contact has its status moved along too, where RingTonic's stage has a SyteOps equivalent. A stage RingTonic tracks that SyteOps doesn't have a status for (there are more RingTonic stages than SyteOps ones) is still recorded on the lead for reference and as the baseline the outbound sync compares against — it just doesn't change the status shown in your list. |
 | A form is submitted | If SyteOps already has a lead for that same RingTonic contact, RingTonic's form record is linked to it. **RingTonic form submissions never create a new lead** — your own site's forms already do that, and this would just duplicate it. |
 
-A delivery whose type SyteOps doesn't yet recognize is simply acknowledged and ignored, never treated as an error — RingTonic adds new capabilities over time, and an unrecognized one should never look like something is broken.
+Each of these also records the call detail RingTonic already has — duration, how the call ended, the tracking number's name, the caller's city and state and the tags — and, if you switch it on, RingTonic's AI summary of the conversation. See [What lands on the lead](#what-lands-on-the-lead) for the full list and how each field is written.
+
+A delivery whose type SyteOps doesn't yet recognize is simply acknowledged and ignored, never treated as an error — RingTonic adds new capabilities over time, and an unrecognized one should never look like something is broken. A **transcription** notification is the one exception SyteOps acts on selectively: with the call summary switched on it takes the AI summary from it and discards the transcript itself; with the summary off it changes nothing.
 
 :::note Matching an inbound call to an existing lead
 A completed or missed call is matched by the call's OWN identity in RingTonic (its call id), not by the contact — a lead qualified for that call is looked up the same way, so qualifying one call for a repeat caller only ever affects that one call's lead, never an earlier one from the same person. A stage change or a form submission, by contrast, IS a contact-level fact — see [How inbound deliveries are matched](#how-inbound-deliveries-are-matched) below.
 :::
+
+## What lands on the lead
+
+A live notification does more than create or match the lead: it records what RingTonic already knows about the call, so a call lead is reviewable in SyteOps without opening RingTonic. Everything below shows up on the lead's detail screen under **From RingTonic**, in the lead notification email, in the CSV export, and in the `ringtonic` object on the outgoing [automation webhook](../features/lead-attribution#automation-webhook-every-new-lead).
+
+| On the lead | Arrives with | Written |
+|---|---|---|
+| **Call duration** — how long the call lasted, in seconds | A completed or missed call | Once |
+| **Call status** — RingTonic's own word for how the call ended (`completed`, `missed`, `busy`, `no-answer`, `failed`, or anything else RingTonic adds later), recorded exactly as sent | A completed or missed call | Once |
+| **Tracking number name** — the label on the RingTonic number that answered | A completed or missed call | Once |
+| **Caller city** and **Caller state** — where RingTonic placed the caller | A completed or missed call | Once |
+| **Call tags** — the tags RingTonic put on the call | A completed or missed call, or a qualified lead | Once |
+| **Call summary** — RingTonic's AI summary of the conversation. **Only when you turn it on** — see [Turning the call summary on](#turning-the-call-summary-on) | A qualified lead, or a transcription notification | Replaced by a newer summary — see below |
+| **Summarized at** — when RingTonic produced that summary. **Only when the summary is turned on** | A qualified lead, or a transcription notification | Alongside the summary |
+| **Call outcome** — RingTonic's verdict on the call (`qualified`, `not_qualified`, `pending`, `junk`, or whatever RingTonic sends) | A qualified lead | Once |
+| **Qualification reason** — why RingTonic reached that verdict. **Only when the call summary is turned on** — it is free text from the same conversation | A qualified lead | Once |
+| **Qualification confidence** — how sure RingTonic is, as a number | A qualified lead | Once |
+| **Deal value** — the value RingTonic attached to the opportunity | A qualified lead | Once |
+| **Qualified at** — when RingTonic qualified the call | A qualified lead | Once |
+
+### "Written once" means the first delivery wins
+
+Every field above except the call summary is **fill-only**: the first notification that carries it sets it, and a later notification never rewrites it. Your SyteOps lead is the record of what was true when the call came in; RingTonic remains the live, last-write CRM. If the two ever disagree, that is by design, not a fault.
+
+### Turning the call summary on
+
+The AI call summary and the qualification reason are **off by default**. They are the only fields here that record what was actually *said* on the call, so storing them is a choice you make rather than something a plugin update starts doing for you.
+
+To turn them on, tick **Store RingTonic's AI call summary on the lead** on the **RingTonic** card in **Leads → Settings**. Everything else in the table above — duration, call status, tracking number name, caller city and state, tags, the outcome, confidence, deal value and the dates — is recorded regardless of this setting.
+
+With it off, a transcription notification is acknowledged and changes nothing.
+
+### The call summary is the one field that can be replaced
+
+RingTonic re-summarizes a call — you commonly get one summary with the qualified-lead notification and a better one a little later, once the transcription finishes. So the summary follows a **newer-wins** rule instead:
+
+- Nothing stored yet → the summary is stored.
+- A newer **Summarized at** than the one on the lead → the summary is replaced.
+- The same **Summarized at**, or an older one → the stored summary is kept. A repeated delivery can never undo a better summary.
+- A summary that arrives with **no Summarized at** at all → stored only if the lead has none yet. Without a timestamp there is no way to tell whether it is newer, so it is never allowed to overwrite.
+
+### The summary follows your lead privacy setting
+
+Once you have turned the summary on, the call summary and the qualification reason are free text a person actually said, so they also follow the **How to store contact details** setting on the Leads screen:
+
+- **Full** — stored as RingTonic wrote it.
+- **Masked** (the default) — phone numbers and email addresses in the text are replaced with `[phone]` and `[email]`, and the rest of the wording is kept. Masking the whole summary would leave nothing worth reading, and the contact details are the part the setting is really protecting. **A name spoken during the call can still appear** in the summary — there is no reliable way to detect one in ordinary prose. If that is not acceptable for your site, choose **Off**, or simply leave the summary switched off.
+- **Off** — the summary and the qualification reason are not stored at all. The numbers, dates, statuses, city and state above are not free text and are still stored.
+
+### What is never stored
+
+- **Recordings and transcripts.** RingTonic can send the full transcript of a call; SyteOps discards it and keeps only the AI summary. The credentials your hub operator installs deliberately cannot read call logs either, so there is no second route to it.
+- **The caller's ZIP code.** City and state answer "where is this caller?" without a pinpoint identifier.
+- **Call sentiment.** RingTonic scores sentiment in its own call-log screens, but it does not include it in any of the notifications it sends, so SyteOps has nothing to record. This is a limit of the notification payload, not a SyteOps choice.
+
+Everything here is ordinary lead data: it is deleted with the lead, included in a Leads data export, and removed when the module is uninstalled.
 
 ## Deleting a lead
 
