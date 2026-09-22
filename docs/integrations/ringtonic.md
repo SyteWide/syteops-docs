@@ -13,6 +13,8 @@ description: Push a lead's pipeline status to RingTonic, and receive calls, qual
 - **SyteOps → RingTonic:** move a lead from **Contacted** to **Qualified** in your SyteOps Leads list and RingTonic hears about it shortly after (via a background task).
 - **RingTonic → SyteOps ("Live notifications"):** once your hub operator sets up RingTonic's webhook for you, a completed or missed call, a qualified lead, or a stage change made *inside* RingTonic shows up in your Leads list within moments — no more relying only on the outbound push above.
 
+A closed deal's **value** travels the same way, in both directions — see [Deal value](#deal-value) below.
+
 ## Requirements
 
 - SyteOps installed and activated, with **Lead Attribution** turned on (see [Lead Attribution](../features/lead-attribution)).
@@ -75,6 +77,24 @@ A delivery whose type SyteOps doesn't yet recognize is simply acknowledged and i
 
 :::note Matching an inbound call to an existing lead
 A completed or missed call is matched by the call's OWN identity in RingTonic (its call id), not by the contact — a lead qualified for that call is looked up the same way, so qualifying one call for a repeat caller only ever affects that one call's lead, never an earlier one from the same person. A stage change or a form submission, by contrast, IS a contact-level fact — see [How inbound deliveries are matched](#how-inbound-deliveries-are-matched) below.
+:::
+
+## Deal value
+
+A closed deal carries a **value**, and it travels both ways. Amounts are always whole cents on the wire (RingTonic's own convention), but the Leads screen always shows and accepts ordinary currency units — for example you type `1234.56` and SyteOps stores and sends `123456`.
+
+**Setting a value in SyteOps sends it to RingTonic.** Type a value into the **Deal value** column on any row in your Leads list and it saves instantly, the same way the status drop-down does. The next time that lead's status is pushed to RingTonic — whether you just changed it, or it already synced earlier — the value rides along on the same request, **as long as the lead's currency matches your Default deal currency setting below** — RingTonic has no currency field of its own on this value, so it always stores the amount in your workspace's own currency, and a mismatched amount is skipped (never sent) rather than silently misrepresenting it. If a lead has no value recorded, SyteOps never sends the field at all, so it can never blank out a value you (or someone else) already set directly in RingTonic.
+
+**Clearing the field removes the value in SyteOps only.** Empty the **Deal value** input and save (tab or click away) to clear it — this deletes the value here but is never sent to RingTonic; the value it already has stays exactly as it is.
+
+**A deal closed in RingTonic fills in the value here.** When RingTonic reports a contact's stage change and that delivery carries a monetary value, SyteOps records it on the matching lead(s) — but only if that lead doesn't already have a value of its own, and a reported value of exactly zero is treated the same as no value at all (RingTonic's own "nothing recorded yet" signal, not a genuine $0.00 deal). A value you've already set in SyteOps is never overwritten by an inbound echo.
+
+Your Leads settings have a **Default deal currency** (three-letter code, e.g. `USD`, `EUR`, `GBP` — defaults to `USD`) used whenever a value is recorded without one of its own, such as one you type into the Leads list. For a handful of currencies that don't use decimal subdivisions — Japanese Yen (`JPY`), South Korean Won (`KRW`), Vietnamese Dong (`VND`), Chilean Peso (`CLP`), and Icelandic Króna (`ISK`) — the Deal value field shows and accepts a whole number with no decimal point, since there's no smaller unit to divide into.
+
+The value and its currency appear on the lead's detail screen, in the CSV export (`deal_value_cents`, `deal_currency`), and in the automation webhook payload (see [Send leads to your tools](../features/lead-attribution#send-leads-to-your-tools-webhooks)).
+
+:::note A separate field: the raw number RingTonic reports when qualifying a call
+The **Deal value** row under [What lands on the lead](#what-lands-on-the-lead) below is a DIFFERENT thing — a plain number RingTonic may attach when it marks a call qualified, recorded once for reference and never sent anywhere. The bidirectional value described here — the one shown as your lead's own **Deal value**, sent to RingTonic with the status, and filled in from a RingTonic stage change — is tracked separately.
 :::
 
 ## What lands on the lead
@@ -186,3 +206,7 @@ Note that SyteOps only attempts a forced move when the change is genuinely backw
 ### A lead I deleted is still in RingTonic
 
 Also expected. RingTonic has no delete via its API, so SyteOps best-effort marks the contact **Lost** and RingTonic keeps its record. See [Deleting a lead](#deleting-a-lead).
+
+### A deal value I set didn't reach RingTonic
+
+Give it a minute — like a status change, the value rides along on the next background push, not instantly. Setting a value schedules that push on its own, so you don't need to change the status first. If it still doesn't arrive, confirm the lead actually matches a RingTonic contact by **phone or email** (see [How outbound status pushes are matched](#how-outbound-status-pushes-are-matched)) — a value on an unmatched lead has nothing to send it to yet. Also confirm the lead's currency matches your **Default deal currency** setting (see [Deal value](#deal-value) above) — a mismatched currency is skipped on purpose, never sent.

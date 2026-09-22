@@ -166,6 +166,8 @@ Whichever you choose, contact details are **never** written to the tamper-eviden
 
 There is **one exception to what Masked removes**, and only if you switch it on: RingTonic's AI call summary, described in [What lands on the lead](../integrations/ringtonic#what-lands-on-the-lead). It is stored as readable prose with phone numbers and email addresses replaced, so a name spoken during the call can remain in it. It is **off by default**; turn it on with **Store RingTonic's AI call summary on the lead** on the RingTonic card, or choose **Off** above to store no summary at all.
 
+The same card also has a **Default deal currency** field — a three-letter ISO code (e.g. `USD`, `EUR`, `GBP`; defaults to `USD`) used whenever a deal value is recorded without a currency of its own (from the Leads list, the RingTonic integration, or the management API). See [the dashboard](#the-dashboard) above and [RingTonic integration → Deal value](../integrations/ringtonic#deal-value).
+
 ### Map any form field (custom fields)
 
 Beyond Name, Email, Phone, Office phone and Message, you can map **any** of a form's fields to a **custom field** on the lead. In a mapping's **Custom fields** section, click **+ Add custom field**, type a name (e.g. "Budget" or "Company"), and pick the form field it comes from. Tick **Sensitive** for anything that shouldn't be stored in the clear — a sensitive field is masked under **Masked** storage and dropped under **Off**, while ordinary business fields like "Budget" are kept as-is.
@@ -221,6 +223,8 @@ Paste any URL into the **Automation webhook URL** field to activate it. Use the 
 | `source` | Attributed source |
 | `campaign` | Campaign / UTM campaign |
 | `status` | Lead status |
+| `deal_value_cents` | Deal value, in whole cents (e.g. `123456` for $1,234.56) — `null` when no value is set. Not gated by your privacy setting; money isn't personal contact data. Set from the Leads list, sent to and received from RingTonic — see [RingTonic integration → Deal value](../integrations/ringtonic#deal-value). |
+| `deal_currency` | Three-letter ISO currency code for the value above (e.g. `USD`) — `""` when no value is set. |
 | `first_seen` | First-touch timestamp |
 | `name` | Contact name, if captured (stored per your privacy setting) |
 | `email` | Contact email, if captured (stored per your privacy setting) |
@@ -292,12 +296,14 @@ The native qualification form can be placed anywhere on your site:
 
 **Lead status** is a simple pipeline: **New → Contacted → Qualified → Unqualified → Customer**. Pick a status from the drop-down on any row and it saves instantly. (This is separate from the optional *scoring tiers* — Hot/Warm/Cold — which come from your qualification questions.)
 
+**Deal value** — a closed deal's value — is right next to it. Type a value (in ordinary currency units, e.g. `1234.56`) into the **Deal value** column on any row and it saves instantly, the same way status does. If you use the [RingTonic integration](../integrations/ringtonic#deal-value), this value is sent there automatically, and a value closed in RingTonic can fill this field in too when it's empty.
+
 **Row actions:**
 
 - **Send to webhook** — push that single lead to your automation webhook on demand (in addition to the automatic send for new leads).
 - **Delete** — remove the lead. If RingTonic sync is on, its RingTonic contact is moved to **Lost** (RingTonic keeps its own record — it has no delete).
 
-**Export CSV** downloads your leads — now including name, how received, email, phone, office phone, and status alongside the attribution columns.
+**Export CSV** downloads your leads — now including name, how received, email, phone, office phone, status, and deal value (as `deal_value_cents` + `deal_currency`) alongside the attribution columns.
 
 Click a lead's name to open its **proof packet**.
 

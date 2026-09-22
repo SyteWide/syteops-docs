@@ -8,6 +8,22 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.381
+
+- Added: a lead can now carry a deal value; it is sent to RingTonic with the status, shown on the lead, exported and included in the automation webhook; a deal value recorded in RingTonic fills in here when the lead has none.
+
+## v1.6.380
+
+- Added: the management API can now report the RingTonic connection's health — whether the receiver is ready, observe mode, delivery counters and last delivery — without exposing any credential.
+
+## v1.6.379
+
+- Fixed: the management API can now activate or deactivate any module the plugin ships, not only the original three — a module added since could answer "unknown module" even though it worked fine from the Modules screen. Retired modules continue to be refused.
+
+## v1.6.378
+
+- Internal: RingTonic contact matching now also recognizes phone_number, the phone field name used by RingTonic's other contact record shape, as defensive groundwork for a future read of that shape — the endpoint this integration calls today never sends that field, so there is no user-visible change in this release.
+
 ## v1.6.377
 
 - Added: RingTonic's call outcome, confidence, deal value, call duration and status, tracking number name, caller city/state and call tags now land on the matching lead as RingTonic reports them, and appear in the lead's details, exports, emails and the automation webhook. RingTonic's AI call summary and the reason it gave for qualifying a call land there too when you turn on the new Store RingTonic's AI call summary on the lead setting, which is off by default; once on, the summary follows your contact-detail privacy setting, and under Masked phone numbers and email addresses are replaced while the wording is kept, so a name spoken on the call can remain. Call recordings and transcripts are never stored.

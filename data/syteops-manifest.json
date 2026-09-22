@@ -1,6 +1,6 @@
 {
     "schema_version": 1,
-    "syteops_version": "1.6.377",
+    "syteops_version": "1.6.381",
     "operations": [
         {
             "resource": "users",
@@ -867,8 +867,17 @@
         },
         {
             "resource": "leads",
+            "action": "ringtonic_status",
+            "summary": "Report the RingTonic receiver's health: module/integration state, whether it is ready to receive deliveries, observe mode, delivery counters, and stored-secret fingerprints. Never returns a secret value.",
+            "params": [],
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {leads_module_active, integration_enabled, receiver_ready, observe_mode, stats:{counts,last_received_at,last_event,last_status,key_form}, api_key_present, api_key_fingerprint, webhook_secret_present, webhook_secret_fingerprint, plugin_version, leads_module_version}"
+        },
+        {
+            "resource": "leads",
             "action": "set_status",
-            "summary": "Set a lead's pipeline status (New/Contacted/Qualified/Unqualified/Customer). Used by the RingTonic inbound reconcile; recorded as inbound so it does not echo back to RingTonic.",
+            "summary": "Set a lead's pipeline status (New/Contacted/Qualified/Unqualified/Customer). Used by the RingTonic inbound reconcile; recorded as inbound so it does not echo back to RingTonic. Optionally also sets the lead's deal value (value_cents, in the smallest currency unit, plus an optional ISO 4217 currency — defaults to the site's configured deal currency).",
             "params": {
                 "id": {
                     "type": "integer",
@@ -879,11 +888,21 @@
                 "status": {
                     "type": "string",
                     "required": true
+                },
+                "value_cents": {
+                    "type": "integer",
+                    "format": "cents",
+                    "required": false,
+                    "description": "Amount in the smallest currency unit (cents), a whole number."
+                },
+                "currency": {
+                    "type": "string",
+                    "required": false
                 }
             },
             "destructive": false,
             "capability": "manage_options",
-            "returns": "data: {id, status, label}"
+            "returns": "data: {id, status, label, deal_value_cents?, deal_currency?}"
         },
         {
             "resource": "leads",
