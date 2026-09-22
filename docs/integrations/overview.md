@@ -89,7 +89,7 @@ WooCommerce REST and payment gateway support for stores that run on WooCommerce.
 
 ### RingTonic
 
-AI call-tracking and attribution with a lightweight built-in CRM (built on Twilio). When enabled, SyteOps keeps a lead's **pipeline status** in sync between your SyteOps Leads list and the RingTonic CRM — status changes made in SyteOps push to RingTonic right away, and changes made in RingTonic are brought back on a regular reconcile. Requires a RingTonic **Agency plan** for API access. See the dedicated [RingTonic Integration](ringtonic) page for setup.
+AI call-tracking and attribution with a lightweight built-in CRM (built on Twilio). When enabled, SyteOps pushes a lead's **pipeline status** from your SyteOps Leads list to the matching RingTonic contact shortly after it changes (via a background task, not instantly) — and, once your hub operator sets up live notifications, RingTonic notifies SyteOps back: completed and missed calls, qualified leads and stage changes all land in your Leads list automatically. Requires a RingTonic **Agency plan** for API access. See the dedicated [RingTonic Integration](ringtonic) page for setup.
 
 ---
 

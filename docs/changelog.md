@@ -8,6 +8,58 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.375
+
+- Added: RingTonic can now notify SyteOps directly over a signed webhook, instead of relying only on the existing one-way status push. A completed or missed inbound call, a qualified lead, or a stage change made in RingTonic now shows up in your Leads list — matched by call or contact identity, with whatever attribution RingTonic captured for the call filled in — and a form submission there links, by contact, to its matching lead.
+
+## v1.6.374
+
+- Fixed: files that a FlowMattic workflow stores in private storage now get the full guard files in every subfolder level, so a store inside the web root stays protected on OpenLiteSpeed hosts too.
+
+## v1.6.373
+
+- Added: **protected upload folders**. List the folders under your uploads directory that hold files visitors should never be able to download — a cookie banner's proof-of-consent records, for example — and SyteOps empties them into private storage on a schedule of 1, 5 or 15 minutes. Every file is copied, checked byte for byte and only then removed from the public folder; a file whose contents are already archived is simply deleted rather than stored a second time.
+- Added: a **Sweep now** button and a last-sweep line on the Private Storage card, reporting how long ago the sweep ran, how many files moved, how many duplicates were removed and how many errors there were. Clearing the folder list stops the schedule.
+
+## v1.6.372
+
+- Added: **private storage now moves outside the web root** when your host allows it. A folder the web server has no address for cannot be served by any server, which closes a gap on hosts that ignore the protective `.htaccess` rules. Existing files move across only after every one of them is verified byte for byte; if any file fails, nothing is deleted and the folder stays where it was.
+- Added: a **Private Storage card** on the Systems / API tab — the folder path, whether it is inside or outside the web root, and the result of a self-check that asks your own site whether the folder can be fetched. It runs daily and on demand, and a warning appears in the admin if the folder turns out to be reachable.
+
+## v1.6.371
+
+- Added: store a Media Library file in private storage from a FlowMattic workflow, so an automation that imports a file (for example, a daily consent-proof email attachment) can keep it out of the public library.
+
+## v1.6.370
+
+- Fixed: RingTonic status sync no longer retries a declined status change as a forced write. Only a change RingTonic answers as successful while silently keeping the lead at its previous stage is retried, and the retry is a direct stage update — never a new conversion record.
+- Fixed: re-engaging a lead RingTonic currently shows as Unqualified or Lost (moving it to any other status) is now recognized as needing the same forced-update permission a backward move needs, instead of being silently skipped forever.
+- Fixed: a forced RingTonic stage change is verified against RingTonic's own response rather than assumed to have worked.
+- Fixed: the RingTonic API key can no longer be silently blanked by a failed encryption attempt when saving Leads settings.
+- Fixed: a lead created purely from a phone call no longer sends its masked phone number to RingTonic's contact lookup, where it could never match — SyteOps logs that it has no usable identifier instead.
+- Changed: a phone number captured from a completed call now follows your Lead privacy setting on the editable lead record, and is never written to the tamper-evident event record at all.
+
+## v1.6.369
+
+- Fixed: license activation now recognizes a site whose address starts with www. when the license server recorded it without www. (and the reverse), so re-activating a site after its activation was removed no longer stalls at "Activation could not be confirmed yet."
+
+## v1.6.368
+
+- Fixed: **Create an original picture inspired by this one** now also ticks itself when the picture you are working from already has a durable reference attached in Notes, not only when you attach a reference picture live in the dialog. Unticking the box yourself still stays unticked for the rest of that dialog session.
+- Fixed: the **Review Photo AI** picker no longer offers to describe pictures that are attached to the article but not shown anywhere in it (not in the body, not the featured image) — it now tells you when any pictures were skipped for that reason, and reports plainly when nothing on the article can be described.
+
+## v1.6.367
+
+- Added: **Create an original picture inspired by this one**, a new checkbox in the Review Portal's Modify with AI dialog. Instead of editing the picture you started from, it writes a description of its style, mood, colors and people, then generates a brand-new picture from that description — the source picture's pixels are never sent to the image generator. It ticks itself when you attach a reference picture, with a site setting (**Create an original picture by default**, on the Content Pipelines tab) to change that default. A completed one is badged "Original · inspired by &lt;file name&gt;" in the grid of versions.
+
+## v1.6.366
+
+- Internal: groundwork for a future image-remix feature. No user-visible change in this release.
+
+## v1.6.365
+
+- Added: a **Review Photo AI** button in the Review Portal's SEO panel opens the same photo-description picker the AI buttons already offer, so you can run it on the article's pictures without generating a meta description first. The picker gains **Check all** and **Uncheck all** links above the list, and the button shows the configured AI provider and model underneath.
+
 ## v1.6.364
 
 - Fixed: the AI agent prompts panel's **Copy** button is now always visible beside the generated prompt (disabled until there is text to copy) instead of appearing only after Generate.
