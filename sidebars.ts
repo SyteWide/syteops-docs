@@ -45,6 +45,7 @@ const sidebars: SidebarsConfig = {
         'features/social-publishing',
         'features/server-connections',
         'features/debug-tool',
+        'features/private-storage',
         'features/licensing',
         'features/workflow-templates',
         'features/manage-api',

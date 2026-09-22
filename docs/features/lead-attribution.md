@@ -15,8 +15,9 @@ It's built for anyone who needs to **prove a lead came from the website** — fo
 - **Phone-call clicks** — when someone taps a `tel:` link on mobile (tap-to-call), that's captured along with where they came from.
 - **"Reveal number" clicks** — if your site hides the number behind a button, clicking it counts as call intent (useful on desktop).
 - **Form submissions** — contact and quote forms (Fluent Forms, Gravity Forms, Contact Form 7, WPForms are auto-detected; you can also target a form by CSS selector).
+- **Completed phone calls, when the RingTonic integration is connected** — a `tel:` click only proves someone *tapped* the number; it can't tell you whether the call actually connected, how long it lasted, or whether it was a first-time caller. Once RingTonic's [live notifications](../integrations/ringtonic#4-live-notifications-set-up-by-your-hub-operator) are set up, a call that actually completes (or is missed) is captured too, with that richer detail attached.
 
-What it **cannot** do, by design, is track a call placed by someone who reads your number off the screen and dials from a different phone — no website tool can see that without a special tracking phone number, which this feature deliberately avoids. To help bridge that gap, every lead gets a short **reference code** (e.g. `WEB-7K2QF`) you can ask callers to mention.
+Without RingTonic, tracking a call placed by someone who reads your number off the screen and dials from a different phone is not possible — no website tool can see that without a special tracking phone number, which the built-in `tel:`/reveal capture above deliberately avoids. To help bridge that gap either way, every lead gets a short **reference code** (e.g. `WEB-7K2QF`) you can ask callers to mention.
 
 ## Turn it on
 
