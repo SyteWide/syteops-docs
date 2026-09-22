@@ -158,11 +158,13 @@ Mapping copies details onto the lead **when the submission is captured as a lead
 
 The same card has a **How to store contact details** control:
 
-- **Masked** (recommended) — stores only non-identifying hints (initials, a partial email, the last four digits of each phone — mobile and office alike). The message isn't stored.
+- **Masked** (recommended) — stores only non-identifying hints of the contact details (initials, a partial email, the last four digits of each phone — mobile and office alike). The message isn't stored.
 - **Full** — stores the exact name, email, phone, office phone, and message. Choose this only where your privacy policy allows.
 - **Off** — stores no contact identity or message at all.
 
 Whichever you choose, contact details are **never** written to the tamper-evident activity log behind each lead — only to the editable lead record, so they remain easy to remove for data-erasure requests.
+
+There is **one exception to what Masked removes**, and only if you switch it on: RingTonic's AI call summary, described in [What lands on the lead](../integrations/ringtonic#what-lands-on-the-lead). It is stored as readable prose with phone numbers and email addresses replaced, so a name spoken during the call can remain in it. It is **off by default**; turn it on with **Store RingTonic's AI call summary on the lead** on the RingTonic card, or choose **Off** above to store no summary at all.
 
 ### Map any form field (custom fields)
 
@@ -185,6 +187,8 @@ To use it, first choose your AI provider and model in the **AI mapping** card lo
 ### Pull data from RingTonic into the lead
 
 When the RingTonic integration is on, SyteOps can bring the CRM's contact data onto the lead. It works as an **overlay**: the lead keeps the details it originally captured, and RingTonic's **extra** fields (custom fields, tags, stage) plus anything RingTonic has that **differs** are added alongside — nothing you already have is stored twice or overwritten. This happens automatically the first time a lead syncs with RingTonic, and you can pull the latest anytime with the **Refresh from RingTonic** button on the lead. RingTonic data rides the outgoing webhook under a `ringtonic` object.
+
+When RingTonic's live notifications are set up, the same `ringtonic` object also carries what RingTonic knows about each **call** — duration, how the call ended, the caller's city and state, the tags, and RingTonic's AI call summary. The full field list, and how the summary follows your PII storage setting, are in [What lands on the lead](../integrations/ringtonic#what-lands-on-the-lead).
 
 ### Fill in leads you already have (Backfill)
 
@@ -229,6 +233,11 @@ Paste any URL into the **Automation webhook URL** field to activate it. Use the 
 | `utm_campaign` | UTM campaign tag |
 | `gclid` | Google Ads click ID |
 | `fbclid` | Facebook Ads click ID |
+| `msclkid` | Microsoft Ads click ID |
+| `gbraid` | Google consent-mode click ID (app-to-web) |
+| `wbraid` | Google consent-mode click ID (web-to-app) |
+| `ttclid` | TikTok click ID |
+| `li_fat_id` | LinkedIn click ID |
 | `custom` | Object of your mapped custom fields, if any (`{ key: value }`) |
 | `ringtonic` | Object of RingTonic overlay data, if any (extra/differing CRM fields) |
 | `admin_url` | Deep link to the lead in WP admin |

@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.377
+
+- Added: RingTonic's call outcome, confidence, deal value, call duration and status, tracking number name, caller city/state and call tags now land on the matching lead as RingTonic reports them, and appear in the lead's details, exports, emails and the automation webhook. RingTonic's AI call summary and the reason it gave for qualifying a call land there too when you turn on the new Store RingTonic's AI call summary on the lead setting, which is off by default; once on, the summary follows your contact-detail privacy setting, and under Masked phone numbers and email addresses are replaced while the wording is kept, so a name spoken on the call can remain. Call recordings and transcripts are never stored.
+
+## v1.6.376
+
+- Added: The newer ad click IDs — Google's gbraid and wbraid, TikTok's ttclid, and LinkedIn's li_fat_id — are now captured on the website tracker and on calls reported by RingTonic, alongside the existing gclid, fbclid, and msclkid, and flow through to CSV exports and the automation webhook alongside the rest of your first-touch attribution. Note: gbraid, wbraid, ttclid, and li_fat_id are now reserved names for Leads custom fields — an existing custom field mapped to one of those names is dropped in favor of the built-in attribution field on your next Leads settings save.
+
 ## v1.6.375
 
 - Added: RingTonic can now notify SyteOps directly over a signed webhook, instead of relying only on the existing one-way status push. A completed or missed inbound call, a qualified lead, or a stage change made in RingTonic now shows up in your Leads list — matched by call or contact identity, with whatever attribution RingTonic captured for the call filled in — and a form submission there links, by contact, to its matching lead.
