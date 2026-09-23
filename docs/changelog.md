@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.389
+
+- Fixed: Links in a page bundle email open your reviews on the Pages view.
+
 ## v1.6.388
 
 - Fixed: My Portal now lists bundled pages, and bundle email links open each page's review, on sites without an active content source.
