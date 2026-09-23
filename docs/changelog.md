@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.386
+
+- Fixed: Pages and posts in a page bundle now show on My Portal, including ones that are already published.
+- Changed: Review emails place the logo at the top left, and the page bundle email lists its pages in one card.
+
 ## v1.6.385
 
 - Added: A page bundle can include a note for reviewers, and that note appears at the top of the bundle email.
