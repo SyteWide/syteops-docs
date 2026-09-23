@@ -8,6 +8,22 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.385
+
+- Added: A page bundle can include a note for reviewers, and that note appears at the top of the bundle email.
+
+## v1.6.384
+
+- Fixed: the Review Portal Page bundle toolbar now spaces its action buttons consistently, centers icons with labels, and shows a light checkmark on the Save button.
+
+## v1.6.383
+
+- Changed: the page bundle picker lists eligible pages and posts when you click it; typing narrows the list.
+
+## v1.6.382
+
+- Changed: The Send bundle email is now a numbered checklist of linked page and post titles with one Open button, instead of per-item keyword cards.
+
 ## v1.6.381
 
 - Added: a lead can now carry a deal value; it is sent to RingTonic with the status, shown on the lead, exported and included in the automation webhook; a deal value recorded in RingTonic fills in here when the lead has none.
