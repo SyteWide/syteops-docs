@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.388
+
+- Fixed: My Portal now lists bundled pages, and bundle email links open each page's review, on sites without an active content source.
+
+## v1.6.387
+
+- Fixed: A page bundle names each page and links it to that page's review, and every link in the bundle email opens that page's review.
+
 ## v1.6.386
 
 - Fixed: Pages and posts in a page bundle now show on My Portal, including ones that are already published.
