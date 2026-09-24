@@ -8,6 +8,53 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.403
+
+- Added: On the Notice Management page, the Save button now also stays visible at the bottom of the screen as you scroll, joining the other single-Save pages.
+
+## v1.6.402
+
+- Changed: Removed the Save button from each Review Portal panel (Links, Author, SEO, GEO, Categories & Tags) — each panel still shows whether it has unsaved changes, and the Save controls at the bottom of the page save the whole draft, including those panels.
+
+## v1.6.401
+
+- Fixed: Quick Navigation pills on the Systems / API and CRM tabs now jump to the section they name instead of doing nothing, and the Private Storage card on the Systems / API tab now sits in the same order as its own pill.
+- Added: The Admin tab's Quick Navigation now includes a pill for the Product License card.
+
+## v1.6.400
+
+- Added: On pages with a single Save button — main Settings, the Review settings panel, and Banners — the button now stays visible at the bottom of the screen as you scroll, so a long page no longer needs a scroll back down to save.
+
+## v1.6.399
+
+- Changed: On the SyteHero image AI tile, you now pick each job's model from a dropdown that shows every model SyteHero supports and its cost.
+
+## v1.6.398
+
+- Fixed: The model fields on the SyteHero image AI tile no longer spill out of their boxes, and long model ids are readable.
+- Added: The tile fills in value-for-money image models for each job until you save your own picks.
+
+## v1.6.397
+
+- Fixed: Moving between pages in a page bundle now saves any edit you just made to the page you made it on first, instead of dropping it. If that save fails, you stay on the page with your edits.
+
+## v1.6.396
+
+- Fixed: Cmd/Ctrl+click in Page review now opens the image tools on pictures set as a section or hero background, and the image tools open next to the picture instead of in the corner of the screen.
+- Changed: The Page Preview heading and page bundle strip sit in their own card above the preview, and the strip no longer lets its scroll bar cover the page buttons.
+- Changed: The current page in the bundle strip is marked with a brand-colored outline.
+- Changed: The SEO area's AI buttons are spaced apart.
+- Removed: The Cmd/Ctrl+click hint in the Page Preview heading.
+
+## v1.6.395
+
+- Fixed: Cmd/Ctrl+click on a picture in Page review now opens the image tools even when the picture sits under a link or overlay.
+- Changed: The page preview toolbar now uses a dark bar.
+
+## v1.6.394
+
+- Changed: The page bundle strip in Page review has a cleaner, easier-to-scan design.
+
 ## v1.6.393
 
 - Added: In Page review, hold Cmd (Mac) or Ctrl (Windows) and click a picture to open the image tools and swap it into the page, with Undo.

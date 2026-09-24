@@ -43,7 +43,7 @@ What changes while the toggle is on:
 
 - SyteHero uses the key from this tile for every image call, and never stores a copy of it.
 - On SyteHero's own Integrations page, the fal card's key field, enable switch, clear checkbox and Test Connection button are disabled, with a "Managed by SyteOps" note and a link back here. Its own stored key is left untouched and comes back the moment you turn the toggle off.
-- Each capability row on the tile — generate a picture, remix a picture, picture to video, remove background, upscale, extend edges — pins a model id for that job. Leave a row blank to let SyteHero choose. When SyteHero is active, the field suggests the model ids it knows about; you can still type one that isn't on the list.
+- Each capability row on the tile — generate a picture, remix a picture, picture to video, remove background, upscale, extend edges — pins a model id for that job. When SyteHero is active, each row is a dropdown of the models SyteHero supports, showing each model's name and cost ($ to $$$$). Choose **Let SyteHero choose** to leave that job to SyteHero. Until you save your own picks, value-for-money models are preselected: good quality at a modest per-image price. Save to use them, or change any row. Without SyteHero active, the rows are plain text fields for a model id.
 
 The key is encrypted at rest, never shown again after save ("Leave blank to keep current key" plus a **Clear key on save** checkbox), and excluded from configuration exports and backups, exactly like the provider keys above.
 
