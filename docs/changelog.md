@@ -8,6 +8,22 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.393
+
+- Added: In Page review, hold Cmd (Mac) or Ctrl (Windows) and click a picture to open the image tools and swap it into the page, with Undo.
+
+## v1.6.392
+
+- Added: Groundwork for swapping pictures directly from Page review.
+
+## v1.6.391
+
+- Changed: The page preview toolbar now has a full-width solid black line above the preview.
+
+## v1.6.390
+
+- Fixed: Notes in review emails keep the line breaks typed in the note field.
+
 ## v1.6.389
 
 - Fixed: Links in a page bundle email open your reviews on the Pages view.
