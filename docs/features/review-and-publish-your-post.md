@@ -151,7 +151,7 @@ Two things worth knowing when you swap the image:
 
 ### Author
 
-The **Author** panel sits just under Featured Image. It lists the same WordPress users as the content source Default author picker. The field is labeled **Post Author**, with a hint that it is shown as the byline. Change who is credited on the article and click **Save** (or wait for autosave). The new author is added to the reviewer list so they can open the portal; the previous author stays on that list too. This does not rebuild who receives review emails.
+The **Author** panel sits just under Featured Image. It lists the same WordPress users as the content source Default author picker. The field is labeled **Post Author**, with a hint that it is shown as the byline. Change who is credited on the article — the panel shows **Unsaved changes** underneath while autosave catches up, or click **Save draft** (or **Save changes** on a live article) at the bottom of the page to save it right away. The new author is added to the reviewer list so they can open the portal; the previous author stays on that list too. This does not rebuild who receives review emails.
 
 If an operator has set Author to **View only** for your reviewer type, you can still see who is credited, but the list is disabled. The same happens when **Who can publish** is **Author or designated approver only** and you are a co-reviewer — only the credited author (and administrators) can change the byline, so a co-reviewer cannot assign themselves and then publish.
 
@@ -368,7 +368,7 @@ The **SEO** panel lets you control how the post appears in Google and other sear
 - **Description** — The short sentence that appears under the page title in search results, and the WordPress excerpt. Keep it to one or two clear sentences that summarize the article. Click **Generate with AI** to have the AI draft it from the current title and body — the result fills the field for you to review and edit. (This requires a Content provider to be configured in the Review Portal settings.)
 - **Review Photo AI** — Beside the description sits its own button for the article's pictures, shown once an Image SEO provider and model are configured (with the provider and model named underneath). Click it to open the same photo picker the AI buttons above offer after they run — see **Describing a picture for search** later in this guide — without first generating a meta description. It never touches the description field; describing photos is a separate AI call from writing the description.
 
-Each of the SEO, GEO and Categories & Tags panels has its own **Save** button at the foot of the panel, so you never have to scroll to the bottom of the page to keep your work. It saves everything on the page exactly as shown, not just that one panel. The portal also saves on its own a few seconds after you stop typing — and immediately after any of the AI buttons fills something in — so generated text is never left sitting only in your browser.
+Each of the Links, Author, SEO, GEO and Categories & Tags panels shows its own **Saved** / **Unsaved changes** line at the foot of the panel, so you can see at a glance whether what you just changed there has been kept. The portal saves on its own a few seconds after you stop typing — and immediately after any of the AI buttons fills something in — so generated text is never left sitting only in your browser; you can also click **Save draft** (or **Save changes** on a live article) at the bottom of the page at any time, which saves everything on the page, not just one panel.
 
 As you type, a **search-result preview** updates in real time so you can see exactly how the title and meta description will look to someone finding your post on Google before you publish. When an SEO title is set, the preview uses it as the headline.
 
@@ -394,7 +394,7 @@ The **Include in llms.txt / AI Answer Feed** toggle controls whether this specif
 - The toggle is **on by default** for every published post, meaning all of your published content is included automatically.
 - Turn the toggle **off** if you want to keep a particular post out of the AI feed (for example, a time-sensitive or confidential article).
 
-This setting is saved when you click the panel's **Save** button, **Save draft**, or **Approve & Publish**.
+This setting is saved by autosave, or when you click **Save draft** (or **Save changes**) or **Approve & Publish**.
 
 **Pillar Article (Cornerstone)**
 
@@ -418,7 +418,7 @@ it once.
 Use it sparingly. If everything is a pillar, nothing is — the point is to tell AI tools which handful
 of pages to trust first.
 
-This setting is saved when you click the panel's **Save** button, **Save draft**, or **Approve & Publish**.
+This setting is saved by autosave, or when you click **Save draft** (or **Save changes**) or **Approve & Publish**.
 
 ### Links
 
@@ -442,7 +442,7 @@ The **Categories & Tags** panel shows the categories and tags that will be appli
 - **Remove a category or tag** — Click the × on any chip to remove it.
 - **Get fresh AI suggestions** — Click **Refresh** to ask the AI for a new set of suggested categories and tags based on the current article content. The suggestions are shown as chips you can accept, adjust, or discard — clicking Refresh does not apply anything automatically.
 
-The final set of categories and tags is saved when you click the panel's **Save** button, **Save draft**, or **Approve & Publish**.
+The final set of categories and tags is saved by autosave, or when you click **Save draft** (or **Save changes**) or **Approve & Publish**.
 
 ---
 
