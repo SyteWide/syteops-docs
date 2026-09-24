@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.404
+
+- Fixed: The Save button on the Settings page now stays visible at the bottom of the screen as you scroll, instead of disappearing behind the page.
+
 ## v1.6.403
 
 - Added: On the Notice Management page, the Save button now also stays visible at the bottom of the screen as you scroll, joining the other single-Save pages.
