@@ -247,6 +247,13 @@ ago**). If a balance cannot be read, you are told why instead of being shown a m
 would read as an empty account rather than a lookup that did not work. The balance appears only when
 Modify with AI is available to you.
 
+**This month's spend.** Under the credit pill, when your image service reports it, a line reads
+something like **This month: $12.50 (fal list price)** — the total spent generating and remixing
+pictures on this site so far this month, at the image service's own list price. If some of that
+total is an estimate rather than an exact figure, the line says **fal prices & estimates** instead,
+so you never read an estimated total as more precise than it is. This line appears only where the
+credit pill does.
+
 **While it runs.** A progress bar appears under the controls. Some models report how far along they
 are, and the bar fills to match — it deliberately sits near the end for a while, because that is
 where the image service holds a job it has not quite finished. Many models say nothing at all while
@@ -265,6 +272,12 @@ yourself, such as a permission you do not have, you still get the plain-language
 **If somebody else is already changing that picture**, you are told so, shown how far along their
 job is, and offered **Stop** — so you are not left waiting out a job you cannot see.
 
+**What that generation cost.** When your image service reports it, the "New version ready" message
+also says what that particular generation cost — something like **This cost $0.025 · fal list
+price**, or, when the figure is an estimate rather than an exact one, **est. $0.04**. If the image
+service does not report a cost for that generation, nothing is added — you are never shown a made-up
+figure.
+
 ### Choosing between versions
 
 Every time you press **Generate** you get another version of that picture, and they all stay. They
@@ -276,7 +289,8 @@ so nothing is shown.
 
 Click a card's thumbnail to see that version at full size, with the prompt that produced it underneath
 — big enough to judge whether it actually fixed what you asked for, which a small thumbnail cannot tell
-you. Click the same thumbnail again to close it. Clicking is only looking: nothing is written and your
+you. When your image service has a cost on record for that version, it appears under the prompt too.
+Click the same thumbnail again to close it. Clicking is only looking: nothing is written and your
 article does not change.
 
 Up to three controls sit on each card.

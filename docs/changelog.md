@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.409
+
+- Added: The AI balance popup now shows this month's image-generation spend at fal list price, with the last several months available to expand.
+- Added: In page and post review, generating or varying a picture now shows what that generation cost, and an already-generated picture in the strip shows its own cost too, when SyteHero reports it.
+
 ## v1.6.408
 
 - Added: An optional fal billing key on the Systems / API tab, so SyteOps can read your fal account balance without reusing the key used for image generation.
