@@ -221,7 +221,7 @@ Model photos reach the image service only when SyteHero on this site is a releas
 
 Two things decide whether the picture comes back looking like itself:
 
-- **Model.** The list now names each model and says which ones *keep text and logos*. If a picture has words in it — a sign, a label, packaging — choose one of those. The others are better at reimagining a scene than at preserving one, and they are the reason text has come back garbled.
+- **Model.** The list now names each model and says which ones *keep text and logos*. If a picture has words in it — a sign, a label, packaging — choose one of those. The others are better at reimagining a scene than at preserving one, and they are the reason text has come back garbled. Where your image service reports it, each option also ends with a price rating from **$** (lowest cost) to **$$$$** (highest), so you can weigh quality against cost before you generate.
 - **Keep text and logos exactly as they are.** On by default. Turn it off only when you want a genuine reinterpretation rather than an edit.
 
 **Model** and **Quality** now share one row at equal width, so the model name is never cut off. **Quality** is Standard, High or Ultra; several of the models that best preserve text ignore it entirely — they always return their own size — so it applies mainly to the more generative ones. **Strength**, for the one model that actually uses it, wraps onto its own line below Model and Quality, with its own hint. **Generate** (with a sparkle icon), **Revert** and **Stop** sit together on their own row below both checkboxes on this panel — this one and **Tell the AI what this article is about** above — with Generate filling the row.
@@ -251,8 +251,11 @@ Modify with AI is available to you.
 something like **This month: $12.50 (fal list price)** — the total spent generating and remixing
 pictures on this site so far this month, at the image service's own list price. If some of that
 total is an estimate rather than an exact figure, the line says **fal prices & estimates** instead,
-so you never read an estimated total as more precise than it is. This line appears only where the
-credit pill does.
+so you never read an estimated total as more precise than it is. Once the image service confirms the
+actual billed charge for the month, the label instead reads **fal billed** (or **fal billed + list
+prices** when only some of it is confirmed yet), and, if your account's team-wide usage is readable,
+a trailing **fal team total this month: $X** names the whole team's spend alongside this site's own.
+This line appears only where the credit pill does.
 
 **While it runs.** A progress bar appears under the controls. Some models report how far along they
 are, and the bar fills to match — it deliberately sits near the end for a while, because that is
@@ -274,9 +277,10 @@ job is, and offered **Stop** — so you are not left waiting out a job you canno
 
 **What that generation cost.** When your image service reports it, the "New version ready" message
 also says what that particular generation cost — something like **This cost $0.025 · fal list
-price**, or, when the figure is an estimate rather than an exact one, **est. $0.04**. If the image
-service does not report a cost for that generation, nothing is added — you are never shown a made-up
-figure.
+price**, or, when the figure is an estimate rather than an exact one, **est. $0.04**. Once the image
+service confirms the actual billed charge for that generation, it instead reads **This cost $0.025 ·
+billed by fal**. If the image service does not report a cost for that generation, nothing is added —
+you are never shown a made-up figure.
 
 ### Choosing between versions
 
@@ -959,7 +963,7 @@ Two more rows are status-only — a pill, a "Powers: …" line and a link, no co
 
 Each configurable row shows **"Uses site default (Provider · Model)"** when it has no provider of its own, with an **Override** toggle beside it — turn it on to pick a provider and model for that row alone, or leave it off to follow whatever the **Site default provider** on **System / API** resolves to. An **Advanced** disclosure under each row holds **Max tokens**, tunable independent of Override; choosing **Custom** in the model select lets you type a model ID by hand.
 
-**Image generation.** A separate section below the rows above. These are billed per picture. Each appears only when its provider is available, so you may see one, both, or neither.
+**Image generation.** A separate section below the rows above. These are billed per picture. Each appears only when its provider is available, so you may see one, both, or neither. Where your image service reports it, each model option here ends with a **$**-to-**$$$$** price rating, with a short legend beside the picker explaining the scale.
 
 - **Modify images with AI** — the model, quality, detail preservation and strength used when a reviewer remakes a picture.
 - **Listing image** — the provider, repair model and seed used to repair a watermark on the cropped listing copy. The switch that turns that repair on stays with the rest of the listing-image settings, under **Article images**.
