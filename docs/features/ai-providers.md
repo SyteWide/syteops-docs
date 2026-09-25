@@ -47,6 +47,8 @@ What changes while the toggle is on:
 
 The key is encrypted at rest, never shown again after save ("Leave blank to keep current key" plus a **Clear key on save** checkbox), and excluded from configuration exports and backups, exactly like the provider keys above.
 
+**Default collection.** SyteOps Admins see a read-only **Default collection** line under this tile once one is set in SyteHero's AI Studio — the collection new pictures are filed into by default. It shows the collection's name, with a link to open SyteHero's AI Studio Assets view. Nothing here can create or change a collection; that stays entirely inside SyteHero's own AI Studio.
+
 ### Other service keys
 
 Some services SyteOps talks to are not AI providers, so their keys live further down the same **System / API** tab, with the other service credentials rather than in the API Keys tile:

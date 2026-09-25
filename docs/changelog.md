@@ -8,6 +8,20 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.407
+
+- Added: In page and post review, a "From library" option lets a reviewer reuse a picture already generated for this client on another of their sites, instead of generating a new one — available once SyteHero is connected with a supported image AI key.
+- Added: Generating a new picture now offers a "File into" choice of which of the client's collections to save it in, and admins can see the site's default collection on the Systems / API tab.
+
+## v1.6.406
+
+- Added: The Device Preview in page and post review now shows a colored frame and a small label — Live, Draft preview, Scheduled, or Private — so you always know whether you're looking at what visitors already see or a preview only reviewers can see.
+- Changed: Review Portal card borders and dividers are a touch darker for better definition.
+
+## v1.6.405
+
+- Fixed: On the Systems / API tab, the AI Keys tile fields — including the Preferred model dropdown — now fit their card instead of the text clipping under the dropdown arrow.
+
 ## v1.6.404
 
 - Fixed: The Save button on the Settings page now stays visible at the bottom of the screen as you scroll, instead of disappearing behind the page.
