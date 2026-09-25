@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.410
+
+- Changed: The optional fal billing key on the Systems / API tab is deprecated — use an Admin key from the client's fal team if you want the fal balance shown. The field now stays hidden unless one is already stored, with a note to clear it.
+- Fixed: The AI balance popup and page/post review AI status row now point at using an Admin fal key instead of suggesting a separate billing key.
+
 ## v1.6.409
 
 - Added: The AI balance popup now shows this month's image-generation spend at fal list price, with the last several months available to expand.
