@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.408
+
+- Added: An optional fal billing key on the Systems / API tab, so SyteOps can read your fal account balance without reusing the key used for image generation.
+- Fixed: The AI balance popup and the page/post review AI status row now explain when a fal key can't read the balance, instead of showing a bare "Error".
+
 ## v1.6.407
 
 - Added: In page and post review, a "From library" option lets a reviewer reuse a picture already generated for this client on another of their sites, instead of generating a new one — available once SyteHero is connected with a supported image AI key.
