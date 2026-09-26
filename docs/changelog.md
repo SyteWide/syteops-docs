@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.416
+
+- Fixed: In Page review and page bundles, accordions, tabs, buttons and same-page links in the preview now work when clicked, instead of every click starting a note. Links to other pages still start a note, and holding Shift while clicking starts a note on any element. A key at the top of the preview lists each click, and shows the picture shortcut only to people who can change pictures. Changing a picture from the page preview now also follows the Modify with AI permission, like the other image tools.
+
 ## v1.6.415
 
 - Fixed: A scheduled article whose publish job went missing is now published on time. SyteOps checks scheduled posts every few minutes, restores a missing publish job, and publishes an article that has already passed its time.
