@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.415
+
+- Fixed: A scheduled article whose publish job went missing is now published on time. SyteOps checks scheduled posts every few minutes, restores a missing publish job, and publishes an article that has already passed its time.
+
+## v1.6.414
+
+- Fixed: A page bundle's note for reviewers is no longer cut short in the bundle email when it has line breaks and runs close to the 1,000-character limit.
+
 ## v1.6.413
 
 - Fixed: Review Portal cards in a page bundle now list in the order you set them — in the queue, and in reminder, escalation and digest emails — instead of newest-first.
