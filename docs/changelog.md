@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.426
+
+- Fixed: Clicking a same-page link in the Review Portal's appearance preview no longer leaves the top of the page cut off with no way to scroll back up.
+
 ## v1.6.425
 
 - Fixed: Review emails sent in a batch now accept only valid, distinct email addresses from any code that adjusts a reviewer's addresses, matching the check emails sent right away already had.
