@@ -8,6 +8,35 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.425
+
+- Fixed: Review emails sent in a batch now accept only valid, distinct email addresses from any code that adjusts a reviewer's addresses, matching the check emails sent right away already had.
+
+## v1.6.424
+
+- Added: The Insert Link dialog in page and post review now also searches your site's own pages and posts, alongside any LinkCentral managed links.
+- Improved: The LinkCentral links list in that dialog now always stays visible, showing a plain reason (and a Retry option if it couldn't load) instead of quietly disappearing.
+
+## v1.6.423
+
+- Fixed: Re-scheduling an already-scheduled Review Portal article now says the schedule changed instead of announcing it as scheduled again, and pressing Schedule with the same date sends no notice at all. The review digest shows one card, not two, when a post's schedule or draft status changes twice in the same batch window. Pressing Notify again after one of a person's email addresses was refused no longer sends the notes a second time to the address that already received them. A new draft or update whose only reachable address belongs to a CC'd watcher, rather than the author or a reviewer, now reaches that watcher instead of being silently skipped.
+
+## v1.6.422
+
+- Fixed: A page bundle's note now appears once, labeled with the bundle's own name and visually grouped with the cards it belongs to, above that group — in the regular review digest and in the "coming up" and "still waiting" reminder emails, not only in the direct bundle email — and only for people who can see that bundle. Every note-writing field in the portal (picture and page-element notes, replies, Request Changes, the Notify message, and Send to a colleague) now stops you at the same length limit the server enforces, and counts line breaks the same way before applying it, so a note that fits on screen is never cut short by how its line breaks were sent. Request Changes and Send to a colleague notes are now capped to the same length as every other note.
+
+## v1.6.421
+
+- Added: Notes saved in the Review Portal now reach the article's author and reviewers automatically after the batch window, in the same email as their other review updates, so a whole session of notes arrives as one email with each note in full. Notify still sends at once, and a note it has sent is not sent again. A reply posted with "Notify recipient via email?" cleared, or a note left unchecked when someone pressed Notify for that person, is never sent this way, and people who turned Reply notifications off do not get it. A new setting, "Send unsent notes with the batched email" (on by default), turns it off.
+
+## v1.6.420
+
+- Fixed: Review emails that could not go out right away are no longer lost when WordPress drops a scheduled task. Everyone past the first recipient of a large send, and the "Now live" email's retries, now wait in the same queue as other review updates, go out within minutes, and still respect a reviewer who has since turned that email off. A "Now live" email that still cannot be delivered is now listed in Activity once for each person who missed it. Publishing from the Review Portal after a slow image check no longer holds back everyone but the first recipient, and publishing many posts at once in WordPress no longer risks a timed-out page while their emails go out.
+
+## v1.6.419
+
+- Fixed: A reviewer with more than one email address no longer gets repeat copies of a review update when one of their addresses turns it away; only that address is tried again. A review update that cannot be put together no longer holds up the other updates waiting to go out, and the Activity log now shows review updates that were emailed or skipped.
+
 ## v1.6.417
 
 - Fixed: A review notification email that WordPress failed to send on time, such as the new-draft notice, now goes out within about ten minutes instead of up to an hour late.
