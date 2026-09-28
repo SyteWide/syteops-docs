@@ -469,7 +469,7 @@ The **Categories & Tags** panel shows the categories and tags that will be appli
 
 - **Add a category or tag** — Type into the field and press Enter, or click a suggestion to add it.
 - **Remove a category or tag** — Click the × on any chip to remove it.
-- **Get fresh AI suggestions** — Click **Refresh** to ask the AI for a new set of suggested categories and tags based on the current article content. The suggestions are shown as chips you can accept, adjust, or discard — clicking Refresh does not apply anything automatically.
+- **Get fresh AI suggestions** — Click **Refresh** to ask the AI for a new set of suggested categories and tags based on the current article content. The AI suggests one of your existing categories and up to six of your existing tags; it never suggests a new one. The suggestions are added beside the chips already there, so remove any category you no longer want — an article publishes with exactly one category. Clicking Refresh does not save anything automatically.
 
 The final set of categories and tags is saved by autosave, or when you click **Save draft** (or **Save changes**) or **Approve & Publish**.
 
@@ -551,7 +551,7 @@ To stop half-finished articles going live, **Approve & Publish** first checks th
 | GEO Analysis | The article has never been analyzed for AI-engine readiness. | **Analyze GEO** |
 | GEO Analysis Is Current | The article was edited after it was last analyzed, so the score is out of date. Formatting-only edits — bolding a word, re-wrapping a paragraph — do not count. | **Re-analyze GEO** |
 | Description | The description is empty. | **Generate with AI** |
-| Categories & Tags | The article has no category, or no tag. "Uncategorized" does not count. | **Suggest categories & tags** |
+| Categories & Tags | The article needs exactly one category and at least one tag. No category, or more than one, is not ready. "Uncategorized" does not count. | **Suggest categories & tags** |
 | AI Answers Reviewed | Nobody has confirmed the AI-written questions and answers for this article. Until someone does, they are held back from your answer-engine surfaces. | **Review the answers** |
 
 Some items finish as soon as you click the button. Others — accepting a generated meta description, or choosing which suggested categories and tags to keep — hand back to you, and the list closes so you can make the choice. Once everything is clear, click **Publish now** and the article goes live.
@@ -939,7 +939,7 @@ Publish is blocked until these are met. All of the following are **on** by defau
 - **GEO Analysis has run**
 - **GEO Analysis Is Current** — required after the article changes. Formatting-only edits are ignored.
 - **Description present**
-- **Categories & Tags assigned**
+- **Categories & Tags assigned** — exactly one category and at least one tag
 - **AI Answers Reviewed** — required when answers are published
 
 A requirement is skipped when the reviewer cannot act on it (no permission for that area, or the AI behind it is not configured).
