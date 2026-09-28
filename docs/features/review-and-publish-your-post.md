@@ -381,6 +381,8 @@ If that person has more than one email address on file and only one of them coul
 
 **Nothing new to say?** If that person has already been sent every note on the article, Send tells you so rather than mailing them a duplicate — add a message if you want to reach them anyway.
 
+Your own name is not in the list, because Notify never emails the person sending. If the person you choose has turned **Reply notifications** off on their own page, or has no email address on file, Notify says that nothing was sent instead of asking you to try again. A message you typed is kept as a note on the article either way.
+
 If your site administrator has turned reviewer-note emails off, the **Notify** button simply is not there; you can still write and resolve notes.
 
 ### SEO — keyword and meta description
