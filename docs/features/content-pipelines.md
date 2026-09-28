@@ -229,6 +229,8 @@ You can tailor how each source proves and processes its content, and every optio
 - **Signature header** — choose which request header the sending app signs with, so a source can match whatever your app already sends.
 - **Author matching** — match the article's stated author to one of your registered team members (by email or last name). On a **new** article, if that value is blank or does not match a WordPress user, the source's **Default author** is used (instead of the first administrator). On an **update** of an existing draft, a blank inbound author leaves the credited author as it is, unless you tick **Always use this author**. That pin ignores the payload author on every delivery.
 - **Target tag** — automatically add a tag of your choosing to every post from this source, so you can find and group its content later.
+- **Strip "Uncategorized"** — remove your site's default category from drafts when WordPress added it automatically. If the AI chose the default category for the article (some sites use a real topic as their default), it stays.
+- **Categories AI must not use** — category slugs, separated by commas, that the AI never files this source's drafts under — for example an old catch-all such as `blog`. "Uncategorized" is always left out.
 ### How the article is displayed
 
 These four options change **only how the article is shown on your site**. Your stored article is
@@ -334,7 +336,9 @@ will not work either until that is set up.
 
 Once approved, the source goes **active**: every future post to its Ingest URL becomes a Review Portal draft automatically, using the same mapping. Any field the mapping doesn't fill — because that particular delivery genuinely has no value at the mapped location — is simply left blank for the reviewer to complete. SyteOps only pauses (holds) the source when an entire delivery doesn't match the mapping at all, so one article missing a single field never blocks the ones behind it.
 
-Categories and tags are not part of the mapping: SyteOps reads each incoming article and chooses them with AI, preferring your site's existing categories and tags and adding new ones only when nothing fits. Reviewers can adjust the suggestions in the Review Portal before publishing, and the source's **Target tag** (if set) is always added on top.
+Categories and tags are not part of the mapping: SyteOps reads each incoming article and files it with AI under **exactly one** of your site's existing categories, using each category's **description** to decide which fits best, and adds up to **six** of your existing tags. It never creates a new category or tag — anything the AI names that your site does not already have is ignored. If the AI cannot name a usable category, the draft keeps the category WordPress gave it and the source's run log says why. "Uncategorized" is never chosen, and you can keep the AI away from other categories with the source's **Categories AI must not use** setting. Reviewers can adjust the choice in the Review Portal before publishing, and the source's **Target tag** (if set) is always added on top.
+
+Because the AI uses each category's description, write a short description for every category on your site (**Posts → Categories**) saying what belongs in it.
 
 The **Author** mapping row also has a **Default author** picker (the same list as in Settings). Use it when the mapped author is often blank or does not match a WordPress user. Changing it there saves immediately and stays in sync with Settings.
 

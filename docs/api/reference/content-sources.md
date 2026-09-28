@@ -70,6 +70,7 @@ Create a content source; generates its id and slug, and (unless a secret is prov
 | `target_tag_slug` | string | no |  |
 | `taxonomy_apply_mode` | string | no |  |
 | `strip_uncategorized` | boolean | no |  |
+| `category_exclude` | object | no |  |
 | `content_cleanup` | boolean | no |  |
 | `strip_inbody_toc` | boolean | no |  |
 | `strip_inbody_faq` | boolean | no |  |
@@ -107,6 +108,7 @@ data: &#123;id, name, slug, secret, secret_source, ...} — secret is plaintext 
     "target_tag_slug": "string",
     "taxonomy_apply_mode": "string",
     "strip_uncategorized": true,
+    "category_exclude": {},
     "content_cleanup": true,
     "strip_inbody_toc": true,
     "strip_inbody_faq": true,
@@ -328,6 +330,7 @@ Update editable fields on an existing content source (slug is not editable; secr
 | `target_tag_slug` | string | no |  |
 | `taxonomy_apply_mode` | string | no |  |
 | `strip_uncategorized` | boolean | no |  |
+| `category_exclude` | object | no |  |
 | `content_cleanup` | boolean | no |  |
 | `strip_inbody_toc` | boolean | no |  |
 | `strip_inbody_faq` | boolean | no |  |
@@ -370,6 +373,7 @@ data: &#123;id, name, slug, ...} (no secret, no forward_secret)
     "target_tag_slug": "string",
     "taxonomy_apply_mode": "string",
     "strip_uncategorized": true,
+    "category_exclude": {},
     "content_cleanup": true,
     "strip_inbody_toc": true,
     "strip_inbody_faq": true,
