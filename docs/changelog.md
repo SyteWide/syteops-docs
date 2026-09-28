@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.430
+
+- Fixed: Review Portal — the Notify list no longer offers your own name, and when the person you choose has switched these emails off or has no email address, Notify says so instead of "Could not send that — please try again".
+
+## v1.6.429
+
+- Fixed: Review Portal — pressing Notify on a page review no longer reports "Could not send that" after the email was actually sent, and leaving the page or clicking a note's thumbnail no longer hits the same error.
+
 ## v1.6.428
 
 - Fixed: Review Portal — the Notify dialog no longer offers a note back to the person who wrote it, so pressing Notify never emails someone their own note.
