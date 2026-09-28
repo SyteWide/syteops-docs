@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.428
+
+- Fixed: Review Portal — the Notify dialog no longer offers a note back to the person who wrote it, so pressing Notify never emails someone their own note.
+
 ## v1.6.427
 
 - Changed: Articles arriving from a content source are now filed under exactly one of your existing categories, chosen using each category's description, and get up to six of your existing tags. The AI no longer creates new categories or tags; when it cannot name a usable category, the draft keeps its default category and the run log says why. A new per-source setting, "Categories AI must not use", keeps the AI away from categories you list, and "Strip Uncategorized" no longer removes a default category the AI actually chose. The Review Portal's pre-publish check now asks for exactly one category.
