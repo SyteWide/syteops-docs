@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.431
+
+- Fixed: Review Portal — a long link in a note now wraps inside its card instead of running off the edge, in the Feedback panel and in the notes lists on the review queue and your personal page.
+
 ## v1.6.430
 
 - Fixed: Review Portal — the Notify list no longer offers your own name, and when the person you choose has switched these emails off or has no email address, Notify says so instead of "Could not send that — please try again".
