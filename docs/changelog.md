@@ -8,6 +8,112 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.457
+
+- Added: leads can now be moved to another site and still pass their integrity check there. A new "Export Data + Verification Key" option (SyteOps admins only) adds this site's verification key to the export, encrypted with a passphrase you choose (at least 12 characters). The file never holds the key in readable form. When you import the file on another site and enter the passphrase, the imported leads show "Integrity verified with the source site's key". The other site keeps its own key and uses the imported one only to check the records that import brought in. A wrong passphrase stops the import before anything is saved. Both sites show a matching key fingerprint so you can confirm the file came from where you think. Visits the new site has already recorded are skipped, and the import message says how many.
+
+## v1.6.456
+
+- Fixed: A one-time notice that tells your Tech Contact when a LiteSpeed Cache update makes an internal Cloudflare authentication fix unnecessary could mark itself as sent even when the email never went out, so a real failure meant nobody was ever told. It now only marks itself sent after a successful delivery, and retries a bounded number of times instead of giving up silently.
+- Fixed: New-lead email notifications could lose an entire batch of leads if the notification failed to send, and turning on "send instantly" could make a visitor's own page wait on outbound email before finishing. A failed send now keeps its leads for the next attempt instead of losing them, and instant lead emails always go out in the background rather than holding up the visitor.
+- Fixed: A directly-sent review notification (Resend, Send page, Send bundle, and similar) now leaves the same delivery record in the article's history that a scheduled notification already does. The held-source alert email (sent when a content source's mapping needs re-approval) now sends one message per recipient instead of one message naming everyone, so a bad address for one person no longer risks the others.
+- Changed: A few admin screens (the purchase/license screen, an admin menu label, and the store-licensing settings page) no longer name the third-party payment platform behind them; the wording is now generic.
+
+## v1.6.455
+
+- Fixed: two actions by the same visitor recorded at the same instant could make that lead's proof packet say "Integrity check failed" even though nothing had been altered. Events recorded at the same instant are now always put in order, so this can no longer happen for new activity. A lead already affected keeps its original record, and its proof packet now explains the cause.
+
+## v1.6.454
+
+- Fixed: Publishing reminders now stop once an article is actually scheduled — it's going out on its own, so there's nothing left for anyone to act on, and the reminder no longer nags about it.
+- Fixed: Choosing someone in Notify to send them the article's notes right away no longer gets silently skipped because that person had turned off their own "Reply notifications" — that switch was never meant to cover a note a colleague sent them by name.
+- Added: Every review email's footer now carries a "Why you got this: Email settings" link straight to your own notification preferences, and the Notify dialog now explains that everyone already on the article hears about new notes automatically, so picking someone there is just a heads-up, not a way to limit who is told.
+- Fixed: The email notification settings for new drafts, updated drafts, and publishing or scheduling now correctly say they also email anyone watching the article, not just the author and reviewers.
+
+## v1.6.453
+
+- Fixed: with Reserve publishing slots turned on, a busy calendar — for example one where reviewers had set many future publishing times — could stop new articles from getting a slot at all, even when the next free day was clear. New articles now get their slot unless the days right around it are too crowded to check, and on a crowded calendar the suggested time is now checked against every article near it instead of skipping some. Also fixed a rare case where the hourly Auto-defer stale drafts pass, if it ran slowly while a new article arrived, could give both articles the same publishing slot. It now stops instead and picks up again on the next hourly run.
+
+## v1.6.452
+
+- Improved: when WordPress's own scheduled-publish timer, or its missed-schedule catch-up, takes several review-managed articles live in the same pass, the people who review them now get one "Now live" email listing every article, sent within a few minutes — instead of a separate email per article. Publishing an article yourself still sends its "Now live" email immediately, exactly as before.
+
+## v1.6.451
+
+- Added: The Lead Form block now shows a live preview and a settings panel (Title, Button label) directly in the block editor, instead of a blank placeholder you could only check by viewing the page.
+
+## v1.6.450
+
+- Internal: some of the Review Portal's internal pieces now load their own dependencies directly, instead of depending on which of several internal files happened to load first. Normal page loads were never affected, but the previous setup could fail under an unusual load order. No user-visible change in this release.
+
+## v1.6.449
+
+- Improved: Review Portal schedule emails now go out however an article's publishing time is set, moved or cancelled — the WordPress editor, Quick Edit or another tool as well as the portal and the content calendar — for articles that came through review. Taking a scheduled article back to a draft (Unschedule, or the editor) now sends an "Unscheduled" email naming who did it and when the article was going to publish, before that time arrives, to the people who were emailed about the schedule. A change request that cancels a schedule says so in its own email instead of sending a second one (anyone else who was emailed about the schedule still gets the Unscheduled email), and in Setup mode schedule changes made outside the portal and the calendar send nothing.
+
+## v1.6.448
+
+- Added: If your site runs both Squirrly SEO and LLMS Amplifier, a new note on Amplifier's own settings screen tells you when a post you marked noindex in Squirrly is still being published into your AI answer-engine files. Amplifier does not currently recognize Squirrly's noindex setting, so without this note that post would be published there with nothing to say so. SyteOps does not change what gets published — fix it in Amplifier's own per-post exclusion control, or by turning off noindex in Squirrly, whichever is right for that post.
+
+## v1.6.447
+
+- Improved: An article scheduled to publish within half an hour no longer sends a "Scheduled" review email a few minutes before its "Now live" email; only the "Now live" email goes out. Moving it to a later time still sends the scheduled notice with the new time, and unscheduling it sends nothing. Other scheduled notices now arrive at least half an hour before the article publishes.
+
+## v1.6.446
+
+- Internal: the checks for whether your SEO plugin (Squirrly SEO) still claims the /llms.txt address, strips other plugins' structured data, or serves robots.txt itself now share one implementation instead of three separate copies. While consolidating them, one check turned out to compare a Squirrly setting differently than Squirrly itself does — a mismatch reachable only on a hand-edited or migrated Squirrly configuration, where SyteOps could believe the /llms.txt address was free when Squirrly was still serving it. That check now matches Squirrly's own comparison exactly.
+
+## v1.6.445
+
+- Internal: cleaned up some duplicated admin styling rules and removed a leftover fallback for a browser that's no longer supported, relying on an existing site-wide rule instead. No user-visible change in this release.
+
+## v1.6.444
+
+- Improved: Review Portal batched emails now wait for things to go quiet instead of going out on a fixed timer, so a long review session arrives as one email once the notes stop, never more than four batch windows after the first one (one hour at the default). Two batched emails to the same person are always at least one batch window apart, including when a very large pile is split across several emails.
+
+## v1.6.443
+
+- Internal: renamed eight legacy global helper functions (Debug Tool log management, admin bar links, dashboard status widget) to carry the plugin's function-name prefix, and removed stale references to a retired cron schedule key. No user-visible change.
+
+## v1.6.442
+
+- Improved: Review Portal digest emails (several updates in one message) now show the same detail the single-article email already did: reviewer names and article details on a new draft, "Publishing" vs. "Planned" wording on an upcoming reminder, and the "nothing has been published yet" note on a still-waiting-for-review notice. A rescheduled article's email now says so, naming the previous and new publishing time, instead of reading like the very first schedule notice.
+
+## v1.6.441
+
+- Fixed: Review Portal — a picture picked through "Use another picture" no longer disappears if you press Apply or close the panel before pressing Generate with it; the panel now asks first, and only discards the pick if you say yes. The picker and its chip can no longer be mistaken for a replace: the chip now reads "AI reference" instead of "Starting from," and a note beside it points you at "Choose from library" for an actual swap. The disabled "Attach reference image" Pick button under Notes now shows its reason clearly, with a "Go to Import" link that jumps straight to the button that fixes it.
+
+## v1.6.440
+
+- Improved: Every email SyteOps sends now shows your site's name as the sender instead of a generic fallback name, and gets your site's name at the start of the subject line by default, so a mailbox that receives mail from more than one site can tell at a glance which one an email is about. A new General setting, "Add Site Name to Email Subjects," lets you turn the subject prefix off. Review Portal emails about the same article now thread together in your inbox instead of arriving as separate messages, and every email now includes a plain-text version alongside the formatted one, with links kept as readable text and a web address.
+
+## v1.6.439
+
+- Fixed: Review Portal — the "Finish These Before Publishing" checklist's Categories & Tags item now tells you exactly what to fix: no category yet, more than one category, or no tag, instead of one generic message for all three. A "Go to Categories & Tags" button takes you straight to the panel to fix it by hand. And when "Suggest categories & tags" comes back with nothing, it now says why — your site has no categories or tags of that kind yet — and tells you to add one yourself, or, if your permission only lets you pick from existing terms, to ask a colleague who can create one.
+
+## v1.6.438
+
+- Fixed: Review Portal — when an email reached some people but not others, or reached a person at one address while another address on file turned it away, the confirmation now says it was sent and names who was emailed and who could not be reached, without guessing at a reason it cannot back up. Before, Resend, Send page, Send bundle, colleague hand-offs, change requests, publishing and note replies said the email could not be sent even though people had received it, and pressing Resend, Send page or Send bundle again emailed everyone a second time. Send bundle also now says when its email could not be sent, instead of always saying "Bundle sent." A problem while sending the "Now live" email, or while working out who should receive it, during a scheduled publish no longer loses that email, no longer stops the site's other scheduled tasks, and is no longer recorded as failed on the rare occasion the email had, in fact, already gone out. Two people who share one email address are no longer left with only one of them told when a problem interrupts the first. A scheduled post's own notice no longer shows a failure banner when only part of it could not be queued for later delivery, and no confirmation ever shows a person's email address in place of their name.
+
+## v1.6.437
+
+- Fixed: Review Portal — for a reviewer whose GEO permission is set to View only, two pre-publish checks (GEO Analysis, GEO Analysis Is Current) quietly stepped aside instead of blocking, while AI Answers Reviewed already blocked with different wording. All three now behave the same way: they stay on the pre-publish checklist, block publishing, and explain who can finish them or that the article can be sent back with Request Changes. Description and Categories & Tags are unaffected and continue to be skipped for a View-only reviewer.
+
+## v1.6.436
+
+- Fixed: Review Portal — role rows in Reviewer editing permissions now have their own "inherit" option on every cell, the same as per-user overrides. Before, saving the settings panel for any reason locked every role into a concrete value for every area, including AI Agent Prompts (Hide) — nobody had to choose that for it to happen. A cell left at Inherit now takes no position of its own for that role and falls through to the default row instead. A role already saved before this change keeps its stored values; open its cells directly, or choose Inherit, to change them.
+
+## v1.6.434
+
+- Internal: the Review Portal's note-length limit now has one definition every part of the portal relies on, instead of depending on which of two internal files happened to load first. Normal page loads were never affected, but the previous setup could fail under an unusual load order. No user-visible change in this release.
+
+## v1.6.433
+
+- Fixed: Review Portal — the Image Details section in the picture and featured-image panels now opens by itself as soon as you click a picture, instead of starting collapsed. It holds the image link, "Choose from library", alt text and caption, so they're visible right away; collapse it for the picture you're on and the next one still opens it.
+
+## v1.6.432
+
+- Fixed: Review Portal — role and per-person permissions now apply to WordPress site administrators too. Before, any site administrator saw every portal tool, including Modify with AI and Remix with AI, even when their own settings hid it. SyteOps Admins still see everything. An administrator with no SyteOps role and no per-person entry keeps everything open, exactly as before. An administrator mapped to a role or with a per-person entry now follows those saved values — a saved role row stores every area, so, for example, a role's AI Agent Prompts = Hide now applies to administrators in that role too. Administrators can still open and edit every article. A View-only SEO or GEO setting also removes that area's item from the pre-publish checklist for an administrator, the same as it already does for any other reviewer.
+
 ## v1.6.431
 
 - Fixed: Review Portal — a long link in a note now wraps inside its card instead of running off the edge, in the Feedback panel and in the notes lists on the review queue and your personal page.

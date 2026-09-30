@@ -87,7 +87,7 @@ Get one lead with attribution, event timeline, and chain status.
 
 **Returns**
 
-data: &#123;id,ref,attribution,events[],chain:&#123;ok,count,broken_at}}
+data: &#123;id,ref,attribution,events[],chain:&#123;ok,count,broken_at,reason}}
 
 **Request**
 
@@ -229,7 +229,7 @@ data: &#123;id, status, label, deal_value_cents?, deal_currency?}
 
 ## `verify`
 
-Verify the tamper-evident integrity chain for a lead.
+Verify the tamper-evident integrity chain for a lead. chain.reason is null when ok (imported_source_key when imported events verified with the source site's key), else fork (two events saved at the same instant linked to one earlier event; each intact), mismatch (an edited event or another site's key), imported_mismatch (an imported event altered since export), imported_no_key (imported without the source key; cannot be re-verified) or no_key.
 
 **Capability:** `manage_options`
 
@@ -242,7 +242,7 @@ Verify the tamper-evident integrity chain for a lead.
 
 **Returns**
 
-data: &#123;id, chain:&#123;ok,count,broken_at}}
+data: &#123;id, chain:&#123;ok,count,broken_at,reason}}
 
 **Request**
 

@@ -287,7 +287,7 @@ A CSS selector tells Lead Attribution exactly which element on the page to watch
 The native qualification form can be placed anywhere on your site:
 
 - **Shortcode:** `[syteops_lead_form]` — paste into any post, page, or widget area.
-- **Block:** search for **Lead Form** in the Gutenberg block inserter and drop it where you want the form to appear.
+- **Block:** search for **Lead Form** in the Gutenberg block inserter and drop it where you want the form to appear. The block shows a live preview and a settings panel (Title, Button label) right in the editor.
 - **Pop-up:** configure the pop-up options in the qualification settings — choose a trigger (time delay, scroll percentage, or exit intent) and optionally set a title for the pop-up overlay. The pop-up appears automatically without any shortcode or block.
 
 ## The dashboard
@@ -312,6 +312,23 @@ Click a lead's name to open its **proof packet**.
 Each lead's proof packet shows its full story: the source, campaign, landing page, and a timeline of every event — with an **integrity check** that confirms the record hasn't been altered since it was captured.
 
 Need to show a client the evidence without giving them admin access? Use the **shareable proof link** — a read-only web page for that single lead. You can regenerate the link at any time to revoke the old one.
+
+### Moving leads to another site
+
+A normal data export (**Modules → Lead Attribution → Export Data**) restores cleanly on the same site. On a *different* site, the integrity check can't be re-run, because each site signs its records with its own secret **verification key**.
+
+To keep leads verifiable after a move, a SyteOps admin can choose **Export Data + Verification Key** instead:
+
+1. Choose a passphrase of at least 12 characters. The key is encrypted with it; the file never contains the key in readable form.
+2. Note the **fingerprint** shown when the export finishes.
+3. On the new site, choose **Import Data** and pick the file. You'll be asked for the passphrase. A wrong passphrase stops the import before anything is saved, so you can try again. You can also import without the key; the leads then show as imported records that can't be re-verified.
+4. Check that the fingerprint in the import message matches the one from step 2.
+
+Imported leads then show **Integrity verified with the source site's key**. Leads the old site had itself imported from a third site can't be re-verified, because the file carries only one site's key; they show as imported records. Visits the new site has already recorded are skipped, and the import message says how many. The new site keeps its own key. It uses the imported key only to *check* the records that import brought in, never to sign new ones.
+
+:::warning
+The export file plus its passphrase lets anyone create lead history that verifies as your site's. Never send the passphrase with the file, and delete the file from both sites once the move is done — the export copy stays on the server otherwise. "Verified with the source site's key" means the records are unchanged since they were signed with that key. It is only as trustworthy as the file you imported, so import only files you exported yourself.
+:::
 
 ## Consent & privacy
 
@@ -341,5 +358,5 @@ If you use [WP Full Picture](./../integrations/wp-full-picture.md) for analytics
 
 - **Leads not captured** — check that the goal (phone, reveal, or form) is toggled on, that the CSS selector matches the actual element on the page, and that consent mode isn't set to opt-in without a consent signal being present.
 - **Webhook not received** — verify the URL is entered correctly and the webhook toggle is on. Webhooks are sent in the background (fire-and-forget), so a failed delivery won't show as an error on the lead record — check your receiving tool's logs.
-- **Integrity check failed** — the record was altered after it was captured, or it was imported from another site. Records imported from a different site can't be re-verified because the cryptographic proof was generated with that site's keys.
+- **Integrity check failed** — the record was altered after it was captured, or it was imported from another site. Records imported from a different site can be re-verified only if they were exported with the verification key (see [Moving leads to another site](#moving-leads-to-another-site)); otherwise the proof packet says they were imported and can't be re-verified here. If the proof packet adds that two events were recorded at the same instant, nothing was altered: an older version could save two simultaneous events against the same earlier one. Each event is still intact, and current versions always put simultaneous events in order.
 - **Pop-up not showing** — its trigger conditions (delay, scroll depth, or exit intent) haven't been met yet, or lead qualification is turned off in settings.

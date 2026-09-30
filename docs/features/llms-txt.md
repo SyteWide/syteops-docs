@@ -192,6 +192,26 @@ A few things worth knowing:
   with its own sitemap feature switched off, so that file lists no sitemap at all, the
   **Answer-engine publishing** card will point that out and leave the fix to you.
 
+### When Squirrly's noindex setting disagrees with LLMS Amplifier
+
+LLMS Amplifier checks several SEO plugins for a per-post "noindex" setting before deciding what to
+publish into `llms.txt` and `llms-full.txt` — but Squirrly SEO's own noindex setting is not one of
+them. So a post you have marked noindex in Squirrly is still published into your AI answer-engine
+files, with nothing on either plugin's screen to tell you.
+
+**SyteOps does not change what LLMS Amplifier publishes.** Its own per-post "exclude from these
+files" control, and SyteOps' own per-article "exclude from llms.txt" setting, are your deliberate
+choices — mirroring Squirrly's noindex into either one would silently override a decision you may
+not have meant to make.
+
+Instead, if your site runs both Squirrly SEO and LLMS Amplifier, a note appears in LLMS Amplifier's
+own health panel naming how many posts are in this state. Fix it either way:
+
+- In LLMS Amplifier, mark the post excluded on its own per-post control, or
+- In Squirrly, turn off noindex for a post that should actually be indexed.
+
+The note clears itself once every noindexed post is one or the other.
+
 ### A setup review when you switch answer-engine publishing on
 
 The clashes above are all detected the same way, and none of them announces itself. So when
