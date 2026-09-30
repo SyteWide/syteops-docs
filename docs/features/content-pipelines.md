@@ -173,7 +173,7 @@ The warning is **always advisory**. It reports what it found and offers the next
 
 Reviewers working in the portal see warnings about the articles their own calendar shows; as the site owner you see them across all your content, so the two can differ for the same date.
 
-If the warning cannot find a free slot ahead, it says so rather than suggesting one. And if your site has more scheduled articles than the check can read at once, it tells you the answer may be incomplete.
+If the warning cannot find a free slot ahead, it says so rather than suggesting one. And if so many articles are scheduled close to that moment that the check cannot read them all, it tells you the answer may be incomplete.
 
 ### Reserving slots for new articles
 

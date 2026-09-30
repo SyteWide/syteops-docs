@@ -97,6 +97,12 @@ This is where you tell SyteOps who your business is. Every field here becomes pa
 - **Answer-engine publishing (LLMS Amplifier)** — if the LLMS Amplifier integration is installed and active, your business profile (name, description, entity type, logo, address, social links, and hours) can be published into Amplifier's own AI index file, so AI agents reading it learn who the site belongs to. This is a separate on/off switch located under **Content Pipelines → Review Portal settings → Answer-engine publishing → "Business identity in the LLMS Amplifier index."** Anything already configured directly in LLMS Amplifier's own settings always takes priority — SyteOps only fills in what's missing.
 - **Contact emails and phone numbers are never published** by any of the above — they are excluded from this shared identity entirely and stay private no matter how these settings are configured.
 
+### Outbound Email
+
+- **Send Transactional Emails From** — the address SyteOps emails come from. Leave it blank to use `noreply@` your site's domain.
+- **Add Site Name to Email Subjects** — on by default. Prefixes every SyteOps email subject with `[Your Site Name]`, so a mailbox that receives mail from more than one site can tell at a glance which one an email is about. Turn it off to leave subjects exactly as each email already builds them.
+- Every SyteOps email also shows your site's name as the sender rather than a generic fallback, and Review Portal mail about the same article threads together in your inbox instead of arriving as unrelated messages.
+
 ## Integrations Tab
 
 - Integration toggles (enable/disable individual integrations)
