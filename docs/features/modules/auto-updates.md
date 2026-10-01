@@ -16,6 +16,8 @@ When a newer version is found, the update appears in the **Modules** section of 
 
 No action happens automatically -- SyteOps notifies you that an update is available and waits for you to install it.
 
+The list of available modules, and the keys a site needs to verify and install them, come from the license server. A connected site picks these up again **once a day** in the background, so a newly published module version reaches every connected site within about a day. A site that has never been connected to the license server is not offered updates until it is connected once.
+
 :::note Not seeing any updates?
 The check can only find a newer version when one has been **published** to the distribution server.
 If your modules were supplied to you directly -- installed from a package file rather than
