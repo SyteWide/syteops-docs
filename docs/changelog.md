@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.458
+
+- Fixed: Sites that were already set up were never offered module updates, because they only received the module list and the keys needed to install updates once, during first setup, and an error stopped the main key from being saved even then. Each connected site now checks in with the license server once a day, quietly in the background, using its own connection, and picks up the current module list and keys, so new module versions start appearing in the Modules section of the Admin tab. If the license server cannot be reached, the site tries again a few hours later instead of every hour. A site whose connection has been revoked no longer receives anything, and a site that was never connected is not included; connect it once with the connect button. Also fixed: the license server now sends sites the signing keys they need to verify a module before installing it; before this, a correctly configured server silently left them out. The license server's Server card now shows whether those signing keys are set up correctly.
+
 ## v1.6.457
 
 - Added: leads can now be moved to another site and still pass their integrity check there. A new "Export Data + Verification Key" option (SyteOps admins only) adds this site's verification key to the export, encrypted with a passphrase you choose (at least 12 characters). The file never holds the key in readable form. When you import the file on another site and enter the passphrase, the imported leads show "Integrity verified with the source site's key". The other site keeps its own key and uses the imported one only to check the records that import brought in. A wrong passphrase stops the import before anything is saved. Both sites show a matching key fingerprint so you can confirm the file came from where you think. Visits the new site has already recorded are skipped, and the import message says how many.
