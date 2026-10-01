@@ -14,9 +14,11 @@ SyteOps runs an automatic check **twice daily** in the background using WordPres
 
 When a newer version is found, the update appears in the **Modules** section of the Admin tab, alongside your installed modules.
 
-No action happens automatically -- SyteOps notifies you that an update is available and waits for you to install it.
+By default nothing installs automatically -- SyteOps shows the update and waits for you to install it. Whoever runs your license server can switch on **automatic module updates** for your site; then SyteOps installs updates for the modules you already have on its own during that twice-daily check. It never installs a module you do not already have, and never brings back one you uninstalled. The Modules section shows whether automatic updates are on, and what the last automatic run installed or why it could not.
 
 The list of available modules, and the keys a site needs to verify and install them, come from the license server. A connected site picks these up again **once a day** in the background, so a newly published module version reaches every connected site within about a day. A site that has never been connected to the license server is not offered updates until it is connected once.
+
+A small number of modules exist only to run the plugin's own licensing and support infrastructure. These never appear in your available-modules list and are never offered for install, regardless of connection status.
 
 :::note Not seeing any updates?
 The check can only find a newer version when one has been **published** to the distribution server.
@@ -31,13 +33,18 @@ whether a newer version exists, ask whoever supplies your modules.
 
 ## Installing an Update
 
-When an update is available for a module:
+When an update is available, the module's version shows **Update available: 1.0.024 → 1.0.025** with an **Update** button. Only a SyteOps Admin sees these controls.
 
-1. Navigate to the **Modules** section of the Admin tab
-2. Click the **update button** next to the module
-3. SyteOps downloads the new `.sytepkg` package from the distribution server
-4. The package signature is verified and contents are decrypted
-5. The updated module code is installed
+1. Navigate to the **Modules** section of the Admin tab (use **Check for updates** to look again right away)
+2. Click **Update** next to the module
+3. SyteOps fetches the new package, checks its signature and checksum, and unpacks it beside the installed version
+4. Only a complete, verified package replaces the installed one; if anything fails, the installed version is kept and the reason is shown
+
+Only one module installs at a time. If another install is already running (for example the automatic run), the button tells you so -- try again a minute later.
+
+## Installing a New Module
+
+Modules your license server offers to your site that are not installed yet appear under **Available to install**. Click **Install**; if **Enable modules after installation** is on, the new module is also switched on.
 
 **Your module data and settings are preserved.** Only the module code is updated -- your configuration, saved data, and FlowMattic variable assignments carry over to the new version.
 

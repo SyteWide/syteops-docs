@@ -18,7 +18,7 @@ Every operation runs through the single dispatch endpoint. See [Dispatch contrac
 | [`identity`](./identity) | 2 | no |
 | [`integrations`](./integrations) | 3 | yes |
 | [`leads`](./leads) | 8 | yes |
-| [`modules`](./modules) | 9 | yes |
+| [`modules`](./modules) | 10 | yes |
 | [`pipelines`](./pipelines) | 8 | yes |
 | [`roles`](./roles) | 6 | yes |
 | [`status`](./status) | 1 | no |

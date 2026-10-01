@@ -8,6 +8,19 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.461
+
+- Added: the Modules section of the Admin tab now shows "Update available: 1.0.024 → 1.0.025" with an Update button next to each installed module that has a newer version, a Check for updates button, and an "Available to install" list of modules your license server offers this site, each with an Install button. Only SyteOps Admins see these controls. A new version is unpacked beside the installed one and only replaces it once it is complete and its signature and checksum check out; if anything fails, the installed version is kept and the reason is shown. Only one module installs at a time. When the license server has switched on automatic module updates for the site, the twice-daily check now installs updates for modules already installed, one by one; it never installs a new module and never brings back one you uninstalled, and one failure does not stop the others. The Modules section shows whether automatic updates are on and what the last automatic run installed or why it could not. Uploading a module package now replaces an installed module the same safe way, and a package whose version is not exactly the one offered, or older than what is installed, is refused. Automatic updates only install packages signed by the signing key built into the plugin; a package signed by any other key is left for the Update button, and the reason is shown.
+
+## v1.6.460
+
+- Added: on the license server, each connection's action menu has a new "Module Access" option. It lists every module the server publishes with an on/off switch for that one site, labeled Private or Public with its starting state: private modules start off, public modules start on. Turning a module off stops that site being offered the module or its updates; it never uninstalls anything already there. The same window has an "Install module updates automatically" switch for the site, off by default, which the license server now sends to the site with its daily check-in. A switch covers the site's address with or without www. Only SyteOps Admins can change these switches, and every change is recorded in the log.
+
+## v1.6.459
+
+- Changed: a small number of internal modules that only apply to the plugin's own licensing server are no longer offered for install on any client site.
+- Internal: the licensing server now checks for its own module updates on a regular schedule, independent of the daily per-site refresh, and always sees every module it has published, including those internal-only ones, when it checks for itself.
+
 ## v1.6.458
 
 - Fixed: Sites that were already set up were never offered module updates, because they only received the module list and the keys needed to install updates once, during first setup, and an error stopped the main key from being saved even then. Each connected site now checks in with the license server once a day, quietly in the background, using its own connection, and picks up the current module list and keys, so new module versions start appearing in the Modules section of the Admin tab. If the license server cannot be reached, the site tries again a few hours later instead of every hour. A site whose connection has been revoked no longer receives anything, and a site that was never connected is not included; connect it once with the connect button. Also fixed: the license server now sends sites the signing keys they need to verify a module before installing it; before this, a correctly configured server silently left them out. The license server's Server card now shows whether those signing keys are set up correctly.

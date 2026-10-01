@@ -1,6 +1,6 @@
 {
     "schema_version": 1,
-    "syteops_version": "1.6.458",
+    "syteops_version": "1.6.461",
     "operations": [
         {
             "resource": "users",
@@ -255,16 +255,16 @@
         {
             "resource": "modules",
             "action": "entitlements_list",
-            "summary": "List which domains are entitled to which private modules.",
+            "summary": "List per-client module access: private allow-lists, public switched-off lists and auto-update clients.",
             "params": [],
             "destructive": false,
             "capability": "",
-            "returns": "data: {entitlements: {module_id: [domains]}, source: \"option\"|\"constant\"}"
+            "returns": "data: {entitlements: {module_id: [domains]}, denied: {module_id: [hosts]}, auto_update_modules: [hosts], source: \"option\"|\"constant\"}"
         },
         {
             "resource": "modules",
             "action": "entitlements_grant",
-            "summary": "Entitle one domain to one private module. Idempotent.",
+            "summary": "Switch one module ON for one domain (private or public). Idempotent.",
             "params": {
                 "module_id": {
                     "type": "string",
@@ -280,12 +280,12 @@
             },
             "destructive": true,
             "capability": "manage_options",
-            "returns": "data: {module_id, domain, domains: [domains for THIS module only]}"
+            "returns": "data: {module_id, domain, domains: [allow-list for THIS module only], denied: [hosts switched off for THIS module only]}"
         },
         {
             "resource": "modules",
             "action": "entitlements_revoke",
-            "summary": "Remove one domain from one private module. Stops that site receiving the module.",
+            "summary": "Switch one module OFF for one domain (private or public). Stops that site being offered or updated with it.",
             "params": {
                 "module_id": {
                     "type": "string",
@@ -301,12 +301,33 @@
             },
             "destructive": true,
             "capability": "manage_options",
-            "returns": "data: {module_id, domain, domains: [domains for THIS module only]}"
+            "returns": "data: {module_id, domain, domains: [allow-list for THIS module only], denied: [hosts switched off for THIS module only]}"
+        },
+        {
+            "resource": "modules",
+            "action": "entitlements_auto_update",
+            "summary": "Turn automatic module updates on or off for one client domain (default off).",
+            "params": {
+                "domain": {
+                    "type": "string",
+                    "required": true
+                },
+                "enabled": {
+                    "type": "boolean",
+                    "required": true
+                },
+                "confirm": {
+                    "type": "boolean"
+                }
+            },
+            "destructive": true,
+            "capability": "manage_options",
+            "returns": "data: {domain, auto_update_modules: bool}"
         },
         {
             "resource": "modules",
             "action": "entitlements_set",
-            "summary": "Replace the whole entitlement map. Any domain omitted stops receiving its module.",
+            "summary": "Replace the whole private allow-list map. Any domain omitted stops receiving its private module. Public-module switches and auto-update are kept.",
             "params": {
                 "entitlements": {
                     "type": "object",
