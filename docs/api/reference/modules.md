@@ -8,7 +8,7 @@ description: Manage API operations for the modules resource.
 
 # `modules`
 
-9 operation(s). All run through `POST /syteops/v1/manage/dispatch` (reads may use the documented GET form).
+10 operation(s). All run through `POST /syteops/v1/manage/dispatch` (reads may use the documented GET form).
 
 ## `activate`
 
@@ -72,9 +72,44 @@ data: &#123;module, active: false}
 }
 ```
 
+## `entitlements_auto_update`
+
+Turn automatic module updates on or off for one client domain (default off).
+
+**🔴 Destructive** — requires `confirm: true`.  
+**Capability:** `manage_options`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `domain` | string | yes |  |
+| `enabled` | boolean | yes |  |
+| `confirm` | boolean | no |  |
+
+
+**Returns**
+
+data: &#123;domain, auto_update_modules: bool}
+
+**Request**
+
+```json
+{
+  "resource": "modules",
+  "action": "entitlements_auto_update",
+  "params": {
+    "domain": "string",
+    "enabled": true,
+    "confirm": true
+  },
+  "confirm": true
+}
+```
+
 ## `entitlements_grant`
 
-Entitle one domain to one private module. Idempotent.
+Switch one module ON for one domain (private or public). Idempotent.
 
 **🔴 Destructive** — requires `confirm: true`.  
 **Capability:** `manage_options`
@@ -90,7 +125,7 @@ Entitle one domain to one private module. Idempotent.
 
 **Returns**
 
-data: &#123;module_id, domain, domains: [domains for THIS module only]}
+data: &#123;module_id, domain, domains: [allow-list for THIS module only], denied: [hosts switched off for THIS module only]}
 
 **Request**
 
@@ -109,7 +144,7 @@ data: &#123;module_id, domain, domains: [domains for THIS module only]}
 
 ## `entitlements_list`
 
-List which domains are entitled to which private modules.
+List per-client module access: private allow-lists, public switched-off lists and auto-update clients.
 
 **Capability:** SyteOps admin only (or an X-API-Key caller).
 
@@ -120,7 +155,7 @@ _No parameters._
 
 **Returns**
 
-data: &#123;entitlements: &#123;module_id: [domains]}, source: "option"|"constant"}
+data: &#123;entitlements: &#123;module_id: [domains]}, denied: &#123;module_id: [hosts]}, auto_update_modules: [hosts], source: "option"|"constant"}
 
 **Request**
 
@@ -134,7 +169,7 @@ data: &#123;entitlements: &#123;module_id: [domains]}, source: "option"|"constan
 
 ## `entitlements_revoke`
 
-Remove one domain from one private module. Stops that site receiving the module.
+Switch one module OFF for one domain (private or public). Stops that site being offered or updated with it.
 
 **🔴 Destructive** — requires `confirm: true`.  
 **Capability:** `manage_options`
@@ -150,7 +185,7 @@ Remove one domain from one private module. Stops that site receiving the module.
 
 **Returns**
 
-data: &#123;module_id, domain, domains: [domains for THIS module only]}
+data: &#123;module_id, domain, domains: [allow-list for THIS module only], denied: [hosts switched off for THIS module only]}
 
 **Request**
 
@@ -169,7 +204,7 @@ data: &#123;module_id, domain, domains: [domains for THIS module only]}
 
 ## `entitlements_set`
 
-Replace the whole entitlement map. Any domain omitted stops receiving its module.
+Replace the whole private allow-list map. Any domain omitted stops receiving its private module. Public-module switches and auto-update are kept.
 
 **🔴 Destructive** — requires `confirm: true`.  
 **Capability:** `manage_options`

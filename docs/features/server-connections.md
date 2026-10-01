@@ -64,6 +64,18 @@ Each connection has a dropdown menu with available actions, organized by categor
 |---|---|
 | **Retry Connection** | Re-establish a disconnected connection |
 | **Edit Users** | Manage user settings on the endpoint |
+| **Module Access** | Choose which modules this site is offered and updated with, and whether it installs module updates automatically |
+
+### Module Access
+
+**Module Access** lists every module this server publishes, each with an on/off switch for that one site:
+
+- **Private** modules start **off** — the site never sees them until you switch them on.
+- **Public** modules start **on** — switch one off and the site stops being offered it and its updates.
+- Turning a module off never uninstalls it. A copy already on the site stays where it is; it just stops getting updates.
+- **Install module updates automatically** is off by default, so the site shows an Update button. Turn it on and the site installs updates to the modules it is allowed to have on its daily check.
+
+A switch applies to the site's domain with or without `www.`. Only SyteOps Admins can change these switches, and each change is recorded in the log.
 
 ### REST API Actions
 
