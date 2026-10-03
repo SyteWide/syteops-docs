@@ -56,7 +56,7 @@ If the card says the stored key can no longer be read on this site (this can hap
 
 ## How reviewers use the library
 
-Once the library is switched on, reviewers who may change pictures see a button named after your library (for example **Client photos**) in the Review Portal. It is in **Image Details**, beside **Choose from library**, and it appears for a picture in an article, for the featured image and for a picture on a page.
+Once the library is switched on, reviewers who may change pictures see a button named after your library (for example **Client photos**) in the Review Portal. It is in **Image Details**, beside **Media Library**, and it appears for a picture in an article, for the featured image and for a picture on a page.
 
 - **Browse.** The library opens on the folder you chose. Folders are listed first; click one to go in, and use the trail at the top to go back. **Load more** brings the next pictures of a large folder, and the round arrow asks your cloud folder for a fresh list.
 - **Look closer.** Hover a picture to see it larger. With the keyboard, Tab to a picture's **Use** button and the larger picture appears; press Escape to close it. On a phone or tablet, tap the picture to open it larger and tap it again, or anywhere else, to close it.
