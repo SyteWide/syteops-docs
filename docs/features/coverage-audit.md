@@ -8,13 +8,13 @@ description: Audit every article your answer engines describe — what the AI an
 
 The **Coverage** view answers one question: across all the articles your AI answer files describe, what has actually been run against each one?
 
-It has two modes. **GEO** is the answer-engine audit described below. **SEO** turns the same table into a bulk pass over your SEO titles, meta descriptions, focus keywords and the alt text on your pictures — see [Filling in SEO fields in bulk](#filling-in-seo-fields-in-bulk) and [Describing your pictures](#describing-your-pictures).
+It has three modes. **GEO** is the answer-engine audit described below. **SEO** turns the same table into a bulk pass over your SEO titles, meta descriptions, focus keywords and the alt text on your pictures — see [Filling in SEO fields in bulk](#filling-in-seo-fields-in-bulk) and [Describing your pictures](#describing-your-pictures). **Comments** lists every page and post that has review comments and lets you delete them in bulk — see [Deleting review comments in bulk](#deleting-review-comments-in-bulk).
 
 In GEO mode it puts every one of those articles in a single table — whether the GEO analysis has ever run, how the article scored, how many questions and answers it has, whether anyone has reviewed those answers, and whether its meta description, SEO title, focus keyword and pillar mark are filled in. From the same table you can run the GEO analysis over a batch of articles at once, or mark existing stored answers as reviewed in a batch without re-running AI.
 
 ## Where to find it
 
-Open the **Content Pipelines** tab and click the **Coverage** pill in the row of view links at the top. The **Mode** pills just under the heading switch between **GEO** and **SEO**.
+Open the **Content Pipelines** tab and click the **Coverage** pill in the row of view links at the top. The **Mode** pills just under the heading switch between **GEO**, **SEO** and **Comments**.
 
 Coverage is for SyteOps administrators only. It is deliberately **not** part of the [Review Portal](review-and-publish-your-post.md) — a reviewer working on one article already has an **Analyze GEO** button in that article's GEO panel, and that is a different, one-article-at-a-time action. Coverage is the whole-library view.
 
@@ -120,7 +120,7 @@ When an accept run finishes you get a summary of what was accepted, what failed 
 
 ## Filling in SEO fields in bulk
 
-Switch **Mode** to **SEO** and the table changes to four columns — **SEO title**, **Meta description**, **Focus keyword** and **Structure** — showing what each article holds today, with a **Missing** badge where there is nothing. The row picker, **Select all on this page**, the gap filters and the **Include drafts & scheduled** toggle all work exactly as they do in GEO mode. The **Structure** column is a read-only report on the article body itself — nothing here proposes or writes anything — giving a one-line summary of its headings, images and links (hover it for the full list of anything worth a second look), with four filter pills that narrow the table to a specific problem: **Multiple H1** (more than one top-level heading), **Heading order** (a heading level skipped, such as jumping from an H2 straight to an H4), **Images without alt** (a picture in the body with no alt text), and **No internal links** (nothing in the body linking to another page on your own site); because it reads the article's content directly, it works even with no SEO tool integration switched on.
+Switch **Mode** to **SEO** and the table changes to four columns — **SEO title**, **Meta description**, **Focus keyword** and **Structure** — showing what each article holds today, with a **Missing** badge where there is nothing. The row picker, **Select all on this page**, the gap filters and the **Include drafts & scheduled** toggle all work exactly as they do in GEO mode. The **Structure** column is a read-only report on the article body itself — nothing here proposes or writes anything — giving a one-line summary of its headings, images and links (hover it for the full list of anything worth a second look), with four filter pills that narrow the table to a specific problem: **Multiple H1** (more than one top-level heading), **Heading order** (a heading level skipped, such as jumping from an H2 straight to an H4), **Images without alt** (a picture in the body with no alt text; a picture deliberately marked decorative, with an empty alt plus `role="presentation"`, `role="none"` or `aria-hidden="true"`, is not counted), and **No internal links** (nothing in the body linking to another page on your own site); because it reads the article's content directly, it works even with no SEO tool integration switched on. **Images without alt** reads the article and skips a picture marked decorative, while the **Pictures needing alt text** pill reads the Media Library and still counts a decorative picture whose library entry is blank; a decorative marker on a wrapping figure or link is not recognized, so that picture still counts.
 
 This is a **two-step** workflow, and the split is deliberate: unlike answers, an SEO title appears in a search result the moment it is stored, so nothing is written until you say so.
 
@@ -206,6 +206,23 @@ Suggestions are refused rather than written, with the reason reported, when:
 ### The File name column
 
 This column reports pictures whose media record says nothing the file name does not already say — an `IMG_4821.jpg` with no title, for example. It is **report only**. Renaming a file means finding and updating every place it is referenced, so it is not done from this screen; each name links to that picture in the **Media Library**.
+
+## Deleting review comments in bulk
+
+The **Comments** mode is a clean-up tool for the comments people leave in the [Review Portal](review-and-publish-your-post.md) — not WordPress comments. It lists **every page and post that currently has at least one review comment**, whatever its content type and status — published, scheduled, draft, pending, private or a custom status. It is not limited to the content types covered by the answer engines, or to the types the Review Portal currently opens, so comments left on content from a source you have since changed still show up. Trashed items, revisions and media files are not listed.
+
+The most recently commented items come first. For each one the table shows its type and status, how many comments it has in total, how many of those are replies, how many are still **open** (top-level comments nobody has marked resolved), and the date and author of the latest comment. The title opens the item in the Review Portal.
+
+To delete comments:
+
+1. Tick the pages and posts you want, or click **Select all on this page**.
+2. Click **Delete comments on selected**.
+3. Read the confirmation. It tells you how many pages and posts and how many comments in total will be removed. It removes **everyone's comments, including replies**, and **it cannot be undone**.
+4. Confirm. The deleted rows leave the table. If any page or post could not be cleared, a message names it and the rest are still deleted.
+
+Each page or post that is cleared gets one entry in its Review Portal activity history recording who deleted the comments and how many. Only SyteOps administrators can use this mode. That is stricter than the Review Portal's own **Delete all comments** button on a single article, which any WordPress administrator can also use.
+
+The confirmation shows the counts from when the page loaded. If someone adds a comment in the meantime it is removed too, and the result tells you how many more were removed than shown. If the connection drops part-way, the message says some of the remaining pages may already have been cleared — reload to check.
 
 ## Where the run is recorded
 

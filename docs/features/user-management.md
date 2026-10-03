@@ -62,9 +62,19 @@ Changing a person's profile picture keeps their Model photos in order:
 
 - The new picture starts in the curated set, even if you had excluded the old one.
 - The old picture stays in the curated set as an ordinary curated photo — unless you had excluded it, in which case it leaves the set.
-- A profile picture you delete from the media library is gone from the gallery too.
+- A profile picture you remove with **Delete image** is not added to the curated set, and a picture you delete from the media library is gone from the gallery too.
 
 The gallery updates as soon as you select, clear, replace, or delete a profile picture. **Select from Media** and **Clear** are saved only when you save the card, so until then the gallery shows what that save will do.
+
+### Delete image on a profile picture
+
+**Delete image** always clears the profile picture. What happens to the file depends on whether anything else uses it:
+
+- **Still used elsewhere** (in a post or page, as another person's picture or Model photo, as a logo, or marked to always keep): the file stays in your media library, and the notice says so.
+- **Possibly used, or the check could not finish:** the file stays too, and the notice says why.
+- **Not used anywhere:** the file is removed from your media library but **kept for the number of days set in Keep removed pictures** (default 30), and the notice offers **Undo**, which brings the picture back and sets it again as the profile picture. Leave the page and Undo is gone for now; the picture can still be restored to your media library from Content Pipelines, [Removed pictures](removed-pictures.md), though it is not set again there. With **Do not keep (delete immediately)** the file is deleted at once.
+
+**Delete image** on a theme logo works the same way. A picture is removed only if it is the one currently set for that person or logo.
 
 ### Promote a tagged file
 
