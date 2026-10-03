@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.508
+
+- Changed: in the Review Portal, the two library buttons in Image Details are now named Media Library and Stock Photos, so they are easy to tell apart; the Stock Photos and cloud library browsers open right under those buttons, above Alt Text; and the open/close arrows beside section headings line up with the heading text.
+
 ## v1.6.507
 
 - Fixed: on a phone, settings fields, tables and the AI token-limit row no longer run past the edge of their cards; desktop layout is unchanged.
