@@ -8,6 +8,197 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.507
+
+- Fixed: on a phone, settings fields, tables and the AI token-limit row no longer run past the edge of their cards; desktop layout is unchanged.
+
+## v1.6.506
+
+- Added: the Review Portal no longer saves over a change someone else made after you opened the post. A bar names who changed it (or says it was updated), pauses saving, and offers Reload to see their changes or Save mine anyway; what you typed stays on the page.
+
+## v1.6.505
+
+- Added: groundwork for warning a reviewer when a post changed after they opened it in the Review Portal, so a save from an older tab cannot quietly overwrite someone else's change. Nothing changes on your site yet.
+
+## v1.6.504
+
+- Changed: the cloud image library's Enable library switch and Library name can now be changed only by a SyteOps administrator, like the key and the folder; a settings save from anyone else leaves both as they were.
+
+## v1.6.503
+
+- Changed: the Google Drive integration card now uses a transparent logo, so it matches the other integration cards.
+
+## v1.6.502
+
+- Changed: the warning shown when WP-Optimize is active now says how to keep held pictures safe (untick its "Clean all trashed posts" option, or keep at least as many weeks of data as the holding period), and it no longer warns about WP-Sweep or Advanced Database Cleaner, which cannot remove held pictures.
+
+## v1.6.501
+
+- Added: a Removed pictures view in Content Pipelines lists every picture being held after removal, with Restore and Delete now, and every picture marked to always keep, with Stop keeping. It shows how many pictures are held and how much space they use.
+
+## v1.6.500
+
+- Changed: importing or choosing a picture that is being held after removal now brings that picture back instead of creating a duplicate; a picture in the trash can no longer be set as a featured image or placed into a page.
+
+## v1.6.499
+
+- Changed: removing a version of a picture, and the automatic clean-up of old versions, now keep the picture for the holding period, so it can be restored from its row of versions. A picture an administrator chose to remove anyway is now removed when the period ends unless a new reason to keep it has appeared, and a kept picture the site is still showing is restored automatically.
+
+## v1.6.498
+
+- Changed: "Delete image" on a profile picture or theme logo now only removes that picture. If the picture is still used elsewhere the file stays in your media library, otherwise it is kept for the same period as other removed pictures, with an Undo.
+
+## v1.6.497
+
+- Changed: pictures removed with Delete Unused are now kept for 30 days (adjustable in settings) and can be restored from the card's "Recently removed" list. The site keeps showing a kept picture until it is finally removed, and it is checked once more before that.
+
+## v1.6.496
+
+- Added: you can mark a picture "always keep" from the Unused pictures card, so it is never offered for removal or cleaned up automatically. The card lists the pictures kept on the article and lets you stop keeping one.
+
+## v1.6.495
+
+- Changed: Delete Unused now lists a picture your public site displayed in the last 90 days under "May still be in use", unticked and with the date, so it is not removed by mistake. Only an administrator can remove such a picture, after a second confirmation.
+
+## v1.6.494
+
+- Changed: Delete Unused now lists a picture it cannot be sure about under "May still be in use", unticked and with the reason. Only an administrator can remove such a picture, after a second confirmation.
+
+## v1.6.493
+
+- Changed: the plugin now notes when the public site displays a picture. A later update will use this to avoid offering pictures that are still on show for deletion. It has no visible effect yet.
+
+## v1.6.492
+
+- Fixed: pictures the plugin itself uses (theme and brand logos, profile and model photos, the email logo) are always kept by Delete Unused and by variant clean-up, and a refused variant delete now says which of those uses it.
+
+## v1.6.491
+
+- Fixed: Delete Unused no longer holds a picture back because its number matches a slide's size or position.
+
+## v1.6.490
+
+- Fixed: a notification email waiting to be sent no longer stops Delete Unused from listing a picture; if a picture is removed before the email goes out, the email says so.
+
+## v1.6.489
+
+- Fixed: Delete Unused now also keeps a picture that an inactive theme's settings still use, so switching themes back does not show a missing picture.
+
+## v1.6.488
+
+- Changed: Delete Unused no longer checks the whole site every time a portal page opens. It checks when you press its button, and on a very large site it checks as many pictures as it can in the time allowed and lets you check the rest.
+
+## v1.6.487
+
+- Fixed: Delete Unused no longer holds back a picture just because its number appears somewhere unrelated in a post's fields, and now recognizes picture fields from field plugins and theme settings whatever they are named.
+
+## v1.6.486
+
+- Fixed: deleting a picture variant now checks the whole site first, including the article's own custom fields and unsaved changes, and a refused delete changes nothing in the article; automatic clean-up of old variants no longer stalls when one variant cannot be checked.
+
+## v1.6.485
+
+- Fixed: Delete Unused now also keeps a picture that a slider, the links list, network settings or the theme's own files still use, and says so when it cannot confirm the list.
+
+## v1.6.484
+
+- Fixed: when comments were added since the page loaded, Delete All Comments now shows them before asking again, and a deleted comment and its replies leave the Notify list right away.
+
+## v1.6.483
+
+- Fixed: in Review photos with AI, a picture explicitly marked decorative (an empty alt text plus a decorative role or hidden-from-assistive-technology marker) is labeled "decorative", is not pre-selected and is not billed unless you tick it, and ticking it says first that it will stop being marked decorative. Coverage's "Images without alt" count skips decorative pictures, and an alt text that is only a non-breaking space now counts as blank there.
+
+## v1.6.482
+
+- Fixed: the Coverage view's mode switch and filters now line up, the SEO gap filters wrap onto more lines instead of being cut off on narrower screens, and the Delete buttons across the admin (logo, user image, backup and Coverage comments) share one red destructive style.
+
+## v1.6.481
+
+- Added: the Coverage view has a new Comments mode next to GEO and SEO. It lists every page and post that has Review Portal comments and lets a SyteOps administrator select several and delete all of their comments in one go, after a confirmation that says how many will be removed, including replies.
+
+## v1.6.480
+
+- Added: administrators now see a Delete All Comments button at the bottom of the comments area on every Review Portal page and post. It asks you to confirm, says how many comments will be removed, and removes everyone's comments on that page or post, including replies. If someone added comments after you opened the page, nothing is deleted and you are asked again with the new total.
+- Fixed: a notification email is no longer sent for a comment or reply that was deleted before the email went out.
+
+## v1.6.479
+
+- Fixed: Delete Unused in the Review Portal now lists a picture only when nothing on the site still uses it, and checks again when you confirm. Before, it looked only at other pages and posts' text, so a picture could be offered, already ticked, while it was still in use. It now also checks other pages and posts' excerpts, the open article's own custom fields and excerpt, the pictures currently in your editor even before you save, site settings such as the site icon and logo, widgets, categories, user profiles, and comments. A picture it cannot be sure about is kept. Tables that other plugins keep for themselves, such as some slider plugins, are not checked.
+
+## v1.6.478
+
+- Fixed: the Review photos with AI dialog now shows "has alt text" for pictures whose alt text is in the article, no longer re-selects them after a run, never replaces alt text or captions you wrote, and reports how many pictures were actually written.
+
+## v1.6.477
+
+- Fixed: in the Coverage view, the GEO and SEO switch, the filters, Clear filters and the page numbers no longer land on a "not allowed" screen.
+- Changed: the Coverage view now has even spacing between the mode switch, notes, notices and filters.
+
+## v1.6.476
+
+- Added: the Used badge now also appears in the media library window that opens from Choose from library, and from Use another picture, in the Review Portal. A picture already in use on the site carries a Used badge with the number of places. Select the picture to see a Used on list at the top of the details column: it names the posts and pages you can edit and counts the rest. On a phone, where that column is not shown, the same list is a short line beside the button at the bottom of the window. Badges load for the pictures on screen as you scroll, and a count with a plus sign means at least that many.
+
+## v1.6.475
+
+- Fixed: the Used count on a picture in the Review Portal now counts only real placements of that picture. Before, any number on the site that happened to equal the picture's internal number was counted as a use (a year written in an article, a price, a stock level, the person who last edited a post, a category), so a picture nobody had placed could show a large Used count. A picture still counts when it is a featured image, sits in the content, or is referenced by a gallery, a block, a page-builder widget or a picture field. A picture stored by number alone in a custom field is counted when the field's name says it holds a picture (author_image, hero_logo) or, with Advanced Custom Fields active, when the field is an image, gallery or file field; a field that only holds a count, a setting or another item's number is not counted even when its name mentions pictures. A picture stored by number alone in a field whose name does not say it is a picture, on a site without Advanced Custom Fields, is not counted until a developer registers that field name. Where the portal cannot tell whether a very large page uses a picture, a count it shows carries a plus sign (at least that many) instead of reading as exact.
+- Changed: in From library, the enlarged preview opens on click only; resting the pointer on a picture no longer opens it. Moving to a picture's Use button with the keyboard still shows the picture and where it is used.
+
+## v1.6.474
+
+- Added: the Used badge and the list of where a picture is used now also appear on three more pictures in the Review Portal. In From library, a picture this site already holds shows its badge, and so does a picture right after you use it. In the Unused pictures card, a badge means another post or page shows that picture; hover it, Tab to it or tap it to see which. In the versions strip under a picture, each version in use anywhere carries the badge. In From library and the versions strip, click the picture to see the list in the preview that opens.
+
+## v1.6.473
+
+- Changed: pressing Save in a Review Portal tab that is showing the signed-out bar, or that recently failed to check your sign-in, now checks again first, so signing in again in another window no longer needs a switch of tabs before saving works. The signed-out bar and message are now always shown on a phone, even when Hide tools was on, and the account chip reads Signed out while the bar is showing.
+- Fixed: the live-article Save no longer replaces the message that a colleague is editing with a generic failure, and the check of who is editing now gives up after 15 seconds instead of holding Save on Still saving.
+
+## v1.6.471
+
+- Changed: a Review Portal tab left open for a long time keeps working. When its sign-in token has expired (after about a day), the portal now fetches a fresh one by itself and repeats the save, import, note or picture request that was refused, instead of failing until you reload the page. Pictures in the cloud image library that failed to appear for the same reason are loaded again.
+- Added: if you have been signed out altogether, the portal now says so in a bar at the top with a Sign in again button that opens in a new tab. What you typed stays on the page, and it is saved when you come back to the tab after signing in, unless a colleague is editing the same draft, in which case you are told before anything is saved over their work, and that save is held. A colleague who edited the draft and then left is not detected.
+
+## v1.6.470
+
+- **Keyboard and touch previews:** the larger picture preview in the Review Portal now opens when you Tab to a picture (or to its checkbox or Use button), with the list of where it is used, and closes with Escape. On a phone or tablet, tap a cloud library picture to open it larger and tap it again, or anywhere else, to close it.
+- **Feedback pictures:** the small picture beside a feedback note can now be opened from the keyboard too (Tab to it, press Enter or Space to open its Image Details), and focus returns to it when you close Image Details. Where a viewer cannot open Image Details, the picture still shows its larger preview on focus but is not offered as a button.
+- **Exact Used count:** after you use a cloud library picture, its Used badge shows the exact count once the article has been saved, instead of a count with a plus sign.
+
+## v1.6.469
+
+- Added: reviewers can now pick pictures from your connected cloud folder in the Review Portal. Click a picture in an article, the featured image, or a picture on a page, open Image Details, and choose the button named after your library. Browse its subfolders, hover a picture to see it larger, and choose Use to copy it into your media library and put it in place.
+- Added: a picture that was already copied in is reused instead of being copied again, and a Used badge marks pictures that are already in use on the site. Hover a badged picture to see which of your posts and pages use it.
+- Added: pictures in a format the site cannot use are left out of the library, with one line saying how many were left out.
+- Added: when you use a picture in the article, the description (alt text) it already has replaces the old picture's description, and you are asked to write one if it has none.
+
+## v1.6.468
+
+- Changed: in Reviewer editing permissions, the Modify with AI column is now named Modify with AI and image libraries, because the same permission also decides who may pick pictures from the image libraries. The column now also appears when the Google Drive integration is on, not only when the companion image plugin is active.
+- Added: groundwork for browsing the cloud image library from the Review Portal. The picker is not visible yet.
+
+## v1.6.467
+
+- Added: in the Cloud image library card you can now choose the Google Drive folder, either from a list of the folders shared with your service account or by pasting a folder link, give the library a name, and switch it on. SyteOps checks the folder with Google before keeping it, then shows its name and how many usable pictures it holds, and tells you to share the folder with the connected address when Google cannot open it. Disconnecting, or connecting a different key, clears the chosen folder and switches the library off, and the chosen folder is left out of exports and backups. The reviewer picker that browses the folder arrives in a later version, so reviewers do not see the library yet.
+
+## v1.6.466
+
+- Added: groundwork for copying a picture from the cloud image library into the media library, where a picture picked more than once is copied only once. Nothing changes on your site yet.
+
+## v1.6.465
+
+- Added: a Google Drive integration and a Cloud image library card in the Review Portal settings. Paste a Google service account key, share your Drive folder with that account, and use Test connection to confirm Google accepts the key. The key is stored encrypted, is never shown again, and is left out of exports and backups. SyteOps only reads from Drive and never changes or deletes anything there. Choosing the folder and the reviewer picker arrive in later versions, so reviewers do not see the library yet.
+
+## v1.6.464
+
+- Added: groundwork for a pictures-in-use lookup that a later version will use to show where an image is already used. Nothing changes on your site yet.
+
+## v1.6.463
+
+- Changed: more groundwork for the cloud image library that arrives in a later version. Nothing changes on your site yet. Internal: the new code can only look inside the one cloud folder an admin chooses, and it still can only read.
+
+## v1.6.462
+
+- Added: groundwork for a cloud image library, which will let reviewers pick pictures from cloud storage in a later version. Nothing changes on your site yet. Internal: the new code can only read from cloud storage; it has no way to change or remove a file there, and a build check enforces that.
+
 ## v1.6.461
 
 - Added: the Modules section of the Admin tab now shows "Update available: 1.0.024 → 1.0.025" with an Update button next to each installed module that has a newer version, a Check for updates button, and an "Available to install" list of modules your license server offers this site, each with an Install button. Only SyteOps Admins see these controls. A new version is unpacked beside the installed one and only replaces it once it is complete and its signature and checksum check out; if anything fails, the installed version is kept and the reason is shown. Only one module installs at a time. When the license server has switched on automatic module updates for the site, the twice-daily check now installs updates for modules already installed, one by one; it never installs a new module and never brings back one you uninstalled, and one failure does not stop the others. The Modules section shows whether automatic updates are on and what the last automatic run installed or why it could not. Uploading a module package now replaces an installed module the same safe way, and a package whose version is not exactly the one offered, or older than what is installed, is refused. Automatic updates only install packages signed by the signing key built into the plugin; a package signed by any other key is left for the Update button, and the reason is shown.

@@ -26,7 +26,7 @@ Each integration card shows a small **tier badge** next to the category label. T
 | Tier | What it means | Examples |
 |---|---|---|
 | **Basic** | Toggle-only. Flip it on and you're done. Some Basic integrations store a single credential (like an API key), but there's no dedicated control panel. Most integrations live here. | Slack, Cloudflare, AWS SES, WooCommerce, Wordfence |
-| **Extended** | Has its own settings area inside SyteOps, stores credentials, and includes light AI configuration where applicable. More involved than Basic but doesn't drive deep AI features. | LLMS Amplifier, RingTonic |
+| **Extended** | Has its own settings area inside SyteOps, stores credentials, and includes light AI configuration where applicable. More involved than Basic but doesn't drive deep AI features. | LLMS Amplifier, RingTonic, Google Drive |
 | **AI-Powered** | A full control panel with deep AI features — you pick which AI provider and model to use, SyteOps runs background jobs on your behalf, and the integration has quality gating built in. | LinkCentral |
 
 The tier is purely informational. It doesn't change how an integration works or what it costs — it just helps you plan your setup time and understand what each toggle unlocks.
@@ -90,6 +90,14 @@ WooCommerce REST and payment gateway support for stores that run on WooCommerce.
 ### RingTonic
 
 AI call-tracking and attribution with a lightweight built-in CRM (built on Twilio). When enabled, SyteOps pushes a lead's **pipeline status** from your SyteOps Leads list to the matching RingTonic contact shortly after it changes (via a background task, not instantly) — and, once your hub operator sets up live notifications, RingTonic notifies SyteOps back: completed and missed calls, qualified leads and stage changes all land in your Leads list automatically. Requires a RingTonic **Agency plan** for API access. See the dedicated [RingTonic Integration](ringtonic) page for setup.
+
+---
+
+## Cloud Storage
+
+### Google Drive
+
+A read-only connection to one Google Drive folder for the Review Portal's cloud image library. You paste a Google service account key, share the folder with that account as a Viewer, and SyteOps can read the pictures in it. SyteOps never changes or deletes anything in Drive. Connecting, choosing the folder, switching the library on and testing work now; the reviewer-facing picker is coming. See the dedicated [Google Drive Integration](google-drive) page for setup, including the Google Workspace policies that can block it.
 
 ---
 
