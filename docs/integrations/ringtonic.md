@@ -151,7 +151,7 @@ Once you have turned the summary on, the call summary and the qualification reas
 - **The caller's ZIP code.** City and state answer "where is this caller?" without a pinpoint identifier.
 - **Call sentiment.** RingTonic scores sentiment in its own call-log screens, but it does not include it in any of the notifications it sends, so SyteOps has nothing to record. This is a limit of the notification payload, not a SyteOps choice.
 
-Everything here is ordinary lead data: it is deleted with the lead, included in a Leads data export, and removed when the module is uninstalled.
+Everything here is ordinary lead data: it is deleted with the lead, included in a Leads data export, and removed when the plugin is uninstalled, after a copy has been saved (if no copy could be saved, uninstalling keeps the lead records and says so; see Private storage).
 
 ## Deleting a lead
 

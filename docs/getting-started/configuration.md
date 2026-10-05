@@ -31,7 +31,7 @@ Toggle modules ON/OFF. Modules must be uploaded as ZIP packages before they can 
 - **Export Master** — Export all settings as a master configuration file
 - **Export Scoped** — Export settings for a specific tab or area
 - **Import** — Import a configuration file (master or scoped)
-- **Full Backup** — Create a complete ZIP backup including all settings, module data, and licensing records (secrets excluded)
+- **Full Backup** — Create a complete ZIP backup including all settings, module data, and licensing records (keys, tokens and passwords are never included)
 
 ### Other Options
 

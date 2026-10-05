@@ -8,6 +8,69 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.523
+
+- Changed: private storage is safer when a site is copied or moved. The private storage location is no longer part of a configuration export, and an import, a restore, a restore point or Reset All Settings never change it. The plugin now tells an administrator when the private storage folder in use may belong to another site (for example after a site is copied, moved between databases, or turned into a network) and offers two choices, each after a confirmation: "This is this site's folder" and "Stop using it" (a new, empty folder outside the web root; nothing is copied or moved); it changes nothing by itself. A copy of a site that keeps the original's saved address is never marked as owning the original's folder. Uninstalling never removes a private storage folder it cannot prove is this site's, and names what it leaves. A move of the private storage out of the web root that fails removes what it created and keeps the old location, which is recorded; a move that was cut off partway is completed by a later request. Private file downloads and backup archives refuse symbolic links. Notices that carry buttons are no longer turned into pop-ups on the plugin's screens. Known limits: until an administrator answers the notice, a copied site keeps sharing the original's folder, as before; on a network the first site to move its private storage out of the web root takes the shared folder's contents with it, as before. On a network the two choices are for a network administrator, and a deleted site's own marked private storage folder is removed with it.
+
+## v1.6.522
+
+- Changed: backups are safer and more complete. A restore point is now saved before a restore or a configuration import changes anything, so it can really undo it. It holds all your stored settings, so undoing brings back every key the restore changed, added or removed, and a restore no longer drops settings that no backup covers; if the restore point cannot be saved, nothing is changed and the message says why, and each site keeps its newest 10 restore points. Saved backups can be downloaded again, with a protected request and a file name that does not reveal the secret name stored on the server, and that secret name no longer appears in the backup log or on screen. Backups and restore points no longer contain any keys, tokens or passwords (the Manage API key, the GitHub token and the AI provider keys were included before): a restore keeps the site's own and never clears them, so restoring onto a fresh site means entering them again, and an older backup that still holds some can no longer bring back a key you rotated. Saved backups are referred to by an internal id instead of a file path, path handling was tightened, and a backup folder that is a symbolic link is refused with a clear message. On a network, every site now has its own backup folder and a deleted site's backups are removed with it; earlier backups made before this change are kept at network level, where only a network administrator can download or delete them.
+
+## v1.6.521
+
+- Fixed: an upgrade step no longer fails on database servers that do not provide a SQL hash function, and one failed upgrade step no longer blocks the others or repeats on every page load. A step that fails is now retried later, with longer waits between attempts, and the plugin version is only recorded as upgraded once every step has finished. Nothing else changes in what you see.
+
+## v1.6.520
+
+- Changed: uninstalling the plugin now keeps your lead records when it could not save a copy of them. The lead records stay if neither the spreadsheet file nor the backup file of them could be written, the lead activity table stays if its file could not be written, and the few saved keys those records need stay with them; the uninstall log line says so, with the row counts. It also no longer deletes a copy of your own logo from the Media Library, only the plugin's own bundled logo pictures, and a logo copy that is kept shows in the Media Library again. The scheduler cleanup that runs on uninstall is more complete, because it now also removes the scheduler log entries of an older setup, and gentler on large sites, because it works in small batches.
+
+## v1.6.519
+
+- Added: a third choice when you deactivate the plugin, Wipe all FlowMattic data. It is destructive and cannot be undone, and nothing is backed up. If the same person who confirmed it deletes the plugin from the Plugins screen within 60 minutes, FlowMattic is deactivated (its files stay, and it can be activated again later and starts empty) and all of its data is removed: its tables, settings, scheduled jobs, the files it saved in its own upload folders (such as PDFs, images and signatures), its translation files, its user and post fields, and the workflow manager role it added. Users who held only that role are left without a role, and plugins that require FlowMattic are deactivated by WordPress. Files saved to the Media Library or to a folder you chose stay. Tables your workflows built are dropped only when they match exactly what FlowMattic creates and are not WordPress tables; any other is left and named in the uninstall log, and you can drop it by hand if it really is yours. You must type the site address to confirm, and the choice cannot be combined with Do not ask again. On a network it can only be chosen from the network Plugins screen by a super admin, and it runs only if every site of the network is armed. It expires after an hour and then the earlier choice applies (Keep or Remove), the Admin tab shows it with its expiry and a Cancel control, and choosing Keep or Remove cancels it. A remote uninstall, the command line, a scheduled task or a different user never carries it out: they remove the variables the plugin manages instead, and the log says why. Keep and Remove work as before.
+
+## v1.6.518
+
+- Changed: when the plugin is deleted with its FlowMattic variables kept, it now also saves a snapshot of the settings those variables come from in the private backups folder, and a small marker file in the wp-content folder that records only that kept variables exist. Saved keys stay encrypted in the snapshot; license and lock state, the private storage location and the stored password of the licensing gateway module are never written to it. After a reinstall the plugin pauses all syncing to FlowMattic, whether it finds the snapshot or only the marker, and shows a notice offering Restore settings or Start fresh, so the kept variables are not deleted by the first sync of a site that has no settings yet. Restore puts the saved settings back; Start fresh discards what was saved; both resume syncing on the next admin page load, after the plugin's own upgrade steps have run. Start fresh then deletes the variables whose settings are empty. If you delete the plugin a second time before answering, the first snapshot is kept. The Keep description on the Admin tab and in the Deactivate question now says so. Nothing is paused or saved when the variables are removed instead.
+
+## v1.6.517
+
+- Changed: deactivating the plugin from the Plugins screen now asks what should happen to its FlowMattic variables if the plugin is later deleted. You can keep them as they are, including saved keys (the default), or remove the ones SyteOps manages, which are the variables whose names start with the plugin's own prefix; nothing else in FlowMattic is touched. The question appears for a single Deactivate and for a bulk Deactivate, and can be switched off with Don't ask again. The same choice, and a switch to turn the question back on, are on the Admin tab. Deactivating never deletes anything. Deleting the plugin from the Plugins screen, a bulk delete, the command line and a remote uninstall do not ask: they use the saved choice. Reset All Settings returns the choice to Keep and turns the question back on. Sites that had the old Clear FlowMattic variables toggle on start on Remove, and all other sites start on Keep.
+- Fixed: deactivating the plugin no longer deletes any FlowMattic variable. The removal now happens when the plugin is deleted, and it works whether or not FlowMattic is active at that moment.
+- Fixed: Reset All Settings no longer deletes a FlowMattic variable whose name only resembles one of ours.
+
+## v1.6.516
+
+- Changed: backups are always stored in the default backup folder on your site, and the option to choose a different folder is removed. If you had chosen a folder, the packages already in it stay where they are and the plugin no longer lists, prunes or removes them; a notice on the Backups screen names the folder once so you can move or delete them by hand, because they contain saved settings including keys.
+- Security: backup packages now have unguessable file names, and the backup folder gets files that block direct web access on Apache and LiteSpeed servers; on servers that ignore those files, such as nginx, the unguessable file name is the protection. Packages already in the default folder are renamed when you update, and if that could not be completed the Backups screen says so and tries again each time you open it. The Download button on saved backups is removed because it never worked; retrieve packages over SFTP or from your cloud storage. Uninstalling still names a previously chosen folder in the log and never deletes it.
+
+## v1.6.515
+
+- Changed: uninstalling no longer deletes posts in post types created for content sources, or the custom-field values content sources filled in on any post, because that is your site's published content. The posts stay in the database with their comments, categories, tags and images, and a small file in the backups folder lists each content source with its post type's settings, its custom fields and its post counts so you can register the type again. Pictures are unaffected except in the two cases uninstall already handled: the theme logos, and files kept in the private storage folder that is removed. Lead records and lead activity records are now also saved as CSV files in the backups folder before they are removed, so you can open them in a spreadsheet.
+
+## v1.6.514
+
+- Fixed: uninstalling now also removes the queued REST request log entries (client address and route) that a site using the older post-based scheduled-tasks storage keeps, whether they are waiting, finished, failed or canceled, together with their log comments and the monitor's own task group, so none of it outlives the plugin. Scheduled tasks that belong to other plugins are left alone, including ones whose name differs from ours only by letter case, and the existing cleanup of the request log in the scheduled-tasks tables now removes large backlogs in small batches so other plugins' queued tasks are not blocked while it runs.
+
+## v1.6.513
+
+- Fixed: uninstalling now also removes the numbered archive copies (.1 to .5) that the automation debug logs rotate into, so no debug log file outlives the plugin.
+
+## v1.6.512
+
+- Fixed: uninstalling now also removes the queued REST request log entries (client address and route) that the request monitor leaves in the scheduled-tasks tables, whether they are waiting, finished, failed or canceled, together with their task logs and the monitor's own task group, so none of it outlives the plugin; scheduled tasks that belong to other plugins are left alone.
+
+## v1.6.511
+
+- Fixed: uninstalling now also removes two more leftover markers: an option that a disabled-site backup used to leave behind, and a hidden-from-library flag that could stay on a media item.
+
+## v1.6.510
+
+- Fixed: uninstalling now also removes leftovers it used to miss: two scheduled checks (a license health check and the update check), old revoked-connection records, library entries for files that moved into the private storage folder being removed and for the default logo copies, and posts in a content source's own post type now leave with their category and tag links, comments and revisions; settings imported from another site can no longer make uninstall delete regular posts or media, it refuses to empty a storage folder that is a link or sits inside the plugins, themes or core folders, and a custom backup folder is still never deleted and is now named in the log as left in place.
+
+## v1.6.509
+
+- Fixed: uninstalling now also removes a private storage folder that was moved outside the web root (only a folder named like this site's own private storage is ever emptied), keeps the backup of your contact records inside the private backups folder under a long random name instead of the public content folder, and clears the SyteOps Admin grant from every user so a reinstall no longer restores it.
+
 ## v1.6.508
 
 - Changed: in the Review Portal, the two library buttons in Image Details are now named Media Library and Stock Photos, so they are easy to tell apart; the Stock Photos and cloud library browsers open right under those buttons, above Alt Text; and the open/close arrows beside section headings line up with the heading text.
