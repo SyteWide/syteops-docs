@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.524
+
+- Fixed: the page preview in page and appearance review now fills its frame edge to edge. The white band between the colored frame and the previewed page is gone, so the preview shows the page the way a visitor sees it, and no white shows through at the frame's rounded corners.
+
 ## v1.6.523
 
 - Changed: private storage is safer when a site is copied or moved. The private storage location is no longer part of a configuration export, and an import, a restore, a restore point or Reset All Settings never change it. The plugin now tells an administrator when the private storage folder in use may belong to another site (for example after a site is copied, moved between databases, or turned into a network) and offers two choices, each after a confirmation: "This is this site's folder" and "Stop using it" (a new, empty folder outside the web root; nothing is copied or moved); it changes nothing by itself. A copy of a site that keeps the original's saved address is never marked as owning the original's folder. Uninstalling never removes a private storage folder it cannot prove is this site's, and names what it leaves. A move of the private storage out of the web root that fails removes what it created and keeps the old location, which is recorded; a move that was cut off partway is completed by a later request. Private file downloads and backup archives refuse symbolic links. Notices that carry buttons are no longer turned into pop-ups on the plugin's screens. Known limits: until an administrator answers the notice, a copied site keeps sharing the original's folder, as before; on a network the first site to move its private storage out of the web root takes the shared folder's contents with it, as before. On a network the two choices are for a network administrator, and a deleted site's own marked private storage folder is removed with it.
