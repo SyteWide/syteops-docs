@@ -52,7 +52,7 @@ These endpoints stay reachable when REST restriction (not Block All) is enabled.
 
 ## Third-Party Secret Keys
 
-PhantomStudio reads your content over the REST API without a WordPress login, so it presents a project secret key in the `X-PhantomWP-Secret` header instead. When the PhantomStudio integration is on and a key is saved, a request whose header matches that key is let through. Nothing opens until a key is saved, and a missing, empty, or wrong key is blocked as usual. Block All still blocks everything, and User Enumeration Defense still hides `/wp-json/wp/v2/users`. See the [PhantomStudio integration](../integrations/phantomstudio.md).
+PhantomStudio reads your content over the REST API without a WordPress login, so it presents a project secret key in the `X-PhantomWP-Secret` header instead. When the PhantomStudio integration is on and a key is saved, a request whose header matches that key is let through. Nothing opens until a key is saved, and a missing, empty, or wrong key is blocked as usual. Block All still blocks everything. A matching key also lets PhantomStudio read author details past User Enumeration Defense, so treat the key like a password. See the [PhantomStudio integration](../integrations/phantomstudio.md).
 
 ## What Gets Blocked
 
@@ -87,6 +87,8 @@ When the toggle is on, unauthenticated visitors receive HTTP 404 from these thre
 | `/wp-json/wp/v2/users` | JSON list of users with login + display name | 404 with `rest_no_route` |
 
 It also strips `author_url` from OEmbed responses (the URL contains the login slug).
+
+One exception: a request that carries a matching PhantomStudio key can read the users route and embedded authors. Author pages and `?author=` stay hidden.
 
 ### Independent of REST Restriction
 
@@ -126,7 +128,7 @@ High-volume routes can be excluded from logging to reduce noise. Three common ro
 - `/wp-json/wc/store/` — WooCommerce Store API
 - `/wp-json/oembed/` — oEmbed
 
-You can add additional route prefixes to exclude (one per line).
+You can add additional route prefixes to exclude (one per line). Excluding a route only stops it being logged. A request that presents a matching PhantomStudio key and is not signed in to WordPress is always recorded, even on excluded routes, labeled as shared-secret access.
 
 ### Log Table
 
