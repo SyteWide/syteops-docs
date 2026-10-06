@@ -52,7 +52,7 @@ These endpoints stay reachable when REST restriction (not Block All) is enabled.
 
 ## Third-Party Secret Keys
 
-PhantomStudio reads your content over the REST API without a WordPress login, so it presents a project secret key in the `X-PhantomWP-Secret` header instead. When the PhantomStudio integration is on and a key is saved, a request whose header matches that key is let through. Nothing opens until a key is saved, and a missing, empty, or wrong key is blocked as usual. Block All still blocks everything. A matching key also lets PhantomStudio read author details past User Enumeration Defense, so treat the key like a password. See the [PhantomStudio integration](../integrations/phantomstudio.md).
+PhantomStudio reads your content over the REST API without a WordPress login, so it presents a project secret key in the `X-PhantomWP-Secret` header instead. When the PhantomStudio integration is on and a key is saved, a request whose header matches that key is let through. Nothing opens until a key is saved, and a missing, empty, or wrong key is blocked as usual. Block All still blocks everything. A matching key also gives PhantomStudio read-only access to your WordPress content routes, including drafts, private and password-protected items, but never user emails, and it can change nothing. Treat the key like a password. See the [PhantomStudio integration](../integrations/phantomstudio.md).
 
 ## What Gets Blocked
 
@@ -88,7 +88,7 @@ When the toggle is on, unauthenticated visitors receive HTTP 404 from these thre
 
 It also strips `author_url` from OEmbed responses (the URL contains the login slug).
 
-One exception: a request that carries a matching PhantomStudio key can read the users route and embedded authors. Author pages and `?author=` stay hidden.
+One exception: a request that carries a matching PhantomStudio key can read authors who have published, and the authors embedded in posts. Author pages and `?author=` stay hidden.
 
 ### Independent of REST Restriction
 

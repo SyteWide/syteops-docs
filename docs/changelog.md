@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.532
+
+- Fixed: in the cloud image library settings, the folder dropdown beside Choose folder is now wide enough to read, instead of a narrow box that cut off its text and drew the arrow over it. It fits the longest folder name, with a sensible minimum and maximum so a very long name ends in an ellipsis, it lines up with its button at the same height, and it stays hidden until the folders have loaded. Dropdowns elsewhere in the admin that are filled in after the page loads now resize to fit what they were given.
+
+## v1.6.531
+
+- Changed: PhantomStudio can now read your WordPress content when its key matches, read-only and only through the WordPress content routes: published, draft, pending, scheduled, private and password-protected content of every REST-enabled content type (including each post's password field, raw content, unpublished revisions and numeric author id), terms, media, menus and menu locations, installed fonts, global styles, the active theme's data, and authors' public profiles (name, slug, bio, link, avatar links). Comments, search and the lists of content types, taxonomies and statuses are served exactly as to any visitor and are not part of the read access. It cannot read user emails, accounts that have not published, roles or capabilities, commenters' emails, IP addresses or user agents, unapproved, spam or trashed comments, application passwords, the plugin list, site settings, inactive themes, block rendering, widgets, font catalogs or any other plugin's routes, and it cannot create, change or delete anything. Anyone holding the key can read every draft, private and password-protected item through those routes, but no user emails, so treat it like a password. Custom content types are readable in full, so a site that keeps personal data as content (for example form entries stored as posts) exposes it to whoever holds the key. PhantomWP Connect's routes are now let through the REST restriction while the integration is on. Block All still blocks everything.
+
 ## v1.6.530
 
 - Changed: PhantomStudio can now read author details when its key matches, with REST API restriction on or off, including the authors embedded in posts and pages, so its pages can show who wrote them. Block All still blocks it, and front-end author pages and ?author= links stay hidden. Anyone holding the key can list your site's authors, so treat it like a password. Responses to requests that carry the key are always marked uncacheable. With REST logging on, a request that presents the PhantomStudio key and is not signed in to WordPress is now always recorded, even on routes the log is set to suppress, and are labeled Shared secret instead of unauthenticated.
