@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.525
+
+- Changed: the Task type dropdowns in AI Agent Prompts and the collection filter in Stock Photos now show the same clean arrow as the other dropdowns in the review screens, in place of the browser's own. The Task type dropdown also shows the standard focus ring.
+
 ## v1.6.524
 
 - Fixed: the page preview in page and appearance review now fills its frame edge to edge. The white band between the colored frame and the previewed page is gone, so the preview shows the page the way a visitor sees it, and no white shows through at the frame's rounded corners.
