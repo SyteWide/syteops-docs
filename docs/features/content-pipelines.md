@@ -16,6 +16,8 @@ Content Pipelines is built in to SyteOps — there's nothing to upload or activa
 
 Open Content Pipelines from the **Content Pipelines** link in the SyteOps admin sidebar (or the Content Pipelines tab in SyteOps settings). The tab has several views, accessible from the quick-nav pills at the top.
 
+The pills, left to right, are **Log**, **Recipes**, **Review Portal**, **Page Bundles**, **Content Sources**, **Coverage**, **Removed pictures** and **Calendar**. **Page Bundles** is where you group several pages or posts under one review link; how a bundle is sent and reviewed is covered in [Review and publish your post](review-and-publish-your-post.md).
+
 ### Log
 
 The Log is the tab's landing view, and it keeps two records, one above the other: every pipeline run, and beneath it everything the people reviewing your articles did to them.
@@ -112,7 +114,7 @@ Enable **dry-run** on a recipe or on a manual run to preview what would change w
 
 The **Calendar** view gives you a month-at-a-glance look at your content: recent, draft, scheduled, and published posts, all in one place.
 
-Open it from the quick-nav pills at the top of the Content Pipelines tab, alongside Log, Recipes, and Content Sources.
+Open it from the quick-nav pills at the top of the Content Pipelines tab, alongside Log, Recipes, Review Portal, Page Bundles, and Content Sources.
 
 Reviewers reach the same calendar from two places of their own: the **Calendar** button inside an article's [Review Portal](review-and-publish-your-post.md#step-6-use-the-content-calendar), and a matching button on the [review queue](review-and-publish-your-post.md#your-review-queue) page — the page the **Open my review queue** button on **Log** opens, and the one every reviewer email links to. That queue button shows only for accounts allowed to use the calendar, and what a reviewer can move there follows the same permissions as anywhere else.
 

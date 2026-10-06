@@ -135,6 +135,10 @@ Squirrly SEO, Yoast SEO and Rank Math are mutually exclusive — SyteOps connect
 
 AI-discovery file generation (`llms.txt` and `llms-full.txt`) for AI search engines. Enabling the LLMS Amplifier integration makes it the engine for the GEO step in Content Pipelines instead of the built-in generator — an either/or choice you flip from the GEO card, with no separate setup step. See the dedicated [LLMS Amplifier Integration](llms-amplifier) page for setup.
 
+### PhantomStudio
+
+Astro front-end builds that read your content over the REST API. With REST restriction on, the toggle lets through requests that carry your project's secret key in the `X-PhantomWP-Secret` header; nothing opens until a key is saved. See the dedicated [PhantomStudio Integration](phantomstudio) page for setup.
+
 ---
 
 ## Analytics & SEO
@@ -245,5 +249,7 @@ SyteOps automatically allows REST API access for key services when REST restrict
 | Wordfence | `/wp-json/wordfence/v1/*` |
 | WooCommerce | `/wc-auth/v1/*` |
 | SyteHero | `/wp-json/sytehero/v1/jurisdiction`, `/wp-json/sytehero/v1/touch` |
+
+PhantomStudio is not an allowlist entry: it passes by presenting its secret key. See its [integration page](phantomstudio).
 
 See [REST API Restriction](../features/rest-api-restriction) for details.

@@ -15,6 +15,7 @@ SyteOps provides a security feature that restricts access to the WordPress REST 
 Blocks anonymous (unauthenticated) REST requests while allowing:
 - All authenticated requests (logged-in users)
 - Built-in allowlisted endpoints (see below)
+- Requests that carry the secret key of an enabled third-party integration, such as PhantomStudio (see below)
 
 ### Block All REST API
 
@@ -48,6 +49,10 @@ These endpoints stay reachable when REST restriction (not Block All) is enabled.
 | `/wc-auth/v1/*` | WooCommerce OAuth |
 | `/wp-json/sytehero/v1/jurisdiction` | SyteHero consent — conditional: allowed whenever SyteHero is active |
 | `/wp-json/sytehero/v1/touch` | SyteHero attribution — conditional: allowed whenever SyteHero is active |
+
+## Third-Party Secret Keys
+
+PhantomStudio reads your content over the REST API without a WordPress login, so it presents a project secret key in the `X-PhantomWP-Secret` header instead. When the PhantomStudio integration is on and a key is saved, a request whose header matches that key is let through. Nothing opens until a key is saved, and a missing, empty, or wrong key is blocked as usual. Block All still blocks everything, and User Enumeration Defense still hides `/wp-json/wp/v2/users`. See the [PhantomStudio integration](../integrations/phantomstudio.md).
 
 ## What Gets Blocked
 
