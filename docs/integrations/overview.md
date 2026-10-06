@@ -137,7 +137,7 @@ AI-discovery file generation (`llms.txt` and `llms-full.txt`) for AI search engi
 
 ### PhantomStudio
 
-Astro front-end builds that read your content over the REST API. With REST restriction on, the toggle lets through requests that carry your project's secret key in the `X-PhantomWP-Secret` header; nothing opens until a key is saved. See the dedicated [PhantomStudio Integration](phantomstudio) page for setup.
+Front-end builds that read your content over the REST API. The toggle lets through requests that carry your project's secret key in the `X-PhantomWP-Secret` header and gives them read-only access to your WordPress content routes, including drafts, private and password-protected items (never user emails); it also lets PhantomWP Connect's routes through. Nothing opens until a key is saved. See the dedicated [PhantomStudio Integration](phantomstudio) page for setup.
 
 ---
 
@@ -250,6 +250,6 @@ SyteOps automatically allows REST API access for key services when REST restrict
 | WooCommerce | `/wc-auth/v1/*` |
 | SyteHero | `/wp-json/sytehero/v1/jurisdiction`, `/wp-json/sytehero/v1/touch` |
 
-PhantomStudio is not an allowlist entry: it passes by presenting its secret key. See its [integration page](phantomstudio).
+PhantomStudio passes by presenting its secret key; only its companion plugin's routes (`/wp-json/phantomwp/v1/*`) are an allowlist entry, gated on its toggle. See its [integration page](phantomstudio).
 
 See [REST API Restriction](../features/rest-api-restriction) for details.
