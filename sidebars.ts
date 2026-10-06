@@ -76,6 +76,7 @@ const sidebars: SidebarsConfig = {
         'integrations/wp-full-picture',
         'integrations/sytehero',
         'integrations/the-events-calendar',
+        'integrations/phantomstudio',
         'integrations/woocommerce',
         'integrations/wordfence',
         'integrations/secure-passkeys',

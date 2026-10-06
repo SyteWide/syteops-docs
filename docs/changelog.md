@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.528
+
+- Changed: page bundles now have their own Page Bundles view in Content Pipelines, with its own Quick navigation pill right after Review Portal, instead of sitting inside the Review Portal settings. Bundles are saved, sent and reviewed exactly as before; only where you open them moved. The reviewer lists in the bundle card and in the Review Portal settings are also taller now, so more names show without scrolling.
+
+## v1.6.527
+
+- Added: a PhantomStudio integration. With REST API restriction on, requests that carry your PhantomStudio project's secret key are let through, so its front end can read your content. It is off by default, nothing opens until you save the key under System / API, Block All still blocks it, and the key is encrypted and kept out of exports, backups, and FlowMattic. Responses to requests that carry the key are marked so site caches do not store them.
+
 ## v1.6.526
 
 - Changed: in the publishing reminder, missed publishing time and digest emails, the line above each article card (for example Planned and the date) now has more space beneath it, so it no longer crowds the top of the card.
