@@ -25,12 +25,14 @@ PhantomStudio keeps WordPress as your content system and builds an Astro front e
 4. Toggle it **ON** and click **Save Changes**.
 5. Open **System / API**, paste the key into **PhantomStudio Secret Key**, and save. Leave the field blank on later saves to keep the stored key.
 
-When REST API restriction is off, the integration has no practical effect, because your REST API is reachable either way.
+With REST API restriction off, your REST API is reachable either way, but the key still matters: it is what lets PhantomStudio read author details past User Enumeration Defense, and every response to a request that carries it is marked uncacheable.
+
+With REST logging on, a request that presents the key and is not signed in to WordPress is always recorded, even on routes the log is set to suppress, and are labeled **Shared secret** instead of unauthenticated. A signed-in person's own requests are logged or suppressed as usual, even if their browser sends the key.
 
 ## Limits
 
 - **Block All still blocks it.** When Block All is enabled, every REST request is refused, including ones that carry the secret key.
-- **User enumeration hardening still applies.** The `/wp/v2/users` route stays hidden from PhantomStudio, so author details may not be readable.
+- **A matching key can read authors.** With the key, PhantomStudio can read the users route and the authors embedded in posts and pages, with REST API restriction on or off. Anyone holding the key can list your site's authors, so treat it like a password. Front-end author archives and `?author=` links stay hidden even with the key.
 - **One key at a time.** To rotate the key, paste the new one here. There is no overlap period for the old key.
 - **This only lifts this plugin's restriction.** A firewall, a Cloudflare rule, or another security plugin in front of your site needs its own rule for PhantomStudio.
 - **Responses are marked uncacheable.** Responses to requests that carry the key tell site caches not to store them. A CDN, edge, or server cache that ignores origin cache headers and caches `/wp-json` would still replay them to anyone, so exclude `/wp-json` from such rules.

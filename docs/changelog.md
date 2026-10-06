@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.530
+
+- Changed: PhantomStudio can now read author details when its key matches, with REST API restriction on or off, including the authors embedded in posts and pages, so its pages can show who wrote them. Block All still blocks it, and front-end author pages and ?author= links stay hidden. Anyone holding the key can list your site's authors, so treat it like a password. Responses to requests that carry the key are always marked uncacheable. With REST logging on, a request that presents the PhantomStudio key and is not signed in to WordPress is now always recorded, even on routes the log is set to suppress, and are labeled Shared secret instead of unauthenticated.
+
 ## v1.6.529
 
 - Fixed: when you open one page bundle's review list, its pages now appear in the bundle's own order, the same order as the bundle email and the bundle strip, instead of the most recently edited page first, and the order holds as you load more.

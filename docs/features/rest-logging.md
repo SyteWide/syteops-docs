@@ -26,7 +26,7 @@ Per request, up to 19 fields can be recorded. Always-visible by default:
 - **Route** — the REST route pattern matched (e.g., `/wp-json/wp/v2/posts/{id}`)
 - **Method** — GET, POST, PUT, DELETE, etc.
 - **Username** — the authenticated user, or `anonymous`
-- **Outcome** — `allowed` or `blocked`, and HTTP status
+- **Outcome** — `allowed`, `allowlisted`, `blocked`, `failed_auth`, `nonce_failed`, `permission_denied` or `error`, and HTTP status
 
 Additional fields can be enabled through column selection, including IP address (plain or hashed), user agent, response size, duration, and error details.
 
@@ -37,11 +37,12 @@ Additional fields can be enabled through column selection, including IP address 
 | **Enable REST Logging** | Master on/off. When off, no requests are recorded regardless of other settings. |
 | **Sampling Rate (%)** | 1–100. At 100% every request is logged; at 25% roughly one in four is recorded. Use sampling on high-traffic sites to control database growth. |
 | **Retention (days)** | 1–365. Older entries are pruned automatically. Default is 30 days. |
-| **Excluded Routes** | Comma- or newline-separated route patterns to skip (useful for health checks and noisy internal routes). |
-| **Excluded IPs** | Addresses that should never be logged (office IPs, monitoring services). |
+| **Excluded Routes** | Comma- or newline-separated route patterns to skip (useful for health checks and noisy internal routes). A request that presents a matching PhantomStudio key and is not signed in to WordPress is always recorded, even on excluded routes; a signed-in person's own requests are logged or suppressed as usual, even if their browser sends the key. |
 | **Hash IPs** | When enabled, the IP field stores a one-way hash instead of the raw address. Useful for GDPR-conscious installs that still want correlation without storing PII. |
 
 Save the form to apply changes. Settings take effect on the next request.
+
+Each row also records how the caller authenticated (`logged_in_user`, `application_password`, `basic_auth`, `jwt`, `oauth`, `wc_api_key`, `shared_secret` shown as "Shared secret" for PhantomStudio's key, or `unauthenticated`).
 
 ## Viewing logs
 
@@ -51,7 +52,7 @@ The filter bar lets you narrow the table by:
 - **IP** (exact, matches either plain or hashed depending on mode)
 - **Username**
 - **Date range**
-- **Outcome** (allowed / blocked)
+- **Outcome** (allowed, allowlisted, blocked, failed_auth, nonce_failed, permission_denied, error)
 
 The table is paginated and sortable by column. Click any entry to see the full recorded row.
 
