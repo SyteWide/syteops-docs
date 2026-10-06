@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.529
+
+- Fixed: when you open one page bundle's review list, its pages now appear in the bundle's own order, the same order as the bundle email and the bundle strip, instead of the most recently edited page first, and the order holds as you load more.
+
 ## v1.6.528
 
 - Changed: page bundles now have their own Page Bundles view in Content Pipelines, with its own Quick navigation pill right after Review Portal, instead of sitting inside the Review Portal settings. Bundles are saved, sent and reviewed exactly as before; only where you open them moved. The reviewer lists in the bundle card and in the Review Portal settings are also taller now, so more names show without scrolling.
