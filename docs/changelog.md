@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.526
+
+- Changed: in the publishing reminder, missed publishing time and digest emails, the line above each article card (for example Planned and the date) now has more space beneath it, so it no longer crowds the top of the card.
+
 ## v1.6.525
 
 - Changed: the Task type dropdowns in AI Agent Prompts and the collection filter in Stock Photos now show the same clean arrow as the other dropdowns in the review screens, in place of the browser's own. The Task type dropdown also shows the standard focus ring.
