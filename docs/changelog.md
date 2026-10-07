@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.533
+
+- Changed: PhantomStudio can now also read Elementor templates and LinkCentral links when its key matches, on sites where those plugins are active. Every Elementor content type on the WordPress content routes becomes readable, and so do LinkCentral's links with the fields that plugin exposes for them. This is read-only and still limited to the WordPress content routes: the key can create, change or delete nothing, and both plugins' own routes outside those content routes are unaffected. Each plugin's own access check is accommodated for that one read request only, and if either plugin changes how its check works, PhantomStudio is refused rather than anything being exposed. Anyone holding the key can read all of that content, so treat the key like a password.
+
 ## v1.6.532
 
 - Fixed: in the cloud image library settings, the folder dropdown beside Choose folder is now wide enough to read, instead of a narrow box that cut off its text and drew the arrow over it. It fits the longest folder name, with a sensible minimum and maximum so a very long name ends in an ellipsis, it lines up with its button at the same height, and it stays hidden until the folders have loaded. Dropdowns elsewhere in the admin that are filled in after the page loads now resize to fit what they were given.

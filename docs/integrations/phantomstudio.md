@@ -20,6 +20,13 @@ A request that carries your key in the `X-PhantomWP-Secret` header, while nobody
 - Terms, media, menus and menu locations, installed fonts, global styles and the active theme's data.
 - Authors' public profiles: name, slug, bio, link and avatar links, only for accounts that have published content. Avatar links contain a hash of the author's email, exactly as on any WordPress site.
 
+**Elementor and LinkCentral, only when each plugin is active:**
+
+- Elementor templates and every other Elementor content type on the WordPress content routes (read-only).
+- LinkCentral links, with whatever fields that plugin exposes for them (read-only).
+
+Elementor's and LinkCentral's own routes outside the WordPress content routes are unaffected.
+
 **Served exactly as to any visitor, not part of the read access:** comments, search, and the lists of content types, taxonomies and statuses.
 
 **It cannot read:**
@@ -30,7 +37,7 @@ A request that carries your key in the `X-PhantomWP-Secret` header, while nobody
 
 **It cannot create, change or delete anything.** Only `GET` and `HEAD` requests are granted; a `POST`, `PUT`, `PATCH` or `DELETE` that carries the key gets exactly what an anonymous request gets. The rights lent are read-level content and theme-option rights, not site administration.
 
-**The exposure, plainly:** anyone holding the key can read every draft, private and password-protected item through those routes, but no user emails, and cannot change anything. Treat the key like a password.
+**The exposure, plainly:** anyone holding the key can read every draft, private and password-protected item through those routes, including Elementor templates and LinkCentral links where those plugins are active, but no user emails, and cannot change anything. Treat the key like a password.
 
 **Custom content types are readable in full.** A site that stores personal data as a content type (for example form entries or leads kept as posts) exposes it to whoever holds the key.
 
