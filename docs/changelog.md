@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.582
+
+- Fixed: the Save bar is now the same height on every settings page, and its button no longer touches the bar's edges. The button has equal space above and below it and a gap to the right edge on the main settings tabs, the Content Pipelines settings pages and each content source, and the "Unsaved changes" line still sits beside it.
+
 ## v1.6.581
 
 - Fixed: A draft tab's variables are no longer sent to workflows; they are sent once the tab is published, and a tab that becomes a draft has its variables removed the way a disabled tab does. A tab copied with Duplicate starts as a draft, so a copy sends nothing until it is published. On a site that already has a draft tab whose variables were sent earlier, the update does not delete them: they stay in place without being updated, until the tab is published (they are then refreshed) or disabled (they are then removed). The registry now says a draft's variables are not available to workflows until the tab is published.
