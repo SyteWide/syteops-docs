@@ -76,14 +76,14 @@ Setting **Update Frequency** to Manual stops LLMS Amplifier scheduling its own r
 
 ## Publishing into llms-index.json
 
-Two SyteOps options — **Questions in the LLMS Amplifier index** and **Business identity in the LLMS Amplifier index**, both under Content Pipelines → Review Portal → Answer-engine publishing — write into LLMS Amplifier's `llms-index.json` file.
+Two SyteOps options — **Questions in the LLMS Amplifier index** and **Business identity in the LLMS Amplifier index**, both under Content Pipelines → Answer Engine → Answer-engine publishing — write into LLMS Amplifier's `llms-index.json` file.
 
 An article's questions and answers only reach the index once a reviewer has ticked **I have reviewed these answers** in the article's GEO panel — until then they're held back, the same as on every other answer-engine surface. LLMS Amplifier's health panel shows how many articles currently have answers waiting for review, matching the count shown on SyteOps' own **Answer-engine publishing** settings card. See [Reviewing the answers before they go live](../features/llms-txt.md#reviewing-the-answers-before-they-go-live).
 
 :::caution The JSON index has to be switched on
 Those two options can only publish if LLMS Amplifier is generating `llms-index.json` in the first place. If its JSON index is off, both options sit there switched on and publish nothing.
 
-Choosing LLMS Amplifier as the GEO engine (or turning one of those two options on) now turns the JSON index on automatically. On a site that already had LLMS Amplifier selected with the index off, use **Apply recommended Amplifier settings** on the Answer-engine publishing card — that also turns on sitemap, robots, and meta-tag discovery, and leaves your content types, limits, and identity copy alone.
+Choosing LLMS Amplifier as the GEO engine (or turning one of those two options on) now turns the JSON index on automatically. On a site that already had LLMS Amplifier selected with the index off, use **Apply recommended Amplifier settings** on the Answer-engine publishing card — that also turns on sitemap, robots, and meta-tag discovery, and leaves your content types, limits, and identity copy alone. The button is marked **Applies immediately**: it acts when you click it and does not wait for **Save settings**.
 
 ### If you update LLMS Amplifier
 

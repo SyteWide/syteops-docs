@@ -27,14 +27,14 @@ SyteOps does not connect directly to LinkedIn or any other social network. For L
 ## Enabling Social Publishing
 
 1. Go to **SyteOps → Content Pipelines**.
-2. Click the **Social Publishing** jump pill, or find the **Social Publishing** group.
+2. Click the **Social Publishing** pill at the top of the page.
 3. Turn on **Enable Social Publishing**.
 
 With the feature enabled, you'll set up an AI provider, at least one voice profile, and at least one destination before the send buttons appear anywhere in the admin.
 
 ### Choosing an AI provider
 
-The Social Publishing settings card (found on the **Content Pipelines** settings panel, in the **Social Publishing** section) has its own AI provider setup, separate from the AI providers used elsewhere in SyteOps:
+The Social Publishing settings card (on its own **Social Publishing** view in **Content Pipelines**) has its own AI provider setup, separate from the AI providers used elsewhere in SyteOps:
 
 - **AI provider** — choose which configured AI provider composes social updates.
 - **Model** — fetch and select a model for that provider.
@@ -54,7 +54,7 @@ A voice profile tells the AI how to write your update. In the Social Publishing 
    - **Voice / tone** — a short instruction describing the style you want, for example *"witty and concise"* or *"formal, no exclamation points."*
    - **Max chars** — the maximum length of the generated update (50–3,000 characters).
    - **Link** — check this box to automatically append the post's web address to the end of the generated text.
-3. Click **Save settings** at the bottom of the panel, or **Save Social Publishing** on that group.
+3. Click **Save settings** at the bottom of the page. It saves Social Publishing together with the settings in the other Content Pipelines views; this view has no separate Save. Until you click it, the line beside the button reads **Unsaved changes**, and your browser asks before you close the tab.
 
 Add as many profiles as you like — for example, a punchy version for LinkedIn and a more relaxed one for an internal Slack channel — and pick the right one each time you send.
 
@@ -70,7 +70,7 @@ A destination is where the generated update is sent. Under **Destinations** in t
    - **Webhook URL** — the address the update will be sent to.
    - **Auth** — how the destination expects to be authenticated: **none**, **bearer** (an `Authorization: Bearer` header), **basic** (a basic-auth header), or **both**.
    - **Secret** — the token, key, or credential your webhook requires, if any. Leave this blank when editing an existing destination to keep the value that's already saved — only fill it in when setting a new secret. It's stored encrypted and is never shown back to you in the field.
-3. Click **Save settings** at the bottom of the panel, or **Save Social Publishing** on that group.
+3. Click **Save settings** at the bottom of the page. It saves Social Publishing together with the settings in the other Content Pipelines views; this view has no separate Save. Until you click it, the line beside the button reads **Unsaved changes**, and your browser asks before you close the tab.
 
 **For LinkedIn:** SyteOps doesn't post to LinkedIn directly. Set the Webhook URL to a trigger in Make, Zapier, or n8n, and build the rest of the automation (the LinkedIn post step, with its own LinkedIn connection) inside that tool.
 
@@ -125,7 +125,7 @@ Because the text is generated and approved up front, "at a time" and "when the p
 
 ### Choosing a post type when publishing
 
-The Review Portal's **Publish as** control lets a reviewer choose which post type a draft is published under, instead of always publishing to the type it was created as. An administrator sets the type that's pre-selected for reviewers under **SyteOps → Content Pipelines → Review & Approval Rules → Default publish type**; a reviewer can still change it per-post at publish time if they hold the publish capability for the target type.
+The Review Portal's **Publish as** control lets a reviewer choose which post type a draft is published under, instead of always publishing to the type it was created as. An administrator sets the type that's pre-selected for reviewers under **SyteOps → Content Pipelines → Review and approval rules → Default publish type**; a reviewer can still change it per-post at publish time if they hold the publish capability for the target type.
 
 :::caution Changing post type doesn't move type-specific data
 Switching a draft to a different post type at publish time changes only the post's type — it does **not** migrate taxonomies, terms, or custom fields that only apply to the original type. If the original type has its own categories/tags or custom fields, review and re-set anything type-specific after switching, since it won't carry over automatically.

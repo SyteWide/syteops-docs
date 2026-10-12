@@ -16,7 +16,7 @@ Content Pipelines is built in to SyteOps — there's nothing to upload or activa
 
 Open Content Pipelines from the **Content Pipelines** link in the SyteOps admin sidebar (or the Content Pipelines tab in SyteOps settings). The tab has several views, accessible from the quick-nav pills at the top.
 
-The pills, left to right, are **Log**, **Recipes**, **Review Portal**, **Page Bundles**, **Content Sources**, **Coverage**, **Removed pictures** and **Calendar**. **Page Bundles** is where you group several pages or posts under one review link; how a bundle is sent and reviewed is covered in [Review and publish your post](review-and-publish-your-post.md).
+The pills are in three labeled groups. **Activity** holds **Log**, **Calendar**, **Coverage** and **Removed pictures**; **Content** holds **Recipes**, **Content Sources** and **Page Bundles**; **Settings** holds **Review Portal**, **Social Publishing**, **AI Models**, **Images** and **Answer Engine**. The five under **Settings** are settings views: each is a stack of cards you can open and close, with an **On this page** bar that jumps to a card (see [Review Portal settings](review-and-publish-your-post.md#review-portal-settings-for-site-owners)). **Log** and **Content Sources** carry the same bar, with a pill for each part of the view; there a pill only takes you to that part, and nothing opens or closes. On Content Sources each source has its own pill, or one **Your sources** pill once you have more than six. A pill appears only for a part that is on the page, and a view with a single part shows no bar. On the Log, the link on a content source's card (**Edit settings** or **Finish setup**) opens Content Sources at that source. **Page Bundles** is where you group several pages or posts under one review link; how a bundle is sent and reviewed is covered in [Review and publish your post](review-and-publish-your-post.md).
 
 ### Log
 
@@ -104,7 +104,7 @@ You can also have GEO analysis run automatically the first time a new article ar
 
 ## Social Publishing
 
-Social Publishing's **Enable Social Publishing** switch and its full configuration — AI provider, voice profiles, and destinations — live together in one place on this tab. See [Social Publishing](./social-publishing.md) for setup.
+Social Publishing's **Enable Social Publishing** switch and its full configuration — AI provider, voice profiles, and destinations — live together on the **Social Publishing** view of this tab. See [Social Publishing](./social-publishing.md) for setup.
 
 ## Dry-Run Mode
 
@@ -160,7 +160,7 @@ By default, the calendar shows only content your pipeline has touched — posts 
 
 ## Publishing cadence
 
-Describe how often your site publishes, and the [content calendar](review-and-publish-your-post.md#cadence-warnings) will warn anyone who schedules an article that breaks the rhythm. The settings live on the **Content Pipelines** tab, in the **Review Portal** settings view, under **Workflow** — in the **Publishing cadence** card. If you type a value outside the range a setting accepts, it is ignored and the previous value is kept.
+Describe how often your site publishes, and the [content calendar](review-and-publish-your-post.md#cadence-warnings) will warn anyone who schedules an article that breaks the rhythm. The settings live on the **Content Pipelines** tab, in the **Review Portal** settings view, in the **Publishing cadence** card. If you type a value outside the range a setting accepts, it is ignored and the previous value is kept.
 
 | Setting | What it does |
 | --- | --- |
@@ -213,7 +213,7 @@ A few things worth knowing:
 
 ## Remix presets
 
-Choose which [instruction chips](review-and-publish-your-post.md#formatting-and-links) the **Remix with AI** dialog offers a reviewer, in the **Content Pipelines** tab, in the **Review Portal** settings view, under **Workflow** — in the **Remix presets** card; a reviewer can always type a free-form instruction instead, and clearing every box hides the chip row entirely.
+Choose which [instruction chips](review-and-publish-your-post.md#formatting-and-links) the **Remix with AI** dialog offers a reviewer, in the **Content Pipelines** tab, in the **Review Portal** settings view, in the **Remix presets** card; a reviewer can always type a free-form instruction instead, and clearing every box hides the chip row entirely.
 
 ## Content Sources
 
@@ -342,7 +342,7 @@ Categories and tags are not part of the mapping: SyteOps reads each incoming art
 
 Because the AI uses each category's description, write a short description for every category on your site (**Posts → Categories**) saying what belongs in it.
 
-The **Author** mapping row also has a **Default author** picker (the same list as in Settings). Use it when the mapped author is often blank or does not match a WordPress user. Changing it there saves immediately and stays in sync with Settings.
+The **Author** mapping row also has a **Default author** picker (the same list as in Settings). Use it when the mapped author is often blank or does not match a WordPress user. It stays in sync with the one in Settings, and like every other field on the card it is stored when you click **Save source**.
 
 ### Reprocess last payload
 
@@ -379,6 +379,18 @@ To map a field visually, use whichever is quicker:
 Either way, SyteOps fills in the *location* of the value you picked, not the value itself. That means the mapping keeps working correctly on every future payload, even though the specific text you saw was only ever from one example — nothing is frozen to that one sample.
 
 **Clearing remembered payloads.** Each source's Payload panel has a **Clear** button that forgets just that source's last payload. To forget them all at once, use **Delete all captured payloads** at the top of the Content Sources page (it appears once at least one source has a remembered payload).
+
+### Saving a source
+
+Each source card has one **Save source** button. It stays pinned to the bottom of the window while you scroll through the card, and one click saves everything on the card together: **Settings**, **Custom fields**, **FlowMattic config variables**, **Forward to workflow** and, where it is shown, **Modify images with AI**.
+
+The line next to the button tells you where you stand: **Unsaved changes** as soon as you edit anything, **Saving…** while the request is out, then **Saved**.
+
+- **Field mapping is separate.** Editing a path or a transform is not an unsaved change; **Approve mapping** applies it.
+- **Nothing is half saved.** If the save is refused — for example, you switch **Auth mode** away from **None** without a verification secret — nothing on the card is stored. The line says why, and the fields to fix are outlined.
+- **Rows that cannot be saved are pointed out.** A custom field or variable whose key is not valid, or repeats another row, is not stored. Everything else is, the line says so, and those rows are outlined until you fix or remove them and save again.
+- **Leaving asks first.** With unsaved changes on any card, SyteOps asks before you close the page, and before a button that reloads it (**Enable**/**Disable**, **Delete**, **Approve mapping**, **Reprocess last payload**, **Clear**, and **I have saved it** after a new secret).
+- After a save that changes custom fields or stores a secret, the page reloads so the mapping table and the secret's status are current. The line still reads **Saved** when it comes back.
 
 ### Per-source settings
 
@@ -420,7 +432,7 @@ If a source's articles carry information beyond the standard title, body, and ex
 | **Label** | The friendly name shown in the mapping table. |
 | **Type** | How the value is handled: Text, Text area, Number, Yes/No, URL, or Date. |
 
-Click **Add field** for each one you need, then **Save custom fields**. Every field you define shows up as its own row in **Field mapping**, so you can point it at the right location in the incoming payload just like the built-in fields. Once mapped, the values are saved as custom fields (post meta) on the draft.
+Click **Add field** for each one you need, then **Save source**. Every field you define shows up as its own row in **Field mapping**, so you can point it at the right location in the incoming payload just like the built-in fields. Once mapped, the values are saved as custom fields (post meta) on the draft.
 
 ### FlowMattic config variables
 
@@ -428,7 +440,7 @@ Expand **FlowMattic config variables** on a source's card to define named values
 
 1. Enter a **Key** (lowercase letters, numbers, and underscores) and a **Value**.
 2. SyteOps shows the resulting **FlowMattic variable** name next to each entry — copy that exact name to reference it in your FlowMattic workflows.
-3. Click **Add variable** for each one you need, then **Save FlowMattic variables**.
+3. Click **Add variable** for each one you need, then **Save source**.
 
 Because each source's variables are named after that source, two sources can use the same key (for example, both defining a `brand` value) without colliding.
 
@@ -448,7 +460,7 @@ Expand **Forward to workflow** on a source's card to also send each mapped artic
 1. Turn on **Enable forwarding**.
 2. Enter the **Workflow webhook URL** from FlowMattic.
 3. Pick an **Auth mode** — **None**, **Bearer token**, **Basic auth**, or **Bearer + Basic** — to match what the workflow expects, and enter the matching **Auth secret** (leave it blank to keep whatever secret is already saved).
-4. Click **Save forwarding settings**.
+4. Click **Save source**.
 
 Forwarding is optional and never gets in the way: SyteOps always creates the Review Portal draft first, then sends a copy of the mapped content to your workflow in the background. A slow or unreachable workflow endpoint never delays or blocks the draft.
 
@@ -456,7 +468,7 @@ Forwarding is optional and never gets in the way: SyteOps always creates the Rev
 
 Blog and archive cards force pictures into a fixed shape and still download the full-size file. **Listing image** crops a card-sized copy so those cards do not stretch or clip the original. Article pages keep the original.
 
-You will find it on the **Content Pipelines** tab, under **Review Portal → AI Models → Image generation**.
+You will find it on the **Content Pipelines** tab, under **Images → Article images → Listing image**. The model that repairs a watermark is chosen under **AI Models → Image generation**.
 
 ### Setting it up
 
@@ -725,7 +737,7 @@ With **Remove a watermark** on, the cropped copy is prepared in the background t
 
 ### Delete or rebuild every listing copy
 
-On **Content Pipelines → Review Portal**, the listing-image card has two site-wide actions (SyteOps administrators only):
+On **Content Pipelines → Images**, the listing-image block has two site-wide actions (SyteOps administrators only):
 
 - **Delete listing copies** removes every listing-size file. Cards go back to the original photo (logo included). Article pages are unchanged — they never used this copy.
 - **Rebuild listing copies** makes new card-sized files from the original using the settings currently on that card. If **Remove a watermark** is still on, confirm first: this bills the image-AI repair again for each picture. If it is off, you get a plain crop and the logo is kept.

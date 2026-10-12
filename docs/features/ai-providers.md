@@ -37,6 +37,8 @@ All five keys are encrypted at rest. They are never displayed in plaintext after
 
 Below the provider tiles, an **Image AI** group holds one more tile: **SyteHero image AI (fal)**. SyteHero generates and modifies pictures through fal, and normally holds that key itself. Turn **Manage this key here** on and SyteOps holds it instead — you paste the fal key once, on this card, and SyteHero borrows it.
 
+This tile does not need FlowMattic. On a site without FlowMattic the System / API tab still shows it, on its own and with its own quick-navigation pill named after the tile, so you can set, change or clear the key and switch management off; the rest of the AI API keys stay hidden until FlowMattic is installed.
+
 **Update SyteHero to version 1.0.139 or newer before you turn the toggle on.** An older SyteHero does not know to ask, so the toggle would simply do nothing while its own key controls stayed live. Nothing breaks either way — SyteHero falls back to whatever key it already has — but the setting will not take effect until it is updated.
 
 What changes while the toggle is on:
@@ -93,12 +95,12 @@ Where an area is running on the site default, SyteOps says so wherever a provide
 
 ## Per-feature provider and model selection: the AI Models card
 
-The Content Pipelines → Review Portal view carries one **AI Models** card, one row per feature, named by what it powers rather than by an internal area slug:
+The Content Pipelines → AI Models view carries one **AI Models** card, one row per feature, named by what it powers rather than by an internal area slug:
 
 - **Article writing & remix** (Content) — AI-suggested categories, tags, and meta descriptions for content sources and the Review Portal, plus the Text AI Remixer. See [Content Pipelines](./content-pipelines.md).
 - **Answer-engine analysis** (GEO) — AI readiness analysis that scores how well a post is positioned for AI answer engines. See [Content Pipelines](./content-pipelines.md).
 - **Ingest field mapping** (Ingest) — proposes how an inbound content-source payload maps to your post fields when you set up a new content source. See [Content Pipelines](./content-pipelines.md).
-- **Social posts** (Social) — AI-generated social posts from your published content. Its provider/model/max-tokens fields render on this card and save with it; the Social Publishing card below keeps its own voice profiles, destinations, and enable toggle.
+- **Social posts** (Social) — AI-generated social posts from your published content. Its provider/model/max-tokens fields render on this card and save with it; the Social Publishing view keeps its own voice profiles, destinations, and enable toggle.
 - **Image alt & captions** (Image SEO, carries a **Vision** badge) — **Generate SEO with AI** in the Review Portal. It writes an image's alt text, title, and caption from the picture itself rather than the surrounding words. It uses that provider's key on **System / API**, not SyteHero (SyteHero is **Modify with AI**). This area must point at a model that accepts image input; a text-only model is refused rather than asked to guess, so a provider that cannot take an image shows disabled here. See [Review & Publish Your Post](./review-and-publish-your-post.md).
 - **Agent prompts** — turns a page reviewer's notes into an implementation prompt. A per-site preamble template (with a **Restore default** option) sits beside it, in its own card just below.
 
@@ -119,7 +121,7 @@ Turn **Override** on to reveal the provider and model selects and pick your own.
 
 An **Advanced** disclosure under each row holds **Max tokens** — a per-area setting, editable independent of Override. To use a model that isn't in the fetched list, choose **Custom** in the model select (still inside the main row, not inside Advanced) and type the exact model ID.
 
-The card's header links to **API keys & site default**, on **System / API**, for the keys and the site-default provider setting themselves.
+The card's header links to **API keys & site default**, on **System / API**, for the keys and the site-default provider setting themselves. On a site without FlowMattic that section is not shown, so the card instead points to the **Systems / API** tab, where FlowMattic can be installed.
 
 ### Image generation & modify (SyteHero)
 

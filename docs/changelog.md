@@ -8,6 +8,211 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.581
+
+- Fixed: A draft tab's variables are no longer sent to workflows; they are sent once the tab is published, and a tab that becomes a draft has its variables removed the way a disabled tab does. A tab copied with Duplicate starts as a draft, so a copy sends nothing until it is published. On a site that already has a draft tab whose variables were sent earlier, the update does not delete them: they stay in place without being updated, until the tab is published (they are then refreshed) or disabled (they are then removed). The registry now says a draft's variables are not available to workflows until the tab is published.
+
+## v1.6.580
+
+- Fixed: the variable registry's popups (create, edit, details, import, export, bulk actions and collections) open again and work; they had not opened since v1.2.001. A tab created there now gets its Tab Code (1 to 10 lowercase letters, numbers or underscores), so its variables reach FlowMattic, and names and descriptions with quotes are stored as typed. The details popup shows its values, its Edit, Enable / Disable, Export, Delete and Duplicate buttons work, and a refused delete is reported instead of looking done. Edit saves the Order Index, Duplicate makes a draft copy with its own Tab Code, the bulk toolbar appears when tabs are selected, and a sorted column shows an arrow. Import checks each tab's Tab Code, leaves built-in tabs alone, reads a single-tab file as one tab and refuses a file over 5 MB. The Tab Code column sorts by the code it shows, an export file keeps the tab's capital letters, and an edit made from a popup opened before someone else saved the same tab is refused with a message to reopen the tab. The registry list's Updated column and the details popup show the saved date, formatted, instead of a dash or raw text.
+
+## v1.6.579
+
+- Fixed: on a small or short screen, the plugin's popups now fit the screen and keep their buttons in view.
+
+## v1.6.578
+
+- Fixed: with several notices showing, the stack now scrolls inside the free space, so it no longer covers a popup's close or action buttons.
+
+## v1.6.577
+
+- Fixed: in the action dropdown, typing a letter jumps to the matching option; nothing is chosen until Enter, Space or a click.
+
+## v1.6.576
+
+- Fixed: on a short screen (a phone held sideways), the recipe popup gives most of its height to the scrolling area.
+
+## v1.6.575
+
+- Fixed: on a site without the automation plugin, the Systems / API tab now shows the image AI key tile, so the key can be changed, cleared or switched off there.
+
+## v1.6.574
+
+- Fixed: on a phone, the recipe popup's buttons all fit on the screen.
+
+## v1.6.573
+
+- Fixed: on a phone, a dropdown's text no longer runs under its arrow.
+
+## v1.6.572
+
+- Fixed: a notice no longer covers a popup's close button, and the Return to top button no longer sits on the Save bar or under a notice.
+
+## v1.6.571
+
+- Fixed: in the module list on a phone, a button reached by keyboard is now scrolled fully into view instead of being left partly cut off. The module action dropdown now works from the keyboard alone: open it with the arrow keys, move between options, choose with Enter or Space and close with Escape, and screen readers announce it and the current option. Scrolling inside an open dropdown list no longer closes it.
+
+## v1.6.570
+
+- Fixed: on a phone, notices now appear at the bottom of the screen above the Save bar instead of over the tabs, and move to the top while a popup is open. They have a larger close button and also close with the Escape key. A settings tab reached by keyboard is now fully visible in the tab bar.
+
+## v1.6.569
+
+- Fixed: settings pages no longer scroll sideways on phones, tablets and small laptops. Wide tables, such as the module list and the variable-set tables, now scroll inside their own box, and URL and description fields shrink to fit a narrow screen. On the General tab the Upload and Remove buttons of the two logo fields now sit under the field on screens narrower than about 1320 pixels, where they used to run past the page edge.
+
+## v1.6.568
+
+- Changed: Content Pipelines help text is shorter. Each long help line now shows one sentence, with the detail behind a closed "More" link under it. Some labels were reworded: the Posts and Pages row action and the Social Publishing wording now say "Post to Social", each settings view's Save button now names the view, such as "Save Review Portal settings", the two card titles are now "Review and approval rules" and "Review Portal branding", and "Delete now selected" on Removed pictures is now "Delete selected now".
+
+## v1.6.567
+
+- Fixed: the AI Models note shown on a site without FlowMattic is now one translatable sentence, and the image AI link sent to the companion plugin no longer carries an anchor to a section that site does not show.
+
+## v1.6.566
+
+- Fixed: the settings tab bar no longer makes every settings page scroll sideways on a phone; it scrolls inside itself. Content Sources now fits the screen, so its URL and select boxes shrink to the card, the field-mapping table scrolls inside its own column, and the Path input keeps a readable width.
+
+## v1.6.565
+
+- Fixed: AI Models: on a site without FlowMattic the card no longer links to an API keys section that is not shown. It now says the section appears on the Systems / API tab once FlowMattic is installed, with a link to that tab. The Systems / API quick-navigation pills and the key-tile link follow the same rule.
+
+## v1.6.564
+
+- Improved: Content Sources: a source with unsaved changes now shows a dot on its "On this page" pill, so you can see from the bar which sources still need saving.
+
+## v1.6.563
+
+- Fixed: Settings: a link to a section on another settings tab now opens that tab and scrolls to the section. Before, it opened the tab at the top.
+
+## v1.6.562
+
+- Fixed: Content Calendar: the date picker always stays on screen. It opens upward when there is no room below, and scrolls inside when neither side fits. Before, its buttons could sit below the bottom of the screen.
+
+## v1.6.561
+
+- Fixed: Review Portal settings: removing every default reviewer or every default CC now saves an empty list. Before, the old list came back after a reload.
+
+## v1.6.560
+
+- Fixed: The one-time background check for older AI-made pictures now retries after a database error and restarts itself if it stalls, so it cannot finish early and leave an editorial picture unmarked.
+
+## v1.6.559
+
+- Changed: The Review Portal popups (Notify, Ready to publish, Publish, Request Changes, Insert Link, Post to Social and the page comment box) now have a clear title band, a button bar and grouped sections.
+- Changed: Their status line now sits above the buttons.
+
+## v1.6.558
+
+- Changed: Pictures made with Modify with AI before this release are checked once, in the background, and marked editorial where the picture they were made from is editorial.
+- Changed: The check runs in small batches after the update and its progress can be read through the Manage API.
+
+## v1.6.557
+
+- Changed: Review Portal: the reviewer permissions table keeps its first column in view, with an edge, while you scroll it sideways.
+- Added: Social Publishing and Answer Engine now have On this page buttons for the parts of their card, such as Voice profiles and Destinations, or Content types and Question surfaces. A button for a part that is not shown on your site does not appear.
+
+## v1.6.556
+
+- Changed: A picture made with Modify with AI from an editorial-only picture is now marked editorial too, including pictures made from a reference picture or a model photo.
+- Changed: Editorial always wins: a picture marked standard becomes editorial when its source picture, or a fresh read of its Drive file, says editorial. Editorial is never lowered automatically.
+- Changed: When a license is recorded on a picture later, its existing versions are updated as well.
+
+## v1.6.555
+
+- Changed: Content Sources: each source now has one Save source button that saves the whole card at once (settings, custom fields, FlowMattic variables, forwarding and image mapping). It stays at the bottom of the window while you scroll, and the line beside it says when something is unsaved, not saved or only partly saved. Field mapping is still applied with Approve mapping, and the Default author picker is now saved with the card instead of on its own.
+- Changed: On Content Sources, a button that reloads the page (Enable or Disable, Delete, Approve mapping, Reprocess last payload, Clear) now asks first when a source has unsaved changes.
+- Fixed: The Content Sources page no longer scrolls sideways: the Field mapping table now fits its card.
+
+## v1.6.554
+
+- Changed: Cloud image library: opening a folder now records the license on pictures you imported from it before licenses were tracked. A license is recorded only from a fresh read of the folder, never from a cached list, and never replaces one already on the picture.
+
+## v1.6.553
+
+- Added: The Log and Content Sources views now have an On this page bar under the Content Pipelines header, with one button for each part of the view. On the Log these are Engines, Run now, Recent runs and Editorial activity. On Content Sources they are Add a content source and one button per source, or a single Your sources button once you have more than six. A button takes you to that part of the view; nothing opens or closes. A button appears only for a part that is on the page, and a view with a single part shows no bar.
+- Changed: The numbered headings inside the Log, Recipes and Calendar views are now plain titles, and the extra Log, Recipes and Calendar buttons beside them are gone. Use the view buttons in the header to switch views. Existing links to a view still work.
+- Changed: On the Log, the link on a content source's card (Edit settings or Finish setup) now opens Content Sources at that source instead of at the top of the list.
+
+## v1.6.552
+
+- Added: In the Review Portal, a picture marked for editorial use only now shows an Editorial badge wherever a reviewer picks a picture: in the cloud image library (grid and list), in Stock Photos, in the Media Library window and on the versions under Modify with AI. Hover the picture, move to it with the keyboard, or tap it, and the rule is spelled out: fine in articles, not for ads, landing pages or anything that suggests a brand endorses the site. A picture with a standard license, or with none recorded, shows no badge. Two limits for now: a picture copied from the cloud library before this release shows the badge in the cloud library but not in the other places until it is used from the cloud library again, and a version made with Modify with AI does not carry the badge of the picture it was made from.
+- Fixed: On a site with a persistent object cache, the License column in the Media Library list could fail to appear after the first licensed picture was added. The check is now remembered for one page load only.
+
+## v1.6.551
+
+- Changed: The Content Pipelines views are now grouped under three labels in the header: Activity (Log, Calendar, Coverage, Removed pictures), Content (Recipes, Content Sources, Page Bundles) and Settings (Review Portal, Social Publishing, AI Models, Images, Answer Engine). The order of the view buttons changed to match these groups. Each button opens the same view as before, and existing links to a view still work.
+
+## v1.6.550
+
+- Changed: The Content Pipelines settings are now cards you can open and close one at a time, on the Review Portal, Social Publishing, AI Models, Images and Answer Engine views. The first time you visit a view its first card is open and the rest are closed; after that each card stays the way you left it. That choice is remembered in your browser only. Settings inside a closed card are still saved. The three settings groups and their jump links are replaced by the cards.
+- Added: An On this page bar under the Content Pipelines header has one button per card. It stays at the top of the screen while you scroll, opens a card and jumps to it, highlights the card you are on, and has Expand all and Collapse all. A jump is kept in the address bar, so a copied address lands on that card, and older links to a settings card still land on it.
+- Added: A closed card that holds a warning is marked Needs attention on its heading and on its button in the bar.
+- Fixed: On every settings tab, reloading the page or going back now keeps your place on the page. Before, the page jumped back to the top.
+
+## v1.6.549
+
+- Added: The Cloud image library now reads a stock picture's license (editorial or standard) from Google Drive, keeps it on the picture when it is copied into the media library, and shows it in the Media Library.
+
+## v1.6.548
+
+- Changed: The image popup's sections are easier to tell apart: section headers, opened drawers and the button bar are now visually distinct. The Modify with AI options are grouped by what they do, and the Stock Photos buttons match the rest of the popup.
+
+## v1.6.547
+
+- Added: The cloud library's picture list in the image popup can now be shown as a list with full file names and dimensions, and the choice is remembered while the browser tab is open.
+
+## v1.6.546
+
+- Changed: Answer-engine publishing settings, including the setup review, now have their own view and button in Content Pipelines, next to Images, instead of sitting inside the Review Portal view. The setup review dialog no longer opens over a different view: it opens by itself only when you are on its own view, or the first time you switch to it. The Coverage message about a missing AI provider now points to AI Models.
+
+## v1.6.545
+
+- Fixed: The diagnostic record of stray output that SyteOps discards from your content responses no longer stores any text chosen by whoever sent the request. Its entries are now filed by route: a page is shown by its number, and any other part of the address is replaced by a placeholder. A requester can no longer push real entries out of the record, and at most three entries are kept for one route. If the record cannot be saved, a line now says so in the debug log while debug mode is on.
+
+## v1.6.544
+
+- Changed: Image settings for the Review Portal, including the cloud image library, now have their own view and button in Content Pipelines, next to AI Models, instead of sitting inside the Review Portal settings. Save settings still saves everything. Old links to the Article images and Cloud image library sections open the new view and scroll to the card, and the Google Drive tile on the Integrations tab links straight to it. The listing-image picker windows now open centered on the screen instead of far down the page. A reviewer who sees that AI is not set up for agent prompts is now told where an administrator sets it up.
+
+## v1.6.543
+
+- Changed: AI Models settings now have their own view and button in Content Pipelines, next to Social Publishing, instead of sitting inside the Review Portal settings. Save settings still saves everything. Old links to the AI Models section open the new view, and the Social posts row there has a button to Social Publishing. A change to one view's settings no longer makes another view's automatic update look like an unsaved edit.
+
+## v1.6.542
+
+- Changed: In the image popup, the cloud library's picture list now stops at three rows and scrolls on its own, with the folders and Load more staying in place, and Load more keeps your place in the list.
+
+## v1.6.541
+
+- Changed: Social Publishing settings now have their own view and button in Content Pipelines, next to Review Portal, instead of sitting inside the Review Portal settings. Save settings still saves both. An old link to the Social Publishing section opens the new view. The view buttons also wrap onto a second line now, so every view stays reachable on narrower screens. Wide tables in Social Publishing now scroll within their card on narrower screens.
+
+## v1.6.540
+
+- Added: The record of stray output that SyteOps discarded from your content responses can now be read remotely through the management API, so you no longer need server access to see which routes were affected and how often.
+
+## v1.6.539
+
+- Added: The Content Pipelines settings now show when you have unsaved changes. The line beside Save settings reads Unsaved changes (and names the other view when the change is there, with a dot on that view's button), and your browser asks before you leave with changes unsaved. A setting that cannot be saved turns that line red and takes you to the field, opening its section if it was closed. Buttons that act at once, such as connecting the cloud image library or changing the answer-engine robots file, are now marked Applies immediately, and the ones that reload the page ask first when you have unsaved changes.
+
+## v1.6.538
+
+- Added: PhantomStudio can now rebuild your site automatically when your content changes. With the PhantomStudio integration on, System / API has a new Deploy when content changes switch and a Deploy webhook address field: paste the Auto-Deploy Webhook address from your PhantomStudio project (it is a secret, so it is stored encrypted, shown masked and left out of exports and backups, and an address that is not an https address on phantomwp.com is refused when you save). Publishing, updating, unpublishing, trashing or deleting a post, page or store product, changing a menu or a menu location, and adding, renaming or removing a category or tag ask PhantomStudio to rebuild. A burst of changes causes one rebuild about a minute after the first, and a failed request is tried once more. Orders, stock changes from sales, refunds, customers and coupons never start a rebuild. The request is sent by WordPress's scheduled tasks, which only run when your site receives a visit, so a site with no visitors should use a system cron. Under the address, a line shows when the last request went out and how it ended, and says when a retry is coming.
+
+## v1.6.537
+
+- Added: REST responses for your content (pages, posts, media and the other WordPress content routes) now stay valid when another plugin prints stray output while the response is being built. That output used to land in front of the data and break anything that reads the response, such as a headless front end. It is now discarded, and the affected routes are recorded (which route, how many bytes and when, never the output itself). Always on, with no setting, for every visitor and app. A route that sends its own file or image is passed on unchanged and in order, with one known exception: a route that pushes output out, then discards every output buffer, then ends the request early gets an empty body. Output that another plugin deliberately processes itself, and stray output over 1 MB, are left alone. Each such request reserves about 1 MB of memory while it runs.
+
+## v1.6.536
+
+- Changed: Social Publishing no longer has its own separate Save button. Save settings at the bottom of the Review Portal settings saves it with everything else, as it already did. The save status (Saving, Saved, or what went wrong) now sits beside the Save button, to its left, so the button stays in place. Added: If part of the settings page fails to load, Save now stops and names the missing part instead of saving blanks over your stored settings. The same protection covers Social Publishing voice profiles and destinations.
+
+## v1.6.535
+
+- Changed: The Content Pipelines page now builds its view buttons and views from a single list, and the address bar follows the view you open, so a reload or a copied link lands on the same view. Nothing else looks different.
+
+## v1.6.534
+
+- Changed: Settings pages behind the Review Portal were reorganized internally to prepare for moving a few sections to their own pages later. Nothing looks or behaves differently.
+
 ## v1.6.533
 
 - Changed: PhantomStudio can now also read Elementor templates and LinkCentral links when its key matches, on sites where those plugins are active. Every Elementor content type on the WordPress content routes becomes readable, and so do LinkCentral's links with the fields that plugin exposes for them. This is read-only and still limited to the WordPress content routes: the key can create, change or delete nothing, and both plugins' own routes outside those content routes are unaffected. Each plugin's own access check is accommodated for that one read request only, and if either plugin changes how its check works, PhantomStudio is refused rather than anything being exposed. Anyone holding the key can read all of that content, so treat the key like a password.

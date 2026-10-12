@@ -20,7 +20,7 @@ Coverage is for SyteOps administrators only. It is deliberately **not** part of 
 
 ## Which articles are listed
 
-Coverage lists exactly the content your answer engines describe — the same content types you picked under **Content Pipelines → Review Portal settings → Answer-engine publishing → Content types**. Change that setting and Coverage follows it, so the two can never disagree about what is in scope. (See [Choosing which content types are covered](llms-txt.md#choosing-which-content-types-are-covered).)
+Coverage lists exactly the content your answer engines describe — the same content types you picked under **Content Pipelines → Answer Engine → Answer-engine publishing → Content types**. Change that setting and Coverage follows it, so the two can never disagree about what is in scope. (See [Choosing which content types are covered](llms-txt.md#choosing-which-content-types-are-covered).)
 
 Beyond that:
 

@@ -21,6 +21,6 @@ Every operation runs through the single dispatch endpoint. See [Dispatch contrac
 | [`modules`](./modules) | 10 | yes |
 | [`pipelines`](./pipelines) | 8 | yes |
 | [`roles`](./roles) | 6 | yes |
-| [`status`](./status) | 1 | no |
+| [`status`](./status) | 3 | no |
 | [`users`](./users) | 6 | yes |
 | [`variables`](./variables) | 5 | yes |

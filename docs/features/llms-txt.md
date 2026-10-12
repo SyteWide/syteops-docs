@@ -20,7 +20,7 @@ A Markdown list of your published Posts (most-recently-updated first), each with
 
 ## Choosing which content types are covered
 
-**Content Pipelines → Review Portal settings → Answer-engine publishing → Content types** decides which content your AI files describe. It covers all of them at once: `llms.txt`, the questions feed, FAQ structured data, and the LLMS Amplifier index.
+**Content Pipelines → Answer Engine → Answer-engine publishing → Content types** decides which content your AI files describe. It covers all of them at once: `llms.txt`, the questions feed, FAQ structured data, and the LLMS Amplifier index.
 
 Out of the box only **Posts** are covered. Pages are usually site furniture — your contact page, your privacy policy, a landing page — rather than content that answers a question worth citing, so listing them mostly pads the file. Tick **Pages**, or any other public content type, if your site is the exception.
 
@@ -36,7 +36,7 @@ LLMS Amplifier can serve a decoupled ("headless") front end, in which case it wo
 
 When an article goes through the [Review Portal](review-and-publish-your-post.md), the GEO analysis records the specific questions it answers well — and an answer for each, drawn from the article. Those question-and-answer pairs are what an AI answer engine actually quotes, so SyteOps can publish them in five places.
 
-Each one has its own switch under **Content Pipelines → Review Portal settings → Answer-engine publishing**:
+Each one has its own switch under **Content Pipelines → Answer Engine → Answer-engine publishing**:
 
 | Switch | What it does |
 | --- | --- |
@@ -171,7 +171,7 @@ along with everything else.
 
 Instead, the **Answer-engine publishing** card shows you exactly which lines are missing and offers
 to **add them for you**. SyteOps adds only those lines. Every rule you wrote stays exactly where it
-is, and there is an **Undo this change** button that puts the file back the way it was.
+is, and there is an **Undo this change** button that puts the file back the way it was. Both buttons are marked **Applies immediately**: they act as soon as you click them and reload the page, so if you have unsaved settings the page asks first.
 
 If you would rather do it yourself, the same card links straight to that plugin's robots editor.
 
