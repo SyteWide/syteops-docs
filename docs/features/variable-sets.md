@@ -28,7 +28,7 @@ These three types are also called SVS, DVS, and RSVS in older docs and in the ad
 2. Fill in:
    - **Full Name** — a descriptive label for the tab (e.g., "Service Packages").
    - **Tab Name** — the short label that appears in your admin navigation.
-   - **Acronym** — 1 to 10 characters, lowercase. This is used when SyteOps names the variables it sends to FlowMattic, so pick something short and memorable.
+   - **Tab Code** — 1 to 10 characters: lowercase letters, numbers or underscores, and not used by another tab. This is used when SyteOps names the variables it sends to FlowMattic, so pick something short and memorable.
    - **Initial Set Type** — Static, Dynamic, or Related Static.
    - **Set Count** (Related Static only) — how many parallel sets you need, 1–20.
 3. Click **Submit**.

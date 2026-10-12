@@ -287,7 +287,7 @@ These are **two independent systems** — do not confuse them. See [Licensing](f
 
 **Cause:** The master sync has not run yet, or the variable set is not currently published.
 
-**Solution:** Use the **Resync All Variables** button in the Debug Tool to force a sync. If still missing, confirm the variable set is in published state, not draft.
+**Solution:** Use the **Resync All Variables** button in the Debug Tool to force a sync. If still missing, confirm the tab is published: a draft tab's variables are not sent to workflows until it is.
 
 ## Debug Mode
 

@@ -40,4 +40,4 @@ Lists the pictures a person marked **Always keep**, with who kept them, when, an
 
 ## Several at once
 
-Tick rows, or press **Select all on this page**, then use **Restore selected**, **Delete now selected** or **Stop keeping selected**. Large selections are handled a few pictures at a time with progress shown. If one picture cannot be handled it is named in the result line and stays in the list, and the others carry on. The result also stays written under the buttons after the pop-up message goes away.
+Tick rows, or press **Select all on this page**, then use **Restore selected**, **Delete selected now** or **Stop keeping selected**. Large selections are handled a few pictures at a time with progress shown. If one picture cannot be handled it is named in the result line and stays in the list, and the others carry on. The result also stays written under the buttons after the pop-up message goes away.

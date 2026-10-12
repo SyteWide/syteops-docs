@@ -70,6 +70,20 @@ When Block All is enabled:
 - Legitimate authenticated users experience no change
 - REST API access logs are available for monitoring (see below)
 
+## Clean JSON From Content Routes
+
+Some plugins print HTML while WordPress is building a REST response, for example a wrapper element printed while a page's content is rendered. That output lands in front of the JSON, and the response can no longer be read by anything that expects JSON, such as a headless front end.
+
+SyteOps discards that stray output on the WordPress content routes (`/wp-json/wp/v2/...`), so the response is the JSON document and nothing else. This is always on and has no setting. It applies to every caller and works with REST restriction on or off.
+
+- **Only the content routes are covered.** Other plugins' routes and SyteOps' own routes are untouched.
+- **A route that sends its own body is not cleaned.** A file or an image a route serves itself is passed on unchanged and in order. If the route pushes it out in pieces while keeping its output buffer open, the pieces are passed on at the end of the request, or as a stream once they pass 1 MB, rather than one by one. One unusual pattern is not delivered: a route that pushes output out that way, then discards every output buffer, then tells the server to finish the request early gets an empty body.
+- **`HEAD` requests are not covered.**
+- **Nothing that was printed is ever stored.** SyteOps keeps only a small internal note of which routes were affected, how many bytes and when, for the 20 most recent routes, updated at most once every five minutes per route.
+- **It cannot catch everything.** If a plugin closes the output buffer SyteOps opened, what was printed up to that point is passed on as it would be without SyteOps, and so is what that plugin prints next, until SyteOps takes over again a moment later. Output that another plugin deliberately processes through its own output handler is left alone, and so is stray output larger than 1 MB.
+
+A developer filter can switch it off or extend it for a single request.
+
 ## User Enumeration Defense
 
 WordPress leaks usernames to unauthenticated visitors through three well-known surfaces that anyone scanning your site can use to harvest valid login names. **User Enumeration Defense** is an independent toggle on the same REST API admin page that closes all three.
@@ -189,6 +203,9 @@ Add the plugin's REST endpoint to the Custom Allowlist. Check the plugin's docum
 
 **WooCommerce issues:**
 WooCommerce OAuth paths (`/wc-auth/v1/*`) are automatically allowed. If you have custom WooCommerce integrations, add their specific REST routes to the allowlist.
+
+**A content route returns HTML in front of the JSON:**
+SyteOps removes output other plugins print into `/wp-json/wp/v2/...` responses (see Clean JSON From Content Routes above). If you still see stray output there, another plugin is closing the output buffer; if it is on a different route, that route is outside what SyteOps cleans.
 
 **Block All is too restrictive:**
 Block All is intended for staging/development. Switch to standard REST restriction for production sites that need selective endpoint access.
