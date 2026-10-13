@@ -8,6 +8,18 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.585
+
+- Fixed: paging through the reviewer queue's lists (Awaiting Your Review, Watching, Published Content and Coming Up) could skip or repeat an article at a page edge for articles saved during the hour the clocks change in autumn. The same fix applies to the editorial calendar's Unscheduled drafts list. Each page now continues from the same time the list is ordered by. A page you already had open before the update may repeat or miss a few rows on its next page until you reload it; nothing breaks.
+
+## v1.6.584
+
+- Added: the Published Content section on the reviewer queue has three links inside it to choose its order: Recently updated (the default), Newest published and Oldest published. Choosing one opens the section and scrolls to it, keeps your other filters and the Awaiting Your Review sort, and stays when you move between pages; Clear filters resets it. The order follows each row's published date, and rows with the same date keep a steady order from page to page. The links do not appear on a bundle's own page, which keeps the bundle's saved order, or where the section is not shown. Also fixed: a "sticky" post could repeat on the second page of a reviewer list or jump to the top of it, and a published sticky post could show under Awaiting Your Review.
+
+## v1.6.583
+
+- Added: the reviewer queue's Awaiting Your Review list has a Sort by menu beside the other filters. Choose Recently updated (the default), Received: newest first, Received: oldest first, and, when scheduling is on, Planned publish date: soonest first or latest first. Received sorts by the date each row shows, so an article with no recorded received date sorts by its own date; an article that shows no received date, or has no planned publish date, is listed last. A planned date is the time a reviewer chose, or the reserved slot while slot reservation is on. A chosen sort lists the rows in that order and does not group bundle pages under their heading. The choice applies to both the Posts and Pages lists, stays when you move between pages or use the quick filters, and Clear filters resets it. A bundle's own page keeps the bundle's saved order and shows no sort menu. Also fixed: the second page of Awaiting Your Review no longer skips or repeats rows when bundle pages were added to the first page.
+
 ## v1.6.582
 
 - Fixed: the Save bar is now the same height on every settings page, and its button no longer touches the bar's edges. The button has equal space above and below it and a gap to the right edge on the main settings tabs, the Content Pipelines settings pages and each content source, and the "Unsaved changes" line still sits beside it.
