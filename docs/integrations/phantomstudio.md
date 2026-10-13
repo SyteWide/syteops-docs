@@ -45,7 +45,7 @@ Anything PhantomStudio can read it can publish on your front end, so check the f
 
 ## PhantomWP Connect
 
-Writes go through PhantomStudio's companion plugin, PhantomWP Connect, which this integration does not replace. Install it from the PhantomStudio project's WordPress panel; it pairs on the first admin visit. While this integration is on, its routes under `/wp-json/phantomwp/v1/` are let through the REST restriction automatically, and Connect authenticates each request itself with a per-project signature. Block All still blocks them. [PhantomWP Connect documentation](https://phantomwp.com/docs/wordpress/phantomwp-connect).
+Writes go through PhantomStudio's companion plugin, PhantomWP Connect, which this integration does not replace. Install it from the PhantomStudio project's WordPress panel; it pairs on the first admin visit. While this integration is on, its routes under `/wp-json/phantomwp/v1/` are let through the REST restriction automatically, and Connect authenticates each request itself with a per-project signature. Block All still blocks them. A headless install shows a dismissible notice to SyteOps Admins, on SyteOps screens and on the Plugins screen, while Connect is not active; dismissing it is permanent for that user. [PhantomWP Connect documentation](https://phantomwp.com/docs/wordpress/phantomwp-connect).
 
 ## Other effects of the toggle
 
@@ -63,18 +63,72 @@ With the integration on, **System / API** also shows **Deploy when content chang
 - A menu that is created, renamed, deleted or changed, and a menu location that is assigned or cleared.
 - A category or tag that is added, renamed or removed (and a store product category or brand). A new category created while a draft is saved counts too, because it changes what your site's category lists contain.
 - A store product that a merchant edits, whose variations change or that is duplicated. Editing a product that is not published does not.
+- A WooCommerce store's products work the same way, with their categories, tags and brands. A published product whose regular price, sale price or sale dates change also triggers a rebuild, even when the product is not saved as a whole (a price edited by hand or through the WooCommerce API). A sale that WooCommerce starts or ends on its schedule triggers a rebuild too (with WooCommerce 10.5 or later at the exact time; older versions at the next daily check), and so does a variation that is published, unpublished or deleted. A stock change caused by a sale, such as an order reducing stock or a product selling out, never does.
 
 **What never triggers one:** orders, stock changes from a sale, refunds, customers and coupons, so a sale never rebuilds your site. Also not covered: changes made directly in the database or only to a post's custom fields without saving the post, sticky posts, term meta, a block theme's navigation, media library changes, site title and permalink settings, theme changes, users and comments. If you change one of those, deploy from PhantomStudio.
 
 **One rebuild for a burst of changes.** The first change starts a one-minute wait; every change in that minute rides along, and one request is sent when it ends.
 
-**When it actually goes out.** The request is sent by WordPress's scheduled tasks (WP-Cron), and WP-Cron runs only when WordPress receives a request. The deploy is triggered by the first request WordPress receives at least a minute after the change: an admin screen left open, a visitor's page view, an API read, or a system cron. On a site that receives no requests, it waits until one arrives, which on a purely headless backend can be a long time. If your site is headless, set up a real system cron that calls WordPress every minute, because that makes the timing predictable. A lost scheduled task is picked up again on the next ten-minute check, which is also driven by requests.
+**When it actually goes out.** The request is sent by WordPress's scheduled tasks (WP-Cron), and WP-Cron runs only when WordPress receives a request. The deploy is triggered by the first request WordPress receives at least a minute after the change: an admin screen left open, a visitor's page view, an API read, or a system cron. On a site that receives no requests, it waits until one arrives, which on a purely headless backend can be a long time. If your site is headless, set up a real system cron that calls WordPress every minute, because that makes the timing predictable. The pairing status below shows `wp_cron_disabled`, which is `true` when WordPress's own scheduled tasks are switched off and a system cron is therefore required. A lost scheduled task is picked up again on the next ten-minute check, which is also driven by requests.
+
+**Other plugins can ask too.** Another plugin on the same site can ask for a rebuild, for example when something it shows changes on a schedule. The request goes through the same one-minute wait as every other change, so it adds to the same single deploy, and it does nothing when the integration or automatic deploys are off or no valid address is saved.
 
 **If a request fails.** A network error or a server error (5xx) is tried once more after another minute. A refusal such as a 404 (usually a wrong or outdated address) is not retried, and neither is a redirect, because WordPress does not follow redirects for this request. The second failure is final: the screen shows it, and the next change asks again.
 
 **Where to find the address.** In PhantomStudio, open your project and find the **Auto-Deploy Webhook** panel. Copy the address. It starts with `https://phantomwp.com/` and **it is a secret**: anyone who has it can start a deploy, so it is stored encrypted, shown masked and left out of exports and backups. This plugin never writes it to a log or shows it in a message. A plugin that records WordPress's outgoing web requests can see it, so be careful with those. The address is checked when you save (it must be an `https` address on `phantomwp.com`; anything else is refused with a message and not stored) and again before every request. The address changes with each build in PhantomStudio, so paste the new one here when it does; leave the field blank on later saves to keep the stored one.
 
 If the switch is on but no valid address is saved, the screen says the switch is doing nothing. Under the address, a line shows when the last request went out and how it ended (for example **HTTP 200**, **failed: HTTP 404** or **failed: timeout**).
+
+## Headless install
+
+If the public site is served by the PhantomStudio frontend, **System / API** shows two more settings while the integration is on:
+
+- **This is a headless install.** The public site is served by the PhantomStudio frontend. WordPress serves the editor and the cart, checkout, account and receipt pages.
+- **Frontend address.** The https address of the frontend, with no path, for example `https://www.example.com`. It is not a secret, so it is shown as typed.
+
+The address is cleaned up when you save: the host is lowercased and a trailing slash is dropped. It is refused, with a message and the old address kept, when it is not https, has a path, a query or a login in it, or points at `localhost`, an IP address or a name with no dot. The switch cannot be turned on until a valid address is saved: it stays off and the screen says why. Clearing the address turns the switch off, and the screen says so. Only a SyteOps Admin can change either setting. They describe this site's own pairing, so they are left out of exports, backups and restore points, and an import keeps the values already on the site.
+
+In this version the two settings are stored and reported only. They do not change what PhantomStudio can read, how the REST restriction behaves or when a deploy is requested.
+
+## Pairing status
+
+`wp syteops phantomstudio status` shows whether this site is paired and ready for a headless PhantomStudio frontend. It reads settings only: it sends nothing, changes nothing and never prints the project key or the deploy address, only whether each is set.
+
+```bash
+wp syteops phantomstudio status
+wp syteops phantomstudio status --format=json
+```
+
+The default is a two-column table. With `--format=json`, the first line on standard output is one JSON object and nothing else is printed there; any other message goes to standard error. The command exits 0 whenever it runs, whether the integration is on or off and whether anything is configured, so a fleet check can read every site the same way. A non-zero exit means the command itself crashed, or that something ended the request before the summary was written; in that case a one-line explanation is printed to standard error.
+
+Example line (fake values):
+
+```json
+{"schema":1,"syteops_version":"1.6.592","integration_enabled":true,"headless":true,"frontend_origin":"https://www.example.com","key_set":true,"rest_restriction":"authenticated","webhook_set":true,"webhook_last_trigger":1760000000,"webhook_last_result":"http_200","webhook_debounce_seconds":60,"webhook_events":["content","product","menu","taxonomy","requested"],"stray_output_guard":true,"stray_output_last_seen":null,"connect_active":true,"connect_version":"2.4.1","capabilities":["rebuild_webhook","stray_output_guard","authors","rebuild_request"],"wp_cron_disabled":false}
+```
+
+| Field | Meaning |
+|---|---|
+| `schema` | The version of this format. It is `1`. |
+| `syteops_version` | The SyteOps version on the site. |
+| `integration_enabled` | The PhantomStudio integration is switched on. |
+| `headless` | The headless install switch is on. It can be on while the integration is off. |
+| `frontend_origin` | The saved frontend address, or an empty string. |
+| `key_set` | A project key is saved. The key itself is never shown. |
+| `rest_restriction` | `off`, `authenticated` or `block_all`: the REST restriction in force. |
+| `webhook_set` | Automatic deploys are switched on and a deploy address is saved. The address is never shown. |
+| `webhook_last_trigger` | When the last deploy request went out, as a Unix time, or `null` if none has. |
+| `webhook_last_result` | How it ended, such as `http_200`, or `null`. |
+| `webhook_debounce_seconds` | How long SyteOps waits after a change before it asks for a deploy. |
+| `webhook_events` | The kinds of change that request a deploy. |
+| `stray_output_guard` | SyteOps would discard HTML that another plugin prints into a content response. |
+| `stray_output_last_seen` | When it last recorded such output, or `null`. |
+| `connect_active` | The PhantomWP Connect plugin is active. |
+| `connect_version` | Its version, or `null`. |
+| `capabilities` | The features this site reports to PhantomStudio. |
+| `wp_cron_disabled` | WordPress's built-in scheduled tasks are switched off on this site (`DISABLE_WP_CRON`), so a deploy waits for a real system cron. |
+
+A plugin that prints plain text while WordPress loads, or that changes the PHP error display setting, can put text on standard output before the command starts. The command cannot prevent that.
 
 ## Setup
 
