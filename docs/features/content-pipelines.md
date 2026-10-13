@@ -100,7 +100,7 @@ Turning LLMS Amplifier on takes care of the rest of the setup for you — it aut
 
 Switching engines doesn't change the per-article **Analyze GEO** check in the [Review Portal](./review-and-publish-your-post.md#geo--ai-search-and-answer-engine-visibility) — that readiness score and the **Include in llms.txt / AI Answer Feed** toggle work the same way no matter which engine generates the file.
 
-You can also have GEO analysis run automatically the first time a new article arrives (Review Portal settings → **Analyze GEO when a draft is first created**). It is **off** by default, it needs a GEO provider, and later deliveries of the same article are not re-analyzed.
+You can also have GEO analysis run automatically (Review Portal settings → **Analyze GEO automatically**): once when a new article first arrives, and again a few minutes after the text of a draft or scheduled article changes. It is **off** by default, it needs a GEO provider, and each run is a paid AI call. See [Review and publish your post](review-and-publish-your-post.md) for exactly when it runs.
 
 ## Social Publishing
 

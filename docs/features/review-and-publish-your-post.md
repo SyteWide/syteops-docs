@@ -442,7 +442,7 @@ Click **Analyze GEO** to run an AI analysis of the post. Within a few seconds th
 - A **readiness score** indicating how well the article is structured to be picked up and cited by AI answer engines.
 - A list of the **questions your article answers** — these are the kinds of questions an AI search tool might recognize your article as a source for.
 
-You can run the analysis as many times as you like; it does not change the article itself. The score and the questions are stored as soon as the analysis finishes, and re-running never discards answers you have edited yourself. If you turn on **Analyze GEO when a draft is first created** on the Review Portal settings, that same analysis also runs once when a new article first arrives, so reviewers do not have to click the button for every new draft. It is off by default, and later deliveries of the same article are not re-analyzed.
+You can run the analysis as many times as you like; it does not change the article itself. The score and the questions are stored as soon as the analysis finishes, and re-running never discards answers you have edited yourself. If you turn on **Analyze GEO automatically** on the Review Portal settings, that same analysis also runs when a new article first arrives and again a few minutes after its text changes, so reviewers do not have to click the button for every new or edited draft. It is off by default.
 
 Running the analysis writes an answer for each question. Answers are shown in full in this panel (up to 2000 characters) and are never cut off. They stay held back from your answer-engine surfaces until a reviewer ticks **I have reviewed these answers**, which sits under **Pillar Article (Cornerstone)**. On a site where **AI Answers Reviewed** is required before publishing, that checkbox sits in a **Required to publish** box; where the requirement is switched off, the checkbox is still there but the box is not labeled required. If an answer already looks cut off from an earlier review, edit it or tap **Draft answer** again — re-running the analysis keeps your existing wording and will not replace it. See [Publishing the questions your articles answer](./llms-txt.md#publishing-the-questions-your-articles-answer) for the full walkthrough of what that switch does and where the answers get published.
 
@@ -581,7 +581,7 @@ To stop half-finished articles going live, **Approve & Publish** first checks th
 | GEO Analysis | The article has never been analyzed for AI-engine readiness. | **Analyze GEO** |
 | GEO Analysis Is Current | The article was edited after it was last analyzed, so the score is out of date. Formatting-only edits — bolding a word, re-wrapping a paragraph — do not count. | **Re-analyze GEO** |
 | Description | The description is empty. | **Generate with AI** |
-| Categories & Tags | The article needs exactly one real category ("Uncategorized" does not count) and at least one tag. The message names exactly which part is missing — no category yet, more than one category, or no tag. | **Suggest categories & tags**, plus **Go to Categories & Tags** |
+| Categories & Tags | The article needs exactly one real category (only "Uncategorized" does not count; your site's main category counts like any other) and at least one tag. The message names exactly which part is missing — no category yet, more than one category, or no tag. | **Suggest categories & tags**, plus **Go to Categories & Tags** |
 | AI Answers Reviewed | Nobody has confirmed the AI-written questions and answers for this article. Until someone does, they are held back from your answer-engine surfaces. | **Review the answers** |
 
 Some items finish as soon as you click the button. Others — accepting a generated meta description, or choosing which suggested categories and tags to keep — hand back to you, and the list closes so you can make the choice. Once everything is clear, click **Publish now** and the article goes live.
@@ -993,7 +993,14 @@ A requirement is skipped when the reviewer cannot act on it (no permission for t
 
 Turning **AI Answers Reviewed** off here only removes it from the publish checklist — it does not change what appears on your answer-engine surfaces. An article's questions and answers are held back from every one of those surfaces until someone ticks **I have reviewed these answers** in the article's GEO panel, whether or not this requirement is switched on. See [Reviewing the answers before they go live](./llms-txt.md#reviewing-the-answers-before-they-go-live).
 
-**Analyze GEO when a draft is first created** is **off** by default. When it is on (and a GEO provider is configured), analysis runs once when the article first arrives. Later deliveries of that article are not re-analyzed.
+**Analyze GEO automatically** is **off** by default. When it is on (and a GEO provider is configured), analysis runs:
+
+- **Once when the article first arrives.**
+- **Again a few minutes after its text changes**, for drafts, pending and scheduled articles. This covers an edit made anywhere: in the Review Portal, in the WordPress editor, or by a later delivery of the same article that changed its words. A change to the words of the title or the body counts; formatting alone does not.
+
+Each run is a paid AI call, so SyteOps keeps the number down: it waits about five minutes so several edits in a row cost one call, it waits longer while someone has the article open in the Review Portal, it does not retry text that already failed to analyze, and it runs at most six times a day for one article. After that the article shows as needing analysis until someone clicks **Analyze GEO**.
+
+Two things never happen automatically. **Published articles are not re-analyzed**: a new answer has to be accepted by a person before it is shown to answer engines, so a published article whose text changed appears as **Stale** on the Coverage screen instead. And **answers are never accepted automatically**: if a run finds a new question, **I have reviewed these answers** is cleared and someone has to tick it again.
 
 Turn a requirement off if your workflow publishes without it — for example, if you do not use tags. Whatever you leave on is enforced in the portal and on the server.
 
