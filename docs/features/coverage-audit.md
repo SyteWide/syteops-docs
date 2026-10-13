@@ -24,7 +24,7 @@ Coverage lists exactly the content your answer engines describe — the same con
 
 Beyond that:
 
-- **Published articles only**, unless you switch on the **Include drafts & scheduled** filter — useful when you want to get a draft into shape before it goes live.
+- **Published, scheduled, draft and pending articles** are all listed and included in bulk runs by default, so work started on a draft is not repeated in the Review Portal. Switch **Include drafts & scheduled** off to limit the list and every bulk run to published articles (**Clear filters** switches it back on).
 - **Password-protected articles are never listed.** They are not public, so nothing SyteOps publishes describes them.
 
 ## What each column tells you
@@ -49,7 +49,7 @@ The **SEO title** and **Focus keyword** columns appear only when you have an SEO
 | State | What it means |
 | --- | --- |
 | **Never analyzed** | The GEO analysis has never run on this article. Nothing has been recorded for it at all. |
-| **Stale** | The analysis ran, but the article has been edited since. What was recorded describes an older version of the text. |
+| **Stale** | The analysis ran, but the article has been edited since. What was recorded describes an older version of the text. With **Analyze GEO automatically** on, a draft or scheduled article is re-analyzed by itself a few minutes after its text changes; a published article stays Stale until someone analyzes it here or in the Review Portal. |
 | **Current** | The analysis matches the article's current words. Nothing is owed here. |
 | **Analysis failed** | The last attempt errored. The row shows the reason and a **Retry** link so you can try that article again. |
 
@@ -63,7 +63,7 @@ Three sets of filters sit above the table, and they combine:
 
 - **By GEO state** — **Never analyzed**, **Stale**, **Current** or **Analysis failed**. Filtering to *Never analyzed* is the usual way to find everything that has never been looked at.
 - **By gap** — **Answers awaiting review**, **No meta description**, **No focus keyword** or **No SEO title**. Each one narrows the table to articles missing that single thing, so you can clear one kind of gap across the whole library in one sitting. The keyword and SEO title filters appear only when an SEO tool integration is switched on.
-- **Include drafts & scheduled** — a toggle that widens the list beyond published articles.
+- **Include drafts & scheduled** — on by default. Turn it off to narrow the list, and the bulk runs, to published articles only.
 
 **Clear filters** puts you back to the full list.
 
@@ -106,13 +106,13 @@ The limits below apply to **both** run types unless a bullet says otherwise:
 - **Clicking Stop** on the active button halts the run after the article in progress finishes.
 - **Only one bulk run can be in flight at a time** on the site.
 - **Some articles are skipped**, and every skip is reported with its reason:
-  - An article **somebody currently has open in the Review Portal** is skipped.
+  - An article **somebody currently has open in the Review Portal** is skipped. Its checkbox is disabled, and a line under the buttons says how many rows on the page cannot be selected and why.
   - **Analyze only:** an article whose **exact current text already failed** is skipped rather than being sent to the provider to fail identically and bill you again. **Editing the article makes it eligible again.** The **Retry** link on a failed row clears that block for a single article.
   - **Accept only:** an article with **no stored answers** is skipped.
 
 ### After an Analyze run
 
-When an analyze run finishes you get a summary of what was analyzed, what failed and what was skipped. Reload the page to see the updated table. You may lose a paid completion you have already started if you stop mid-run, but you never have to wait out a batch you changed your mind about.
+When an analyze run finishes you get a summary of what was analyzed, what failed and what was skipped. Skipped articles are named (up to five, then a count) with the reason, and any skip turns the notice into a warning. Reload the page to see the updated table. You may lose a paid completion you have already started if you stop mid-run, but you never have to wait out a batch you changed your mind about.
 
 ### After an Accept run
 

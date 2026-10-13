@@ -8,6 +8,22 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.589
+
+- Changed: with Analyze GEO automatically switched on (the setting was called Analyze GEO when a draft is first created), SyteOps now also re-analyzes a draft, pending or scheduled article a few minutes after its text changes, wherever the edit was made, so reviewers are no longer asked to run the analysis again by hand. Each run is a paid AI call: several edits in a row cost one run, text that already failed to analyze is not retried, an article gets at most six automatic runs a day, and a run waits while someone has the article open in the Review Portal. Published articles are not re-analyzed automatically, and answers are never accepted automatically.
+
+## v1.6.588
+
+- Fixed: the publish check no longer says an article has no category when it is filed under your site's main category. Only the category with the slug uncategorized is rejected, any other single category counts, and the message names the Uncategorized category by its current name. Suggest categories & tags no longer adds a second category to an article that already has one.
+
+## v1.6.587
+
+- Changed: the Coverage tools (analysis, SEO and pictures) now include draft, scheduled and pending articles by default; the Include drafts & scheduled control turns that off. A run that skips articles now names them (up to five) with the reason, shows a warning instead of a success notice, and a line under the buttons says how many rows on the page cannot be selected and why.
+
+## v1.6.586
+
+- Fixed: an article with an apostrophe, a dash or a private status could not be published untouched after its answer-engine analysis (the check said the analysis was out of date), and saving it from the review portal rewrote its title with curly quotes, dashes or a "Private:" prefix. The portal's title field now starts from the title exactly as stored.
+
 ## v1.6.585
 
 - Fixed: paging through the reviewer queue's lists (Awaiting Your Review, Watching, Published Content and Coming Up) could skip or repeat an article at a page edge for articles saved during the hour the clocks change in autumn. The same fix applies to the editorial calendar's Unscheduled drafts list. Each page now continues from the same time the list is ordered by. A page you already had open before the update may repeat or miss a few rows on its next page until you reload it; nothing breaks.
