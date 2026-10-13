@@ -8,6 +8,46 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.599
+
+- Fixed: in the Review Portal, a note left on a page element is now labeled with the first few words of that element instead of its entire text, in the Feedback panel and in emails; the full text still shows on hover and is still passed to AI agent prompts. A selected note now outlines its whole card in the brand's primary color, pins on the preview are larger and grow when pointed at, and a bundle's note for reviewers is included in a grouped email only alongside a request to review, not with later activity such as new notes.
+
+## v1.6.598
+
+- Added: a headless install now shows a dismissible notice while its companion plugin is not active, saying the plugin's install file comes from the project's WordPress panel in PhantomStudio.
+
+## v1.6.597
+
+- Added: a WooCommerce store's items now ask PhantomStudio to rebuild the site when they are published, updated or unpublished, and when a published item's regular price, sale price or sale dates change on their own or a scheduled sale starts or ends, but never when a sale changes stock.
+
+## v1.6.596
+
+- Fixed: the REST API Restriction and Block All now judge each request by the method WordPress will actually run, and Block All now also refuses browser preflight requests.
+
+## v1.6.595
+
+- Added: other plugins on a headless PhantomStudio site can now ask for a rebuild through the same one-minute wait as every other change, and the pairing summary now reports whether WordPress's built-in scheduled tasks are switched off.
+
+## v1.6.594
+
+- Changed: the built-in REST API Restriction allowlist now names all four of SyteHero's public routes itself, with no change in behavior on a site running a SyteHero version that already allowlisted the impression and click routes.
+
+## v1.6.593
+
+- Fixed: a WP-CLI command that prints a headless PhantomStudio site's pairing summary now exits with an error and says so on standard error when another plugin ends the request before the summary is written, instead of exiting 0 with nothing printed.
+
+## v1.6.592
+
+- Added: a WP-CLI command now prints a headless PhantomStudio site's pairing summary as one line of JSON (or as a table) and exits 0 whether the integration is on or off, so a fleet check can read every backend; it never prints the project key or the deploy address.
+
+## v1.6.591
+
+- Added: SyteOps can now build a pairing summary for a headless PhantomStudio site (whether the headless switch, the project key and the rebuild address are set, the REST restriction in force, the last rebuild result and whether the PhantomWP Connect plugin is active) that never contains the key or the address. This version only builds the summary; nothing prints it yet and nothing else changes.
+
+## v1.6.590
+
+- Added: a headless install switch and a frontend address (System / API, shown while the PhantomStudio integration is on) record that your site's public pages are served by the PhantomStudio frontend and where it lives. This version only stores and reports them; nothing else changes.
+
 ## v1.6.589
 
 - Changed: with Analyze GEO automatically switched on (the setting was called Analyze GEO when a draft is first created), SyteOps now also re-analyzes a draft, pending or scheduled article a few minutes after its text changes, wherever the edit was made, so reviewers are no longer asked to run the analysis again by hand. Each run is a paid AI call: several edits in a row cost one run, text that already failed to analyze is not retried, an article gets at most six automatic runs a day, and a run waits while someone has the article open in the Review Portal. Published articles are not re-analyzed automatically, and answers are never accepted automatically.

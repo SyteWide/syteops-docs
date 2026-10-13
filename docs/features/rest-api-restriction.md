@@ -16,10 +16,11 @@ Blocks anonymous (unauthenticated) REST requests while allowing:
 - All authenticated requests (logged-in users)
 - Built-in allowlisted endpoints (see below)
 - Requests that carry the secret key of an enabled third-party integration, such as PhantomStudio (see below)
+- Browser preflight (OPTIONS) requests, so other plugins' browser calls keep working. A request is judged by the method WordPress will actually run.
 
 ### Block All REST API
 
-Blocks **all** REST API requests with no exceptions, including authenticated requests. Use this for staging or development sites that should not process any external API calls.
+Blocks **all** REST API requests with no exceptions, including authenticated requests and browser preflight (OPTIONS) requests. Use this for staging or development sites that should not process any external API calls.
 
 ### Custom Allowlist
 
@@ -44,11 +45,13 @@ These endpoints stay reachable when REST restriction (not Block All) is enabled.
 | `/wp-json` | REST API discovery |
 | `/wp-json/syteops/*` | SyteOps plugin endpoints |
 | `/wp-json/flowmattic/v1/*` | FlowMattic workflow automation |
-| `/wp-json/google-site-kit/*` | Google Site Kit |
-| `/wp-json/wordfence/v1/*` | Wordfence security |
-| `/wc-auth/v1/*` | WooCommerce OAuth |
+| `/wp-json/google-site-kit/*` | Google Site Kit — conditional: allowed while its integration is enabled |
+| `/wp-json/wordfence/v1/*` | Wordfence security — conditional: allowed while its integration is enabled |
+| `/wc-auth/v1/*` | WooCommerce OAuth — conditional: allowed while its integration is enabled |
 | `/wp-json/sytehero/v1/jurisdiction` | SyteHero consent — conditional: allowed whenever SyteHero is active |
 | `/wp-json/sytehero/v1/touch` | SyteHero attribution — conditional: allowed whenever SyteHero is active |
+| `/wp-json/sytehero/v1/impression` | SyteHero slide impressions — conditional: allowed whenever SyteHero is active |
+| `/wp-json/sytehero/v1/click` | SyteHero slide clicks — conditional: allowed whenever SyteHero is active |
 
 ## Third-Party Secret Keys
 
@@ -62,7 +65,7 @@ When REST restriction is enabled:
 - Any endpoint not in the built-in or custom allowlist
 
 When Block All is enabled:
-- Everything, with no exceptions
+- Everything, with no exceptions, including browser preflight (OPTIONS) requests
 
 ## Security Details
 
