@@ -26,7 +26,7 @@ Each integration card shows a small **tier badge** next to the category label. T
 | Tier | What it means | Examples |
 |---|---|---|
 | **Basic** | Toggle-only. Flip it on and you're done. Some Basic integrations store a single credential (like an API key), but there's no dedicated control panel. Most integrations live here. | Slack, Cloudflare, AWS SES, WooCommerce, Wordfence |
-| **Extended** | Has its own settings area inside SyteOps, stores credentials, and includes light AI configuration where applicable. More involved than Basic but doesn't drive deep AI features. | LLMS Amplifier, RingTonic, Google Drive |
+| **Extended** | Has its own settings area inside SyteOps, stores credentials, and includes light AI configuration where applicable. More involved than Basic but doesn't drive deep AI features. | LLMS Amplifier, RingTonic, Google Drive, Squirrly SEO |
 | **AI-Powered** | A full control panel with deep AI features — you pick which AI provider and model to use, SyteOps runs background jobs on your behalf, and the integration has quality gating built in. | LinkCentral |
 
 The tier is purely informational. It doesn't change how an integration works or what it costs — it just helps you plan your setup time and understand what each toggle unlocks.

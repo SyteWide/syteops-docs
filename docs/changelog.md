@@ -8,6 +8,142 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.633
+
+- Changed: On a licensing server, the admin screens and jobs change one issued connection at a time, so a scan, purge, revoke or delete no longer puts back another connection's earlier state, and a background settings save no longer brings back a deleted connection.
+
+## v1.6.632
+
+- Changed: A licensing server creates a table for its issued connection records and reads and writes them through one store; the records stay in the settings row until a later update moves them, and nothing changes for connected sites.
+
+## v1.6.631
+
+- Changed: A connected site signs its Management Server requests with its own connection ID once its server supports it, then stops storing the shared Management Server Secret; if the server refuses that ID the site falls back and asks to request the connection again; requests to an older server are unchanged.
+
+## v1.6.630
+
+- Added: On a licensing server, check and connection answers say which credential model the server uses, and Issued Connections shows whether each site uses its own secret or the shared one, with a count.
+
+## v1.6.629
+
+- Fixed: SEO values saved for custom post types are now stored where Squirrly SEO reads them, earlier saves move on the next save without losing an operator's title, and renaming an image now updates Squirrly's social image address.
+
+## v1.6.628
+
+- Fixed: On servers that host several sites on one database server, Lead Attribution's locks no longer block another site, so a table upgrade is no longer skipped and lead writes no longer wait on another site.
+
+## v1.6.627
+
+- Fixed: A site's own connection secret, or the Management Server Secret every site holds, can no longer run server actions on another site or on its server; each credential now runs only the actions that belong to it, and existing connections keep working.
+
+## v1.6.626
+
+- Changed: On a headless site, saving a setting the frontend reads only at build time (pages kept on WordPress, store pages, company name, theme colors, and Lead Attribution consent, internal-traffic, goal and tracker options) now asks for a rebuild; an unchanged or unrelated save does not.
+
+## v1.6.625
+
+- Added: On a headless site with Lead Attribution active, the frontend's browser can send a form entry through a ticketed, rate-limited route that adds it to the visitor's lead, or saves it as a separate lead when it cannot safely join one.
+
+## v1.6.624
+
+- Added: With IndexNow on, each Published Content row in the Review Portal and a post-editor side panel show the post's IndexNow result, and editors get a Send now button.
+
+## v1.6.623
+
+- Added: On a headless site using Squirrly SEO with IndexNow on, a key-protected address lists the pages that went live, changed or were removed, in the frontend's own addresses, with the IndexNow key, so the frontend can send them after each deploy.
+
+## v1.6.622
+
+- Changed: Groundwork for recording form entries from a headless frontend against the visitor's session; form capture on the site itself is unchanged.
+
+## v1.6.621
+
+- Added: On a site using Squirrly SEO, a new IndexNow switch in Content Pipelines, Answer Engine (off by default) sends each page's address to IndexNow when it goes live, when its text changes and when it is removed, with a one-sentence status line.
+
+## v1.6.620
+
+- Added: Two Manage API operations report IndexNow's state for the site or one post and queue a manual send, which goes out about a minute later.
+
+## v1.6.619
+
+- Changed: Going live, a text change and a removal now queue the page's address for IndexNow through Squirrly SEO; nothing is sent until the IndexNow switch ships and is turned on.
+
+## v1.6.618
+
+- Changed: Squirrly SEO moves to the Extended integration tier, because the coming IndexNow sends run as a background job; nothing is sent yet.
+
+## v1.6.617
+
+- Changed: Groundwork for sending page addresses to IndexNow through Squirrly SEO; this version reads Squirrly's settings and sends nothing.
+
+## v1.6.616
+
+- Added: On a site using Squirrly SEO, the headless frontend's keyed requests carry each item's saved SEO values as yoast_head_json, the shape the frontend already reads.
+
+## v1.6.615
+
+- Added: On a headless site, the frontend build can read the public consent, lead-tracking and brand values it needs from one keyed route, which also names the values the site cannot supply.
+
+## v1.6.614
+
+- Added: The site now tells a frontend build how many pages and posts it should receive, taken from the same keyed list requests the build makes.
+
+## v1.6.613
+
+- Changed: A revoked connection stays revoked: its site can no longer reactivate it by asking, and the server's operator reconnects it with Delete Connection.
+
+## v1.6.612
+
+- Added: On a headless site, the store's cart, checkout, account and receipt pages are listed for the frontend to skip, and two settings add or remove entries.
+
+## v1.6.611
+
+- Changed: With REST API restriction on, a visitor's route list at /wp-json shows only the routes they can use; a tool that discovers a route from that list must have the route allowlisted.
+
+## v1.6.610
+
+- Fixed: A Q&A submission from a visitor with no tracking session is now saved as its own lead without any tracking data, where it used to be silently dropped.
+
+## v1.6.609
+
+- Fixed: After a connected site's secret is rolled, its old key no longer returns the new secret or removes the connection, and a restricted connection can no longer lift its own restriction.
+
+## v1.6.608
+
+- Added: On a headless site, lead events posted from the frontend are now recorded where they used to be discarded, and the tracker sends its token in the request body when it posts to another hostname.
+
+## v1.6.607
+
+- Fixed: With REST API restriction on, a browser preflight to a route visitors cannot reach now gets an empty answer, the same as for a route that does not exist, where it used to get a description of the route.
+
+## v1.6.606
+
+- Fixed: Once a SyteOps Admin exists, only a SyteOps Admin can save the plugin's settings; the SyteOps Admin capability in the role definitions, this plugin's own entry in the active-plugins list and the plugin's setup state are protected from change by anyone else, and the default role for new users can no longer be set to a role that grants it.
+
+## v1.6.605
+
+- Added: A site's Management Server connection now sends its secret only to the server it was entered for, a list of permitted servers can be set in wp-config, and a Management Server requires a connected site's own credential to read, change or remove its connection.
+
+## v1.6.604
+
+- Fixed: once a SyteOps Admin exists, only a SyteOps Admin can run license setup, change the licensing settings or reopen the activation screen; WordPress's All Settings screen is restricted to a SyteOps Admin by default, with a setting to open it; license checks no longer run for a visitor who is not signed in.
+
+## v1.6.603
+
+- Fixed: only a SyteOps Admin can edit, change the role of, or delete a SyteOps Admin user; license activation from the purchase screen needs a SyteOps Admin once one exists; and deleting this plugin, or updating it from the single-plugin update page, is refused in more cases for someone who may not manage it.
+
+## v1.6.602
+
+- Fixed: deactivating or deleting this plugin from the Plugins screen, in bulk or one at a time, now needs the same permission everywhere, so an administrator who cannot do it from the plugin's own row can no longer do it another way.
+
+## v1.6.601
+
+- Fixed: changing this plugin's status or removing it through the REST API now needs the same permission as doing so on the Plugins screen, so an administrator who cannot deactivate or delete it there can no longer do either over REST.
+
+## v1.6.600
+
+- Fixed: with REST API restriction on, a request is now served only if it ends up signed in once WordPress has finished authenticating it, or its route is on the allowlist, and an integration that checks its own token inside its route needs an allowlist entry.
+
 ## v1.6.599
 
 - Fixed: in the Review Portal, a note left on a page element is now labeled with the first few words of that element instead of its entire text, in the Feedback panel and in emails; the full text still shows on hover and is still passed to AI agent prompts. A selected note now outlines its whole card in the brand's primary color, pins on the preview are larger and grow when pointed at, and a bundle's note for reviewers is included in a grouped email only alongside a request to review, not with later activity such as new notes.

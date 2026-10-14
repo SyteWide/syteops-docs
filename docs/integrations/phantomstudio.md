@@ -64,6 +64,7 @@ With the integration on, **System / API** also shows **Deploy when content chang
 - A category or tag that is added, renamed or removed (and a store product category or brand). A new category created while a draft is saved counts too, because it changes what your site's category lists contain.
 - A store product that a merchant edits, whose variations change or that is duplicated. Editing a product that is not published does not.
 - A WooCommerce store's products work the same way, with their categories, tags and brands. A published product whose regular price, sale price or sale dates change also triggers a rebuild, even when the product is not saved as a whole (a price edited by hand or through the WooCommerce API). A sale that WooCommerce starts or ends on its schedule triggers a rebuild too (with WooCommerce 10.5 or later at the exact time; older versions at the next daily check), and so does a variation that is published, unpublished or deleted. A stock change caused by a sale, such as an order reducing stock or a product selling out, never does.
+- A change to a setting the frontend reads only at build time also triggers a rebuild: the pages kept on WordPress (including the store's cart, checkout and account page choices), the company name, the theme colors, and the Lead Attribution consent mode, internal-traffic parameter, goals and tracker options. Saving a setting without changing it, or changing an unrelated one, does not.
 
 **What never triggers one:** orders, stock changes from a sale, refunds, customers and coupons, so a sale never rebuilds your site. Also not covered: changes made directly in the database or only to a post's custom fields without saving the post, sticky posts, term meta, a block theme's navigation, media library changes, site title and permalink settings, theme changes, users and comments. If you change one of those, deploy from PhantomStudio.
 
@@ -88,7 +89,76 @@ If the public site is served by the PhantomStudio frontend, **System / API** sho
 
 The address is cleaned up when you save: the host is lowercased and a trailing slash is dropped. It is refused, with a message and the old address kept, when it is not https, has a path, a query or a login in it, or points at `localhost`, an IP address or a name with no dot. The switch cannot be turned on until a valid address is saved: it stays off and the screen says why. Clearing the address turns the switch off, and the screen says so. Only a SyteOps Admin can change either setting. They describe this site's own pairing, so they are left out of exports, backups and restore points, and an import keeps the values already on the site.
 
-In this version the two settings are stored and reported only. They do not change what PhantomStudio can read, how the REST restriction behaves or when a deploy is requested.
+With the integration on, **This is a headless install** on and the frontend address saved, this site accepts the lead events that the lead tracker posts from the frontend, and the tracker's token in the request body; they are no longer discarded as coming from another website. This is the receiving side only. The frontend pages must load the tracker script themselves and be given the ingest and bootstrap addresses, which WordPress emits only into pages it renders itself, so a frontend page does not get them today. Form goals that this site captures on the server read cookies from the backend and are not covered for frontend visitors. With the integration or the switch off, lead capture behaves exactly as before. The two settings do not change what PhantomStudio can read or how the REST restriction behaves.
+
+## IndexNow changes for the frontend
+
+On a site using Squirrly SEO with **Send to IndexNow** switched on, the site lists the pages that went live, changed or were removed since a number you pass, at `/wp-json/syteops/v1/phantomstudio/indexnow-changes?since=<number>`. Like the other lists it answers only to the project key, and with the integration off the address does not exist (a 404). Send the key in the usual project-key header after each successful deploy, then send the listed addresses to IndexNow yourself.
+
+The answer is `{"schema":1,"key":"...","key_file":"/<key>.txt","cursor":12,"changes":[{"url":"https://www.example.com/page/","kind":"live","time":1760000000}],"truncated":false}`:
+
+- `changes` are oldest first, at most 500 per answer; a full 500 means ask again with `since` set to `cursor`. Start with `since=0` and keep the last `cursor`.
+- `kind` is `live`, `change` or `removal`; a removal's address is the one the page had while it was live.
+- `truncated: true` means your `since` is older than the list keeps (14 days or 1,000 changes): send every page once, then carry on from `cursor`.
+- `key` is the IndexNow key Squirrly SEO stores, and `key_file` is where the frontend must serve it. This is the only place the site gives the key out. When no key is stored the answer has no `key` and says `"missing":["key"]`; open Squirrly SEO's LLM Indexing settings once to create it.
+
+Turn Squirrly SEO's auto-indexing off on a headless backend, or its editor will send this server's addresses.
+
+## Pages the frontend does not build
+
+The cart, checkout, account and receipt pages of your store stay on WordPress, so the frontend must not build them. While the integration is on, the site lists them for the frontend at `/wp-json/syteops/v1/phantomstudio/exclusions`, an address that answers only to the project key (a signed-in administrator without the key is refused). Each store plugin that is active contributes its own pages (the second store also its order review page), and a page set to nothing is left out. An entry may be a page ID or a path; a pasted address of this site or of the frontend is cut down to its path, and capital letters are lowered. **System / API** has two more settings:
+
+- **Also keep on WordPress.** The frontend does not build the pages listed here; enter page IDs or paths separated by commas.
+- **Build these store pages.** Store pages listed here are built by the frontend although they are excluded by default.
+
+Only a SyteOps Admin can change them. An entry that matches no page is named under the field and has no effect. The list routes (`/wp-json/wp/v2/pages` and the others) still return excluded pages, so the frontend must skip the ones in this list. Changing the list does not ask for a rebuild.
+
+## How many pages a build should receive
+
+While the integration is on, the site gives the frontend's build check the number of items it should be handed, at `/wp-json/syteops/v1/phantomstudio/expected-pages`. Like the exclusions list, it answers only to the project key; a signed-in administrator without the key is refused, and with the integration off the address does not exist (a 404, which the build check reads as "not offered").
+
+Each number is the total the frontend's own keyed list request (`/wp-json/wp/v2/pages?per_page=1`, and the same for every other type) reports, minus the published excluded pages of that type, so it follows any plugin that narrows the lists (a language or visibility plugin) and never counts a draft, a private, a scheduled or a trashed item. The answer is `{"schema":1,"counts":{...},"routes":{...},"excluded":{...},"uncounted":[...]}`: `counts` holds whole numbers only, keyed by post type name and always with `page`; `routes` names the list address of each counted type; `excluded` says how many were subtracted; `uncounted` names types whose list gives no total. If the pages cannot be counted the answer is a 500 with the code `syteops_phantomstudio_count_failed`, so a build stops instead of deploying with pages missing.
+
+Not every type appears in `counts`: do not assume one is there, and do not read `uncounted` as an error. A site with a store or other content types lists them too, at most 40.
+
+## Site settings
+
+While the integration is on, the site gives the frontend the public values it needs when it builds, at `/wp-json/syteops/v1/phantomstudio/site-settings`. Like the other project routes it answers only to the project key; a signed-in administrator without the key is refused, and with the integration off the address does not exist (a 404, which the build check reads as "not offered").
+
+The answer is `{"schema":1,"settings":{...},"missing":[...]}`. A value the site does not hold is left out, never sent empty, and its name is listed in `missing`. Every value is one the site already shows in its own pages; no key, webhook address or recipient email is included.
+
+- `consent_posture` is the Lead Attribution consent mode as saved (`optout`, `optin` or `geo`), and only while Lead Attribution is active; with it off the value is listed in `missing`.
+- `internal_cookie` is the saved internal-traffic parameter name. The frontend's convention gives the cookie the same name as the parameter.
+- `lead_tracking` is what the frontend needs to run the lead tracker: the tracker and consent script addresses, the ingest, bootstrap and jurisdiction addresses, the enabled goals, and the consent settings. It is left out while Lead Attribution is inactive.
+- `brand` is the company name and the five theme colors (valid hex colors only).
+
+The frontend must hand the tracker its settings itself, as `window.SyteOpsLeads` before it loads the tracker script, using the camelCase names the tracker reads: `ingest_url` is `ingestUrl`, `bootstrap_url` is `bootstrapUrl`, `wpfp_mirror` is `wpfpMirror`, `reveal_desktop_only` is `revealDesktopOnly`, `goals` stays `goals`, and `consent` stays `consent` with `jurisdiction_url` moved inside it as `jurisdictionUrl` and `full_picture` as `fullPicture`. `tracker_src` and `consent_src` are the two script addresses (load the consent script first). `full_picture` is always `false` here, because the consent plugin does not run on a headless frontend and `true` would stop the tracker from ever firing.
+
+No source exists on the site for `ga4_measurement_id`, `ringtonic_campaign`, `brand.spacing` or `brand.type`, so they are always listed in `missing` unless the site's own code supplies them through the `syteops_phantomstudio_site_settings` filter. What the filter returns is checked again: known keys only, text of 191 characters or fewer, and a Google Analytics id must look like `G-XXXXXXXX` or it is dropped. A value the filter supplies leaves `missing`. Changing these settings does not ask for a rebuild.
+## SEO fields
+
+When the site uses Squirrly SEO (and Yoast is not running), the frontend's project-key requests for pages, posts and other content types carry each item's saved search settings in the same shape Yoast uses (`yoast_head_json`): title, description, canonical address, social titles, descriptions and images, social card type, and the index and follow choices. Only values saved on the item are sent, and a saved text that still contains a placeholder such as a site-name tag is left out. Nothing is sent for an item whose own search settings are switched off. Squirrly's automatic defaults are not computed, so an item with nothing saved has no field and the frontend uses the item's own title. The canonical address points at the frontend when a frontend address is set. Visitors, and signed-in users without the project key, never receive the field.
+
+## Form entries from the frontend
+
+With **This is a headless install** on, a frontend address saved and Lead Attribution active, the frontend's browser can send a form entry straight to this site and have it recorded as a lead. Neither route needs the secret key, because a visitor calls them. With Block All on, both are refused. Without a headless install or without Lead Attribution, both answer 404. The pairing status lists the capability `form_route` only while an entry would be recorded: the routes exist and an enabled form goal in Lead Attribution accepts the provider `frontend` (the default goal does, as does any goal set to match all providers).
+
+- `GET /wp-json/syteops/v1/phantomstudio/form-ticket` returns `{"ok":true,"ticket":"...","min_seconds":3,"ttl":3600}` and is never cached. Send the visitor's tracker session in `session_id` (optional). The ticket is tied to that session. At most 60 a minute from one address.
+- `POST /wp-json/syteops/v1/phantomstudio/form` takes a JSON body with `form_id` (lowercase letters, digits, `_` and `-`, up to 64), `name`, `email`, `phone`, `message`, `hp` (the hidden spam trap, always empty from a real form), `ticket`, `session_id`, `visitor_id` and `page_url`. The visitor id is accepted and ignored. The session id travels in the body, because the frontend cannot share the tracker's cookies with this site. Post the entry at least 3 seconds after the ticket was issued and within an hour of it.
+
+| Status | Meaning |
+|---|---|
+| 200 `{"ok":true}` | Recorded, or silently dropped (see below). A lead this entry created also returns `reference`, its public reference code. |
+| 400 | The body is not a JSON object, a contact field is not text, or `form_id` has the wrong shape. |
+| 403 | The `Origin` header is missing or is not exactly the frontend address. |
+| 409 `expired` | The ticket is more than an hour old. Fetch a new one and post again. |
+| 413 | A field is over 4 KB or the body is over 16 KB. |
+| 503 `unavailable` | Nothing was recorded: no enabled form goal accepts the provider `frontend`, or another plugin vetoed the capture. Retry later. |
+| 429 | More than 5 entries a minute or 20 an hour from one address. |
+
+**A 200 can be a drop.** A filled `hp` field, a ticket that is missing, forged, issued for another session or younger than 3 seconds all get the same 200 `{"ok":true}` as a real entry, and nothing is recorded or logged, so the reply does not tell a bot which check it failed. Test with a real ticket and a wait.
+
+The entry becomes a lead event in Lead Attribution (goal type form submit, provider `frontend`) on a lead of its own, and the four contact fields are saved on that lead following the Lead Attribution privacy mode. The route never writes to a lead that already exists: when the session already has a lead (a phone tap, for example), the entry is saved as a separate lead with no session, visitor or page. That is a deliberate trade-off: a returning visitor whose session already has a lead gets a second, unattributed lead, and nothing they typed is lost. The site runs the action `syteops_phantomstudio_form_submitted` with the lead id, the form id, `true` and the four cleaned fields, only for a lead the entry created. The route ignores cookies and ignores whoever is signed in. reCAPTCHA is not part of this version, and no form plugin is called.
 
 ## Pairing status
 
@@ -104,7 +174,7 @@ The default is a two-column table. With `--format=json`, the first line on stand
 Example line (fake values):
 
 ```json
-{"schema":1,"syteops_version":"1.6.592","integration_enabled":true,"headless":true,"frontend_origin":"https://www.example.com","key_set":true,"rest_restriction":"authenticated","webhook_set":true,"webhook_last_trigger":1760000000,"webhook_last_result":"http_200","webhook_debounce_seconds":60,"webhook_events":["content","product","menu","taxonomy","requested"],"stray_output_guard":true,"stray_output_last_seen":null,"connect_active":true,"connect_version":"2.4.1","capabilities":["rebuild_webhook","stray_output_guard","authors","rebuild_request"],"wp_cron_disabled":false}
+{"schema":1,"syteops_version":"1.6.592","integration_enabled":true,"headless":true,"frontend_origin":"https://www.example.com","key_set":true,"rest_restriction":"authenticated","webhook_set":true,"webhook_last_trigger":1760000000,"webhook_last_result":"http_200","webhook_debounce_seconds":60,"webhook_events":["content","product","menu","taxonomy","settings","requested"],"stray_output_guard":true,"stray_output_last_seen":null,"connect_active":true,"connect_version":"2.4.1","capabilities":["rebuild_webhook","stray_output_guard","authors","rebuild_request","lead_origin","exclusions","expected_pages","site_settings","seo_fields","form_route"],"wp_cron_disabled":false}
 ```
 
 | Field | Meaning |
@@ -145,7 +215,7 @@ With REST logging on, a request that presents the key and is not signed in to Wo
 ## Limits
 
 - **Block All still blocks it.** When Block All is enabled, every REST request is refused, including ones that carry the secret key.
-- **Authors.** With the key, PhantomStudio can read authors who have published content, and the authors embedded in posts and pages, with REST API restriction on or off. Front-end author archives and `?author=` links stay hidden even with the key.
+- **Authors.** With the key, PhantomStudio can read authors who have published content, with REST API restriction on or off. Four lookups are covered: one author by id, the list of authors, one author by slug, and the author embedded in each post and page. Each returns the same public fields: id, name, slug, link, bio, website and avatar links, and never an email, role or capability. An author who has no published content is not readable with the key, by design, so on a draft whose author has only drafts the embedded author is an error object (code `rest_user_cannot_view`, status 401), not an author; your front end must not treat it as one. Front-end author archives and `?author=` links stay hidden even with the key.
 - **One key at a time.** To rotate the key, paste the new one here. There is no overlap period for the old key.
 - **This only lifts this plugin's restriction.** A firewall, a Cloudflare rule, or another security plugin in front of your site needs its own rule for PhantomStudio.
 - **Responses are marked uncacheable.** Responses to requests that carry the key tell site caches not to store them. A CDN, edge, or server cache that ignores origin cache headers and caches `/wp-json` would still replay them to anyone, so exclude `/wp-json` from such rules.

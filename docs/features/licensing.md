@@ -18,6 +18,9 @@ Your **Product License** is the SyteWide license key that proves you purchased S
 2. Click **Save & Activate** (server) or **Activate** (endpoint)
 3. The license validates against SyteWide's licensing API
 4. Activation limits apply based on your plan (1, 5, 15, 50, or unlimited sites)
+5. Until a SyteOps Admin exists, any WordPress administrator can activate a license and run first-time setup. Once one exists, only a SyteOps Admin can run license setup, change the licensing settings or reopen the activation screen. One exception: a FlowMattic license key and email can be saved by any administrator through the FlowMattic install and activate actions.
+6. License checks run when a signed-in user opens an admin screen, not for a visitor who is not signed in. A locked site with no administrator visiting re-checks the next time someone signs in.
+7. The **Go to Reactivation** button and the **Return to activation screen** link are for a SyteOps Admin. Reopening the activation screen asks you to confirm first, because it takes the SyteOps Admin role away from everyone until a license is activated again.
 
 ### License States
 
@@ -41,6 +44,10 @@ When a license is revoked or disabled:
 
 When the license validates again, everything is automatically restored.
 
+### Revoking a connection
+
+On a Management Server, **Revoke** is final. A revoked connection is not restored by a request from the site: the site is told the connection was revoked, it is given nothing, and nothing on the server changes. When the site could be reached, the server removes its row from the connections table and the site can request a new connection. When it could not be reached, the row stays marked revoked until you delete it. To reconnect a revoked site, delete the connection on the server (**Delete Connection**), then use **Request Connection** on the site.
+
 ### Activation Errors
 
 | Error | Meaning | Action |
@@ -62,6 +69,16 @@ The **Management Connection** is a separate system for server-to-endpoint contro
 - **Issued Connections** — Connections created by the server for endpoints
 - **Server mode** — The controlling site that manages endpoints
 - **Endpoint mode** — A site managed by a server
+
+### The Management Server your site is set up with
+
+Your site sends its connection ID and Management Server Secret only to the Management Server they were entered for. The **Bound server** shown on the Management Server Connection card is that server: it is recorded when you enter the Management Server Secret (or a connection ID) in the dashboard, for the address saved at that moment. A secret that a server pushes to your site never changes it. A site that was already connected before this update is bound to its current Management Server automatically.
+
+If you change the Management Server address, nothing is sent to the new address until you enter the Management Server Secret again. You can do it in the same save as the new address, or save the address first and the secret afterwards. Typing the secret moves the binding to the new address and removes any other stored secret you did not type (for example the connection ID): use **Request connection** afterwards to get a new connection ID from the new server. If the card says the record of the bound server is missing, type the Management Server Secret again with the address unchanged (any other stored secret, such as the connection ID, is removed at that point; use **Request connection** to get a new one). The address must be a plain `https://` address on a public host name (no user name, port, query string or IP address).
+
+To limit which servers a site may use, set a list of permitted servers in `wp-config.php` (the `SYTEOPS_MANAGEMENT_SERVER_HOSTS` constant), as host names separated by commas (a host also allows its subdomains). When the list is set, an address that is not on it is refused when saved and when used. A list that is set but empty or malformed refuses every address until it is corrected.
+
+After you change the Management Server address, enter the Management Server Secret again and use **Request connection**. A list of permitted servers can be set in `wp-config.php`. To remove a connected site, delete its connection row on the server (**Delete Connection**): a site keeps working with its own connection secret until its row is deleted, and rolling the Management Server Secret does not shut it out. If the site may have been compromised, also roll the Management Server Secret.
 
 Management Connections are completely independent from your Product License. A valid Product License is required for both servers and endpoints, but the connection system operates separately.
 

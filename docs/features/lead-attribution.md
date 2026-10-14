@@ -336,6 +336,8 @@ Lead Attribution is **consent-aware**. Nothing is recorded, no cookie is set, an
 
 **Global Privacy Control (GPC) is always honored** — a visitor whose browser sends GPC is never tracked, in any region.
 
+If a visitor who is not being tracked (consent withheld, GPC on, or no tracking cookie) fills in the built-in qualification form, their answers are still saved as a lead, but with no tracking attached: no session, no visitor ID, and no source, landing page, referrer or campaign data. Each such submission is its own lead. This applies only to the built-in form; a qualification form that comes from a form plugin is not covered by this change and is handled as before.
+
 How consent is decided depends on your setup:
 
 - **Using WP Full Picture (recommended):** enable the [WP Full Picture integration](./../integrations/wp-full-picture.md#consent-gating-lead-attribution) and SyteOps follows Full Picture's consent choices automatically — a lead is recorded only after the visitor grants **Statistics** consent. That page also has the exact Full Picture settings and how to register SyteOps's cookies.

@@ -1,6 +1,6 @@
 {
     "schema_version": 1,
-    "syteops_version": "1.6.599",
+    "syteops_version": "1.6.633",
     "operations": [
         {
             "resource": "users",
@@ -1470,6 +1470,38 @@
             "destructive": false,
             "capability": "manage_options",
             "returns": "data: {fields: {...updated map...}}"
+        },
+        {
+            "resource": "squirrly",
+            "action": "indexnow_status",
+            "summary": "Read the Squirrly IndexNow state: whether SyteOps may send, why not, the queue, the last result and, with post_id, that post's eligibility.",
+            "params": {
+                "post_id": {
+                    "type": "integer",
+                    "format": "record_id",
+                    "required": false,
+                    "description": "Record id, digits only."
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {state, reason, enabled, squirrly_version, auto_indexing, post_types[], key_stored, paused, queue: {count, next_run}, last: {time, post_id, kind, result, http}, post?: {post_id, eligible, reason, last}}"
+        },
+        {
+            "resource": "squirrly",
+            "action": "indexnow_send",
+            "summary": "Queue one live post for IndexNow. It is not sent inside this request: it goes out through the normal queue about a minute later, and Squirrly's 24-hour rule still applies.",
+            "params": {
+                "post_id": {
+                    "type": "integer",
+                    "format": "record_id",
+                    "required": true,
+                    "description": "Record id, digits only."
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {queued, post_id, url, not_before, paused}"
         }
     ]
 }
