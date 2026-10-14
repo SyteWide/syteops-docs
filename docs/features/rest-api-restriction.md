@@ -13,10 +13,10 @@ SyteOps provides a security feature that restricts access to the WordPress REST 
 ### Enable REST Restriction
 
 Blocks anonymous (unauthenticated) REST requests while allowing:
-- All authenticated requests (logged-in users)
+- Requests that end up signed in: logged-in users, and API callers that WordPress signs in, such as application passwords or WooCommerce keys
 - Built-in allowlisted endpoints (see below)
 - Requests that carry the secret key of an enabled third-party integration, such as PhantomStudio (see below)
-- Browser preflight (OPTIONS) requests, so other plugins' browser calls keep working. A request is judged by the method WordPress will actually run.
+- Browser preflight (OPTIONS) requests, so other plugins' browser calls keep working. A request is judged by the method WordPress will actually run. For a route that visitors who are not signed in could not otherwise reach, the preflight is answered with an empty description, the same as for a route that does not exist, so it never lists the route's details.
 
 ### Block All REST API
 
@@ -53,6 +53,10 @@ These endpoints stay reachable when REST restriction (not Block All) is enabled.
 | `/wp-json/sytehero/v1/impression` | SyteHero slide impressions — conditional: allowed whenever SyteHero is active |
 | `/wp-json/sytehero/v1/click` | SyteHero slide clicks — conditional: allowed whenever SyteHero is active |
 
+## What the Route List Shows
+
+With the restriction on, the route list a visitor receives at `/wp-json` shows only the routes on the allowlist, plus SyteOps's own. A tool that finds a route from that list must have the route allowlisted before it can use it. Signed-in users see everything. The list no longer names WordPress's own `wp/v2` namespace unless one of its routes is allowlisted, and a third-party route whose address has an optional part is not listed even when allowlisted (it still works).
+
 ## Third-Party Secret Keys
 
 PhantomStudio reads your content over the REST API without a WordPress login, so it presents a project secret key in the `X-PhantomWP-Secret` header instead. When the PhantomStudio integration is on and a key is saved, a request whose header matches that key is let through. Nothing opens until a key is saved, and a missing, empty, or wrong key is blocked as usual. Block All still blocks everything. A matching key also gives PhantomStudio read-only access to your WordPress content routes, including drafts, private and password-protected items, but never user emails, and it can change nothing. Treat the key like a password. See the [PhantomStudio integration](../integrations/phantomstudio.md).
@@ -67,10 +71,16 @@ When REST restriction is enabled:
 When Block All is enabled:
 - Everything, with no exceptions, including browser preflight (OPTIONS) requests
 
+## Signed In, Not Just a Header
+
+With the restriction on, a request is served only if it ends up signed in once WordPress has finished authenticating it, or is on the allowlist. A credentials header, a login cookie sent without a REST nonce, or another plugin's approval without a signed-in user is not enough by itself: the request is treated like any other anonymous request.
+
+An integration that checks its own token inside its route, instead of signing in through WordPress, needs an allowlist entry. Add its path under **Security → REST API → Custom Allowlist**. A sign-in that WordPress completes only after the restriction has already refused the request, and leaves the refusal in place, does not count; neither does a custom sign-in that is not attached to the request's `Authorization` header or login cookie. Both need an allowlist entry. With debug logging on, such a refusal is recorded as "REST BLOCKED (nobody signed in after authentication)", which helps you find the route to add.
+
 ## Security Details
 
 - Blocked anonymous requests receive a randomized delay (200-800ms) before the 401 response to discourage automated probing
-- Legitimate authenticated users experience no change
+- Legitimate signed-in users experience no change
 - REST API access logs are available for monitoring (see below)
 
 ## Clean JSON From Content Routes

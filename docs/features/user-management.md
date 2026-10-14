@@ -148,9 +148,18 @@ The **SyteOps Admin** is a special WordPress role with elevated permissions:
 - Full access to all SyteOps features
 - Required for destructive operations (wipes, debug tool)
 - Only existing SyteOps Admins can assign this role to others
+- Only a SyteOps Admin can edit, change the role of, or delete a SyteOps Admin user; other administrators cannot
 - The role auto-recovers if capabilities are lost
 
 The first user to complete Initial Setup becomes a SyteOps Admin.
+
+### Who can change the plugin's settings
+
+The plugin's settings page is for a SyteOps Admin, and so is saving it. Once a SyteOps Admin exists, only a SyteOps Admin can save the plugin's settings, including a save sent to WordPress's settings handler directly. The SyteOps Admin capability in the role definitions, this plugin's own entry in the active-plugins list and the plugin's setup state are protected from change by anyone else (other plugins and other roles can still be changed), and a plain administrator cannot give the SyteOps Admin role to anyone or delete a site that has a SyteOps Admin. Until a SyteOps Admin exists, any administrator can complete first-time setup. This does not change who can read or use a stored key. Screens that other administrators are meant to use, such as **Roles & Users** when it is shown to them (its actions are available to administrators only while that setting is on), still save normally.
+
+### All Settings screen
+
+WordPress has a hidden **All Settings** screen that lets any administrator change any stored setting on the site by name. Once a SyteOps Admin exists, only a SyteOps Admin can open or save it, because it can change settings the plugin protects. This is on by default, including after an upgrade. A SyteOps Admin can change it on the **Admin** tab under **SyteOps Admin Management > Screen Access > Restrict the All Settings screen**. Turning it off opens the screen to every administrator again, which lets an administrator change the plugin's stored state. Ordinary WordPress settings pages such as General and Reading are not affected. Until a SyteOps Admin exists, any administrator can use the screen.
 
 ## Export and Import
 
