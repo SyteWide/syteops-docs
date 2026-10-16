@@ -91,9 +91,35 @@ The address is cleaned up when you save: the host is lowercased and a trailing s
 
 With the integration on, **This is a headless install** on and the frontend address saved, this site accepts the lead events that the lead tracker posts from the frontend, and the tracker's token in the request body; they are no longer discarded as coming from another website. This is the receiving side only. The frontend pages must load the tracker script themselves and be given the ingest and bootstrap addresses, which WordPress emits only into pages it renders itself, so a frontend page does not get them today. Form goals that this site captures on the server read cookies from the backend and are not covered for frontend visitors. With the integration or the switch off, lead capture behaves exactly as before. The two settings do not change what PhantomStudio can read or how the REST restriction behaves.
 
+### Brand colors on the shop and forms
+
+While the integration is on, System / API also shows **Write brand colors to the shop and form plugins**. It acts only while **This is a headless install** is on; a site that has never touched the box follows that switch, so it is on for a headless site and off for any other, and a choice you make is kept. With it on, the cart, checkout, account and form pages that WordPress still serves use the same five theme colors the frontend gets in `brand`, so the two look alike:
+
+- The primary color becomes the shop's main color, button color and active outline; the button text is black or white, whichever reads better on it, and the button hover is a slightly darker or lighter shade of it.
+- The accent color becomes the shop's active-text color, the secondary color its secondary button and softer active outline, and the heading text color its main text color.
+- The primary color also becomes the form plugin's main color, and the warning color its error color.
+
+Nothing else is changed: surfaces, borders, inputs and corner radii stay as those plugins have them, and the brand font and spacing are not written because neither plugin has a setting for them. It only acts on the public site, never in the admin, and only while those plugins are active. It does nothing when this is not a headless install, whatever the box says, so a site that is not headless is unchanged. Text colors are written only where they read on the shop's own background; otherwise the shop keeps its own text color. Turning it off removes the colors on the next page load. A color that is not a plain hex color is skipped. Limit: a shop page that does not call the standard page header will not carry the colors.
+
+## Setting the frontend and asking for a rebuild from the command line
+
+Two more commands do what the settings screen and a content change do, for a fleet that is set up over SSH:
+
+```bash
+wp syteops phantomstudio set-frontend https://www.example.com --headless
+wp syteops phantomstudio set-frontend https://www.example.com --no-headless --internal-traffic-param=sw_internal
+wp syteops phantomstudio rebuild
+```
+
+`set-frontend` checks the address with the same rules as the settings screen, refuses a bad one with an error and a non-zero exit, and prints the stored address and whether headless is on. `--headless` is refused unless a valid address is stored. It never turns the PhantomStudio integration on: when the integration is off it prints a line saying the settings take effect once it is on. `--internal-traffic-param` sets the Content Pipelines parameter that keeps editorial visits out of analytics, using that setting's own cleanup; an empty value clears it. A change that the frontend reads when it is built asks for a rebuild, as it does from the settings screen.
+
+`rebuild` asks for a rebuild through the same wait and checks as every other change and prints one line: queued, or why not (the integration is off, Deploy when content changes is off, or no valid deploy address is saved). It exits non-zero when nothing was queued. Neither command prints the project key or the deploy address. The pairing status lists `cli_set_frontend` and `cli_rebuild` among its capabilities, so a hub can tell a site has them.
+
 ## IndexNow changes for the frontend
 
 On a site using Squirrly SEO with **Send to IndexNow** switched on, the site lists the pages that went live, changed or were removed since a number you pass, at `/wp-json/syteops/v1/phantomstudio/indexnow-changes?since=<number>`. Like the other lists it answers only to the project key, and with the integration off the address does not exist (a 404). Send the key in the usual project-key header after each successful deploy, then send the listed addresses to IndexNow yourself.
+
+A frontend that cannot remember the last number between deploys can tell the site where it got to: after a successful send, `POST /wp-json/syteops/v1/phantomstudio/indexnow-changes/ack` with `{"cursor": <the cursor of the answer you sent>}`, with the project key. The site answers `{"acked": <number>}`. From then on a request without `since` lists only what changed after that number, and says so in `since_source` (`ack`, `request` or `default`); a `since` you pass always wins. An acknowledgment never moves backward, and a number the site never gave is refused.
 
 The answer is `{"schema":1,"key":"...","key_file":"/<key>.txt","cursor":12,"changes":[{"url":"https://www.example.com/page/","kind":"live","time":1760000000}],"truncated":false}`:
 
@@ -130,11 +156,11 @@ The answer is `{"schema":1,"settings":{...},"missing":[...]}`. A value the site 
 - `consent_posture` is the Lead Attribution consent mode as saved (`optout`, `optin` or `geo`), and only while Lead Attribution is active; with it off the value is listed in `missing`.
 - `internal_cookie` is the saved internal-traffic parameter name. The frontend's convention gives the cookie the same name as the parameter.
 - `lead_tracking` is what the frontend needs to run the lead tracker: the tracker and consent script addresses, the ingest, bootstrap and jurisdiction addresses, the enabled goals, and the consent settings. It is left out while Lead Attribution is inactive.
-- `brand` is the company name and the five theme colors (valid hex colors only).
+- `brand` is the company name, the five theme colors (valid hex colors only), and the font and spacing you set under Systems / API (Brand font and Brand spacing, shown while the PhantomStudio integration is on). The font is a CSS font stack such as `"Inter", system-ui, sans-serif`; the spacing is a number with px, rem or em, such as `4px` or `0.25rem`. A value that is not valid is not saved, and the one you had stays. Changing either asks for a rebuild.
 
 The frontend must hand the tracker its settings itself, as `window.SyteOpsLeads` before it loads the tracker script, using the camelCase names the tracker reads: `ingest_url` is `ingestUrl`, `bootstrap_url` is `bootstrapUrl`, `wpfp_mirror` is `wpfpMirror`, `reveal_desktop_only` is `revealDesktopOnly`, `goals` stays `goals`, and `consent` stays `consent` with `jurisdiction_url` moved inside it as `jurisdictionUrl` and `full_picture` as `fullPicture`. `tracker_src` and `consent_src` are the two script addresses (load the consent script first). `full_picture` is always `false` here, because the consent plugin does not run on a headless frontend and `true` would stop the tracker from ever firing.
 
-No source exists on the site for `ga4_measurement_id`, `ringtonic_campaign`, `brand.spacing` or `brand.type`, so they are always listed in `missing` unless the site's own code supplies them through the `syteops_phantomstudio_site_settings` filter. What the filter returns is checked again: known keys only, text of 191 characters or fewer, and a Google Analytics id must look like `G-XXXXXXXX` or it is dropped. A value the filter supplies leaves `missing`. Changing these settings does not ask for a rebuild.
+`brand.spacing` and `brand.type` are listed in `missing` until you set them. No source exists on the site for `ga4_measurement_id` or `ringtonic_campaign`, so they are always listed in `missing` unless the site's own code supplies them (and may override the brand font and spacing) through the `syteops_phantomstudio_site_settings` filter. What the filter returns is checked again: known keys only, text of 191 characters or fewer, and a Google Analytics id must look like `G-XXXXXXXX` or it is dropped. A value the filter supplies leaves `missing`.
 ## SEO fields
 
 When the site uses Squirrly SEO (and Yoast is not running), the frontend's project-key requests for pages, posts and other content types carry each item's saved search settings in the same shape Yoast uses (`yoast_head_json`): title, description, canonical address, social titles, descriptions and images, social card type, and the index and follow choices. Only values saved on the item are sent, and a saved text that still contains a placeholder such as a site-name tag is left out. Nothing is sent for an item whose own search settings are switched off. Squirrly's automatic defaults are not computed, so an item with nothing saved has no field and the frontend uses the item's own title. The canonical address points at the frontend when a frontend address is set. Visitors, and signed-in users without the project key, never receive the field.

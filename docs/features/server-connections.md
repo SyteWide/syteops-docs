@@ -152,6 +152,17 @@ When the server scans an endpoint, it checks:
 
 The results appear as status badges next to each connection.
 
+## Giving the server its own enrollment secret
+
+By default every connected site holds the same shared secret as the server. When your connected sites are on a current version, give the server its own secret so the shared one can be retired:
+
+1. Open **Issued Connections** and check the line "N of M sites use their own secret". Each row shows its credential; a site moves to its own secret on its next check.
+2. Click **Give this server its own enrollment secret**. The new secret is shown once, with a Copy button. Use it only for connecting a new site. Your FlowMattic token does not change. Afterward, **Roll the enrollment secret** replaces it at any time; no connected site holds it.
+3. Click **Stop accepting the shared secret**. Before it takes effect, the server lists every site that has not checked in on its own secret in the last 14 days; if any are listed, type RETIRE to continue. A site left behind shows an error asking it to update and is not locked out.
+4. After the server has its own enrollment secret, rolling the FlowMattic token does not change the shared secret older sites use, and the roll says so. To make the shared secret stop working, use **Stop accepting the shared secret** (type RETIRE if sites are still listed). Roll the FlowMattic token (push to all) and fix any workflow that used it to call these routes.
+
+**Accept the shared secret again** undoes step 3 at any time.
+
 ## Troubleshooting
 
 **Endpoint shows "Disconnected":**
