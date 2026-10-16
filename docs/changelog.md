@@ -8,6 +8,42 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.642
+
+- A licensing server moves its issued connections into their own table once, so no settings save can lose or undo a connection change, and it refuses to answer rather than treat a damaged store as empty.
+
+## v1.6.641
+
+- On a headless site, the shop and form plugins can take the site's brand colors, behind one switch under Systems / API.
+
+## v1.6.640
+
+- A headless site can set its brand font and spacing under Systems / API, and the frontend reads them with its other build-time settings.
+
+## v1.6.639
+
+- On a licensing server, checks, pairing, purchases, detach and backdoor reports change one issued connection at a time, so a request no longer undoes another connection's change or acts on a record revoked a moment earlier.
+
+## v1.6.638
+
+- A licensing server can give itself its own enrollment secret, roll the FlowMattic token without changing the secret older sites still use, and stop accepting the shared secret once no site depends on it.
+
+## v1.6.637
+
+- On a headless site, the frontend can tell the site which IndexNow changes it already sent, so a frontend that keeps no memory between deploys gets only the newer changes next time.
+
+## v1.6.636
+
+- Changed: The filter a site uses to supply build-time values to a headless frontend (analytics ID, call-tracking campaign, consent posture, internal-traffic cookie, brand spacing and type) is now a documented, supported contract; behavior is unchanged.
+
+## v1.6.635
+
+- Changed: A licensing server can hold an enrollment secret of its own for connecting new sites, tells it apart from the shared Management Server Secret and each site's own secret, refuses the shared secret once it is retired (a later update adds that control), gives the FlowMattic license only to an active connection, and offers a purchased site its own connection secret until the site uses it.
+
+## v1.6.634
+
+- Added: Two WP-CLI commands for headless sites: one queues a frontend rebuild through the usual checks and delay, and one sets the frontend address, the headless switch and the internal-traffic parameter with the same checks as the settings screen.
+
 ## v1.6.633
 
 - Changed: On a licensing server, the admin screens and jobs change one issued connection at a time, so a scan, purge, revoke or delete no longer puts back another connection's earlier state, and a background settings save no longer brings back a deleted connection.
