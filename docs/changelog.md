@@ -8,6 +8,34 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.649
+
+- The personal page has a My links section: each team member sees their own tracked links, where to place each one on LinkedIn, and their clicks and leads.
+
+## v1.6.648
+
+- Leads that come in through a form now carry the visitor's first campaign tags and the team member whose tracked link brought them, kept in a consent-gated first-touch cookie that a later visit never rewrites.
+
+## v1.6.647
+
+- A read-only metrics endpoint reports tracked-link clicks, unique clicks and attributed leads per person and link kind for client reports, with no lead personal data.
+
+## v1.6.646
+
+- A WP-CLI command imports existing Squirrly short-link redirects as tracked links, with a dry run first and a list of the rules that are safe to delete once the import has been applied and checked.
+
+## v1.6.645
+
+- Lead Attribution has a Tracked links screen: generate a person's link set from their user slot with a preview, then edit, copy, disable, alias and count clicks on each link.
+
+## v1.6.644
+
+- Lead Attribution can serve per-person tracked links: short addresses that redirect with one set of campaign tags and count each click, ready for the link screen in a later update.
+
+## v1.6.643
+
+- On the Server settings tab, the pinned Save bar lines up with the cards above it instead of overhanging them.
+
 ## v1.6.642
 
 - A licensing server moves its issued connections into their own table once, so no settings save can lose or undo a connection change, and it refuses to answer rather than treat a damaged store as empty.

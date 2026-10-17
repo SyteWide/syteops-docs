@@ -19,7 +19,7 @@ description: Make WP Full Picture the consent authority for Lead Attribution, an
 
 When this integration is on and you use [Lead Attribution](../features/lead-attribution.md), Full Picture becomes the consent authority: SyteOps reads Full Picture's consent choices directly — no per-site code. SyteOps maps Full Picture's **Statistics** consent to its own **analytics** category, so:
 
-> **A lead is recorded — and `syteops_vid` / `syteops_sid` are set, and first-touch attribution is stored — only after the visitor grants _Statistics_ consent in Full Picture.** A later change or withdrawal is honored. If Full Picture hasn't resolved a choice yet, SyteOps stores and sends nothing (fail-closed).
+> **A lead is recorded — and `syteops_vid` / `syteops_sid` / `syteops_attr` are set, and first-touch attribution is stored — only after the visitor grants _Statistics_ consent in Full Picture.** A later change or withdrawal is honored. If Full Picture hasn't resolved a choice yet, SyteOps stores and sends nothing (fail-closed).
 
 **Global Privacy Control (GPC) is always honored**, whether or not Full Picture is active — a visitor whose browser sends GPC has no lead recorded and no cookie set, in every region. (Full Picture 10.1.1 does not honor GPC itself; SyteOps does.)
 
@@ -54,6 +54,7 @@ Add these to Full Picture's cookie list under the **Statistics** category, so it
 |---|---|---|---|
 | `syteops_vid` | 1 year | Anonymous first-party visitor id (random UUID, no personal data) linking a visitor's conversions | Statistics |
 | `syteops_sid` | 30 minutes | Session id grouping conversions within a visit | Statistics |
+| `syteops_attr` | 90 days (the **First-touch cookie lifetime** setting) | First-touch attribution, written once: landing page, referrer, campaign tags, ad click id and the tracked link, no personal data | Statistics |
 
 ### Verify it works
 

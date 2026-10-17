@@ -1,6 +1,6 @@
 {
     "schema_version": 1,
-    "syteops_version": "1.6.642",
+    "syteops_version": "1.6.649",
     "operations": [
         {
             "resource": "users",
@@ -962,6 +962,25 @@
             "destructive": false,
             "capability": "manage_options",
             "returns": "data: {id, rt_contact_id}"
+        },
+        {
+            "resource": "leads",
+            "action": "tracked_link_metrics",
+            "summary": "Tracked-link metrics for reports: clicks, unique clicks and attributed leads per person and kind, plus company, ownerless and total rows. Dates are in the site timezone; the same answer as GET syteops/v1/leads/tracked-links/metrics. Carries no lead PII.",
+            "params": {
+                "from": {
+                    "type": "string"
+                },
+                "to": {
+                    "type": "string"
+                },
+                "group": {
+                    "type": "string"
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {schema, from, to, timezone, group[], generated_at, people[]: {slug, name, kinds{}, totals, first_touch_landings[]}, company, ownerless, totals, kinds?}"
         },
         {
             "resource": "leads",

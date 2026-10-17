@@ -242,6 +242,10 @@ Paste any URL into the **Automation webhook URL** field to activate it. Use the 
 | `wbraid` | Google consent-mode click ID (web-to-app) |
 | `ttclid` | TikTok click ID |
 | `li_fat_id` | LinkedIn click ID |
+| `link_owner` | The person whose [tracked link](#tracked-links) brought the visitor (their link name, such as `chet-bohley`), or `""` |
+| `link_owner_slot` | That person's team slot when the link was made (for example `001`), or `""` |
+| `link_kind` | Which of their links it was (`featured`, `deals`, `contact`, `post` or `msg`), or `""` |
+| `link_id` | The tracked link's internal id, or `""` |
 | `custom` | Object of your mapped custom fields, if any (`{ key: value }`) |
 | `ringtonic` | Object of RingTonic overlay data, if any (extra/differing CRM fields) |
 | `admin_url` | Deep link to the lead in WP admin |
@@ -330,6 +334,51 @@ Imported leads then show **Integrity verified with the source site's key**. Lead
 The export file plus its passphrase lets anyone create lead history that verifies as your site's. Never send the passphrase with the file, and delete the file from both sites once the move is done — the export copy stays on the server otherwise. "Verified with the source site's key" means the records are unchanged since they were signed with that key. It is only as trustworthy as the file you imported, so import only files you exported yourself.
 :::
 
+## Tracked links
+
+Tracked links give each team member short links such as `/li/chet-bohley` and `/meet/chet-bohley`. A visitor who opens one is sent to the page you chose with one set of campaign tags added, and the click is counted in your lead events. The default **LinkedIn** set creates five links per person (featured, deals, contact, post and message). Its prefix and tags are stored per site and edited on the **Tracked links** tab.
+
+- **The redirect is temporary and never cached,** so a link can be changed or turned off at any time.
+- **A click is counted without identifying the visitor** unless your consent mode is **Opt-out** and the visitor has not sent a "Global Privacy Control" signal. In Opt-in, By location and Full Picture setups, clicks are counted anonymously and the visitor's own consent choice is applied by the page they land on.
+- **A new link will not take over an existing page.** A path that matches an existing page, post or category, a WordPress route (such as the login, search or author pages) or a reserved file such as `/wp-admin` or `/sitemap.xml`, is refused. A link wins over a page created later at the same path, so turn the link off if you want the page to show.
+- **Link previews and checks are not counted.** A LinkedIn or Slack preview of a link, and a check that only asks for the headers, get the same redirect but are not recorded as clicks.
+- **Headless sites** (a separate frontend) do not use tracked links, because WordPress does not serve the public pages there. The Tracked links tab says so at the top when your site is set up that way.
+- **Each lead shows its link owner.** When a visitor who arrived through someone's link becomes a lead, by a call click or a form, the lead records that person as its **Link owner**. The owner appears on the lead page, the proof page, the lead emails, the CSV export, the automation webhook (`link_owner`, `link_owner_slot`, `link_kind`, `link_id`) and the Manage API. The person's name is shown, including on the shareable proof page, and it keeps showing after the person leaves the team. The link name (such as `chet-bohley`) is shown only when this site has no record of the person, for example on a lead imported from another site.
+- **The owner comes only from a link you created.** It is found by matching the visitor's campaign tags exactly against your links, whether the visitor arrived by the link or with the same tags in the address. Tags that differ in any way (one letter, a missing tag, a different case) credit no one, and two links with the same tags credit no one.
+
+### Managing links
+
+Open **Leads**, then the **Tracked links** tab. It is open to anyone who can manage Lead Attribution.
+
+- **Generate links for a person.** Choose a team member and a link set, then **Preview**. The preview shows the person's slug (a person who already has one keeps it), every path with the address it sends visitors to, and anything that cannot be created, such as a path that is reserved, taken by a page or category, or already used. Nothing is saved until you press **Create**.
+- **Copy.** **Copy** puts the full address on your clipboard, ready to paste into a profile or message.
+- **Edit.** Change a link's destination (a path on your site), its campaign tags, its fragment, or whether the owner's name is used as the page anchor. **Add alias** gives the link another path. **Disable** turns a link off (it then falls through to your site); **Enable** brings it back; **Delete** removes the link and its aliases.
+- **Links without an owner** such as `/meet/ourteam`, and the two company links, can be added at the bottom of the list.
+- **Filter** the list by person or by link set. Each row shows the owner, kind, destination with its tags, whether it is active, and how many clicks were counted.
+- **Not trackable from Featured.** Links of the Featured and Deals kinds carry this label. LinkedIn's Featured section does not let a click be traced back, so zero clicks there is not a fault.
+- **Link set templates.** Edit the prefix, source and, for each kind, the destination, medium, campaign and content pattern. Changes apply to links generated afterward; links that already exist keep their own values.
+
+### Metrics for reports
+
+A read-only metrics endpoint is available for reports and dashboards. It gives, for each person and link kind, the clicks, the unique clicks, the leads that came through the person's links and the pages those leads first landed on, for a date range you choose (up to 366 days, in your site's timezone). It never includes a lead's name, email, phone or address, and a landing page is shown only when it is a real page of your site. "Unique" counts visitors the site could identify; clicks counted without identifying the visitor add to the total only. Access needs a SyteOps Admin sign-in (an application password works) or the management key. Zero clicks on Featured and Deals links is expected (see above). The developer documentation describes the endpoint and its fields.
+
+### My links (your page)
+
+Each person who has tracked links sees a **My links** section on their own private page. It lists only that person's links, in the order of the link set. For each one it shows the full address with a Copy button, a short note on where to put it (the link set's own wording for that kind, which you can edit in the link set templates), the friendly `/meet/` path for messages, and the clicks and leads from the last 30 days and all time for that exact link. The numbers can be up to five minutes old. If they cannot be read, the page shows a dash rather than a zero. Featured and Deals links carry the note "Not trackable from Featured: LinkedIn replaces the link with the page address", so a zero there is expected. A disabled link stays listed with a Disabled tag and its address, but no Copy button. The section shows counts only, never a lead's details, and it does not appear for a person without links. On a headless site it says the links do not redirect there.
+
+### Import existing redirects (Squirrly)
+
+If your short links are Squirrly SEO redirects under `/li/` and `/meet/`, a WP-CLI command copies them into tracked links with the same destination and campaign tags for a plain visit. It only reads Squirrly; it never changes or deletes a Squirrly rule. Two things differ from Squirrly: if a visitor's address carries a query key that the link also sets, the link's tag wins (Squirrly appends the visitor's value), and the host the link sends follows your site address.
+
+1. Try it on a staging copy first, once its Squirrly destinations point at the staging address.
+2. Run a dry run (the default): the `import-squirrly` command in the `leads tracked-links` WP-CLI group, with `--people=linkedin-people.json` (the full command is in the plugin README). Nothing is written. Each rule is listed with what would happen to it, and the report ends with "Would be covered after --apply (do NOT delete yet)".
+3. Run it again with `--apply` to create the links. It reads every link back and exits with an error if anything could not be written or verified. Running it a second time changes nothing and reports "already present".
+4. Open every link, with and without the trailing slash, and check where it lands. Also check a response header only a tracked link sends (`Cache-Control: no-store, private`).
+5. After an applied run, the report lists the Squirrly rule ids that are covered. Delete only those, yourself. Rules listed as **NOT covered** (a permanent 301, a disabled, regex or post-tied rule, a different host, a path that matches nobody in the people file) stay in Squirrly.
+6. If your theme blocks `/li/` and `/meet/` so Squirrly can answer, remove that block only when NOT covered lists none of those paths, then check every link again.
+
+The people file lists each person's name, link name (`slug`), older first-name link names (`aliases`) and the date issued. A first-name link such as `/li/chet-msg` becomes an alias of the full-name link only when it sends exactly the same destination; otherwise it is kept as its own link and flagged. A destination on another host or scheme (www, http, staging) is not covered unless you add `--accept-host`. If Squirrly is not installed, the command says so and does nothing.
+
 ## Consent & privacy
 
 Lead Attribution is **consent-aware**. Nothing is recorded, no cookie is set, and no first-touch attribution is stored until the visitor's consent and jurisdiction allow it.
@@ -348,9 +397,22 @@ How consent is decided depends on your setup:
 
 ### Cookies this feature sets
 
-Lead Attribution sets two first-party cookies: a **visitor-id cookie** (1 year — a random id with no personal data, linking a visitor's conversions) and a **session cookie** (30 minutes — groups conversions within a visit). Register them with your consent tool so its scanner keeps them — an undeclared cookie is often auto-deleted, which breaks attribution. The exact cookie names to register are on the [WP Full Picture integration page](./../integrations/wp-full-picture.md).
+Lead Attribution sets three first-party cookies: a **visitor-id cookie** (1 year — a random id with no personal data, linking a visitor's conversions), a **session cookie** (30 minutes — groups conversions within a visit) and a **first-touch cookie** (90 days by default — described below). Register them with your consent tool so its scanner keeps them — an undeclared cookie is often auto-deleted, which breaks attribution. The exact cookie names to register are on the [WP Full Picture integration page](./../integrations/wp-full-picture.md).
 
 Suppressing tracking never breaks a form submission or call the visitor initiated — only the *analytics record* is withheld.
+
+### The first-touch cookie
+
+The first-touch cookie remembers how a visitor first reached your site: the landing page, the referring site, the campaign tags, any ad click id and, when they came through a [tracked link](#tracked-links), which link it was. It keeps only the page address and its campaign and click-id parameters, and only the referring site's address without its parameters, so no name, email, phone number or other parameter is stored. A lead created later, including one that starts with a form, a call click or the Q&A form, gets this whole set as its source.
+
+- **It is written once.** A later visit never changes it, and it is never mixed with a later visit's tags. The one exception: a first visit with no campaign tags or click id (typed in, or from a plain link) is replaced, as a whole, by the first visit that has them. It is written again after it expires.
+- **It follows your consent rules.** It is never set for a visitor sending Global Privacy Control, or before consent where your mode needs it (Opt-in, By location for EU/EEA/UK visitors, a Full Picture denial, or a consent cookie you configured that is not set). A tracked link sets it at once only in **Opt-out** mode; otherwise the page the visitor lands on sets it after they consent. If the visitor later withdraws consent through your consent tool or Full Picture, the cookie is removed.
+- **A consent tool that only sends a browser event** (no consent cookie and no Full Picture) cannot be seen when a tracked link is opened. In **Opt-out** mode the link then sets the cookie before the tool's choice is known. If your tool works that way and you need consent first, use **Opt-in** or set the consent cookie name and value.
+- **A form lead from a visitor sending Global Privacy Control** gets no source from the cookie.
+- **Its lifetime** is the **First-touch cookie lifetime (days)** setting under **Leads → Settings → Consent & privacy**, 90 days by default (1 to 395).
+- **An existing lead keeps its source.** The cookie fills in a lead's source only when the lead was created without one.
+
+If another plugin on your site keeps its own first-touch cookie, the two can disagree, for example when that plugin's cookie is older. Lead Attribution uses its own cookie when it creates a lead.
 
 ## WP Full Picture
 
