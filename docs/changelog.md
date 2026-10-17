@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.651
+
+- Tracked links use the shorter `/ops/<name>/<placement>` shape, the second Featured link is now called my work, and a move command switches an existing link set over while keeping its history and every old address working.
+
+## v1.6.650
+
+- Two WP-CLI commands whose names contain a hyphen, the short-link import and the fleet domains command, now work on production installs.
+
 ## v1.6.649
 
 - The personal page has a My links section: each team member sees their own tracked links, where to place each one on LinkedIn, and their clicks and leads.
