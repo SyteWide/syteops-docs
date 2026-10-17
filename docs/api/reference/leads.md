@@ -8,7 +8,7 @@ description: Manage API operations for the leads resource.
 
 # `leads`
 
-8 operation(s). All run through `POST /syteops/v1/manage/dispatch` (reads may use the documented GET form).
+9 operation(s). All run through `POST /syteops/v1/manage/dispatch` (reads may use the documented GET form).
 
 ## `delete`
 
@@ -223,6 +223,39 @@ data: &#123;id, status, label, deal_value_cents?, deal_currency?}
     "status": "string",
     "value_cents": 0,
     "currency": "string"
+  }
+}
+```
+
+## `tracked_link_metrics`
+
+Tracked-link metrics for reports: clicks, unique clicks and attributed leads per person and kind, plus company, ownerless and total rows. Dates are in the site timezone; the same answer as GET syteops/v1/leads/tracked-links/metrics. Carries no lead PII.
+
+**Capability:** `manage_options`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `from` | string | no |  |
+| `to` | string | no |  |
+| `group` | string | no |  |
+
+
+**Returns**
+
+data: &#123;schema, from, to, timezone, group[], generated_at, people[]: &#123;slug, name, kinds&#123;}, totals, first_touch_landings[]}, company, ownerless, totals, kinds?}
+
+**Request**
+
+```json
+{
+  "resource": "leads",
+  "action": "tracked_link_metrics",
+  "params": {
+    "from": "string",
+    "to": "string",
+    "group": "string"
   }
 }
 ```
