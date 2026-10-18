@@ -596,9 +596,10 @@ Site owners can switch any of the five requirements off individually — see [Re
 
 :::tip Open the live article or the full WordPress editor
 
-The portal's top bar has two jumps, next to each other:
+The portal's top bar has these controls, next to each other:
 
 - **View Live** (once the post is published) or **View Preview** (while it is still a draft or scheduled) — Opens the post in a new tab, rendered by your theme, so you can check the layout. On a draft, **View Preview** saves your current edits first. Preview is shown only to reviewers whose WordPress account can edit the post (Editor role or above). **View Live** is available to anyone already in the portal.
+- **Copy link** (once the post is published) — A menu next to **View Live**, closed until you open it. Pick where you are sharing it (LinkedIn, Facebook, X, Instagram, email or text) and it copies the article's public address with tags that credit you for the visits it brings, or pick **Plain address** for the address alone. It appears as soon as you publish, without a reload. Drafts, scheduled and private posts have no public address, so they have no menu.
 - **Edit in WordPress** _(Editor role or above)_ — Opens the post in the full WordPress block editor in a new tab — handy when you need a capability the streamlined portal doesn't offer, such as reordering blocks or adding an advanced layout.
 
 Your portal tab stays open so you can return to it to keep reviewing or to approve and publish.
