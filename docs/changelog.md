@@ -8,6 +8,22 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.655
+
+- Every live page and post on your personal page and in the review editor has a Copy link menu: pick LinkedIn, Facebook, X, Instagram, email or text and it copies the address with tags that credit you, or copy the plain address.
+
+## v1.6.654
+
+- The Tracked links screen groups links by person, with one-line rows, copy buttons, an on/off switch, old addresses folded away and a phone layout, and the templates move to their own Templates view.
+
+## v1.6.653
+
+- Visitors who never answer the cookie banner on an opt-out site now keep their first-visit campaign tags across pages, so their later form leads carry their source and the person whose link brought them.
+
+## v1.6.652
+
+- Your personal page has a Copy my links menu at the top, and the My links card opens on demand with your link, click and lead totals.
+
 ## v1.6.651
 
 - Tracked links use the shorter `/ops/<name>/<placement>` shape, the second Featured link is now called my work, and a move command switches an existing link set over while keeping its history and every old address working.
