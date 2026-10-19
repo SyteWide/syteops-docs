@@ -74,6 +74,10 @@ In addition to full backups, you can export and import specific sections:
 
 Scoped imports remap data to the target site automatically and only touch the scope you imported. Other tabs, modules, and users on the destination site are untouched.
 
+### Export the settings of one area
+
+The **Backup Actions** card has **Export the settings of one area** while a module that offers it is on. Today that is **Leads settings**: choose it and click **Export settings**. The file is saved under **Saved Backups** like any backup, and restoring it replaces only that area's settings while every other setting stays as it is; a setting the file does not hold keeps the site's value. API keys and secrets are never in the file, so the site you restore on keeps its own; webhook addresses are included, so keep the file private. A Leads settings file can only be restored while the Leads module is on. **Leads → Settings** links straight here with Leads already chosen.
+
 ## Related
 
 - [Licensing](licensing.md) — the Product License that post-restore re-check validates

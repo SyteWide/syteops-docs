@@ -214,10 +214,13 @@ This works with **Fluent Forms** today. On **Leads → Settings**, open the **Fi
 - **Match by field name**: a hidden field whose name is a first-touch value gets that value: `utm_source`, `utm_medium`, `utm_campaign`, `utm_term`, `utm_content`, `landing`, `referrer`, the click ids (`gclid`, `fbclid`, `msclkid`, `gbraid`, `wbraid`, `ttclid`, `li_fat_id`), `first_landing` (the first page the visitor landed on) and `originating_post` (the post that sent them to the form). A few common names are understood too: `landing_page`, `landing_page_url` and `landing_url` get the landing page, `referer` and `referrer_url` get the referrer, `first_landing_page` and `first_landing_url` get the first landing page, and `originating_url` gets the originating post. The card lists the fields that will be filled.
 - **Custom**: pick, for each of the form's hidden fields, which first-touch value it gets, or leave it on "Not filled".
 
-**Replace values already present** (off by default) decides what happens when a hidden field already has a value, such as a default of `{get.utm_source}` that reads the form page's address:
+**When a field already has a value** decides what happens when a hidden field already has a value, such as a default of `{get.utm_source}` that reads the form page's address. Each form has its own choice:
 
-- **Off**: only empty fields are filled, so a field's own default is kept.
-- **On**: every chosen field takes the first-touch value, even a blank one, so the entry carries one complete first-touch set and never a mix of the form page's tags and the first visit's.
+- **Fill empty fields only** (the default): only empty fields are filled, so a field's own default is kept.
+- **Replace when first touch has a value**: a chosen field takes the first-touch value whenever there is one. When the first touch has nothing for it, the field keeps what it has. A visitor without a first-touch cookie has no first landing page or referrer, so those fields stay as the form had them.
+- **Replace all, blanks included**: every chosen field takes the first-touch value, even a blank one, so the entry carries one complete first-touch set and never a mix of the form page's tags and the first visit's. A field the first touch has blank is emptied.
+
+A site that had **Replace values already present** switched on before this choice existed now shows **Replace all, blanks included**, and one that had it off shows **Fill empty fields only**. Nothing changes for a form until you pick a different choice.
 
 Good to know:
 
@@ -361,6 +364,12 @@ Imported leads then show **Integrity verified with the source site's key**. Lead
 The export file plus its passphrase lets anyone create lead history that verifies as your site's. Never send the passphrase with the file, and delete the file from both sites once the move is done — the export copy stays on the server otherwise. "Verified with the source site's key" means the records are unchanged since they were signed with that key. It is only as trustworthy as the file you imported, so import only files you exported yourself.
 :::
 
+### Copy your settings to another site
+
+**Leads → Settings** links to the **Backup** page with **Leads settings** already chosen under **Export the settings of one area**. Click **Export settings**: the file is saved under **Saved Backups**, where you can download it. To bring the settings in, restore that file on the other site (or on this one, to go back). Only the Leads settings are replaced: goals, qualification, consent, notifications and emails, form field mapping, the RingTonic contact push, internal traffic, and the AI provider and model used by **Auto-map with AI**. A setting the file does not hold (for example one added in a later version) keeps this site's value, and everything else on the site stays as it is. Forms are checked against the site you restore on: a RingTonic contact push or a form field fill set up for a form that site does not have is left out, and an email logo that is not an image in that site's media library is cleared.
+
+The file never holds your RingTonic API key, the RingTonic webhook signing secret or any other key, so the site you restore on keeps its own. It does hold your webhook addresses, which work like passwords, so keep the file private. It holds no leads, tracked links or counts either; to move those, use **Export Data** above. **Let the contact push finish after the visitor's page responds** is turned on again only where its rule can be added to that site's `.htaccess`; otherwise it is restored off. The same happens when you undo a restore or restore a full backup. The Leads module must be on to export or restore these settings, and the link shows only to administrators who can open the Backup page.
+
 ## Tracked links
 
 Tracked links give each team member short links such as `/ops/chet-bohley`, `/ops/chet-bohley/my-work` and `/meet/chet-bohley`. A visitor who opens one is sent to the page you chose with one set of campaign tags added, and the click is counted in your lead events. The default **LinkedIn** set creates five links per person: featured (`/ops/<name>`), my work (`/ops/<name>/my-work`, the second Featured card), contact, post and message (`/ops/<name>/msg`, also reachable as `/meet/<name>`), plus the company pair `/ops/company` and `/ops/company/contact`. Its paths, campaigns and tags are stored per site and edited on the **Tracked links** tab; the shipped campaigns are generic (`linkedin_profile`, `linkedin_outreach`).
@@ -493,8 +502,8 @@ Visits from your own team, test tools and automation should not count as leads' 
 
 - **Cookie name** and **Cookie value**: a browser holding that cookie.
 - **Query parameter**: a visit to any page with that parameter set to the cookie value, for example `?site_internal=1`. It also sets the cookie for 90 days, so the same browser stays internal on later visits without the parameter. Give your team a bookmark with it.
-- **Request header** and **Header value**: for scripts and test tools that can add a header to every request.
-- **User agents containing**: one per line, for example `HeadlessChrome` or `Playwright` (at least 3 characters, any case).
+- **Request header** and **Header value**: for scripts and test tools that can add a header to every request, such as a header your proxy or test runner sets (for example `X-Site-Internal` with the value `1`). It is checked on the server only.
+- **User agents containing**: one per line, for example `HeadlessChrome` (headless Chrome and Puppeteer) or `Playwright` for automated browsers (at least 3 characters, any case, matched anywhere in the user agent).
 - **Logged-in users who can**: logged-in users with this capability. The default, `edit_posts`, covers contributors, authors, editors and administrators; customers and subscribers are still tracked. Choose **Nobody** to turn it off.
 
 If your site already has an editorial internal-traffic parameter in the review settings (the one added to links sent to reviewers), it is used here too while **Cookie name** and **Query parameter** are blank, and the card says which one.

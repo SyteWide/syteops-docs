@@ -8,6 +8,35 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.668
+
+- **Change one lead-tracking setting from the command line:** new WP-CLI commands (`get`, `set` and `list`) read and change a single setting with the same checks the settings screen applies. A value the screen would quietly correct (an unknown mode, a number out of range) is refused with a message, and nothing else in your saved settings changes.
+- Webhook addresses are hidden in the output unless you add `--reveal`, and no secret is ever printed. The setting that edits your site's `.htaccess` file can only be changed on the settings screen.
+
+## v1.6.667
+
+- **`landing_page_url` is now the form page:** RingTonic contacts created from a form carry the page the form was submitted from in `landing_page_url`, without anything after `?` in its address, the same page Fluent Forms' notification emails show. **The campaign landing page is in `campaign_landing_page_url`**, the page the lead first arrived on with its campaign tags. `first_landing_page_url` is unchanged. A site that kept the default field names gets the new meaning automatically; register `campaign_landing_page_url` in your RingTonic workspace to keep receiving the campaign landing page.
+- **Contact source:** every contact SyteOps creates gets `contact_source` = `form`, also under Global Privacy Control. A contact RingTonic already had keeps its contact source, and one a phone call created is not marked as a form contact. Leave the name empty on the card to not send it. Contacts created before this version keep the campaign landing page in `landing_page_url`.
+- **Under Global Privacy Control**, a refused consent or internal traffic, neither landing page is sent.
+- **Site push status:** on the RingTonic card, each form that is switched on says when a site push on your site last checked in and whether it stood down or kept sending. While a site push has checked in and the **Submission id** is still the default pattern, the card warns: set it to the pattern your site push uses, or each lead may count twice.
+
+## v1.6.666
+
+- **Form fill, a choice for fields that already have a value:** under **Fill form fields from first touch**, each form now has **When a field already has a value** with three choices: **Fill empty fields only**, **Replace when first touch has a value**, and **Replace all, blanks included**. The middle choice overwrites a field only when the first touch has a value for it, so a lead without a cookie keeps the form's own first landing page and referrer. A form that had **Replace values already present** on now shows the third choice and one that had it off shows the first, so nothing changes until you pick.
+- **Internal traffic, with examples:** the **Request header** and **User agents containing** fields now say what to enter, with examples such as a header your proxy or test runner sets and `HeadlessChrome` or `Playwright` for automated browsers.
+
+## v1.6.665
+
+- **Export your Leads settings:** Leads → Settings now links to the Backup page, where **Export the settings of one area** has **Leads settings** already chosen. The file holds goals, qualification, consent, notifications and emails, form field mapping, the RingTonic contact push, internal traffic and the AI field-mapping choice, and is saved under **Saved Backups**.
+- **Restore them on any site:** restoring that file replaces only the Leads settings it holds and leaves every other setting on the site alone. Forms the site does not have are left out of the RingTonic contact push and form field fill, and an email logo that is not an image there is cleared. Your RingTonic API key and webhook signing secret are never in the file, so the site keeps its own; webhook addresses are included, so keep the file private. **Let the contact push finish after the visitor's page responds** comes back on only where its `.htaccess` rule can be added, also after undoing a restore or restoring a full backup. The Leads module must be on to export or restore, and the link shows only to administrators who can open the Backup page.
+
+## v1.6.664
+
+- **Leads → Settings, aligned and evenly padded:** every checkbox now sits level with its label, and its explanation runs on its own line beneath, lined up with the label text (for example **Replace values already present**).
+- **Mappings in a grid:** the per-field choices under **Fill form fields from first touch**, **Create contacts in RingTonic** and a form mapping now sit in two or three columns on a wide screen and one on a phone, every select the same width. The RingTonic custom field names, the internal traffic signals and the report addresses use the same grid.
+- **Even panels:** the shaded panels under a toggle or a form have the same padding on every side, help text is one size throughout, and card headings no longer carry a second underline.
+- **Phone:** the screen no longer scrolls sideways at phone width; long buttons wrap and the RingTonic custom field names stack.
+
 ## v1.6.663
 
 - **RingTonic replies, read in full:** a contact RingTonic answers as already sent is recorded as sent and keeps its RingTonic id; a request RingTonic is still busy with, or one whose request key was already used, is tried again later instead of being counted as done; each retry uses its own request key, so a retry after an outage can land; a contact RingTonic restored is filled only where it is empty, like any contact it already had; and a contact's existing values are read whether RingTonic lists them as names and values or as pairs.
