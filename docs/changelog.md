@@ -8,6 +8,53 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.663
+
+- **RingTonic replies, read in full:** a contact RingTonic answers as already sent is recorded as sent and keeps its RingTonic id; a request RingTonic is still busy with, or one whose request key was already used, is tried again later instead of being counted as done; each retry uses its own request key, so a retry after an outage can land; a contact RingTonic restored is filled only where it is empty, like any contact it already had; and a contact's existing values are read whether RingTonic lists them as names and values or as pairs.
+- **Fewer refused contacts:** a custom field RingTonic refuses for its type is dropped and the rest of the contact is saved; a phone RingTonic cannot read is dropped when there is an email to match on; a clash between a phone and an email is shown on the lead instead of being retried blindly.
+- **Let the contact push finish after the visitor's page responds** (RingTonic card, LiteSpeed servers only): adds a short rule to your site's `.htaccess`, for form submissions only, so the first attempt is not stopped by the server. Turning it off or deleting the plugin removes it; if the rule cannot be removed the card says so and keeps the setting on. If `.htaccess` cannot be written the setting stays off and the card shows the lines to paste; on OpenLiteSpeed restart the server once.
+- The card shows **In-request sends: N finished, M cut off (last 30 days)**, with a hint when sends are being cut off (those contacts still arrive a few minutes later from the background task).
+- **Forms that hold their entries:** an entry confirmed by double opt-in, approved by an admin, or paid on the payment provider's page now records its lead (and RingTonic contact) with the visitor and campaign details from the moment they submitted, instead of reading whoever releases it as the visitor. An entry the form marks as spam records no lead.
+
+## v1.6.662
+
+- **Originating post on headless sites:** when a separate frontend builds your public pages, each post that counts as an originating post (Leads → Settings → Consent & privacy → **Originating post types**) now tells the frontend so as it builds that post's page. Once the frontend passes it to the lead tracker, leads from that site record the post that sent the visitor, just as they do on a WordPress page. Drafts, scheduled, private and password-protected posts never count.
+- Changing **Originating post types** asks the frontend to rebuild, so every page carries the new choice.
+- **First-touch cookie lifetime on headless sites:** the frontend now receives your **First-touch cookie lifetime (days)** setting, so the visitor's first source is kept for the number of days you chose instead of always 90. Changing it, the frontend address or **This is a headless install** asks the frontend to rebuild.
+
+## v1.6.661
+
+- **Create contacts in RingTonic** (Leads → Settings, RingTonic card): tick a Fluent form and each submission becomes a RingTonic contact, with a **form submitted** conversion, sent in the background a moment later so the visitor never waits for RingTonic. Choose per form which fields hold the name, email, phone (with a second phone used when the first is empty), message and how they heard about you; phones are sent in international format.
+- **RingTonic custom field names** decide where each value lands in your workspace: first and last name, message, how they heard, and the lead's campaign details (landing page, first landing page, originating post, UTM tags, click ids, referrer). Leave a name empty to not send it; a name your workspace does not know is dropped by RingTonic while the rest of the contact is saved.
+- A contact RingTonic already has (from its website tracker or a returning visitor) is never duplicated: SyteOps only fills the custom fields it does not have yet, so a visitor typing someone else's phone or email cannot rewrite that person's name, message or campaign details. A **Submission id** (by default your site's address, the form id and the entry id) makes a repeated submission count once, also when a site's own RingTonic push uses the same pattern.
+- The contact is sent right after the visitor's page is answered, with a background task as the safety net; a busy or briefly unreachable RingTonic is tried again after 5, 30 and 120 minutes. Spam and trashed entries are not sent, and a form set to delete its entries after submission cannot be used (the card says so).
+- Campaign details are sent only when the lead has them. Under Global Privacy Control, or when the visitor refused consent, the contact is created without them. Internal traffic creates no contact by default; **RingTonic contacts for internal traffic** can send it without campaign details instead.
+- Each lead's **From RingTonic** card shows **Contact created from the form**, one line per submission: queued, sent, not sent and why, or failed with RingTonic's answer, and whether the conversion was recorded.
+
+## v1.6.660
+
+- Form leads from visitors without a first-touch cookie can take the campaign tags of the page the form was sent from. The new setting **When the visitor has no attribution cookie** is **Automatic** by default: in Opt-out mode such a lead now gets the form page's tags (before this version it got none), in Opt-in mode it stays blank, and By location (and WP Full Picture) decides per visitor, leaving it blank when the region cannot be told. Visitors sending Global Privacy Control never get them.
+- A refused consent is now honored on the server: a visitor who declined statistics in WP Full Picture's banner, or whose consent cookie (when you set one) does not hold the consent value, never gets the form page's tags, whatever the setting.
+- Each lead's page, the proof page, the CSV export and the automation webhook (`ft_via`) show **Attribution from**: the first-touch cookie, the browser tab, the form page, a site integration or none.
+- New **Internal traffic** settings keep your own team, test tools and automation out of tracking: a cookie, a query parameter that sets it for 90 days, a request header, user-agent text, and logged-in users with a capability. Their visits set no cookie and record no events, their tracked-link clicks still redirect but are not counted, and their form fields are not filled. **Form submissions from internal traffic** decides whether a form they send is recorded as a lead with no source (the default) or not recorded as a lead at all; the form's own entry and emails are unaffected either way. While the cookie name and query parameter are blank, the site's editorial internal-traffic parameter from the review settings is used. A headless frontend receives these settings and is rebuilt when they change.
+- What changes for existing sites: logged-in users who can edit posts (contributors, authors, editors, administrators) count as internal by default, so their clicks and visits are no longer counted and their test forms record leads with no source. Choose **Nobody** under **Logged-in users who can** to keep the old behavior. The other internal-traffic signals do nothing until you fill them in.
+
+## v1.6.659
+
+- Forms can have their hidden fields filled with the visitor's first-touch campaign details when they submit, so notification emails that print those fields keep working; choose per form which fields get which values.
+
+## v1.6.658
+
+- Leads now record the first page a visitor landed on and the blog post that sent them to the form, and you choose which post types count.
+
+## v1.6.657
+
+- The Tracked links screen's templates and share channels line up cleanly, with even spacing and nothing cut off on narrower screens.
+
+## v1.6.656
+
+- The My links card on your personal page is laid out as a compact three-column grid, with a tidier channel picker and copy buttons, the Friendly path label is now Message address, and the Featured caveat is a badge.
+
 ## v1.6.655
 
 - Every live page and post on your personal page and in the review editor has a Copy link menu: pick LinkedIn, Facebook, X, Instagram, email or text and it copies the address with tags that credit you, or copy the plain address.

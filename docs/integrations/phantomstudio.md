@@ -155,15 +155,27 @@ The answer is `{"schema":1,"settings":{...},"missing":[...]}`. A value the site 
 
 - `consent_posture` is the Lead Attribution consent mode as saved (`optout`, `optin` or `geo`), and only while Lead Attribution is active; with it off the value is listed in `missing`.
 - `internal_cookie` is the saved internal-traffic parameter name. The frontend's convention gives the cookie the same name as the parameter.
-- `lead_tracking` is what the frontend needs to run the lead tracker: the tracker and consent script addresses, the ingest, bootstrap and jurisdiction addresses, the enabled goals, and the consent settings. It is left out while Lead Attribution is inactive.
+- `lead_tracking` is what the frontend needs to run the lead tracker: the tracker and consent script addresses, the ingest, bootstrap and jurisdiction addresses, the enabled goals, the consent settings, and how many days the first-touch cookie lasts. It is left out while Lead Attribution is inactive.
 - `brand` is the company name, the five theme colors (valid hex colors only), and the font and spacing you set under Systems / API (Brand font and Brand spacing, shown while the PhantomStudio integration is on). The font is a CSS font stack such as `"Inter", system-ui, sans-serif`; the spacing is a number with px, rem or em, such as `4px` or `0.25rem`. A value that is not valid is not saved, and the one you had stays. Changing either asks for a rebuild.
 
-The frontend must hand the tracker its settings itself, as `window.SyteOpsLeads` before it loads the tracker script, using the camelCase names the tracker reads: `ingest_url` is `ingestUrl`, `bootstrap_url` is `bootstrapUrl`, `wpfp_mirror` is `wpfpMirror`, `reveal_desktop_only` is `revealDesktopOnly`, `goals` stays `goals`, and `consent` stays `consent` with `jurisdiction_url` moved inside it as `jurisdictionUrl` and `full_picture` as `fullPicture`. `tracker_src` and `consent_src` are the two script addresses (load the consent script first). `full_picture` is always `false` here, because the consent plugin does not run on a headless frontend and `true` would stop the tracker from ever firing.
+The frontend must hand the tracker its settings itself, as `window.SyteOpsLeads` before it loads the tracker script, using the camelCase names the tracker reads: `ingest_url` is `ingestUrl`, `bootstrap_url` is `bootstrapUrl`, `wpfp_mirror` is `wpfpMirror`, `reveal_desktop_only` is `revealDesktopOnly`, `attr_cookie_days` is `attrCookieDays` (how many days the first-touch cookie lasts), `goals` stays `goals`, and `consent` stays `consent` with `jurisdiction_url` moved inside it as `jurisdictionUrl` and `full_picture` as `fullPicture`. `tracker_src` and `consent_src` are the two script addresses (load the consent script first). `full_picture` is always `false` here, because the consent plugin does not run on a headless frontend and `true` would stop the tracker from ever firing.
 
 `brand.spacing` and `brand.type` are listed in `missing` until you set them. No source exists on the site for `ga4_measurement_id` or `ringtonic_campaign`, so they are always listed in `missing` unless the site's own code supplies them (and may override the brand font and spacing) through the `syteops_phantomstudio_site_settings` filter. What the filter returns is checked again: known keys only, text of 191 characters or fewer, and a Google Analytics id must look like `G-XXXXXXXX` or it is dropped. A value the filter supplies leaves `missing`.
 ## SEO fields
 
 When the site uses Squirrly SEO (and Yoast is not running), the frontend's project-key requests for pages, posts and other content types carry each item's saved search settings in the same shape Yoast uses (`yoast_head_json`): title, description, canonical address, social titles, descriptions and images, social card type, and the index and follow choices. Only values saved on the item are sent, and a saved text that still contains a placeholder such as a site-name tag is left out. Nothing is sent for an item whose own search settings are switched off. Squirrly's automatic defaults are not computed, so an item with nothing saved has no field and the frontend uses the item's own title. The canonical address points at the frontend when a frontend address is set. Visitors, and signed-in users without the project key, never receive the field.
+
+## Originating post for Lead Attribution
+
+With Lead Attribution active, the frontend's project-key requests for posts and other content carry one more value on each item that counts as an originating post: `syteops_originating_post`, the item's address on the frontend without the host (for example `/how-to/`). It is there only for a published item without a password, of a type checked under **Leads → Settings → Consent & privacy → Originating post types** (blog posts by default). Drafts, scheduled, private and password-protected items never carry it, and neither does a page the frontend does not build (an excluded page). Visitors, and signed-in users without the project key, never receive it.
+
+The frontend must pass it to the lead tracker on that item's page only, as `originatingPost` in `window.SyteOpsLeads` next to the other tracker settings:
+
+```js
+if (window.SyteOpsLeads && item && typeof item.syteops_originating_post === 'string') { window.SyteOpsLeads.originatingPost = item.syteops_originating_post; }
+```
+
+Pages that show no single item (a list of posts, a home page that is not a WordPress page) leave it out, and the visitor's earlier originating post is kept. If your home page is built from the page set as the static front page and that type counts, pass its value too: it is `/`. Changing **Originating post types** asks for a rebuild, so every page carries the new answer.
 
 ## Form entries from the frontend
 

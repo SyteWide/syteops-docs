@@ -1,7 +1,7 @@
 ---
 sidebar_position: 8
 title: RingTonic Integration
-description: Push a lead's pipeline status to RingTonic, and receive calls, qualified leads and stage changes back — automatically, in both directions.
+description: Create RingTonic contacts from your form submissions, push a lead's pipeline status to RingTonic, and receive calls, qualified leads and stage changes back — automatically, in both directions.
 ---
 
 # RingTonic Integration
@@ -11,6 +11,7 @@ description: Push a lead's pipeline status to RingTonic, and receive calls, qual
 [RingTonic](https://ringtonic.app) is an AI call-tracking and attribution tool with a lightweight built-in CRM, built on Twilio. The connection works in two directions:
 
 - **SyteOps → RingTonic:** move a lead from **Contacted** to **Qualified** in your SyteOps Leads list and RingTonic hears about it shortly after (via a background task).
+- **Form submissions → RingTonic contacts:** switch it on per form and every submission becomes a RingTonic contact with a "form submitted" conversion — see [Create contacts from form submissions](#create-contacts-from-form-submissions).
 - **RingTonic → SyteOps ("Live notifications"):** once your hub operator sets up RingTonic's webhook for you, a completed or missed call, a qualified lead, or a stage change made *inside* RingTonic shows up in your Leads list within moments — no more relying only on the outbound push above.
 
 A closed deal's **value** travels the same way, in both directions — see [Deal value](#deal-value) below.
@@ -78,6 +79,49 @@ A delivery whose type SyteOps doesn't yet recognize is simply acknowledged and i
 :::note Matching an inbound call to an existing lead
 A completed or missed call is matched by the call's OWN identity in RingTonic (its call id), not by the contact — a lead qualified for that call is looked up the same way, so qualifying one call for a repeat caller only ever affects that one call's lead, never an earlier one from the same person. A stage change or a form submission, by contrast, IS a contact-level fact — see [How inbound deliveries are matched](#how-inbound-deliveries-are-matched) below.
 :::
+
+## Create contacts from form submissions
+
+Each Fluent Forms form you choose can create (or update) a contact in RingTonic when it is submitted, and record a **form submitted** conversion for it, so the lead counts in RingTonic's funnel.
+
+### Turn it on
+
+In **Leads → Settings**, open the **RingTonic** card and find **Create contacts in RingTonic**:
+
+1. Tick **Create contacts in RingTonic when "…" is submitted** for each form you want.
+2. Check the fields SyteOps reads from that form: **Name**, **Email**, **Phone**, a **Second phone** used when the first is empty, **Message**, and the optional **How they heard about you** answer with its **"Other" detail**. A form you have not set up before shows its likely fields already selected.
+3. Check the **RingTonic custom field names**: the name of the custom field in your RingTonic workspace that receives each value (first and last name, message, how they heard, and the campaign details: landing page, first landing page, originating post, UTM tags, click ids and referrer). Leave a name empty to not send that value. A name your workspace has not registered is dropped by RingTonic and the rest of the contact is still saved, so register a custom field in RingTonic for each value you want to keep.
+4. Save.
+
+The contact is sent right after your visitor's page has been answered, so they never wait for RingTonic, and a RingTonic outage never affects your form. A background task makes sure it still goes out if that first attempt is interrupted. If RingTonic is busy or briefly down, the send is tried again after 5, 30 and 120 minutes before it is recorded as failed.
+
+The card shows how those first attempts fared: **In-request sends: N finished, M cut off (last 30 days)**. A cut-off attempt is one the web server stopped after answering the visitor; its contact still arrives a few minutes later from the background task. On a **LiteSpeed** server the card also offers **Let the contact push finish after the visitor's page responds (adds a LiteSpeed rule to .htaccess)**: it adds a short rule to your site's `.htaccess`, for form submissions only, that lets the first attempt finish. Turning it off removes the rule, and so does switching the Leads module off or deleting the plugin. If your `.htaccess` cannot be written, the setting stays off and the card shows the exact lines to paste at the top of the file yourself. On OpenLiteSpeed the server must be restarted once after the rule is added or removed.
+
+### What RingTonic receives
+
+- **The contact:** the name ("First Last" when the form has a first and last name), the email, and the phone in international format (`+1` for US numbers; a number that cannot be read confidently is left out). A submission with neither an email nor a phone is not sent. Empty values are never sent, so a contact RingTonic already has never loses a good value.
+- **Custom fields:** first and last name, the message, how they heard ("Other: …" when the visitor typed their own answer), and the lead's campaign details.
+- **A "form submitted" conversion** for the contact.
+
+If RingTonic already has the contact (for example from its own website tracker, or a returning visitor), SyteOps adds to that contact instead of creating a second one, but **only fills the custom fields the contact does not have yet**. RingTonic recognizes a contact by the phone or email typed into the form, so a visitor typing someone else's number must never be able to rewrite that person's name, message or campaign details. Existing values are kept; the submission still appears as a new "form submitted" conversion, and the full message is always on the lead in SyteOps. If RingTonic does not let SyteOps read the contact's current values, none of them are changed.
+
+A form set to **delete entries after submission** cannot be used here (SyteOps has nothing to send from); its row on the card says so, and a site that sends contacts another way keeps sending that form's.
+
+A form that holds its entries until something else happens creates the contact when that happens, not at submission: with **double opt-in** when the visitor confirms, with **admin approval** when an admin approves, and with a **payment** that completes on the payment provider's page when the payment comes back. The contact carries the campaign details the visitor had **when they submitted**, so the person who approves is never mistaken for the visitor, and a submission your own team made stays internal traffic. An entry submitted before this version is sent without campaign details.
+
+### Privacy
+
+- Campaign details are sent only when the lead itself has them, exactly as recorded on the lead — the same consent rules as everywhere in Lead Attribution apply.
+- Under **Global Privacy Control**, or when the visitor refused consent in your cookie banner, the contact is still created (the visitor asked to be contacted), but **without any campaign details**.
+- **Internal traffic** (your staff, test tools and automation, as your Internal traffic settings recognize them) creates no RingTonic contact by default. Choose **Create the contact without campaign details** under **RingTonic contacts for internal traffic** to send them anyway. When internal submissions record no lead at all, no contact is created either way.
+
+### One submission, one contact
+
+Each submission carries a **Submission id** (by default `{site}-ff{form}-{entry}`: your site's address, the form id and the entry id). RingTonic uses it to recognize a repeat of the same submission, so a retry never creates a second contact or a second conversion. If your site already sends contacts to RingTonic some other way, set that same pattern here **in the same save that switches the form on**, then turn the other one off for the forms SyteOps now handles (a site developer can have it check whether SyteOps already handles a form). While both run, only the same pattern lets RingTonic count each submission once; with different patterns the conversion is recorded twice.
+
+### Where to see the result
+
+Open the lead: the **From RingTonic** card shows **Contact created from the form**, one line per submission, with the outcome — queued (and, while retrying, the last failure), sent, sent without campaign details, not sent (and why), or failed with RingTonic's answer — and whether the conversion was recorded. Only a busy or unreachable RingTonic is retried; any other refusal is shown once so you can fix it (for example an API key without the contacts permission). Entries the form plugin marks as spam record no lead and are not sent; entries moved to the trash are not sent.
 
 ## Deal value
 
@@ -206,6 +250,14 @@ Note that SyteOps only attempts a forced move when the change is genuinely backw
 ### A lead I deleted is still in RingTonic
 
 Also expected. RingTonic has no delete via its API, so SyteOps best-effort marks the contact **Lost** and RingTonic keeps its record. See [Deleting a lead](#deleting-a-lead).
+
+### A form submission didn't create a RingTonic contact
+
+1. Open the lead and read **Contact created from the form** on the **From RingTonic** card — it names the reason.
+2. **Not sent (internal traffic):** the submission came from someone your Internal traffic settings recognize, which is skipped by default.
+3. **Not sent (no email or phone in the submission):** check the form's **Email** and **Phone** field choices under **Create contacts in RingTonic**.
+4. **Failed:** RingTonic's answer is shown. A permission error usually means the API key cannot create contacts; ask your hub operator for a key with contact and conversion access.
+5. No line at all: confirm the form is ticked, the RingTonic integration is on with an API key, and your **Form submission** goal is enabled — without it SyteOps records no lead for the submission.
 
 ### A deal value I set didn't reach RingTonic
 
