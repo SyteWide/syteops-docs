@@ -30,6 +30,7 @@ On the **Leads → Settings** tab, choose which actions to capture:
 - **Phone (tel:) link clicks** — on by default. Fires whenever a visitor taps or clicks any `tel:` link on your site, capturing their source and the page they were on.
 - **"Reveal number" clicks** — turn this on and enter the CSS selector of your reveal button (e.g. `.reveal-phone`). Useful when your site shows a button like "Show phone number" instead of a raw `tel:` link. See the [CSS selector cookbook](#css-selector-cookbook) below for help finding the right selector. Leave **Only count reveal clicks on desktop** on (the default) to ignore taps on phones, where the number is already tap-to-call.
 - **Form submissions** — pick your form plugin (or "auto"), or enter a specific CSS selector to target one particular form (e.g. `#gform_1` or `.wpcf7-form`). Auto-detection covers Fluent Forms, Gravity Forms, Contact Form 7, and WPForms.
+  With Fluent Forms, an entry the form marks as spam records no lead. An entry the form holds until it is confirmed (double opt-in), approved by an admin, or paid on the payment provider's page records its lead when that happens, with the visitor and campaign details from the moment they submitted, so the person approving is never mistaken for the visitor.
 
 ### Consent
 
@@ -203,6 +204,30 @@ It reads each mapped form's **stored submissions**, matches each one to an exist
 
 Under **Masked** storage the lead only holds a partial email/phone, so matching is approximate: the backfill guards against obvious mismatches (it skips when a lead's other stored detail contradicts the submission), but for the most precise matching, run the backfill while **Full** storage is selected.
 
+## Fill form fields from first touch
+
+Some forms carry **hidden fields** for campaign details (for example `utm_source`, `utm_campaign`, `gclid`, a landing page or a referrer) so that the form's notification emails and webhooks can print them. Lead Attribution can fill those hidden fields for you when the visitor submits, from the same first-touch details it records on the lead. The stored entry, the entry screen, the emails and the webhooks then all show the visitor's first campaign, with no extra script on your pages.
+
+This works with **Fluent Forms** today. On **Leads → Settings**, open the **Fill form fields from first touch** card. Every form is listed by title and ID. For each one, choose:
+
+- **Off** (the default): the form is left exactly as it is.
+- **Match by field name**: a hidden field whose name is a first-touch value gets that value: `utm_source`, `utm_medium`, `utm_campaign`, `utm_term`, `utm_content`, `landing`, `referrer`, the click ids (`gclid`, `fbclid`, `msclkid`, `gbraid`, `wbraid`, `ttclid`, `li_fat_id`), `first_landing` (the first page the visitor landed on) and `originating_post` (the post that sent them to the form). A few common names are understood too: `landing_page`, `landing_page_url` and `landing_url` get the landing page, `referer` and `referrer_url` get the referrer, `first_landing_page` and `first_landing_url` get the first landing page, and `originating_url` gets the originating post. The card lists the fields that will be filled.
+- **Custom**: pick, for each of the form's hidden fields, which first-touch value it gets, or leave it on "Not filled".
+
+**Replace values already present** (off by default) decides what happens when a hidden field already has a value, such as a default of `{get.utm_source}` that reads the form page's address:
+
+- **Off**: only empty fields are filled, so a field's own default is kept.
+- **On**: every chosen field takes the first-touch value, even a blank one, so the entry carries one complete first-touch set and never a mix of the form page's tags and the first visit's.
+
+Good to know:
+
+- Only **hidden** fields are filled. A field the visitor can see and type into is never changed.
+- Nothing is filled when the visitor sends Global Privacy Control, when the visit is [internal traffic](#internal-traffic-your-own-team-and-tools), or when the visitor has no first-touch cookie and neither a site integration nor the [no-cookie setting](#when-a-visitor-has-no-first-touch-cookie) supplies details. The submission then goes through exactly as it would without this setting.
+- With the no-cookie setting on **Use the form page's own tags**, a visitor without the cookie gets the campaign tags of the page the form was sent from, in the fields and on the lead alike.
+- The values are the same first-touch details the lead capture reads for that submission: plain text, with web addresses kept exactly as recorded. A visitor who already has a lead keeps that lead's earlier first touch, so the two can differ then.
+- A hidden field the form left out of the submission (for example because its conditional logic hid it) stays out.
+- If Fluent Forms is not active, or its forms cannot be read, the card says so and keeps your saved choices.
+
 ## Send leads to your tools (webhooks)
 
 Lead Attribution can fire webhooks to any tool that accepts an incoming HTTP POST — an **automation webhook** (FlowMattic, Make, Zapier, n8n, or any other platform), a CRM, a custom endpoint, or a combination.
@@ -242,6 +267,8 @@ Paste any URL into the **Automation webhook URL** field to activate it. Use the 
 | `wbraid` | Google consent-mode click ID (web-to-app) |
 | `ttclid` | TikTok click ID |
 | `li_fat_id` | LinkedIn click ID |
+| `first_landing` | The first page the visitor landed on (full address, campaign and click-id parameters only), or `""` |
+| `originating_post` | The last post the visitor read before the conversion (see [Originating post types](#first-landing-page-and-originating-post)), or `""` |
 | `link_owner` | The person whose [tracked link](#tracked-links) brought the visitor (their link name, such as `chet-bohley`), or `""` |
 | `link_owner_slot` | That person's team slot when the link was made (for example `001`), or `""` |
 | `link_kind` | Which of their links it was (`featured`, `my-work`, `contact`, `post` or `msg`; links not yet moved to the current shape may still say `deals`), or `""` |
@@ -313,7 +340,7 @@ Click a lead's name to open its **proof packet**.
 
 ## Proof packets and shareable links
 
-Each lead's proof packet shows its full story: the source, campaign, landing page, and a timeline of every event — with an **integrity check** that confirms the record hasn't been altered since it was captured.
+Each lead's proof packet shows its full story: the source, campaign, landing page, first landing page, originating post, and a timeline of every event — with an **integrity check** that confirms the record hasn't been altered since it was captured.
 
 Need to show a client the evidence without giving them admin access? Use the **shareable proof link** — a read-only web page for that single lead. You can regenerate the link at any time to revoke the old one.
 
@@ -342,6 +369,7 @@ Tracked links give each team member short links such as `/ops/chet-bohley`, `/op
 - **A click is counted without identifying the visitor** unless your consent mode is **Opt-out** and the visitor has not sent a "Global Privacy Control" signal. In Opt-in, By location and Full Picture setups, clicks are counted anonymously and the visitor's own consent choice is applied by the page they land on.
 - **A new link will not take over an existing page.** A path that matches an existing page, post or category, a WordPress route (such as the login, search or author pages) or a reserved file such as `/wp-admin` or `/sitemap.xml`, is refused. A link wins over a page created later at the same path, so turn the link off if you want the page to show.
 - **Link previews and checks are not counted.** A LinkedIn or Slack preview of a link, and a check that only asks for the headers, get the same redirect but are not recorded as clicks.
+- **Your own team's clicks are not counted.** A click from [internal traffic](#internal-traffic-your-own-team-and-tools), such as a logged-in editor testing a link, still goes to the page but is not recorded and sets no first-touch cookie.
 - **Headless sites** (a separate frontend) do not use tracked links, because WordPress does not serve the public pages there. The Tracked links tab says so at the top when your site is set up that way.
 - **Each lead shows its link owner.** When a visitor who arrived through someone's link becomes a lead, by a call click or a form, the lead records that person as its **Link owner**. The owner appears on the lead page, the proof page, the lead emails, the CSV export, the automation webhook (`link_owner`, `link_owner_slot`, `link_kind`, `link_id`) and the Manage API. The person's name is shown, including on the shareable proof page, and it keeps showing after the person leaves the team. The link name (such as `chet-bohley`) is shown only when this site has no record of the person, for example on a lead imported from another site.
 - **The owner comes only from a link you created.** It is found by matching the visitor's campaign tags exactly against your links, whether the visitor arrived by the link or with the same tags in the address. Tags that differ in any way (one letter, a missing tag, a different case) credit no one, and two links with the same tags credit no one.
@@ -376,7 +404,7 @@ A read-only metrics endpoint is available for reports and dashboards. It gives, 
 
 ### My links (your page)
 
-Each person who has tracked links sees a **My links** section on their own private page. It lists only that person's links, in the order of the link set. For each one it shows the full address with a Copy button, a short note on where to put it (the link set's own wording for that kind, which you can edit in the link set templates), the friendly `/meet/` path for messages, and the clicks and leads from the last 30 days and all time for that exact link. The numbers can be up to five minutes old. If they cannot be read, the page shows a dash rather than a zero. Featured and My work links carry the note "Not trackable from Featured: LinkedIn replaces the link with the page address", so a zero there is expected. A disabled link stays listed with a Disabled tag and its address, but no Copy button. The section shows counts only, never a lead's details, and it does not appear for a person without links. On a headless site it says the links do not redirect there.
+Each person who has tracked links sees a **My links** section on their own private page. It lists only that person's links, in the order of the link set. The links appear as compact tiles in a three-column grid (two columns on a narrow window, one on a phone). Each tile shows the full address with a Copy button joined to it, a short note on where to put it (the link set's own wording for that kind, which you can edit in the link set templates), the message address for messages, and the clicks and leads from the last 30 days and all time for that exact link. The numbers can be up to five minutes old. If they cannot be read, the page shows a dash rather than a zero. Featured and My work links carry a "Not trackable from Featured" badge with the reason ("LinkedIn replaces the link with the page address") printed under it, so a zero there is expected. A disabled link stays listed with a Disabled tag and its address, but no Copy button. The section shows counts only, never a lead's details, and it does not appear for a person without links. On a headless site it says the links do not redirect there.
 
 At the top of the page, next to Sign out, a **Copy my links** menu copies any one of your active links, the friendly message address, or all of them at once (one line each, with where it goes). Disabled links are never in it. When you share an article, paste the article's address into **Tag an article link** and copy the result. Or copy **Tags for article links** and add them to the end of an address that has no `?` or `#` in it. It works only for addresses on this site and keeps any other parts of the address. Both the menu and the My links card start closed; the card's heading line shows your active link count and your click and lead totals for the last 30 days. **Posting on** lets you pick where you are sharing (LinkedIn, Facebook, email and so on); the tags and the tagged address then carry that channel's source and medium and still credit you.
 
@@ -421,14 +449,66 @@ Suppressing tracking never breaks a form submission or call the visitor initiate
 
 The first-touch cookie remembers how a visitor first reached your site: the landing page, the referring site, the campaign tags, any ad click id and, when they came through a [tracked link](#tracked-links), which link it was. It keeps only the page address and its campaign and click-id parameters, and only the referring site's address without its parameters, so no name, email, phone number or other parameter is stored. A lead created later, including one that starts with a form, a call click or the Q&A form, gets this whole set as its source.
 
-- **It is written once.** A later visit never changes it, and it is never mixed with a later visit's tags. The one exception: a first visit with no campaign tags or click id (typed in, or from a plain link) is replaced, as a whole, by the first visit that has them. It is written again after it expires.
+- **Its source is written once.** A later visit never changes the source, and it is never mixed with a later visit's tags. Only the originating post (below) is updated as the visitor reads. The one exception: a first visit with no campaign tags or click id (typed in, or from a plain link) is replaced, as a whole, by the first visit that has them. It is written again after it expires.
 - **It follows your consent rules.** It is never set for a visitor sending Global Privacy Control, or before consent where your mode needs it (Opt-in, By location for EU/EEA/UK visitors, a Full Picture denial, or a consent cookie you configured that is not set). A tracked link sets it at once only in **Opt-out** mode; otherwise the page the visitor lands on sets it after they consent. If the visitor later withdraws consent through your consent tool or Full Picture, the cookie is removed.
 - **A consent tool that only sends a browser event** (no consent cookie and no Full Picture) cannot be seen when a tracked link is opened. In **Opt-out** mode the link then sets the cookie before the tool's choice is known. If your tool works that way and you need consent first, use **Opt-in** or set the consent cookie name and value.
-- **A form lead from a visitor sending Global Privacy Control** gets no source from the cookie.
+- **A form lead from a visitor sending Global Privacy Control** gets no source at all: not from the cookie, and not from the form page.
 - **Its lifetime** is the **First-touch cookie lifetime (days)** setting under **Leads → Settings → Consent & privacy**, 90 days by default (1 to 395).
 - **An existing lead keeps its source.** The cookie fills in a lead's source only when the lead was created without one.
 
 If another plugin on your site keeps its own first-touch cookie, the two can disagree, for example when that plugin's cookie is older. Lead Attribution uses its own cookie when it creates a lead.
+
+### First landing page and originating post
+
+The first-touch cookie also remembers two pages, and every new lead records them:
+
+- **First landing page:** the first page of your site the visitor landed on, kept with only its campaign and click-id parameters. It is written once and never changes, even when a later visit through a tagged link becomes the lead's source. Where tracking waits for consent (Opt-in, By location for EU/EEA/UK visitors, or a consent tool that has not answered yet), it is the first page after the visitor consented.
+- **Originating post:** the last post the visitor read before they converted, for example the article that sent them to your contact form. Each post they read replaces the one before; other pages leave it alone. A form placed on a post counts that post. Private and password-protected posts never count.
+
+Choose which kinds of content count as an originating post under **Leads → Settings → Consent & privacy → Originating post types**. Blog posts are checked by default; check any other public content type (such as pages or a custom type your theme adds) or clear them all to stop recording it.
+
+On a headless site (a separate frontend builds the public pages), each eligible post tells the frontend it counts when the frontend builds that page, so the originating post is recorded there too once the frontend passes it to the lead tracker (see [PhantomStudio](../integrations/phantomstudio.md#originating-post-for-lead-attribution)). Changing **Originating post types** asks the frontend to rebuild.
+
+Both pages follow the same consent rules as the rest of the cookie and are removed with it. They appear in the lead's proof packet, the shareable proof link, lead emails, the CSV export (`first_landing`, `originating_post`) and the automation webhook. A lead created before this feature, or from a visitor whose cookie predates it, has them empty.
+
+### When a visitor has no first-touch cookie
+
+A visitor can send a form without the first-touch cookie: they never allowed tracking, their browser blocks the cookie, or they sent the form on the first page before it was written. **Leads → Settings → Consent & privacy → When the visitor has no attribution cookie** decides what such a form lead gets:
+
+- **Automatic** (the default) follows your consent mode. In **Opt-out** the lead takes the campaign tags of the page the form was sent from; in **Opt-in** it is left blank; **By location** does one or the other per visitor (blank for EU/EEA/UK visitors). With WP Full Picture as your consent tool, the visitor's region decides the same way, and a visitor whose region cannot be told is left blank.
+- **Use the form page's own tags** takes them whatever the region, including for visitors your consent mode would treat as opt-in.
+- **Leave blank** never does.
+
+Whatever you choose, a visitor who **declined** is never given the form page's tags: one who turned statistics off in WP Full Picture's banner, or, when you set a consent cookie, one whose cookie does not hold the consent value. A consent tool that only signals inside the browser cannot be seen when the form arrives; with such a tool use **Opt-in** or set its consent cookie.
+
+What the form page gives is only what the submission itself says about that page: its address, kept with only its campaign and click-id parameters, the campaign tags and click id read from it, and, when the page is a post of a type you count as an originating post, that post. No referring site and no first landing page are recorded, because the submission does not carry them. Only a page of your own site counts; an address from another site is ignored. A visitor sending Global Privacy Control, or [internal traffic](#internal-traffic-your-own-team-and-tools), never gets this.
+
+Each lead's page shows **Attribution from**: the first-touch cookie, the browser tab, the form page's own tags, a site integration, or none, so you can tell a lead whose source came from the form page apart from one with a full first touch. Leads created before this setting show nothing there.
+
+The same **Attribution from** value is in the CSV export and the automation webhook (`ft_via`) and on the shareable proof page. When a site integration later fills in the campaign of a lead recorded with none, it shows the site integration.
+
+### Internal traffic (your own team and tools)
+
+Visits from your own team, test tools and automation should not count as leads' sources. **Leads → Settings → Internal traffic** lists the signals that mark a visit as internal; any one is enough:
+
+- **Cookie name** and **Cookie value**: a browser holding that cookie.
+- **Query parameter**: a visit to any page with that parameter set to the cookie value, for example `?site_internal=1`. It also sets the cookie for 90 days, so the same browser stays internal on later visits without the parameter. Give your team a bookmark with it.
+- **Request header** and **Header value**: for scripts and test tools that can add a header to every request.
+- **User agents containing**: one per line, for example `HeadlessChrome` or `Playwright` (at least 3 characters, any case).
+- **Logged-in users who can**: logged-in users with this capability. The default, `edit_posts`, covers contributors, authors, editors and administrators; customers and subscribers are still tracked. Choose **Nobody** to turn it off.
+
+If your site already has an editorial internal-traffic parameter in the review settings (the one added to links sent to reviewers), it is used here too while **Cookie name** and **Query parameter** are blank, and the card says which one.
+
+Internal traffic is never tracked or attributed: no cookie is set, no events are recorded, tracked-link clicks still redirect but are not counted, and no form fields are filled. **Form submissions from internal traffic** decides what a form or qualification your team sends does:
+
+- **Record the lead without attribution** (the default): it is recorded as a lead with no source and no link to any earlier visit, so a test submission still shows up.
+- **Don't record a lead**: no lead is made. The form itself still saves its entry and sends its own notification emails as usual.
+
+This works on cached pages too: the page itself checks the cookie, the query parameter and the user agent, and the server checks every signal again when a form, a click or an event arrives. A headless frontend gets the cookie, parameter and user-agent settings with its site settings and is rebuilt when they change.
+
+**What changes when you update:** the **Logged-in users who can** signal is on for every site, set to `edit_posts`. From this version, a logged-in team member's clicks and visits are no longer counted, and a form they send records a lead with no source. The other signals do nothing until you fill them in.
+
+The internal-traffic cookie (only when you set a cookie name) is an operational cookie: it stops tracking and carries no identifier. You can list it in your cookie policy as necessary.
 
 ## WP Full Picture
 

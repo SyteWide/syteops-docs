@@ -54,7 +54,7 @@ Add these to Full Picture's cookie list under the **Statistics** category, so it
 |---|---|---|---|
 | `syteops_vid` | 1 year | Anonymous first-party visitor id (random UUID, no personal data) linking a visitor's conversions | Statistics |
 | `syteops_sid` | 30 minutes | Session id grouping conversions within a visit | Statistics |
-| `syteops_attr` | 90 days (the **First-touch cookie lifetime** setting) | First-touch attribution, written once: landing page, referrer, campaign tags, ad click id and the tracked link, no personal data | Statistics |
+| `syteops_attr` | 90 days (the **First-touch cookie lifetime** setting) | First-touch attribution: landing page, referrer, campaign tags, ad click id, the tracked link and the first page landed on (kept once set), plus the last blog post read (updated on each post view); no personal data | Statistics |
 
 ### Verify it works
 
