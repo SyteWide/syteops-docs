@@ -156,12 +156,16 @@ The results appear as status badges next to each connection.
 
 By default every connected site holds the same shared secret as the server. When your connected sites are on a current version, give the server its own secret so the shared one can be retired:
 
-1. Open **Issued Connections** and check the line "N of M sites use their own secret". Each row shows its credential; a site moves to its own secret on its next check.
+1. Open **Issued Connections** and check the line "N of M sites use their own secret". Each row shows its credential. A site moves to its own secret on its next check after it updates. The row follows within about a day, from the daily refresh of a site on v1.6.670 or later (which reports the secret its checks would use), or at once when the site clicks **Sync now**.
 2. Click **Give this server its own enrollment secret**. The new secret is shown once, with a Copy button. Use it only for connecting a new site. Your FlowMattic token does not change. Afterward, **Roll the enrollment secret** replaces it at any time; no connected site holds it.
-3. Click **Stop accepting the shared secret**. Before it takes effect, the server lists every site that has not checked in on its own secret in the last 14 days; if any are listed, type RETIRE to continue. A site left behind shows an error asking it to update and is not locked out.
+3. Click **Stop accepting the shared secret**. Before it takes effect, the server lists every site not seen using its own secret for its checks (from a check, or from a daily refresh that reports it) in the last 14 days; if any are listed, type RETIRE to continue. A site left behind shows an error asking it to update and is not locked out.
 4. After the server has its own enrollment secret, rolling the FlowMattic token does not change the shared secret older sites use, and the roll says so. To make the shared secret stop working, use **Stop accepting the shared secret** (type RETIRE if sites are still listed). Roll the FlowMattic token (push to all) and fix any workflow that used it to call these routes.
 
 **Accept the shared secret again** undoes step 3 at any time.
+
+After step 3 each site connects to the server with its own secret, and the server no longer accepts the shared secret or the FlowMattic token from a site. The FlowMattic token is then only a FlowMattic credential.
+
+A connected site on a current version also stops accepting the shared secret or the FlowMattic token on its own connection routes, as soon as its server has told it that it connects with its own secret. The server reaches the site with that site's own secret, so every action in Issued Connections, including pushing a new FlowMattic token, keeps working. A site in server mode keeps accepting the shared secret from its own connected sites until you stop accepting it there.
 
 ## Troubleshooting
 
