@@ -90,7 +90,7 @@ In **Leads → Settings**, open the **RingTonic** card and find **Create contact
 
 1. Tick **Create contacts in RingTonic when "…" is submitted** for each form you want.
 2. Check the fields SyteOps reads from that form: **Name**, **Email**, **Phone**, a **Second phone** used when the first is empty, **Message**, and the optional **How they heard about you** answer with its **"Other" detail**. A form you have not set up before shows its likely fields already selected.
-3. Check the **RingTonic custom field names**: the name of the custom field in your RingTonic workspace that receives each value (first and last name, message, how they heard, and the campaign details: landing page, first landing page, originating post, UTM tags, click ids and referrer). Leave a name empty to not send that value. A name your workspace has not registered is dropped by RingTonic and the rest of the contact is still saved, so register a custom field in RingTonic for each value you want to keep.
+3. Check the **RingTonic custom field names**: the name of the custom field in your RingTonic workspace that receives each value (first and last name, message, how they heard, the contact source, the form page, and the campaign details: campaign landing page, first landing page, originating post, UTM tags, click ids and referrer). Leave a name empty to not send that value. A name your workspace has not registered is dropped by RingTonic and the rest of the contact is still saved, so register a custom field in RingTonic for each value you want to keep.
 4. Save.
 
 The contact is sent right after your visitor's page has been answered, so they never wait for RingTonic, and a RingTonic outage never affects your form. A background task makes sure it still goes out if that first attempt is interrupted. If RingTonic is busy or briefly down, the send is tried again after 5, 30 and 120 minutes before it is recorded as failed.
@@ -100,7 +100,12 @@ The card shows how those first attempts fared: **In-request sends: N finished, M
 ### What RingTonic receives
 
 - **The contact:** the name ("First Last" when the form has a first and last name), the email, and the phone in international format (`+1` for US numbers; a number that cannot be read confidently is left out). A submission with neither an email nor a phone is not sent. Empty values are never sent, so a contact RingTonic already has never loses a good value.
-- **Custom fields:** first and last name, the message, how they heard ("Other: …" when the visitor typed their own answer), and the lead's campaign details.
+- **Custom fields:** first and last name, the message, how they heard ("Other: …" when the visitor typed their own answer), and the lead's campaign details. By default:
+  - `landing_page_url` is the **form page**: the page the form was submitted from, without anything after `?` in its address, the same page Fluent Forms' notification emails show for a form with a landing page field. It is sent even when the lead has no campaign details. (The **Landing page** row in SyteOps's own lead emails and lead details is the campaign landing page.)
+  - `campaign_landing_page_url` is the **campaign landing page**: the page the lead first arrived on, with its campaign tags.
+  - `first_landing_page_url` is the first page the visitor ever landed on, as before.
+  - `contact_source` is `form` on every contact SyteOps creates. RingTonic does not let a website set a contact's own source, so this field carries it. A contact RingTonic already had gets it only when the field is empty and RingTonic has not given the contact another source: a contact a phone call created is never marked as a form contact.
+  - Contacts created before this version keep the campaign landing page in `landing_page_url`; existing values are never overwritten.
 - **A "form submitted" conversion** for the contact.
 
 If RingTonic already has the contact (for example from its own website tracker, or a returning visitor), SyteOps adds to that contact instead of creating a second one, but **only fills the custom fields the contact does not have yet**. RingTonic recognizes a contact by the phone or email typed into the form, so a visitor typing someone else's number must never be able to rewrite that person's name, message or campaign details. Existing values are kept; the submission still appears as a new "form submitted" conversion, and the full message is always on the lead in SyteOps. If RingTonic does not let SyteOps read the contact's current values, none of them are changed.
@@ -112,12 +117,14 @@ A form that holds its entries until something else happens creates the contact w
 ### Privacy
 
 - Campaign details are sent only when the lead itself has them, exactly as recorded on the lead — the same consent rules as everywhere in Lead Attribution apply.
-- Under **Global Privacy Control**, or when the visitor refused consent in your cookie banner, the contact is still created (the visitor asked to be contacted), but **without any campaign details**.
-- **Internal traffic** (your staff, test tools and automation, as your Internal traffic settings recognize them) creates no RingTonic contact by default. Choose **Create the contact without campaign details** under **RingTonic contacts for internal traffic** to send them anyway. When internal submissions record no lead at all, no contact is created either way.
+- Under **Global Privacy Control**, or when the visitor refused consent in your cookie banner, the contact is still created (the visitor asked to be contacted), but **without any campaign details and without the form page**. The contact source is still sent.
+- **Internal traffic** (your staff, test tools and automation, as your Internal traffic settings recognize them) creates no RingTonic contact by default. Choose **Create the contact without campaign details** under **RingTonic contacts for internal traffic** to send them anyway (without the form page too). When internal submissions record no lead at all, no contact is created either way.
 
 ### One submission, one contact
 
 Each submission carries a **Submission id** (by default `{site}-ff{form}-{entry}`: your site's address, the form id and the entry id). RingTonic uses it to recognize a repeat of the same submission, so a retry never creates a second contact or a second conversion. If your site already sends contacts to RingTonic some other way, set that same pattern here **in the same save that switches the form on**, then turn the other one off for the forms SyteOps now handles (a site developer can have it check whether SyteOps already handles a form). While both run, only the same pattern lets RingTonic count each submission once; with different patterns the conversion is recorded twice.
+
+When such a site push checks with SyteOps before it sends, the card shows it on each form that is switched on: **A site push on this site checked in 5 minutes ago and stood down** (SyteOps sends that form's contacts) or **… and kept sending**. While a site push has checked in and the Submission id is still the default pattern, the card warns: **Set the Submission id to the pattern your site push uses, or each lead may count twice.** If no site push has ever checked in, a short note says so; that is fine when your site has none.
 
 ### Where to see the result
 
