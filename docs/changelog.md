@@ -8,6 +8,19 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.672
+
+- **Connected sites refuse the shared secret:** a connected site that has learned from its server that it connects with its own secret no longer accepts the shared secret or the FlowMattic token on its own connection routes. Such a request is refused like a wrong secret, changes nothing and locks nothing. The server's actions on the site, including pushing a new FlowMattic token, keep working on the site's own secret. A server's Cloudflare purge no longer leaves a connection record behind on a connected site. A site connected to an older server, and a site in server mode, behave as before.
+
+## v1.6.671
+
+- **No copy of the previous FlowMattic token:** a connected site no longer keeps the previous FlowMattic token when it changes. Nothing has used that copy since the shared secret could be retired, and any copy a site still holds is deleted once when it updates.
+- **Security notes after retirement:** the documentation now describes a server that has stopped accepting the shared secret: each site connects with its own secret, the server refuses the shared secret and the FlowMattic token from a site, and **Accept the shared secret again** undoes it.
+
+## v1.6.670
+
+- **The Credential column follows the daily refresh:** on a licensing server, Issued Connections learns from each connected site's daily refresh which secret the site's connection checks would use, so the Credential column, the "N of M sites use their own secret" line and the list of sites to update before you stop accepting the shared secret follow within about a day of a site's update, without a connection check. A site whose checks still use the shared secret shows Shared secret and stays listed; a site older than this version updates its row only through a check, as before. **Sync now** on a site still updates its row at once, and the refresh answer is unchanged for every site.
+
 ## v1.6.669
 
 - **JSON values work from the command line:** the `set` command with `--json` was refused for list and map settings when run through WP-CLI, which turns `--json` into `--format=json` before the command sees it. Both spellings now work. The value can also come from a file (`--file=<path>`, up to 1 MB) or from standard input (`-` as the value), which avoids quoting a long value over ssh.
