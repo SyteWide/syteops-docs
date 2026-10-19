@@ -8,6 +8,12 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.669
+
+- **JSON values work from the command line:** the `set` command with `--json` was refused for list and map settings when run through WP-CLI, which turns `--json` into `--format=json` before the command sees it. Both spellings now work. The value can also come from a file (`--file=<path>`, up to 1 MB) or from standard input (`-` as the value), which avoids quoting a long value over ssh.
+- **`get` prints what the plugin uses:** a setting saved by an older release (a field fill row before the three-way choice, a RingTonic field name map without the newer fields) prints in its current shape, so `get` piped into `set` changes nothing. A note on the error stream says when the stored copy is in an older shape; the next save upgrades it.
+- **RingTonic card:** it now says how many submissions (last 30 days) were left without a contact source because their contact was one RingTonic already had; RingTonic does not report the source of such a contact. Contacts that RingTonic's own page script created already show the source form, and contacts SyteOps creates carry it.
+
 ## v1.6.668
 
 - **Change one lead-tracking setting from the command line:** new WP-CLI commands (`get`, `set` and `list`) read and change a single setting with the same checks the settings screen applies. A value the screen would quietly correct (an unknown mode, a number out of range) is refused with a message, and nothing else in your saved settings changes.
