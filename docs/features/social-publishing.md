@@ -84,7 +84,7 @@ Once the feature is enabled with at least one voice profile and one destination,
 
 ### From the Review Portal
 
-While reviewing a post in the secure Review Portal, click **Post to Social** in the action bar at the bottom of the page.
+While reviewing a post in the secure Review Portal, click **Send to webhook** in the action bar at the bottom of the page.
 
 ### From the Posts list
 
@@ -135,5 +135,5 @@ Switching a draft to a different post type at publish time changes only the post
 
 ## Related pages
 
-- [Review & Publish Your Post](./review-and-publish-your-post.md) — The secure portal where the Post to Social button also appears.
+- [Review & Publish Your Post](./review-and-publish-your-post.md) — The secure portal where the Send to webhook button also appears.
 - [AI Providers](./ai-providers.md) — Configure the AI providers and API keys used to compose social updates.

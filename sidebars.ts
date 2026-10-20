@@ -66,6 +66,7 @@ const sidebars: SidebarsConfig = {
         'integrations/llms-amplifier',
         'integrations/ringtonic',
         'integrations/google-drive',
+        'integrations/linkedin',
         'integrations/slack',
         'integrations/aws-ses',
         'integrations/fluent-forms',
