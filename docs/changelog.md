@@ -8,6 +8,31 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.679
+
+- **No LinkedIn app to set up:** the Review Portal's **Share to** dialog now signs people in to LinkedIn through the site's Management Connection, so a site never creates or enters a LinkedIn app. Each person chooses **Connect LinkedIn**, confirms on the page that names the site, and approves on LinkedIn.
+- The **Share to LinkedIn** card on the **Integrations** tab is gone. The **LinkedIn** tile now says whether LinkedIn sign-in is offered to the site; until it is, Share to keeps opening LinkedIn's own share window.
+- A Management Server's own Review Portal connects the same way.
+- The dialog says when LinkedIn sign-in is not offered (and switches to LinkedIn's own share window), when the site or its server needs **HTTPS**, or when to wait a minute, instead of always asking you to try again.
+- Opening the **Integrations** tab checks again for LinkedIn sign-in, at most every 10 minutes, so a newly offered sign-in appears right away. Requesting or checking the site's connection no longer hides **Connect LinkedIn**.
+
+## v1.6.678
+
+- **For Management Servers:** a server can now offer its connected sites added services over the connection they already have, and a server route can be set to accept only each site's own connection credential, never the shared Management Server Secret.
+- The **Server** tab can show cards from add-ons under the **Licensing Server** card.
+- Nothing changes on a connected site.
+
+## v1.6.677
+
+- **Post to LinkedIn from the Review Portal:** the **Share to** dialog's LinkedIn row can now post for you. Add your LinkedIn app's **Client ID** and **Client Secret** on the new **Share to LinkedIn** card, which appears on the **Integrations** tab once the **LinkedIn** integration is switched on; each person then chooses **Connect LinkedIn** once, signs in to their own LinkedIn account in a small window, and posts a live article to their profile with **Post to LinkedIn**. The link goes with the post as a preview card with the title, summary and featured picture, and the status line offers **View post**. The **LinkedIn Integration** page walks through the setup.
+- **Disconnect** beside your name in the dialog removes your connection from the site. LinkedIn's sign-in lasts about 60 days; after that the dialog shows **Reconnect LinkedIn**.
+- Your text posts exactly as written, and a word starting with `#` becomes a LinkedIn hashtag. Posting the same text twice within a minute is refused, so a double click cannot post twice; if LinkedIn does not answer in time, the dialog says the post could not be confirmed and asks you to check your profile first. Facebook and X keep the copy-and-open share window for now.
+
+## v1.6.676
+
+- **Share to menu in the Review Portal:** the **Copy link** menu in the top bar can now be **Share to**. **LinkedIn**, **Facebook** and **X** open a dialog where you type the post, watch the character counter (X allows 280, and a link counts as 23) and see a preview card with the title, picture, short description and the link. **Copy text & open** copies your text and opens that site's own share window with the link attached. Every row keeps a small **Copy** button, and **Instagram**, **Email** and **Text** still copy the address. The link always carries your tracking tags and is never the private review link. A new **Share to menu** permission in the portal permissions table is **Hide** by default, so reviewers keep **Copy link** until you set it to **Allow**; administrators always see it. **Draft with AI** appears in the dialog when Social Publishing has a voice profile.
+- **Renamed:** the **Post to Social** button is now **Send to webhook**. It works exactly as before.
+
 ## v1.6.675
 
 - **Copy link on the card, status on every row:** The Copy link menu on the personal page now sits on the card itself, at its right edge (under the text on a phone), instead of in a pill under it. A page or post that is not published now shows a small status pill, Draft, Pending, Scheduled or Private, next to its title, so a draft among live pages is easy to spot. Which pages and posts have a Copy link, and what it copies, are unchanged.

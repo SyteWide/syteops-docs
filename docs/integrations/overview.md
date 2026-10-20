@@ -26,7 +26,7 @@ Each integration card shows a small **tier badge** next to the category label. T
 | Tier | What it means | Examples |
 |---|---|---|
 | **Basic** | Toggle-only. Flip it on and you're done. Some Basic integrations store a single credential (like an API key), but there's no dedicated control panel. Most integrations live here. | Slack, Cloudflare, AWS SES, WooCommerce, Wordfence |
-| **Extended** | Has its own settings area inside SyteOps, stores credentials, and includes light AI configuration where applicable. More involved than Basic but doesn't drive deep AI features. | LLMS Amplifier, RingTonic, Google Drive, Squirrly SEO |
+| **Extended** | Has its own settings area inside SyteOps, stores credentials, and includes light AI configuration where applicable. More involved than Basic but doesn't drive deep AI features. | LLMS Amplifier, RingTonic, Google Drive, Squirrly SEO, LinkedIn |
 | **AI-Powered** | A full control panel with deep AI features — you pick which AI provider and model to use, SyteOps runs background jobs on your behalf, and the integration has quality gating built in. | LinkCentral |
 
 The tier is purely informational. It doesn't change how an integration works or what it costs — it just helps you plan your setup time and understand what each toggle unlocks.
@@ -190,6 +190,14 @@ SyteOps supports six AI providers. Configure one or more API keys in the **Syste
 | **Perplexity** | Web-aware models with built-in search for grounded, up-to-date responses. |
 
 OpenRouter is the recommended default — it gives you access to models from every provider through one key.
+
+---
+
+## Social
+
+### LinkedIn
+
+Lets people post a live article to their own LinkedIn profile from the Review Portal's **Share to** menu, with the link shown as a preview card. You create a LinkedIn app once and paste its Client ID and Client Secret on the **Share to LinkedIn** card, which appears on the Integrations tab once LinkedIn is switched on; each person then connects their own LinkedIn account from the dialog. See the dedicated [LinkedIn Integration](linkedin) page for setup.
 
 ---
 
