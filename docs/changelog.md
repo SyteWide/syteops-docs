@@ -8,6 +8,18 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.675
+
+- **Copy link on the card, status on every row:** The Copy link menu on the personal page now sits on the card itself, at its right edge (under the text on a phone), instead of in a pill under it. A page or post that is not published now shows a small status pill, Draft, Pending, Scheduled or Private, next to its title, so a draft among live pages is easy to spot. Which pages and posts have a Copy link, and what it copies, are unchanged.
+
+## v1.6.674
+
+- **Drag to reorder bundle items:** each item in a Page Bundle now has a drag handle in place of the Up and Down buttons. Drag it to move the item, with a gap showing where it will land and the position numbers updating as you go. From the keyboard, focus the handle, press Space or Enter to pick the item up, move it with the arrow keys (Home and End jump to the first and last place) and press Space or Enter to drop it, or Escape to cancel. Screen readers announce each move, and a changed order reminds you to save.
+
+## v1.6.673
+
+- **Page Bundles builder:** the card is now a two-panel screen. The Library has a Posts tab and a Pages tab, each showing its count, with a search box, a Select all shown box and a status and date on every row. Tick several pages or posts and add them together; the bundle list beside it shows numbered cards with a picture, type and status. A bundle still holds 20 at most, and when a bulk add would pass that, the message says how many were added and how many were left out. Reviewers are now chosen from a row of checkboxes. Bundle cards can be selected and reordered from the keyboard, and the library shows Loading, or the error, instead of an empty list while a search runs or fails.
+
 ## v1.6.672
 
 - **Connected sites refuse the shared secret:** a connected site that has learned from its server that it connects with its own secret no longer accepts the shared secret or the FlowMattic token on its own connection routes. Such a request is refused like a wrong secret, changes nothing and locks nothing. The server's actions on the site, including pushing a new FlowMattic token, keep working on the site's own secret. A server's Cloudflare purge no longer leaves a connection record behind on a connected site. A site connected to an older server, and a site in server mode, behave as before.
