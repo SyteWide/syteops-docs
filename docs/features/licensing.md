@@ -44,6 +44,14 @@ When a license is revoked or disabled:
 
 When the license validates again, everything is automatically restored.
 
+### When your site's address changes
+
+A Product License is activated for your site's address. If the same site moves to a new address (for example from `example.com` to `cms.example.com`), the license keeps working for 14 days: the plugin sees that the activation is still under the old address, and every administrator gets a notice naming both addresses and the date it stops working. Move the license promptly: run the license move command for your site with the old address (it frees the old address's activation and activates the new one with the same key), or remove the old address from the license in your account and then activate the license on the site. Before it frees anything, the move asks the old address for proof: the new front end that now serves it must name this site as its backend. If it names a different site, the move is refused, so a copy can never take the original site's activation; if there is no proof yet (WordPress still answers there, or nothing answers), the move waits and can be run again. If the old address no longer exists at all, activate the license by hand instead. The daily license check does not activate the new address on its own, because that would use a second activation. After 14 days the site is locked until the license is moved, so a copy of a site cannot keep using the original site's license.
+
+This applies only to the address the license was last confirmed for. A site whose address matches nothing the license knows is treated as a different site, as before.
+
+For tooling, the license status command-line check with JSON output prints the comparison as one object: whether the license is active, the address it is held under, the site's current address, whether they match, whether the move is available, when the license was last checked, and when a moved site's 14 days end. It can also run one live check first. The move has a dry run that reports what it would do and changes nothing. Neither prints the license key.
+
 ### Revoking a connection
 
 On a Management Server, **Revoke** is final. A revoked connection is not restored by a request from the site: the site is told the connection was revoked, it is given nothing, and nothing on the server changes. When the site could be reached, the server removes its row from the connections table and the site can request a new connection. When it could not be reached, the row stays marked revoked until you delete it. To reconnect a revoked site, delete the connection on the server (**Delete Connection**), then use **Request Connection** on the site.
@@ -54,7 +62,7 @@ On a Management Server, **Revoke** is final. A revoked connection is not restore
 |---|---|---|
 | `unauthorized_domain` | Domain not authorized for this license | Check that your site URL matches the license |
 | `in_use` | License active on another domain | Deactivate on the other site first |
-| `max_activations` | Activation limit reached | Upgrade your plan or deactivate unused sites |
+| `max_activations` | Activation limit reached (also shown when the licensing server refuses a new address for want of a free activation) | Upgrade your plan or deactivate unused sites |
 | `license_expired` | License term ended | Renew your license |
 | `deleted` / `blacklisted` | License permanently blocked | Contact support |
 | `server_unreachable` | Cannot reach licensing server | Check your internet connection and try again |

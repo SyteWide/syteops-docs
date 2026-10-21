@@ -52,6 +52,7 @@ These endpoints stay reachable when REST restriction (not Block All) is enabled.
 | `/wp-json/sytehero/v1/touch` | SyteHero attribution — conditional: allowed whenever SyteHero is active |
 | `/wp-json/sytehero/v1/impression` | SyteHero slide impressions — conditional: allowed whenever SyteHero is active |
 | `/wp-json/sytehero/v1/click` | SyteHero slide clicks — conditional: allowed whenever SyteHero is active |
+| `/wp-json/sytehero/v1/install-echo` | SyteHero's check used when moving a license to a new address — conditional: allowed whenever SyteHero is active |
 
 ## What the Route List Shows
 
