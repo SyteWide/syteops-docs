@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.705
+
+- The PhantomStudio headless card on Systems / API now shows on sites without FlowMattic.
+
 ## v1.6.704
 
 - SEO titles set in Squirrly or by other tools are no longer replaced when SyteOps writes a description or keyword.
