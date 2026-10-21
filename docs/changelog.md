@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.704
+
+- SEO titles set in Squirrly or by other tools are no longer replaced when SyteOps writes a description or keyword.
+
+## v1.6.703
+
+- A Review Portal save that changes nothing no longer touches the post or its SEO record; a save that changes only SEO fields, image text or categories on a live page still refreshes the live site.
+
 ## v1.6.702
 
 - A Review Portal save no longer resets a page's SEO title or description that was set elsewhere.

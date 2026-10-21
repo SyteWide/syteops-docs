@@ -50,7 +50,7 @@ That's it — no additional configuration. With the integration on and the Squir
 
 A **Content Pipeline's SEO stage** and the **Review Portal** SEO panel are two surfaces over the same Squirrly fields (`_sq_title` / `_sq_description` / `_sq_keywords`), plus the `wp_qss` snippet row that renders the page title.
 
-The **SEO title** has special handling: by default it is auto-generated from the **post title** (clean — the description is *not* appended; that's the meta description's job). If a reviewer types a **custom** SEO title in the Review Portal, SyteOps marks it as a manual override and stops auto-recomposing it, so a later pipeline run won't overwrite the reviewer's title. Clearing the portal field returns the title to automatic.
+The **SEO title** has special handling: when a post has no Squirrly record yet, an SEO title is generated from the **post title** (clean — the description is *not* appended; that's the meta description's job). A title that is already set, in Squirrly, the Review Portal or by another tool, is not replaced when SyteOps writes a description or keyword. If a reviewer types a **custom** SEO title in the Review Portal, SyteOps marks it as a manual override and stops auto-recomposing it, so a later pipeline run won't overwrite the reviewer's title. Clearing the portal field returns the title to automatic.
 
 ## IndexNow
 
