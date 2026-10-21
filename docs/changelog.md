@@ -8,6 +8,35 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.702
+
+- A Review Portal save no longer resets a page's SEO title or description that was set elsewhere.
+- Emptying the Description box no longer clears the search description.
+
+## v1.6.701
+
+- Hosting tools can read the license state as one machine-readable status, including the address the license is registered to and the site's current address.
+- A license can be moved to a site's new address with one command: it frees the old address and activates the new one with the same key, but only after the front end now serving the old address confirms this site, so a copy of a site is refused.
+- After a site's address changes, the license keeps working with an admin notice for 14 days instead of locking at once.
+- The licensing server no longer reports an activation it refused for want of a free seat as a success.
+- Deactivated seats are never counted as in use.
+
+## v1.6.700
+
+- The Show on page crosshair on each note now sits in the note's left column, right above the delete button.
+
+## v1.6.699
+
+- A save followed by an automatic content pass no longer triggers two rebuilds.
+
+## v1.6.698
+
+- The Review Portal top bar now shows a small ID chip, such as #1234, just left of the status pill, so you can tell a teammate exactly which post or page you mean.
+
+## v1.6.697
+
+- Posts to LinkedIn now include the page's picture again: the picture is now sent to LinkedIn labeled as the image it is, which LinkedIn requires. When LinkedIn still refuses a picture, the post goes out without it and the message names the step and the status code LinkedIn answered with.
+
 ## v1.6.696
 
 - The Quick Navigation heading is now centered above its section links on every tab header, sitting with them instead of floating left.

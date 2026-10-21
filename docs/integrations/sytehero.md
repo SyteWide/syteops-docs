@@ -9,12 +9,12 @@ description: Keep SyteHero's consent and attribution endpoints reachable while S
 **Tier: Basic** — Plugin-gated toggle. SyteHero is the sister plugin that runs hero sliders, consent, and front-end attribution tracking. This tile gives it a place on your Integrations tab alongside every other plugin SyteOps knows about.
 
 :::tip You do not have to turn this on for SyteHero to work
-The four SyteHero endpoints below are allowed **whenever SyteHero is installed and active**, whether or not this toggle is enabled. See [Why this one is different](#why-this-one-is-different).
+The five SyteHero endpoints below are allowed **whenever SyteHero is installed and active**, whether or not this toggle is enabled. See [Why this one is different](#why-this-one-is-different).
 :::
 
 ## What this integration covers
 
-SyteHero's front end calls four public endpoints. Its consent layer asks the first one before it records anything:
+SyteHero's front end calls four public endpoints, and a fifth answers another site during a license move. Its consent layer asks the first one before it records anything:
 
 | Endpoint | What it does |
 |---|---|
@@ -22,8 +22,9 @@ SyteHero's front end calls four public endpoints. Its consent layer asks the fir
 | `/wp-json/sytehero/v1/touch` | Records an attribution touch against a first-party visitor cookie |
 | `/wp-json/sytehero/v1/impression` | Records that a slide was shown |
 | `/wp-json/sytehero/v1/click` | Records a click on a slide |
+| `/wp-json/sytehero/v1/install-echo` | Answers whether this site still runs at an old address when its license is moved; records nothing |
 
-All four are public by design. When [REST API Restriction](../features/rest-api-restriction.md) is enabled, SyteOps blocks unauthenticated REST calls before the endpoint's own permission check ever runs — so without an allowlist entry each of these returns `401`.
+All five are public by design. When [REST API Restriction](../features/rest-api-restriction.md) is enabled, SyteOps blocks unauthenticated REST calls before the endpoint's own permission check ever runs — so without an allowlist entry each of these returns `401`.
 
 That failure is quiet and total. SyteHero's consent layer **fails closed** on an unresolved jurisdiction, which means a blocked `/jurisdiction` call switches off *all* of SyteHero's front-end analytics — attribution touches, slide impressions, and hero clicks — with nothing to show for it but a `401` in the browser's network log. SyteHero's own script treats the blocked call as an unresolved answer rather than raising a visible error. Each blocked call also ties up a PHP worker for the 200-800ms anti-scanner delay SyteOps applies before refusing a request.
 
@@ -31,7 +32,7 @@ That failure is quiet and total. SyteHero's consent layer **fails closed** on an
 
 Every other integration on the Integrations tab works the same way: the toggle is the switch, and nothing happens until you flip it.
 
-SyteHero's four endpoints are the exception. **They are allowed based on whether SyteHero is active, not on this toggle.** Activate SyteHero and its public endpoints keep working immediately — there is no window in which your analytics are silently off because nobody remembered to visit this screen.
+SyteHero's five endpoints are the exception. **They are allowed based on whether SyteHero is active, not on this toggle.** Activate SyteHero and its public endpoints keep working immediately — there is no window in which your analytics are silently off because nobody remembered to visit this screen.
 
 Only those four exact routes are opened. SyteHero's other endpoints — settings, backups, slides, sales data — stay behind the restriction, protected by their own permission checks (and, for most of them, a license check as well). SyteOps never opens the `sytehero/v1` namespace as a whole.
 
