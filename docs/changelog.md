@@ -8,6 +8,30 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.711
+
+- In the Review Portal, the SEO panel now shows what search engines will read: the search-result preview fills in your SEO plugin's placeholders, and the Description box shows the search description your SEO plugin holds. Editing the Description no longer overwrites a different page excerpt. Reviewers who cannot edit the post itself can no longer save SEO placeholders that read hidden data, such as custom fields or author details.
+
+## v1.6.710
+
+- Groundwork for step-by-step task prompts for site coding sessions: each requested change will name only what it can safely edit on the reviewed page, and anything uncertain is described instead of changed.
+
+## v1.6.709
+
+- In the Review Portal, the web address (permalink) now sits in a slim strip right under the title, above the article or page preview, instead of at the bottom of the article.
+
+## v1.6.708
+
+- Notes on Elementor pages can now be matched to the exact element, its current settings and a check value, so an assistant working on the site can confirm the element is unchanged before editing it.
+
+## v1.6.707
+
+- The note at the side of the Review Portal that says what you can do with a draft now stands out, with a clear border, an accent edge and a shadow, so it no longer blends into the page.
+
+## v1.6.706
+
+- Notes pinned on a page now record which Elementor element, template, image and link they point at, and the location details already captured (heading, classes, the element's markup) are now kept with the note.
+
 ## v1.6.705
 
 - The PhantomStudio headless card on Systems / API now shows on sites without FlowMattic.
