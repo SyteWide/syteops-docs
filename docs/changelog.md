@@ -8,6 +8,34 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.720
+
+- LinkCentral now changes only the links it adds or removes: every other character of an article, including hand-placed links, formatting and the title and excerpt, stays exactly as written, and links match whole words only.
+
+## v1.6.719
+
+- Headless sites can read each page's SEO data (title, description, canonical, robots, social and structured data) from the active SEO plugin, on the frontend's own address, so the frontend can build its page heads from it.
+
+## v1.6.718
+
+- LinkCentral no longer strips backslashes from a post when it adds links, so block settings and code samples stay intact.
+
+## v1.6.717
+
+- LinkCentral's automatic cross-linking now runs only on an article's first publish, so later edits and saves never change its links; a post can opt out, and the links route re-runs on a live post only when asked with force.
+
+## v1.6.716
+
+- The Review Portal warns when your SEO plugin would drop part of a search title or description, such as a percent range written as 65%-75%, and suggests a form it keeps; with an SEO plugin active, an empty excerpt now stays empty when you edit the search description.
+
+## v1.6.715
+
+- Headless sites get a FAQ prompt card in the Review Portal: it turns a page's reviewed questions and answers into a ready task for building the visible FAQ and its FAQ schema on the frontend, and refuses pages that are not publishable.
+
+## v1.6.714
+
+- The Review Portal's AI agent prompts card now has an Approval choice (propose only, approve each change, or an approved batch), a site default for it, a Download .md button and a Template badge, and generates step-by-step task prompts a site coding session can act on.
+
 ## v1.6.713
 
 - Hosting tools can now read and set a page's SEO title, description and keywords through whichever SEO plugin is active, with a preview first, and clear a page's cache; SEO writes for custom page types used as the home or posts page now reach Squirrly.
