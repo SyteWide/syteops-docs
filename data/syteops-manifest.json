@@ -1,6 +1,6 @@
 {
     "schema_version": 1,
-    "syteops_version": "1.6.705",
+    "syteops_version": "1.6.711",
     "operations": [
         {
             "resource": "users",
@@ -1521,6 +1521,26 @@
             "destructive": false,
             "capability": "manage_options",
             "returns": "data: {queued, post_id, url, not_before, paused}"
+        },
+        {
+            "resource": "builder",
+            "action": "guard",
+            "summary": "Recompute the agent-prompt guard hash (CANON-1) for one Elementor element so a session can compare it before writing. Returns the hash and its key list only, never a setting value.",
+            "params": {
+                "post_id": {
+                    "type": "integer",
+                    "format": "record_id",
+                    "required": true,
+                    "description": "Record id, digits only."
+                },
+                "el_id": {
+                    "type": "string",
+                    "required": true
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "returns": "data: {status, reason, guard, guard_keys[], widget_type}"
         }
     ]
 }
