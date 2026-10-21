@@ -193,14 +193,6 @@ OpenRouter is the recommended default — it gives you access to models from eve
 
 ---
 
-## Social
-
-### LinkedIn
-
-Lets people post a live article to their own LinkedIn profile from the Review Portal's **Share to** menu, with the link shown as a preview card. You create a LinkedIn app once and paste its Client ID and Client Secret on the **Share to LinkedIn** card, which appears on the Integrations tab once LinkedIn is switched on; each person then connects their own LinkedIn account from the dialog. See the dedicated [LinkedIn Integration](linkedin) page for setup.
-
----
-
 ## Backup & Utilities
 
 ### WPVivid

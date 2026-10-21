@@ -8,6 +8,39 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.696
+
+- The Quick Navigation heading is now centered above its section links on every tab header, sitting with them instead of floating left.
+
+## v1.6.695
+
+- Rebuilds no longer deploy twice when PhantomStudio is slow to answer: the rebuild request now waits up to 20 seconds for PhantomStudio, and if it still has not answered, the screen says it was sent and most likely started instead of asking again.
+
+## v1.6.694
+
+- Sharing to LinkedIn now reads a page's picture straight from the server only when it is that post's own featured or attached image. Any other picture is fetched through the website like a visitor would, so images in members-only or protected locations are never posted.
+
+## v1.6.693
+
+- Saving a change to the consent mode, cookie, internal traffic, goal or qualification settings now refreshes your page cache automatically, so visitors see the change at once; saving without a change leaves the cache alone.
+
+## v1.6.692
+
+- Red status pills now always show white text on a red dark enough to read, including the Logging ON pill when your brand warning color is red, the failed and error pills on Content Pipelines, and the dead-link pill in the Review Portal.
+
+## v1.6.691
+
+- Posting to LinkedIn from Share to now sends the same preview card the page shows when anyone else shares it: its Open Graph title, description and image, as your SEO plugin prints them. Where the page has none, the card uses the post's title, excerpt and featured picture. A picture on a CDN or another site is downloaded for the card (https only, up to 8 MB).
+- When a LinkedIn post goes out without a picture, the dialog now says so and why, for example that the page has no image or that LinkedIn did not accept it.
+- Long titles and descriptions are shortened for the card, so LinkedIn no longer refuses the post over them.
+
+## v1.6.690
+
+- Share to now shows titles and summaries as plain text. Apostrophes, spaces and ampersands no longer appear as code in the LinkedIn dialog, and the LinkedIn post card is sent clean.
+- The small button beside each channel in Share to now reads Copy link, and says Link copied once it works.
+- Share to menus now list a channel only while its switch is on under Content Pipelines, Review Portal, Social sharing (LinkedIn, Facebook, X, Instagram, Email, Text message; all off until you turn them on). Existing channel rows for Facebook, X, Instagram, Email and Text message disappear until you switch them on. LinkedIn is carried over if its integration was on; channels you added yourself always show. With all off, the menu is just Copy link.
+- The LinkedIn switch replaces the LinkedIn tile on the Integrations tab. Sites that had it on keep sharing, and people who can change settings see a one-line note when LinkedIn sign-in is not offered yet. LinkedIn shows with its logo.
+
 ## v1.6.689
 
 - On Systems / API, every headless PhantomStudio setting now sits in one card, in the order a pairing is set up, with a status line at the top that says exactly what is missing, such as auto-deploy being switched off, no webhook address being stored, or the last rebuild call being refused. The saved webhook address shows only its host, and the secret key and address secret are never shown.
