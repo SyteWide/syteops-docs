@@ -145,9 +145,14 @@ Two read commands print, over SSH, exactly what the site's project-key lists ans
 ```bash
 wp syteops phantomstudio exclusions --format=json
 wp syteops phantomstudio expected-pages --format=json
+wp syteops phantomstudio seo --page=1 --format=json
 ```
 
-Each prints the same JSON the matching list sends to the frontend (the pages left out of the build, and the page counts a build should hold), then a newline; anything else goes to the error stream. With the integration off, each prints the same error answer the list gives and exits non-zero; `expected-pages` does the same when the page count cannot be read. If something stops the command partway, it prints nothing on the output stream and exits non-zero. JSON is the only format. The pairing status lists `cli_exclusions` and `cli_expected_pages` among its capabilities.
+Each prints the same JSON the matching list sends to the frontend (the pages left out of the build, and the page counts a build should hold), then a newline; anything else goes to the error stream. With the integration off, each prints the same error answer the list gives and exits non-zero; `expected-pages` does the same when the page count cannot be read. If something stops the command partway, it prints nothing on the output stream and exits non-zero. JSON is the only format. The third prints one page of SEO records (see below); `--page` and `--per-page` choose the page. The pairing status lists `cli_exclusions`, `cli_expected_pages` and `cli_seo` among its capabilities.
+
+## SEO data for the frontend
+
+With a frontend address saved, the site lists one SEO record per published page at `/wp-json/syteops/v1/phantomstudio/seo?page=1&per_page=50`, so the frontend builds each page's head from what your team edits in its SEO plugin. Like the other lists it answers only to the project key, and with the integration off the address does not exist (a 404). Each record holds the page address, title, description, canonical address, search-engine visibility, social sharing text and image, and structured data, with every address of this site already on the frontend address. Only the SEO plugin that is turned on is read; with none, the page's own title, excerpt and address are used. Drafts, private pages, password-protected pages and the pages you leave out of the build never appear. For Rank Math and Squirrly SEO the structured data holds only what is saved on the page itself, not the site-wide entries those plugins add when a page is shown.
 
 ## IndexNow changes for the frontend
 

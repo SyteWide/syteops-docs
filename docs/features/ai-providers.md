@@ -102,7 +102,7 @@ The Content Pipelines → AI Models view carries one **AI Models** card, one row
 - **Ingest field mapping** (Ingest) — proposes how an inbound content-source payload maps to your post fields when you set up a new content source. See [Content Pipelines](./content-pipelines.md).
 - **Social posts** (Social) — AI-generated social posts from your published content. Its provider/model/max-tokens fields render on this card and save with it; the Social Publishing view keeps its own voice profiles, destinations, and enable toggle.
 - **Image alt & captions** (Image SEO, carries a **Vision** badge) — **Generate SEO with AI** in the Review Portal. It writes an image's alt text, title, and caption from the picture itself rather than the surrounding words. It uses that provider's key on **System / API**, not SyteHero (SyteHero is **Modify with AI**). This area must point at a model that accepts image input; a text-only model is refused rather than asked to guess, so a provider that cannot take an image shows disabled here. See [Review & Publish Your Post](./review-and-publish-your-post.md).
-- **Agent prompts** — turns a page reviewer's notes into an implementation prompt. A per-site preamble template (with a **Restore default** option) sits beside it, in its own card just below.
+- **Agent prompts** — turns a page reviewer's notes into an implementation prompt. A **Default approval mode** setting (Propose only, Approve each change or Approved batch; Approve each change by default) chooses which mode the portal card starts on. A per-site preamble template (with a **Restore default** option) sits beside it, in its own card just below.
 
 Two more rows are status-only, with no controls of their own:
 

@@ -197,13 +197,38 @@ You can also click **Configure AI Provider** in the card header to quickly set t
 When the endpoint is called with a post ID:
 
 1. **Load keywords** — SyteOps reads your LinkCentral link library and builds an index of keywords mapped to their link URLs, SEO attributes, and density settings. Keyword enrichment uses layered context — combining Perplexity web search, page metadata, and link categories — to produce more accurate keyword matches.
-2. **Clean previous runs** — Any links from a previous auto-linking run are removed first, so the process always starts fresh. Manual links you added yourself are never touched.
-3. **Scan paragraphs** — The engine walks through your post content paragraph by paragraph, skipping headings, existing links, code blocks, and shortcodes.
+2. **Clean previous runs** — Links from a previous auto-linking run are removed first, so the process starts fresh. Links you added yourself are never touched, and neither is an auto-placed link you later changed in any way (its text, its address, its formatting, or added nofollow or a class). If SyteOps cannot be sure a link is its own, it leaves it alone.
+3. **Scan paragraphs** — The engine walks through your post content paragraph by paragraph, skipping headings, existing links, code blocks, and shortcodes. Page-builder layouts (Divi, WPBakery and similar) are linked normally.
 4. **Insert keyword links** — Depending on **Keyword Matching Mode**, SyteOps either matches whole words exactly, or uses AI to pick verbatim phrases from the article that correspond to your library keywords, then inserts links to the correct LinkCentral URLs with the right nofollow/sponsored attributes.
 5. **Insert cross-links** — Related posts are identified by shared categories and tags, and contextual links are placed in relevant paragraphs.
-6. **Save** — The updated content is saved back to the post (unless you used dry-run mode).
+6. **Save** — The updated content is saved back to the post (unless you used dry-run mode). When nothing was linked or removed, the post is not saved at all.
+
+### What auto-linking never does
+
+- It never changes, moves or removes a link you placed by hand, or one you edited after it was added.
+- It never changes anything else you wrote. Only the link tags it adds or removes differ; your quotes, spacing, special characters, line breaks and every other character stay exactly as they were.
+- It never adds a keyword link or cross-link to a page the article already links, however you wrote the address (with or without `www`, a trailing slash or a tracking query, as a relative path, or using your site's front-end address).
+- It only links whole words. "cause" is never linked inside "because", and "lender" is not linked inside "lender's" or "no-doc". A phrase still matches when its words are separated by a non-breaking space or two spaces.
+- It never links text inside an existing link, a heading, a button, code, an image caption, a shortcode or an HTML comment, and never touches image alt text.
 
 The process is **idempotent**: running it again on the same post produces the same result. It removes its own previous links before re-processing, so you can safely re-run it after updating your LinkCentral keywords.
+
+## When Links Are Added Automatically
+
+The automatic pass runs **once per article, the first time it is published**. Editing, updating, unpublishing and republishing, or rescheduling an article that has already been linked does not run it again, so links you adjusted by hand are never swapped out by a later save.
+
+- **Articles already cross-linked** (including everything linked before this behavior shipped) are never re-linked automatically, even if you unpublish and republish them.
+- **Live articles that were never linked, or whose first pass was missed,** are not linked automatically. Link them with Manual Process in the admin, or by calling process-links with `"options": {"force": true}`.
+- **Asking for a run still works.** Manual Process in the admin and a manual pipeline run always process the article. The process-links endpoint follows the same once-only rule as the automatic pass (so a "post updated" workflow cannot re-link every edit), but a call made right after an article's first publish still runs, and `"options": {"force": true}` always runs it.
+- **Opt a single article out.** An opted-out article is never touched by any pass, automatic or requested. Turn it on or off from the command line:
+
+```
+wp syteops linkcentral skip 123
+wp syteops linkcentral unskip 123
+wp syteops linkcentral status 123
+```
+
+A requested run on an opted-out article is refused with a clear message instead of silently doing nothing: process-links answers HTTP 409 with the code `opted_out`, and `force` does not override it.
 
 ## Cross-Link Modes
 
@@ -307,6 +332,7 @@ Processes a post by inserting keyword links and cross-links.
 | `first_occurrence` | boolean | Override first-occurrence-only setting. |
 | `target_blank` | boolean | Override open-in-new-tab setting. |
 | `keyword_matching_mode` | string | `exact`, `ai`, or `fallback` — same meaning as the Keyword Matching Mode setting. |
+| `force` | boolean | Process an article that was already linked. Without it, an already-linked article returns `"skipped": true` with a `skip_reason`. It never overrides an article's opt-out, which answers HTTP 409 with the code `opted_out`. |
 
 **Example request:**
 
