@@ -74,11 +74,35 @@ With the integration on, **System / API** also shows **Deploy when content chang
 
 **Other plugins can ask too.** Another plugin on the same site can ask for a rebuild, for example when something it shows changes on a schedule. The request goes through the same one-minute wait as every other change, so it adds to the same single deploy, and it does nothing when the integration or automatic deploys are off or no valid address is saved.
 
-**If a request fails.** A network error or a server error (5xx) is tried once more after another minute. A refusal such as a 404 (usually a wrong or outdated address) is not retried, and neither is a redirect, because WordPress does not follow redirects for this request. The second failure is final: the screen shows it, and the next change asks again.
+**How the request is sent.** WordPress sends a POST to the address you pasted without the part after `?`, the way PhantomStudio requires: the secret goes in a request header and the repository name in the request body. Neither ever appears in an address PhantomStudio or anything in between records. The address must include its `secret=` and `repo=` parts: one without either is refused when you save, and if one was saved before this check, the screen says the switch is doing nothing and no rebuild is asked for.
+
+**If a request fails.** A network error, a server error (5xx), a request timeout (408) or a request to slow down (429) is tried once more after another minute. Any other refusal, such as a 404 (the repository or the webhook address was not found), is not retried, and neither is a redirect, because WordPress does not follow redirects for this request. The second failure is final: the screen shows it, and the next change asks again.
 
 **Where to find the address.** In PhantomStudio, open your project and find the **Auto-Deploy Webhook** panel. Copy the address. It starts with `https://phantomwp.com/` and **it is a secret**: anyone who has it can start a deploy, so it is stored encrypted, shown masked and left out of exports and backups. This plugin never writes it to a log or shows it in a message. A plugin that records WordPress's outgoing web requests can see it, so be careful with those. The address is checked when you save (it must be an `https` address on `phantomwp.com`; anything else is refused with a message and not stored) and again before every request. The address changes with each build in PhantomStudio, so paste the new one here when it does; leave the field blank on later saves to keep the stored one.
 
-If the switch is on but no valid address is saved, the screen says the switch is doing nothing. Under the address, a line shows when the last request went out and how it ended (for example **HTTP 200**, **failed: HTTP 404** or **failed: timeout**).
+If the switch is on but no valid address is saved, the screen says the switch is doing nothing. In the **Last rebuild call** row, a line shows when the last request went out and how it ended (for example **HTTP 200**, **failed: HTTP 404** or **failed: timeout**). A refusal from PhantomStudio says what it means:
+
+| Result | What it means |
+|---|---|
+| `http_3xx` | the address redirects; copy it again from PhantomStudio (not followed, not retried) |
+| `http_400` | the repository was missing from the request; the request was changed on the way or PhantomStudio changed how it accepts it — copy the address again |
+| `http_401` | the webhook secret header was missing; the request was changed on the way or PhantomStudio changed how it accepts it — copy the address again |
+| `http_403` | the webhook secret is invalid; regenerate the webhook URL in PhantomStudio and store it again |
+| `http_404` | repository or webhook address not found; check the stored repo value (PhantomStudio expects the bare repo name, not owner/name) and the address |
+| `http_405` | wrong method; the request was changed on the way or PhantomStudio changed how it accepts it — copy the address again |
+| `http_429` | PhantomStudio asked to slow down; the first such answer is tried once more |
+
+Only the 429 is tried again. Because SyteOps always sends the method, the secret header and the repository, a 400, 401 or 405 means the request was changed on the way or PhantomStudio changed how it accepts it: copy the address again. For a 403, regenerate the webhook URL in PhantomStudio and save it again; for a 404, check the repository name and the address.
+
+## The headless card on Systems / API
+
+While the integration is on, every PhantomStudio setting sits in one card on **Systems / API**, in the order a pairing is set up. A status line at the top reads like the pairing status and names exactly what is missing, for example "Rebuilds off: auto-deploy is switched off" or "Rebuilds off: no webhook URL stored". An address with no usable secret or no usable repository part reads "Rebuilds off". When a rebuild call came back refused, it says what that answer means, in the same words as the table above.
+
+- **Pairing:** the integration state, the secret key (set or not, never shown), PhantomWP Connect, the frontend address and the headless switch.
+- **Rebuilds:** the auto-deploy switch, the saved webhook address shown as its host and a masked path (the secret part is never shown), the wait before a rebuild and the time and result of the last call.
+- **What the frontend gets:** the pages kept on WordPress, the store pages to build, the brand font and spacing, the brand colors switch, and the internal-traffic parameter and IndexNow state, which are set in Content Pipelines and shown here with a link.
+
+Every setting keeps its name and its saved value; the card only gathers them.
 
 ## Headless install
 
@@ -113,7 +137,16 @@ wp syteops phantomstudio rebuild
 
 `set-frontend` checks the address with the same rules as the settings screen, refuses a bad one with an error and a non-zero exit, and prints the stored address and whether headless is on. `--headless` is refused unless a valid address is stored. It never turns the PhantomStudio integration on: when the integration is off it prints a line saying the settings take effect once it is on. `--internal-traffic-param` sets the Content Pipelines parameter that keeps editorial visits out of analytics, using that setting's own cleanup; an empty value clears it. A change that the frontend reads when it is built asks for a rebuild, as it does from the settings screen.
 
-`rebuild` asks for a rebuild through the same wait and checks as every other change and prints one line: queued, or why not (the integration is off, Deploy when content changes is off, or no valid deploy address is saved). It exits non-zero when nothing was queued. Neither command prints the project key or the deploy address. The pairing status lists `cli_set_frontend` and `cli_rebuild` among its capabilities, so a hub can tell a site has them.
+`rebuild` asks for a rebuild through the same wait and checks as every other change and prints one line: queued, or why not (the integration is off, Deploy when content changes is off, or no valid deploy address is saved, or the saved address has no usable secret or repo in it). It exits non-zero when nothing was queued. Neither command prints the project key or the deploy address. The pairing status lists `cli_set_frontend` and `cli_rebuild` among its capabilities, so a hub can tell a site has them.
+
+Two read commands print, over SSH, exactly what the site's project-key lists answer, for a hub that holds no project key:
+
+```bash
+wp syteops phantomstudio exclusions --format=json
+wp syteops phantomstudio expected-pages --format=json
+```
+
+Each prints the same JSON the matching list sends to the frontend (the pages left out of the build, and the page counts a build should hold), then a newline; anything else goes to the error stream. With the integration off, each prints the same error answer the list gives and exits non-zero; `expected-pages` does the same when the page count cannot be read. If something stops the command partway, it prints nothing on the output stream and exits non-zero. JSON is the only format. The pairing status lists `cli_exclusions` and `cli_expected_pages` among its capabilities.
 
 ## IndexNow changes for the frontend
 
@@ -163,11 +196,11 @@ The frontend must hand the tracker its settings itself, as `window.SyteOpsLeads`
 `brand.spacing` and `brand.type` are listed in `missing` until you set them. No source exists on the site for `ga4_measurement_id` or `ringtonic_campaign`, so they are always listed in `missing` unless the site's own code supplies them (and may override the brand font and spacing) through the `syteops_phantomstudio_site_settings` filter. What the filter returns is checked again: known keys only, text of 191 characters or fewer, and a Google Analytics id must look like `G-XXXXXXXX` or it is dropped. A value the filter supplies leaves `missing`.
 ## SEO fields
 
-When the site uses Squirrly SEO (and Yoast is not running), the frontend's project-key requests for pages, posts and other content types carry each item's saved search settings in the same shape Yoast uses (`yoast_head_json`): title, description, canonical address, social titles, descriptions and images, social card type, and the index and follow choices. Only values saved on the item are sent, and a saved text that still contains a placeholder such as a site-name tag is left out. Nothing is sent for an item whose own search settings are switched off. Squirrly's automatic defaults are not computed, so an item with nothing saved has no field and the frontend uses the item's own title. The canonical address points at the frontend when a frontend address is set. Visitors, and signed-in users without the project key, never receive the field.
+When the site uses Squirrly SEO (and Yoast is not running), the frontend's project-key requests for pages, posts and other content types (and the site's own count requests for `expected-pages`, which ask for ids only) carry each item's saved search settings in the same shape Yoast uses (`yoast_head_json`): title, description, canonical address, social titles, descriptions and images, social card type, and the index and follow choices. Only values saved on the item are sent, and a saved text that still contains a placeholder such as a site-name tag is left out. Nothing is sent for an item whose own search settings are switched off. Squirrly's automatic defaults are not computed, so an item with nothing saved has no field and the frontend uses the item's own title. The canonical address points at the frontend when a frontend address is set. Visitors, and signed-in users without the project key, never receive the field.
 
 ## Originating post for Lead Attribution
 
-With Lead Attribution active, the frontend's project-key requests for posts and other content carry one more value on each item that counts as an originating post: `syteops_originating_post`, the item's address on the frontend without the host (for example `/how-to/`). It is there only for a published item without a password, of a type checked under **Leads → Settings → Consent & privacy → Originating post types** (blog posts by default). Drafts, scheduled, private and password-protected items never carry it, and neither does a page the frontend does not build (an excluded page). Visitors, and signed-in users without the project key, never receive it.
+With Lead Attribution active, the frontend's project-key requests for posts and other content (and the site's own count requests for `expected-pages`, which ask for ids only) carry one more value on each item that counts as an originating post: `syteops_originating_post`, the item's address on the frontend without the host (for example `/how-to/`). It is there only for a published item without a password, of a type checked under **Leads → Settings → Consent & privacy → Originating post types** (blog posts by default). Drafts, scheduled, private and password-protected items never carry it, and neither does a page the frontend does not build (an excluded page). Visitors, and signed-in users without the project key, never receive it.
 
 The frontend must pass it to the lead tracker on that item's page only, as `originatingPost` in `window.SyteOpsLeads` next to the other tracker settings:
 
@@ -224,9 +257,9 @@ Example line (fake values):
 | `frontend_origin` | The saved frontend address, or an empty string. |
 | `key_set` | A project key is saved. The key itself is never shown. |
 | `rest_restriction` | `off`, `authenticated` or `block_all`: the REST restriction in force. |
-| `webhook_set` | Automatic deploys are switched on and a deploy address is saved. The address is never shown. |
+| `webhook_set` | Automatic deploys are switched on and a deploy address is saved. The address is never shown. It does not say the address is usable: a saved address with no secret or repo in it still reads `true`, and `wp syteops phantomstudio rebuild` then says why nothing was queued. |
 | `webhook_last_trigger` | When the last deploy request went out, as a Unix time, or `null` if none has. |
-| `webhook_last_result` | How it ended, such as `http_200`, or `null`. |
+| `webhook_last_result` | How it ended, such as `http_200`, or `null`. Each refusal (`http_400`, `http_401`, `http_403`, `http_404`, `http_405`) has its own meaning, listed above; `refused_no_secret` and `refused_no_repo` mean the saved address has no usable secret or repo in it, so nothing was sent. The table format adds that meaning in parentheses; the JSON line carries the code alone. |
 | `webhook_debounce_seconds` | How long SyteOps waits after a change before it asks for a deploy. |
 | `webhook_events` | The kinds of change that request a deploy. |
 | `stray_output_guard` | SyteOps would discard HTML that another plugin prints into a content response. |

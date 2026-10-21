@@ -8,6 +8,48 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.689
+
+- On Systems / API, every headless PhantomStudio setting now sits in one card, in the order a pairing is set up, with a status line at the top that says exactly what is missing, such as auto-deploy being switched off, no webhook address being stored, or the last rebuild call being refused. The saved webhook address shows only its host, and the secret key and address secret are never shown.
+
+## v1.6.688
+
+- On the Review Portal, cards that no longer fit beside the preview wrap underneath it at full width in two or three columns, a long Feedback list now scrolls inside its card, and a Back to preview (or Back to article) button appears at the bottom right once the preview has scrolled out of view. The preview also re-fits when the window is resized.
+
+## v1.6.687
+
+- On a page review, each note about an element has a small crosshair that scrolls to the spot, flashes the element and bounces its marker so you can see where it was left. Pointing at any other note also clears the previously lit marker.
+
+## v1.6.686
+
+- The Review Portal's Feedback card has a Show resolved switch that hides resolved notes, their replies and their markers on the page preview. Your choice is remembered in this browser, and a link to a resolved note still shows it.
+
+## v1.6.685
+
+- On a page's Appearance review, Apply in a picture's panel now saves its alt text and caption (only the boxes you changed), every copy of the picture on the page is updated and the status line says how many, and Undo picture swap reverses it. Cover and background pictures, square brackets and HTML comments are refused with a clear message, and alt text on an Elementor picture is left untouched.
+
+## v1.6.684
+
+- Two new command-line reads, for a hub that manages the site over SSH, return exactly the same answers as the headless frontend's lists of excluded pages and expected page counts.
+
+## v1.6.683
+
+- Companion plugins can now ask SyteOps for the site's consent setting: one lookup returns the posture (opt-out, opt-in or by location) and another returns this visitor's decision (opt-in or opt-out).
+
+## v1.6.682
+
+- Review Portal emails now name the item by what it is. A note on a page, or on the home page, no longer says "Article notes", "There is 1 note on this article" or "Chet on The article": emails say page, post or the item's own type everywhere, including buttons such as Edit/View this page and Preview this page. Reminders and digests name their shared type ("2 pages are coming up") and say items when the types are mixed.
+
+## v1.6.681
+
+- Frontend form tickets and the consent lookup are no longer cached: the headless form ticket and the Leads consent lookup now tell the page cache not to store them, so one visitor's answer is never replayed to the next.
+
+## v1.6.680
+
+- **Headless rebuilds work again:** SyteOps now calls the PhantomStudio rebuild webhook the way PhantomStudio requires: a POST with the secret in a request header and the repository in the request body, never in the address. Your saved **Deploy webhook address** does not change and does not need to be pasted again, as long as it includes its repository part.
+- The address must include its `secret=` and `repo=` parts: an address without either is refused when you save, and one saved earlier makes the screen say the switch is doing nothing and makes the rebuild command say why nothing was queued.
+- Each refusal from PhantomStudio now says what it means, on the settings screen and in the pairing status table: the repository was missing (400), the secret header was missing (401), the secret is invalid (403), the repository or address was not found (404), the method was wrong (405), or the address redirects (3xx). A request PhantomStudio asks to slow down (429) or that times out (408) is tried once more.
+
 ## v1.6.679
 
 - **No LinkedIn app to set up:** the Review Portal's **Share to** dialog now signs people in to LinkedIn through the site's Management Connection, so a site never creates or enters a LinkedIn app. Each person chooses **Connect LinkedIn**, confirms on the page that names the site, and approves on LinkedIn.
