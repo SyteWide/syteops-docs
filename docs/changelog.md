@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.713
+
+- Hosting tools can now read and set a page's SEO title, description and keywords through whichever SEO plugin is active, with a preview first, and clear a page's cache; SEO writes for custom page types used as the home or posts page now reach Squirrly.
+
+## v1.6.712
+
+- Task prompts for site coding sessions can now fix a change whose target SyteOps can't prove on the page, after the person approves that exact change; nothing reaches a site until the prompt button ships.
+
 ## v1.6.711
 
 - In the Review Portal, the SEO panel now shows what search engines will read: the search-result preview fills in your SEO plugin's placeholders, and the Description box shows the search description your SEO plugin holds. Editing the Description no longer overwrites a different page excerpt. Reviewers who cannot edit the post itself can no longer save SEO placeholders that read hidden data, such as custom fields or author details.

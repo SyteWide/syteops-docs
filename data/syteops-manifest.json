@@ -1,6 +1,6 @@
 {
     "schema_version": 1,
-    "syteops_version": "1.6.711",
+    "syteops_version": "1.6.713",
     "operations": [
         {
             "resource": "users",
@@ -1541,6 +1541,93 @@
             "destructive": false,
             "capability": "manage_options",
             "returns": "data: {status, reason, guard, guard_keys[], widget_type}"
+        },
+        {
+            "resource": "seo",
+            "action": "get",
+            "summary": "Read one post's SEO title, description and focus keywords from whichever SEO tool is active. With no active SEO tool it returns 409 no_active_seo_tool.",
+            "params": {
+                "post_id": {
+                    "type": "integer",
+                    "format": "record_id",
+                    "required": true,
+                    "description": "Record id, digits only."
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "strict": true,
+            "returns": "data: {post_id, tool, tool_label, fields: {title, description, keywords}}"
+        },
+        {
+            "resource": "seo",
+            "action": "set",
+            "summary": "Write one post's SEO title, description or focus keywords through the active SEO tool's own writer. Use this, not update_content meta, for every SEO plugin. dry_run:true writes nothing and returns each field's current and proposed value; a real write returns 409 confirmation_required until confirm:true. Only the fields sent change; any other field is refused. Caps: title 300, description 1000, keywords 500 characters. A placeholder the SEO tool fills from site data is refused (422 seo_token_not_allowed) unless allow_placeholders:true.",
+            "params": {
+                "post_id": {
+                    "type": "integer",
+                    "format": "record_id",
+                    "required": true,
+                    "description": "Record id, digits only."
+                },
+                "title": {
+                    "type": "string",
+                    "required": false,
+                    "description": "SEO title. Send an empty string to clear it."
+                },
+                "description": {
+                    "type": "string",
+                    "required": false,
+                    "description": "Meta description. Send an empty string to clear it."
+                },
+                "keywords": {
+                    "type": "string",
+                    "required": false,
+                    "description": "Focus keywords, comma-separated. Send an empty string to clear it."
+                },
+                "dry_run": {
+                    "type": "boolean",
+                    "required": false,
+                    "description": "Preview only; nothing is written."
+                },
+                "confirm": {
+                    "type": "boolean",
+                    "required": false,
+                    "description": "Required (true) for a real write."
+                },
+                "allow_placeholders": {
+                    "type": "boolean",
+                    "literal": true,
+                    "required": false,
+                    "description": "JSON true only. Allow placeholders the SEO tool fills from site data (custom fields, options). Off by default; only safe ones such as the post title are accepted without it."
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "strict": true,
+            "returns": "data: {post_id, tool, tool_label, dry_run, changed, written, fields: {<field>: {current, proposed, changed}}, placeholders: {<field>: []}, stored?: {title, description, keywords}, note?}"
+        },
+        {
+            "resource": "cache",
+            "action": "purge",
+            "summary": "Purge one post's page (post_id), or up to 30 URLs on this site's own host (urls), from LiteSpeed and Cloudflare when present. With post_id it also asks Elementor to rebuild its generated CSS when that post is built with Elementor. Send post_id or urls, not both; a URL on any other host refuses the whole call.",
+            "params": {
+                "post_id": {
+                    "type": "integer",
+                    "format": "record_id",
+                    "required": false,
+                    "description": "Record id, digits only."
+                },
+                "urls": {
+                    "type": "object",
+                    "required": false,
+                    "description": "List of absolute http(s) URLs on this site's host, at most 30."
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "strict": true,
+            "returns": "data: {urls[], purged[], attempted[], skipped[], errors[], elementor_css: cleared|unavailable|not_elementor|null}"
         }
     ]
 }

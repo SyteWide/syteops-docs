@@ -14,6 +14,7 @@ Every operation runs through the single dispatch endpoint. See [Dispatch contrac
 |---|---|---|
 | [`ai`](./ai) | 5 | no |
 | [`builder`](./builder) | 1 | no |
+| [`cache`](./cache) | 1 | no |
 | [`content_sources`](./content-sources) | 9 | yes |
 | [`crm`](./crm) | 6 | yes |
 | [`identity`](./identity) | 2 | no |
@@ -22,6 +23,7 @@ Every operation runs through the single dispatch endpoint. See [Dispatch contrac
 | [`modules`](./modules) | 10 | yes |
 | [`pipelines`](./pipelines) | 8 | yes |
 | [`roles`](./roles) | 6 | yes |
+| [`seo`](./seo) | 2 | no |
 | [`squirrly`](./squirrly) | 2 | no |
 | [`status`](./status) | 3 | no |
 | [`users`](./users) | 6 | yes |
