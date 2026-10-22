@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.731
+
+- LinkCentral never saves to pages built with Elementor (it only suggests links there), leaves text after a hand link that was never closed alone, and suggests only phrases it can actually link.
+
 ## v1.6.730
 
 - On a headless site, saving an opted-in form, a published page's SEO fields or a redirect rule now rebuilds the frontend automatically, through the same single debounced rebuild as publishing.
