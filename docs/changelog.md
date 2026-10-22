@@ -8,6 +8,26 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.725
+
+- LinkCentral keeps each page within a body-link limit (12 by default), never removes the last inbound links an article relies on, and can favor priority pages the site lists.
+
+## v1.6.724
+
+- The builder check used by site coding sessions now confirms a signed-in caller can edit the page or template, and refuses trashed or hidden posts.
+
+## v1.6.723
+
+- Headless sites can read their redirects from Redirection, Pretty Links and LinkCentral as plain rules on the frontend's own address, with any rule the frontend cannot safely serve listed separately.
+
+## v1.6.722
+
+- Headless sites' SEO data leaves out search and author links the frontend does not serve, until a SyteOps admin turns them on, and the frontend can read those switches.
+
+## v1.6.721
+
+- LinkCentral now writes descriptive link text that names the linked page's topic, taken from its SEO focus keyword or title, and skips vague phrases.
+
 ## v1.6.720
 
 - LinkCentral now changes only the links it adds or removes: every other character of an article, including hand-placed links, formatting and the title and excerpt, stays exactly as written, and links match whole words only.
