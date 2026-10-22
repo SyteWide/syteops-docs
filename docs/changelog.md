@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.728
+
+- Authorized Domains wildcards (*.example.com) now work: they cover subdomains but not the bare domain, and malformed entries are refused on save. A licensing server whose list held only wildcards used to allow every site; it now allows only the matching subdomains, and a list holding only the server's own domain now allows only the server. The Authorized Domains screen lists any live site the current list would refuse.
+
 ## v1.6.727
 
 - After a site moves to a new address, one command moves its management connection there too, so LinkedIn sign-in and the daily delivery keep working; the hub checks both the old and the new address before it changes anything.
