@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.727
+
+- After a site moves to a new address, one command moves its management connection there too, so LinkedIn sign-in and the daily delivery keep working; the hub checks both the old and the new address before it changes anything.
+
+## v1.6.726
+
+- Headless sites can read the Fluent Forms forms an admin marks for the frontend, with their fields, labels, submit button and success message, so the frontend can show them natively; a form with features the frontend cannot reproduce is flagged so it links to the WordPress page instead.
+
 ## v1.6.725
 
 - LinkCentral keeps each page within a body-link limit (12 by default), never removes the last inbound links an article relies on, and can favor priority pages the site lists.
