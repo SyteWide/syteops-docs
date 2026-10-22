@@ -35,6 +35,10 @@ When this toggle is on and REST API Restriction is enabled, Wordfence's entire v
 
 Wordfence verifies its own requests against these endpoints — SyteOps isn't weakening Wordfence's security, just keeping Wordfence's namespace open while everything else stays restricted.
 
+## Review Portal sign-in
+
+This works whether or not the toggle is on. When Wordfence's login reCAPTCHA is turned on, the Review Portal's sign-in card passes Wordfence's security check the same way the WordPress login screen does, so reviewers are not sent a "Login Verification Required" email every time they sign in, and Wordfence still counts wrong passwords toward its lockout. When Wordfence does send a verification email, its link brings the reviewer back to the portal after they sign in. Reviewers who sign in from their own private review page, with their own username or email, are not asked by Wordfence to confirm by email at all: the private link sent to them already shows the sign-in is theirs. Anyone holding that link can still only try passwords for that one reviewer, and Wordfence's lockout, two-factor and passkey rules all still apply, so treat the link like the private link it is. After three wrong passwords in an hour, the private-page shortcut pauses for a day. Reviewers who use Wordfence two-factor codes or passkeys are pointed to the standard sign-in page to finish. While the check is running, the sign-in button shows as busy, and Google's reCAPTCHA notice appears under it instead of Google's floating badge in the corner of the page.
+
 ## Common use-cases
 
 - Sites running both Wordfence and SyteOps REST API Restriction.

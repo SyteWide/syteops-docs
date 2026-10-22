@@ -8,6 +8,30 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.737
+
+- Links are no longer suggested for content with an unfinished link.
+
+## v1.6.736
+
+- Reviewers who sign in from their own private review page are no longer asked by Wordfence to confirm by email.
+
+## v1.6.735
+
+- Signing in from the Review Portal on a site protected by Wordfence no longer sends a verification email every time, and a verification email brings the reviewer back to the portal.
+
+## v1.6.734
+
+- Signing in from a reviewer's private page no longer fails with a cookie error.
+
+## v1.6.733
+
+- A license's status can no longer be changed from a customer site through any licensing gateway, and an expired license is never switched back on by an activation attempt.
+
+## v1.6.732
+
+- A newly issued license now activates on the first try from a customer site, and a license you disable can no longer be switched back on from a customer site. An expired license no longer switches itself back on when a site checks it.
+
 ## v1.6.731
 
 - LinkCentral never saves to pages built with Elementor (it only suggests links there), leaves text after a hand link that was never closed alone, and suggests only phrases it can actually link.

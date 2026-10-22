@@ -29,7 +29,7 @@ Your **Product License** is the SyteWide license key that proves you purchased S
 | Active | License is valid and working |
 | Inactive | License has not been activated |
 | Expired | License term has ended |
-| Suspended | License suspended by issuer |
+| Suspended | License suspended or disabled by the issuer. Activating again from your site does not switch it back on; contact support |
 | Revoked | License revoked by issuer |
 | Unknown | Cannot reach licensing server |
 
