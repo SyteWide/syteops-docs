@@ -41,6 +41,7 @@ const sidebars: SidebarsConfig = {
         'features/rest-logging',
         'features/content-pipelines',
         'features/review-and-publish-your-post',
+        'features/search-console-index-status',
         'features/coverage-audit',
         'features/removed-pictures',
         'features/social-publishing',
