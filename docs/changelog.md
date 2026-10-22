@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.739
+
+- A site that hasn't confirmed its license for 15 days now locks until it can check again, and a license lock no longer removes SyteOps Admin access for good: it comes back when the license checks out.
+
+## v1.6.738
+
+- A licensing answer that leaves out the site list no longer locks a site.
+
 ## v1.6.737
 
 - Links are no longer suggested for content with an unfinished link.

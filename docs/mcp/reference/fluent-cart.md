@@ -7,7 +7,7 @@ description: MCP tools provided by FluentCart (provider id fluent-cart).
 
 # FluentCart
 
-Provider id: `fluent-cart` · 48 tool(s).
+Provider id: `fluent-cart` · 63 tool(s).
 
 ## `fcart_accept_order_dispute`
 
@@ -22,6 +22,21 @@ Accept a payment dispute/chargeback on an order transaction. Irreversible.
 |---|---|---|---|
 | `order_id` | integer | yes |  |
 | `transaction_id` | integer | yes |  |
+
+
+## `fcart_activate_license_site`
+
+Activate a license on a site URL, as the FluentCart admin does. The license must be exactly "active" (an "inactive" license is refused: set it active with fcart_update_license_status first), not expired, and have an activation left. FluentCart exempts a "local" site from the seat limit only through its fluent_cart_sl/is_local_site filter (its built-in check reads an empty field in 1.7.1), so expect every site to use a seat. This tool checks all of that first and returns an error; FluentCart would otherwise end the request. Activating a site the license already has reuses that activation.
+
+**🔴 Destructive** — supports a `dry_run` preview flag.  
+**Profiles:** `full`, `cart`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `license_id` | integer | yes | License ID. |
+| `url` | string | yes | Site URL, e.g. https://example.com. |
 
 
 ## `fcart_add_custom_order_item`
@@ -213,6 +228,21 @@ Create a product variation. Pass product_id and variation fields via extra.
 | `extra` | object | no | Variation fields (incl. product_id) merged into the body. |
 
 
+## `fcart_deactivate_license_site`
+
+Deactivate one activation of a license, as the FluentCart admin does: it deletes the activation and frees the seat. WARNING: FluentCart also deletes the license site row itself, and site rows are shared by URL across licenses, so another license activated on the same URL can be left pointing at a deleted site. Get activation_id from fcart_get_license.
+
+**🔴 Destructive** — supports a `dry_run` preview flag.  
+**Profiles:** `full`, `cart`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `license_id` | integer | yes | License ID. |
+| `activation_id` | integer | yes | Activation ID (from fcart_get_license activations). |
+
+
 ## `fcart_delete_coupon`
 
 Permanently delete a coupon.
@@ -240,6 +270,20 @@ Delete a customer address.
 |---|---|---|---|
 | `customer_id` | integer | yes |  |
 | `address_id` | integer | yes |  |
+
+
+## `fcart_delete_license`
+
+Permanently delete a license. Every site using its key loses it.
+
+**🔴 Destructive** — supports a `dry_run` preview flag.  
+**Profiles:** `full`, `cart`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `license_id` | integer | yes | License ID. |
 
 
 ## `fcart_delete_order`
@@ -310,6 +354,21 @@ Duplicate a product.
 | `product_id` | integer | yes |  |
 
 
+## `fcart_extend_license`
+
+Set a license's expiration date. expiration_date is "Y-m-d H:i:s" or "lifetime". A past date is accepted and shortens the license. FluentCart also sets a disabled or expired license back to active when its date changes.
+
+**🔴 Destructive** — supports a `dry_run` preview flag.  
+**Profiles:** `full`, `cart`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `license_id` | integer | yes | License ID. |
+| `expiration_date` | string | yes | "Y-m-d H:i:s" (e.g. 2027-10-22 23:59:59) or "lifetime". |
+
+
 ## `fcart_get_coupon`
 
 Get a FluentCart coupon by ID.
@@ -360,6 +419,36 @@ Get FluentCart store dashboard statistics (revenue, orders, etc.; amounts in cen
 _No parameters._
 
 
+## `fcart_get_license`
+
+Get one license with its activations (each with its site), order, related orders, product, downloads and labels. Keys and activation hashes are masked unless reveal_key:true. Note: FluentCart itself sets an "inactive" license with activations to "active" when this is read.
+
+**Profiles:** `full`, `cart`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `license_id` | integer | yes | License ID. |
+| `reveal_key` | boolean | no | Return license_key, license_keys and activation_hash unmasked. Default false: each is masked to its last 4 characters. Only set this when the operator needs the full key. |
+
+
+## `fcart_get_license_site`
+
+Get one license site with every license activation on it (paginated), plus the related customers and orders. Keys are masked unless reveal_key:true.
+
+**Profiles:** `full`, `cart`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `site_id` | integer | yes | License site ID. |
+| `per_page` | integer | no | Activations per page (default 15, max 100). |
+| `page` | integer | no | Page number. |
+| `reveal_key` | boolean | no | Return license_key, license_keys and activation_hash unmasked. Default false: each is masked to its last 4 characters. Only set this when the operator needs the full key. |
+
+
 ## `fcart_get_order`
 
 Get a FluentCart order by ID (amounts in cents).
@@ -398,6 +487,20 @@ Get a FluentCart product by ID (pricing in cents).
 | Parameter | Type | Required | Description |
 |---|---|---|---|
 | `product_id` | integer | yes | Product ID. |
+
+
+## `fcart_get_product_license_settings`
+
+Get a product's licensing settings: enabled, version, update file, per-variation activation limit and validity, WordPress plugin info, changelog, pre-generated license_keys (masked unless reveal_key:true), and the release manifest/signature.
+
+**Profiles:** `full`, `cart`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `product_id` | integer | yes | Product ID. |
+| `reveal_key` | boolean | no | Return license_key, license_keys and activation_hash unmasked. Default false: each is masked to its last 4 characters. Only set this when the operator needs the full key. |
 
 
 ## `fcart_get_product_pricing`
@@ -441,6 +544,22 @@ List FluentCart discount coupons with optional search and pagination.
 | `page` | integer | no | Page number. |
 
 
+## `fcart_list_customer_licenses`
+
+List one customer's licenses, newest first, with activation counts. Keys are masked unless reveal_key:true.
+
+**Profiles:** `full`, `cart`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `customer_id` | integer | yes | FluentCart customer ID. |
+| `per_page` | integer | no | Items per page (default 10, max 200). |
+| `page` | integer | no | Page number. |
+| `reveal_key` | boolean | no | Return license_key, license_keys and activation_hash unmasked. Default false: each is masked to its last 4 characters. Only set this when the operator needs the full key. |
+
+
 ## `fcart_list_customers`
 
 List FluentCart customers with optional search and pagination.
@@ -455,6 +574,42 @@ List FluentCart customers with optional search and pagination.
 | `sort_by` | string | no | Column to sort by. |
 | `per_page` | integer | no | Items per page (default 10). |
 | `page` | integer | no | Page number. |
+
+
+## `fcart_list_license_sites`
+
+List the sites licenses are activated on, with the products and customers behind each. A site row is shared by every license activated on that URL.
+
+**Profiles:** `full`, `cart`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `search` | string | no | Search term. |
+| `per_page` | integer | no | Items per page (default 10, max 199). |
+| `page` | integer | no | Page number. |
+| `filters` | object | no | Further FluentCart LicenseSiteFilter query args, sent as given (except select, which is dropped). |
+
+
+## `fcart_list_licenses`
+
+List FluentCart Pro licenses (with customer and product). Keys are masked unless reveal_key:true. search matches the license key, order ID, product title, and customer name or email. A license past its expiration date that is not expired or disabled is shown with status "expiring". Paginate with page/per_page.
+
+**Profiles:** `full`, `cart`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `search` | string | no | Search term. |
+| `active_view` | string | no | FluentCart list tab, e.g. all, active, inactive, expired or disabled. |
+| `sort_by` | string | no | Column to sort by (e.g. id, order_id). |
+| `sort_type` | string | no | ASC or DESC. |
+| `per_page` | integer | no | Items per page (default 10, max 199). |
+| `page` | integer | no | Page number. |
+| `filters` | object | no | Further FluentCart LicenseFilter query args, sent as given (except select, which is dropped). The named arguments above win on a clash. |
+| `reveal_key` | boolean | no | Return license_key, license_keys and activation_hash unmasked. Default false: each is masked to its last 4 characters. Only set this when the operator needs the full key. |
 
 
 ## `fcart_list_orders`
@@ -553,6 +708,20 @@ Refund an order. IMPORTANT: amount is in DECIMAL major units (e.g. 19.99), NOT c
 | `note` | string | no | Optional refund note. |
 
 
+## `fcart_regenerate_license_key`
+
+Generate a new key for a license. The old key stops working immediately, on every site using it. The result shows the new key masked; read it with fcart_get_license reveal_key:true.
+
+**🔴 Destructive** — supports a `dry_run` preview flag.  
+**Profiles:** `full`, `cart`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `license_id` | integer | yes | License ID. |
+
+
 ## `fcart_request`
 
 Call any FluentCart REST route (scoped to /fluent-cart/v2). GET runs immediately; POST/PUT/PATCH/DELETE require "confirm": true, or pass "dry_run": true to preview the request. Use fcart_list_routes to discover available paths.
@@ -565,10 +734,24 @@ Call any FluentCart REST route (scoped to /fluent-cart/v2). GET runs immediately
 | Parameter | Type | Required | Description |
 |---|---|---|---|
 | `method` | string | yes | HTTP method: GET, POST, PUT, PATCH, or DELETE. |
-| `path` | string | yes | Route path within /fluent-cart/v2, e.g. /fluent-cart/v2/contacts or /fluent-cart/v2/contacts/42. |
+| `path` | string | yes | Route path within /fluent-cart/v2, e.g. /fluent-cart/v2/\<resource\> for a collection or /fluent-cart/v2/\<resource\>/42 for one item. Call fcart_list_routes for the real resource names — do not guess them. |
 | `body` | object | no | Request body for writes (JSON object). |
 | `query` | object | no | Query-string arguments (JSON object). |
 | `confirm` | boolean | no | Required to execute a write (POST/PUT/PATCH/DELETE). |
+
+
+## `fcart_reset_license`
+
+Return an active license to the never-activated state: detach every activation, recount, then set the status to "inactive" (REST update_status cannot set inactive). Only an active or inactive license is reset; a disabled or expired one is refused, since inactive counts as usable and the reset would undo the revocation (set it active with fcart_update_license_status first if re-enabling is intended). Defaults to a dry run that changes nothing and returns the current status, the activations (masked) and the planned steps, naming any other license that shares a site about to be deleted. A real run needs dry_run:false AND confirm:true (booleans). It detaches each activation through FluentCart's own admin deactivate_site, stopping at the first error and reporting what was already detached, and only then recounts and sets inactive, because FluentCart's recount flips inactive back to active. WARNING: each detach also deletes that activation's shared site row (see fcart_deactivate_license_site). A license reset to inactive cannot be activated through admin activate_site until it is set active again (FluentCart treats inactive as invalid there); SyteOps 1.6.732's gateway makes that switch. Requires the FluentCart licenses/manage permission.
+
+**Profiles:** `full`, `cart`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `license_id` | integer | yes | License ID. |
+| `confirm` | boolean | no | Required (true), together with dry_run:false, for a real run. |
 
 
 ## `fcart_resync_subscription`
@@ -646,6 +829,36 @@ Update a customer address. Pass address_id and changed fields (via extra).
 | `extra` | object | no | Address fields to update, merged into the body. |
 
 
+## `fcart_update_license_limit`
+
+Set how many sites a license may be activated on. limit is a whole number; 0 or "unlimited" means unlimited. A limit below the current activation count detaches nothing, but blocks new activations.
+
+**🔴 Destructive** — supports a `dry_run` preview flag.  
+**Profiles:** `full`, `cart`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `license_id` | integer | yes | License ID. |
+| `limit` | integer,string | yes | Site limit (0 or "unlimited" for unlimited). |
+
+
+## `fcart_update_license_status`
+
+Set a license's status to active, disabled or expired. FluentCart refuses "inactive" here (HTTP 423), so this tool does too: use fcart_reset_license to return a license to inactive.
+
+**🔴 Destructive** — supports a `dry_run` preview flag.  
+**Profiles:** `full`, `cart`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `license_id` | integer | yes | License ID. |
+| `status` | string | yes | New status. |
+
+
 ## `fcart_update_order`
 
 Update a FluentCart order (POST, not PUT). Subscription orders cannot be edited. Use extra for additional fields.
@@ -706,6 +919,21 @@ Update stock levels for a specific variant. Pass stock fields (e.g. total_stock)
 | `product_id` | integer | yes |  |
 | `variant_id` | integer | yes |  |
 | `extra` | object | no | Stock fields merged into the body. |
+
+
+## `fcart_update_product_license_settings`
+
+Save a product's licensing settings. FluentCart replaces the stored settings with what you send, and an omitted manifest/signature pair is cleared, so read fcart_get_product_license_settings first and send the whole settings object back changed. Keys read back masked are refused: re-read with reveal_key:true, or leave license_keys out. Refused for bundle products. Changing version tells FluentCart a release happened. settings must carry enabled and variations: a save without variations wipes every per-variation activation limit and validity.
+
+**🔴 Destructive** — supports a `dry_run` preview flag.  
+**Profiles:** `full`, `cart`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `product_id` | integer | yes | Product ID. |
+| `settings` | object | yes | Full settings object: enabled (yes\|no, required), version (required when enabled), global_update_file, variations (required: list of \{variation_id, activation_limit, validity:\{unit,...\}\}), wp, prefix, and optionally manifest, signature, changelog, license_keys. |
 
 
 ## `fcart_update_product_variant`

@@ -48,7 +48,7 @@ Create new content of any type. Returns the created object.
 | `tags` | array | no | Tag IDs (posts). |
 | `featured_media` | integer | no | Featured image attachment ID. |
 | `menu_order` | integer | no | Menu order (pages). |
-| `meta` | object | no | Registered meta fields. |
+| `meta` | object | no | Meta registered for the REST API. Other keys are not saved and come back in warnings. For SEO fields use syteops_seo_set. |
 
 
 ## `create_term`
@@ -133,7 +133,7 @@ Find content by its public URL. Extracts the slug and resolves the content type 
 |---|---|---|---|
 | `url` | string | yes | Full public URL of the content. |
 | `content_types` | array | no | Optional explicit content types (slugs or REST bases) to search. If omitted, inferred from the URL path plus all public types. |
-| `update_fields` | object | no | Optional fields to update once found (title, content, status, meta). |
+| `update_fields` | object | no | Optional fields to update once found (title, content, status, meta). Meta keys WordPress does not save come back in warnings; for SEO fields use syteops_seo_set. |
 
 
 ## `get_content`
@@ -260,7 +260,7 @@ Update existing content of any type. Only provided fields change.
 | `tags` | array | no |  |
 | `featured_media` | integer | no |  |
 | `menu_order` | integer | no |  |
-| `meta` | object | no |  |
+| `meta` | object | no | Meta registered for the REST API. Other keys are not saved and come back in warnings. For SEO fields use syteops_seo_set. |
 
 
 ## `update_term`

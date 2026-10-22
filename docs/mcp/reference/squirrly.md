@@ -80,7 +80,7 @@ List Squirrly wp_qss snippet rows (url, url_hash, title). Paginated; optional se
 
 ## `sqseo_set_snippet`
 
-Write a page's Squirrly SEO snippet. Writes the canonical wp_qss row (the layer that renders the &lt;title>) plus the _sq_* post-meta mirror layer. Only supplied fields change. Target by post_id or url ("/" = homepage). Destructive: pass dry_run:true to preview the call (the arguments to be written) without executing.
+Write a page's Squirrly SEO snippet. Writes the canonical wp_qss row (the layer that renders the &lt;title>) plus the _sq_* post-meta mirror. Only supplied fields change. Target by post_id or url ("/" = homepage). Destructive: pass dry_run:true to preview the call (the arguments to be written) without executing. For title, description and keywords alone, syteops_seo_set does the same write through SyteOps and works with any SEO plugin; use this tool for the Squirrly-only fields.
 
 **🔴 Destructive** — supports a `dry_run` preview flag.  
 **Profiles:** `full`, `seo`

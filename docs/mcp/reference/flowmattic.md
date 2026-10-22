@@ -7,7 +7,7 @@ description: MCP tools provided by FlowMattic (provider id flowmattic).
 
 # FlowMattic
 
-Provider id: `flowmattic` · 16 tool(s).
+Provider id: `flowmattic` · 21 tool(s).
 
 ## `fflow_create_connection`
 
@@ -45,6 +45,7 @@ Author a new FlowMattic workflow from a trigger + ordered actions (each naming a
 | `trigger` | object | yes | Trigger step: \{ app, action, config? \}. |
 | `actions` | array | yes | Ordered action steps: [ \{ app, action, config?, connect_id? \} ]. |
 | `status` | string | no | on or off (default off). |
+| `folder` | string | no | Optional folder name to organize the workflow under (FlowMattic folders; stored in workflow settings). |
 | `allow_php` | boolean | no | Permit executable PHP config (php-functions/code apps or PHP: values); default false. |
 
 
@@ -74,6 +75,42 @@ Describe one app trigger or action: its input fields (name, label, type, require
 |---|---|---|---|
 | `app` | string | yes | App slug (from fflow_list_apps). |
 | `action` | string | yes | Trigger OR action slug within the app. |
+
+
+## `fflow_expose_workflow`
+
+Expose a FlowMattic workflow as a tool on FlowMattic's MCP server (calling the tool runs the workflow via the engine — so this works for ANY workflow, not just webhook-triggered ones). Identify the workflow by "id"/"key", or pass an explicit "workflow_id". Idempotent: re-exposing the same tool_name updates rather than duplicates.
+
+**🔴 Destructive** — supports a `dry_run` preview flag.  
+**Profiles:** `full`, `flowmattic`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `id` | integer | no | Numeric workflow id (from fflow_list_workflows). |
+| `key` | string | no | SyteWide logical key or FlowMattic workflow_id. |
+| `workflow_id` | string | no | Explicit FlowMattic workflow_id (alternative to id/key). |
+| `tool_name` | string | no | Optional MCP tool name (defaults to a slug of the workflow title). |
+| `description` | string | no | Optional tool description shown to MCP clients. |
+
+
+## `fflow_generate_workflow`
+
+Generate a FlowMattic workflow from a natural-language "prompt" using FlowMattic's built-in Workflow AI (requires the AI Agent integration + a configured AI connect). The workflow is created DISABLED — review it, then activate with fflow_set_workflow_status. IMPORTANT: AI generation is NOT bound by SyteWide's allow_php guard, so review the generated steps (they may include code-execution apps) before activating. Pass "provider" and/or "connect_id" to choose the AI connect when more than one exists (the error lists the available providers).
+
+**🔴 Destructive** — supports a `dry_run` preview flag.  
+**Profiles:** `full`, `flowmattic`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `prompt` | string | yes | What the workflow should do (at least 10 characters). |
+| `title` | string | no | Optional workflow title (defaults to a summary of the prompt). |
+| `provider` | string | no | Optional AI provider slug (openai, anthropic, google, groq, mistral, xai, perplexity, deepseek, openrouter, straico). Auto-selected when unambiguous. |
+| `connect_id` | integer | no | Optional AI connect id (the error lists available connects/providers). |
+| `model` | string | no | Optional model override (defaults to the provider default). |
 
 
 ## `fflow_get_variable`
@@ -145,7 +182,7 @@ List the FlowMattic variables available to reference in workflows as &#123;&#123
 
 ## `fflow_list_workflows`
 
-List FlowMattic workflows on this site: id (numeric), workflow_id (FlowMattic string id), title, status (active/inactive), trigger application (e.g. "webhook"), the derived webhook capture URL, and the SyteWide logical_key + version (when the workflow was provisioned by SyteWide). Use this to find a workflow to trigger or remove.
+List FlowMattic workflows on this site: id (numeric), workflow_id (FlowMattic string id), title, status (active/inactive), trigger application (e.g. "webhook"), the derived webhook capture URL, folder (FlowMattic v7 workflow folder, "" if none), and the SyteWide logical_key + version (when the workflow was provisioned by SyteWide). Use this to find a workflow to trigger or remove.
 
 **Profiles:** `full`, `flowmattic`
 
@@ -155,6 +192,33 @@ List FlowMattic workflows on this site: id (numeric), workflow_id (FlowMattic st
 |---|---|---|---|
 | `search` | string | no | Filter by title substring. |
 | `status` | string | no | Filter by status: active or inactive. |
+
+
+## `fflow_mcp_server_status`
+
+Report FlowMattic's built-in MCP server: whether it is provisioned, active, whether auth is required, its public URL, and which workflows are exposed as MCP tools. Never returns the auth token.
+
+**Profiles:** `full`, `flowmattic`
+
+**Parameters**
+
+_No parameters._
+
+
+## `fflow_provision_mcp_server`
+
+Provision (create + activate) FlowMattic's built-in MCP server. SECURE BY DEFAULT: pass "auth_token_ref" (a secret REFERENCE staged out-of-band — a SyteOps api_ variable or WP option; resolved server-side, never echoed) to require a static bearer token. To deliberately run it OPEN (no auth), pass require_auth:false — the result warns about the exposure. Note: FlowMattic's MCP server lets requests whose Origin/Referer contains "claude.ai" through WITHOUT a token, even when auth is enabled.
+
+**🔴 Destructive** — supports a `dry_run` preview flag.  
+**Profiles:** `full`, `flowmattic`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `auth_token_ref` | string | no | Reference name of the staged bearer token (NOT the token itself). Enables token auth. |
+| `require_auth` | boolean | no | Default true. Pass false to provision an OPEN server (no token). |
+| `name` | string | no | Optional server display name. |
 
 
 ## `fflow_provision_workflow`
@@ -234,6 +298,21 @@ Trigger a FlowMattic workflow on demand by numeric "id" or "key", posting an opt
 | `payload` | object | no | JSON body delivered to the workflow webhook. |
 
 
+## `fflow_unexpose_workflow`
+
+Remove an exposed workflow tool from FlowMattic's MCP server by "tool_name" or "workflow_id".
+
+**🔴 Destructive** — supports a `dry_run` preview flag.  
+**Profiles:** `full`, `flowmattic`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `tool_name` | string | no | Exposed tool name to remove. |
+| `workflow_id` | string | no | Or remove every tool exposing this workflow_id. |
+
+
 ## `fflow_update_workflow`
 
 Re-author an existing FlowMattic workflow by "id" or "key" — including hand-built ones. The prior version is auto-backed-up first. If the workflow was built in FlowMattic's visual (v2) canvas, the rewrite emits a v1 flat graph: it still runs and re-lays-out when reopened, but loses saved canvas positioning (a warning is returned). The result includes a "previous" snapshot (before/after).
@@ -251,5 +330,6 @@ Re-author an existing FlowMattic workflow by "id" or "key" — including hand-bu
 | `trigger` | object | yes | New trigger: \{ app, action, config? \}. |
 | `actions` | array | yes | New actions: [ \{ app, action, config?, connect_id? \} ]. |
 | `status` | string | no | on or off (default: keep current). |
+| `folder` | string | no | Optional folder name (default: keep the workflow's current folder). |
 | `allow_php` | boolean | no | Permit executable PHP config (php-functions/code apps or PHP: values); default false. |
 

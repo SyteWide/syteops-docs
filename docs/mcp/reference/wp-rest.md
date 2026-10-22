@@ -36,7 +36,7 @@ Call any WordPress REST REST route (scoped to /wp/v2). GET runs immediately; POS
 | Parameter | Type | Required | Description |
 |---|---|---|---|
 | `method` | string | yes | HTTP method: GET, POST, PUT, PATCH, or DELETE. |
-| `path` | string | yes | Route path within /wp/v2, e.g. /wp/v2/contacts or /wp/v2/contacts/42. |
+| `path` | string | yes | Route path within /wp/v2, e.g. /wp/v2/\<resource\> for a collection or /wp/v2/\<resource\>/42 for one item. Call wp_list_routes for the real resource names — do not guess them. |
 | `body` | object | no | Request body for writes (JSON object). |
 | `query` | object | no | Query-string arguments (JSON object). |
 | `confirm` | boolean | no | Required to execute a write (POST/PUT/PATCH/DELETE). |
