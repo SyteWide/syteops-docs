@@ -39,7 +39,7 @@ Each entry in the manifest `data` array has the following fields:
 | `action` | string | Yes | The action name (e.g. `get`, `set`, `enable`, `disable`) |
 | `summary` | string | Yes | Short human-readable description of what the operation does |
 | `params` | object | Yes | JSON Schema object describing the accepted `params` fields; may be an empty object if no params are accepted |
-| `capability` | string | Yes | The WordPress capability required to execute this operation |
+| `capability` | string | Yes | Kept for compatibility. Access is not decided by it: every operation needs a SyteOps admin or an API key (see [Authentication](./authentication)) |
 | `destructive` | boolean | Yes | `true` if the operation requires `confirm: true` in the request body |
 | `secret_keys` | array of strings | No | Response fields that will be redacted; only present when the operation touches secrets |
 | `returns` | object | No | JSON Schema describing the `data` payload shape; only present when the operation returns a non-trivial structure |

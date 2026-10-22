@@ -14,8 +14,8 @@ description: Manage API operations for the leads resource.
 
 Permanently delete a lead and its events (best-effort moves its RingTonic contact to "lost").
 
-**🔴 Destructive** — requires `confirm: true`.  
-**Capability:** `manage_options`
+**🔴 Destructive**  
+**Access:** SyteOps Admin or API key, plus `confirm: true`.
 
 **Parameters**
 
@@ -47,7 +47,7 @@ data: &#123;id, deleted: true}
 
 Export the lead ledger as structured rows (optionally since a datetime).
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -76,7 +76,7 @@ data: &#123;rows[], count}
 
 Get one lead with attribution, event timeline, and chain status.
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -105,7 +105,7 @@ data: &#123;id,ref,attribution,events[],chain:&#123;ok,count,broken_at,reason}}
 
 Store the RingTonic contact id on a lead (the reconcile calls this after matching by phone/email).
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -136,7 +136,7 @@ data: &#123;id, rt_contact_id}
 
 List captured leads (paginated; filter by source/since).
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -171,7 +171,7 @@ data: &#123;items[]: &#123;id,ref,source,campaign,status,event_count,first_seen}
 
 Report the RingTonic receiver's health: module/integration state, whether it is ready to receive deliveries, observe mode, delivery counters, and stored-secret fingerprints. Never returns a secret value.
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -196,7 +196,7 @@ data: &#123;leads_module_active, integration_enabled, receiver_ready, observe_mo
 
 Set a lead's pipeline status (New/Contacted/Qualified/Unqualified/Customer). Used by the RingTonic inbound reconcile; recorded as inbound so it does not echo back to RingTonic. Optionally also sets the lead's deal value (value_cents, in the smallest currency unit, plus an optional ISO 4217 currency — defaults to the site's configured deal currency).
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -231,7 +231,7 @@ data: &#123;id, status, label, deal_value_cents?, deal_currency?}
 
 Tracked-link metrics for reports: clicks, unique clicks and attributed leads per person and kind, plus company, ownerless and total rows. Dates are in the site timezone; the same answer as GET syteops/v1/leads/tracked-links/metrics. Carries no lead PII.
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -264,7 +264,7 @@ data: &#123;schema, from, to, timezone, group[], generated_at, people[]: &#123;s
 
 Verify the tamper-evident integrity chain for a lead. chain.reason is null when ok (imported_source_key when imported events verified with the source site's key), else fork (two events saved at the same instant linked to one earlier event; each intact), mismatch (an edited event or another site's key), imported_mismatch (an imported event altered since export), imported_no_key (imported without the source key; cannot be re-verified) or no_key.
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 

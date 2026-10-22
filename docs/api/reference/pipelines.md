@@ -12,9 +12,9 @@ description: Manage API operations for the pipelines resource.
 
 ## `create_recipe`
 
-Create a pipeline recipe.
+Create a pipeline recipe. Refuses with 409 recipe_exists when a recipe with that id (default: the slug of name) already exists; use update_recipe to change an existing one.
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -53,8 +53,8 @@ data: recipe object
 
 Delete a pipeline recipe (the default recipe cannot be deleted).
 
-**🔴 Destructive** — requires `confirm: true`.  
-**Capability:** `manage_options`
+**🔴 Destructive**  
+**Access:** SyteOps Admin or API key, plus `confirm: true`.
 
 **Parameters**
 
@@ -86,7 +86,7 @@ data: &#123;id, deleted: true}
 
 Get one recipe by id.
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -115,7 +115,7 @@ data: recipe object
 
 Get one run-history row by id (includes decoded per-stage results).
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -144,7 +144,7 @@ data: &#123;id,source,post_id,recipe_id,status,...,stages}
 
 List all configured pipeline recipes.
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -169,7 +169,7 @@ data.recipes[]: array of recipe objects
 
 List pipeline run-history ledger rows (paginated; filter by post/recipe/status).
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -204,9 +204,9 @@ data: &#123;items[]: &#123;id,source,post_id,recipe_id,status,trigger_kind,is_dr
 
 ## `run`
 
-Run a recipe against one post now (inline; admin-initiated). force bypasses skip-unchanged.
+Run a recipe against one post now (inline; admin-initiated). force bypasses skip-unchanged. Returns 404 post_not_found for a missing, trashed or non-viewable post (and post_id 0), and 403 forbidden for a signed-in caller without edit_post on it; an API key skips only the edit_post check.
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -241,7 +241,7 @@ data: &#123;status,post_id,recipe,stages,run_id,changed}
 
 Update an existing pipeline recipe (merge-patch: omitted top-level keys are preserved, but a supplied trigger or policy replaces that whole sub-object — send the full sub-object to change one field).
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 

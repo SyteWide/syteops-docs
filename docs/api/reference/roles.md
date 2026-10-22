@@ -14,7 +14,7 @@ description: Manage API operations for the roles resource.
 
 Assign a user (slot number) to a role.
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -45,7 +45,7 @@ data: &#123;slug, assigned_users}
 
 Create a custom role.
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -84,8 +84,8 @@ data: &#123;slug, role}
 
 Delete a custom role (system roles cannot be deleted).
 
-**🔴 Destructive** — requires `confirm: true`.  
-**Capability:** `manage_options`
+**🔴 Destructive**  
+**Access:** SyteOps Admin or API key, plus `confirm: true`.
 
 **Parameters**
 
@@ -117,7 +117,7 @@ data: &#123;slug, deleted: true}
 
 List system + custom roles with assignees.
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -142,7 +142,7 @@ data.roles[]: &#123;slug, name, system, constraint_type, assigned_users}
 
 Unassign a user (slot number) from a role.
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -173,7 +173,7 @@ data: &#123;slug, assigned_users}
 
 Update a custom role.
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 

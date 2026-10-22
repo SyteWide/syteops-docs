@@ -1,6 +1,6 @@
 {
     "schema_version": 1,
-    "syteops_version": "1.6.744",
+    "syteops_version": "1.6.750",
     "operations": [
         {
             "resource": "users",
@@ -1004,7 +1004,7 @@
         {
             "resource": "pipelines",
             "action": "run",
-            "summary": "Run a recipe against one post now (inline; admin-initiated). force bypasses skip-unchanged.",
+            "summary": "Run a recipe against one post now (inline; admin-initiated). force bypasses skip-unchanged. Returns 404 post_not_found for a missing, trashed or non-viewable post (and post_id 0), and 403 forbidden for a signed-in caller without edit_post on it; an API key skips only the edit_post check.",
             "params": {
                 "post_id": {
                     "type": "integer",
@@ -1096,7 +1096,7 @@
         {
             "resource": "pipelines",
             "action": "create_recipe",
-            "summary": "Create a pipeline recipe.",
+            "summary": "Create a pipeline recipe. Refuses with 409 recipe_exists when a recipe with that id (default: the slug of name) already exists; use update_recipe to change an existing one.",
             "params": {
                 "id": {
                     "type": "string"
@@ -1628,6 +1628,99 @@
             "capability": "manage_options",
             "strict": true,
             "returns": "data: {urls[], purged[], attempted[], skipped[], errors[], elementor_css: cleared|unavailable|not_elementor|null}"
+        },
+        {
+            "resource": "review",
+            "action": "queue_list",
+            "summary": "One page of a person's Review Portal queue, as that person sees it. list is pending (default), watching, live, live_posts, live_pages, coming_up or notes. An API-key call must send as_user_id (the person whose queue to read; 422 as_user_id_required otherwise, 404 user_not_found when no such user); a signed-in SyteOps Admin defaults to themselves. per_page is 5, 10, 25 or 100. Page with the returned next_cursor. No review links are returned.",
+            "params": {
+                "as_user_id": {
+                    "type": "integer",
+                    "format": "record_id",
+                    "required": false,
+                    "description": "Record id, digits only."
+                },
+                "list": {
+                    "type": "string",
+                    "required": false,
+                    "description": "pending (default), watching, live, live_posts, live_pages, coming_up or notes."
+                },
+                "per_page": {
+                    "type": "integer",
+                    "required": false,
+                    "description": "Page size: 5, 10, 25 or 100."
+                },
+                "cursor": {
+                    "type": "string",
+                    "required": false,
+                    "description": "next_cursor from the previous page."
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "strict": true,
+            "returns": "data: {as_user_id, list, rows[], has_more, next_cursor, truncated, page_count}; a post row is {post_id, title, source, received, scheduled_ts, modified_ts, feedback_count, changes_requested, qa}, a notes row is {post_id, title, author, excerpt, created, note_id}"
+        },
+        {
+            "resource": "review",
+            "action": "get",
+            "summary": "One post's review status: post status, whether changes are requested, open and total note counts, the reviewers and watchers, and the latest recorded activity. A missing, trashed or non-viewable post is 404 post_not_found.",
+            "params": {
+                "post_id": {
+                    "type": "integer",
+                    "format": "record_id",
+                    "required": true,
+                    "description": "Record id, digits only."
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "strict": true,
+            "returns": "data: {post_id, title, post_status, changes_requested, open_notes, total_notes, reviewers[], watchers[], last_activity: {event, at}|null}; a person is {user_id, display_name, roles[]}"
+        },
+        {
+            "resource": "review",
+            "action": "reviewers_get",
+            "summary": "The people who may review one post and the people watching it. Ids, display names and roles only; no email addresses.",
+            "params": {
+                "post_id": {
+                    "type": "integer",
+                    "format": "record_id",
+                    "required": true,
+                    "description": "Record id, digits only."
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "strict": true,
+            "returns": "data: {post_id, reviewers[], watchers[]}; a person is {user_id, display_name, roles[]}"
+        },
+        {
+            "resource": "review",
+            "action": "comments_list",
+            "summary": "One post's review notes and replies, oldest first, as the portal shows them. per_page is 1 to 100 (default 25).",
+            "params": {
+                "post_id": {
+                    "type": "integer",
+                    "format": "record_id",
+                    "required": true,
+                    "description": "Record id, digits only."
+                },
+                "per_page": {
+                    "type": "integer",
+                    "required": false,
+                    "description": "Notes per page, 1 to 100 (default 25)."
+                },
+                "page": {
+                    "type": "integer",
+                    "required": false,
+                    "description": "Page number from 1 (default 1)."
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "strict": true,
+            "returns": "data: {post_id, total, page, per_page, has_more, comments[]}; a comment is {id, parent, user_id, user_name, note, created_at, kind, target_kind, att_id, resolved}"
         }
     ]
 }

@@ -17,7 +17,7 @@ The API is intentionally narrow: rather than exposing dozens of individual REST 
 All mutations and reads flow through a single endpoint:
 
 - **`POST /manage/dispatch`** — execute any operation by naming its `resource` and `action` in the request body.
-- **`GET /manage/manifest`** — retrieve the list of every operation the installed version of SyteOps supports, together with its parameter schema, required capability, and any other metadata.
+- **`GET /manage/manifest`** — retrieve the list of every operation the installed version of SyteOps supports, together with its parameter schema, whether it is destructive, and any other metadata.
 
 The manifest is the source of truth for what the API can do. Documentation tooling, MCP bridges, and IDE helpers can all be driven from it without hard-coding operation lists. See [Manifest](./manifest) for details.
 

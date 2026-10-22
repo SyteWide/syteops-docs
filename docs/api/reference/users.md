@@ -14,7 +14,7 @@ description: Manage API operations for the users resource.
 
 Create a SyteOps team-member record in the next free slot and fill its fields. A slot reused after a delete starts fully blank: no name, contact details, links, Model consent, or Model photos survive from the previous occupant.
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -77,8 +77,8 @@ data: &#123;user_num, ...fields}
 
 Soft-delete a SyteOps team-member record and blank its editable fields (frees its slot for reuse).
 
-**🔴 Destructive** — requires `confirm: true`.  
-**Capability:** `manage_options`
+**🔴 Destructive**  
+**Access:** SyteOps Admin or API key, plus `confirm: true`.
 
 **Parameters**
 
@@ -110,7 +110,7 @@ data: &#123;user_num, deleted: true}
 
 Get one SyteOps team-member record by slot number (e.g. "003").
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -139,7 +139,7 @@ data: &#123;user_num, ...fields}
 
 List all active SyteOps team-member records.
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -164,8 +164,8 @@ data.users[]: array of &#123;user_num, ...fields}
 
 Email the person their personal page link at their stored work email. Requires a saved work email and a linked WordPress account. dry_run previews eligibility and the destination without sending, and still requires confirm:true. A repeat to the same address within 5 minutes is refused.
 
-**🔴 Destructive** — requires `confirm: true`.  
-**Capability:** `manage_options`
+**🔴 Destructive**  
+**Access:** SyteOps Admin or API key, plus `confirm: true`.
 
 **Parameters**
 
@@ -199,7 +199,7 @@ data: &#123;eligible, outcome, to, retry_after}
 
 Update fields on an existing SyteOps team-member record.
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 

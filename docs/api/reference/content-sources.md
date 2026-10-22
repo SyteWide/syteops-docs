@@ -14,7 +14,7 @@ description: Manage API operations for the content_sources resource.
 
 Approve a field mapping for a source, activating it for live ingest.
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -45,7 +45,7 @@ data: &#123;id, status, mapping_status, mapping}
 
 Create a content source; generates its id and slug, and (unless a secret is provided or auth_mode is none) a webhook secret.
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -122,8 +122,8 @@ data: &#123;id, name, slug, secret, secret_source, ...} — secret is plaintext 
 
 Permanently delete a content source.
 
-**🔴 Destructive** — requires `confirm: true`.  
-**Capability:** `manage_options`
+**🔴 Destructive**  
+**Access:** SyteOps Admin or API key, plus `confirm: true`.
 
 **Parameters**
 
@@ -155,7 +155,7 @@ data: &#123;id, deleted: true}
 
 Export one content source as a portable setup package (no secrets, no posts).
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -184,7 +184,7 @@ data: envelope &#123;format, schema_version, payload, ...} — never includes se
 
 Get a single content source by id (never includes the secret).
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -213,7 +213,7 @@ data: &#123;id, name, slug, enabled, status, auth_mode, mapping, mapping_status,
 
 Import a content source setup package; creates when the slug is free, overwrites when overwrite+confirm.
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -246,7 +246,7 @@ data: &#123;id, name, slug, mode, secret, secret_source, ...} — secret is plai
 
 List all configured content sources (never includes the secret).
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -271,7 +271,7 @@ data.sources[]: array of &#123;id, name, slug, enabled, status, auth_mode, targe
 
 Generate a new webhook secret for a content source, invalidating the old one.
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -300,7 +300,7 @@ data: &#123;id, secret} — secret is plaintext, returned only this once
 
 Update editable fields on an existing content source (slug is not editable; secret is write-only).
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 

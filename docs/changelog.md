@@ -8,6 +8,30 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.750
+
+- The content pipeline screen and docs now describe which recipe runs and when.
+
+## v1.6.749
+
+- Deleting a pipeline recipe or run history now leaves a lasting entry in the activity log.
+
+## v1.6.748
+
+- Creating or duplicating a pipeline recipe no longer overwrites an existing recipe, and recipe saves can't overwrite other settings.
+
+## v1.6.747
+
+- The API can now read the review queue, a post's review status, its reviewers and its comments.
+
+## v1.6.746
+
+- Running a pipeline through the API now refuses trashed posts and posts you can't edit.
+
+## v1.6.745
+
+- API operations now require a SyteOps Admin or an API key on every path.
+
 ## v1.6.744
 
 - The distribution site can now install and auto-update its own private module updates, and the release check confirms private packages stay private.

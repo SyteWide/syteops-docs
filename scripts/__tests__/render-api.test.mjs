@@ -16,6 +16,15 @@ test('resource page includes destructive badge + confirm in sample', () => {
   assert.match(md, /GENERATED — do not edit/);
 });
 
+test('resource page states the real access rule, never the manifest capability', () => {
+  const md = renderResourcePage('users', OPS);
+  assert.doesNotMatch(md, /Capability:/);
+  assert.doesNotMatch(md, /manage_options/);
+  const [create, del] = md.split('## `delete`');
+  assert.match(create, /\*\*Access:\*\* SyteOps Admin or API key\.\n/);
+  assert.match(del, /\*\*Access:\*\* SyteOps Admin or API key, plus `confirm: true`\./);
+});
+
 test('index lists resources with counts', () => {
   const md = renderIndex(groupByResource(OPS));
   assert.match(md, /\| \[`users`\]\(\.\/users\) \| 2 \| yes \|/);
