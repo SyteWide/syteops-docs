@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.730
+
+- On a headless site, saving an opted-in form, a published page's SEO fields or a redirect rule now rebuilds the frontend automatically, through the same single debounced rebuild as publishing.
+
+## v1.6.729
+
+- A headless site's frontend can submit a Fluent Forms form through SyteOps, which stores it as a normal Fluent Forms entry, so notifications, FluentCRM and FlowMattic run as they do on WordPress and lead attribution is kept. Forms with features the frontend can't reproduce, such as captcha, user registration or double opt-in, stay as links to their WordPress page.
+
 ## v1.6.728
 
 - Authorized Domains wildcards (*.example.com) now work: they cover subdomains but not the bare domain, and malformed entries are refused on save. A licensing server whose list held only wildcards used to allow every site; it now allows only the matching subdomains, and a list holding only the server's own domain now allows only the server. The Authorized Domains screen lists any live site the current list would refuse.

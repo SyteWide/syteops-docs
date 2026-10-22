@@ -65,6 +65,9 @@ With the integration on, **System / API** also shows **Deploy when content chang
 - A store product that a merchant edits, whose variations change or that is duplicated. Editing a product that is not published does not.
 - A WooCommerce store's products work the same way, with their categories, tags and brands. A published product whose regular price, sale price or sale dates change also triggers a rebuild, even when the product is not saved as a whole (a price edited by hand or through the WooCommerce API). A sale that WooCommerce starts or ends on its schedule triggers a rebuild too (with WooCommerce 10.5 or later at the exact time; older versions at the next daily check), and so does a variation that is published, unpublished or deleted. A stock change caused by a sale, such as an order reducing stock or a product selling out, never does.
 - A change to a setting the frontend reads only at build time also triggers a rebuild: the pages kept on WordPress (including the store's cart, checkout and account page choices), the company name, the theme colors, and the Lead Attribution consent mode, internal-traffic parameter, goals and tracker options. Saving a setting without changing it, or changing an unrelated one, does not.
+- Saving a Fluent Forms form you turned on for the frontend (its fields or its settings), or turning a form on or off for the frontend, also triggers a rebuild. A form you did not turn on never does.
+- Saving SEO fields (title, description, canonical, robots, social and schema) of a published page that your frontend builds triggers a rebuild, in the SEO tool you use, whether you save in the editor, the Review Portal or through the Manage API. Drafts and private pages never do, and neither do pages you keep on WordPress.
+- Creating, editing, deleting, enabling or disabling a redirect in Redirection, Pretty Links or LinkCentral also triggers a rebuild. Redirection's bulk actions and group changes do not, so they appear at the next rebuild.
 
 **What never triggers one:** orders, stock changes from a sale, refunds, customers and coupons, so a sale never rebuilds your site. Also not covered: changes made directly in the database or only to a post's custom fields without saving the post, sticky posts, term meta, a block theme's navigation, media library changes, site title and permalink settings, theme changes, users and comments. If you change one of those, deploy from PhantomStudio.
 
@@ -163,7 +166,7 @@ The site lists its redirects at `/wp-json/syteops/v1/phantomstudio/redirects?pag
 
 The site lists the forms you choose at `/wp-json/syteops/v1/phantomstudio/forms?page=1&per_page=50`, so the frontend can show them as its own forms. It answers only to the project key, and with the integration off the address does not exist (a 404). This works with Fluent Forms. A form is off until you turn it on: list its ID under **Forms to use on the frontend** in the PhantomStudio card on Systems / API (the card lists your forms with their IDs), or run `wp syteops phantomstudio forms enable <id>` (and `forms disable <id>`). Only published forms are listed.
 
-Each form comes with its fields in order (name, type, label, placeholder, whether it is required, choices, help text and simple limits), the submit button's text, what happens after sending (a message, or a page on the frontend address), and whether a honeypot or a captcha is set up. Nothing else is shared: notification emails, connected services, keys, entries and addresses of visitors are never included. A form that uses something the frontend cannot show natively (conditional fields, calculations, repeaters, file uploads, payments, several steps, address lookup and the like) lists those features, and the frontend then links to the form's page on WordPress instead.
+Each form comes with its fields in order (name, type, label, placeholder, whether it is required, choices, help text and simple limits), the submit button's text, what happens after sending (a message, or a page on the frontend address), and whether a honeypot or a captcha is set up. Nothing else is shared: notification emails, connected services, keys, entries and addresses of visitors are never included. A form that uses something the frontend cannot show natively (conditional fields, calculations, repeaters, file uploads, payments, several steps, address lookup and the like) lists those features, and the frontend then links to the form's page on WordPress instead. Double opt-in and admin approval count too, because the entry waits for a confirmation, and so do forms that register or update a WordPress user, conditional confirmations, CleanTalk spam checks and a confirmation that sends visitors to another site. So do a captcha, Fluent Forms' token-based spam protection and nonce checks: the frontend cannot answer them, so Fluent Forms would turn every entry away.
 
 ## IndexNow changes for the frontend
 
@@ -248,6 +251,24 @@ With **This is a headless install** on, a frontend address saved and Lead Attrib
 **A 200 can be a drop.** A filled `hp` field, a ticket that is missing, forged, issued for another session or younger than 3 seconds all get the same 200 `{"ok":true}` as a real entry, and nothing is recorded or logged, so the reply does not tell a bot which check it failed. Test with a real ticket and a wait.
 
 The entry becomes a lead event in Lead Attribution (goal type form submit, provider `frontend`) on a lead of its own, and the four contact fields are saved on that lead following the Lead Attribution privacy mode. The route never writes to a lead that already exists: when the session already has a lead (a phone tap, for example), the entry is saved as a separate lead with no session, visitor or page. That is a deliberate trade-off: a returning visitor whose session already has a lead gets a second, unattributed lead, and nothing they typed is lost. The site runs the action `syteops_phantomstudio_form_submitted` with the lead id, the form id, `true` and the four cleaned fields, only for a lead the entry created. The route ignores cookies and ignores whoever is signed in. reCAPTCHA is not part of this version, and no form plugin is called.
+
+### Fluent Forms entries from the frontend
+
+A form listed under **Forms for the frontend** with nothing unsupported can be sent to the same `POST /wp-json/syteops/v1/phantomstudio/form` address and saved as a real Fluent Forms entry. Fluent Forms checks it, saves it in **Entries**, sends its notification emails and runs its connected services (FluentCRM, FlowMattic and the rest) exactly as for a form sent on WordPress, and Lead Attribution records the lead as it does for any Fluent Forms entry. The pairing status lists the capability `fluent_form_submit` while the routes exist and Fluent Forms is active.
+
+Send `fluent_form_id` (the form's ID) and `fields` (an object of the field names the forms list gives, for example `names[first_name]`; a checkbox or multi-choice list takes a list of values) instead of `form_id` and the four contact fields, with the same `ticket`, `session_id`, `page_url` and empty `hp`. Field names the form does not have are dropped, hidden fields always keep the value set in the form, and files cannot be sent. The whole entry may be at most 16 KB, so a very long message can be turned away even below the 4 KB field limit.
+
+| Status | Meaning |
+|---|---|
+| 200 `{"ok":true,"success":{...}}` | Saved. `success` is the form's own confirmation: `type` `message` with the message to show, or `redirect` with an address on the frontend. A 200 without `success` is a silent drop, as above. |
+| 400 `bad_form_id` / `bad_request` | The form ID has the wrong shape, or a field value is the wrong kind (a list for a single field, true or false). |
+| 404 `form_unavailable` | The form is not on the list, not published, or uses something unsupported. Link to its WordPress page. |
+| 413 | A field over 4 KB, a list over 4 KB or 100 choices, or more than 100 fields. |
+| 422 `invalid` | Fluent Forms turned the entry away. `errors` holds its own messages by field name, and under `_form` for the whole form. |
+| 429 | Too many entries from one address, by this site's limit or by Fluent Forms' own. |
+| 503 `unavailable` | Fluent Forms is not active or failed before saving. Retry later. Once the entry is saved, a later failure still answers 200 with the form's confirmation, so a retry never saves it twice. |
+
+The entry's lead follows the same rule as above: it is tied to the visitor's session only when that session has no lead yet, and an existing lead is never joined or written, even when one appears while the entry is being saved.
 
 ## Pairing status
 
