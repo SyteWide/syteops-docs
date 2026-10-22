@@ -8,6 +8,26 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.744
+
+- The distribution site can now install and auto-update its own private module updates, and the release check confirms private packages stay private.
+
+## v1.6.743
+
+- The Review Portal shows whether Google has indexed a published page, once Search Console is connected.
+
+## v1.6.742
+
+- Google sign-in for connected services now shares one secure helper.
+
+## v1.6.741
+
+- Published pages and posts get a Request indexing on Google button in the Review Portal.
+
+## v1.6.740
+
+- Logos and small pictures in review emails no longer appear blown up to the full width.
+
 ## v1.6.739
 
 - A site that hasn't confirmed its license for 15 days now locks until it can check again, and a license lock no longer removes SyteOps Admin access for good: it comes back when the license checks out.
