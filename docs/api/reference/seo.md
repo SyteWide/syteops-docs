@@ -14,7 +14,7 @@ description: Manage API operations for the seo resource.
 
 Read one post's SEO title, description and focus keywords from whichever SEO tool is active. With no active SEO tool it returns 409 no_active_seo_tool.
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -43,7 +43,7 @@ data: &#123;post_id, tool, tool_label, fields: &#123;title, description, keyword
 
 Write one post's SEO title, description or focus keywords through the active SEO tool's own writer. Use this, not update_content meta, for every SEO plugin. dry_run:true writes nothing and returns each field's current and proposed value; a real write returns 409 confirmation_required until confirm:true. Only the fields sent change; any other field is refused. Caps: title 300, description 1000, keywords 500 characters. A placeholder the SEO tool fills from site data is refused (422 seo_token_not_allowed) unless allow_placeholders:true.
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 

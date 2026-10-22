@@ -1,7 +1,7 @@
 ---
 title: Dispatch contract
 sidebar_position: 3
-description: The request body, response envelope, destructive-operation confirmation, capability gating, secret redaction, and param validation for POST /manage/dispatch.
+description: The request body, response envelope, destructive-operation confirmation, the access check, secret redaction, and param validation for POST /manage/dispatch.
 ---
 
 # Dispatch contract
@@ -47,11 +47,11 @@ If you omit `confirm` (or send `confirm: false`) for a destructive operation, th
 
 This is a safety guard against accidental automation-triggered deletions or resets. Always require an explicit confirmation step in any tooling that calls destructive operations.
 
-## Capability gating
+## Access check
 
-Every operation in the manifest declares a required WordPress capability. The API checks this capability against the authenticated identity on every request — regardless of whether you are using an in-process session or an API key.
+Every operation needs a signed-in SyteOps admin or a valid API key, whichever way it is called. A valid API key is not checked against WordPress capabilities, and a signed-in user who is not a SyteOps admin is refused even with `manage_options`. The manifest's `capability` field does not affect this check.
 
-If the capability check fails, the API returns HTTP 403 and:
+If the check fails, the API returns HTTP 403 and:
 
 ```json
 {
@@ -62,7 +62,7 @@ If the capability check fails, the API returns HTTP 403 and:
 }
 ```
 
-See [Authentication](./authentication) for details on how capabilities are resolved for each credential type.
+See [Authentication](./authentication) for each credential type.
 
 ## Secret redaction
 

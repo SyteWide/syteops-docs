@@ -14,7 +14,7 @@ description: Manage API operations for the cache resource.
 
 Purge one post's page (post_id), or up to 30 URLs on this site's own host (urls), from LiteSpeed and Cloudflare when present. With post_id it also asks Elementor to rebuild its generated CSS when that post is built with Elementor. Send post_id or urls, not both; a URL on any other host refuses the whole call.
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 

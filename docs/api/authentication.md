@@ -12,7 +12,7 @@ The Manage API accepts two forms of authentication. Both are checked on every re
 
 ### 1. SyteOps admin — in-process (session or cookie)
 
-When a request arrives already authenticated as a WordPress user who holds the **SyteOps admin** capability (for example, a logged-in admin making a browser-side XHR call or a server-side call using WordPress's own HTTP stack), no additional credentials are needed. The API recognizes the current user context and grants access according to that user's capabilities.
+When a request arrives already authenticated as a WordPress user who holds the **SyteOps admin** capability (for example, a logged-in admin making a browser-side XHR call or a server-side call using WordPress's own HTTP stack), no additional credentials are needed. The API recognizes the current user context and grants access because that user is a SyteOps admin. A WordPress administrator who is not a SyteOps admin is refused.
 
 This mode is used by the SyteOps admin UI itself.
 
@@ -42,16 +42,19 @@ API keys are managed entirely from the **SyteOps admin UI** — no WP-CLI or dat
 
 Keys are **encrypted at rest**; SyteOps never stores them in plaintext.
 
-## Capabilities
+## Who may call an operation
 
-Every operation declared in the [Manifest](./manifest) specifies a required WordPress capability (for example, `manage_options` or a SyteOps-specific capability). The API enforces this gate regardless of which authentication method is used.
+Every operation, on every path, needs one of two things: a signed-in SyteOps admin, or a valid API key. Nothing else is checked at this step.
 
-- An API key inherits the capabilities of the site's SyteOps admin role.
-- An in-process session is checked against the current user's actual capabilities.
+- **API key:** a valid key may call every operation. It is not checked against WordPress capabilities.
+- **Signed-in user:** the user must be a SyteOps admin. Holding `manage_options`, or the Administrator role, is not enough.
+- **Destructive operations** also need `confirm: true` in the request. See [Dispatch contract](./dispatch-contract#destructive-operations).
 
-Attempting an operation without the required capability returns `{ "ok": false, "error": "..." }` with an HTTP 403 status.
+Some operations that act on one post also check that a signed-in user can edit that post. An API-key call skips that check because it has no WordPress user.
 
-For the capability required by each operation, see the [Manage API reference](./reference/).
+A caller who is neither gets HTTP 403 with the error code `forbidden`.
+
+The `capability` field in the [Manifest](./manifest) is kept for compatibility. The API does not use it to decide access.
 
 :::warning
 API keys are **operator secrets**. Treat them with the same care as database passwords:

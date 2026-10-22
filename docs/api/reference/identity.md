@@ -14,7 +14,7 @@ description: Manage API operations for the identity resource.
 
 Get the per-site business identity (company facts) map.
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -39,7 +39,7 @@ data: &#123;fields: &#123;company_name, ..., syteops_system_company_hours}}
 
 Update business identity fields (partial map; unknown keys rejected).
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 

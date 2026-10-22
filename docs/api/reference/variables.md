@@ -14,7 +14,7 @@ description: Manage API operations for the variables resource.
 
 Discover syteops_* FlowMattic variables: free-form (writable) + registry-managed (read-only).
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -39,8 +39,8 @@ data: &#123;flowmattic_available, variables[]: &#123;name, description, source, 
 
 Delete a free-form variable and its FlowMattic variable.
 
-**🔴 Destructive** — requires `confirm: true`.  
-**Capability:** `manage_options`
+**🔴 Destructive**  
+**Access:** SyteOps Admin or API key, plus `confirm: true`.
 
 **Parameters**
 
@@ -72,7 +72,7 @@ data: &#123;key, deleted: true}
 
 Get one free-form variable by key.
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -101,7 +101,7 @@ data: &#123;key, name, value, description}
 
 Force a full master-registry push to FlowMattic (idempotent).
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -126,7 +126,7 @@ data: &#123;resynced: true}
 
 Upsert a free-form variable (emits syteops_api_&lt;key> to FlowMattic).
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 

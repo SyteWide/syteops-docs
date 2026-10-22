@@ -14,7 +14,7 @@ description: Manage API operations for the crm resource.
 
 Create a CRM record in the next free slot (up to SYTEOPS_MAX_CRM_SYSTEMS).
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -47,8 +47,8 @@ data: &#123;crm_num, name, code, url, link_admin_only}
 
 Delete a CRM slot: clears fields and secret; crm_count stays as high-water mark.
 
-**🔴 Destructive** — requires `confirm: true`.  
-**Capability:** `manage_options`
+**🔴 Destructive**  
+**Access:** SyteOps Admin or API key, plus `confirm: true`.
 
 **Parameters**
 
@@ -80,7 +80,7 @@ data: &#123;crm_num, deleted: true}
 
 Get a single CRM slot by crm_num (e.g. "003").
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -109,7 +109,7 @@ data: &#123;crm_num, name, code, url, link_admin_only}
 
 List all non-empty CRM system slots (gap-aware; never includes api_key).
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -134,7 +134,7 @@ data.crms[]: array of &#123;crm_num, name, code, url, link_admin_only}
 
 Store (encrypted) the API key for a CRM slot. Key is never returned.
 
-**Capability:** `manage_options`  
+**Access:** SyteOps Admin or API key.  
 **Redacted fields:** `api_key`
 
 **Parameters**
@@ -166,7 +166,7 @@ data: &#123;crm_num, key_set}
 
 Update editable fields on an existing CRM slot.
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 

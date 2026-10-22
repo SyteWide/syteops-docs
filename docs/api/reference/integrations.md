@@ -14,8 +14,8 @@ description: Manage API operations for the integrations resource.
 
 Disable an integration.
 
-**🔴 Destructive** — requires `confirm: true`.  
-**Capability:** `manage_options`
+**🔴 Destructive**  
+**Access:** SyteOps Admin or API key, plus `confirm: true`.
 
 **Parameters**
 
@@ -47,7 +47,7 @@ data: &#123;slug, enabled: false}
 
 Enable an integration (refused if its required plugin is not installed).
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -76,7 +76,7 @@ data: &#123;slug, enabled: true}
 
 List integration toggles with enabled + plugin-installed state.
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 

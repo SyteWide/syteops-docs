@@ -14,7 +14,7 @@ description: Manage API operations for the builder resource.
 
 Recompute the agent-prompt guard hash (CANON-1) for one Elementor element so a session can compare it before writing. Returns the hash and its key list only, never a setting value.
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 

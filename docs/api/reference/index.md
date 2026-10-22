@@ -22,6 +22,7 @@ Every operation runs through the single dispatch endpoint. See [Dispatch contrac
 | [`leads`](./leads) | 9 | yes |
 | [`modules`](./modules) | 10 | yes |
 | [`pipelines`](./pipelines) | 8 | yes |
+| [`review`](./review) | 4 | no |
 | [`roles`](./roles) | 6 | yes |
 | [`seo`](./seo) | 2 | no |
 | [`squirrly`](./squirrly) | 2 | no |

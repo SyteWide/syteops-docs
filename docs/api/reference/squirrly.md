@@ -14,7 +14,7 @@ description: Manage API operations for the squirrly resource.
 
 Queue one live post for IndexNow. It is not sent inside this request: it goes out through the normal queue about a minute later, and Squirrly's 24-hour rule still applies.
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -43,7 +43,7 @@ data: &#123;queued, post_id, url, not_before, paused}
 
 Read the Squirrly IndexNow state: whether SyteOps may send, why not, the queue, the last result and, with post_id, that post's eligibility.
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 

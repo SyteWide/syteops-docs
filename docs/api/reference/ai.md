@@ -14,7 +14,7 @@ description: Manage API operations for the ai resource.
 
 Get the AI provider/model/max_tokens for an AI-consuming area.
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -43,7 +43,7 @@ data: &#123;area, provider, model, max_tokens}
 
 List available AI provider slugs and the default.
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -68,7 +68,7 @@ data: &#123;providers[], default, site_default}
 
 Set provider/model/max_tokens for an AI-consuming area.
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -103,7 +103,7 @@ data: &#123;area, provider, model, max_tokens}
 
 Store (encrypted) the API key for an AI provider.
 
-**Capability:** `manage_options`  
+**Access:** SyteOps Admin or API key.  
 **Redacted fields:** `api_key`
 
 **Parameters**
@@ -135,7 +135,7 @@ data: &#123;provider, key_set}
 
 Set the site-default AI provider every area falls back to (empty clears it).
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 

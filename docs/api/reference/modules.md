@@ -14,7 +14,7 @@ description: Manage API operations for the modules resource.
 
 Activate a SyteOps module.
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -43,8 +43,8 @@ data: &#123;module, active: true}
 
 Deactivate a SyteOps module.
 
-**🔴 Destructive** — requires `confirm: true`.  
-**Capability:** `manage_options`
+**🔴 Destructive**  
+**Access:** SyteOps Admin or API key, plus `confirm: true`.
 
 **Parameters**
 
@@ -76,8 +76,8 @@ data: &#123;module, active: false}
 
 Turn automatic module updates on or off for one client domain (default off).
 
-**🔴 Destructive** — requires `confirm: true`.  
-**Capability:** `manage_options`
+**🔴 Destructive**  
+**Access:** SyteOps Admin or API key, plus `confirm: true`.
 
 **Parameters**
 
@@ -111,8 +111,8 @@ data: &#123;domain, auto_update_modules: bool}
 
 Switch one module ON for one domain (private or public). Idempotent.
 
-**🔴 Destructive** — requires `confirm: true`.  
-**Capability:** `manage_options`
+**🔴 Destructive**  
+**Access:** SyteOps Admin or API key, plus `confirm: true`.
 
 **Parameters**
 
@@ -146,7 +146,7 @@ data: &#123;module_id, domain, domains: [allow-list for THIS module only], denie
 
 List per-client module access: private allow-lists, public switched-off lists and auto-update clients.
 
-**Capability:** SyteOps admin only (or an X-API-Key caller).
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -171,8 +171,8 @@ data: &#123;entitlements: &#123;module_id: [domains]}, denied: &#123;module_id: 
 
 Switch one module OFF for one domain (private or public). Stops that site being offered or updated with it.
 
-**🔴 Destructive** — requires `confirm: true`.  
-**Capability:** `manage_options`
+**🔴 Destructive**  
+**Access:** SyteOps Admin or API key, plus `confirm: true`.
 
 **Parameters**
 
@@ -206,8 +206,8 @@ data: &#123;module_id, domain, domains: [allow-list for THIS module only], denie
 
 Replace the whole private allow-list map. Any domain omitted stops receiving its private module. Public-module switches and auto-update are kept.
 
-**🔴 Destructive** — requires `confirm: true`.  
-**Capability:** `manage_options`
+**🔴 Destructive**  
+**Access:** SyteOps Admin or API key, plus `confirm: true`.
 
 **Parameters**
 
@@ -239,7 +239,7 @@ data: &#123;entitlements}
 
 Get a module's stored configuration.
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -268,7 +268,7 @@ data: &#123;module, config}
 
 List known SyteOps modules and whether each is active.
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
@@ -293,7 +293,7 @@ data.modules[]: array of &#123;module, active}
 
 Merge keys into a module's stored configuration.
 
-**Capability:** `manage_options`
+**Access:** SyteOps Admin or API key.
 
 **Parameters**
 
