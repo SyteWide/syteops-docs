@@ -90,6 +90,8 @@ The integration works with any FlowMattic workflow that creates or updates posts
 | **Cross-Link Mode** | Heuristic | Choose between taxonomy-based matching (free, fast) or AI-enhanced scoring (requires an AI provider). |
 | **Min Word Gap** | 50 | Minimum number of words between consecutive auto-inserted links. Prevents link clustering. |
 | **Keyword Matching Mode** | Exact match | How SyteOps finds keyword phrases in your post: **Exact match** links only when the keyword text appears as whole words. **AI semantic match** asks your configured LinkCentral AI to map each library keyword to a phrase that actually appears in the article (useful when wording differs). **Fallback** tries exact matching first, then uses AI only if no keyword links were inserted. AI modes need a valid AI provider and model for LinkCentral (same as cross-link AI). |
+| **Max Internal Links per Page** | 12 | The most links to your own site a page body may hold, counting the ones you wrote and the ones SyteOps added. SyteOps adds no link that would go past it, and never removes a link of yours to get under it. Links to other sites do not count. Set to 0 for no limit. |
+| **Min Inbound Links per Article** | 2 | Every published article should keep at least this many links pointing at it from other posts. SyteOps keeps its own earlier link to an article when taking it away would leave that article below this number, and favors articles below it when it chooses what to link. Set to 0 to turn this off. |
 | **LC Category Filter** | All | Comma-separated LinkCentral category IDs. Leave empty to use keywords from all categories. |
 | **Cross-Link Post Types** | post | Comma-separated post types to consider for cross-linking (e.g., post,page). |
 
@@ -210,6 +212,33 @@ When the endpoint is called with a post ID:
 - It never adds a keyword link or cross-link to a page the article already links, however you wrote the address (with or without `www`, a trailing slash or a tracking query, as a relative path, or using your site's front-end address).
 - It only links whole words. "cause" is never linked inside "because", and "lender" is not linked inside "lender's" or "no-doc". A phrase still matches when its words are separated by a non-breaking space or two spaces.
 - It never links text inside an existing link, a heading, a button, code, an image caption, a shortcode or an HTML comment, and never touches image alt text.
+
+### Spreading links across your site
+
+Two settings keep links from piling up on a few pages while others go without. The page limit stops a page from collecting more internal links than an SEO audit tolerates. The inbound minimum stops a re-run from taking the last links away from a thin article.
+
+You can also tell SyteOps which articles need links most, such as the priority targets and orphan pages from your SEO tool. Priority articles are preferred when SyteOps chooses what to link. A page that already holds the limit in links you wrote gets no automatic links, and keyword links that point to your own site's redirect addresses count toward the limit and are placed first. An article whose type is not in Cross-Link Post Types (pages, on default settings) gets no preference; the command warns you when that happens. They still need a natural, descriptive phrase in the article, so a priority is a nudge, never a forced link. Set the list from the command line:
+
+```
+wp syteops linkcentral priority-targets set '[123, {"url":"https://example.com/guide/","weight":8}]'
+wp syteops linkcentral priority-targets get
+wp syteops linkcentral priority-targets clear
+```
+
+Each entry is a post ID or a page address on your site, with an optional weight from 1 to 10 (5 if left out). Only published posts and pages of your own site are accepted, up to 50. If any entry is not valid, nothing is saved.
+
+### Anchors that say what the page is about
+
+Search engines learn what a page is about from the words that link to it, so SyteOps only uses anchors that name the target's topic. For a related post, the topic is the post's focus keyword in your active SEO plugin (Squirrly SEO, Yoast SEO or Rank Math), or its SEO title if there is no focus keyword, or its title if there is no SEO title or no SEO plugin. A long title is shortened to its main topic first, so "The Complete Guide to Hotel Financing Options for First-Time Owners" is treated as "hotel financing options".
+
+A phrase is linked only when it:
+
+- is two to six words long;
+- contains the keyword or a close variant (a plural or other word form, or at least 60% of the keyword's main words);
+- ends on the topic itself or a natural follow-on word such as "options", "rates" or "lenders", never on a verb;
+- is made mostly of meaningful words, and does not start or end with a filler word, a verb or a small word such as "the" or "before".
+
+So "right lender", "before long" and "lenders best matched" are never used as links. A single word is used only when the page's keyword is that one word. This also applies to phrases suggested by AI: they are checked with the same rules, and the AI is asked for descriptive anchors that contain the keyword. Phrases that fail are skipped, and an AI keyword run reports how many.
 
 The process is **idempotent**: running it again on the same post produces the same result. It removes its own previous links before re-processing, so you can safely re-run it after updating your LinkCentral keywords.
 
