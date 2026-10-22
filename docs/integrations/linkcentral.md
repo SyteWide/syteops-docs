@@ -321,7 +321,7 @@ No API token has been saved in SyteOps yet. Go to the System / API tab, enter a 
 
 **Elementor-built pages**
 
-Elementor stores your layout in Elementor’s own data, not in the regular WordPress content field. SyteOps reads the same rendered HTML a visitor would see when matching keywords and cross-links. If you run a live (non–dry-run) process, SyteOps may report proposed links in the response but **not** write them into the post automatically, and you will see a warning explaining that Elementor pages must be updated in Elementor (or use a block/classic post if you need automatic saving into the post body).
+Elementor stores your layout in Elementor’s own data, not in the regular WordPress content field, so SyteOps never saves links into a page built with Elementor. It still reads the same rendered HTML a visitor would see and lists the links it would add as suggestions, with a warning; add them in the Elementor editor. A live run on such a page reports `"skipped": true` with the `skip_reason` `elementor_preview_only` instead of an error, and the Manual Process panel says nothing was saved. When an inbound pass would add a link to an Elementor page, that page is left unchanged and the link is recorded with the pipeline run as a suggestion (up to five Elementor pages per run). Links on an Elementor page do not count toward another article's inbound links.
 
 **Cross-links not appearing**
 - The post needs to have categories or tags assigned for the cross-linker to find related posts
@@ -361,7 +361,7 @@ Processes a post by inserting keyword links and cross-links.
 | `first_occurrence` | boolean | Override first-occurrence-only setting. |
 | `target_blank` | boolean | Override open-in-new-tab setting. |
 | `keyword_matching_mode` | string | `exact`, `ai`, or `fallback` — same meaning as the Keyword Matching Mode setting. |
-| `force` | boolean | Process an article that was already linked. Without it, an already-linked article returns `"skipped": true` with a `skip_reason`. It never overrides an article's opt-out, which answers HTTP 409 with the code `opted_out`. |
+| `force` | boolean | Process an article that was already linked. Without it, an already-linked article returns `"skipped": true` with a `skip_reason`. It never overrides an article's opt-out, which answers HTTP 409 with the code `opted_out`. A page built with Elementor is never saved: it returns `"skipped": true` with the `skip_reason` `elementor_preview_only` and its links as suggestions. |
 
 **Example request:**
 
