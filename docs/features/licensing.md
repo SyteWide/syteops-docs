@@ -50,6 +50,8 @@ A Product License is activated for your site's address. If the same site moves t
 
 This applies only to the address the license was last confirmed for. A site whose address matches nothing the license knows is treated as a different site, as before.
 
+The site's Management Server connection moves the same way. After the license move, run the connection move command for your site with the old address: it asks your Management Server to file the site's connection under the new address, so the server keeps recognizing the site for module delivery and LinkedIn sign-in. The server asks the old address for the same proof itself before it changes anything, and running the command again changes nothing. Update your Management Server first: one running an older version answers that it cannot move connections yet, and nothing changes.
+
 For tooling, the license status command-line check with JSON output prints the comparison as one object: whether the license is active, the address it is held under, the site's current address, whether they match, whether the move is available, when the license was last checked, and when a moved site's 14 days end. It can also run one live check first. The move has a dry run that reports what it would do and changes nothing. Neither prints the license key.
 
 ### Revoking a connection
