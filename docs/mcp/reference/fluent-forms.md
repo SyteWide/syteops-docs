@@ -225,7 +225,7 @@ Call any Fluent Forms REST route (scoped to /fluentform/v1). GET runs immediatel
 | Parameter | Type | Required | Description |
 |---|---|---|---|
 | `method` | string | yes | HTTP method: GET, POST, PUT, PATCH, or DELETE. |
-| `path` | string | yes | Route path within /fluentform/v1, e.g. /fluentform/v1/contacts or /fluentform/v1/contacts/42. |
+| `path` | string | yes | Route path within /fluentform/v1, e.g. /fluentform/v1/\<resource\> for a collection or /fluentform/v1/\<resource\>/42 for one item. Call fform_list_routes for the real resource names — do not guess them. |
 | `body` | object | no | Request body for writes (JSON object). |
 | `query` | object | no | Query-string arguments (JSON object). |
 | `confirm` | boolean | no | Required to execute a write (POST/PUT/PATCH/DELETE). |

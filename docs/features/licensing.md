@@ -42,7 +42,11 @@ When a license is revoked or disabled:
 - The Admin tab is not accessible
 - **All settings are preserved** — nothing is deleted
 
-When the license validates again, everything is automatically restored.
+When the license validates again, everything is automatically restored, including the SyteOps Admin role for everyone who held it.
+
+If the licensing server answers without saying which sites hold the license, nothing changes: the site keeps its current state, the validation history notes it, and the next check asks again. A license that lists no sites at all is a different answer, and locks the site until it is activated.
+
+If the site can't reach the licensing server, its license stays active for 14 days after it was last confirmed. From then on, opening an admin screen as an administrator checks the license again, at most once an hour. If 15 days pass without a confirmation, the site locks as above until a check succeeds; it unlocks on its own the next time one does. If another license check is already running when you click Sync now, you're asked to try again in a minute. After updating from an earlier version, a site gets the full 15 days before it can lock. If the site's address has changed, these days end no later than the 14 days the move allows.
 
 ### When your site's address changes
 

@@ -1,7 +1,7 @@
 {
     "schema_version": 1,
     "generated_from": "sytewide-mcp",
-    "mcp_version": "0.22.2",
+    "mcp_version": "0.27.2",
     "profiles": {
         "full": {
             "label": "Full (all tools)",
@@ -77,6 +77,12 @@
                 "syteops"
             ]
         },
+        "woo": {
+            "label": "WooCommerce",
+            "providers": [
+                "woocommerce"
+            ]
+        },
         "wp": {
             "label": "WordPress core",
             "providers": [
@@ -120,6 +126,11 @@
         "fform_get_entry",
         "fsmtp_list_email_logs",
         "syteops_manifest",
+        "syteops_seo_get",
+        "syteops_builder_guard",
+        "syteops_recipe_list",
+        "syteops_pipeline_runs",
+        "syteops_source_list",
         "fflow_list_variables",
         "fflow_list_apps",
         "fflow_describe_action"
@@ -192,6 +203,10 @@
         {
             "id": "squirrly",
             "label": "Squirrly SEO"
+        },
+        {
+            "id": "woocommerce",
+            "label": "WooCommerce"
         },
         {
             "id": "syteops",
@@ -373,7 +388,7 @@
                     },
                     "meta": {
                         "type": "object",
-                        "description": "Registered meta fields."
+                        "description": "Meta registered for the REST API. Other keys are not saved and come back in warnings. For SEO fields use syteops_seo_set."
                     },
                     "dry_run": {
                         "type": "boolean",
@@ -1997,6 +2012,7 @@
                 "smtp",
                 "seo",
                 "syteops",
+                "woo",
                 "wp"
             ]
         },
@@ -2154,7 +2170,7 @@
                     },
                     "path": {
                         "type": "string",
-                        "description": "Route path within /fluent-affiliate/v2, e.g. /fluent-affiliate/v2/contacts or /fluent-affiliate/v2/contacts/42."
+                        "description": "Route path within /fluent-affiliate/v2, e.g. /fluent-affiliate/v2/<resource> for a collection or /fluent-affiliate/v2/<resource>/42 for one item. Call faff_list_routes for the real resource names — do not guess them."
                     },
                     "body": {
                         "type": "object",
@@ -2195,6 +2211,7 @@
                 "smtp",
                 "seo",
                 "syteops",
+                "woo",
                 "wp"
             ]
         },
@@ -3199,6 +3216,7 @@
                 "smtp",
                 "seo",
                 "syteops",
+                "woo",
                 "wp"
             ]
         },
@@ -3215,7 +3233,7 @@
                     },
                     "path": {
                         "type": "string",
-                        "description": "Route path within /fluent-booking/v2, e.g. /fluent-booking/v2/contacts or /fluent-booking/v2/contacts/42."
+                        "description": "Route path within /fluent-booking/v2, e.g. /fluent-booking/v2/<resource> for a collection or /fluent-booking/v2/<resource>/42 for one item. Call fbook_list_routes for the real resource names — do not guess them."
                     },
                     "body": {
                         "type": "object",
@@ -3256,6 +3274,7 @@
                 "smtp",
                 "seo",
                 "syteops",
+                "woo",
                 "wp"
             ]
         },
@@ -4737,6 +4756,7 @@
                 "smtp",
                 "seo",
                 "syteops",
+                "woo",
                 "wp"
             ]
         },
@@ -5128,7 +5148,7 @@
                     },
                     "path": {
                         "type": "string",
-                        "description": "Route path within /fluent-community/v2, e.g. /fluent-community/v2/contacts or /fluent-community/v2/contacts/42."
+                        "description": "Route path within /fluent-community/v2, e.g. /fluent-community/v2/<resource> for a collection or /fluent-community/v2/<resource>/42 for one item. Call fc_list_routes for the real resource names — do not guess them."
                     },
                     "body": {
                         "type": "object",
@@ -5169,6 +5189,7 @@
                 "smtp",
                 "seo",
                 "syteops",
+                "woo",
                 "wp"
             ]
         },
@@ -5599,6 +5620,39 @@
             ]
         },
         {
+            "name": "fcart_activate_license_site",
+            "provider": "fluent-cart",
+            "description": "Activate a license on a site URL, as the FluentCart admin does. The license must be exactly \"active\" (an \"inactive\" license is refused: set it active with fcart_update_license_status first), not expired, and have an activation left. FluentCart exempts a \"local\" site from the seat limit only through its fluent_cart_sl/is_local_site filter (its built-in check reads an empty field in 1.7.1), so expect every site to use a seat. This tool checks all of that first and returns an error; FluentCart would otherwise end the request. Activating a site the license already has reuses that activation.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "license_id": {
+                        "type": "integer",
+                        "description": "License ID."
+                    },
+                    "url": {
+                        "type": "string",
+                        "description": "Site URL, e.g. https://example.com."
+                    },
+                    "dry_run": {
+                        "type": "boolean",
+                        "description": "If true, preview this destructive action without executing it."
+                    }
+                },
+                "required": [
+                    "license_id",
+                    "url"
+                ]
+            },
+            "destructive": true,
+            "capability": "",
+            "always": false,
+            "profiles": [
+                "full",
+                "cart"
+            ]
+        },
+        {
             "name": "fcart_add_custom_order_item",
             "provider": "fluent-cart",
             "description": "Add a custom (ad-hoc) line item to an order. price is in cents.",
@@ -6014,6 +6068,39 @@
             ]
         },
         {
+            "name": "fcart_deactivate_license_site",
+            "provider": "fluent-cart",
+            "description": "Deactivate one activation of a license, as the FluentCart admin does: it deletes the activation and frees the seat. WARNING: FluentCart also deletes the license site row itself, and site rows are shared by URL across licenses, so another license activated on the same URL can be left pointing at a deleted site. Get activation_id from fcart_get_license.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "license_id": {
+                        "type": "integer",
+                        "description": "License ID."
+                    },
+                    "activation_id": {
+                        "type": "integer",
+                        "description": "Activation ID (from fcart_get_license activations)."
+                    },
+                    "dry_run": {
+                        "type": "boolean",
+                        "description": "If true, preview this destructive action without executing it."
+                    }
+                },
+                "required": [
+                    "license_id",
+                    "activation_id"
+                ]
+            },
+            "destructive": true,
+            "capability": "",
+            "always": false,
+            "profiles": [
+                "full",
+                "cart"
+            ]
+        },
+        {
             "name": "fcart_delete_coupon",
             "provider": "fluent-cart",
             "description": "Permanently delete a coupon.",
@@ -6062,6 +6149,34 @@
                 "required": [
                     "customer_id",
                     "address_id"
+                ]
+            },
+            "destructive": true,
+            "capability": "",
+            "always": false,
+            "profiles": [
+                "full",
+                "cart"
+            ]
+        },
+        {
+            "name": "fcart_delete_license",
+            "provider": "fluent-cart",
+            "description": "Permanently delete a license. Every site using its key loses it.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "license_id": {
+                        "type": "integer",
+                        "description": "License ID."
+                    },
+                    "dry_run": {
+                        "type": "boolean",
+                        "description": "If true, preview this destructive action without executing it."
+                    }
+                },
+                "required": [
+                    "license_id"
                 ]
             },
             "destructive": true,
@@ -6200,6 +6315,39 @@
             ]
         },
         {
+            "name": "fcart_extend_license",
+            "provider": "fluent-cart",
+            "description": "Set a license's expiration date. expiration_date is \"Y-m-d H:i:s\" or \"lifetime\". A past date is accepted and shortens the license. FluentCart also sets a disabled or expired license back to active when its date changes.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "license_id": {
+                        "type": "integer",
+                        "description": "License ID."
+                    },
+                    "expiration_date": {
+                        "type": "string",
+                        "description": "\"Y-m-d H:i:s\" (e.g. 2027-10-22 23:59:59) or \"lifetime\"."
+                    },
+                    "dry_run": {
+                        "type": "boolean",
+                        "description": "If true, preview this destructive action without executing it."
+                    }
+                },
+                "required": [
+                    "license_id",
+                    "expiration_date"
+                ]
+            },
+            "destructive": true,
+            "capability": "",
+            "always": false,
+            "profiles": [
+                "full",
+                "cart"
+            ]
+        },
+        {
             "name": "fcart_get_coupon",
             "provider": "fluent-cart",
             "description": "Get a FluentCart coupon by ID.",
@@ -6289,6 +6437,70 @@
             ]
         },
         {
+            "name": "fcart_get_license",
+            "provider": "fluent-cart",
+            "description": "Get one license with its activations (each with its site), order, related orders, product, downloads and labels. Keys and activation hashes are masked unless reveal_key:true. Note: FluentCart itself sets an \"inactive\" license with activations to \"active\" when this is read.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "license_id": {
+                        "type": "integer",
+                        "description": "License ID."
+                    },
+                    "reveal_key": {
+                        "type": "boolean",
+                        "description": "Return license_key, license_keys and activation_hash unmasked. Default false: each is masked to its last 4 characters. Only set this when the operator needs the full key."
+                    }
+                },
+                "required": [
+                    "license_id"
+                ]
+            },
+            "destructive": false,
+            "capability": "",
+            "always": false,
+            "profiles": [
+                "full",
+                "cart"
+            ]
+        },
+        {
+            "name": "fcart_get_license_site",
+            "provider": "fluent-cart",
+            "description": "Get one license site with every license activation on it (paginated), plus the related customers and orders. Keys are masked unless reveal_key:true.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "site_id": {
+                        "type": "integer",
+                        "description": "License site ID."
+                    },
+                    "per_page": {
+                        "type": "integer",
+                        "description": "Activations per page (default 15, max 100)."
+                    },
+                    "page": {
+                        "type": "integer",
+                        "description": "Page number."
+                    },
+                    "reveal_key": {
+                        "type": "boolean",
+                        "description": "Return license_key, license_keys and activation_hash unmasked. Default false: each is masked to its last 4 characters. Only set this when the operator needs the full key."
+                    }
+                },
+                "required": [
+                    "site_id"
+                ]
+            },
+            "destructive": false,
+            "capability": "",
+            "always": false,
+            "profiles": [
+                "full",
+                "cart"
+            ]
+        },
+        {
             "name": "fcart_get_order",
             "provider": "fluent-cart",
             "description": "Get a FluentCart order by ID (amounts in cents).",
@@ -6351,6 +6563,34 @@
                     "product_id": {
                         "type": "integer",
                         "description": "Product ID."
+                    }
+                },
+                "required": [
+                    "product_id"
+                ]
+            },
+            "destructive": false,
+            "capability": "",
+            "always": false,
+            "profiles": [
+                "full",
+                "cart"
+            ]
+        },
+        {
+            "name": "fcart_get_product_license_settings",
+            "provider": "fluent-cart",
+            "description": "Get a product's licensing settings: enabled, version, update file, per-variation activation limit and validity, WordPress plugin info, changelog, pre-generated license_keys (masked unless reveal_key:true), and the release manifest/signature.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "product_id": {
+                        "type": "integer",
+                        "description": "Product ID."
+                    },
+                    "reveal_key": {
+                        "type": "boolean",
+                        "description": "Return license_key, license_keys and activation_hash unmasked. Default false: each is masked to its last 4 characters. Only set this when the operator needs the full key."
                     }
                 },
                 "required": [
@@ -6443,6 +6683,42 @@
             ]
         },
         {
+            "name": "fcart_list_customer_licenses",
+            "provider": "fluent-cart",
+            "description": "List one customer's licenses, newest first, with activation counts. Keys are masked unless reveal_key:true.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "customer_id": {
+                        "type": "integer",
+                        "description": "FluentCart customer ID."
+                    },
+                    "per_page": {
+                        "type": "integer",
+                        "description": "Items per page (default 10, max 200)."
+                    },
+                    "page": {
+                        "type": "integer",
+                        "description": "Page number."
+                    },
+                    "reveal_key": {
+                        "type": "boolean",
+                        "description": "Return license_key, license_keys and activation_hash unmasked. Default false: each is masked to its last 4 characters. Only set this when the operator needs the full key."
+                    }
+                },
+                "required": [
+                    "customer_id"
+                ]
+            },
+            "destructive": false,
+            "capability": "",
+            "always": false,
+            "profiles": [
+                "full",
+                "cart"
+            ]
+        },
+        {
             "name": "fcart_list_customers",
             "provider": "fluent-cart",
             "description": "List FluentCart customers with optional search and pagination.",
@@ -6473,6 +6749,88 @@
             "profiles": [
                 "full",
                 "lean",
+                "cart"
+            ]
+        },
+        {
+            "name": "fcart_list_license_sites",
+            "provider": "fluent-cart",
+            "description": "List the sites licenses are activated on, with the products and customers behind each. A site row is shared by every license activated on that URL.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "search": {
+                        "type": "string",
+                        "description": "Search term."
+                    },
+                    "per_page": {
+                        "type": "integer",
+                        "description": "Items per page (default 10, max 199)."
+                    },
+                    "page": {
+                        "type": "integer",
+                        "description": "Page number."
+                    },
+                    "filters": {
+                        "type": "object",
+                        "description": "Further FluentCart LicenseSiteFilter query args, sent as given (except select, which is dropped)."
+                    }
+                }
+            },
+            "destructive": false,
+            "capability": "",
+            "always": false,
+            "profiles": [
+                "full",
+                "cart"
+            ]
+        },
+        {
+            "name": "fcart_list_licenses",
+            "provider": "fluent-cart",
+            "description": "List FluentCart Pro licenses (with customer and product). Keys are masked unless reveal_key:true. search matches the license key, order ID, product title, and customer name or email. A license past its expiration date that is not expired or disabled is shown with status \"expiring\". Paginate with page/per_page.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "search": {
+                        "type": "string",
+                        "description": "Search term."
+                    },
+                    "active_view": {
+                        "type": "string",
+                        "description": "FluentCart list tab, e.g. all, active, inactive, expired or disabled."
+                    },
+                    "sort_by": {
+                        "type": "string",
+                        "description": "Column to sort by (e.g. id, order_id)."
+                    },
+                    "sort_type": {
+                        "type": "string",
+                        "description": "ASC or DESC."
+                    },
+                    "per_page": {
+                        "type": "integer",
+                        "description": "Items per page (default 10, max 199)."
+                    },
+                    "page": {
+                        "type": "integer",
+                        "description": "Page number."
+                    },
+                    "filters": {
+                        "type": "object",
+                        "description": "Further FluentCart LicenseFilter query args, sent as given (except select, which is dropped). The named arguments above win on a clash."
+                    },
+                    "reveal_key": {
+                        "type": "boolean",
+                        "description": "Return license_key, license_keys and activation_hash unmasked. Default false: each is masked to its last 4 characters. Only set this when the operator needs the full key."
+                    }
+                }
+            },
+            "destructive": false,
+            "capability": "",
+            "always": false,
+            "profiles": [
+                "full",
                 "cart"
             ]
         },
@@ -6582,6 +6940,7 @@
                 "smtp",
                 "seo",
                 "syteops",
+                "woo",
                 "wp"
             ]
         },
@@ -6691,6 +7050,34 @@
             ]
         },
         {
+            "name": "fcart_regenerate_license_key",
+            "provider": "fluent-cart",
+            "description": "Generate a new key for a license. The old key stops working immediately, on every site using it. The result shows the new key masked; read it with fcart_get_license reveal_key:true.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "license_id": {
+                        "type": "integer",
+                        "description": "License ID."
+                    },
+                    "dry_run": {
+                        "type": "boolean",
+                        "description": "If true, preview this destructive action without executing it."
+                    }
+                },
+                "required": [
+                    "license_id"
+                ]
+            },
+            "destructive": true,
+            "capability": "",
+            "always": false,
+            "profiles": [
+                "full",
+                "cart"
+            ]
+        },
+        {
             "name": "fcart_request",
             "provider": "fluent-cart",
             "description": "Call any FluentCart REST route (scoped to /fluent-cart/v2). GET runs immediately; POST/PUT/PATCH/DELETE require \"confirm\": true, or pass \"dry_run\": true to preview the request. Use fcart_list_routes to discover available paths.",
@@ -6703,7 +7090,7 @@
                     },
                     "path": {
                         "type": "string",
-                        "description": "Route path within /fluent-cart/v2, e.g. /fluent-cart/v2/contacts or /fluent-cart/v2/contacts/42."
+                        "description": "Route path within /fluent-cart/v2, e.g. /fluent-cart/v2/<resource> for a collection or /fluent-cart/v2/<resource>/42 for one item. Call fcart_list_routes for the real resource names — do not guess them."
                     },
                     "body": {
                         "type": "object",
@@ -6744,7 +7131,40 @@
                 "smtp",
                 "seo",
                 "syteops",
+                "woo",
                 "wp"
+            ]
+        },
+        {
+            "name": "fcart_reset_license",
+            "provider": "fluent-cart",
+            "description": "Return an active license to the never-activated state: detach every activation, recount, then set the status to \"inactive\" (REST update_status cannot set inactive). Only an active or inactive license is reset; a disabled or expired one is refused, since inactive counts as usable and the reset would undo the revocation (set it active with fcart_update_license_status first if re-enabling is intended). Defaults to a dry run that changes nothing and returns the current status, the activations (masked) and the planned steps, naming any other license that shares a site about to be deleted. A real run needs dry_run:false AND confirm:true (booleans). It detaches each activation through FluentCart's own admin deactivate_site, stopping at the first error and reporting what was already detached, and only then recounts and sets inactive, because FluentCart's recount flips inactive back to active. WARNING: each detach also deletes that activation's shared site row (see fcart_deactivate_license_site). A license reset to inactive cannot be activated through admin activate_site until it is set active again (FluentCart treats inactive as invalid there); SyteOps 1.6.732's gateway makes that switch. Requires the FluentCart licenses/manage permission.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "license_id": {
+                        "type": "integer",
+                        "description": "License ID."
+                    },
+                    "dry_run": {
+                        "type": "boolean",
+                        "description": "Default true: preview only. Pass false (with confirm:true) to run."
+                    },
+                    "confirm": {
+                        "type": "boolean",
+                        "description": "Required (true), together with dry_run:false, for a real run."
+                    }
+                },
+                "required": [
+                    "license_id"
+                ]
+            },
+            "destructive": false,
+            "capability": "",
+            "always": false,
+            "profiles": [
+                "full",
+                "cart"
             ]
         },
         {
@@ -6901,6 +7321,80 @@
             ]
         },
         {
+            "name": "fcart_update_license_limit",
+            "provider": "fluent-cart",
+            "description": "Set how many sites a license may be activated on. limit is a whole number; 0 or \"unlimited\" means unlimited. A limit below the current activation count detaches nothing, but blocks new activations.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "license_id": {
+                        "type": "integer",
+                        "description": "License ID."
+                    },
+                    "limit": {
+                        "type": [
+                            "integer",
+                            "string"
+                        ],
+                        "description": "Site limit (0 or \"unlimited\" for unlimited)."
+                    },
+                    "dry_run": {
+                        "type": "boolean",
+                        "description": "If true, preview this destructive action without executing it."
+                    }
+                },
+                "required": [
+                    "license_id",
+                    "limit"
+                ]
+            },
+            "destructive": true,
+            "capability": "",
+            "always": false,
+            "profiles": [
+                "full",
+                "cart"
+            ]
+        },
+        {
+            "name": "fcart_update_license_status",
+            "provider": "fluent-cart",
+            "description": "Set a license's status to active, disabled or expired. FluentCart refuses \"inactive\" here (HTTP 423), so this tool does too: use fcart_reset_license to return a license to inactive.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "license_id": {
+                        "type": "integer",
+                        "description": "License ID."
+                    },
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "active",
+                            "disabled",
+                            "expired"
+                        ],
+                        "description": "New status."
+                    },
+                    "dry_run": {
+                        "type": "boolean",
+                        "description": "If true, preview this destructive action without executing it."
+                    }
+                },
+                "required": [
+                    "license_id",
+                    "status"
+                ]
+            },
+            "destructive": true,
+            "capability": "",
+            "always": false,
+            "profiles": [
+                "full",
+                "cart"
+            ]
+        },
+        {
             "name": "fcart_update_order",
             "provider": "fluent-cart",
             "description": "Update a FluentCart order (POST, not PUT). Subscription orders cannot be edited. Use extra for additional fields.",
@@ -7028,6 +7522,39 @@
                 ]
             },
             "destructive": false,
+            "capability": "",
+            "always": false,
+            "profiles": [
+                "full",
+                "cart"
+            ]
+        },
+        {
+            "name": "fcart_update_product_license_settings",
+            "provider": "fluent-cart",
+            "description": "Save a product's licensing settings. FluentCart replaces the stored settings with what you send, and an omitted manifest/signature pair is cleared, so read fcart_get_product_license_settings first and send the whole settings object back changed. Keys read back masked are refused: re-read with reveal_key:true, or leave license_keys out. Refused for bundle products. Changing version tells FluentCart a release happened. settings must carry enabled and variations: a save without variations wipes every per-variation activation limit and validity.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "product_id": {
+                        "type": "integer",
+                        "description": "Product ID."
+                    },
+                    "settings": {
+                        "type": "object",
+                        "description": "Full settings object: enabled (yes|no, required), version (required when enabled), global_update_file, variations (required: list of {variation_id, activation_limit, validity:{unit,...}}), wp, prefix, and optionally manifest, signature, changelog, license_keys."
+                    },
+                    "dry_run": {
+                        "type": "boolean",
+                        "description": "If true, preview this destructive action without executing it."
+                    }
+                },
+                "required": [
+                    "product_id",
+                    "settings"
+                ]
+            },
+            "destructive": true,
             "capability": "",
             "always": false,
             "profiles": [
@@ -8558,6 +9085,7 @@
                 "smtp",
                 "seo",
                 "syteops",
+                "woo",
                 "wp"
             ]
         },
@@ -8752,7 +9280,7 @@
                     },
                     "path": {
                         "type": "string",
-                        "description": "Route path within /fluent-crm/v2, e.g. /fluent-crm/v2/contacts or /fluent-crm/v2/contacts/42."
+                        "description": "Route path within /fluent-crm/v2, e.g. /fluent-crm/v2/<resource> for a collection or /fluent-crm/v2/<resource>/42 for one item. Call fcrm_list_routes for the real resource names — do not guess them."
                     },
                     "body": {
                         "type": "object",
@@ -8793,6 +9321,7 @@
                 "smtp",
                 "seo",
                 "syteops",
+                "woo",
                 "wp"
             ]
         },
@@ -9528,6 +10057,10 @@
                         "type": "string",
                         "description": "on or off (default off)."
                     },
+                    "folder": {
+                        "type": "string",
+                        "description": "Optional folder name to organize the workflow under (FlowMattic folders; stored in workflow settings)."
+                    },
                     "allow_php": {
                         "type": "boolean",
                         "description": "Permit executable PHP config (php-functions/code apps or PHP: values); default false."
@@ -9606,6 +10139,91 @@
             "profiles": [
                 "full",
                 "lean",
+                "flowmattic"
+            ]
+        },
+        {
+            "name": "fflow_expose_workflow",
+            "provider": "flowmattic",
+            "description": "Expose a FlowMattic workflow as a tool on FlowMattic's MCP server (calling the tool runs the workflow via the engine — so this works for ANY workflow, not just webhook-triggered ones). Identify the workflow by \"id\"/\"key\", or pass an explicit \"workflow_id\". Idempotent: re-exposing the same tool_name updates rather than duplicates.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "Numeric workflow id (from fflow_list_workflows)."
+                    },
+                    "key": {
+                        "type": "string",
+                        "description": "SyteWide logical key or FlowMattic workflow_id."
+                    },
+                    "workflow_id": {
+                        "type": "string",
+                        "description": "Explicit FlowMattic workflow_id (alternative to id/key)."
+                    },
+                    "tool_name": {
+                        "type": "string",
+                        "description": "Optional MCP tool name (defaults to a slug of the workflow title)."
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Optional tool description shown to MCP clients."
+                    },
+                    "dry_run": {
+                        "type": "boolean",
+                        "description": "If true, preview this destructive action without executing it."
+                    }
+                }
+            },
+            "destructive": true,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "flowmattic"
+            ]
+        },
+        {
+            "name": "fflow_generate_workflow",
+            "provider": "flowmattic",
+            "description": "Generate a FlowMattic workflow from a natural-language \"prompt\" using FlowMattic's built-in Workflow AI (requires the AI Agent integration + a configured AI connect). The workflow is created DISABLED — review it, then activate with fflow_set_workflow_status. IMPORTANT: AI generation is NOT bound by SyteWide's allow_php guard, so review the generated steps (they may include code-execution apps) before activating. Pass \"provider\" and/or \"connect_id\" to choose the AI connect when more than one exists (the error lists the available providers).",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "prompt": {
+                        "type": "string",
+                        "description": "What the workflow should do (at least 10 characters)."
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "Optional workflow title (defaults to a summary of the prompt)."
+                    },
+                    "provider": {
+                        "type": "string",
+                        "description": "Optional AI provider slug (openai, anthropic, google, groq, mistral, xai, perplexity, deepseek, openrouter, straico). Auto-selected when unambiguous."
+                    },
+                    "connect_id": {
+                        "type": "integer",
+                        "description": "Optional AI connect id (the error lists available connects/providers)."
+                    },
+                    "model": {
+                        "type": "string",
+                        "description": "Optional model override (defaults to the provider default)."
+                    },
+                    "dry_run": {
+                        "type": "boolean",
+                        "description": "If true, preview this destructive action without executing it."
+                    }
+                },
+                "required": [
+                    "prompt"
+                ]
+            },
+            "destructive": true,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
                 "flowmattic"
             ]
         },
@@ -9733,7 +10351,7 @@
         {
             "name": "fflow_list_workflows",
             "provider": "flowmattic",
-            "description": "List FlowMattic workflows on this site: id (numeric), workflow_id (FlowMattic string id), title, status (active/inactive), trigger application (e.g. \"webhook\"), the derived webhook capture URL, and the SyteWide logical_key + version (when the workflow was provisioned by SyteWide). Use this to find a workflow to trigger or remove.",
+            "description": "List FlowMattic workflows on this site: id (numeric), workflow_id (FlowMattic string id), title, status (active/inactive), trigger application (e.g. \"webhook\"), the derived webhook capture URL, folder (FlowMattic v7 workflow folder, \"\" if none), and the SyteWide logical_key + version (when the workflow was provisioned by SyteWide). Use this to find a workflow to trigger or remove.",
             "inputSchema": {
                 "type": "object",
                 "properties": {
@@ -9748,6 +10366,55 @@
                 }
             },
             "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "flowmattic"
+            ]
+        },
+        {
+            "name": "fflow_mcp_server_status",
+            "provider": "flowmattic",
+            "description": "Report FlowMattic's built-in MCP server: whether it is provisioned, active, whether auth is required, its public URL, and which workflows are exposed as MCP tools. Never returns the auth token.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {}
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "flowmattic"
+            ]
+        },
+        {
+            "name": "fflow_provision_mcp_server",
+            "provider": "flowmattic",
+            "description": "Provision (create + activate) FlowMattic's built-in MCP server. SECURE BY DEFAULT: pass \"auth_token_ref\" (a secret REFERENCE staged out-of-band — a SyteOps api_ variable or WP option; resolved server-side, never echoed) to require a static bearer token. To deliberately run it OPEN (no auth), pass require_auth:false — the result warns about the exposure. Note: FlowMattic's MCP server lets requests whose Origin/Referer contains \"claude.ai\" through WITHOUT a token, even when auth is enabled.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "auth_token_ref": {
+                        "type": "string",
+                        "description": "Reference name of the staged bearer token (NOT the token itself). Enables token auth."
+                    },
+                    "require_auth": {
+                        "type": "boolean",
+                        "description": "Default true. Pass false to provision an OPEN server (no token)."
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Optional server display name."
+                    },
+                    "dry_run": {
+                        "type": "boolean",
+                        "description": "If true, preview this destructive action without executing it."
+                    }
+                }
+            },
+            "destructive": true,
             "capability": "manage_options",
             "always": false,
             "profiles": [
@@ -9922,6 +10589,35 @@
             ]
         },
         {
+            "name": "fflow_unexpose_workflow",
+            "provider": "flowmattic",
+            "description": "Remove an exposed workflow tool from FlowMattic's MCP server by \"tool_name\" or \"workflow_id\".",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "tool_name": {
+                        "type": "string",
+                        "description": "Exposed tool name to remove."
+                    },
+                    "workflow_id": {
+                        "type": "string",
+                        "description": "Or remove every tool exposing this workflow_id."
+                    },
+                    "dry_run": {
+                        "type": "boolean",
+                        "description": "If true, preview this destructive action without executing it."
+                    }
+                }
+            },
+            "destructive": true,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "flowmattic"
+            ]
+        },
+        {
             "name": "fflow_update_workflow",
             "provider": "flowmattic",
             "description": "Re-author an existing FlowMattic workflow by \"id\" or \"key\" — including hand-built ones. The prior version is auto-backed-up first. If the workflow was built in FlowMattic's visual (v2) canvas, the rewrite emits a v1 flat graph: it still runs and re-lays-out when reopened, but loses saved canvas positioning (a warning is returned). The result includes a \"previous\" snapshot (before/after).",
@@ -9951,6 +10647,10 @@
                     "status": {
                         "type": "string",
                         "description": "on or off (default: keep current)."
+                    },
+                    "folder": {
+                        "type": "string",
+                        "description": "Optional folder name (default: keep the workflow's current folder)."
                     },
                     "allow_php": {
                         "type": "boolean",
@@ -10406,6 +11106,7 @@
                 "smtp",
                 "seo",
                 "syteops",
+                "woo",
                 "wp"
             ]
         },
@@ -10422,7 +11123,7 @@
                     },
                     "path": {
                         "type": "string",
-                        "description": "Route path within /fluentform/v1, e.g. /fluentform/v1/contacts or /fluentform/v1/contacts/42."
+                        "description": "Route path within /fluentform/v1, e.g. /fluentform/v1/<resource> for a collection or /fluentform/v1/<resource>/42 for one item. Call fform_list_routes for the real resource names — do not guess them."
                     },
                     "body": {
                         "type": "object",
@@ -10463,6 +11164,7 @@
                 "smtp",
                 "seo",
                 "syteops",
+                "woo",
                 "wp"
             ]
         },
@@ -10585,7 +11287,7 @@
                     },
                     "update_fields": {
                         "type": "object",
-                        "description": "Optional fields to update once found (title, content, status, meta)."
+                        "description": "Optional fields to update once found (title, content, status, meta). Meta keys WordPress does not save come back in warnings; for SEO fields use syteops_seo_set."
                     },
                     "dry_run": {
                         "type": "boolean",
@@ -11247,6 +11949,7 @@
                 "smtp",
                 "seo",
                 "syteops",
+                "woo",
                 "wp"
             ]
         },
@@ -11418,7 +12121,7 @@
                     },
                     "path": {
                         "type": "string",
-                        "description": "Route path within /fluent-support/v2, e.g. /fluent-support/v2/contacts or /fluent-support/v2/contacts/42."
+                        "description": "Route path within /fluent-support/v2, e.g. /fluent-support/v2/<resource> for a collection or /fluent-support/v2/<resource>/42 for one item. Call fsupport_list_routes for the real resource names — do not guess them."
                     },
                     "body": {
                         "type": "object",
@@ -11459,6 +12162,7 @@
                 "smtp",
                 "seo",
                 "syteops",
+                "woo",
                 "wp"
             ]
         },
@@ -12246,7 +12950,7 @@
         {
             "name": "sqseo_set_snippet",
             "provider": "squirrly",
-            "description": "Write a page's Squirrly SEO snippet. Writes the canonical wp_qss row (the layer that renders the <title>) plus the _sq_* post-meta mirror layer. Only supplied fields change. Target by post_id or url (\"/\" = homepage). Destructive: pass dry_run:true to preview the call (the arguments to be written) without executing.",
+            "description": "Write a page's Squirrly SEO snippet. Writes the canonical wp_qss row (the layer that renders the <title>) plus the _sq_* post-meta mirror. Only supplied fields change. Target by post_id or url (\"/\" = homepage). Destructive: pass dry_run:true to preview the call (the arguments to be written) without executing. For title, description and keywords alone, syteops_seo_set does the same write through SyteOps and works with any SEO plugin; use this tool for the Squirrly-only fields.",
             "inputSchema": {
                 "type": "object",
                 "properties": {
@@ -12366,6 +13070,64 @@
             ]
         },
         {
+            "name": "syteops_builder_guard",
+            "provider": "syteops",
+            "description": "Read-only. Recompute the agent-prompt guard hash (CANON-1) for one Elementor element (SyteOps builder.guard). Call it right before an Elementor MCP write and compare it with the task's guard; if they differ the element changed, so stop. Never hash by hand. Returns {status, reason, guard, guard_keys, widget_type}, never a setting value. Check status first: when the element can't be resolved (bad el_id, not found, ambiguous) the call still succeeds, with a reason and an empty guard, so two empty guards matching proves nothing. post_id may be a page or a published Elementor template (elementor_library); syteops_seo_get and syteops_seo_set refuse templates. An API key is trusted; a signed-in caller needs edit access to the post. Errors: post_not_found (trashed or not viewable), forbidden (no edit access), module_unavailable (Review Portal not loaded). Note for the write that follows: EMCP update-element and update-widget merge settings shallowly, so writing __globals__ or link replaces that whole object; send every key it should keep.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "post_id": {
+                        "type": "integer",
+                        "description": "Post ID."
+                    },
+                    "el_id": {
+                        "type": "string",
+                        "description": "Elementor element ID."
+                    }
+                },
+                "required": [
+                    "post_id",
+                    "el_id"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "lean",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_cache_purge",
+            "provider": "syteops",
+            "description": "Purge one post's page, or up to 30 URLs on this site, from LiteSpeed and Cloudflare when present (SyteOps cache.purge). Send post_id or urls, not both. Prefer post_id: only that path also clears Elementor's generated CSS (site-wide, and only when the post is built with Elementor; elementor_css reports cleared, unavailable or not_elementor). A URL on another host refuses the whole call. Returns {urls, purged, attempted, skipped, errors, elementor_css}.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "post_id": {
+                        "type": "integer",
+                        "description": "Post ID."
+                    },
+                    "urls": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Absolute http(s) URLs on this site's host, at most 30."
+                    }
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
             "name": "syteops_dispatch",
             "provider": "syteops",
             "description": "Invoke any SyteOps Manage operation. Pass resource + action (see syteops_manifest) and params per that operation's schema. Destructive operations (the manifest marks them) require confirm:true. Returns {ok, changed, data} on success.",
@@ -12425,6 +13187,818 @@
             ]
         },
         {
+            "name": "syteops_pipeline_run",
+            "provider": "syteops",
+            "description": "Run a pipeline recipe against one post now, inline (SyteOps pipelines.run). dry_run:true previews without persisting; force:true bypasses skip-unchanged. SyteOps does not refuse a trashed or non-viewable post and does not check edit_post on this op (it only checks the post exists), so check the post first (get_content, syteops_seo_get). An unknown recipe_id errors unknown_recipe. The call returns ok even when the run fails: read data.status (error, or skipped/unchanged) and data.stages[*].status. dry_run:false cannot override a recipe whose policy.dry_run is true. Returns {status, post_id, recipe, stages, run_id, changed}. Returns 409 module_unavailable when Content Pipelines are disabled in SyteOps.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "post_id": {
+                        "type": "integer",
+                        "description": "Post ID."
+                    },
+                    "recipe_id": {
+                        "type": "string",
+                        "description": "Recipe id (a slug). Defaults to 'default'."
+                    },
+                    "dry_run": {
+                        "type": "boolean",
+                        "description": "Preview only: the recipe runs without persisting its changes."
+                    },
+                    "force": {
+                        "type": "boolean",
+                        "description": "Bypass the skip-unchanged check."
+                    }
+                },
+                "required": [
+                    "post_id"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_pipeline_run_get",
+            "provider": "syteops",
+            "description": "Get one pipeline run-history row with its decoded per-stage results (SyteOps pipelines.get_run). Read-only. Errors not_found for an unknown id. Returns 409 module_unavailable when Content Pipelines are disabled in SyteOps.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "Run ID from syteops_pipeline_runs."
+                    }
+                },
+                "required": [
+                    "id"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_pipeline_runs",
+            "provider": "syteops",
+            "description": "List pipeline run-history rows, paginated; filter by post_id, recipe_id or status (SyteOps pipelines.list_runs). Read-only. Returns {items[], total, page, per_page}; each item has id, source, post_id, recipe_id, status, trigger_kind, is_dry_run, changed, duration_ms, message, created_at. Use syteops_pipeline_run_get for per-stage results. Returns 409 module_unavailable when Content Pipelines are disabled in SyteOps.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "per_page": {
+                        "type": "integer",
+                        "description": "Rows per page (default 25)."
+                    },
+                    "page": {
+                        "type": "integer",
+                        "description": "Page number (default 1)."
+                    },
+                    "post_id": {
+                        "type": "integer",
+                        "description": "Post ID."
+                    },
+                    "recipe_id": {
+                        "type": "string",
+                        "description": "Only runs of this recipe. Omitted means no filter."
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "Only runs with this status: 'ok', 'error' or 'skipped'."
+                    }
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "lean",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_recipe_create",
+            "provider": "syteops",
+            "description": "Create a pipeline recipe (SyteOps pipelines.create_recipe). The id defaults to the slug of name, and a recipe whose id matches an existing one REPLACES that recipe without warning, so call syteops_recipe_list first. A recipe is a list of stages, a trigger and a policy; copy the shape from syteops_recipe_get. On publish only the single highest-priority matching auto_publish recipe runs. Returns the saved recipe. Returns 409 module_unavailable when Content Pipelines are disabled in SyteOps.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Recipe id (a slug). Omit to derive it from name. An existing id is replaced."
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Recipe name."
+                    },
+                    "priority": {
+                        "type": "integer",
+                        "description": "Recipe priority (default 0). Only the single highest-priority matching auto_publish recipe runs on publish, so a priority above the default recipe displaces it."
+                    },
+                    "stages": {
+                        "type": "array",
+                        "description": "Ordered list of stages: {stage_id, enabled (default true), options}. An item without stage_id is silently dropped. On update the list REPLACES all stages, so send the full list (copy from syteops_recipe_get).",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "stage_id": {
+                                    "type": "string",
+                                    "description": "Stage ID."
+                                },
+                                "enabled": {
+                                    "type": "boolean",
+                                    "description": "Run this stage (default true)."
+                                },
+                                "options": {
+                                    "type": "object",
+                                    "description": "Stage options; unknown keys are dropped."
+                                }
+                            },
+                            "required": [
+                                "stage_id"
+                            ]
+                        }
+                    },
+                    "trigger": {
+                        "type": "object",
+                        "description": "{mode: 'auto_publish' (default) or 'manual', scope: {post_types: [..] (default ['post']), tag_slugs: [..]}}. Omitted, it defaults to auto_publish on posts. Supplied on update, it replaces the whole trigger, so send every key."
+                    },
+                    "policy": {
+                        "type": "object",
+                        "description": "{on_error: 'continue' (default) or 'stop', rerun: 'always' (default) or 'skip_unchanged', execution: 'async' (default) or 'sync', dry_run: bool}. Supplied on update, it replaces the whole policy, so send every key."
+                    }
+                },
+                "required": [
+                    "name"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_recipe_delete",
+            "provider": "syteops",
+            "description": "Delete a pipeline recipe (SyteOps pipelines.delete_recipe). Needs confirm:true. The 'default' recipe cannot be deleted (protected_recipe). Returns {id, deleted}. Returns 409 module_unavailable when Content Pipelines are disabled in SyteOps. SyteOps requires a SyteOps Admin for this delete.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Recipe id (a slug)."
+                    },
+                    "confirm": {
+                        "type": "boolean",
+                        "description": "Required (true): SyteOps refuses the delete without it."
+                    }
+                },
+                "required": [
+                    "id"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_recipe_get",
+            "provider": "syteops",
+            "description": "Get one pipeline recipe by id (SyteOps pipelines.get_recipe). Read-only. Errors not_found for an unknown id. Returns 409 module_unavailable when Content Pipelines are disabled in SyteOps.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Recipe id (a slug)."
+                    }
+                },
+                "required": [
+                    "id"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_recipe_list",
+            "provider": "syteops",
+            "description": "List all configured pipeline recipes (SyteOps pipelines.list_recipes). Read-only. Returns {recipes[]}. Call it before syteops_recipe_create to see which ids exist. Returns 409 module_unavailable when Content Pipelines are disabled in SyteOps.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {}
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "lean",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_recipe_update",
+            "provider": "syteops",
+            "description": "Update a pipeline recipe (SyteOps pipelines.update_recipe). A merge-patch at the top level only: omitted keys are kept, but a supplied trigger or policy replaces that whole sub-object, so send the full sub-object to change one field (read it with syteops_recipe_get first). Errors not_found for an unknown id. Returns the saved recipe. Returns 409 module_unavailable when Content Pipelines are disabled in SyteOps.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Recipe id (a slug)."
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Recipe name."
+                    },
+                    "priority": {
+                        "type": "integer",
+                        "description": "Recipe priority (default 0). Only the single highest-priority matching auto_publish recipe runs on publish, so a priority above the default recipe displaces it."
+                    },
+                    "stages": {
+                        "type": "array",
+                        "description": "Ordered list of stages: {stage_id, enabled (default true), options}. An item without stage_id is silently dropped. On update the list REPLACES all stages, so send the full list (copy from syteops_recipe_get).",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "stage_id": {
+                                    "type": "string",
+                                    "description": "Stage ID."
+                                },
+                                "enabled": {
+                                    "type": "boolean",
+                                    "description": "Run this stage (default true)."
+                                },
+                                "options": {
+                                    "type": "object",
+                                    "description": "Stage options; unknown keys are dropped."
+                                }
+                            },
+                            "required": [
+                                "stage_id"
+                            ]
+                        }
+                    },
+                    "trigger": {
+                        "type": "object",
+                        "description": "{mode: 'auto_publish' (default) or 'manual', scope: {post_types: [..] (default ['post']), tag_slugs: [..]}}. Omitted, it defaults to auto_publish on posts. Supplied on update, it replaces the whole trigger, so send every key."
+                    },
+                    "policy": {
+                        "type": "object",
+                        "description": "{on_error: 'continue' (default) or 'stop', rerun: 'always' (default) or 'skip_unchanged', execution: 'async' (default) or 'sync', dry_run: bool}. Supplied on update, it replaces the whole policy, so send every key."
+                    }
+                },
+                "required": [
+                    "id"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_seo_get",
+            "provider": "syteops",
+            "description": "Read one post's SEO title, description and focus keywords from whichever SEO plugin is active (SyteOps seo.get). Returns {post_id, tool, tool_label, fields}. With no active SEO plugin it errors no_active_seo_tool. For Squirrly-only fields (canonical, Open Graph, robots) use sqseo_get_snippet.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "post_id": {
+                        "type": "integer",
+                        "description": "Post ID."
+                    }
+                },
+                "required": [
+                    "post_id"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "lean",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_seo_set",
+            "provider": "syteops",
+            "description": "Write one post's SEO title, description or focus keywords through the active SEO plugin's own writer (SyteOps seo.set). SEO writes for any SEO plugin go here, not update_content.meta. Send dry_run:true first: it writes nothing and returns each field's current and proposed value. A real write needs confirm:true. Only the fields you send change. Caps: title 300, description 1000, keywords 500 characters. A placeholder the SEO plugin fills from site data is refused unless allow_placeholders:true. On Squirrly the result carries a note: reload any block-editor tab that was open before the write, or its SEO Snippet box saves the old title back. For Squirrly-only fields use sqseo_set_snippet.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "post_id": {
+                        "type": "integer",
+                        "description": "Post ID."
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "SEO title. Send an empty string to clear it."
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Meta description. Send an empty string to clear it."
+                    },
+                    "keywords": {
+                        "type": "string",
+                        "description": "Focus keywords, comma-separated. Send an empty string to clear it."
+                    },
+                    "dry_run": {
+                        "type": "boolean",
+                        "description": "Preview only; nothing is written."
+                    },
+                    "confirm": {
+                        "type": "boolean",
+                        "description": "Required (true) for a real write."
+                    },
+                    "allow_placeholders": {
+                        "type": "boolean",
+                        "description": "JSON true only. Allow placeholders the SEO plugin fills from site data (custom fields, options). Safe ones such as the post title need no opt-in."
+                    }
+                },
+                "required": [
+                    "post_id"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_source_approve_mapping",
+            "provider": "syteops",
+            "description": "Approve a field mapping for a content source, activating it for live ingest (SyteOps content_sources.approve_mapping). Returns {id, status, mapping_status, mapping}.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Content source id."
+                    },
+                    "mapping": {
+                        "type": "object",
+                        "description": "The field mapping to approve and activate for live ingest."
+                    }
+                },
+                "required": [
+                    "id",
+                    "mapping"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_source_create",
+            "provider": "syteops",
+            "description": "Create a content source (SyteOps content_sources.create); SyteOps generates its id and slug. Unless you pass a secret or auth_mode:'none', it generates a webhook secret and returns it as data.secret (only when secret_source is 'generated'), once. The plaintext secret is not redacted and is returned only once: do not log or store it. The slug comes from name and cannot be changed later. A supplied secret or forward_secret is write-only.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Source name; the slug is derived from it."
+                    },
+                    "auth_mode": {
+                        "type": "string",
+                        "description": "Inbound verification: 'hmac' (default), 'bearer', 'both' or 'none' (no verification; the slug URL is the only gate). Switching from 'none' to a verifying mode with no stored secret errors secret_required."
+                    },
+                    "secret": {
+                        "type": "string",
+                        "description": "Write-only verification secret, e.g. a provider-owned key. Never echoed back."
+                    },
+                    "default_author_id": {
+                        "type": "integer",
+                        "description": "Default author user ID."
+                    },
+                    "pin_author": {
+                        "type": "boolean",
+                        "description": "Pin the default author on ingested posts."
+                    },
+                    "target_post_type": {
+                        "type": "string",
+                        "description": "Post type the source creates."
+                    },
+                    "new_cpt": {
+                        "type": "object",
+                        "description": "Source-owned custom post type definition. Create-time only; not editable afterwards."
+                    },
+                    "meta_fields": {
+                        "type": "array",
+                        "description": "Native custom fields this source declares: a list of {field_key, label, type}."
+                    },
+                    "fm_variables": {
+                        "type": "array",
+                        "description": "Per-source FlowMattic config vars: a list of {key, value, source: 'payload' or 'static'}."
+                    },
+                    "forward_enabled": {
+                        "type": "boolean",
+                        "description": "Forward each ingest to a workflow URL."
+                    },
+                    "forward_url": {
+                        "type": "string",
+                        "description": "Workflow URL to forward to. Must pass wp_http_validate_url: private hosts and unusual ports are rejected."
+                    },
+                    "forward_auth_mode": {
+                        "type": "string",
+                        "description": "Auth mode for the forward call."
+                    },
+                    "forward_secret": {
+                        "type": "string",
+                        "description": "Write-only forward secret; never returned on any read."
+                    },
+                    "sig_header_mode": {
+                        "type": "string",
+                        "description": "Signature header mode."
+                    },
+                    "sig_header_name": {
+                        "type": "string",
+                        "description": "Signature header name."
+                    },
+                    "author_match_mode": {
+                        "type": "string",
+                        "description": "How the incoming author is matched."
+                    },
+                    "target_tag_slug": {
+                        "type": "string",
+                        "description": "Tag slug applied to ingested posts. Changing it on update retags this source's existing posts."
+                    },
+                    "taxonomy_apply_mode": {
+                        "type": "string",
+                        "description": "How taxonomies are applied."
+                    },
+                    "strip_uncategorized": {
+                        "type": "boolean",
+                        "description": "Drop the Uncategorized term."
+                    },
+                    "category_exclude": {
+                        "type": "array",
+                        "description": "Category slugs the AI classifier may never choose: a list of strings."
+                    },
+                    "content_cleanup": {
+                        "type": "boolean",
+                        "description": "Clean up the incoming body."
+                    },
+                    "strip_inbody_toc": {
+                        "type": "boolean",
+                        "description": "Strip an in-body table of contents."
+                    },
+                    "strip_inbody_faq": {
+                        "type": "boolean",
+                        "description": "Strip an in-body FAQ."
+                    },
+                    "add_heading_anchors": {
+                        "type": "boolean",
+                        "description": "Add anchors to headings."
+                    },
+                    "image_modify": {
+                        "type": "object",
+                        "description": "Portal image-modify mapping (tokens only)."
+                    }
+                },
+                "required": [
+                    "name"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_source_delete",
+            "provider": "syteops",
+            "description": "Permanently delete a content source (SyteOps content_sources.delete). Needs confirm:true. Returns {id, deleted}. SyteOps requires a SyteOps Admin for this delete.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Content source id."
+                    },
+                    "confirm": {
+                        "type": "boolean",
+                        "description": "Required (true): SyteOps refuses the delete without it."
+                    }
+                },
+                "required": [
+                    "id"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_source_export",
+            "provider": "syteops",
+            "description": "Export one content source as a portable setup package (SyteOps content_sources.export). Read-only. The envelope {format, schema_version, payload} never includes secret or forward_secret; feed it to syteops_source_import.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Content source id."
+                    }
+                },
+                "required": [
+                    "id"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_source_get",
+            "provider": "syteops",
+            "description": "Get one content source by id (SyteOps content_sources.get). Read-only. Secrets are never included.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Content source id."
+                    }
+                },
+                "required": [
+                    "id"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_source_import",
+            "provider": "syteops",
+            "description": "Import a content source setup package (SyteOps content_sources.import). When the slug is free it creates the source; when it exists it errors already_exists. To replace an existing source send overwrite:true AND confirm:true (overwrite alone errors confirmation_required); an overwrite clears the stored forward_secret and, for a verifying auth_mode, also invalidates the source's current webhook secret and returns the new one once, so live senders break until updated. This op is not marked destructive, so confirm only gates that overwrite. If a verifying secret is minted it is returned as data.secret (only when secret_source is 'generated'). The plaintext secret is not redacted and is returned only once: do not log or store it.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "envelope": {
+                        "type": "object",
+                        "description": "A setup package from syteops_source_export."
+                    },
+                    "overwrite": {
+                        "type": "boolean",
+                        "description": "Replace an existing source with the same slug. Also needs confirm:true."
+                    },
+                    "confirm": {
+                        "type": "boolean",
+                        "description": "Required (true) together with overwrite to replace an existing source."
+                    }
+                },
+                "required": [
+                    "envelope"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_source_list",
+            "provider": "syteops",
+            "description": "List all content sources, the inbound feeds that create posts for the pipelines (SyteOps content_sources.list). Read-only. Each has id, name, slug, enabled, status, auth_mode, target_post_type, mapping, mapping_status, defaults and forward settings. Secrets are never included.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {}
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "lean",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_source_rotate_secret",
+            "provider": "syteops",
+            "description": "Generate a new webhook secret for a content source and invalidate the old one at once (SyteOps content_sources.rotate_secret). Returns {id, secret} with the new secret, once; it enters this conversation's transcript. The plaintext secret is not redacted and is returned only once: do not log or store it. Senders using the old secret fail until updated.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Content source id."
+                    }
+                },
+                "required": [
+                    "id"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_source_update",
+            "provider": "syteops",
+            "description": "Update editable fields on a content source (SyteOps content_sources.update); only the fields you send change. The slug, new_cpt and the internal idempotency key are not editable. A non-empty secret or forward_secret overwrites the stored one (write-only, never returned); an empty value leaves it unchanged. Returns the source without secrets.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Content source id."
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Source name."
+                    },
+                    "default_author_id": {
+                        "type": "integer",
+                        "description": "Default author user ID."
+                    },
+                    "pin_author": {
+                        "type": "boolean",
+                        "description": "Pin the default author on ingested posts."
+                    },
+                    "default_reviewers": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        },
+                        "description": "Default reviewers for ingested posts: a list of WordPress user IDs (integers)."
+                    },
+                    "default_ccs": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        },
+                        "description": "Default CC recipients for ingested posts: a list of WordPress user IDs (integers)."
+                    },
+                    "default_post_status": {
+                        "type": "string",
+                        "description": "'draft' (default) or 'publish'; anything else is stored as draft."
+                    },
+                    "auth_mode": {
+                        "type": "string",
+                        "description": "Inbound verification: 'hmac' (default), 'bearer', 'both' or 'none' (no verification; the slug URL is the only gate). Switching from 'none' to a verifying mode with no stored secret errors secret_required."
+                    },
+                    "secret": {
+                        "type": "string",
+                        "description": "Write-only verification secret, e.g. a provider-owned key. Never echoed back."
+                    },
+                    "enabled": {
+                        "type": "boolean",
+                        "description": "Enable or disable the source."
+                    },
+                    "reingest_mode": {
+                        "type": "string",
+                        "description": "'protect' (default; keeps a reviewer-published post) or 'overwrite'."
+                    },
+                    "target_post_type": {
+                        "type": "string",
+                        "description": "Post type the source creates."
+                    },
+                    "meta_fields": {
+                        "type": "array",
+                        "description": "Native custom fields this source declares: a list of {field_key, label, type}."
+                    },
+                    "fm_variables": {
+                        "type": "array",
+                        "description": "Per-source FlowMattic config vars: a list of {key, value, source: 'payload' or 'static'}."
+                    },
+                    "forward_enabled": {
+                        "type": "boolean",
+                        "description": "Forward each ingest to a workflow URL."
+                    },
+                    "forward_url": {
+                        "type": "string",
+                        "description": "Workflow URL to forward to. Must pass wp_http_validate_url: private hosts and unusual ports are rejected."
+                    },
+                    "forward_auth_mode": {
+                        "type": "string",
+                        "description": "Auth mode for the forward call."
+                    },
+                    "forward_secret": {
+                        "type": "string",
+                        "description": "Write-only forward secret; never returned on any read."
+                    },
+                    "sig_header_mode": {
+                        "type": "string",
+                        "description": "Signature header mode."
+                    },
+                    "sig_header_name": {
+                        "type": "string",
+                        "description": "Signature header name."
+                    },
+                    "author_match_mode": {
+                        "type": "string",
+                        "description": "How the incoming author is matched."
+                    },
+                    "target_tag_slug": {
+                        "type": "string",
+                        "description": "Tag slug applied to ingested posts. Changing it on update retags this source's existing posts."
+                    },
+                    "taxonomy_apply_mode": {
+                        "type": "string",
+                        "description": "How taxonomies are applied."
+                    },
+                    "strip_uncategorized": {
+                        "type": "boolean",
+                        "description": "Drop the Uncategorized term."
+                    },
+                    "category_exclude": {
+                        "type": "array",
+                        "description": "Category slugs the AI classifier may never choose: a list of strings."
+                    },
+                    "content_cleanup": {
+                        "type": "boolean",
+                        "description": "Clean up the incoming body."
+                    },
+                    "strip_inbody_toc": {
+                        "type": "boolean",
+                        "description": "Strip an in-body table of contents."
+                    },
+                    "strip_inbody_faq": {
+                        "type": "boolean",
+                        "description": "Strip an in-body FAQ."
+                    },
+                    "add_heading_anchors": {
+                        "type": "boolean",
+                        "description": "Add anchors to headings."
+                    },
+                    "image_modify": {
+                        "type": "object",
+                        "description": "Portal image-modify mapping (tokens only)."
+                    }
+                },
+                "required": [
+                    "id"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
             "name": "sytewide_bulk",
             "provider": "core",
             "description": "Run one tool repeatedly over a list of argument sets and return the per-call results. Capped at 50 calls per request. For destructive target tools, include \"dry_run\": true in each call to preview.",
@@ -12469,6 +14043,7 @@
                 "smtp",
                 "seo",
                 "syteops",
+                "woo",
                 "wp"
             ]
         },
@@ -12497,6 +14072,7 @@
                 "smtp",
                 "seo",
                 "syteops",
+                "woo",
                 "wp"
             ]
         },
@@ -12525,6 +14101,7 @@
                 "smtp",
                 "seo",
                 "syteops",
+                "woo",
                 "wp"
             ]
         },
@@ -12614,7 +14191,8 @@
                         "type": "integer"
                     },
                     "meta": {
-                        "type": "object"
+                        "type": "object",
+                        "description": "Meta registered for the REST API. Other keys are not saved and come back in warnings. For SEO fields use syteops_seo_set."
                     },
                     "dry_run": {
                         "type": "boolean",
@@ -12771,9 +14349,9 @@
             ]
         },
         {
-            "name": "wp_list_routes",
-            "provider": "wp-rest",
-            "description": "List the WordPress REST REST routes registered under /wp/v2 and their HTTP methods. Optional \"search\" substring filter and \"limit\" (1-500, default 200). Use this to find a path for wp_request.",
+            "name": "wc_analytics_list_routes",
+            "provider": "woocommerce",
+            "description": "List the WooCommerce Analytics REST routes registered under /wc-analytics and their HTTP methods. Optional \"search\" substring filter and \"limit\" (1-500, default 200). Use this to find a path for wc_analytics_request.",
             "inputSchema": {
                 "type": "object",
                 "properties": {
@@ -12804,13 +14382,14 @@
                 "smtp",
                 "seo",
                 "syteops",
+                "woo",
                 "wp"
             ]
         },
         {
-            "name": "wp_request",
-            "provider": "wp-rest",
-            "description": "Call any WordPress REST REST route (scoped to /wp/v2). GET runs immediately; POST/PUT/PATCH/DELETE require \"confirm\": true, or pass \"dry_run\": true to preview the request. Use wp_list_routes to discover available paths.",
+            "name": "wc_analytics_request",
+            "provider": "woocommerce",
+            "description": "Call any WooCommerce Analytics REST route (scoped to /wc-analytics). GET runs immediately; POST/PUT/PATCH/DELETE require \"confirm\": true, or pass \"dry_run\": true to preview the request. Use wc_analytics_list_routes to discover available paths.",
             "inputSchema": {
                 "type": "object",
                 "properties": {
@@ -12820,7 +14399,7 @@
                     },
                     "path": {
                         "type": "string",
-                        "description": "Route path within /wp/v2, e.g. /wp/v2/contacts or /wp/v2/contacts/42."
+                        "description": "Route path within /wc-analytics, e.g. /wc-analytics/<resource> for a collection or /wc-analytics/<resource>/42 for one item. Call wc_analytics_list_routes for the real resource names — do not guess them."
                     },
                     "body": {
                         "type": "object",
@@ -12861,6 +14440,454 @@
                 "smtp",
                 "seo",
                 "syteops",
+                "woo",
+                "wp"
+            ]
+        },
+        {
+            "name": "wc_get_settings_group",
+            "provider": "woocommerce",
+            "description": "Read the options in ONE WooCommerce settings group, with each option's id, current value, default and type. Returns only that group's own options — NOT its children's: settings groups are hierarchical, so stock options are in \"inventory\" rather than \"products\", and per-email options are in the email_* groups. If an option you expect is missing, check the group's sub_groups via wc_list_settings_groups. Store address and currency live in \"general\"; tax posture lives in \"tax\".",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "group": {
+                        "type": "string",
+                        "description": "Settings group id, e.g. general, products, tax, shipping."
+                    }
+                },
+                "required": [
+                    "group"
+                ]
+            },
+            "destructive": false,
+            "capability": "",
+            "always": false,
+            "profiles": [
+                "full",
+                "woo"
+            ]
+        },
+        {
+            "name": "wc_get_shipping_zone",
+            "provider": "woocommerce",
+            "description": "Get one WooCommerce shipping zone with its locations and shipping methods resolved. Use this to read the current location set before calling wc_set_shipping_zone_locations.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "zone_id": {
+                        "type": "integer",
+                        "description": "Shipping zone ID (0 is \"Locations not covered by your other zones\")."
+                    }
+                },
+                "required": [
+                    "zone_id"
+                ]
+            },
+            "destructive": false,
+            "capability": "",
+            "always": false,
+            "profiles": [
+                "full",
+                "woo"
+            ]
+        },
+        {
+            "name": "wc_list_routes",
+            "provider": "woocommerce",
+            "description": "List the WooCommerce REST routes registered under /wc/v3 and their HTTP methods. Optional \"search\" substring filter and \"limit\" (1-500, default 200). Use this to find a path for wc_request.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "search": {
+                        "type": "string",
+                        "description": "Only return routes whose path contains this substring."
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "description": "Max routes to return (1-500, default 200)."
+                    }
+                }
+            },
+            "destructive": false,
+            "capability": "",
+            "always": true,
+            "profiles": [
+                "full",
+                "lean",
+                "booking",
+                "forms",
+                "cart",
+                "crm",
+                "community",
+                "support",
+                "affiliate",
+                "flowmattic",
+                "smtp",
+                "seo",
+                "syteops",
+                "woo",
+                "wp"
+            ]
+        },
+        {
+            "name": "wc_list_settings_groups",
+            "provider": "woocommerce",
+            "description": "List the WooCommerce settings groups (general, products, tax, shipping, checkout, account, email, advanced, integration, plus any an extension has added). Groups are HIERARCHICAL: the response is one flat list in which child groups carry a \"parent_id\" and parents carry \"sub_groups\". Options live on whichever group actually owns them — stock settings are in \"inventory\" (a child of products), not in \"products\" — so read sub_groups before concluding an option does not exist.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {}
+            },
+            "destructive": false,
+            "capability": "",
+            "always": false,
+            "profiles": [
+                "full",
+                "woo"
+            ]
+        },
+        {
+            "name": "wc_list_shipping_zones",
+            "provider": "woocommerce",
+            "description": "List WooCommerce shipping zones with each zone's locations and shipping methods resolved in one call. Includes zone 0 (\"Locations not covered by your other zones\"), which has methods but no locations. Resolving costs one request per zone per sub-resource, so set include_locations or include_methods to false, or lower \"limit\", on stores with many zones.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "include_locations": {
+                        "type": "boolean",
+                        "description": "Resolve each zone's locations (default true)."
+                    },
+                    "include_methods": {
+                        "type": "boolean",
+                        "description": "Resolve each zone's shipping methods (default true)."
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "description": "Max zones to resolve (1-200, default 50). The response reports total and truncated."
+                    }
+                }
+            },
+            "destructive": false,
+            "capability": "",
+            "always": false,
+            "profiles": [
+                "full",
+                "woo"
+            ]
+        },
+        {
+            "name": "wc_request",
+            "provider": "woocommerce",
+            "description": "Call any WooCommerce REST route (scoped to /wc/v3). GET runs immediately; POST/PUT/PATCH/DELETE require \"confirm\": true, or pass \"dry_run\": true to preview the request. Use wc_list_routes to discover available paths.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "method": {
+                        "type": "string",
+                        "description": "HTTP method: GET, POST, PUT, PATCH, or DELETE."
+                    },
+                    "path": {
+                        "type": "string",
+                        "description": "Route path within /wc/v3, e.g. /wc/v3/<resource> for a collection or /wc/v3/<resource>/42 for one item. Call wc_list_routes for the real resource names — do not guess them."
+                    },
+                    "body": {
+                        "type": "object",
+                        "description": "Request body for writes (JSON object)."
+                    },
+                    "query": {
+                        "type": "object",
+                        "description": "Query-string arguments (JSON object)."
+                    },
+                    "confirm": {
+                        "type": "boolean",
+                        "description": "Required to execute a write (POST/PUT/PATCH/DELETE)."
+                    },
+                    "dry_run": {
+                        "type": "boolean",
+                        "description": "Preview a write without executing it."
+                    }
+                },
+                "required": [
+                    "method",
+                    "path"
+                ]
+            },
+            "destructive": false,
+            "capability": "",
+            "always": true,
+            "profiles": [
+                "full",
+                "lean",
+                "booking",
+                "forms",
+                "cart",
+                "crm",
+                "community",
+                "support",
+                "affiliate",
+                "flowmattic",
+                "smtp",
+                "seo",
+                "syteops",
+                "woo",
+                "wp"
+            ]
+        },
+        {
+            "name": "wc_set_shipping_zone_locations",
+            "provider": "woocommerce",
+            "description": "Replace a shipping zone's ENTIRE location set. WooCommerce's underlying PUT replaces every location on the zone — it does NOT merge — so \"locations\" must be the complete intended set, not just the additions. Read the current set with wc_get_shipping_zone first. WooCommerce silently discards entries with a missing code or an unrecognized type, so the response reports added/removed/rejected computed against what WooCommerce actually stored. Pass an empty array to clear every location. Zone 0 cannot be edited.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "zone_id": {
+                        "type": "integer",
+                        "description": "Shipping zone ID. Zone 0 (\"Locations not covered by your other zones\") cannot be edited."
+                    },
+                    "locations": {
+                        "type": "array",
+                        "description": "The COMPLETE intended location set. Each entry MUST be an object with a non-empty \"code\" and a \"type\" of exactly postcode, state, country or continent (lowercase — WooCommerce compares strictly). Example: { \"code\": \"US:HI\", \"type\": \"state\" }.",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "string",
+                                    "description": "Location code, e.g. US:HI for a state, US for a country, 96813 for a postcode."
+                                },
+                                "type": {
+                                    "type": "string",
+                                    "description": "One of postcode, state, country, continent.",
+                                    "enum": [
+                                        "postcode",
+                                        "state",
+                                        "country",
+                                        "continent"
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "type"
+                            ]
+                        }
+                    },
+                    "dry_run": {
+                        "type": "boolean",
+                        "description": "If true, preview this destructive action without executing it."
+                    }
+                },
+                "required": [
+                    "zone_id",
+                    "locations"
+                ]
+            },
+            "destructive": true,
+            "capability": "",
+            "always": false,
+            "profiles": [
+                "full",
+                "woo"
+            ]
+        },
+        {
+            "name": "wc_system_status",
+            "provider": "woocommerce",
+            "description": "Read the WooCommerce system status report — environment, database state, active plugins, theme and template overrides, settings and page setup. The full report is very large, so pass \"sections\" to keep only the parts you need; omit it to get everything.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "sections": {
+                        "type": "array",
+                        "description": "Top-level sections to keep, e.g. [\"environment\",\"theme\"]. Must be an array, not a bare string. Sections: environment, database, active_plugins, inactive_plugins, dropins_mu_plugins, theme, settings, security, pages, post_type_counts, logging. Omit for the whole report. The response carries a \"_filter\" key describing what was kept, dropped and available.",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "destructive": false,
+            "capability": "",
+            "always": false,
+            "profiles": [
+                "full",
+                "woo"
+            ]
+        },
+        {
+            "name": "wc_update_setting",
+            "provider": "woocommerce",
+            "description": "Set one WooCommerce setting. Options are addressed by group AND option id (e.g. group \"general\", option_id \"woocommerce_currency\") — read the group first with wc_get_settings_group to get the exact id and the value shape it expects. Changes take effect on the live storefront immediately.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "group": {
+                        "type": "string",
+                        "description": "Settings group id, e.g. general."
+                    },
+                    "option_id": {
+                        "type": "string",
+                        "description": "Option id within the group, e.g. woocommerce_currency."
+                    },
+                    "value": {
+                        "description": "New value. Type must match what the option expects (string, boolean, or array) — check wc_get_settings_group."
+                    },
+                    "dry_run": {
+                        "type": "boolean",
+                        "description": "If true, preview this destructive action without executing it."
+                    }
+                },
+                "required": [
+                    "group",
+                    "option_id",
+                    "value"
+                ]
+            },
+            "destructive": true,
+            "capability": "",
+            "always": false,
+            "profiles": [
+                "full",
+                "woo"
+            ]
+        },
+        {
+            "name": "wc_update_shipping_method",
+            "provider": "woocommerce",
+            "description": "Update a shipping method instance on a zone. Method-specific configuration (cost, tax status, min-amount) goes inside the nested \"settings\" object, keyed by setting id with a PLAIN SCALAR value — e.g. { \"cost\": \"9.95\" }. Note the read/write asymmetry: wc_get_shipping_zone returns each setting as an object ({ id, label, type, value }); send back only the value, not that object. Only the fields you pass are sent.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "zone_id": {
+                        "type": "integer",
+                        "description": "Shipping zone ID."
+                    },
+                    "instance_id": {
+                        "type": "integer",
+                        "description": "Method instance ID on that zone (from wc_get_shipping_zone)."
+                    },
+                    "enabled": {
+                        "type": "boolean",
+                        "description": "Enable or disable this method instance."
+                    },
+                    "order": {
+                        "type": "integer",
+                        "description": "Sort order within the zone."
+                    },
+                    "settings": {
+                        "type": "object",
+                        "description": "Method settings keyed by setting id, each a plain scalar value, e.g. { \"cost\": \"9.95\", \"tax_status\": \"taxable\" }."
+                    },
+                    "dry_run": {
+                        "type": "boolean",
+                        "description": "If true, preview this destructive action without executing it."
+                    }
+                },
+                "required": [
+                    "zone_id",
+                    "instance_id"
+                ]
+            },
+            "destructive": true,
+            "capability": "",
+            "always": false,
+            "profiles": [
+                "full",
+                "woo"
+            ]
+        },
+        {
+            "name": "wp_list_routes",
+            "provider": "wp-rest",
+            "description": "List the WordPress REST REST routes registered under /wp/v2 and their HTTP methods. Optional \"search\" substring filter and \"limit\" (1-500, default 200). Use this to find a path for wp_request.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "search": {
+                        "type": "string",
+                        "description": "Only return routes whose path contains this substring."
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "description": "Max routes to return (1-500, default 200)."
+                    }
+                }
+            },
+            "destructive": false,
+            "capability": "",
+            "always": true,
+            "profiles": [
+                "full",
+                "lean",
+                "booking",
+                "forms",
+                "cart",
+                "crm",
+                "community",
+                "support",
+                "affiliate",
+                "flowmattic",
+                "smtp",
+                "seo",
+                "syteops",
+                "woo",
+                "wp"
+            ]
+        },
+        {
+            "name": "wp_request",
+            "provider": "wp-rest",
+            "description": "Call any WordPress REST REST route (scoped to /wp/v2). GET runs immediately; POST/PUT/PATCH/DELETE require \"confirm\": true, or pass \"dry_run\": true to preview the request. Use wp_list_routes to discover available paths.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "method": {
+                        "type": "string",
+                        "description": "HTTP method: GET, POST, PUT, PATCH, or DELETE."
+                    },
+                    "path": {
+                        "type": "string",
+                        "description": "Route path within /wp/v2, e.g. /wp/v2/<resource> for a collection or /wp/v2/<resource>/42 for one item. Call wp_list_routes for the real resource names — do not guess them."
+                    },
+                    "body": {
+                        "type": "object",
+                        "description": "Request body for writes (JSON object)."
+                    },
+                    "query": {
+                        "type": "object",
+                        "description": "Query-string arguments (JSON object)."
+                    },
+                    "confirm": {
+                        "type": "boolean",
+                        "description": "Required to execute a write (POST/PUT/PATCH/DELETE)."
+                    },
+                    "dry_run": {
+                        "type": "boolean",
+                        "description": "Preview a write without executing it."
+                    }
+                },
+                "required": [
+                    "method",
+                    "path"
+                ]
+            },
+            "destructive": false,
+            "capability": "",
+            "always": true,
+            "profiles": [
+                "full",
+                "lean",
+                "booking",
+                "forms",
+                "cart",
+                "crm",
+                "community",
+                "support",
+                "affiliate",
+                "flowmattic",
+                "smtp",
+                "seo",
+                "syteops",
+                "woo",
                 "wp"
             ]
         }

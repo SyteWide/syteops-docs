@@ -346,7 +346,7 @@ Call any Fluent Support REST route (scoped to /fluent-support/v2). GET runs imme
 | Parameter | Type | Required | Description |
 |---|---|---|---|
 | `method` | string | yes | HTTP method: GET, POST, PUT, PATCH, or DELETE. |
-| `path` | string | yes | Route path within /fluent-support/v2, e.g. /fluent-support/v2/contacts or /fluent-support/v2/contacts/42. |
+| `path` | string | yes | Route path within /fluent-support/v2, e.g. /fluent-support/v2/\<resource\> for a collection or /fluent-support/v2/\<resource\>/42 for one item. Call fsupport_list_routes for the real resource names — do not guess them. |
 | `body` | object | no | Request body for writes (JSON object). |
 | `query` | object | no | Query-string arguments (JSON object). |
 | `confirm` | boolean | no | Required to execute a write (POST/PUT/PATCH/DELETE). |

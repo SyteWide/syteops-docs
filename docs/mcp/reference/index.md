@@ -22,11 +22,12 @@ Tools are grouped by provider. Each provider registers only when its plugin is d
 | [FluentCommunity](./fluent-community) | `fluent-community` | 71 |
 | [FluentCRM](./fluent-crm) | `fluent-crm` | 75 |
 | [Fluent Forms](./fluent-forms) | `fluent-forms` | 18 |
-| [FluentCart](./fluent-cart) | `fluent-cart` | 48 |
+| [FluentCart](./fluent-cart) | `fluent-cart` | 63 |
 | [Fluent Affiliate](./fluent-affiliate) | `fluent-affiliate` | 55 |
-| [FlowMattic](./flowmattic) | `flowmattic` | 16 |
+| [FlowMattic](./flowmattic) | `flowmattic` | 21 |
 | [FluentBooking](./fluent-booking) | `fluent-booking` | 21 |
 | [Fluent Support](./fluent-support) | `fluent-support` | 26 |
 | [FluentSMTP](./fluent-smtp) | `fluent-smtp` | 3 |
 | [Squirrly SEO](./squirrly) | `squirrly` | 8 |
-| [SyteOps](./syteops) | `syteops` | 2 |
+| [WooCommerce](./woocommerce) | `woocommerce` | 12 |
+| [SyteOps](./syteops) | `syteops` | 23 |
