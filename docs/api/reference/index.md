@@ -20,7 +20,7 @@ Every operation runs through the single dispatch endpoint. See [Dispatch contrac
 | [`crm`](./crm) | 6 | yes |
 | [`identity`](./identity) | 2 | no |
 | [`integrations`](./integrations) | 3 | yes |
-| [`leads`](./leads) | 9 | yes |
+| [`leads`](./leads) | 12 | yes |
 | [`listing_image`](./listing-image) | 2 | no |
 | [`modules`](./modules) | 10 | yes |
 | [`pipelines`](./pipelines) | 19 | yes |

@@ -8,6 +8,18 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.765
+
+- Each person's private page can now show a Callbacks list of the callers waiting for a call back, in order, with Done, Not a lead and Reopen. Closed callbacks are hidden until you turn on Show closed, and a status filter shows one group at a time. Access is set person by person (Off, View and act, or Call) on the Roles & Users screen, with no automatic access for administrators.
+
+## v1.6.764
+
+- Callbacks in Leads can now be listed, marked done or not a lead, and reopened through the management API, with the person and time recorded. Closed callbacks are hidden unless asked for, and names and numbers appear only while contact details are stored in Full.
+
+## v1.6.763
+
+- Groundwork for callback tracking in Leads. Callbacks are recorded only when contact details are stored in Full.
+
 ## v1.6.762
 
 - Adds a private, token-protected way for operator tools to read the installed version.
