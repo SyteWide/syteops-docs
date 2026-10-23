@@ -13,11 +13,12 @@ Tools are grouped by provider. Each provider registers only when its plugin is d
 | Provider | id | Tools |
 |---|---|---|
 | [Core / Diagnostics](./core) | `core` | 3 |
-| [WordPress Content & Taxonomies](./wp-content) | `wp-content` | 16 |
+| [WordPress Content & Taxonomies](./wp-content) | `wp-content` | 17 |
 | [WordPress Users](./wp-users) | `wp-users` | 6 |
 | [WordPress Comments](./wp-comments) | `wp-comments` | 5 |
 | [WordPress Media](./wp-media) | `wp-media` | 4 |
 | [WordPress Plugins](./wp-plugins) | `wp-plugins` | 7 |
+| [WordPress Options (single values)](./wp-options) | `wp-options` | 2 |
 | [WordPress REST](./wp-rest) | `wp-rest` | 2 |
 | [FluentCommunity](./fluent-community) | `fluent-community` | 71 |
 | [FluentCRM](./fluent-crm) | `fluent-crm` | 75 |
@@ -30,4 +31,4 @@ Tools are grouped by provider. Each provider registers only when its plugin is d
 | [FluentSMTP](./fluent-smtp) | `fluent-smtp` | 3 |
 | [Squirrly SEO](./squirrly) | `squirrly` | 8 |
 | [WooCommerce](./woocommerce) | `woocommerce` | 12 |
-| [SyteOps](./syteops) | `syteops` | 23 |
+| [SyteOps](./syteops) | `syteops` | 62 |

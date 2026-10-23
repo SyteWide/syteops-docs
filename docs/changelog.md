@@ -8,6 +8,18 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.762
+
+- Adds a private, token-protected way for operator tools to read the installed version.
+
+## v1.6.761
+
+- Review Portal cards now fill the empty space beside and under the preview, in a sensible priority order, with a separate switch for the editing and client views.
+
+## v1.6.760
+
+- Section buttons at the top of admin screens are easier to read: darker text, clearer outlines, readable group labels, and a solid highlight on the screen or section you are in.
+
 ## v1.6.759
 
 - IndexNow sends and status checks through the API now refuse posts you can't edit.
