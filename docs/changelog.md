@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.759
+
+- IndexNow sends and status checks through the API now refuse posts you can't edit.
+
 ## v1.6.758
 
 - The API can now read and change who can review and publish in the Review Portal, with confirmation.

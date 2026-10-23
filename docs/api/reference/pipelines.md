@@ -446,7 +446,7 @@ data: &#123;enabled, engine}
 
 ## `mode_get`
 
-Read the Content Pipelines operating mode: setup (nothing goes live or is sent) or production.
+Read the Content Pipelines operating mode: setup or production. Setup still ingests and builds posts, but forces newly ingested posts to draft, writes no run-history rows, skips the workflow forward and the new-post reviewer email, holds social sends until production, and skips the 'Now live', schedule-change and held-source alert emails. The Review Portal stays fully usable: setup mode does NOT stop review.approve or calendar publishing.
 
 **Access:** SyteOps Admin or API key.
 
@@ -471,7 +471,7 @@ data: &#123;mode: "setup"|"production"}
 
 ## `mode_set`
 
-Switch the Content Pipelines mode. Production starts live publishing and sends; setup halts them. Needs confirm:true. Any other mode value is 422 invalid_mode.
+Switch the Content Pipelines mode. Production lets ingested posts take their source's configured status and turns on run history, the workflow forward, social sends and the pipeline emails. Setup still ingests and builds posts, but forces newly ingested posts to draft, writes no run-history rows, skips the workflow forward and the new-post reviewer email, holds social sends until production, and skips the 'Now live', schedule-change and held-source alert emails. The Review Portal stays fully usable: setup mode does NOT stop review.approve or calendar publishing. Needs confirm:true. Any other mode value is 422 invalid_mode.
 
 **🔴 Destructive**  
 **Access:** SyteOps Admin or API key, plus `confirm: true`.
