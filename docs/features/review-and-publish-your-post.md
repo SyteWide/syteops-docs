@@ -61,11 +61,29 @@ Tables and other formatting in the article body are shown the way they will look
 
 ### A long sidebar wraps under the preview
 
-The cards beside the article or preview (Featured Image, Feedback, Reviewers, SEO and the rest) stay in place while they fit next to it. The first card that would run past the bottom of the preview, and every card after it, moves underneath at full width, in two or three columns. The Feedback card, and every card above it (such as Featured Image, pictures, Author and the permission note), always stays beside the preview. On a narrow screen the layout is a single column and nothing moves.
+The cards beside the article or preview (Featured Image, Feedback, Reviewers, SEO and the rest) stay in place while they fit next to it. With **Pack cards into gaps** off (see below), the first card that would run past the bottom of the preview, and every card after it, moves underneath at full width, in two or three columns. The Feedback card, and every card above it (such as Featured Image, pictures, Author and the permission note), always stays beside the preview. On a narrow screen the layout is a single column and nothing moves.
 
 When there are many notes, the Feedback list scrolls inside its card (on screens wider than 920px), so the card stays about the height of the window instead of growing with every note.
 
 Once you have scrolled so far down that the preview is completely out of view, a **Back to preview** button (**Back to article** when you are editing an article) appears at the bottom right. Select it to return to the top of the preview.
+
+#### Pack cards into gaps
+
+With **Pack cards into gaps** on (Content Pipelines, Review Portal settings, Review and approval rules card; on by default), the cards fill the empty space instead of leaving holes:
+
+- **Beside the preview**, a card that is too tall for the space left is passed over for the next card that fits, so one tall card no longer pushes every other card underneath.
+- **Under the preview**, each card goes into whichever column is shortest, so a tall card no longer leaves holes beside it.
+
+Cards are placed in this order of priority, as far as space allows:
+
+| View | Order |
+|---|---|
+| Editing | Reviewers, SEO, Categories & Tags, GEO, Links, AI agent prompts, FAQ prompt |
+| Client (comment only) | Reviewers, AI agent prompts, FAQ prompt |
+
+Feedback, and every card above it, always stays beside the preview. A card that is not in the list comes after the listed ones. Filling a gap comes first: a lower card takes a space that no higher card fits.
+
+There is a separate switch for the editing view and for the client view, which shows fewer cards. A card you are typing in, or that has a menu open, is never moved; the layout catches up once you leave it. Turn a switch off to keep the cards in their page order, as before.
 
 ### Review how it looks on the site
 

@@ -7,7 +7,7 @@ description: MCP tools provided by WordPress Content & Taxonomies (provider id w
 
 # WordPress Content & Taxonomies
 
-Provider id: `wp-content` · 16 tool(s).
+Provider id: `wp-content` · 17 tool(s).
 
 ## `assign_terms_to_content`
 
@@ -234,6 +234,23 @@ List terms in a taxonomy (e.g. category, post_tag, or a custom taxonomy).
 | `per_page` | integer | no | Items per page (1-100). |
 | `page` | integer | no | Page number. |
 | `parent` | integer | no | Parent term ID (hierarchical taxonomies). |
+
+
+## `replace_content_text`
+
+Replace exact text in one or more posts or Elementor pages, all or nothing. Defaults to a dry run that writes nothing and previews every edit (match counts, where found as widget and setting, the post_content mirror count, what would be written). A real run needs dry_run:false AND confirm:true. Every edit is checked before any write: each must match old exactly expected_count times (default 1), so one bad edit writes nothing and the result names it. On an Elementor page only the matching setting values change and the rest of _elementor_data stays byte for byte; post_content (the mirror) must hold old the same number of times and gets the same replacement. widget_id limits an Elementor match to one widget; refuse_if_present refuses a post that already contains a string (use the target URL to prevent double links). A match inside an HTML tag (an attribute) is refused unless allow_in_attributes:true; a match inside &lt;script>, &lt;style> or an HTML comment is refused unless allow_in_code:true. A restore point (a revision carrying the Elementor meta) is created per post before writing and must still exist; the result gives revision_id, the sha1 of the old _elementor_data and rollback steps. Writes are raw compare-and-swap SQL (no kses, no second revision): a post changed by someone else in the meantime is refused untouched and the posts already written are put back. Save hooks do not run; post_modified is set, caches are cleared and SyteOps cache.purge runs when available. A builder-mode Elementor page with no usable _elementor_data is refused. With verify_rendered (default true) it fetches each published post of this site (about 20 s in total, then the rest are skipped with time_budget) and warns when the new text is missing from the rendered page (it may be stripped from display, for example an in-body FAQ replaced by structured data): check those warnings, the write has already happened. Takes 1-25 edits, one per post. Same permission as update_content (edit_post per post); without unfiltered_html, the stored result must pass wp_kses_post() unchanged and carry no disallowed URL protocol, only Elementor text and content settings may change (not links, custom attributes, CSS, ids or dynamic tags), and allow_in_attributes / allow_in_code are refused.
+
+**Profiles:** `full`, `wp`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `edits` | array | yes | Edits, one per post. |
+| `allow_in_attributes` | boolean | no | Default false: refuse a match that falls inside an HTML tag, so only text content changes. |
+| `allow_in_code` | boolean | no | Default false: refuse a match inside \<script\>, \<style\> or an HTML comment (JSON-LD, CSS, notes). Separate from allow_in_attributes. |
+| `confirm` | boolean | no | Required (true), together with dry_run:false, for a real write. |
+| `verify_rendered` | boolean | no | Default true: after writing, fetch each published post and warn when the new text is not in the rendered HTML. |
 
 
 ## `update_content`

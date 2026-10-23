@@ -1,7 +1,7 @@
 {
     "schema_version": 1,
     "generated_from": "sytewide-mcp",
-    "mcp_version": "0.27.2",
+    "mcp_version": "0.32.1",
     "profiles": {
         "full": {
             "label": "Full (all tools)",
@@ -91,6 +91,7 @@
                 "wp-media",
                 "wp-comments",
                 "wp-plugins",
+                "wp-options",
                 "wp-rest"
             ]
         }
@@ -131,6 +132,12 @@
         "syteops_recipe_list",
         "syteops_pipeline_runs",
         "syteops_source_list",
+        "syteops_review_queue",
+        "syteops_review_get",
+        "syteops_review_permissions_get",
+        "syteops_calendar_query",
+        "syteops_pipeline_stats",
+        "syteops_pipeline_activity",
         "fflow_list_variables",
         "fflow_list_apps",
         "fflow_describe_action"
@@ -159,6 +166,10 @@
         {
             "id": "wp-plugins",
             "label": "WordPress Plugins"
+        },
+        {
+            "id": "wp-options",
+            "label": "WordPress Options (single values)"
         },
         {
             "id": "wp-rest",
@@ -12468,6 +12479,43 @@
             ]
         },
         {
+            "name": "get_option_value",
+            "provider": "wp-options",
+            "description": "Read ONE value inside a WordPress option. An array or object is never returned whole: you get {exists, type, count, keys:[{key, type}]} and drill in with path; a key that looks like a credential (license key, UUID, hex), and every key under a credential-named parent, is listed as null. A bool is always returned. A string or number returns {exists, type, value}, except when the option name or any key on the path looks like a credential (key, secret, token, password, pass, auth, credential, private, license, salt, nonce, cookie, session, bearer, authorization, cert, api, and compounds like smtppass or licensekey), or its record does (any of its name, key, header, field, id, label, title or slug fields, or type/input_type password or secret, hides every value in that record): then only {exists, type} plus length for a string. Under a credential-shaped name a number is still returned when its key ends in a structural measure (session_timeout, nonce_lifetime, cache_ttl, token_ttl, token_expiry, key_length, password_min_length, max_login_attempts, api_version), and a string under cache_key, meta_key, sort_key, transient_key, foreign_key, column_key or index_key when it is a plain identifier. A string that looks like a credential is hidden whatever it is called (fail closed: an unbroken 16+ character string unless it is an email, clean URL, hostname, date, number, version or lowercase slug). Credential rows are allowlist-only: flowmattic_settings exposes notification_email and notification_email_connect; sq_options and fluentmail-settings are refused (use the sqseo_* and fsmtp_* tools). SyteWide MCP API keys, SyteOps keys and licensing, WordPress salts and the role map report only {exists}.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "option": {
+                        "type": "string",
+                        "description": "Option name (wp_options.option_name)."
+                    },
+                    "path": {
+                        "type": [
+                            "array",
+                            "string"
+                        ],
+                        "items": {
+                            "type": [
+                                "string",
+                                "integer"
+                            ]
+                        },
+                        "description": "Key path inside the option. An array of keys is preferred, e.g. [\"rates\", 0, \"label\"], and is required when a key contains a dot; a dot-path string \"rates.0.label\" also works. Omit for the whole option."
+                    }
+                },
+                "required": [
+                    "option"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "wp"
+            ]
+        },
+        {
             "name": "get_plugin",
             "provider": "wp-plugins",
             "description": "Get details for one installed plugin by its file path (e.g. \"akismet/akismet\").",
@@ -12825,6 +12873,88 @@
             ]
         },
         {
+            "name": "replace_content_text",
+            "provider": "wp-content",
+            "description": "Replace exact text in one or more posts or Elementor pages, all or nothing. Defaults to a dry run that writes nothing and previews every edit (match counts, where found as widget and setting, the post_content mirror count, what would be written). A real run needs dry_run:false AND confirm:true. Every edit is checked before any write: each must match old exactly expected_count times (default 1), so one bad edit writes nothing and the result names it. On an Elementor page only the matching setting values change and the rest of _elementor_data stays byte for byte; post_content (the mirror) must hold old the same number of times and gets the same replacement. widget_id limits an Elementor match to one widget; refuse_if_present refuses a post that already contains a string (use the target URL to prevent double links). A match inside an HTML tag (an attribute) is refused unless allow_in_attributes:true; a match inside <script>, <style> or an HTML comment is refused unless allow_in_code:true. A restore point (a revision carrying the Elementor meta) is created per post before writing and must still exist; the result gives revision_id, the sha1 of the old _elementor_data and rollback steps. Writes are raw compare-and-swap SQL (no kses, no second revision): a post changed by someone else in the meantime is refused untouched and the posts already written are put back. Save hooks do not run; post_modified is set, caches are cleared and SyteOps cache.purge runs when available. A builder-mode Elementor page with no usable _elementor_data is refused. With verify_rendered (default true) it fetches each published post of this site (about 20 s in total, then the rest are skipped with time_budget) and warns when the new text is missing from the rendered page (it may be stripped from display, for example an in-body FAQ replaced by structured data): check those warnings, the write has already happened. Takes 1-25 edits, one per post. Same permission as update_content (edit_post per post); without unfiltered_html, the stored result must pass wp_kses_post() unchanged and carry no disallowed URL protocol, only Elementor text and content settings may change (not links, custom attributes, CSS, ids or dynamic tags), and allow_in_attributes / allow_in_code are refused.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "edits": {
+                        "type": "array",
+                        "minItems": 1,
+                        "maxItems": 25,
+                        "description": "Edits, one per post.",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "post_id": {
+                                    "type": "integer",
+                                    "description": "Post ID (any post type)."
+                                },
+                                "old": {
+                                    "type": "string",
+                                    "description": "Exact text to find (non-empty)."
+                                },
+                                "new": {
+                                    "type": "string",
+                                    "description": "Replacement text."
+                                },
+                                "expected_count": {
+                                    "type": "integer",
+                                    "minimum": 1,
+                                    "description": "How many times old must occur (default 1). Any other count refuses the edit."
+                                },
+                                "widget_id": {
+                                    "type": "string",
+                                    "description": "Elementor only: match only in this widget's settings."
+                                },
+                                "refuse_if_present": {
+                                    "type": "string",
+                                    "description": "Refuse the edit if the post already contains this string, for example the target URL."
+                                }
+                            },
+                            "required": [
+                                "post_id",
+                                "old",
+                                "new"
+                            ],
+                            "additionalProperties": false
+                        }
+                    },
+                    "allow_in_attributes": {
+                        "type": "boolean",
+                        "description": "Default false: refuse a match that falls inside an HTML tag, so only text content changes."
+                    },
+                    "allow_in_code": {
+                        "type": "boolean",
+                        "description": "Default false: refuse a match inside <script>, <style> or an HTML comment (JSON-LD, CSS, notes). Separate from allow_in_attributes."
+                    },
+                    "dry_run": {
+                        "type": "boolean",
+                        "description": "Default true: preview only. Pass false (with confirm:true) to write."
+                    },
+                    "confirm": {
+                        "type": "boolean",
+                        "description": "Required (true), together with dry_run:false, for a real write."
+                    },
+                    "verify_rendered": {
+                        "type": "boolean",
+                        "description": "Default true: after writing, fetch each published post and warn when the new text is not in the rendered HTML."
+                    }
+                },
+                "required": [
+                    "edits"
+                ]
+            },
+            "destructive": false,
+            "capability": "",
+            "always": false,
+            "profiles": [
+                "full",
+                "wp"
+            ]
+        },
+        {
             "name": "sqseo_delete_snippet",
             "provider": "squirrly",
             "description": "Delete a page's Squirrly wp_qss override row, reverting it to Squirrly's computed defaults. Target by post_id or url (\"/\" = homepage). Destructive; supports dry_run.",
@@ -13128,6 +13258,240 @@
             ]
         },
         {
+            "name": "syteops_calendar_check",
+            "provider": "syteops",
+            "description": "Read-only advisory: would scheduling this post at this moment break the site's publishing rhythm, and where would it fit instead? (SyteOps calendar.cadence_check; SyteOps 1.6.758+). Nothing is written or refused. scope is all (default) or pipeline. Returns {post_id, date_gmt, enabled, collides, reasons[], conflicts[], suggestion_label, suggestion_local, truncated}. Returns 409 module_unavailable when Content Pipelines is not active.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "post_id": {
+                        "type": "integer",
+                        "description": "Post ID."
+                    },
+                    "date": {
+                        "type": "string",
+                        "description": "ISO 8601 date-time, e.g. 2026-11-03T09:00:00 (site timezone) or with Z / +02:00 (that instant). A bad date is 422 invalid_date."
+                    },
+                    "scope": {
+                        "type": "string",
+                        "enum": [
+                            "pipeline",
+                            "all"
+                        ],
+                        "description": "pipeline (posts the content pipeline produced) or all."
+                    }
+                },
+                "required": [
+                    "post_id",
+                    "date"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_calendar_next_slot",
+            "provider": "syteops",
+            "description": "Read-only. The next free publishing moment on the site's cadence after a time (SyteOps calendar.cadence_next_slot; SyteOps 1.6.758+). enabled is false and the slot empty when cadence is off; truncated means the calendar could not be read completely. scope is all (default) or pipeline. Returns {enabled, truncated, slot_gmt, slot_site}. Returns 409 module_unavailable when Content Pipelines is not active.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "after": {
+                        "type": "string",
+                        "description": "ISO 8601 date-time to search after (default now)."
+                    },
+                    "exclude_post_id": {
+                        "type": "integer",
+                        "description": "Post ID kept out of its own conflicts."
+                    },
+                    "scope": {
+                        "type": "string",
+                        "enum": [
+                            "pipeline",
+                            "all"
+                        ],
+                        "description": "pipeline (posts the content pipeline produced) or all."
+                    }
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_calendar_query",
+            "provider": "syteops",
+            "description": "Read-only. The publishing calendar for a window (SyteOps calendar.query; SyteOps 1.6.758+): scheduled and published posts in it (grid_events) plus the undated draft and pending rail. The window may span at most 92 days (422 range_too_large; 422 invalid_range when to is before from). scope is pipeline (default) or all. grid_truncated is true when the window held more than 500 posts: narrow it. The rail is not date-bounded: page it with rail_cursor (422 invalid_cursor) and rail_per. A site-local time the clocks skip is 422 date_in_dst_gap. Returns {from_gmt, to_gmt, scope, grid_events[], grid_truncated, rail_drafts[], rail_has_more, rail_next_cursor, rail_truncated}. Returns 409 module_unavailable when Content Pipelines is not active.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "from": {
+                        "type": "string",
+                        "description": "Window start: YYYY-MM-DD (start of that day) or an ISO 8601 date-time, in the site timezone unless it has Z or an offset."
+                    },
+                    "to": {
+                        "type": "string",
+                        "description": "Window end: YYYY-MM-DD (end of that day) or an ISO 8601 date-time. At most 92 days after from (422 range_too_large)."
+                    },
+                    "scope": {
+                        "type": "string",
+                        "enum": [
+                            "pipeline",
+                            "all"
+                        ],
+                        "description": "pipeline (posts the content pipeline produced) or all."
+                    },
+                    "post_types": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of calendar post type names, e.g. [\"post\",\"page\"]; a keyed object or an unknown type is 422 invalid_post_type."
+                    },
+                    "rail_per": {
+                        "type": "integer",
+                        "enum": [
+                            5,
+                            10,
+                            25,
+                            100
+                        ],
+                        "description": "Draft rail page size: 5, 10, 25 or 100."
+                    },
+                    "rail_cursor": {
+                        "type": "string",
+                        "description": "rail_next_cursor from the previous page, unchanged; anything else is 422 invalid_cursor."
+                    }
+                },
+                "required": [
+                    "from",
+                    "to"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "lean",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_calendar_reschedule",
+            "provider": "syteops",
+            "description": "Move a post's publication to a future moment, as dragging it on the calendar does (SyteOps calendar.reschedule; SyteOps 1.6.758+): a draft or pending post becomes scheduled and goes live by itself at that time (no review approval, readiness check or confirm), a scheduled post moves, and the schedule notice goes to the people the portal tells. date must be at least five minutes ahead (422 date_not_future); a date under five minutes ahead is refused, never published immediately; a live post cannot get a later date (409 published_immutable). A bad date is 422 invalid_date. Returns {post_id, status, scheduled, intent, date_gmt, date_site, notify}. Returns 409 module_unavailable when Content Pipelines is not active.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "post_id": {
+                        "type": "integer",
+                        "description": "Post ID."
+                    },
+                    "date": {
+                        "type": "string",
+                        "description": "ISO 8601 date-time, e.g. 2026-11-03T09:00:00 (site timezone) or with Z / +02:00 (that instant). A bad date is 422 invalid_date."
+                    }
+                },
+                "required": [
+                    "post_id",
+                    "date"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_calendar_reserve_slot",
+            "provider": "syteops",
+            "description": "Hold the next free cadence moment on a draft or pending post, as an arriving article gets one; a post already holding one is moved (SyteOps calendar.slot_reserve; SyteOps 1.6.758+). Other statuses are 409 not_holdable; a post type the calendar does not handle is 422 unsupported_type. Not reserving is an answer: reserved is false with reason slots_disabled, cadence_opt_out or not_reserved. Returns {post_id, reserved, reason, slot_gmt, slot_site}. Returns 409 module_unavailable when Content Pipelines is not active.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "post_id": {
+                        "type": "integer",
+                        "description": "Post ID."
+                    }
+                },
+                "required": [
+                    "post_id"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_calendar_unpublish",
+            "provider": "syteops",
+            "description": "DESTRUCTIVE: takes a LIVE post down and returns it to a draft (SyteOps calendar.unpublish; SyteOps 1.6.758+). Needs confirm:true. 409 not_published when it is not live; the static front page and posts page are 409 protected_page. The publication date is kept; pending post-publish recipe runs and social sends are stood down. Returns {post_id, status, previous_status}. Returns 409 module_unavailable when Content Pipelines is not active.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "post_id": {
+                        "type": "integer",
+                        "description": "Post ID."
+                    },
+                    "confirm": {
+                        "type": "boolean",
+                        "description": "Required (true): this takes the live post down."
+                    }
+                },
+                "required": [
+                    "post_id"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_calendar_unschedule",
+            "provider": "syteops",
+            "description": "Cancel a scheduled post's publication and return it to a draft (SyteOps calendar.unschedule; SyteOps 1.6.758+); 409 not_scheduled when it is not scheduled. Reversible: previous_gmt is returned and syteops_calendar_reschedule puts it back. Returns {post_id, status, previous_gmt, notify}. Returns 409 module_unavailable when Content Pipelines is not active.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "post_id": {
+                        "type": "integer",
+                        "description": "Post ID."
+                    }
+                },
+                "required": [
+                    "post_id"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
             "name": "syteops_dispatch",
             "provider": "syteops",
             "description": "Invoke any SyteOps Manage operation. Pass resource + action (see syteops_manifest) and params per that operation's schema. Destructive operations (the manifest marks them) require confirm:true. Returns {ok, changed, data} on success.",
@@ -13165,6 +13529,54 @@
             ]
         },
         {
+            "name": "syteops_listing_image_reprocess",
+            "provider": "syteops",
+            "description": "Rebuild the listing-card image for each image the article owns from scratch, even when one looks current (SyteOps listing_image.reprocess; SyteOps 1.6.758+): the failure memo is cleared and the paid repair re-queued. The live crop stays until the new one replaces it, so this is not destructive. At most 25 images per call; same refusals and 600-second per-article cooldown as syteops_listing_image_run.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "post_id": {
+                        "type": "integer",
+                        "description": "Post ID."
+                    }
+                },
+                "required": [
+                    "post_id"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_listing_image_run",
+            "provider": "syteops",
+            "description": "Build the listing-card image for each image the article owns that lacks a current one; current images are left alone (SyteOps listing_image.run; SyteOps 1.6.758+). With the watermark repair on this queues paid image-model jobs. At most 25 images per call. 409 listing_image_disabled when the feature is off; 429 cooldown (600 seconds per article, shared with syteops_listing_image_reprocess, not used up when nothing was built or queued); 404 post_not_found. Returns {post_id, processed, queued, failed, skipped, items[]}.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "post_id": {
+                        "type": "integer",
+                        "description": "Post ID."
+                    }
+                },
+                "required": [
+                    "post_id"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
             "name": "syteops_manifest",
             "provider": "syteops",
             "description": "Discover the SyteOps Manage API: every resource and action with its summary, parameter schema, and whether it is destructive. Optionally filter to one resource. Use this to learn what syteops_dispatch can do.",
@@ -13187,9 +13599,214 @@
             ]
         },
         {
+            "name": "syteops_pipeline_activity",
+            "provider": "syteops",
+            "description": "Read-only. The Log view activity feed, newest first (SyteOps pipelines.activity; SyteOps 1.6.758+). Filter by event or post_id. per_page is 1 to 100 (422 invalid_per_page) and page 1 to 10000 (422 invalid_page). Rows carry only id, created_at, event, status, actor, post and an allowlisted meta; never a review link or token. Returns {items[], total, page, per_page}. Returns 409 module_unavailable when Content Pipelines are disabled in SyteOps.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "per_page": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 100,
+                        "description": "Rows per page, 1 to 100 (default 25)."
+                    },
+                    "page": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 10000,
+                        "description": "Page number from 1 to 10000 (default 1)."
+                    },
+                    "event": {
+                        "type": "string",
+                        "description": "Only this activity event (a key such as recipe_deleted)."
+                    },
+                    "post_id": {
+                        "type": "integer",
+                        "description": "Post ID."
+                    }
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "lean",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_pipeline_engine_get",
+            "provider": "syteops",
+            "description": "Read-only. The stored engine choice for each capability, or for one (SyteOps pipelines.engine_get; SyteOps 1.6.758+), the engine running for it, and the engines that can fill it. An unknown capability is 422. Returns capabilities[]: {capability, label, choice, effective, engines[]}. Returns 409 module_unavailable when Content Pipelines are disabled in SyteOps.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "capability": {
+                        "type": "string",
+                        "description": "Only this capability. Omit for all. Unknown is 422."
+                    }
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_pipeline_engine_set",
+            "provider": "syteops",
+            "description": "Choose the engine for a capability (SyteOps pipelines.engine_set; SyteOps 1.6.758+); an empty engine clears the choice. 422 unknown_capability; 422 invalid_engine when the engine does not fill it; seo and geo follow their integration toggles, so setting or clearing them is 409 engine_follows_integration. Returns {capability, engine, previous}. Returns 409 module_unavailable when Content Pipelines are disabled in SyteOps.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "capability": {
+                        "type": "string",
+                        "description": "Capability a stage engine fills, as listed by syteops_pipeline_engine_get. Unknown is 422 unknown_capability."
+                    },
+                    "engine": {
+                        "type": "string",
+                        "description": "Engine ID from syteops_pipeline_stages; an empty string clears the choice. An engine that does not fill the capability is 422 invalid_engine."
+                    }
+                },
+                "required": [
+                    "capability",
+                    "engine"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_pipeline_geo_toggle",
+            "provider": "syteops",
+            "description": "Turn GEO generation on or off, the same switch as the provider card (SyteOps pipelines.geo_toggle; SyteOps 1.6.758+). Turning it off while LLMS Amplifier is the GEO engine is 409 amplifier_owns_geo. Returns {enabled}. Returns 409 module_unavailable when Content Pipelines are disabled in SyteOps.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "enabled": {
+                        "type": "boolean",
+                        "description": "true turns GEO generation on, false off."
+                    }
+                },
+                "required": [
+                    "enabled"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_pipeline_history_clear",
+            "provider": "syteops",
+            "description": "DESTRUCTIVE: clears ALL run history and the mirrored activity feed (SyteOps pipelines.clear_runs; SyteOps 1.6.758+). Needs confirm:true. The lasting deletion records are kept and a runs_cleared record with the count is written. Returns {deleted}. To delete one row use syteops_pipeline_run_delete. Returns 409 module_unavailable when Content Pipelines are disabled in SyteOps.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "confirm": {
+                        "type": "boolean",
+                        "description": "Required (true): this clears all run history."
+                    }
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_pipeline_llms_amplifier_set",
+            "provider": "syteops",
+            "description": "Turn LLMS Amplifier on or off as the GEO engine (SyteOps pipelines.llms_amplifier_set; SyteOps 1.6.758+). Enabling without the Amplifier plugin is 409 plugin_not_installed. Returns {enabled, engine}. Returns 409 module_unavailable when Content Pipelines are disabled in SyteOps.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "enabled": {
+                        "type": "boolean",
+                        "description": "true turns LLMS Amplifier on as the GEO engine, false off."
+                    }
+                },
+                "required": [
+                    "enabled"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_pipeline_mode_get",
+            "provider": "syteops",
+            "description": "Read-only. The Content Pipelines operating mode (SyteOps pipelines.mode_get; SyteOps 1.6.758+): setup or production. Setup holds back run-history rows (activity rows are still recorded), forwarding to the workflow, social sends (held until production, not dropped) and the ingest reviewer, Now live, schedule-change and held-source alert emails, and forces new ingested posts to draft; review approvals and scheduled posts still publish in setup. Returns {mode}. Returns 409 module_unavailable when Content Pipelines are disabled in SyteOps.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {}
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_pipeline_mode_set",
+            "provider": "syteops",
+            "description": "DESTRUCTIVE: switches the Content Pipelines mode (SyteOps pipelines.mode_set; SyteOps 1.6.758+). Production starts workflow forwards and social sends and lets ingested posts publish. Setup holds back run history, forwards, social sends (held until production) and the ingest reviewer, Now live, schedule-change and held-source alert emails, and forces ingested posts to draft, but it does not stop syteops_review_approve or scheduled posts, which still publish. Needs confirm:true. Any other mode is 422 invalid_mode. Returns {mode, previous}, plus pinned:true when a site filter keeps a different mode running. Returns 409 module_unavailable when Content Pipelines are disabled in SyteOps.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "mode": {
+                        "type": "string",
+                        "enum": [
+                            "setup",
+                            "production"
+                        ],
+                        "description": "setup (holds back run history, workflow forwarding, social sends (queued until production) and the ingest reviewer, Now live, schedule-change and held-source alert emails; new ingested posts stay drafts; review approvals and scheduled posts still publish) or production (everything live). Anything else is 422 invalid_mode."
+                    },
+                    "confirm": {
+                        "type": "boolean",
+                        "description": "Required (true): this changes what the pipelines record, send and publish."
+                    }
+                },
+                "required": [
+                    "mode"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
             "name": "syteops_pipeline_run",
             "provider": "syteops",
-            "description": "Run a pipeline recipe against one post now, inline (SyteOps pipelines.run). dry_run:true previews without persisting; force:true bypasses skip-unchanged. SyteOps does not refuse a trashed or non-viewable post and does not check edit_post on this op (it only checks the post exists), so check the post first (get_content, syteops_seo_get). An unknown recipe_id errors unknown_recipe. The call returns ok even when the run fails: read data.status (error, or skipped/unchanged) and data.stages[*].status. dry_run:false cannot override a recipe whose policy.dry_run is true. Returns {status, post_id, recipe, stages, run_id, changed}. Returns 409 module_unavailable when Content Pipelines are disabled in SyteOps.",
+            "description": "Run a pipeline recipe against one post now, inline (SyteOps pipelines.run). dry_run:true previews without persisting; force:true bypasses skip-unchanged. A missing, trashed, auto-draft or non-viewable post (post_id 0 included) is refused with 404 post_not_found, and a signed-in caller without edit_post on the post gets 403 forbidden; a refused run writes no run-history row. An unknown recipe_id errors unknown_recipe. The call returns ok even when the run fails: read data.status (error, or skipped/unchanged) and data.stages[*].status. dry_run:false cannot override a recipe whose policy.dry_run is true. Returns {status, post_id, recipe, stages, run_id, changed}. Returns 409 module_unavailable when Content Pipelines are disabled in SyteOps.",
             "inputSchema": {
                 "type": "object",
                 "properties": {
@@ -13212,6 +13829,34 @@
                 },
                 "required": [
                     "post_id"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_pipeline_run_delete",
+            "provider": "syteops",
+            "description": "DESTRUCTIVE: permanently deletes ONE run-history row (SyteOps pipelines.delete_run; SyteOps 1.6.758+). Needs confirm:true. Leaves a lasting run_deleted record. 404 not_found when the row is gone; 409 deletion_record_protected for a deletion-record row, which is never removed. Returns {run_id, deleted}. Returns 409 module_unavailable when Content Pipelines are disabled in SyteOps.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "run_id": {
+                        "type": "integer",
+                        "description": "Run ID from syteops_pipeline_runs."
+                    },
+                    "confirm": {
+                        "type": "boolean",
+                        "description": "Required (true): this deletes the run row."
+                    }
+                },
+                "required": [
+                    "run_id"
                 ]
             },
             "destructive": false,
@@ -13285,15 +13930,48 @@
             ]
         },
         {
+            "name": "syteops_pipeline_stages",
+            "provider": "syteops",
+            "description": "Read-only. The registered stage engines (SyteOps pipelines.stages_list; SyteOps 1.6.758+): each {id, label, capability, priority, available}. Use the ids with syteops_pipeline_engine_set. Returns 409 module_unavailable when Content Pipelines are disabled in SyteOps.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {}
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_pipeline_stats",
+            "provider": "syteops",
+            "description": "Read-only. The run-history counters of the pipelines dashboard (SyteOps pipelines.dashboard_stats; SyteOps 1.6.758+). Returns {total, last7, changed, errors}. Returns 409 module_unavailable when Content Pipelines are disabled in SyteOps.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {}
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "lean",
+                "syteops"
+            ]
+        },
+        {
             "name": "syteops_recipe_create",
             "provider": "syteops",
-            "description": "Create a pipeline recipe (SyteOps pipelines.create_recipe). The id defaults to the slug of name, and a recipe whose id matches an existing one REPLACES that recipe without warning, so call syteops_recipe_list first. A recipe is a list of stages, a trigger and a policy; copy the shape from syteops_recipe_get. On publish only the single highest-priority matching auto_publish recipe runs. Returns the saved recipe. Returns 409 module_unavailable when Content Pipelines are disabled in SyteOps.",
+            "description": "Create a pipeline recipe (SyteOps pipelines.create_recipe). The id defaults to the slug of name, and a recipe whose id matches an existing one is refused with 409 recipe_exists (it never replaces; use syteops_recipe_update to change one), so call syteops_recipe_list first. A busy write lock answers 409 save_failed: retry. A recipe is a list of stages, a trigger and a policy; copy the shape from syteops_recipe_get. On publish only the single highest-priority matching auto_publish recipe runs. Returns the saved recipe. Returns 409 module_unavailable when Content Pipelines are disabled in SyteOps.",
             "inputSchema": {
                 "type": "object",
                 "properties": {
                     "id": {
                         "type": "string",
-                        "description": "Recipe id (a slug). Omit to derive it from name. An existing id is replaced."
+                        "description": "Recipe id (a slug). Omit to derive it from name. An id that already exists is refused with 409 recipe_exists."
                     },
                     "name": {
                         "type": "string",
@@ -13351,7 +14029,7 @@
         {
             "name": "syteops_recipe_delete",
             "provider": "syteops",
-            "description": "Delete a pipeline recipe (SyteOps pipelines.delete_recipe). Needs confirm:true. The 'default' recipe cannot be deleted (protected_recipe). Returns {id, deleted}. Returns 409 module_unavailable when Content Pipelines are disabled in SyteOps. SyteOps requires a SyteOps Admin for this delete.",
+            "description": "Delete a pipeline recipe (SyteOps pipelines.delete_recipe). Needs confirm:true. The 'default' recipe cannot be deleted (protected_recipe). Returns {id, deleted}. The deletion leaves a lasting recipe_deleted row in the Content Pipelines activity log. Returns 409 module_unavailable when Content Pipelines are disabled in SyteOps. SyteOps requires a SyteOps Admin for this delete.",
             "inputSchema": {
                 "type": "object",
                 "properties": {
@@ -13420,7 +14098,7 @@
         {
             "name": "syteops_recipe_update",
             "provider": "syteops",
-            "description": "Update a pipeline recipe (SyteOps pipelines.update_recipe). A merge-patch at the top level only: omitted keys are kept, but a supplied trigger or policy replaces that whole sub-object, so send the full sub-object to change one field (read it with syteops_recipe_get first). Errors not_found for an unknown id. Returns the saved recipe. Returns 409 module_unavailable when Content Pipelines are disabled in SyteOps.",
+            "description": "Update a pipeline recipe (SyteOps pipelines.update_recipe). A merge-patch at the top level only: omitted keys are kept, but a supplied trigger or policy replaces that whole sub-object, so send the full sub-object to change one field (read it with syteops_recipe_get first). This is the tool that replaces a recipe by id. Errors not_found (404) for an unknown id. Returns the saved recipe. Returns 409 module_unavailable when Content Pipelines are disabled in SyteOps.",
             "inputSchema": {
                 "type": "object",
                 "properties": {
@@ -13471,6 +14149,425 @@
                 },
                 "required": [
                     "id"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_review_approve",
+            "provider": "syteops",
+            "description": "DESTRUCTIVE: approves a post for publishing (SyteOps review.approve; SyteOps 1.6.758+), as the Review Portal's Publish does with nothing edited. It publishes now, or schedules it when the post holds a reviewer's intended time or a reserved cadence slot at least a minute ahead. Needs confirm:true. Only posts sent for review (409 not_in_review). A post already live is ok with changed:false and already_live:true. It acts with SyteOps Admin authority: the post's reviewer list and who_can_publish are NOT checked for this caller. Still enforced: in review, readiness (409 not_ready with failed[] requirements), 409 published_immutable, 500 publish_failed. Open notes do not block it; open_notes reports them. It takes no as_user_id: the approver is the API key (user 0) or the signed-in SyteOps Admin. Returns {post_id, status, scheduled, permalink, emailed, notify, images, open_notes, approved_by, already_live}. Returns 409 module_unavailable when the Review Portal is not loaded.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "post_id": {
+                        "type": "integer",
+                        "description": "Post ID."
+                    },
+                    "confirm": {
+                        "type": "boolean",
+                        "description": "Required (true): this puts the post live (or schedules it)."
+                    }
+                },
+                "required": [
+                    "post_id"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_review_comment_add",
+            "provider": "syteops",
+            "description": "Add a review note as one person through the Review Portal's own writer (SyteOps review.comments_add; SyteOps 1.6.758+). Send exactly one target: parent_id (a reply to a top-level note; notify and resolve apply), attachment_id or image_url (a note on a picture), or element (a note pinned to a page element). None is 422 target_required, more than one is 422 ambiguous_target; for an article-level note use syteops_review_request_changes. The note is marked as added via API. Through MCP omit as_user_id to act as yourself (the SyteOps Admin); pass it only to act on behalf of that user (SyteOps's own REST API key must send it; MCP need not). That person must be able to comment (403 forbidden); resolve needs edit rights. Returns {post_id, as_user_id, kind, entry}; a reply adds {resolve, notified, notify}. Returns 409 module_unavailable when the Review Portal is not loaded.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "post_id": {
+                        "type": "integer",
+                        "description": "Post ID."
+                    },
+                    "body": {
+                        "type": "string",
+                        "description": "The note, plain text."
+                    },
+                    "as_user_id": {
+                        "type": "integer",
+                        "description": "User ID to act as. Through MCP omit as_user_id to act as yourself (the SyteOps Admin); pass it only to act on behalf of that user. (The 422 as_user_id_required rule applies to the SyteOps REST API key, not to MCP.)"
+                    },
+                    "parent_id": {
+                        "type": "string",
+                        "description": "Reply to this top-level note id (a reply target)."
+                    },
+                    "notify": {
+                        "type": "boolean",
+                        "description": "Reply only: email the thread (default true)."
+                    },
+                    "resolve": {
+                        "type": "boolean",
+                        "description": "Reply only: also resolve the parent note (needs edit rights)."
+                    },
+                    "attachment_id": {
+                        "type": "integer",
+                        "description": "Attachment ID of the picture (a picture target)."
+                    },
+                    "image_url": {
+                        "type": "string",
+                        "description": "The picture's URL, when it has no attachment ID (a picture target)."
+                    },
+                    "element": {
+                        "type": "object",
+                        "description": "Element target (an element note). Keys: selector, sig, text, ox, oy, vw, media, src, name, breakpoint, tag, el_id, classes, heading, html, builder_path, rect, url, bld; any other key is 422 invalid_params."
+                    }
+                },
+                "required": [
+                    "post_id",
+                    "body"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_review_comments",
+            "provider": "syteops",
+            "description": "Read-only. One post's review notes and replies, oldest first, as the portal shows them (SyteOps review.comments_list; SyteOps 1.6.750+). Returns {post_id, total, page, per_page, has_more, comments[]}; a comment is {id, parent, user_id, user_name, note, created_at, kind, target_kind, att_id, resolved}. Returns 409 module_unavailable when the Review Portal is not loaded.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "post_id": {
+                        "type": "integer",
+                        "description": "Post ID."
+                    },
+                    "per_page": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 100,
+                        "description": "Notes per page, 1 to 100 (default 25)."
+                    },
+                    "page": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 10000,
+                        "description": "Page number from 1 to 10000 (default 1)."
+                    }
+                },
+                "required": [
+                    "post_id"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_review_get",
+            "provider": "syteops",
+            "description": "Read-only. One post's review status (SyteOps review.get; SyteOps 1.6.750+): post status, whether changes are requested, open and total note counts, the reviewers and watchers, and the latest recorded activity. A missing, trashed or non-viewable post is 404 post_not_found. Returns {post_id, title, post_status, changes_requested, open_notes, total_notes, reviewers[], watchers[], last_activity: {event, at} or null}; a person is {user_id, display_name, roles[]}. Returns 409 module_unavailable when the Review Portal is not loaded.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "post_id": {
+                        "type": "integer",
+                        "description": "Post ID."
+                    }
+                },
+                "required": [
+                    "post_id"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "lean",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_review_permissions_get",
+            "provider": "syteops",
+            "description": "Read-only. The Review Portal's Portal Permissions as the settings screen reads them (SyteOps review.permissions_get; SyteOps 1.6.758+): who_can_publish (any or author_approver), the per-area matrix (default row, role rows by SyteOps role slug, person rows by user number; an absent cell inherits), every area with its allowed values and whether this site shows it, and the role and person rows that may be set. Works before the portal is in use. Read it before syteops_review_permissions_set.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {}
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "lean",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_review_permissions_set",
+            "provider": "syteops",
+            "description": "DESTRUCTIVE: changes who can review and publish in the Review Portal (SyteOps review.permissions_set; SyteOps 1.6.758+). Needs confirm:true. Read syteops_review_permissions_get first. Partial, cell-level merge: only the cells sent change. In roles and users a cell of \"inherit\" or null clears it and a row of null clears the row; default takes real values only; only people linked to a WordPress account can be set. Send permissions, who_can_publish or both (422 nothing_to_change). 422 invalid_permissions (nothing is written) and invalid_who_can_publish; 409 no_publisher_left (author_approver with no administrator publish override); 409 busy (a concurrent set; retry). Returns {who_can_publish, permissions, changes[]}.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "permissions": {
+                        "type": "object",
+                        "description": "Partial matrix: {default?: {area: value}, roles?: {slug: {area: value|\"inherit\"|null}|null}, users?: {user_num: {area: value|\"inherit\"|null}|null}}. Only the cells sent change; \"inherit\" or null clears a role or person cell, a null row clears the row; default takes real values only."
+                    },
+                    "who_can_publish": {
+                        "type": "string",
+                        "enum": [
+                            "any",
+                            "author_approver"
+                        ],
+                        "description": "any (any selected reviewer) or author_approver (the post author or an administrator)."
+                    },
+                    "confirm": {
+                        "type": "boolean",
+                        "description": "Required (true): this changes who can publish."
+                    }
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_review_queue",
+            "provider": "syteops",
+            "description": "Read-only. One page of a person's Review Portal queue, as that person sees it (SyteOps review.queue_list; SyteOps 1.6.750+). list is pending (default), watching, live, live_posts, live_pages, coming_up or notes; per_page is 5, 10, 25 or 100; page on with the returned next_cursor. as_user_id is the person whose queue to read: SyteOps requires it on an API-key call (422 as_user_id_required), but this tool runs in-process as a SyteOps Admin, so it may be omitted and then reads that admin's own queue; an unknown user is 404 user_not_found, and an over-long cursor is 422 invalid_cursor. Rows carry no review links or tokens. Returns {as_user_id, list, rows[], has_more, next_cursor, truncated, page_count}. A post row is {post_id, title, source, received, scheduled_ts, modified_ts, feedback_count, changes_requested, qa}; a notes row is {post_id, title, author, excerpt, created, note_id}. Returns 409 module_unavailable when the Review Portal is not loaded.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "as_user_id": {
+                        "type": "integer",
+                        "description": "User ID whose queue to read. Through MCP omit as_user_id to read your own queue (the SyteOps Admin); pass it to read that user's. (SyteOps's own REST API key must send it; MCP need not.)"
+                    },
+                    "list": {
+                        "type": "string",
+                        "enum": [
+                            "pending",
+                            "watching",
+                            "live",
+                            "live_posts",
+                            "live_pages",
+                            "coming_up",
+                            "notes"
+                        ],
+                        "description": "Which list: pending (default), watching, live, live_posts, live_pages, coming_up or notes."
+                    },
+                    "per_page": {
+                        "type": "integer",
+                        "enum": [
+                            5,
+                            10,
+                            25,
+                            100
+                        ],
+                        "description": "Page size: 5, 10, 25 or 100."
+                    },
+                    "cursor": {
+                        "type": "string",
+                        "maxLength": 512,
+                        "description": "next_cursor from the previous page, at most 512 characters."
+                    }
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "lean",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_review_request_changes",
+            "provider": "syteops",
+            "description": "Send a post back for changes as one person (SyteOps review.request_changes; SyteOps 1.6.758+): records message as their note, cancels a pending schedule when they may publish, and emails the author and co-reviewers. The note is marked as added via API. Through MCP omit as_user_id to act as yourself (the SyteOps Admin); pass it only to act on behalf of that user (422 as_user_id_required applies to SyteOps's own REST API key, not to MCP). That person must be able to edit the post (403 forbidden); 409 schedule_due when it is about to publish and they cannot cancel it. Returns {post_id, as_user_id, entry, emailed, notify, unscheduled, status}. Returns 409 module_unavailable when the Review Portal is not loaded.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "post_id": {
+                        "type": "integer",
+                        "description": "Post ID."
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "The note, plain text."
+                    },
+                    "as_user_id": {
+                        "type": "integer",
+                        "description": "User ID to act as. Through MCP omit as_user_id to act as yourself (the SyteOps Admin); pass it only to act on behalf of that user. (The 422 as_user_id_required rule applies to the SyteOps REST API key, not to MCP.)"
+                    }
+                },
+                "required": [
+                    "post_id",
+                    "message"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_review_reviewer_add",
+            "provider": "syteops",
+            "description": "Add a reviewer to one post (SyteOps review.reviewers_add; SyteOps 1.6.758+). This grants that person edit rights on the post through the Review Portal, and publish rights too unless who_can_publish is author_approver (then only the author or an administrator can publish), and emails them; the review link gets a fresh expiry. user_id must be a SyteOps user linked to a WordPress account (422 user_not_selectable; 404 user_not_found). A post never sent for review is 409 not_review_managed. A watcher added as a reviewer stops being a watcher. Someone already listed is ok with changed:false and is not emailed again. Returns {post_id, user_id, emailed, notify, reviewers[], watchers[]}. Returns 409 module_unavailable when the Review Portal is not loaded.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "post_id": {
+                        "type": "integer",
+                        "description": "Post ID."
+                    },
+                    "user_id": {
+                        "type": "integer",
+                        "description": "User ID of a SyteOps user linked to a WordPress account."
+                    }
+                },
+                "required": [
+                    "post_id",
+                    "user_id"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_review_reviewer_remove",
+            "provider": "syteops",
+            "description": "Remove a reviewer from one post (SyteOps review.reviewers_remove; SyteOps 1.6.758+). They lose portal access to it unless something else grants it (site administrator, watcher, bundle reviewer). The post's author cannot be removed (409 author_protected). The removal sticks: source default reviewers and CCs do not put them back. Someone not listed is ok with changed:false. No email is sent. Returns {post_id, user_id, reviewers[], watchers[]}. Returns 409 module_unavailable when the Review Portal is not loaded.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "post_id": {
+                        "type": "integer",
+                        "description": "Post ID."
+                    },
+                    "user_id": {
+                        "type": "integer",
+                        "description": "User ID of a SyteOps user linked to a WordPress account."
+                    }
+                },
+                "required": [
+                    "post_id",
+                    "user_id"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_review_reviewers",
+            "provider": "syteops",
+            "description": "Read-only. The people who may review one post and the people watching it (SyteOps review.reviewers_get; SyteOps 1.6.750+). Ids, display names and roles only; no email addresses. Returns {post_id, reviewers[], watchers[]}; a person is {user_id, display_name, roles[]}. Returns 409 module_unavailable when the Review Portal is not loaded.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "post_id": {
+                        "type": "integer",
+                        "description": "Post ID."
+                    }
+                },
+                "required": [
+                    "post_id"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_review_watcher_add",
+            "provider": "syteops",
+            "description": "Add a watcher to one post (SyteOps review.watchers_add; SyteOps 1.6.758+): they may open it, comment and get its routine review emails, but cannot edit or publish. user_id must be a SyteOps user linked to a WordPress account (422 user_not_selectable). A post never sent for review is 409 not_review_managed; a reviewer of the post is 409 already_reviewer. Someone already watching is ok with changed:false. No email is sent. Returns {post_id, user_id, reviewers[], watchers[]}. Returns 409 module_unavailable when the Review Portal is not loaded.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "post_id": {
+                        "type": "integer",
+                        "description": "Post ID."
+                    },
+                    "user_id": {
+                        "type": "integer",
+                        "description": "User ID of a SyteOps user linked to a WordPress account."
+                    }
+                },
+                "required": [
+                    "post_id",
+                    "user_id"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_review_watcher_remove",
+            "provider": "syteops",
+            "description": "Remove a watcher from one post (SyteOps review.watchers_remove; SyteOps 1.6.758+). They can no longer open or comment on it unless something else grants that. The removal sticks: source default CCs do not put them back. Someone not watching is ok with changed:false. No email is sent. Returns {post_id, user_id, reviewers[], watchers[]}. Returns 409 module_unavailable when the Review Portal is not loaded.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "post_id": {
+                        "type": "integer",
+                        "description": "Post ID."
+                    },
+                    "user_id": {
+                        "type": "integer",
+                        "description": "User ID of a SyteOps user linked to a WordPress account."
+                    }
+                },
+                "required": [
+                    "post_id",
+                    "user_id"
                 ]
             },
             "destructive": false,
@@ -13544,6 +14641,82 @@
                 },
                 "required": [
                     "post_id"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_social_cancel",
+            "provider": "syteops",
+            "description": "Cancel one scheduled social send on an article by the job_id syteops_social_schedule returned (SyteOps social.cancel; SyteOps 1.6.758+). Works while Social Publishing is off. 404 post_not_found; 404 job_not_found when no such job is pending. Returns {post_id, job_id, cancelled}. Returns 409 module_unavailable when Social Publishing is not loaded.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "post_id": {
+                        "type": "integer",
+                        "description": "Post ID."
+                    },
+                    "job_id": {
+                        "type": "string",
+                        "description": "The job_id returned by syteops_social_schedule."
+                    }
+                },
+                "required": [
+                    "post_id",
+                    "job_id"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_social_schedule",
+            "provider": "syteops",
+            "description": "Queue one social send for one article to a configured destination (SyteOps social.schedule; SyteOps 1.6.758+). when is time (default; sends at fire_at) or on_publish (sends when the article first goes live; fire_at is then 422 invalid_params). 409 social_disabled while Social Publishing is off; 422 bad_destination; 422 already_published (on_publish for an article already live); a send due while the pipeline is in setup mode is held and retried hourly until production; 404 post_not_found; a signed-in caller also needs publish rights on the post type (403 forbidden). Returns {post_id, job_id, when, fire_at, destination}; keep job_id to cancel. Returns 409 module_unavailable when Social Publishing is not loaded.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "post_id": {
+                        "type": "integer",
+                        "description": "Post ID."
+                    },
+                    "destination_id": {
+                        "type": "string",
+                        "description": "A configured social destination ID (unknown is 422 bad_destination)."
+                    },
+                    "text": {
+                        "type": "string",
+                        "maxLength": 3000,
+                        "description": "The final post text, at most 3000 characters (422 text_too_long; empty is 422 empty_text)."
+                    },
+                    "when": {
+                        "type": "string",
+                        "enum": [
+                            "time",
+                            "on_publish"
+                        ],
+                        "description": "time (default; send at fire_at) or on_publish (send when the article first goes live; fire_at not allowed)."
+                    },
+                    "fire_at": {
+                        "type": "integer",
+                        "description": "Unix time in seconds, between one minute and five years ahead (422 bad_time / too_far). Needed when when is time."
+                    }
+                },
+                "required": [
+                    "post_id",
+                    "destination_id",
+                    "text"
                 ]
             },
             "destructive": false,
@@ -13812,6 +14985,34 @@
             ]
         },
         {
+            "name": "syteops_source_learn",
+            "provider": "syteops",
+            "description": "Ask the Ingest AI area to propose a field mapping from the source's captured sample (SyteOps content_sources.learn_from_sample; SyteOps 1.6.758+). The proposal REPLACES the stored mapping and is never approved: on a source whose mapping was approved, new deliveries are held until it is approved again, so that call needs confirm:true (409 confirmation_required). Spends an AI call and shares the source's daily AI allowance (default 10 a day, UTC) with syteops_source_reprocess (429 learn_cap_reached). 404 not_found; 409 no_provider or no_sample; 422 invalid_sample; 502 ai_empty_response or invalid_json; 503 ai_unavailable. Returns {mapping}.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Content source id."
+                    },
+                    "confirm": {
+                        "type": "boolean",
+                        "description": "Required (true) when the source's mapping is approved."
+                    }
+                },
+                "required": [
+                    "id"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
             "name": "syteops_source_list",
             "provider": "syteops",
             "description": "List all content sources, the inbound feeds that create posts for the pipelines (SyteOps content_sources.list). Read-only. Each has id, name, slug, enabled, status, auth_mode, target_post_type, mapping, mapping_status, defaults and forward settings. Secrets are never included.",
@@ -13829,6 +15030,58 @@
             ]
         },
         {
+            "name": "syteops_source_reprocess",
+            "provider": "syteops",
+            "description": "DESTRUCTIVE: replays a source's last captured payload through the ingest core (SyteOps content_sources.reprocess; SyteOps 1.6.758+). Needs confirm:true. It creates or updates the article with the source's own settings: a source set to publish publishes it, a source in overwrite mode overwrites reviewer edits on an article already live, and the draft core spends an AI call. Shares the source's daily AI allowance (default 10 a day, UTC) with syteops_source_learn (429 learn_cap_reached). 404 not_found (unknown or disabled source); 409 no_payload; 422 invalid_json. Returns {outcome, message, post_id, created, edit_link}; changed is false for a held or protected article.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Content source id."
+                    },
+                    "confirm": {
+                        "type": "boolean",
+                        "description": "Required (true): this can publish or overwrite an article."
+                    }
+                },
+                "required": [
+                    "id"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_source_resend_review_email",
+            "provider": "syteops",
+            "description": "Re-send the review email for a post to its own reviewers, never to a caller-supplied address (SyteOps content_sources.resend_review_email; SyteOps 1.6.758+). One resend per post every 120 seconds (429 resend_cooldown). 404 post_not_found; 400 no_recipients; 500 send_failed. Returns {message, notify} with display names only. Returns 409 module_unavailable when the Review Portal is not loaded.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "post_id": {
+                        "type": "integer",
+                        "description": "Post ID."
+                    }
+                },
+                "required": [
+                    "post_id"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
             "name": "syteops_source_rotate_secret",
             "provider": "syteops",
             "description": "Generate a new webhook secret for a content source and invalidate the old one at once (SyteOps content_sources.rotate_secret). Returns {id, secret} with the new secret, once; it enters this conversation's transcript. The plaintext secret is not redacted and is returned only once: do not log or store it. Senders using the old secret fail until updated.",
@@ -13842,6 +15095,39 @@
                 },
                 "required": [
                     "id"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_source_test",
+            "provider": "syteops",
+            "description": "Read-only preview of a mapping against a sample payload; nothing is written (SyteOps content_sources.test; SyteOps 1.6.758+). Omit mapping to test the source's stored mapping. An empty sample is 422 no_sample; 404 not_found. Returns {normalized, empty_fields}.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Content source id."
+                    },
+                    "sample": {
+                        "type": "object",
+                        "description": "The sample payload, as a non-empty JSON object (an empty one is 422 no_sample)."
+                    },
+                    "mapping": {
+                        "type": "object",
+                        "description": "Optional field => {path, transform} rows to try; omit to test the source's stored mapping."
+                    }
+                },
+                "required": [
+                    "id",
+                    "sample"
                 ]
             },
             "destructive": false,
@@ -14206,6 +15492,64 @@
             },
             "destructive": true,
             "capability": "",
+            "always": false,
+            "profiles": [
+                "full",
+                "wp"
+            ]
+        },
+        {
+            "name": "update_option_value",
+            "provider": "wp-options",
+            "description": "Change ONE existing scalar value inside a WordPress option: reads the option, sets that leaf, saves with update_option (autoload unchanged), then reads back. If the leaf took, it returns verified:true, plus concurrent_change_detected:true and changed_count (a number; no key names) when another key also changed; nothing is reverted. If the leaf did not take, only that leaf is set back and the call fails. Not atomic: a write by someone else between the read and the save is lost. Send value (the leaf keeps its type: an int takes an integral number or numeric string, a float any number, a bool only true/false, a string a string or integer) or increment (an integer, int leaves only). Never creates an option or key and never writes an array or object. Refused: leaves that get_option_value would hide (strings and numbers under credential-shaped names or records; bools are writable), credential-shaped values (set secrets with wp-cli in a terminal so they stay out of the transcript), options whose reads are filtered (pre_option_/option_ hooks) or differ from the stored row or its name casing, hard-denied options, WordPress core options, SyteOps options (use the syteops_* tools), SyteWide options, role/capability/permission/level data, and credential-row paths outside the allowlist. Defaults to a dry run returning {option, path, old, new, type}; a real write needs dry_run:false AND confirm:true.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "option": {
+                        "type": "string",
+                        "description": "Option name (wp_options.option_name)."
+                    },
+                    "path": {
+                        "type": [
+                            "array",
+                            "string"
+                        ],
+                        "items": {
+                            "type": [
+                                "string",
+                                "integer"
+                            ]
+                        },
+                        "description": "Key path inside the option. An array of keys is preferred, e.g. [\"rates\", 0, \"label\"], and is required when a key contains a dot; a dot-path string \"rates.0.label\" also works. Omit for the whole option."
+                    },
+                    "value": {
+                        "type": [
+                            "string",
+                            "integer",
+                            "number",
+                            "boolean"
+                        ],
+                        "description": "New scalar value. Not with increment."
+                    },
+                    "increment": {
+                        "type": "integer",
+                        "description": "Add this to an int leaf (negative to subtract). Not with value."
+                    },
+                    "dry_run": {
+                        "type": "boolean",
+                        "description": "Default true: preview only. Pass false (with confirm:true) to write."
+                    },
+                    "confirm": {
+                        "type": "boolean",
+                        "description": "Required (true), together with dry_run:false, for a real write."
+                    }
+                },
+                "required": [
+                    "option"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
             "always": false,
             "profiles": [
                 "full",
