@@ -167,6 +167,8 @@ The same card has a **How to store contact details** control:
 
 Whichever you choose, contact details are **never** written to the tamper-evident activity log behind each lead — only to the editable lead record, so they remain easy to remove for data-erasure requests.
 
+**Callbacks need Full.** With the RingTonic integration on, Leads keeps one callback record per caller so your team can call them back. That record needs the caller's full phone number (and the name a form supplied), so it is kept **only while this setting is Full**. Under **Masked** or **Off**, no callback record is created or updated. Records made while Full stay until the lead behind them is deleted, and deleting a lead deletes its caller's callback record once no other lead of theirs remains.
+
 There is **one exception to what Masked removes**, and only if you switch it on: RingTonic's AI call summary, described in [What lands on the lead](../integrations/ringtonic#what-lands-on-the-lead). It is stored as readable prose with phone numbers and email addresses replaced, so a name spoken during the call can remain in it. It is **off by default**; turn it on with **Store RingTonic's AI call summary on the lead** on the RingTonic card, or choose **Off** above to store no summary at all.
 
 The same card also has a **Default deal currency** field — a three-letter ISO code (e.g. `USD`, `EUR`, `GBP`; defaults to `USD`) used whenever a deal value is recorded without a currency of its own (from the Leads list, the RingTonic integration, or the management API). See [the dashboard](#the-dashboard) above and [RingTonic integration → Deal value](../integrations/ringtonic#deal-value).
@@ -420,6 +422,10 @@ Each person who has tracked links sees a **My links** section on their own priva
 At the top of the page, next to Sign out, a **Copy my links** menu copies any one of your active links, the friendly message address, or all of them at once (one line each, with where it goes). Disabled links are never in it. When you share an article, paste the article's address into **Tag an article link** and copy the result. Or copy **Tags for article links** and add them to the end of an address that has no `?` or `#` in it. It works only for addresses on this site and keeps any other parts of the address. Both the menu and the My links card start closed; the card's heading line shows your active link count and your click and lead totals for the last 30 days. **Posting on** lets you pick where you are sharing (LinkedIn, Facebook, email and so on); the tags and the tagged address then carry that channel's source and medium and still credit you.
 
 **Copy link on your live pages and posts.** Every published page and post on your page (Published Content, items waiting on you, items you watch and Content health) has a **Copy link** menu on its card, at the right edge (under the text on a phone), closed until you open it. Pick a channel and it copies the article's public address with tags that credit you, or pick **Plain address** for the address alone. Drafts, scheduled and private items have no public address, so they have no menu; a small **Draft**, **Pending**, **Scheduled** or **Private** pill next to the title tells you why. Without an active post link of your own, only **Plain address** is offered.
+
+### Callbacks (your page)
+
+With the RingTonic integration on, the people you give access to see a **Callbacks** list on their private page: everyone waiting for a call back, with Done, Not a lead and Reopen. See [Callbacks](callbacks).
 
 ### Import existing redirects (Squirrly)
 

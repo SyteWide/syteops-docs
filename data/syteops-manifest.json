@@ -1,6 +1,6 @@
 {
     "schema_version": 1,
-    "syteops_version": "1.6.762",
+    "syteops_version": "1.6.765",
     "operations": [
         {
             "resource": "users",
@@ -94,6 +94,10 @@
                 "list_per": {
                     "type": "string",
                     "description": "Review list page size for this person: '5', '10', '25', '100', or '' to inherit the site default."
+                },
+                "callbacks_access": {
+                    "type": "string",
+                    "description": "Callbacks access in the person's private page: '' (off), 'act' (view and act) or 'call'. Anything else is stored as off. Site-local."
                 }
             },
             "destructive": false,
@@ -173,6 +177,10 @@
                 "list_per": {
                     "type": "string",
                     "description": "Review list page size for this person: '5', '10', '25', '100', or '' to inherit the site default."
+                },
+                "callbacks_access": {
+                    "type": "string",
+                    "description": "Callbacks access in the person's private page: '' (off), 'act' (view and act) or 'call'. Anything else is stored as off. Site-local."
                 }
             },
             "destructive": false,
@@ -846,7 +854,8 @@
                     "type": "integer"
                 },
                 "page": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Page number, 1 to 10000 (default 1); above 10000 is 422 invalid_page."
                 },
                 "source": {
                     "type": "string"
@@ -981,6 +990,82 @@
             "destructive": false,
             "capability": "manage_options",
             "returns": "data: {schema, from, to, timezone, group[], generated_at, people[]: {slug, name, kinds{}, totals, first_touch_landings[]}, company, ownerless, totals, kinds?}"
+        },
+        {
+            "resource": "leads",
+            "action": "callbacks_list",
+            "summary": "List callbacks (people to call back, one per phone number), oldest first. OPEN statuses only by default (open, returned, follow_up): closed rows (done, not_lead, expired) are hidden unless `status` asks for them. `status` is open (default), closed, all, one status, or a comma list; an unknown word is refused. The phone is always masked in this list; the full number is on callbacks_get. Needs the RingTonic integration on. While contact details are not stored in Full, names come back empty.",
+            "params": {
+                "status": {
+                    "type": "string",
+                    "required": false,
+                    "description": "Which callbacks: open (default: open, returned, follow_up), closed (done, not_lead, expired), all, one status, or a comma list of statuses."
+                },
+                "page": {
+                    "type": "integer",
+                    "required": false,
+                    "description": "Page number, 1 to 10000 (default 1); above 10000 is 422 invalid_page."
+                },
+                "per_page": {
+                    "type": "integer",
+                    "required": false,
+                    "description": "Rows per page, 1 to 200 (default 50)."
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "strict": true,
+            "returns": "data: {items[]: {id, phone_masked, status, reason, display_name, carry_since, follow_up_date, follow_up_owner, closed_by, closed_at, last_lead_id, created_at, updated_at}, total, page, per_page (1-200, default 50), status}"
+        },
+        {
+            "resource": "leads",
+            "action": "callbacks_get",
+            "summary": "One callback with its recent history. Returns the full phone only while contact details are stored in Full; otherwise the masked number and an empty name (the stored row is kept, not shown).",
+            "params": {
+                "id": {
+                    "type": "integer",
+                    "format": "record_id",
+                    "required": true,
+                    "description": "Record id, digits only."
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "strict": true,
+            "returns": "data: {id, phone? (Full only), phone_masked, status, reason, display_name, carry_since, follow_up_date, follow_up_owner, closed_by, closed_at, last_lead_id, created_at, updated_at, events[]: {kind, actor, at, payload{source?, lead_id?, status?, action?, from?, to?, via?, api_key?}}}"
+        },
+        {
+            "resource": "leads",
+            "action": "callback_action",
+            "summary": "Mark a callback done or not a lead, or reopen a closed one, recorded against a named person (their people slug) and the time. `do` is the verb. An API-key call must name the person with exactly one of `actor` (people slug) or `as_user_id` (WordPress user id); a signed-in SyteOps Admin who names nobody acts as themselves. A slug is accepted only while it belongs to the current holder of its Users slot (422 actor_not_current). A second request on an already-handled callback, or reopen on a callback that is not closed, changes nothing and says who acted and when (changed:false, already:true). Refused 409 contact_details_not_full while contact details are not stored in Full, 409 callbacks_disabled when the RingTonic integration is off, and 409 in_flight while the same request is still being applied.",
+            "params": {
+                "id": {
+                    "type": "integer",
+                    "format": "record_id",
+                    "required": true,
+                    "description": "Record id, digits only."
+                },
+                "do": {
+                    "type": "string",
+                    "required": true,
+                    "description": "done, not_lead or reopen (reopen applies only to a done, not_lead or expired callback)."
+                },
+                "actor": {
+                    "type": "string",
+                    "required": false,
+                    "description": "People slug of the person acting; must be a current slot holder."
+                },
+                "as_user_id": {
+                    "type": "integer",
+                    "format": "record_id",
+                    "required": false,
+                    "description": "WordPress user id of the person acting, resolved to their people slug. Use instead of actor."
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "strict": true,
+            "returns": "data: {id, action, status, already, message, by, by_label? (already only), at}; changed is false when already is true"
         },
         {
             "resource": "leads",

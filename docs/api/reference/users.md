@@ -38,6 +38,7 @@ Create a SyteOps team-member record in the next free slot and fill its fields. A
 | `notify_reminders` | string | no | Whether this person receives publishing reminders and deferral escalations: '1' or ''. Absent means on. |
 | `notify_replies` | string | no | Whether this person receives article feedback and reply notifications: '1' or ''. Absent means on. |
 | `list_per` | string | no | Review list page size for this person: '5', '10', '25', '100', or '' to inherit the site default. |
+| `callbacks_access` | string | no | Callbacks access in the person's private page: '' (off), 'act' (view and act) or 'call'. Anything else is stored as off. Site-local. |
 
 
 **Returns**
@@ -68,7 +69,8 @@ data: &#123;user_num, ...fields}
     "model_consent_granted": "string",
     "notify_reminders": "string",
     "notify_replies": "string",
-    "list_per": "string"
+    "list_per": "string",
+    "callbacks_access": "string"
   }
 }
 ```
@@ -224,6 +226,7 @@ Update fields on an existing SyteOps team-member record.
 | `notify_reminders` | string | no | Whether this person receives publishing reminders and deferral escalations: '1' or ''. Absent means on. |
 | `notify_replies` | string | no | Whether this person receives article feedback and reply notifications: '1' or ''. Absent means on. |
 | `list_per` | string | no | Review list page size for this person: '5', '10', '25', '100', or '' to inherit the site default. |
+| `callbacks_access` | string | no | Callbacks access in the person's private page: '' (off), 'act' (view and act) or 'call'. Anything else is stored as off. Site-local. |
 
 
 **Returns**
@@ -255,7 +258,8 @@ data: &#123;user_num, ...fields}
     "model_consent_granted": "string",
     "notify_reminders": "string",
     "notify_replies": "string",
-    "list_per": "string"
+    "list_per": "string",
+    "callbacks_access": "string"
   }
 }
 ```
