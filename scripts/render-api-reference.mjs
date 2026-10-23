@@ -78,6 +78,7 @@ function sampleParams(params) {
   for (const [k, def] of Object.entries(params || {})) {
     switch (def?.type) {
       case 'object': out[k] = {}; break;
+      case 'array': out[k] = []; break;
       case 'integer': case 'number': out[k] = 0; break;
       case 'boolean': out[k] = true; break;
       case 'email': out[k] = 'name@example.com'; break;

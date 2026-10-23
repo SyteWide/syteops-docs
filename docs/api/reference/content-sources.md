@@ -8,7 +8,7 @@ description: Manage API operations for the content_sources resource.
 
 # `content_sources`
 
-9 operation(s). All run through `POST /syteops/v1/manage/dispatch` (reads may use the documented GET form).
+13 operation(s). All run through `POST /syteops/v1/manage/dispatch` (reads may use the documented GET form).
 
 ## `approve_mapping`
 
@@ -242,6 +242,37 @@ data: &#123;id, name, slug, mode, secret, secret_source, ...} — secret is plai
 }
 ```
 
+## `learn_from_sample`
+
+Ask the Ingest AI area to propose a field mapping from the source's captured sample. The proposal REPLACES the stored mapping and is never approved: on a source whose mapping was approved, new deliveries are held until it is approved again, so that call needs confirm:true. Spends an AI call and shares the source's daily AI allowance (default 10 a day, UTC) with reprocess.
+
+**Access:** SyteOps Admin or API key.
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `id` | string | yes | Content source id. |
+| `confirm` | boolean | no | Required (true) when the source's mapping is approved. |
+
+
+**Returns**
+
+data: &#123;mapping}; changed is true. 404 not_found, 409 confirmation_required, no_provider or no_sample, 422 invalid_sample, 429 learn_cap_reached, 502 ai_empty_response or invalid_json, 503 ai_unavailable
+
+**Request**
+
+```json
+{
+  "resource": "content_sources",
+  "action": "learn_from_sample",
+  "params": {
+    "id": "string",
+    "confirm": true
+  }
+}
+```
+
 ## `list`
 
 List all configured content sources (never includes the secret).
@@ -264,6 +295,68 @@ data.sources[]: array of &#123;id, name, slug, enabled, status, auth_mode, targe
   "resource": "content_sources",
   "action": "list",
   "params": {}
+}
+```
+
+## `reprocess`
+
+Replay a source's last captured payload through the ingest core. Destructive: it creates or updates the article with the source's own settings, so a source set to publish publishes it, a source in overwrite mode overwrites reviewer edits on an article already live, and the draft core spends an AI call. Shares the source's daily AI allowance (default 10 a day, UTC) with learn_from_sample.
+
+**🔴 Destructive**  
+**Access:** SyteOps Admin or API key, plus `confirm: true`.
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `id` | string | yes | Content source id. |
+| `confirm` | boolean | no | Must be true. |
+
+
+**Returns**
+
+data: &#123;outcome, message, post_id, created, edit_link}; changed is false for a held or protected article. 404 not_found (unknown or disabled source), 409 confirmation_required or no_payload, 422 invalid_json, 429 learn_cap_reached
+
+**Request**
+
+```json
+{
+  "resource": "content_sources",
+  "action": "reprocess",
+  "params": {
+    "id": "string",
+    "confirm": true
+  },
+  "confirm": true
+}
+```
+
+## `resend_review_email`
+
+Re-send the review email for a post to its own reviewers (never to a caller-supplied address); one resend per post every 2 minutes.
+
+**Access:** SyteOps Admin or API key.
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `post_id` | integer | yes | Record id, digits only. |
+
+
+**Returns**
+
+data: &#123;message, notify:&#123;outcome, partial, summary}} (display names only, no addresses or links). 404 post_not_found, 409 module_unavailable, 429 resend_cooldown, 400 no_recipients, 500 send_failed
+
+**Request**
+
+```json
+{
+  "resource": "content_sources",
+  "action": "resend_review_email",
+  "params": {
+    "post_id": 0
+  }
 }
 ```
 
@@ -292,6 +385,39 @@ data: &#123;id, secret} — secret is plaintext, returned only this once
   "action": "rotate_secret",
   "params": {
     "id": "string"
+  }
+}
+```
+
+## `test`
+
+Preview a mapping against a sample payload without writing anything.
+
+**Access:** SyteOps Admin or API key.
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `id` | string | yes | Content source id. |
+| `sample` | object | yes | The sample payload, as a JSON object. |
+| `mapping` | object | no | Optional field =\> \{path, transform\} rows to try; omit to test the source's stored mapping. |
+
+
+**Returns**
+
+data: &#123;normalized, empty_fields}. 404 not_found, 422 no_sample (an empty sample object)
+
+**Request**
+
+```json
+{
+  "resource": "content_sources",
+  "action": "test",
+  "params": {
+    "id": "string",
+    "sample": {},
+    "mapping": {}
   }
 }
 ```

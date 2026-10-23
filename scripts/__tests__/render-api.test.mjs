@@ -39,3 +39,11 @@ test('underscore resource keys slug to kebab-case URLs but keep the key in displ
   // Display text keeps the literal resource key; the link target is kebab-cased for the filename/URL.
   assert.match(md, /\| \[`notes_items`\]\(\.\/notes-items\) \|/);
 });
+
+test('an array param samples as a JSON list and an object param as a JSON object', () => {
+  const md = renderResourcePage('calendar', [
+    { resource: 'calendar', action: 'query', summary: 'Q.', destructive: false, capability: 'manage_options', params: { post_types: { type: 'array' }, mapping: { type: 'object' } } },
+  ]);
+  assert.match(md, /"post_types": \[\]/);
+  assert.match(md, /"mapping": \{\}/);
+});

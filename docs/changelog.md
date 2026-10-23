@@ -8,6 +8,38 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.758
+
+- The API can now read and change who can review and publish in the Review Portal, with confirmation.
+
+## v1.6.757
+
+- The API can now schedule or cancel social posts and run or redo listing images.
+
+## v1.6.756
+
+- The API can now reprocess, test and re-send review emails for content sources, and learn a source's mapping from a sample, with a daily limit.
+
+## v1.6.755
+
+- The API can now approve a post for publishing, request changes and add comments, with the same checks as the Review Portal.
+
+## v1.6.754
+
+- The API can now read pipeline stats and the activity log, and delete or clear run history with confirmation.
+
+## v1.6.753
+
+- The API can now read and change the content pipeline mode, stages, AI engines and GEO settings.
+
+## v1.6.752
+
+- The API can now read the publishing calendar and reschedule, unschedule or unpublish posts.
+
+## v1.6.751
+
+- The API can now add and remove a post's reviewers and watchers, and a removed reviewer stays removed.
+
 ## v1.6.750
 
 - The content pipeline screen and docs now describe which recipe runs and when.
