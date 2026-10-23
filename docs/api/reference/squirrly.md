@@ -12,7 +12,7 @@ description: Manage API operations for the squirrly resource.
 
 ## `indexnow_send`
 
-Queue one live post for IndexNow. It is not sent inside this request: it goes out through the normal queue about a minute later, and Squirrly's 24-hour rule still applies.
+Queue one live post for IndexNow. It is not sent inside this request: it goes out through the normal queue about a minute later, and Squirrly's 24-hour rule still applies. A missing, trashed or non-viewable post is 404 post_not_found and a signed-in caller who cannot edit it is 403 forbidden.
 
 **Access:** SyteOps Admin or API key.
 
@@ -41,7 +41,7 @@ data: &#123;queued, post_id, url, not_before, paused}
 
 ## `indexnow_status`
 
-Read the Squirrly IndexNow state: whether SyteOps may send, why not, the queue, the last result and, with post_id, that post's eligibility.
+Read the Squirrly IndexNow state: whether SyteOps may send, why not, the queue, the last result and, with post_id, that post's eligibility. With post_id, a missing, trashed or non-viewable post is 404 post_not_found and a signed-in caller who cannot edit it is 403 forbidden.
 
 **Access:** SyteOps Admin or API key.
 
