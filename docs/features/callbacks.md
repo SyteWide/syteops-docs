@@ -64,6 +64,34 @@ A call that was not answered never changes the callback's status. A call to a ca
 
 Calls back are recorded only while contact details are stored in **Full**, and only for callers who already have a callback. A call to any other number is not recorded here and never creates a lead.
 
+### View a lead without leaving the page
+
+A row that has a lead shows **View lead**. Select it and the lead opens right under the row, so you can see who you are about to call and what happened on earlier calls without going to the WordPress admin. Select it again, or press Escape, to close it. The list keeps its place, and it works the same on a phone.
+
+The panel shows only what the site has for that lead:
+
+- **The top**: the person's name, the lead's status, the callback's status, any follow-up date and owner, and who returned or closed it and when. When the lead may be a duplicate in RingTonic, it says so.
+- **Contact**: phone, office phone and email. Under **Full**, a phone number or email is a link you can tap to call or write. Under **Masked** the details are shown as hidden text with no links, and under **Off** there is no contact section.
+- **Where they came from**: the source, the campaign, when they first got in touch (in your site's time zone), the page they landed on (a link that opens in a new window when the page is on your own site, plain text otherwise), and tags such as the UTM details as small chips.
+- **Form answers** and the **RingTonic** details that came with the lead.
+- **Calls**: one card for each call, newest first. A card shows whether it was outgoing or incoming, how it went in plain words, how long it lasted, when, who placed it (or "Placed in RingTonic"), whether RingTonic has a recording (the recording stays in RingTonic), how confident the transcription is, and RingTonic's AI summary. The full transcript is tucked behind **Show transcript** and scrolls inside its own box. Only the newest five transcripts load; older calls say "Older transcript not loaded". Summaries and transcripts are shown only while contact details are stored in **Full**.
+
+The lead loads once when you first open it and is remembered until you reload the page, and after you press Done, Not a lead or Reopen on that row it loads fresh the next time. If it cannot load, the panel says so and offers **Retry**. If your sign-in has expired it asks you to reload the page instead. If the lead has been deleted, it says "This lead isn't available."
+
+Anyone who sees the Callbacks list can open this panel. People who can also open the Leads screen get a small **Open in admin** link inside it, which opens in a new window.
+
+### Calls from the caller
+
+When a caller rings your RingTonic number again, the callback records that call too, with how it went, how long it lasted, whether there is a recording and, while contact details are stored in **Full**, RingTonic's AI summary and transcript. The row's last call then reads, for example, "Called in Oct 24, 2:30 pm · Answered · 5:00" or "Called in Oct 24, 2:30 pm · Missed".
+
+A call from the caller never marks the callback **Returned** or closes it, however long it lasted: talking to someone when they ring in does not always mean their request was handled. The only change a new call makes is the one in [Good to know](#good-to-know): a callback that was Done, Returned, Expired or Held goes back to the waiting list.
+
+These calls are recorded only while contact details are stored in **Full**, and only for callers who already have a callback (a first-time caller gets one from the call itself).
+
+### Calls placed in the RingTonic app
+
+A call someone on your team dials directly in the RingTonic app is recorded like any other call back. RingTonic does not say which team member dialed it, so the lead view shows **Placed in RingTonic** instead of a name.
+
 ### Closed callbacks are hidden
 
 Closed callbacks are hidden until you ask for them. Turn on **Show closed** to see them under the waiting ones. Your browser remembers this choice for you, so the list opens the same way next time.
@@ -82,5 +110,5 @@ The row moves to its new group straight away, and the page records who marked it
 
 ## Good to know
 
-- A new call from someone whose callback is Done, Returned or Expired puts them back in the waiting list automatically. A form submission does not.
+- A new call from someone whose callback is Done, Returned, Expired or Held puts them back in the waiting list automatically. A form submission does not.
 - The list shows up to 200 waiting callbacks and the 200 most recently closed ones.
