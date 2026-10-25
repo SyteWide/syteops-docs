@@ -47,7 +47,7 @@ data: &#123;id, action, status, already, message, by, by_label? (already only), 
 
 ## `callbacks_get`
 
-One callback with its recent history: at most the 50 most recent events, including outbound calls (event, call status, duration, when, and the AI summary only while contact details are stored in Full; never a transcript or a recording link). Returns the full phone only while contact details are stored in Full; otherwise the masked number and an empty name (the stored row is kept, not shown).
+One callback with its recent history: at most the 50 most recent events, including calls both ways: outbound (kinds outbound_completed, outbound_missed, outbound_recording, outbound_transcription, outbound_placed) and inbound (inbound_completed, inbound_missed, inbound_recording, inbound_transcription; history only, an inbound call never changes the status). Each call event carries event, call status, duration, when, and the AI summary only while contact details are stored in Full; never a transcript or a recording link. Returns the full phone only while contact details are stored in Full; otherwise the masked number and an empty name (the stored row is kept, not shown).
 
 **Access:** SyteOps Admin or API key.
 

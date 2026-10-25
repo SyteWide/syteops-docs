@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.775
+
+- Callbacks now keep calls from the caller too: when a caller rings again, the call, how it went, how long it lasted, whether there is a recording and, while contact details are stored in Full, the AI summary and transcript are added to the callback's history and its row. A call from the caller never marks a callback returned or closes it. A call dialed directly in the RingTonic app shows as Placed in RingTonic.
+
+## v1.6.774
+
+- Callbacks now show the lead right on the page. Select View lead on a row to open the person's contact details, where they came from, their form answers and every call, with the AI summary and the transcript a click away, without leaving the portal. The Callbacks list also gets a tidier layout on desktop and phone.
+
 ## v1.6.773
 
 - Every portal link to the WordPress admin now opens in a new window, and a callback's link to its lead reads Open in admin. Groundwork for showing a callback's lead, its calls and what was said right in the portal, following the site's contact-details setting.
