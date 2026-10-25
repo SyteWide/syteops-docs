@@ -12,7 +12,7 @@ description: Manage API operations for the leads resource.
 
 ## `callback_action`
 
-Mark a callback done or not a lead, or reopen a closed one, recorded against a named person (their people slug) and the time. `do` is the verb. An API-key call must name the person with exactly one of `actor` (people slug) or `as_user_id` (WordPress user id); a signed-in SyteOps Admin who names nobody acts as themselves. A slug is accepted only while it belongs to the current holder of its Users slot (422 actor_not_current). A second request on an already-handled callback, or reopen on a callback that is not closed, changes nothing and says who acted and when (changed:false, already:true). Refused 409 contact_details_not_full while contact details are not stored in Full, 409 callbacks_disabled when the RingTonic integration is off, and 409 in_flight while the same request is still being applied.
+Mark a callback done or not a lead, or reopen a closed one, recorded against a named person (their people slug) and the time. `do` is the verb. An API-key call must name the person with exactly one of `actor` (people slug) or `as_user_id` (WordPress user id); a signed-in SyteOps Admin who names nobody acts as themselves. A slug is accepted only while it belongs to the current holder of its Users slot (422 actor_not_current). 422 actor_unresolved answers an unknown actor slug, an as_user_id with no people-registry entry, and a signed-in SyteOps Admin with no registry entry who names nobody; sending both actor and as_user_id is 422 actor_required. 403 actor_not_permitted when the Callbacks access of that person does not allow acting. A second request on an already-handled callback, or reopen on a callback that is not closed, changes nothing and says who acted and when (changed:false, already:true). Refused 422 invalid_action for any other `do`, 404 not_found for an unknown id, 409 state_changed when the callback moved under two attempts, 409 contact_details_not_full while contact details are not stored in Full, 409 callbacks_disabled when the RingTonic integration is off, 409 module_unavailable while Lead Attribution is off, and 409 in_flight while the same request is still being applied.
 
 **Access:** SyteOps Admin or API key.
 
@@ -47,7 +47,7 @@ data: &#123;id, action, status, already, message, by, by_label? (already only), 
 
 ## `callbacks_get`
 
-One callback with its recent history. Returns the full phone only while contact details are stored in Full; otherwise the masked number and an empty name (the stored row is kept, not shown).
+One callback with its recent history: at most the 50 most recent events, including outbound calls (event, call status, duration, when, and the AI summary only while contact details are stored in Full; never a transcript or a recording link). Returns the full phone only while contact details are stored in Full; otherwise the masked number and an empty name (the stored row is kept, not shown).
 
 **Access:** SyteOps Admin or API key.
 
@@ -60,7 +60,7 @@ One callback with its recent history. Returns the full phone only while contact 
 
 **Returns**
 
-data: &#123;id, phone? (Full only), phone_masked, status, reason, display_name, carry_since, follow_up_date, follow_up_owner, closed_by, closed_at, last_lead_id, created_at, updated_at, events[]: &#123;kind, actor, at, payload&#123;source?, lead_id?, status?, action?, from?, to?, via?, api_key?}}}
+data: &#123;id, phone? (Full only), phone_masked, status, reason, display_name, carry_since, follow_up_date, follow_up_owner, closed_by, closed_at, last_lead_id, created_at, updated_at, events[] (at most 50, newest first): &#123;kind, actor, at, payload&#123;source?, lead_id?, status?, action?, from?, to?, via?, api_key?, event?, duration?, call_log_uuid?, started_at?, recording?, transcription_confidence?, summary? (Full only)}}}
 
 **Request**
 
@@ -76,7 +76,7 @@ data: &#123;id, phone? (Full only), phone_masked, status, reason, display_name, 
 
 ## `callbacks_list`
 
-List callbacks (people to call back, one per phone number), oldest first. OPEN statuses only by default (open, returned, follow_up): closed rows (done, not_lead, expired) are hidden unless `status` asks for them. `status` is open (default), closed, all, one status, or a comma list; an unknown word is refused. The phone is always masked in this list; the full number is on callbacks_get. Needs the RingTonic integration on. While contact details are not stored in Full, names come back empty.
+List callbacks (people to call back, one per phone number), oldest first. OPEN statuses only by default (open, returned, follow_up): closed rows (done, not_lead, expired) are hidden unless `status` asks for them. `status` is open (default), closed, all (every status, including the seventh, held, which open never includes), one status, or a comma list; an unknown word is refused (422 invalid_status). per_page outside 1 to 200 is clamped to that range, not refused. The phone is always masked in this list; the full number is on callbacks_get. Needs the RingTonic integration on. While contact details are not stored in Full, names come back empty.
 
 **Access:** SyteOps Admin or API key.
 
@@ -84,9 +84,9 @@ List callbacks (people to call back, one per phone number), oldest first. OPEN s
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
-| `status` | string | no | Which callbacks: open (default: open, returned, follow_up), closed (done, not_lead, expired), all, one status, or a comma list of statuses. |
+| `status` | string | no | Which callbacks: open (default: open, returned, follow_up), closed (done, not_lead, expired), all (every status, held included), one status, or a comma list of statuses. |
 | `page` | integer | no | Page number, 1 to 10000 (default 1); above 10000 is 422 invalid_page. |
-| `per_page` | integer | no | Rows per page, 1 to 200 (default 50). |
+| `per_page` | integer | no | Rows per page, 1 to 200 (default 50); a value outside that range is clamped to it, not refused. |
 
 
 **Returns**

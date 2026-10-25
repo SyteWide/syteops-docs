@@ -23,7 +23,7 @@ Callbacks hold each caller's name and full phone number, because they exist so y
 Access is set person by person. Nobody sees the list until you give them access, and that includes site administrators. Everyone with access sees the same list: every callback on the site, not only the ones they handled.
 
 1. Go to **Roles & Users** and open the person's card.
-2. On the **Info** tab, set **Callbacks access**:
+2. On the **Leads** tab, set **Callbacks access**:
    - **Off**: the list does not appear on their page. This is where everyone starts.
    - **View and act**: they see the list and can mark callbacks Done, Not a lead or Reopen.
    - **Call**: the same as View and act for now. When calls can be placed from the list, people with this level will get a Call button.
@@ -42,7 +42,23 @@ Callers are grouped in this order:
 3. **Returned**: callers someone has already called back.
 4. **Closed**: callbacks marked Done or Not a lead, and ones that expired after 16 weeks.
 
-Each row shows the caller's name and number, their status, how long they have been waiting (or when they first got in touch), any follow-up date and who it belongs to, who closed it and when, and, for people who can open the Leads screen, an **Open lead** link to the lead there.
+Each row shows the caller's name and number, their status, how long they have been waiting (or when they first got in touch), any follow-up date and who it belongs to, who closed it and when, the last time someone called them back and how that call went, and, for people who can open the Leads screen, an **Open lead** link to the lead there. When the person's phone and email are on two different RingTonic contacts, the row also says **RingTonic: this person's phone and email are on two different contacts. Merge them in RingTonic.** until someone marks them merged on the lead ([RingTonic](../integrations/ringtonic#create-contacts-from-form-submissions)).
+
+### Calls back to the caller
+
+When someone on your team calls a waiting caller back through RingTonic, the callback records the call. The row shows the latest one, for example "Called Oct 23, 2:14 pm · No answer".
+
+| What the row says | What happened |
+|---|---|
+| **Returned · 1:42** | The caller answered, the call lasted 30 seconds or more (here, 1 minute 42 seconds), and this call moved the callback to **Returned** on its own. |
+| **Answered · 0:12** | The caller answered, but this call did not move the callback: it lasted under 30 seconds, or the callback was already closed or returned. |
+| **No answer** | The caller's phone rang and nobody picked up. |
+| **The call was never put through to the lead** | The call was set up but the person placing it never joined, so the caller's phone was never rung. |
+| **The lead's carrier refused the call (or the line was busy)** | The caller's phone company turned the call away, which usually means your caller ID is not verified yet, or the line was simply busy. RingTonic reports both the same way. |
+
+A call that was not answered never changes the callback's status. A call to a callback that is already closed is recorded but does not reopen it. When your site reports who placed a call, the callback records that person; otherwise it records only that the call came through RingTonic.
+
+Calls back are recorded only while contact details are stored in **Full**, and only for callers who already have a callback. A call to any other number is not recorded here and never creates a lead.
 
 ### Closed callbacks are hidden
 
