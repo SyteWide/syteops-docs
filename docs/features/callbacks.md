@@ -112,3 +112,4 @@ The row moves to its new group straight away, and the page records who marked it
 
 - A new call from someone whose callback is Done, Returned, Expired or Held puts them back in the waiting list automatically. A form submission does not.
 - The list shows up to 200 waiting callbacks and the 200 most recently closed ones.
+- **Scripted setup.** The Lead Attribution settings, a person's people link and the site time zone can also be set through the Manage API (`leads.settings_set`, `leads.people_issue_link`, `site.timezone_set`; see the [API reference](../api/reference/leads)). The RingTonic keys are not: they are entered on the RingTonic card or set from a terminal, never through the API.

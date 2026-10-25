@@ -8,7 +8,7 @@ description: Manage API operations for the leads resource.
 
 # `leads`
 
-12 operation(s). All run through `POST /syteops/v1/manage/dispatch` (reads may use the documented GET form).
+15 operation(s). All run through `POST /syteops/v1/manage/dispatch` (reads may use the documented GET form).
 
 ## `callback_action`
 
@@ -264,6 +264,35 @@ data: &#123;items[]: &#123;id,ref,source,campaign,status,event_count,first_seen}
 }
 ```
 
+## `people_issue_link`
+
+Issue (or return) the people link of the person in a Users slot: the stable slug a callback closure and a call are credited to. Idempotent: a second call returns the same slug with changed:false. The same writer the Tracked links screen and the portal's first Done / Not a lead / Reopen use; no tracked link rows are generated. 404 not_found for an empty slot; 422 name_required unless the person has a first and a last name; 409 registry_busy when the registry could not be locked.
+
+**Access:** SyteOps Admin or API key.
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `user_num` | string | yes | Slot number, one to three digits, for example 007 or 7. |
+
+
+**Returns**
+
+data: &#123;user_num, slug, name, issued (true when this call created the slug)}
+
+**Request**
+
+```json
+{
+  "resource": "leads",
+  "action": "people_issue_link",
+  "params": {
+    "user_num": "string"
+  }
+}
+```
+
 ## `ringtonic_status`
 
 Report the RingTonic receiver's health: module/integration state, whether it is ready to receive deliveries, observe mode, delivery counters, and stored-secret fingerprints. Also the calls key (present, fingerprint, RingTonic key id), what it can read (call-logs:read and tracking-numbers read: ok, missing_scope, invalid_key, rate_limited, error, not_checked, no_key or integration_off; calls:place is never probed, because only a real call would test it) and the caller-ID number with its state (unset, unknown, not_found, calls_disabled, ready) from the last tracking-number read. Never returns a secret value.
@@ -324,6 +353,66 @@ data: &#123;id, status, label, deal_value_cents?, deal_currency?}
     "status": "string",
     "value_cents": 0,
     "currency": "string"
+  }
+}
+```
+
+## `settings_get`
+
+Read the Leads settings as the code uses them (the effective value `wp syteops leads setting get` prints), with each key's type, whether it may be written, and whether it is masked. A webhook address (masked) reads '' when empty and '[set]' otherwise; it is never returned. pii_mode is the mode in force, through the syteops_leads_pii_mode filter the contact-details writers apply. `notes` names a key stored in an older shape, or the stored pii_mode when a filter overrides it. Never returns a RingTonic secret (they are not settings).
+
+**Access:** SyteOps Admin or API key.
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `keys` | array | no | Only these setting keys (default: all). An entry that is not a string is 422 invalid_params; an unknown key is 422 unknown_setting. |
+
+
+**Returns**
+
+data: &#123;settings: &#123;key: value}, keys: &#123;key: &#123;type, writable, masked}}, notes: &#123;key: note}}
+
+**Request**
+
+```json
+{
+  "resource": "leads",
+  "action": "settings_get",
+  "params": {
+    "keys": []
+  }
+}
+```
+
+## `settings_set`
+
+Set one or more Leads settings in one write, all or nothing, with the settings screen's own rule for each key (the same table `wp syteops leads setting set` uses): a value the screen would quietly correct is refused. Keys are applied in the screen's order, so consent_mode lands before consent_cookie. Refused with 422 and nothing written: an unknown key (unknown_setting), ringtonic_noabort (screen_only_setting: it edits .htaccess), a RingTonic secret by any name (secret_setting: secrets are never written through this API; set them from a terminal with `wp syteops systems-api set --stdin`), a value the rules refuse (invalid_setting). A change to pii_mode (how contact details are stored) or to a key that decides where lead contact details are sent (crm_webhook_url, automation_webhook_url, recipient_emails, email_reply_to) needs confirm:true (409 confirmation_required, naming the keys); resending the current value does not. The confirm is one explicit step for every caller, not a role check. changed is false and nothing is written when no stored value would change.
+
+**Access:** SyteOps Admin or API key.
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `settings` | object | yes | A non-empty object of \{setting: value\}; see settings_get for the keys and types. Lists and maps are JSON values. |
+| `confirm` | boolean | no | true to change pii_mode or a lead-data destination (the two webhook addresses, recipient_emails, email_reply_to). |
+
+
+**Returns**
+
+data: &#123;changed_keys[], settings: &#123;key: value} (the keys sent, effective, masked keys as '' or '[set]')}
+
+**Request**
+
+```json
+{
+  "resource": "leads",
+  "action": "settings_set",
+  "params": {
+    "settings": {},
+    "confirm": true
   }
 }
 ```

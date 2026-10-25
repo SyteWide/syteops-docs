@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.776
+
+- A site's calling setup can now be written through the management API: the Leads settings, several at once and checked by the settings screen's own rules (changing how contact details are stored needs a confirmation), each person's people link, and the site time zone. RingTonic keys are never accepted this way; they are still set on the RingTonic card or from a terminal. The module configuration call no longer writes raw Leads settings.
+
 ## v1.6.775
 
 - Callbacks now keep calls from the caller too: when a caller rings again, the call, how it went, how long it lasted, whether there is a recording and, while contact details are stored in Full, the AI summary and transcript are added to the callback's history and its row. A call from the caller never marks a callback returned or closes it. A call dialed directly in the RingTonic app shows as Placed in RingTonic.

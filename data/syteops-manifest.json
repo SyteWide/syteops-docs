@@ -1,6 +1,6 @@
 {
     "schema_version": 1,
-    "syteops_version": "1.6.775",
+    "syteops_version": "1.6.776",
     "operations": [
         {
             "resource": "users",
@@ -395,7 +395,7 @@
         {
             "resource": "modules",
             "action": "get_config",
-            "summary": "Get a module's stored configuration.",
+            "summary": "Get a module's stored configuration. Refused for syteops_leads (422 use_leads_settings_get): its webhook addresses can carry a token, and leads.settings_get returns the same settings with them masked.",
             "params": {
                 "module": {
                     "type": "string",
@@ -409,7 +409,7 @@
         {
             "resource": "modules",
             "action": "update_config",
-            "summary": "Merge keys into a module's stored configuration.",
+            "summary": "Merge keys into a module's stored configuration (no schema). Refused for syteops_leads (422 use_leads_settings_set): the Leads settings are written through leads.settings_set.",
             "params": {
                 "module": {
                     "type": "string",
@@ -1080,6 +1080,60 @@
             "capability": "manage_options",
             "strict": true,
             "returns": "data: {id, action, status, already, message, by, by_label? (already only), at}; changed is false when already is true"
+        },
+        {
+            "resource": "leads",
+            "action": "settings_get",
+            "summary": "Read the Leads settings as the code uses them (the effective value `wp syteops leads setting get` prints), with each key's type, whether it may be written, and whether it is masked. A webhook address (masked) reads '' when empty and '[set]' otherwise; it is never returned. pii_mode is the mode in force, through the syteops_leads_pii_mode filter the contact-details writers apply. `notes` names a key stored in an older shape, or the stored pii_mode when a filter overrides it. Never returns a RingTonic secret (they are not settings).",
+            "params": {
+                "keys": {
+                    "type": "array",
+                    "required": false,
+                    "description": "Only these setting keys (default: all). An entry that is not a string is 422 invalid_params; an unknown key is 422 unknown_setting."
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "strict": true,
+            "returns": "data: {settings: {key: value}, keys: {key: {type, writable, masked}}, notes: {key: note}}"
+        },
+        {
+            "resource": "leads",
+            "action": "settings_set",
+            "summary": "Set one or more Leads settings in one write, all or nothing, with the settings screen's own rule for each key (the same table `wp syteops leads setting set` uses): a value the screen would quietly correct is refused. Keys are applied in the screen's order, so consent_mode lands before consent_cookie. Refused with 422 and nothing written: an unknown key (unknown_setting), ringtonic_noabort (screen_only_setting: it edits .htaccess), a RingTonic secret by any name (secret_setting: secrets are never written through this API; set them from a terminal with `wp syteops systems-api set --stdin`), a value the rules refuse (invalid_setting). A change to pii_mode (how contact details are stored) or to a key that decides where lead contact details are sent (crm_webhook_url, automation_webhook_url, recipient_emails, email_reply_to) needs confirm:true (409 confirmation_required, naming the keys); resending the current value does not. The confirm is one explicit step for every caller, not a role check. changed is false and nothing is written when no stored value would change.",
+            "params": {
+                "settings": {
+                    "type": "object",
+                    "required": true,
+                    "description": "A non-empty object of {setting: value}; see settings_get for the keys and types. Lists and maps are JSON values."
+                },
+                "confirm": {
+                    "type": "boolean",
+                    "required": false,
+                    "description": "true to change pii_mode or a lead-data destination (the two webhook addresses, recipient_emails, email_reply_to)."
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "strict": true,
+            "returns": "data: {changed_keys[], settings: {key: value} (the keys sent, effective, masked keys as '' or '[set]')}"
+        },
+        {
+            "resource": "leads",
+            "action": "people_issue_link",
+            "summary": "Issue (or return) the people link of the person in a Users slot: the stable slug a callback closure and a call are credited to. Idempotent: a second call returns the same slug with changed:false. The same writer the Tracked links screen and the portal's first Done / Not a lead / Reopen use; no tracked link rows are generated. 404 not_found for an empty slot; 422 name_required unless the person has a first and a last name; 409 registry_busy when the registry could not be locked.",
+            "params": {
+                "user_num": {
+                    "type": "string",
+                    "format": "slot",
+                    "required": true,
+                    "description": "Slot number, one to three digits, for example 007 or 7."
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "strict": true,
+            "returns": "data: {user_num, slug, name, issued (true when this call created the slug)}"
         },
         {
             "resource": "leads",
@@ -2577,6 +2631,32 @@
             "capability": "manage_options",
             "strict": true,
             "returns": "data: {who_can_publish, permissions: {default, roles, users} as stored after the change, changes[]: {row, area, from, to}} (null = unset)"
+        },
+        {
+            "resource": "site",
+            "action": "timezone_get",
+            "summary": "Read the site time zone (WordPress Settings, General). It decides when a callback follow-up is due today and the times the portal shows. city is true for a region zone such as America/Detroit; note recommends one otherwise.",
+            "params": [],
+            "destructive": false,
+            "capability": "manage_options",
+            "strict": true,
+            "returns": "data: {timezone_string, timezone, gmt_offset, city, note}"
+        },
+        {
+            "resource": "site",
+            "action": "timezone_set",
+            "summary": "Set the site time zone the way the General settings screen stores a city zone (timezone_string set, gmt_offset emptied). One identifier from PHP's timezone_identifiers_list(): a city zone such as America/Detroit is recommended (daylight saving follows it); UTC is accepted; a raw offset (UTC+5), a backward-compatible alias (US/Eastern) or anything else is 422 invalid_timezone and nothing changes. The offset is emptied only after the zone is read back (a save that did not stick is 500 write_failed and leaves both as they were). A changed zone re-arms the events pinned to a site-time hour (the 02:00 FlowMattic orphan sweep).",
+            "params": {
+                "timezone_string": {
+                    "type": "string",
+                    "required": true,
+                    "description": "A time zone identifier, for example America/Detroit."
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "strict": true,
+            "returns": "data: {timezone_string, timezone, gmt_offset, city, note}"
         }
     ]
 }
