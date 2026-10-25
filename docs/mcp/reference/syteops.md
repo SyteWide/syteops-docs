@@ -7,7 +7,7 @@ description: MCP tools provided by SyteOps (provider id syteops).
 
 # SyteOps
 
-Provider id: `syteops` · 62 tool(s).
+Provider id: `syteops` · 65 tool(s).
 
 ## `syteops_builder_guard`
 
@@ -153,6 +153,50 @@ Invoke any SyteOps Manage operation. Pass resource + action (see syteops_manifes
 | `action` | string | yes | Action on the resource, e.g. 'list', 'get', 'activate'. See syteops_manifest. |
 | `params` | object | no | Operation parameters per the manifest's params schema for this resource+action. |
 | `confirm` | boolean | no | Set true to authorize a destructive operation (the manifest marks which actions are destructive). |
+
+
+## `syteops_leads_callback_action`
+
+Mark a callback done or not a lead, or reopen a closed one (SyteOps leads.callback_action; SyteOps 1.6.764+). This changes the callback's status, recorded against a person (their people slug) and the time. The verb param is do, not action: action is refused here as an unknown parameter. Safe to repeat: a callback already in that state, already closed by someone else, or not closed when you reopen it, changes nothing and answers ok with changed:false, already:true and who acted and when. Name the person with actor (a people slug held by the current holder of its Users slot, else 422 actor_not_current) or as_user_id, not both (422 actor_required); through MCP omit both to act as yourself, the SyteOps Admin (422 actor_unresolved when you have no people-registry entry). 409 contact_details_not_full unless contact details are stored in Full; 409 in_flight while the same request is still landing (retry shortly); 409 state_changed when the callback moved meanwhile; 403 actor_not_permitted when that person may not act on callbacks; 404 not_found; 422 invalid_action. Returns &#123;id, action, status, already, message, by, by_label (already only), at}. 409 callbacks_disabled while the RingTonic integration is off; 409 module_unavailable when Lead Attribution or callbacks are not loaded.
+
+**Profiles:** `full`, `syteops`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `id` | integer | yes | Callback id from syteops_leads_callbacks. |
+| `do` | string | yes | done, not_lead or reopen (reopen applies only to a done, not_lead or expired callback). The param is do, not action. |
+| `actor` | string | no | People slug of the person acting; must belong to the current holder of its Users slot. Send actor or as_user_id, not both. |
+| `as_user_id` | integer | no | WordPress user ID of the person acting, resolved to their people slug; use instead of actor. Through MCP omit both to act as yourself. |
+
+
+## `syteops_leads_callback_get`
+
+Read-only. One callback with its 50 most recent events, newest first (SyteOps leads.callbacks_get; SyteOps 1.6.764+). It carries the raw phone number only while SyteOps stores contact details in Full; otherwise phone is absent, phone_masked is the mask (empty under Off) and display_name is empty. Do not copy the phone into logs, tickets or other systems. 404 not_found. Returns the list fields plus phone (Full only) and events[]: &#123;kind, actor, at, payload}; payload keeps only source, lead_id, status, action, from, to, via and api_key, where api_key is true or false: whether an API key authorized that action, never which key. SyteOps 1.6.769+ adds outbound-call kinds: outbound_completed, outbound_missed (status canceled: the rep never pressed 1; no-answer: it rang out; busy: say the lead's carrier refused the call), outbound_recording, outbound_transcription, outbound_placed. Their payload adds event, duration, call_log_uuid, started_at, recording (true or false) and transcription_confidence, plus summary under Full only. Never a transcript or recording link. 409 callbacks_disabled while the RingTonic integration is off; 409 module_unavailable when Lead Attribution or callbacks are not loaded.
+
+**Profiles:** `full`, `syteops`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `id` | integer | yes | Callback id from syteops_leads_callbacks. |
+
+
+## `syteops_leads_callbacks`
+
+Read-only. The Leads callback list: people to call back, one row per phone number, oldest first (SyteOps leads.callbacks_list; SyteOps 1.6.764+). By default only open rows (open, returned, follow_up); closed ones (done, not_lead, expired) and held ones are hidden unless status asks for them. An unknown status word is 422 invalid_status; page above 10000 is 422 invalid_page. The phone is always masked here (phone_masked; empty when contact details are Off), and names are empty unless contact details are stored in Full; syteops_leads_callback_get has the number. Returns &#123;items[], total, page, per_page, status}; an item is &#123;id, phone_masked, status, reason, display_name, carry_since, follow_up_date, follow_up_owner, closed_by, closed_at, last_lead_id, created_at, updated_at}. 409 callbacks_disabled while the RingTonic integration is off; 409 module_unavailable when Lead Attribution or callbacks are not loaded.
+
+**Profiles:** `full`, `syteops`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `status` | string | no | Which callbacks: open (default: open, returned, follow_up), closed (done, not_lead, expired), all (every status, held included), one status, or a comma list of open, returned, follow_up, done, not_lead, expired, held. An unknown word is 422 invalid_status. |
+| `page` | integer | no | Page number from 1 to 10000 (default 1); above is 422 invalid_page. |
+| `per_page` | integer | no | Rows per page, 1 to 200 (default 50). |
 
 
 ## `syteops_listing_image_reprocess`

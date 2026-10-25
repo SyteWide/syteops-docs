@@ -39,6 +39,7 @@ Create a SyteOps team-member record in the next free slot and fill its fields. A
 | `notify_replies` | string | no | Whether this person receives article feedback and reply notifications: '1' or ''. Absent means on. |
 | `list_per` | string | no | Review list page size for this person: '5', '10', '25', '100', or '' to inherit the site default. |
 | `callbacks_access` | string | no | Callbacks access in the person's private page: '' (off), 'act' (view and act) or 'call'. Anything else is stored as off. Site-local. |
+| `ringtonic_email` | string | no | This person's RingTonic member login email, when it differs from their email: the phone RingTonic rings first when they place a call. '' rings their email. Anything that is not an email address is stored as ''. Site-local. |
 
 
 **Returns**
@@ -70,7 +71,8 @@ data: &#123;user_num, ...fields}
     "notify_reminders": "string",
     "notify_replies": "string",
     "list_per": "string",
-    "callbacks_access": "string"
+    "callbacks_access": "string",
+    "ringtonic_email": "string"
   }
 }
 ```
@@ -227,6 +229,7 @@ Update fields on an existing SyteOps team-member record.
 | `notify_replies` | string | no | Whether this person receives article feedback and reply notifications: '1' or ''. Absent means on. |
 | `list_per` | string | no | Review list page size for this person: '5', '10', '25', '100', or '' to inherit the site default. |
 | `callbacks_access` | string | no | Callbacks access in the person's private page: '' (off), 'act' (view and act) or 'call'. Anything else is stored as off. Site-local. |
+| `ringtonic_email` | string | no | This person's RingTonic member login email, when it differs from their email: the phone RingTonic rings first when they place a call. '' rings their email. Anything that is not an email address is stored as ''. Site-local. |
 
 
 **Returns**
@@ -259,7 +262,8 @@ data: &#123;user_num, ...fields}
     "notify_reminders": "string",
     "notify_replies": "string",
     "list_per": "string",
-    "callbacks_access": "string"
+    "callbacks_access": "string",
+    "ringtonic_email": "string"
   }
 }
 ```

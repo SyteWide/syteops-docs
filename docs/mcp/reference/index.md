@@ -31,4 +31,4 @@ Tools are grouped by provider. Each provider registers only when its plugin is d
 | [FluentSMTP](./fluent-smtp) | `fluent-smtp` | 3 |
 | [Squirrly SEO](./squirrly) | `squirrly` | 8 |
 | [WooCommerce](./woocommerce) | `woocommerce` | 12 |
-| [SyteOps](./syteops) | `syteops` | 62 |
+| [SyteOps](./syteops) | `syteops` | 65 |

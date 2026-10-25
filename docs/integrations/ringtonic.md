@@ -45,6 +45,20 @@ In your **Leads** list, change any lead's pipeline status. SyteOps queues the up
 
 This half is normally set up for you, not by you — your hub operator creates the RingTonic endpoint and pushes its signing secret into the same **RingTonic** card in Leads → Settings, under **Live notifications**. Once it's configured, that line shows a fingerprint of the secret (never the value itself) plus the most recent event received, so you can confirm it's live at a glance. If you ever need to paste the secret yourself, the field works the same way as the API key above: paste, save, and it's stored encrypted; a wp-config constant (`SYTEOPS_LEADS_RINGTONIC_WEBHOOK_SECRET`) can override it the same way `SYTEOPS_LEADS_RINGTONIC_API_KEY` does.
 
+### 5. Click-to-call: the calls key and caller ID (set up by your hub operator)
+
+Calling a lead back from SyteOps uses a **second, separate RingTonic key**, minted with the **calls:place**, **call-logs:read** and **tracking-numbers read** permissions. Your Agency API key above keeps doing the CRM sync; the two are never swapped, so the permission that places calls never sits on the key every form submission uses. Your hub operator normally adds it for you. To add it yourself, open the **Click-to-call** part of the RingTonic card, paste the whole key (including the number and bar before `rt_`), and save. A wp-config constant (`SYTEOPS_LEADS_RINGTONIC_CALLS_API_KEY`) can override it the same way.
+
+Once a key is set, the card shows its RingTonic key number and a fingerprint (never the key itself), and SyteOps checks with RingTonic, within a few minutes, what the key can do: whether it can read call logs and tracking numbers. Use **Check now** to check again at any time. Placing calls can only be confirmed by a real call, so the card never tests it.
+
+Then set the **Caller ID number**: the RingTonic tracking number that both your team member and the lead see when a call is placed. The card warns you if the number is not one of your RingTonic tracking numbers, or if RingTonic has calls turned off for it.
+
+:::warning Verify the caller ID before calls go live
+Phone carriers refuse calls from a number whose caller ID is not verified, and RingTonic then reports the call as busy. In Twilio, the number needs **all four** of these: a **Trust Hub Business Profile**, the **SHAKEN/STIR Trust Product** with the number assigned (attestation A), **Voice Integrity** and **CNAM**. SyteOps cannot check these for you, so the card shows this reminder while a caller ID is set.
+:::
+
+Calls themselves (a Call button on the Callbacks list) come in a later update. Each person's calls will ring the RingTonic member set on their card (see [Callbacks](../features/callbacks#ringtonic-member-email)).
+
 ## What syncs, and in which direction
 
 ### From SyteOps to RingTonic (via WP-cron, shortly after the change)
