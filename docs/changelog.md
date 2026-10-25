@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.771
+
+- A license server that is down, being maintained, or can't reach its store no longer removes SyteOps Admin access on client sites, including sites that have not updated yet; they stay on grace until it answers.
+
 ## v1.6.770
 
 - When a form lead's phone and email belong to two different RingTonic contacts, the contact matched by phone is updated and gets the form conversion, and the lead is flagged so the two can be merged in RingTonic. The flag shows on the lead and on the Callbacks list, and a Merged button on the lead clears it.

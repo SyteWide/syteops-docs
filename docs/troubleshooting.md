@@ -25,7 +25,7 @@ Common issues and solutions for SyteOps administrators.
 | `max_activations` | Too many active sites | Deactivate unused sites or upgrade your plan |
 | `license_expired` | License term ended | Renew your license through your account |
 | `deleted` / `blacklisted` | License permanently blocked | Contact support |
-| `server_unreachable` | Can't reach licensing server | Check internet connection; retry later |
+| `server_unreachable` | Can't reach the licensing server, or it is down for maintenance or can't reach its store | Nothing is removed while it is out: your site stays on a grace period and SyteOps Admins keep their access. Check the internet connection and retry later |
 
 ### License Status Shows "[object Object]"
 
