@@ -57,7 +57,9 @@ Then set the **Caller ID number**: the RingTonic tracking number that both your 
 Phone carriers refuse calls from a number whose caller ID is not verified, and RingTonic then reports the call as busy. In Twilio, the number needs **all four** of these: a **Trust Hub Business Profile**, the **SHAKEN/STIR Trust Product** with the number assigned (attestation A), **Voice Integrity** and **CNAM**. SyteOps cannot check these for you, so the card shows this reminder while a caller ID is set.
 :::
 
-Calls themselves (a Call button on the Callbacks list) come in a later update. Each person's calls will ring the RingTonic member set on their card (see [Callbacks](../features/callbacks#ringtonic-member-email)).
+With the key, live notifications (step 4) and a verified caller ID in place, people with **Call** access get a **Call** button on the Callbacks list (see [Call a lead back](../features/callbacks#call-a-lead-back)). Each person's calls ring the RingTonic member set on their card (see [RingTonic member email](../features/callbacks#ringtonic-member-email)).
+
+**Call limits.** Under **Call limits** in the same card: **Calls per person per day** (default 20), **Calls per site per day** (default 60), **Calls per minute (whole site)** (default 8, at most 10, RingTonic's own limit), **Calls per lead per hour** (default 3) and **Calls per lead per day** (default 10), which count every caller, and **Minutes a call locks its callback** (default 15: while someone is calling a lead, everyone else's buttons on it are locked until the call ends, the caller releases it, or this many minutes pass). A call over a limit is refused and nothing is sent. The daily limits reset at midnight in your site's time zone.
 
 ## What syncs, and in which direction
 

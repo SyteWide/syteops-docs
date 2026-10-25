@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.778
+
+- Review Portal: cards that wrap under the article now use the full width, wide cards lay their items out side by side, and a Below the article card at the foot of the sidebar lists them and jumps to them.
+
+## v1.6.777
+
+- Callbacks get a Call button: people with Call access can call a lead back from the portal through RingTonic, after a short confirm. While someone is calling a lead, everyone else's buttons on it are locked until the call ends, the caller releases it, or 15 minutes pass. Calls stop at daily limits per person, per site and per lead, plus an hourly limit per lead and a per-minute limit, all adjustable in the RingTonic settings. Links in callback emails open the right row and its confirm.
+
 ## v1.6.776
 
 - A site's calling setup can now be written through the management API: the Leads settings, several at once and checked by the settings screen's own rules (changing how contact details are stored needs a confirmation), each person's people link, and the site time zone. RingTonic keys are never accepted this way; they are still set on the RingTonic card or from a terminal. The module configuration call no longer writes raw Leads settings.
