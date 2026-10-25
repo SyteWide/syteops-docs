@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.780
+
+- Callbacks: a person returning a call can edit the lead's contact right in the portal (first and last name, company, email, office phone and a note; the phone number stays fixed). Saving updates the lead and the callback, updates the RingTonic contact a moment later, and sends the updated lead to your CRM and Automation webhooks marked as a contact update. The lead view also shows the contact as RingTonic holds it now, and the caller ID name the phone carrier gives on an incoming call.
+
+## v1.6.779
+
+- Review Portal: the list in the Below the article card no longer starts a wrapped line with a dot; each dot now stays at the end of the title before it.
+
 ## v1.6.778
 
 - Review Portal: cards that wrap under the article now use the full width, wide cards lay their items out side by side, and a Below the article card at the foot of the sidebar lists them and jumps to them.
