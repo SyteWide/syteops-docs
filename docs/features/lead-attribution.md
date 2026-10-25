@@ -249,7 +249,7 @@ Paste any URL into the **Automation webhook URL** field to activate it. Use the 
 
 | Field | Meaning |
 |-------|---------|
-| `event` | Always `new_lead` |
+| `event` | `new_lead` (or `contact_updated` after a contact edit; see [When a contact is edited](#when-a-contact-is-edited-contact_updated)) |
 | `ref` | Short reference code, e.g. `WEB-7K2QF` |
 | `lead_id` | Internal lead ID |
 | `source` | Attributed source |
@@ -295,7 +295,7 @@ Paste any URL into the **CRM webhook URL** field to activate it. The payload inc
 
 | Field | Meaning |
 |-------|---------|
-| `event` | Always `qualified` |
+| `event` | `qualified` (or `contact_updated` after a contact edit; see below) |
 | `score` | Total points |
 | `tier` | Tier id (e.g. `hot`) |
 | `tier_label` | Tier display label (e.g. `Hot`) |
@@ -303,6 +303,24 @@ Paste any URL into the **CRM webhook URL** field to activate it. The payload inc
 | `fields` | Object mapping each question's `crm_field` key → the answer value |
 
 The `fields` object is what most CRMs consume directly — for example, `{ "budget": "over_5k", "timeline": "asap" }` — so you can map the values straight to CRM contact properties without extra transformation in your automation.
+
+### When a contact is edited (`contact_updated`)
+
+When someone edits a lead's contact in the [Callbacks](callbacks#edit-a-contact) panel, the lead is sent again, with `event` set to `contact_updated`, to each webhook that **already received it**: the automation webhook when the lead was sent there and its goal still sends to automation, and the CRM webhook when the lead was qualified and sent there. A webhook that is off, has no URL, or never received this lead gets nothing. Match it to the lead you already have by `ref` or `lead_id` and update that record.
+
+Each webhook gets the lead in the shape it already knows, **without `proof_url`**: the automation webhook the lead payload above, the CRM webhook the qualified payload (with `score`, `tier`, `answers` and `fields`). Both carry the edited values in `name`, `email` and `office_phone`, plus:
+
+| Field | Meaning |
+|-------|---------|
+| `first_name` | First name |
+| `last_name` | Last name |
+| `company` | Company |
+| `note` | The note saved with the contact |
+| `changed_fields` | The fields that changed, by name (for example `["company", "email"]`) |
+| `changed_by` | Who made the change: `human` for a person in the portal |
+| `updated_at` | When, as an ISO 8601 time |
+
+A contact can be edited only while contact details are stored in **Full**, so these values are exact.
 
 ## CSS selector cookbook
 

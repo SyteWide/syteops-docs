@@ -47,7 +47,7 @@ data: &#123;id, action, status, already, message, by, by_label? (already only), 
 
 ## `callbacks_get`
 
-One callback with its recent history: at most the 50 most recent events, including calls both ways: outbound (kinds outbound_completed, outbound_missed, outbound_recording, outbound_transcription, outbound_placed) and inbound (inbound_completed, inbound_missed, inbound_recording, inbound_transcription; history only, an inbound call never changes the status). Each call event carries event, call status, duration, when, and the AI summary only while contact details are stored in Full; never a transcript or a recording link. Returns the full phone only while contact details are stored in Full; otherwise the masked number and an empty name (the stored row is kept, not shown).
+One callback with its recent history: at most the 50 most recent events, including calls both ways: outbound (kinds outbound_completed, outbound_missed, outbound_recording, outbound_transcription, outbound_placed) and inbound (inbound_completed, inbound_missed, inbound_recording, inbound_transcription; history only, an inbound call never changes the status). Each call event carries event, call status, duration, when, and the AI summary only while contact details are stored in Full; an inbound call also carries caller_name (the caller-ID name the carrier gives, normalized; Full only); never a transcript or a recording link. A contact_edited event (a person edited the contact in the portal) carries the field names in changed, the source (human) and via, never the values. Returns the full phone only while contact details are stored in Full; otherwise the masked number and an empty name (the stored row is kept, not shown).
 
 **Access:** SyteOps Admin or API key.
 
@@ -60,7 +60,7 @@ One callback with its recent history: at most the 50 most recent events, includi
 
 **Returns**
 
-data: &#123;id, phone? (Full only), phone_masked, status, reason, display_name, carry_since, follow_up_date, follow_up_owner, closed_by, closed_at, last_lead_id, created_at, updated_at, events[] (at most 50, newest first): &#123;kind, actor, at, payload&#123;source?, lead_id?, status?, action?, from?, to?, via?, api_key?, event?, duration?, call_log_uuid?, started_at?, recording?, transcription_confidence?, summary? (Full only)}}}
+data: &#123;id, phone? (Full only), phone_masked, status, reason, display_name, carry_since, follow_up_date, follow_up_owner, closed_by, closed_at, last_lead_id, created_at, updated_at, events[] (at most 50, newest first): &#123;kind, actor, at, payload&#123;source?, lead_id?, status?, action?, from?, to?, via?, api_key?, event?, duration?, call_log_uuid?, started_at?, recording?, transcription_confidence?, summary? (Full only), caller_name? (inbound, Full only), changed? (contact_edited: field names)}}}
 
 **Request**
 

@@ -71,6 +71,10 @@ There's one nuance when you move a lead **backward** — for example from **Cust
 
 SyteOps also recognizes when RingTonic has simply gotten **ahead** of it — for example, another tool recorded a RingTonic-side milestone that puts the contact further along than SyteOps' own last-known stage, or moved it since SyteOps' last successful sync. When that happens, SyteOps does not fight it: it logs the reason and leaves RingTonic's stage alone rather than forcing a regression.
 
+When someone edits a lead's contact in the portal's Callbacks panel (name, company, email, office phone or note; see [Edit a contact](../features/callbacks#edit-a-contact)), the RingTonic contact is updated the same way, in the background a moment later. The update is matched on the lead's phone number, which never changes. Only fields someone on your team has edited on the site are sent (never details the site merely captured), and a field someone cleared is never blanked in RingTonic. If the email someone typed belongs to a different RingTonic contact, that contact is never changed: the phone's contact is updated without the email and the lead is flagged for a merge. If the phone and the email are on two different RingTonic contacts, the phone's contact is updated and the lead is flagged for a merge. RingTonic contacts have no office phone or note fields: to send those, enter the names of custom fields you created in RingTonic under **RingTonic custom field names** (**Office phone (from a contact edit)** and **Contact note (from a contact edit)**); they are off by default.
+
+When the Callbacks panel opens a lead, SyteOps also reads that contact from RingTonic with your site's key, so the panel can show **From RingTonic** and the edit form starts from RingTonic's current values. The read is kept for five minutes. Right after a save, the panel says RingTonic is being updated until the change has been sent. If the key isn't allowed to read contacts, the panel says "RingTonic details unavailable" and everything else still works.
+
 A forced backward move is also verified, not assumed: if your API key isn't permitted to force stage changes, RingTonic may answer with an explicit permission error, or it may accept the request without actually applying it. SyteOps treats either outcome as a no-op and logs it, rather than recording the change as synced when it never actually happened.
 
 :::note Log lines require Debug Mode
@@ -213,6 +217,10 @@ Once you have turned the summary on, the call summary and the qualification reas
 - **Full** — stored as RingTonic wrote it.
 - **Masked** (the default) — phone numbers and email addresses in the text are replaced with `[phone]` and `[email]`, and the rest of the wording is kept. Masking the whole summary would leave nothing worth reading, and the contact details are the part the setting is really protecting. **A name spoken during the call can still appear** in the summary — there is no reliable way to detect one in ordinary prose. If that is not acceptable for your site, choose **Off**, or simply leave the summary switched off.
 - **Off** — the summary and the qualification reason are not stored at all. The numbers, dates, statuses, city and state above are not free text and are still stored.
+
+### Caller ID name
+
+An inbound call can carry the phone carrier's caller-ID name for the number. SyteOps keeps it, tidied up and only while contact details are stored in Full, on that call in the callback's history and, once, on the lead, where the Callbacks panel shows it as **Caller ID name (carrier)**. Generic names such as "Wireless Caller", "Unknown", "Private", "Toll Free", a number or a city and state are left out. It is never copied into the contact's name or company, and it is not part of the lead email, the CSV export or the automation webhook. On a call your team places, the caller-ID name describes your own number, so it is not kept.
 
 ### What is never stored
 

@@ -7,7 +7,7 @@ description: MCP tools provided by SyteOps (provider id syteops).
 
 # SyteOps
 
-Provider id: `syteops` · 65 tool(s).
+Provider id: `syteops` · 71 tool(s).
 
 ## `syteops_builder_guard`
 
@@ -141,7 +141,7 @@ Cancel a scheduled post's publication and return it to a draft (SyteOps calendar
 
 ## `syteops_dispatch`
 
-Invoke any SyteOps Manage operation. Pass resource + action (see syteops_manifest) and params per that operation's schema. Destructive operations (the manifest marks them) require confirm:true. Returns &#123;ok, changed, data} on success.
+Invoke any SyteOps Manage operation. Pass resource + action (see syteops_manifest) and params per that operation's schema. Destructive operations (the manifest marks them) require confirm:true. The dedicated secret-slot writes (crm.set_secret, ai.set_key, any action ending set_secret or set_key, and any operation that takes one of its own secret_keys as a param) are refused, so stored API keys are set from a terminal or the SyteOps admin, not as an MCP tool input. Returns &#123;ok, changed, data} on success.
 
 **Profiles:** `full`, `syteops`
 
@@ -173,7 +173,7 @@ Mark a callback done or not a lead, or reopen a closed one (SyteOps leads.callba
 
 ## `syteops_leads_callback_get`
 
-Read-only. One callback with its 50 most recent events, newest first (SyteOps leads.callbacks_get; SyteOps 1.6.764+). It carries the raw phone number only while SyteOps stores contact details in Full; otherwise phone is absent, phone_masked is the mask (empty under Off) and display_name is empty. Do not copy the phone into logs, tickets or other systems. 404 not_found. Returns the list fields plus phone (Full only) and events[]: &#123;kind, actor, at, payload}; payload keeps only source, lead_id, status, action, from, to, via and api_key, where api_key is true or false: whether an API key authorized that action, never which key. SyteOps 1.6.769+ adds outbound-call kinds: outbound_completed, outbound_missed (status canceled: the rep never pressed 1; no-answer: it rang out; busy: say the lead's carrier refused the call), outbound_recording, outbound_transcription, outbound_placed. Their payload adds event, duration, call_log_uuid, started_at, recording (true or false) and transcription_confidence, plus summary under Full only. Never a transcript or recording link. 409 callbacks_disabled while the RingTonic integration is off; 409 module_unavailable when Lead Attribution or callbacks are not loaded.
+Read-only. One callback with its 50 most recent events, newest first (SyteOps leads.callbacks_get; SyteOps 1.6.764+). It carries the raw phone number only while SyteOps stores contact details in Full; otherwise phone is absent, phone_masked is the mask (empty under Off) and display_name is empty. Do not copy the phone into logs, tickets or other systems. 404 not_found. Returns the list fields plus phone (Full only) and events[]: &#123;kind, actor, at, payload}; payload keeps only source, lead_id, status, action, from, to, via and api_key, where api_key is true or false: whether an API key authorized that action, never which key. Call kinds: outbound_completed, outbound_missed (status canceled: the rep never pressed 1; no-answer: rang out; busy: say the lead's carrier refused the call), outbound_recording, outbound_transcription, outbound_placed (1.6.769+); inbound_completed, inbound_missed, inbound_recording, inbound_transcription (1.6.775+; history only, no status change). Their payload adds event, duration, call_log_uuid, started_at, recording (bool), transcription_confidence, plus summary under Full only. Never a transcript or recording link. 409 callbacks_disabled while the RingTonic integration is off; 409 module_unavailable when Lead Attribution or callbacks are not loaded.
 
 **Profiles:** `full`, `syteops`
 
@@ -197,6 +197,46 @@ Read-only. The Leads callback list: people to call back, one row per phone numbe
 | `status` | string | no | Which callbacks: open (default: open, returned, follow_up), closed (done, not_lead, expired), all (every status, held included), one status, or a comma list of open, returned, follow_up, done, not_lead, expired, held. An unknown word is 422 invalid_status. |
 | `page` | integer | no | Page number from 1 to 10000 (default 1); above is 422 invalid_page. |
 | `per_page` | integer | no | Rows per page, 1 to 200 (default 50). |
+
+
+## `syteops_leads_people_issue_link`
+
+Issue, or return, the people link of the person in a Users slot: the stable slug a callback closure and a call are credited to (SyteOps leads.people_issue_link; SyteOps 1.6.776+). Idempotent: a repeat returns the same slug with issued false. No tracked link rows are generated. 404 not_found for an empty slot; 422 name_required unless the person has a first and a last name; 409 registry_busy when the registry could not be locked (retry); 409 module_unavailable when Tracked links are not loaded. Returns &#123;user_num, slug, name, issued}.
+
+**Profiles:** `full`, `syteops`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `user_num` | string | yes | Users slot number, one to three digits as a string, for example "007" or "7". |
+
+
+## `syteops_leads_settings_get`
+
+Read-only. The Leads settings as the code uses them (SyteOps leads.settings_get; SyteOps 1.6.776+): &#123;settings, keys: &#123;key: &#123;type, writable, masked}}, notes}. Pass keys to read only some (an unknown key is 422 unknown_setting, a non-string entry 422 invalid_params). crm_webhook_url and automation_webhook_url read as an empty string or "[set]" and are never revealed. pii_mode is the mode in force; notes names a key stored in an older shape. Never returns a RingTonic secret. internal_cookie / _param / _header values, recipient_emails, email_reply_to and ringtonic_caller_id_number come back in clear: not credentials, but do not copy them elsewhere. 409 module_unavailable when the Leads settings are not loaded. Call this before syteops_leads_settings_set to learn the keys and which are writable.
+
+**Profiles:** `full`, `syteops`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `keys` | array | no | Only these setting keys (default: all). A non-string entry is 422 invalid_params; an unknown key is 422 unknown_setting. |
+
+
+## `syteops_leads_settings_set`
+
+Set one or more Leads settings in one write, all or nothing (SyteOps leads.settings_set; SyteOps 1.6.776+). This changes live lead routing, so read syteops_leads_settings_get first for the keys and which are writable. Refused with 422 and nothing written: unknown_setting; screen_only_setting (ringtonic_noabort edits .htaccess); invalid_setting (a value the settings screen rules refuse); secret_setting (RingTonic secrets are never written here: set them from a terminal with `wp syteops systems-api set --stdin` or upload-plugin-release.sh set-secret); invalid_params (settings empty or a list); 409 module_unavailable (Leads settings not loaded). 409 confirmation_required unless confirm is true when the call changes pii_mode or a data-egress key (crm_webhook_url, automation_webhook_url, recipient_emails, email_reply_to); resending the current value needs no confirm. Webhook addresses read back as an empty string or "[set]". Returns &#123;changed_keys[], settings}; changed_keys is empty when nothing would change.
+
+**Profiles:** `full`, `syteops`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `settings` | object | yes | A non-empty object of \{setting: value\}, all applied or none. Read syteops_leads_settings_get first for the keys, their types and which are writable. Lists and maps are JSON values. |
+| `confirm` | boolean | yes | true only when this call changes pii_mode or a data-egress key (crm_webhook_url, automation_webhook_url, recipient_emails, email_reply_to) and the operator approved it; false otherwise. |
 
 
 ## `syteops_listing_image_reprocess`
@@ -689,6 +729,19 @@ Remove a watcher from one post (SyteOps review.watchers_remove; SyteOps 1.6.758+
 | `user_id` | integer | yes | User ID of a SyteOps user linked to a WordPress account. |
 
 
+## `syteops_ringtonic_status`
+
+Read-only. RingTonic receiver health (SyteOps leads.ringtonic_status): module and integration state, receiver_ready, observe_mode, delivery stats, and fingerprints of the stored API key and webhook secret, never the values. Also the calls key (calls_api_key_present, calls_api_key_fingerprint, calls_api_key_id), calls_scopes &#123;checked_at, call_logs_read, tracking_numbers_read, calls_place}, each ok, missing_scope, invalid_key, rate_limited, error, not_checked, no_key or integration_off (calls_place is always not_probed: only a real call would test it), and caller_id &#123;number, state: unset, unknown, not_found, calls_disabled or ready} from the last tracking-number read. The calls_* and caller_id fields, and probe, need SyteOps 1.6.772+ and are absent on older SyteOps. Without probe it never contacts RingTonic.
+
+**Profiles:** `full`, `syteops`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `probe` | boolean | no | true re-checks the calls key now with read-only GETs of /call-logs and /tracking-numbers (the latter paged, up to 10 requests; it also refreshes caller_id); it never places a call. At most once a minute per key: a repeat returns the last check. Default false: the last check of the current key. SyteOps 1.6.772+. |
+
+
 ## `syteops_seo_get`
 
 Read one post's SEO title, description and focus keywords from whichever SEO plugin is active (SyteOps seo.get). Returns &#123;post_id, tool, tool_label, fields}. With no active SEO plugin it errors no_active_seo_tool. For Squirrly-only fields (canonical, Open Graph, robots) use sqseo_get_snippet.
@@ -718,6 +771,30 @@ Write one post's SEO title, description or focus keywords through the active SEO
 | `keywords` | string | no | Focus keywords, comma-separated. Send an empty string to clear it. |
 | `confirm` | boolean | no | Required (true) for a real write. |
 | `allow_placeholders` | boolean | no | JSON true only. Allow placeholders the SEO plugin fills from site data (custom fields, options). Safe ones such as the post title need no opt-in. |
+
+
+## `syteops_site_timezone_get`
+
+Read-only. The site time zone from WordPress Settings, General (SyteOps site.timezone_get; SyteOps 1.6.776+). It decides when a callback follow-up is due today and the times the portal shows. Returns &#123;timezone_string, timezone, gmt_offset, city, note}: city is true for a region zone such as America/Detroit; note recommends one otherwise.
+
+**Profiles:** `full`, `syteops`
+
+**Parameters**
+
+_No parameters._
+
+
+## `syteops_site_timezone_set`
+
+Set the site time zone the way the General settings screen stores a city zone (SyteOps site.timezone_set; SyteOps 1.6.776+). Takes one name from PHP timezone_identifiers_list(): a city zone such as America/Detroit is recommended (daylight saving follows it); UTC is accepted. A raw offset (UTC+5), an alias (US/Eastern) or anything else is 422 invalid_timezone and nothing changes. A save that did not stick is 500 write_failed and leaves the old value. A changed zone re-arms events pinned to a site-time hour. Returns &#123;timezone_string, timezone, gmt_offset, city, note}.
+
+**Profiles:** `full`, `syteops`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `timezone_string` | string | yes | A time zone identifier, for example America/Detroit. A raw offset (UTC+5) or an alias (US/Eastern) is refused. |
 
 
 ## `syteops_social_cancel`

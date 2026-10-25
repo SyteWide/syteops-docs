@@ -99,7 +99,8 @@ A row that has a lead shows **View lead**. Select it and the lead opens right un
 The panel shows only what the site has for that lead:
 
 - **The top**: the person's name, the lead's status, the callback's status, any follow-up date and owner, and who returned or closed it and when. When the lead may be a duplicate in RingTonic, it says so.
-- **Contact**: phone, office phone and email. Under **Full**, a phone number or email is a link you can tap to call or write. Under **Masked** the details are shown as hidden text with no links, and under **Off** there is no contact section.
+- **Contact**: phone, office phone, email, company and note. Under **Full**, a phone number or email is a link you can tap to call or write. Under **Masked** the details are shown as hidden text with no links (no company or note), and under **Off** there is no contact section. When the lead called in, **Caller ID name (carrier)** shows the name the phone carrier gives for the number (see [Caller ID name](#caller-id-name)).
+- **From RingTonic**: the contact as RingTonic holds it right now (name, email, phone, company, stage and tags). If RingTonic can't be read with your site's key, it says "RingTonic details unavailable" and the rest of the panel works as usual.
 - **Where they came from**: the source, the campaign, when they first got in touch (in your site's time zone), the page they landed on (a link that opens in a new window when the page is on your own site, plain text otherwise), and tags such as the UTM details as small chips.
 - **Form answers** and the **RingTonic** details that came with the lead.
 - **Calls**: one card for each call, newest first. A card shows whether it was outgoing or incoming, how it went in plain words, how long it lasted, when, who placed it (or "Placed in RingTonic"), whether RingTonic has a recording (the recording stays in RingTonic), how confident the transcription is, and RingTonic's AI summary. The full transcript is tucked behind **Show transcript** and scrolls inside its own box. Only the newest five transcripts load; older calls say "Older transcript not loaded". Summaries and transcripts are shown only while contact details are stored in **Full**.
@@ -107,6 +108,27 @@ The panel shows only what the site has for that lead:
 The lead loads once when you first open it and is remembered until you reload the page, and after you press Done, Not a lead or Reopen on that row it loads fresh the next time. If it cannot load, the panel says so and offers **Retry**. If your sign-in has expired it asks you to reload the page instead. If the lead has been deleted, it says "This lead isn't available."
 
 Anyone who sees the Callbacks list can open this panel. People who can also open the Leads screen get a small **Open in admin** link inside it, which opens in a new window.
+
+### Edit a contact
+
+While contact details are stored in **Full**, anyone who can act on callbacks sees **Edit contact** in the panel's Contact section. It opens a short form right in the panel: first name, last name, company, email, office phone and a note. The phone number the callback belongs to is shown but can't be changed, because the callback is tied to it.
+
+The form starts from the most current details: opening it reads the lead again, and only the fields you change are saved. If someone else saved the contact after you opened the form, saving asks you to open it again instead of overwriting their change. Where RingTonic holds a newer value than the site (someone edited the contact in RingTonic), that value is filled in and marked **From RingTonic**. A value someone on your team typed on the site is always kept as it is.
+
+Select **Save contact** and the change is saved everywhere at once:
+
+- the lead in SyteOps, and the name on the callback;
+- the contact in RingTonic, a moment later, in the background. If the phone and the email belong to two different RingTonic contacts, the phone's contact is updated and the lead is flagged so someone can merge the two in RingTonic;
+- your **Automation webhook** and **CRM webhook**, but only one that already received this lead (the Automation webhook when the lead was sent there and its goal still sends to automation; the CRM webhook when the lead was qualified and sent there). Each receives the lead again in the same shape as before, marked `contact_updated`, so your automation can match it to the record it holds;
+- the callback's history, which records who edited the contact and which fields changed (never the values).
+
+An email must be a real address and a phone number must be dialable with its area code; the form points to any field that needs fixing and keeps everything you typed. While someone else is calling the lead, or a call to it is being placed, **Edit contact** is off and says why, the same as the other buttons on the row. Press Escape or **Cancel** to close the form without saving. Right after a save, the **From RingTonic** section says RingTonic is being updated until the change has reached it.
+
+A value a person saves here is final: later automatic fills (from a call transcript, for example) only fill fields that are empty and never replace what a person typed.
+
+### Caller ID name
+
+When a lead calls in, the phone carrier can send a short caller-ID name for the number, such as "Marriott Intl". The panel shows it as **Caller ID name (carrier)**. It is kept only while contact details are stored in **Full**, the first one received is kept, and generic names such as "Wireless Caller", "Unknown", "Private" or a city and state are left out. It is shown as a clue only: it is never copied into the contact's name or company.
 
 ### Calls from the caller
 
