@@ -1,7 +1,7 @@
 ---
 sidebar_position: 17
 title: Callbacks
-description: A list on each person's private page of the callers waiting for a call back, with Done, Not a lead and Reopen, and a setting that decides who sees it.
+description: A list on each person's private page of the callers waiting for a call back, with Call, Done, Not a lead and Reopen, and a setting that decides who sees it.
 ---
 
 # Callbacks
@@ -26,14 +26,14 @@ Access is set person by person. Nobody sees the list until you give them access,
 2. On the **Leads** tab, set **Callbacks access**:
    - **Off**: the list does not appear on their page. This is where everyone starts.
    - **View and act**: they see the list and can mark callbacks Done, Not a lead or Reopen.
-   - **Call**: the same as View and act for now. When calls can be placed from the list, people with this level will get a Call button.
+   - **Call**: everything View and act allows, plus a **Call** button on each row (see [Call a lead back](#call-a-lead-back)).
 3. Click **Save**.
 
 Access stays with the person if you swap people between slots, is cleared when someone leaves a slot, and is never copied to another site when you export or import a person.
 
 ### RingTonic member email
 
-When calls can be placed from the list, RingTonic will ring the person placing the call first. It rings them by their RingTonic sign-in email, and refuses the call if that email is not a member of your RingTonic account. If someone signs in to RingTonic with a different email from the one on their card, enter it in **RingTonic member email** on the same **Leads** tab. Leave it blank to use their usual email. Like access, it moves with the person when you swap slots, is cleared when someone leaves a slot, and is never copied to another site. People cannot change it on their own private page.
+When someone presses **Call**, RingTonic rings the person placing the call first. It rings them by their RingTonic sign-in email, and refuses the call if that email is not a member of your RingTonic account. If someone signs in to RingTonic with a different email from the one on their card, enter it in **RingTonic member email** on the same **Leads** tab. Leave it blank to use their usual email. Like access, it moves with the person when you swap slots, is cleared when someone leaves a slot, and is never copied to another site. People cannot change it on their own private page.
 
 ## Using the list
 
@@ -47,6 +47,34 @@ Callers are grouped in this order:
 4. **Closed**: callbacks marked Done or Not a lead, and ones that expired after 16 weeks.
 
 Each row shows the caller's name and number, their status, how long they have been waiting (or when they first got in touch), any follow-up date and who it belongs to, who closed it and when, the last time someone called them back and how that call went, and, for people who can open the Leads screen, an **Open in admin** link that opens the lead there in a new window, so the portal stays open. When the person's phone and email are on two different RingTonic contacts, the row also says **RingTonic: this person's phone and email are on two different contacts. Merge them in RingTonic.** until someone marks them merged on the lead ([RingTonic](../integrations/ringtonic#create-contacts-from-form-submissions)).
+
+### Call a lead back
+
+People with **Call** access see a **Call** button on every row that is not closed. Press it and a short question opens under the row, for example: "Call (917) 434-7322 from (866) 994-8556? RingTonic rings you at jo@example.com first, then connects the lead." Press **Call** there to place the call, or **Cancel**. Nothing is dialed until you confirm.
+
+RingTonic then rings your phone. Answer it and press 1 when RingTonic asks, and it connects you to the lead. The row says "Calling… RingTonic is ringing you." The callback's status changes only when RingTonic reports how the call went (see the table below): a call answered for 30 seconds or more marks it **Returned**.
+
+**While you are calling a lead, nobody else can work it.** The row shows "You're calling — since 4:02 pm" to you, and "Jo Smith is calling — since 4:02 pm" to everyone else, whose buttons on that row are locked. The lock ends by itself when RingTonic reports the end of the call, when you press **Release**, when you mark the callback Done or Not a lead, or after 15 minutes at the latest (an admin can change the length). Pressing Done, Not a lead or Reopen never locks a row. The list checks for locks once a minute while it is open.
+
+The Call button is grayed out, with the reason at the top of the list, until your site is ready to place calls: an admin has to add the RingTonic calls key, set up RingTonic live notifications and set a verified caller ID (see [RingTonic click-to-call](../integrations/ringtonic#5-click-to-call-the-calls-key-and-caller-id-set-up-by-your-hub-operator)). Calls also need contact details stored in **Full**, because the whole number is needed.
+
+**Limits.** To keep calls under control, each person can place 20 calls a day and the whole site 60 a day, no more than 8 a minute across the site (RingTonic allows 10), and one lead can be called at most 3 times an hour and 10 times a day, whoever calls. The daily counts start again at midnight in your site's time zone. An admin can change all of them on **Leads → Settings → RingTonic → Click-to-call → Call limits**. When a limit is reached, the call is not placed and the row says which limit it was.
+
+If a call does not go through, the row says why in plain words:
+
+| What the row says | What to do |
+|---|---|
+| Your RingTonic member email isn't a RingTonic member; set it on your Leads tab. | RingTonic does not know the email it rang. Set your **RingTonic member email** (above). |
+| RingTonic did not accept the calls key. Ask an admin to check it. | The calls key is wrong or lacks the calls permission. |
+| RingTonic says you are already on a call. | Finish that call first. |
+| RingTonic is placing too many calls right now. Try again in a minute. | RingTonic's own per-minute limit was reached. |
+| RingTonic didn't answer. Check your phone before trying again. | The call may still come through, so the lead stays locked to you. Press **Release** if it never rings. |
+| Ask an admin to set up RingTonic live notifications. | The site cannot hear back from RingTonic about calls yet, so calls are off. |
+| You have placed 20 calls today, your daily limit. | Your daily limit is used up until midnight. |
+
+### Open a callback from an email
+
+Buttons in callback emails open your private page at the right row: the page scrolls to it, highlights it and opens the same question the row's button opens. Nothing happens until you confirm. If someone else is calling that lead, the page says who and since when, and opens nothing. If the callback is no longer waiting, the page says "This callback is no longer waiting."
 
 ### Calls back to the caller
 

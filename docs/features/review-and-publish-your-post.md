@@ -63,6 +63,10 @@ Tables and other formatting in the article body are shown the way they will look
 
 The cards beside the article or preview (Featured Image, Feedback, Reviewers, SEO and the rest) stay in place while they fit next to it. With **Pack cards into gaps** off (see below), the first card that would run past the bottom of the preview, and every card after it, moves underneath at full width, in two or three columns. The Feedback card, and every card above it (such as Featured Image, pictures, Author and the permission note), always stays beside the preview. On a narrow screen the layout is a single column and nothing moves.
 
+The cards underneath use the whole width. A single card spans the page, two or three share it, and when the last row is not full its last card stretches across the space left. A card that ends up wide lays its contents out across too: GEO questions sit side by side, and the SEO fields sit next to each other instead of each running the full width. When GEO or Reviewers is underneath with other cards, it gets a full-width row of its own after them, so its questions or people spread across instead of running down a narrow column.
+
+When cards have moved underneath, a **Below the article** card (**Below the preview** on a page review) appears at the bottom of the sidebar. It lists those cards by name, such as GEO · SEO, with a small down arrow. Select it to jump to the cards underneath, or select a name to jump straight to that card. It only appears on wide screens, while there is something underneath. The arrow bounces a few times and then stops, and stays still if your device is set to reduce motion.
+
 When there are many notes, the Feedback list scrolls inside its card (on screens wider than 920px), so the card stays about the height of the window instead of growing with every note.
 
 Once you have scrolled so far down that the preview is completely out of view, a **Back to preview** button (**Back to article** when you are editing an article) appears at the bottom right. Select it to return to the top of the preview.
