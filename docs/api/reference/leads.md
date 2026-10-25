@@ -266,18 +266,20 @@ data: &#123;items[]: &#123;id,ref,source,campaign,status,event_count,first_seen}
 
 ## `ringtonic_status`
 
-Report the RingTonic receiver's health: module/integration state, whether it is ready to receive deliveries, observe mode, delivery counters, and stored-secret fingerprints. Never returns a secret value.
+Report the RingTonic receiver's health: module/integration state, whether it is ready to receive deliveries, observe mode, delivery counters, and stored-secret fingerprints. Also the calls key (present, fingerprint, RingTonic key id), what it can read (call-logs:read and tracking-numbers read: ok, missing_scope, invalid_key, rate_limited, error, not_checked, no_key or integration_off; calls:place is never probed, because only a real call would test it) and the caller-ID number with its state (unset, unknown, not_found, calls_disabled, ready) from the last tracking-number read. Never returns a secret value.
 
 **Access:** SyteOps Admin or API key.
 
 **Parameters**
 
-_No parameters._
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `probe` | boolean | no | true re-checks the calls key now with two reads (GET /call-logs and GET /tracking-numbers, which also refreshes the caller-ID lookup), at most once a minute per key (a repeat returns the last check). Default false: the last check of the current key. |
 
 
 **Returns**
 
-data: &#123;leads_module_active, integration_enabled, receiver_ready, observe_mode, stats:&#123;counts,last_received_at,last_event,last_status,key_form}, api_key_present, api_key_fingerprint, webhook_secret_present, webhook_secret_fingerprint, plugin_version, leads_module_version}
+data: &#123;leads_module_active, integration_enabled, receiver_ready, observe_mode, stats:&#123;counts,last_received_at,last_event,last_status,key_form}, api_key_present, api_key_fingerprint, webhook_secret_present, webhook_secret_fingerprint, calls_api_key_present, calls_api_key_fingerprint, calls_api_key_id, calls_scopes:&#123;checked_at, call_logs_read, tracking_numbers_read, calls_place}, caller_id:&#123;number, state}, plugin_version, leads_module_version}
 
 **Request**
 
@@ -285,7 +287,9 @@ data: &#123;leads_module_active, integration_enabled, receiver_ready, observe_mo
 {
   "resource": "leads",
   "action": "ringtonic_status",
-  "params": {}
+  "params": {
+    "probe": true
+  }
 }
 ```
 

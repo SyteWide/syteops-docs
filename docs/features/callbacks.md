@@ -31,6 +31,10 @@ Access is set person by person. Nobody sees the list until you give them access,
 
 Access stays with the person if you swap people between slots, is cleared when someone leaves a slot, and is never copied to another site when you export or import a person.
 
+### RingTonic member email
+
+When calls can be placed from the list, RingTonic will ring the person placing the call first. It rings them by their RingTonic sign-in email, and refuses the call if that email is not a member of your RingTonic account. If someone signs in to RingTonic with a different email from the one on their card, enter it in **RingTonic member email** on the same **Leads** tab. Leave it blank to use their usual email. Like access, it moves with the person when you swap slots, is cleared when someone leaves a slot, and is never copied to another site. People cannot change it on their own private page.
+
 ## Using the list
 
 The list is on the person's own private page, under their name. The heading shows how many callers are waiting.
@@ -42,7 +46,7 @@ Callers are grouped in this order:
 3. **Returned**: callers someone has already called back.
 4. **Closed**: callbacks marked Done or Not a lead, and ones that expired after 16 weeks.
 
-Each row shows the caller's name and number, their status, how long they have been waiting (or when they first got in touch), any follow-up date and who it belongs to, who closed it and when, the last time someone called them back and how that call went, and, for people who can open the Leads screen, an **Open lead** link to the lead there. When the person's phone and email are on two different RingTonic contacts, the row also says **RingTonic: this person's phone and email are on two different contacts. Merge them in RingTonic.** until someone marks them merged on the lead ([RingTonic](../integrations/ringtonic#create-contacts-from-form-submissions)).
+Each row shows the caller's name and number, their status, how long they have been waiting (or when they first got in touch), any follow-up date and who it belongs to, who closed it and when, the last time someone called them back and how that call went, and, for people who can open the Leads screen, an **Open in admin** link that opens the lead there in a new window, so the portal stays open. When the person's phone and email are on two different RingTonic contacts, the row also says **RingTonic: this person's phone and email are on two different contacts. Merge them in RingTonic.** until someone marks them merged on the lead ([RingTonic](../integrations/ringtonic#create-contacts-from-form-submissions)).
 
 ### Calls back to the caller
 

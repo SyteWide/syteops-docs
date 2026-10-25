@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.773
+
+- Every portal link to the WordPress admin now opens in a new window, and a callback's link to its lead reads Open in admin. Groundwork for showing a callback's lead, its calls and what was said right in the portal, following the site's contact-details setting.
+
+## v1.6.772
+
+- Sites can now hold a separate RingTonic calls key for click-to-call, kept apart from the CRM sync key. The RingTonic card shows the key's number and fingerprint, checks what it can read, and takes the caller ID number, with a reminder of the caller-ID verification carriers need. Each person's card gains a RingTonic member email on its Leads tab, for people who sign in to RingTonic with a different email.
+
 ## v1.6.771
 
 - A license server that is down, being maintained, or can't reach its store no longer removes SyteOps Admin access on client sites, including sites that have not updated yet; they stay on grace until it answers.
