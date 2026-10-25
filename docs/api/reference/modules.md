@@ -237,7 +237,7 @@ data: &#123;entitlements}
 
 ## `get_config`
 
-Get a module's stored configuration.
+Get a module's stored configuration. Refused for syteops_leads (422 use_leads_settings_get): its webhook addresses can carry a token, and leads.settings_get returns the same settings with them masked.
 
 **Access:** SyteOps Admin or API key.
 
@@ -291,7 +291,7 @@ data.modules[]: array of &#123;module, active}
 
 ## `update_config`
 
-Merge keys into a module's stored configuration.
+Merge keys into a module's stored configuration (no schema). Refused for syteops_leads (422 use_leads_settings_set): the Leads settings are written through leads.settings_set.
 
 **Access:** SyteOps Admin or API key.
 
