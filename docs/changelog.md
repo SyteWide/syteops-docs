@@ -8,6 +8,22 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.770
+
+- When a form lead's phone and email belong to two different RingTonic contacts, the contact matched by phone is updated and gets the form conversion, and the lead is flagged so the two can be merged in RingTonic. The flag shows on the lead and on the Callbacks list, and a Merged button on the lead clears it.
+
+## v1.6.769
+
+- Calls your team makes back to a waiting caller through RingTonic are now recorded on that caller's callback instead of being ignored. An answered call of 30 seconds or more marks the callback Returned, and each callback in the list shows the last call and how it went, for example "No answer" or "The call was never put through to the lead". A call that is not answered never changes a callback's status, and calls are recorded only while contact details are stored in Full.
+
+## v1.6.768
+
+- The SEO card now has separate Generate title, Generate description and Generate keywords buttons, each beside its own field. Each makes one AI request and fills only its own field or fields. Title and description take the primary keyword into account. On a draft, generated text is autosaved like any edit; on a published post it's kept only when you save. Each person can generate up to 40 times an hour and 200 times a day.
+
+## v1.6.767
+
+- Lead settings for each person now have their own Leads tab in Roles & Users, right after Info. Callbacks access moved there from the Info tab, and the tab only appears while Lead Attribution is active.
+
 ## v1.6.765
 
 - Each person's private page can now show a Callbacks list of the callers waiting for a call back, in order, with Done, Not a lead and Reopen. Closed callbacks are hidden until you turn on Show closed, and a status filter shows one group at a time. Access is set person by person (Off, View and act, or Call) on the Roles & Users screen, with no automatic access for administrators.

@@ -67,14 +67,14 @@ Once your hub operator has set up the connection (see [Live notifications](#4-li
 
 | In RingTonic | In your SyteOps Leads list |
 |---|---|
-| An **inbound** call completes or is missed | A new lead appears (or an existing one is updated), carrying the caller's number, when the call started, whether it was a first-time caller, and — when RingTonic has it — the visit that led to the call (landing page, referrer, click ids, medium). An **outbound** call, and RingTonic's own "send test" delivery, are acknowledged and change nothing. |
+| An **inbound** call completes or is missed | A new lead appears (or an existing one is updated), carrying the caller's number, when the call started, whether it was a first-time caller, and — when RingTonic has it — the visit that led to the call (landing page, referrer, click ids, medium). An **outbound** call (someone on your team calling a lead back) never creates a lead: it is recorded on that caller's callback instead (see [Callbacks](../features/callbacks#calls-back-to-the-caller)). RingTonic's own "send test" delivery is acknowledged and changes nothing. |
 | RingTonic marks a call qualified | The **specific lead that call belongs to** moves to **Qualified** — but only moving *forward* (from New or Contacted). A lead already Qualified, Customer, or Unqualified never moves backward because of this. |
 | A contact's stage changes | Every lead bound to that contact has its status moved along too, where RingTonic's stage has a SyteOps equivalent. A stage RingTonic tracks that SyteOps doesn't have a status for (there are more RingTonic stages than SyteOps ones) is still recorded on the lead for reference and as the baseline the outbound sync compares against — it just doesn't change the status shown in your list. |
 | A form is submitted | If SyteOps already has a lead for that same RingTonic contact, RingTonic's form record is linked to it. **RingTonic form submissions never create a new lead** — your own site's forms already do that, and this would just duplicate it. |
 
 Each of these also records the call detail RingTonic already has — duration, how the call ended, the tracking number's name, the caller's city and state and the tags — and, if you switch it on, RingTonic's AI summary of the conversation. See [What lands on the lead](#what-lands-on-the-lead) for the full list and how each field is written.
 
-A delivery whose type SyteOps doesn't yet recognize is simply acknowledged and ignored, never treated as an error — RingTonic adds new capabilities over time, and an unrecognized one should never look like something is broken. A **transcription** notification is the one exception SyteOps acts on selectively: with the call summary switched on it takes the AI summary from it and discards the transcript itself; with the summary off it changes nothing.
+A delivery whose type SyteOps doesn't yet recognize is simply acknowledged and ignored, never treated as an error — RingTonic adds new capabilities over time, and an unrecognized one should never look like something is broken. A **transcription** notification for an inbound call is the one exception SyteOps acts on selectively: with the call summary switched on it takes the AI summary from it and discards the transcript itself; with the summary off it changes nothing.
 
 :::note Matching an inbound call to an existing lead
 A completed or missed call is matched by the call's OWN identity in RingTonic (its call id), not by the contact — a lead qualified for that call is looked up the same way, so qualifying one call for a repeat caller only ever affects that one call's lead, never an earlier one from the same person. A stage change or a form submission, by contrast, IS a contact-level fact — see [How inbound deliveries are matched](#how-inbound-deliveries-are-matched) below.
@@ -109,6 +109,8 @@ The card shows how those first attempts fared: **In-request sends: N finished, M
 - **A "form submitted" conversion** for the contact.
 
 If RingTonic already has the contact (for example from its own website tracker, or a returning visitor), SyteOps adds to that contact instead of creating a second one, but **only fills the custom fields the contact does not have yet**. RingTonic recognizes a contact by the phone or email typed into the form, so a visitor typing someone else's number must never be able to rewrite that person's name, message or campaign details. Existing values are kept; the submission still appears as a new "form submitted" conversion, and the full message is always on the lead in SyteOps. If RingTonic does not let SyteOps read the contact's current values, none of them are changed.
+
+**When the phone and the email belong to two different RingTonic contacts**, RingTonic will not put them on one contact by itself. SyteOps then updates the contact that has the **phone** (filling only the custom fields it does not have yet, as above), records the conversion on that contact, and flags the lead: **RingTonic: this person's phone and email are on two different contacts. Merge them in RingTonic.** The flag shows on the lead's **From RingTonic** card, with the two RingTonic contact numbers, and on the person's row in the portal **Callbacks** card. Once you have merged the two contacts in RingTonic, open the lead and click **Merged** to clear it.
 
 A form set to **delete entries after submission** cannot be used here (SyteOps has nothing to send from); its row on the card says so, and a site that sends contacts another way keeps sending that form's.
 
@@ -177,7 +179,7 @@ The AI call summary and the qualification reason are **off by default**. They ar
 
 To turn them on, tick **Store RingTonic's AI call summary on the lead** on the **RingTonic** card in **Leads → Settings**. Everything else in the table above — duration, call status, tracking number name, caller city and state, tags, the outcome, confidence, deal value and the dates — is recorded regardless of this setting.
 
-With it off, a transcription notification is acknowledged and changes nothing.
+With it off, a transcription notification for an inbound call is acknowledged and changes nothing.
 
 ### The call summary is the one field that can be replaced
 
@@ -198,7 +200,7 @@ Once you have turned the summary on, the call summary and the qualification reas
 
 ### What is never stored
 
-- **Recordings and transcripts.** RingTonic can send the full transcript of a call; SyteOps discards it and keeps only the AI summary. The credentials your hub operator installs deliberately cannot read call logs either, so there is no second route to it.
+- **Recordings and transcripts.** RingTonic can send the full transcript of a call; SyteOps discards it and keeps only the AI summary. The one exception is a call back to someone waiting on a [callback](../features/callbacks): its transcript is kept with that callback's history, only while contact details are stored in Full. A recording is never stored. The credentials your hub operator installs deliberately cannot read call logs either, so there is no second route to it.
 - **The caller's ZIP code.** City and state answer "where is this caller?" without a pinpoint identifier.
 - **Call sentiment.** RingTonic scores sentiment in its own call-log screens, but it does not include it in any of the notifications it sends, so SyteOps has nothing to record. This is a limit of the notification payload, not a SyteOps choice.
 
