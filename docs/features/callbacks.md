@@ -97,7 +97,7 @@ The buttons in a callback email, such as the call summary email below, open your
 
 Each callback a person places can be emailed to the people you choose, once the call has a transcript. In **Leads → Settings → RingTonic → Call summary email**, list their Users slot numbers (for example `001, 003`). **Off until recipients are set.** On a site that already sends callback emails from its own code, turn those off at the same time, or people will get two.
 
-Each person in a listed slot gets one email per callback (once the AI has read it, when AI reads are on). The subject reads like **Callback by Todd: Jane Roe (4 min)**. Calls the lead made to you do not send this email. Inside:
+Each person in a listed slot gets one email per callback (once the AI has read it, when AI reads are on). The subject reads like **Callback by Todd: Jane Roe (4 min)**, and the email's heading says **Call Summary**. Calls the lead made to you do not send this email. Inside:
 
 - who called, or who you called, and what happened: answered, no answer, how long, when, and who placed it;
 - the summary RingTonic wrote, and what the AI did with the call: closed the callback, marked it returned, reopened it, suggested a change, or left it alone;
