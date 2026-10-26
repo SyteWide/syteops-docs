@@ -1,6 +1,6 @@
 {
     "schema_version": 1,
-    "syteops_version": "1.6.786",
+    "syteops_version": "1.6.787",
     "operations": [
         {
             "resource": "users",
@@ -1095,7 +1095,7 @@
             "destructive": false,
             "capability": "manage_options",
             "strict": true,
-            "returns": "data: {settings: {key: value}, keys: {key: {type, writable, masked}}, notes: {key: note}}"
+            "returns": "data: {settings: {key: value}, keys: {key: {type, writable, masked, egress, confirm}}, notes: {key: note}}. egress: the key decides where lead data is sent. confirm: changing it on leads.settings_set needs confirm: true (pii_mode and every egress key)."
         },
         {
             "resource": "leads",

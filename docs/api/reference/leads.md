@@ -372,7 +372,7 @@ Read the Leads settings as the code uses them (the effective value `wp syteops l
 
 **Returns**
 
-data: &#123;settings: &#123;key: value}, keys: &#123;key: &#123;type, writable, masked}}, notes: &#123;key: note}}
+data: &#123;settings: &#123;key: value}, keys: &#123;key: &#123;type, writable, masked, egress, confirm}}, notes: &#123;key: note}}. egress: the key decides where lead data is sent. confirm: changing it on leads.settings_set needs confirm: true (pii_mode and every egress key).
 
 **Request**
 
