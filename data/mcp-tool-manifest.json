@@ -1,7 +1,7 @@
 {
     "schema_version": 1,
     "generated_from": "sytewide-mcp",
-    "mcp_version": "0.34.0",
+    "mcp_version": "0.34.1",
     "profiles": {
         "full": {
             "label": "Full (all tools)",
@@ -13575,7 +13575,7 @@
         {
             "name": "syteops_leads_callback_get",
             "provider": "syteops",
-            "description": "Read-only. One callback with its 50 most recent events, newest first (SyteOps leads.callbacks_get; SyteOps 1.6.764+). It carries the raw phone number only while SyteOps stores contact details in Full; otherwise phone is absent, phone_masked is the mask (empty under Off) and display_name is empty. Do not copy the phone into logs, tickets or other systems. 404 not_found. Returns the list fields plus phone (Full only) and events[]: {kind, actor, at, payload}; payload keeps only source, lead_id, status, action, from, to, via and api_key, where api_key is true or false: whether an API key authorized that action, never which key. Call kinds: outbound_completed, outbound_missed (status canceled: the rep never pressed 1; no-answer: rang out; busy: say the lead's carrier refused the call), outbound_recording, outbound_transcription, outbound_placed (1.6.769+); inbound_completed, inbound_missed, inbound_recording, inbound_transcription (1.6.775+; history only, no status change). Their payload adds event, duration, call_log_uuid, started_at, recording (bool), transcription_confidence, plus summary under Full only. Never a transcript or recording link. 409 callbacks_disabled while the RingTonic integration is off; 409 module_unavailable when Lead Attribution or callbacks are not loaded.",
+            "description": "Read-only. One callback with its 50 most recent events, newest first (SyteOps leads.callbacks_get; SyteOps 1.6.764+). Contact details (phone, display_name, caller_name, AI quote, reason and contact suggestions, data.ai) come back only while SyteOps stores contact details in Full; otherwise phone is absent and phone_masked is the mask. Do not copy them into logs, tickets or other systems. 404 not_found. events[]: {kind, actor, at, payload}. Kinds: person actions and contact events; outbound_ and inbound_ completed, missed, recording, transcription, plus outbound_placed (missed status canceled: the rep never pressed 1; no-answer; busy: say the lead's carrier refused the call; an inbound call never changes the status); contact_edited (1.6.780+; changed lists field names only); ai_read, ai_status, ai_dismissed (1.6.781+; state, outcome, confidence, decision, applied, suggest, follow_up_date). Call payloads add event, duration, call_log_uuid, started_at and transcription_confidence. payload.api_key and payload.recording are booleans: whether an API key authorized the action, never which key, and never a recording link. Never a transcript. 409 callbacks_disabled while the RingTonic integration is off; 409 module_unavailable when Lead Attribution or callbacks are not loaded.",
             "inputSchema": {
                 "type": "object",
                 "properties": {

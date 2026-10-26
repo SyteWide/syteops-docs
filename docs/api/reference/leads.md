@@ -91,7 +91,7 @@ List callbacks (people to call back, one per phone number), oldest first. OPEN s
 
 **Returns**
 
-data: &#123;items[]: &#123;id, phone_masked, status, reason, display_name, carry_since, follow_up_date, follow_up_owner, closed_by, closed_at, last_lead_id, created_at, updated_at}, total, page, per_page (1-200, default 50), status}
+data: &#123;items[]: &#123;id, phone_masked, status, reason, display_name, carry_since, follow_up_date, follow_up_owner, closed_by, closed_at, last_lead_id, created_at, updated_at, expires_on (Y-m-d while an open callback is in its 16th week, else empty)}, total, page, per_page (1-200, default 50), status}
 
 **Request**
 
@@ -388,7 +388,7 @@ data: &#123;settings: &#123;key: value}, keys: &#123;key: &#123;type, writable, 
 
 ## `settings_set`
 
-Set one or more Leads settings in one write, all or nothing, with the settings screen's own rule for each key (the same table `wp syteops leads setting set` uses): a value the screen would quietly correct is refused. Keys are applied in the screen's order, so consent_mode lands before consent_cookie. Refused with 422 and nothing written: an unknown key (unknown_setting), ringtonic_noabort (screen_only_setting: it edits .htaccess), a RingTonic secret by any name (secret_setting: secrets are never written through this API; set them from a terminal with `wp syteops systems-api set --stdin`), a value the rules refuse (invalid_setting). A change to pii_mode (how contact details are stored) or to a key that decides where lead contact details are sent (crm_webhook_url, automation_webhook_url, recipient_emails, email_reply_to) needs confirm:true (409 confirmation_required, naming the keys); resending the current value does not. The confirm is one explicit step for every caller, not a role check. changed is false and nothing is written when no stored value would change.
+Set one or more Leads settings in one write, all or nothing, with the settings screen's own rule for each key (the same table `wp syteops leads setting set` uses): a value the screen would quietly correct is refused. Keys are applied in the screen's order, so consent_mode lands before consent_cookie. Refused with 422 and nothing written: an unknown key (unknown_setting), ringtonic_noabort (screen_only_setting: it edits .htaccess), a RingTonic secret by any name (secret_setting: secrets are never written through this API; set them from a terminal with `wp syteops systems-api set --stdin`), a value the rules refuse (invalid_setting). A change to pii_mode (how contact details are stored) or to a key that decides where lead contact details are sent (crm_webhook_url, automation_webhook_url, recipient_emails, email_reply_to, callbacks_summary_slots, callbacks_reminder_slots, callbacks_reminders_enabled) needs confirm:true (409 confirmation_required, naming the keys); resending the current value does not. The confirm is one explicit step for every caller, not a role check. changed is false and nothing is written when no stored value would change.
 
 **Access:** SyteOps Admin or API key.
 
@@ -397,7 +397,7 @@ Set one or more Leads settings in one write, all or nothing, with the settings s
 | Parameter | Type | Required | Description |
 |---|---|---|---|
 | `settings` | object | yes | A non-empty object of \{setting: value\}; see settings_get for the keys and types. Lists and maps are JSON values. |
-| `confirm` | boolean | no | true to change pii_mode or a lead-data destination (the two webhook addresses, recipient_emails, email_reply_to). |
+| `confirm` | boolean | no | true to change pii_mode or a lead-data destination (the two webhook addresses, recipient_emails, email_reply_to, callbacks_summary_slots, callbacks_reminder_slots, callbacks_weekly_slots, callbacks_reminders_enabled). |
 
 
 **Returns**
