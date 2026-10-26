@@ -8,6 +8,22 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.785
+
+- Callbacks: a Monday list. Every Monday at about 7:30 am (site time), the people in the slots you list under the new Monday callbacks list setting get one email: the callbacks still waiting (oldest first, with how many weeks each has waited), follow-ups due or overdue, what was returned and closed last week (a callback the AI closed is called out, with Reopen), and who called in. Names, numbers and buttons follow the contact-details setting (Masked shows masked details and a link to the page; Off shows counts only), and a call transcript is never emailed. At 16 weeks a callback gets one last mention and then expires, once that Monday's list has gone out (nothing expires while nobody is listed); a new call or form from the same number, or Reopen, starts its 16 weeks again, and, while the list is on, the portal shows when a callback in its last week will expire. Off until recipients are set. If another tool already sends a Monday callbacks report, turn that off at the same time.
+
+## v1.6.784
+
+- Callbacks: with Follow-up reminders switched on in the RingTonic settings, the person who last called a lead gets one email at about 7:30 am (site time) on the day the follow-up is due. It has the last call's summary, the next step, the follow-up date and how long the lead has been waiting, and buttons (Call, Done, Not a lead) that open their page at that callback and ask for a confirm; Call shows only for people with Call access, and the buttons only while contact details are stored in full. If that person has left or does not have Call access, the reminder goes to the slots listed under Otherwise send reminders to slots, and to nobody when none are listed. Nothing is sent while someone is calling the lead, a follow-up missed by up to three days is reminded once, and older ones are not reminded. The transcript and the AI's quoted words are never emailed, and names, numbers and summaries follow the contact-details setting. Off by default.
+
+## v1.6.783
+
+- Callbacks: a call placed from a Call button your site has outside the portal, such as in its lead emails, now locks the callback for the person who placed it, just like a call from the portal, and counts toward the same call limits. It is never stopped by a limit, because it has already been placed, so the portal's Call button sees the limit reached afterward. If someone else is already calling that lead, their lock stays. A site that places its own calls can also check first whether someone is calling a lead or a limit is reached.
+
+## v1.6.782
+
+- Callbacks: people in the slots you list in the RingTonic settings now get one email for each callback a person places, once its call has a transcript and the AI has read it. The subject reads "Callback by Todd: Jane Roe (4 min)". The email has the lead, how the call went, RingTonic's summary, the next step and follow-up date, what the AI did, and buttons (Call again, Done, Not a lead, Reopen) that open the person's own page at that callback and ask for a confirm; only the buttons that fit the callback's state and the person's access are shown, and only while contact details are stored in full. A callback the AI closed is called out at the top with its reason and confidence, with Reopen. The transcript and the AI's quoted words are never emailed, and names, numbers and summaries follow the contact-details setting. Off until recipients are set. On a site that already sends callback emails from its own code, turn those off at the same time.
+
 ## v1.6.781
 
 - Callbacks: an AI now reads each call's transcript once and decides whether the callback is handled or still needs a call. It closes a callback by itself only when it is at least 85% sure and can quote the call word for word; otherwise the row shows its suggestion with Confirm and Dismiss. It reopens a callback or sets a follow-up when it is at least 60% sure, fills in a name, company or email it heard only where the field is empty and nobody on the team typed one, and treats the carrier's caller ID name as a clue, never as proof. Each call in the lead view shows what the AI read and did. Both thresholds and a daily limit of AI reads are in the RingTonic settings, and it uses the AI provider chosen for Lead Attribution.

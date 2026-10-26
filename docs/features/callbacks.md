@@ -60,6 +60,8 @@ The Call button is grayed out, with the reason at the top of the list, until you
 
 **Limits.** To keep calls under control, each person can place 20 calls a day and the whole site 60 a day, no more than 8 a minute across the site (RingTonic allows 10), and one lead can be called at most 3 times an hour and 10 times a day, whoever calls. The daily counts start again at midnight in your site's time zone. An admin can change all of them on **Leads → Settings → RingTonic → Click-to-call → Call limits**. When a limit is reached, the call is not placed and the row says which limit it was.
 
+**Calls your site places itself.** If your site has a Call button outside the portal, such as in its lead emails, and it tells SyteOps about each call it places, that call now locks the callback for the person who placed it, just like a call from this list, and counts toward the same limits. A call like that is never stopped by a limit, because it has already been placed; once a limit is used up, the Call button here stops placing calls until it resets. If someone else is already calling that lead, their lock stays.
+
 If a call does not go through, the row says why in plain words:
 
 | What the row says | What to do |
@@ -72,9 +74,59 @@ If a call does not go through, the row says why in plain words:
 | Ask an admin to set up RingTonic live notifications. | The site cannot hear back from RingTonic about calls yet, so calls are off. |
 | You have placed 20 calls today, your daily limit. | Your daily limit is used up until midnight. |
 
+### Monday callbacks list
+
+Every Monday at about 7:30 am (your site's time; a missed Monday is made up later that week), the people you list get one email with the week in front of them. Nobody is listed until you add them.
+
+- **Last mention**: callbacks in their 16th week. If nobody returns or closes them, they expire after this email.
+- **Callbacks still waiting**: oldest first, each with how many weeks it has been waiting. A callback stays on the list, week after week, until someone returns it or closes it.
+- **Follow-ups due or overdue**: the follow-ups due this week, and any that are late.
+- **Returned last week**, **Closed last week** (including the ones the AI closed, each with Reopen) and **Called in last week**.
+
+At 16 weeks a callback gets one last mention and then expires. It leaves the waiting list and shows as Expired under Closed. Reopen it, or a new call from the same number, starts its 16 weeks again. Nothing expires while nobody is listed for the email, because the Monday list carries the last mention; with a list set, a callback in its last week also says when it expires on its row in the portal. A new call or form from the same number counts as hearing from them again, so their 16 weeks restart.
+
+**Settings** (an admin, on **Leads → Settings → RingTonic → Monday callbacks list**): **Send the Monday list to slots**, for example `001, 003`. This list is separate from the call summary emails. The email goes to whoever holds each slot on Monday, and only while they have Callbacks access of View and act or Call. If you already send a Monday callbacks report from another tool, turn that off at the same time.
+
+With contact details stored in full, the email shows names and numbers and the Done, Not a lead, Call again and Reopen buttons. With Masked it shows masked names and numbers and one **Open your page** link. With Off it shows counts only. It never includes a call transcript.
+
 ### Open a callback from an email
 
-Buttons in callback emails open your private page at the right row: the page scrolls to it, highlights it and opens the same question the row's button opens. Nothing happens until you confirm. If someone else is calling that lead, the page says who and since when, and opens nothing. If the callback is no longer waiting, the page says "This callback is no longer waiting."
+The buttons in a callback email, such as the call summary email below, open your private page at the right row: the page scrolls to it, highlights it and opens the same question the row's button opens. Nothing happens until you confirm. If someone else is calling that lead, the page says who and since when, and opens nothing. If the callback is no longer waiting, the page says "This callback is no longer waiting."
+
+### Call summary emails
+
+Each callback a person places can be emailed to the people you choose, once the call has a transcript. In **Leads → Settings → RingTonic → Call summary email**, list their Users slot numbers (for example `001, 003`). **Off until recipients are set.** On a site that already sends callback emails from its own code, turn those off at the same time, or people will get two.
+
+Each person in a listed slot gets one email per callback (once the AI has read it, when AI reads are on). The subject reads like **Callback by Todd: Jane Roe (4 min)**. Calls the lead made to you do not send this email. Inside:
+
+- who called, or who you called, and what happened: answered, no answer, how long, when, and who placed it;
+- the summary RingTonic wrote, and what the AI did with the call: closed the callback, marked it returned, reopened it, suggested a change, or left it alone;
+- the next step and follow-up date, when the call needs another call;
+- the callback's status and any follow-up date;
+- buttons (when contact details are stored in full) that fit the callback: **Call again** (only for people with Call access), **Done** and **Not a lead** on a waiting callback, **Reopen** on a closed one.
+
+When the AI closed the callback, the top of the email says so, with its reason and how sure it was, and offers **Reopen**.
+
+The buttons open your own page at that callback and ask you to confirm; nothing changes from the email itself, and a callback someone else is calling stays locked. A person only gets the email while their slot has Callbacks access of View and act or Call. The email never contains the transcript or the words the AI quoted. Under **Masked** it shows the masked number only, with no name, summary or AI reason, and under **Off** no number either. In both, the buttons are replaced by one **Open your page** link, because the page only acts on a callback while contact details are stored in full.
+
+### Follow-up reminders
+
+When a callback has a follow-up date, the person who last called that lead can get one reminder email on the day, at about 7:30 am in your site's time zone. **Off by default.** Turn it on in **Leads → Settings → RingTonic → Follow-up reminders**.
+
+Inside:
+
+- the lead, the follow-up date and how long they have been waiting;
+- the summary of the last call and the next step, when the AI saw that another call is needed;
+- buttons (when contact details are stored in full): **Call** (only for people with Call access), **Done** and **Not a lead**. They open your own page at that callback and ask you to confirm; nothing changes from the email itself.
+
+Who gets it: the person who placed the most recent call on that callback, as long as they still hold their slot with Call access, a portal page and an email address. If they do not, the reminder goes to the slots you list under **Otherwise send reminders to slots** (for example `001, 003`), and to nobody when that box is empty.
+
+Good to know:
+
+- A reminder is sent once for each follow-up date. Move the date and you get a new one for the new date.
+- Nothing is sent while someone is calling that lead, or once the callback is no longer waiting.
+- If the site was down, or reminders were off, a follow-up up to three days late is still reminded once (the subject then says when it was due), and older ones are not. A follow-up set for today after 7:30 is reminded the next morning. If the 7:30 run was missed (for example after a time zone change), it runs as soon as the site is next visited that day.
+- The email never contains the transcript or the words the AI quoted. Under **Masked** it shows the masked number and the person's initials instead of the name, with no summary or next step, and under **Off** no number either; in both, the buttons are replaced by one **Open your page** link.
 
 ### Calls back to the caller
 
