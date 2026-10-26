@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.781
+
+- Callbacks: an AI now reads each call's transcript once and decides whether the callback is handled or still needs a call. It closes a callback by itself only when it is at least 85% sure and can quote the call word for word; otherwise the row shows its suggestion with Confirm and Dismiss. It reopens a callback or sets a follow-up when it is at least 60% sure, fills in a name, company or email it heard only where the field is empty and nobody on the team typed one, and treats the carrier's caller ID name as a clue, never as proof. Each call in the lead view shows what the AI read and did. Both thresholds and a daily limit of AI reads are in the RingTonic settings, and it uses the AI provider chosen for Lead Attribution.
+
 ## v1.6.780
 
 - Callbacks: a person returning a call can edit the lead's contact right in the portal (first and last name, company, email, office phone and a note; the phone number stays fixed). Saving updates the lead and the callback, updates the RingTonic contact a moment later, and sends the updated lead to your CRM and Automation webhooks marked as a contact update. The lead view also shows the contact as RingTonic holds it now, and the caller ID name the phone carrier gives on an incoming call.

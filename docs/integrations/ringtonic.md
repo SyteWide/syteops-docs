@@ -61,6 +61,8 @@ With the key, live notifications (step 4) and a verified caller ID in place, peo
 
 **Call limits.** Under **Call limits** in the same card: **Calls per person per day** (default 20), **Calls per site per day** (default 60), **Calls per minute (whole site)** (default 8, at most 10, RingTonic's own limit), **Calls per lead per hour** (default 3) and **Calls per lead per day** (default 10), which count every caller, and **Minutes a call locks its callback** (default 15: while someone is calling a lead, everyone else's buttons on it are locked until the call ends, the caller releases it, or this many minutes pass). A call over a limit is refused and nothing is sent. The daily limits reset at midnight in your site's time zone.
 
+**AI read of call transcripts.** Under **AI read of call transcripts** in the same card: **AI reads per site per day** (default 100; 0 turns AI reads off), **Close threshold (%)** (default 85) and **Open threshold (%)** (default 60). Each call with a transcript is read once by the AI provider and model chosen in the **AI mapping** card, which decides whether the callback is handled or still needs a call (see [What the AI does with each call](../features/callbacks#what-the-ai-does-with-each-call)). Until an AI provider, a model and its key are set there, nothing is read.
+
 ## What syncs, and in which direction
 
 ### From SyteOps to RingTonic (via WP-cron, shortly after the change)
@@ -224,7 +226,7 @@ An inbound call can carry the phone carrier's caller-ID name for the number. Syt
 
 ### What is never stored
 
-- **Recordings and transcripts.** RingTonic can send the full transcript of a call; SyteOps discards it and keeps only the AI summary. The one exception is a call back to someone waiting on a [callback](../features/callbacks): its transcript is kept with that callback's history, only while contact details are stored in Full. A recording is never stored. The credentials your hub operator installs deliberately cannot read call logs either, so there is no second route to it.
+- **Recordings and transcripts.** RingTonic can send the full transcript of a call; SyteOps discards it and keeps only the AI summary. The one exception is a call with someone waiting on a [callback](../features/callbacks): its transcript is kept with that callback's history, only while contact details are stored in Full. While AI reads are on, that transcript, the call's date and length, the callback's status, the carrier's caller ID name and the lead's name, company and email are sent once to the AI provider chosen in the **AI mapping** card, so it can read the call; set **AI reads per site per day** to 0 to send nothing. A recording is never stored. The credentials your hub operator installs deliberately cannot read call logs either, so there is no second route to it.
 - **The caller's ZIP code.** City and state answer "where is this caller?" without a pinpoint identifier.
 - **Call sentiment.** RingTonic scores sentiment in its own call-log screens, but it does not include it in any of the notifications it sends, so SyteOps has nothing to record. This is a limit of the notification payload, not a SyteOps choice.
 

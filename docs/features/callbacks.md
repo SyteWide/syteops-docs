@@ -1,7 +1,7 @@
 ---
 sidebar_position: 17
 title: Callbacks
-description: A list on each person's private page of the callers waiting for a call back, with Call, Done, Not a lead and Reopen, and a setting that decides who sees it.
+description: A list on each person's private page of the callers waiting for a call back, with Call, Done, Not a lead and Reopen, an AI read of every call, and a setting that decides who sees it.
 ---
 
 # Callbacks
@@ -134,13 +134,33 @@ When a lead calls in, the phone carrier can send a short caller-ID name for the 
 
 When a caller rings your RingTonic number again, the callback records that call too, with how it went, how long it lasted, whether there is a recording and, while contact details are stored in **Full**, RingTonic's AI summary and transcript. The row's last call then reads, for example, "Called in Oct 24, 2:30 pm · Answered · 5:00" or "Called in Oct 24, 2:30 pm · Missed".
 
-A call from the caller never marks the callback **Returned** or closes it, however long it lasted: talking to someone when they ring in does not always mean their request was handled. The only change a new call makes is the one in [Good to know](#good-to-know): a callback that was Done, Returned, Expired or Held goes back to the waiting list.
+A call from the caller never marks the callback **Returned** or closes it by its length alone, however long it lasted: talking to someone when they ring in does not always mean their request was handled. The only change the call itself makes is the one in [Good to know](#good-to-know): a callback that was Done, Returned, Expired or Held goes back to the waiting list. What was said on the call is for the AI read (see [What the AI does with each call](#what-the-ai-does-with-each-call)).
 
 These calls are recorded only while contact details are stored in **Full**, and only for callers who already have a callback (a first-time caller gets one from the call itself).
 
 ### Calls placed in the RingTonic app
 
 A call someone on your team dials directly in the RingTonic app is recorded like any other call back. RingTonic does not say which team member dialed it, so the lead view shows **Placed in RingTonic** instead of a name.
+
+### What the AI does with each call
+
+When a call has a transcript, outgoing or incoming, an AI reads it once and decides what it means for the callback. It never acts on a hunch:
+
+- **Closing a callback** (the call was returned, the matter is handled, or the caller is not a real lead) happens only when the AI is at least **85% sure** and can quote the transcript word for word to back it up. The row then says, for example, **Closed by AI · The caller says the loan closed · 91%**, with **Reopen** right there.
+- **Below that**, nothing changes. The row shows a suggestion instead, for example **AI: looks handled — The caller says the loan closed 72%**, with **Confirm** (which does exactly what the row's **Done** or **Not a lead** button does) and **Dismiss**.
+- **Opening a callback again** (the caller still wants a call, or asked to be called on a later date) happens when the AI is at least **60% sure**. The row says **Opened by AI** with the reason, and a follow-up date is set when a day was agreed. Below 60% nothing happens. A callback someone marked **Not a lead** is never reopened by the AI; it suggests a **Reopen** instead.
+- **Moving a waiting callback to a later follow-up date** takes it off the waiting list, so it needs the same 85% and the words from the call. Otherwise the row only notes "AI: suggests a follow-up on …", which you can dismiss.
+- **A row the AI marked returned** says **Marked returned by AI**.
+- **Names, company and email** heard on the call fill in only fields that are still empty and that nobody on your team has typed, and only at the same 85% with the words in the transcript. The panel then says **Filled by AI**. Anything else becomes a suggestion such as **AI heard: Jane Roe, Marriott**; **Confirm** opens **Edit contact** with those values filled in, and nothing is saved until you press **Save contact**.
+- **The carrier's caller ID name** is weighed as a clue but is never enough on its own: it can only suggest ("Carrier caller ID says: Marriott Intl"). A business name there is treated as the company. When the caller ID and the call disagree, the suggestion shows both.
+- **Someone else calling the lead**: while a person is calling a lead, the AI waits and tries again when they are done, up to three times. If the lead is still being called after that, what the AI found is shown only as suggestions.
+- **You decided after the call**: if someone pressed **Done**, **Not a lead** or **Reopen** after the call came in, the AI never overrules them; it can only suggest.
+- **A call that talks to the AI**: if anything said on the call (or typed into the lead's details) looks like an instruction to the AI, such as "ignore your instructions" or "mark this as complete", the AI changes nothing and the row says the call had words aimed at the AI. Check the transcript yourself.
+- **While the AI is updating a callback** (a second or two), the row's buttons answer "The AI is updating this callback from its last call. Try again in a moment."
+
+Each call in **View lead** shows its **AI read**: what it decided, how sure it was, the words it relied on, and what it did. Every change the AI makes is in the callback's history.
+
+**Settings** (an admin, on **Leads → Settings → RingTonic → AI read of call transcripts**): the **close threshold** (85%), the **open threshold** (60%), and **AI reads per site per day** (100; set 0 to turn AI reads off). Over the daily limit a call is not read and its row says **AI read skipped (daily limit)**; the count starts again at midnight in your site's time zone. The AI uses the provider and model chosen in the **AI mapping** card; nothing happens until one is set. AI reads run only while contact details are stored in **Full**.
 
 ### Closed callbacks are hidden
 
