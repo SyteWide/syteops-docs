@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.786
+
+- Fixes a critical error on sites with Leads active: the follow-up reminder's daily check was started with the wrong kind of value, which stopped the site loading. Callback reminders, summaries and the weekly list now start safely.
+
 ## v1.6.785
 
 - Callbacks: a Monday list. Every Monday at about 7:30 am (site time), the people in the slots you list under the new Monday callbacks list setting get one email: the callbacks still waiting (oldest first, with how many weeks each has waited), follow-ups due or overdue, what was returned and closed last week (a callback the AI closed is called out, with Reopen), and who called in. Names, numbers and buttons follow the contact-details setting (Masked shows masked details and a link to the page; Off shows counts only), and a call transcript is never emailed. At 16 weeks a callback gets one last mention and then expires, once that Monday's list has gone out (nothing expires while nobody is listed); a new call or form from the same number, or Reopen, starts its 16 weeks again, and, while the list is on, the portal shows when a callback in its last week will expire. Off until recipients are set. If another tool already sends a Monday callbacks report, turn that off at the same time.
