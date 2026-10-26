@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.787
+
+- The management API's Leads settings read now says, for each setting, whether it decides where lead details are sent and whether changing it needs a confirmation, so tools no longer keep their own list.
+
 ## v1.6.786
 
 - Fixes a critical error on sites with Leads active: the follow-up reminder's daily check was started with the wrong kind of value, which stopped the site loading. Callback reminders, summaries and the weekly list now start safely.
