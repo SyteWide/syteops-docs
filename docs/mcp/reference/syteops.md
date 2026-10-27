@@ -87,7 +87,7 @@ Read-only. The publishing calendar for a window (SyteOps calendar.query; SyteOps
 
 ## `syteops_calendar_reschedule`
 
-Move a post's publication to a future moment, as dragging it on the calendar does (SyteOps calendar.reschedule; SyteOps 1.6.758+): a draft or pending post becomes scheduled and goes live by itself at that time (no review approval, readiness check or confirm), a scheduled post moves, and the schedule notice goes to the people the portal tells. date must be at least five minutes ahead (422 date_not_future); a date under five minutes ahead is refused, never published immediately; a live post cannot get a later date (409 published_immutable). A bad date is 422 invalid_date. Returns &#123;post_id, status, scheduled, intent, date_gmt, date_site, notify}. Returns 409 module_unavailable when Content Pipelines is not active.
+Move a post's publication to a future moment, as dragging it on the calendar does (SyteOps calendar.reschedule; SyteOps 1.6.758+): a draft or pending post becomes scheduled and goes live by itself at that time (no review approval, readiness check or confirm), a scheduled post moves, and the schedule notice goes to the people the portal tells. date must be at least five minutes ahead (422 date_not_future); a date under five minutes ahead is refused, never published immediately; a live post cannot get a later date (409 published_immutable). A bad date is 422 invalid_date. SyteOps 1.6.804+: 422 invalid_datetime and unsupported_type, 409 unsupported_status and scheduling_disabled (all were 400). Returns &#123;post_id, status, scheduled, intent, date_gmt, date_site, notify}. Returns 409 module_unavailable when Content Pipelines is not active.
 
 **Profiles:** `full`, `syteops`
 
@@ -101,7 +101,7 @@ Move a post's publication to a future moment, as dragging it on the calendar doe
 
 ## `syteops_calendar_reserve_slot`
 
-Hold the next free cadence moment on a draft or pending post, as an arriving article gets one; a post already holding one is moved (SyteOps calendar.slot_reserve; SyteOps 1.6.758+). Other statuses are 409 not_holdable; a post type the calendar does not handle is 422 unsupported_type. Not reserving is an answer: reserved is false with reason slots_disabled, cadence_opt_out or not_reserved. Returns &#123;post_id, reserved, reason, slot_gmt, slot_site}. Returns 409 module_unavailable when Content Pipelines is not active.
+Hold the next free cadence moment on a draft or pending post, as an arriving article gets one; a post already holding one is moved (SyteOps calendar.slot_reserve; SyteOps 1.6.758+). Other statuses are 409 not_holdable; a post type the calendar does not handle is 422 unsupported_type (SyteOps 1.6.804+; was 400). Not reserving is an answer: reserved is false with reason slots_disabled, cadence_opt_out or not_reserved. Returns &#123;post_id, reserved, reason, slot_gmt, slot_site}. Returns 409 module_unavailable when Content Pipelines is not active.
 
 **Profiles:** `full`, `syteops`
 
@@ -141,7 +141,7 @@ Cancel a scheduled post's publication and return it to a draft (SyteOps calendar
 
 ## `syteops_dispatch`
 
-Invoke any SyteOps Manage operation. Pass resource + action (see syteops_manifest) and params per that operation's schema. Destructive operations (the manifest marks them) require confirm:true. The dedicated secret-slot writes (crm.set_secret, ai.set_key, any action ending set_secret or set_key, and any operation that takes one of its own secret_keys as a param) are refused, so stored API keys are set from a terminal or the SyteOps admin, not as an MCP tool input. Returns &#123;ok, changed, data} on success.
+Invoke any SyteOps Manage operation. Pass resource + action (see syteops_manifest) and params per that operation's schema. Destructive operations (the manifest marks them) require confirm:true. The dedicated secret-slot writes (crm.set_secret, ai.set_key, any action ending set_secret or set_key, and any operation that takes one of its own secret_keys as a param) are refused, so stored API keys are set from a terminal or the SyteOps admin, not as an MCP tool input. Returns &#123;ok, changed, data} on success. SyteOps 1.6.804+: modules get_config and update_config reach only the syteops_banners bucket (other modules 403 config_not_exposed; update_config 422 unknown_config_key or invalid_config_value; Leads uses leads.settings_get and settings_set). 409 busy is retryable.
 
 **Profiles:** `full`, `syteops`
 
@@ -214,7 +214,7 @@ Issue, or return, the people link of the person in a Users slot: the stable slug
 
 ## `syteops_leads_settings_get`
 
-Read-only. The Leads settings as the code uses them (SyteOps leads.settings_get; SyteOps 1.6.776+): &#123;settings, keys: &#123;key: &#123;type, writable, masked, egress, confirm}}, notes}; egress and confirm are SyteOps 1.6.787+, and confirm true means syteops_leads_settings_set needs confirm:true to change that key. Pass keys to read only some (an unknown key is 422 unknown_setting, a non-string entry 422 invalid_params). crm_webhook_url and automation_webhook_url read as an empty string or "[set]" and are never revealed. pii_mode is the mode in force; notes names a key stored in an older shape. Never returns a RingTonic secret. internal_cookie / _param / _header values, recipient_emails, email_reply_to and ringtonic_caller_id_number come back in clear: not credentials, but do not copy them elsewhere. 409 module_unavailable when the Leads settings are not loaded. Call this before syteops_leads_settings_set to learn the keys and which are writable.
+Read-only. The Leads settings as the code uses them (SyteOps leads.settings_get; SyteOps 1.6.776+): &#123;settings, keys: &#123;key: &#123;type, writable, masked, egress, confirm}}, notes}; egress and confirm are SyteOps 1.6.787+, and confirm true means syteops_leads_settings_set needs confirm:true to change that key (SyteOps 1.6.804+ also flags the off-site switches and ringtonic_store_call_summary; ringtonic_contact_internal only when set to push). Pass keys to read only some (an unknown key is 422 unknown_setting, a non-string entry 422 invalid_params). crm_webhook_url and automation_webhook_url read as an empty string or "[set]" and are never revealed. pii_mode is the mode in force; notes names a key stored in an older shape. Never returns a RingTonic secret. internal_cookie / _param / _header values, recipient_emails, email_reply_to and ringtonic_caller_id_number come back in clear: not credentials, but do not copy them elsewhere. 409 module_unavailable when the Leads settings are not loaded. Call this before syteops_leads_settings_set to learn the keys and which are writable.
 
 **Profiles:** `full`, `syteops`
 
@@ -227,7 +227,7 @@ Read-only. The Leads settings as the code uses them (SyteOps leads.settings_get;
 
 ## `syteops_leads_settings_set`
 
-Set one or more Leads settings in one write, all or nothing (SyteOps leads.settings_set; SyteOps 1.6.776+). This changes live lead routing, so read syteops_leads_settings_get first for the keys and which are writable. Refused with 422 and nothing written: unknown_setting; screen_only_setting (ringtonic_noabort edits .htaccess); invalid_setting (a value the settings screen rules refuse); secret_setting (RingTonic secrets are never written here: set them from a terminal with `wp syteops systems-api set --stdin` or upload-plugin-release.sh set-secret); invalid_params (settings empty or a list); 409 module_unavailable (Leads settings not loaded). 409 confirmation_required unless confirm is true when the call changes a key whose syteops_leads_settings_get keys entry has confirm true (SyteOps 1.6.787+), i.e. pii_mode or a data-egress key (crm_webhook_url, automation_webhook_url, recipient_emails, email_reply_to; SyteOps 1.6.786+ also callbacks_summary_slots, callbacks_reminders_enabled, callbacks_reminder_slots, callbacks_weekly_slots); resending the current value needs no confirm. Webhook addresses read back as an empty string or "[set]". Returns &#123;changed_keys[], settings}; changed_keys is empty when nothing would change.
+Set one or more Leads settings in one write, all or nothing (SyteOps leads.settings_set; SyteOps 1.6.776+). This changes live lead routing; read syteops_leads_settings_get first. 422, nothing written: unknown_setting; screen_only_setting (ringtonic_noabort); invalid_setting (a value the screen refuses; 1.6.804+: also a loopback, private or metadata webhook address, a sent-back "[set" placeholder, a bad recipient_emails entry); secret_setting (RingTonic secrets: `wp syteops systems-api set --stdin` or upload-plugin-release.sh set-secret); invalid_params (settings empty/list); 409 module_unavailable. 409 confirmation_required unless confirm is true when a call changes a key whose syteops_leads_settings_get keys entry has confirm true (1.6.787+; check keys&#123;k}.confirm first). Fallback: pii_mode, ringtonic_store_call_summary, crm_webhook_url, automation_webhook_url, recipient_emails, email_reply_to, callbacks_summary_slots, callbacks_reminders_enabled, callbacks_reminder_slots, callbacks_weekly_slots, and from 1.6.804 automation_webhook_enabled, crm_webhook_enabled, email_instant_enabled, email_periodic_enabled, ringtonic_contact_forms, ringtonic_contact_field_names, ringtonic_contact_internal=push. Resending the current value needs none. Returns &#123;changed_keys[], settings}.
 
 **Profiles:** `full`, `syteops`
 
@@ -236,12 +236,12 @@ Set one or more Leads settings in one write, all or nothing (SyteOps leads.setti
 | Parameter | Type | Required | Description |
 |---|---|---|---|
 | `settings` | object | yes | A non-empty object of \{setting: value\}, all applied or none. Read syteops_leads_settings_get first for the keys, their types and which are writable. Lists and maps are JSON values. |
-| `confirm` | boolean | yes | true only when this call changes a key that syteops_leads_settings_get marks confirm (pii_mode or a data-egress key: crm_webhook_url, automation_webhook_url, recipient_emails, email_reply_to; SyteOps 1.6.786+ also callbacks_summary_slots, callbacks_reminders_enabled, callbacks_reminder_slots, callbacks_weekly_slots) and the operator approved it; false otherwise. |
+| `confirm` | boolean | yes | true only when this call changes a key that syteops_leads_settings_get marks confirm (check keys\{k\}.confirm first): pii_mode, ringtonic_store_call_summary or a data-egress key (crm_webhook_url, automation_webhook_url, recipient_emails, email_reply_to; SyteOps 1.6.786+ also callbacks_summary_slots, callbacks_reminders_enabled, callbacks_reminder_slots, callbacks_weekly_slots; SyteOps 1.6.804+ also the off-site switches automation_webhook_enabled, crm_webhook_enabled, email_instant_enabled, email_periodic_enabled, ringtonic_contact_forms, ringtonic_contact_field_names, ringtonic_contact_internal=push) and the operator approved it; false otherwise. |
 
 
 ## `syteops_listing_image_reprocess`
 
-Rebuild the listing-card image for each image the article owns from scratch, even when one looks current (SyteOps listing_image.reprocess; SyteOps 1.6.758+): the failure memo is cleared and the paid repair re-queued. The live crop stays until the new one replaces it, so this is not destructive. At most 25 images per call; same refusals and 600-second per-article cooldown as syteops_listing_image_run.
+Rebuild the listing-card image for each image the article owns from scratch, even when one looks current (SyteOps listing_image.reprocess; SyteOps 1.6.758+): the failure memo is cleared and the paid repair re-queued. The live crop stays until the new one replaces it, so this is not destructive. At most 25 images per call; same refusals, 600-second per-article cooldown and 429 daily_limit site-wide daily allowance as syteops_listing_image_run.
 
 **Profiles:** `full`, `syteops`
 
@@ -254,7 +254,7 @@ Rebuild the listing-card image for each image the article owns from scratch, eve
 
 ## `syteops_listing_image_run`
 
-Build the listing-card image for each image the article owns that lacks a current one; current images are left alone (SyteOps listing_image.run; SyteOps 1.6.758+). With the watermark repair on this queues paid image-model jobs. At most 25 images per call. 409 listing_image_disabled when the feature is off; 429 cooldown (600 seconds per article, shared with syteops_listing_image_reprocess, not used up when nothing was built or queued); 404 post_not_found. Returns &#123;post_id, processed, queued, failed, skipped, items[]}.
+Build the listing-card image for each image the article owns that lacks a current one; current images are left alone (SyteOps listing_image.run; SyteOps 1.6.758+). With the watermark repair on this queues paid image-model jobs. At most 25 images per call. 409 listing_image_disabled when the feature is off; 429 cooldown (600 seconds per article, shared with syteops_listing_image_reprocess, not used up when nothing was built or queued); 429 daily_limit (SyteOps 1.6.804+) when the site-wide daily allowance, 100 images by default across run and reprocess and refunded when nothing was built or queued, is used up; 404 post_not_found. Returns &#123;post_id, processed, queued, failed, skipped, items[]}.
 
 **Profiles:** `full`, `syteops`
 
@@ -309,7 +309,7 @@ Read-only. The stored engine choice for each capability, or for one (SyteOps pip
 
 ## `syteops_pipeline_engine_set`
 
-Choose the engine for a capability (SyteOps pipelines.engine_set; SyteOps 1.6.758+); an empty engine clears the choice. 422 unknown_capability; 422 invalid_engine when the engine does not fill it; seo and geo follow their integration toggles, so setting or clearing them is 409 engine_follows_integration. Returns &#123;capability, engine, previous}. Returns 409 module_unavailable when Content Pipelines are disabled in SyteOps.
+Choose the engine for a capability (SyteOps pipelines.engine_set; SyteOps 1.6.758+); an empty engine clears the choice. 422 unknown_capability; 422 invalid_engine when the engine does not fill it; seo and geo follow their integration toggles, so setting or clearing them is 409 engine_follows_integration. Returns &#123;capability, engine, previous}. 409 busy (SyteOps 1.6.804+; was 500 write_failed): another pipelines change is in progress, so retry. Returns 409 module_unavailable when Content Pipelines are disabled in SyteOps.
 
 **Profiles:** `full`, `syteops`
 
@@ -336,7 +336,7 @@ Turn GEO generation on or off, the same switch as the provider card (SyteOps pip
 
 ## `syteops_pipeline_history_clear`
 
-DESTRUCTIVE: clears ALL run history and the mirrored activity feed (SyteOps pipelines.clear_runs; SyteOps 1.6.758+). Needs confirm:true. The lasting deletion records are kept and a runs_cleared record with the count is written. Returns &#123;deleted}. To delete one row use syteops_pipeline_run_delete. Returns 409 module_unavailable when Content Pipelines are disabled in SyteOps.
+DESTRUCTIVE: clears ALL run history and the mirrored activity feed (SyteOps pipelines.clear_runs; SyteOps 1.6.758+). Needs confirm:true. The lasting deletion records are kept and a runs_cleared record with the count is written. Returns &#123;deleted}. A failed clear is 500 clear_failed and writes no record (SyteOps 1.6.804+). To delete one row use syteops_pipeline_run_delete. Returns 409 module_unavailable when Content Pipelines are disabled in SyteOps.
 
 **Profiles:** `full`, `syteops`
 
@@ -373,7 +373,7 @@ _No parameters._
 
 ## `syteops_pipeline_mode_set`
 
-DESTRUCTIVE: switches the Content Pipelines mode (SyteOps pipelines.mode_set; SyteOps 1.6.758+). Production starts workflow forwards and social sends and lets ingested posts publish. Setup holds back run history, forwards, social sends (held until production) and the ingest reviewer, Now live, schedule-change and held-source alert emails, and forces ingested posts to draft, but it does not stop syteops_review_approve or scheduled posts, which still publish. Needs confirm:true. Any other mode is 422 invalid_mode. Returns &#123;mode, previous}, plus pinned:true when a site filter keeps a different mode running. Returns 409 module_unavailable when Content Pipelines are disabled in SyteOps.
+DESTRUCTIVE: switches the Content Pipelines mode (SyteOps pipelines.mode_set; SyteOps 1.6.758+). Production starts workflow forwards and social sends and lets ingested posts publish. Setup holds back run history, forwards, social sends (held until production) and the ingest reviewer, Now live, schedule-change and held-source alert emails, and forces ingested posts to draft, but it does not stop syteops_review_approve or scheduled posts, which still publish. Needs confirm:true. Any other mode is 422 invalid_mode. Returns &#123;mode, previous}, plus pinned:true when a site filter keeps a different mode running. 409 busy (SyteOps 1.6.804+; was 500 write_failed): another pipelines change is in progress, so retry. Returns 409 module_unavailable when Content Pipelines are disabled in SyteOps.
 
 **Profiles:** `full`, `syteops`
 
@@ -542,7 +542,7 @@ Update a pipeline recipe (SyteOps pipelines.update_recipe). A merge-patch at the
 
 ## `syteops_review_approve`
 
-DESTRUCTIVE: approves a post for publishing (SyteOps review.approve; SyteOps 1.6.758+), as the Review Portal's Publish does with nothing edited. It publishes now, or schedules it when the post holds a reviewer's intended time or a reserved cadence slot at least a minute ahead. Needs confirm:true. Only posts sent for review (409 not_in_review). A post already live is ok with changed:false and already_live:true. It acts with SyteOps Admin authority: the post's reviewer list and who_can_publish are NOT checked for this caller. Still enforced: in review, readiness (409 not_ready with failed[] requirements), 409 published_immutable, 500 publish_failed. Open notes do not block it; open_notes reports them. It takes no as_user_id: the approver is the API key (user 0) or the signed-in SyteOps Admin. Returns &#123;post_id, status, scheduled, permalink, emailed, notify, images, open_notes, approved_by, already_live}. Returns 409 module_unavailable when the Review Portal is not loaded.
+DESTRUCTIVE: approves a post for publishing (SyteOps review.approve; SyteOps 1.6.758+), as the Review Portal's Publish does with nothing edited. It publishes now, or schedules it when the post holds a reviewer's intended time or a reserved cadence slot at least a minute ahead. Needs confirm:true. Only posts sent for review (409 not_in_review). A post already live is ok with changed:false and already_live:true. SyteOps 1.6.804+: an already scheduled post keeps its date (it no longer publishes now): scheduling on and the date 1+ minute ahead is ok with changed:false and already_scheduled:true; scheduling off is 409 scheduling_off (unschedule it first to publish now); a date already due publishes with it. It acts with SyteOps Admin authority: the reviewer list and who_can_publish are NOT checked for this caller. Still enforced: in review, readiness (409 not_ready with failed[] requirements), 409 published_immutable, 500 publish_failed. Open notes do not block it; open_notes reports them. It takes no as_user_id: the approver is the API key (user 0) or the signed-in SyteOps Admin. Returns &#123;post_id, status, scheduled, permalink, emailed, notify, images, open_notes, approved_by, already_live, already_scheduled}. Returns 409 module_unavailable when the Review Portal is not loaded.
 
 **Profiles:** `full`, `syteops`
 
@@ -662,7 +662,7 @@ Send a post back for changes as one person (SyteOps review.request_changes; Syte
 
 ## `syteops_review_reviewer_add`
 
-Add a reviewer to one post (SyteOps review.reviewers_add; SyteOps 1.6.758+). This grants that person edit rights on the post through the Review Portal, and publish rights too unless who_can_publish is author_approver (then only the author or an administrator can publish), and emails them; the review link gets a fresh expiry. user_id must be a SyteOps user linked to a WordPress account (422 user_not_selectable; 404 user_not_found). A post never sent for review is 409 not_review_managed. A watcher added as a reviewer stops being a watcher. Someone already listed is ok with changed:false and is not emailed again. Returns &#123;post_id, user_id, emailed, notify, reviewers[], watchers[]}. Returns 409 module_unavailable when the Review Portal is not loaded.
+Add a reviewer to one post (SyteOps review.reviewers_add; SyteOps 1.6.758+). This grants that person edit rights on the post through the Review Portal, and publish rights too unless who_can_publish is author_approver (then only the author or an administrator can publish), and emails them; the review link gets a fresh expiry. user_id must be a SyteOps user linked to a WordPress account (422 user_not_selectable; 404 user_not_found). A post never sent for review is 409 not_review_managed. A watcher added as a reviewer stops being a watcher. Someone already listed is ok with changed:false and is not emailed again. Returns &#123;post_id, user_id, emailed, notify: &#123;outcome: sent|queued|failed|off|none, partial} (an object from SyteOps 1.6.804+, a bare string before), reviewers[], watchers[]}. Returns 409 module_unavailable when the Review Portal is not loaded.
 
 **Profiles:** `full`, `syteops`
 
@@ -823,14 +823,14 @@ Queue one social send for one article to a configured destination (SyteOps socia
 |---|---|---|---|
 | `post_id` | integer | yes | Post ID. |
 | `destination_id` | string | yes | A configured social destination ID (unknown is 422 bad_destination). |
-| `text` | string | yes | The final post text, at most 3000 characters (422 text_too_long; empty is 422 empty_text). |
+| `text` | string | yes | The final post text, at most 3000 characters (422 text_too_long; empty, or markup that sanitizes to nothing, is 422 empty_text). |
 | `when` | string | no | time (default; send at fire_at) or on_publish (send when the article first goes live; fire_at not allowed). |
 | `fire_at` | integer | no | Unix time in seconds, between one minute and five years ahead (422 bad_time / too_far). Needed when when is time. |
 
 
 ## `syteops_source_approve_mapping`
 
-Approve a field mapping for a content source, activating it for live ingest (SyteOps content_sources.approve_mapping). Returns &#123;id, status, mapping_status, mapping}.
+Approve a field mapping for a content source, activating it for live ingest (SyteOps content_sources.approve_mapping). Returns &#123;id, status, mapping_status, mapping}. 409 busy (SyteOps 1.6.804+; was 500 write_failed): another pipelines change is in progress, so retry.
 
 **Profiles:** `full`, `syteops`
 
@@ -881,7 +881,7 @@ Create a content source (SyteOps content_sources.create); SyteOps generates its 
 
 ## `syteops_source_delete`
 
-Permanently delete a content source (SyteOps content_sources.delete). Needs confirm:true. Returns &#123;id, deleted}. SyteOps requires a SyteOps Admin for this delete.
+Permanently delete a content source (SyteOps content_sources.delete). Needs confirm:true. Returns &#123;id, deleted}. 409 busy (SyteOps 1.6.804+; was 500 write_failed): another pipelines change is in progress, so retry. SyteOps requires a SyteOps Admin for this delete.
 
 **Profiles:** `full`, `syteops`
 
@@ -988,7 +988,7 @@ Re-send the review email for a post to its own reviewers, never to a caller-supp
 
 ## `syteops_source_rotate_secret`
 
-Generate a new webhook secret for a content source and invalidate the old one at once (SyteOps content_sources.rotate_secret). Returns &#123;id, secret} with the new secret, once; it enters this conversation's transcript. The plaintext secret is not redacted and is returned only once: do not log or store it. Senders using the old secret fail until updated.
+Generate a new webhook secret for a content source and invalidate the old one at once (SyteOps content_sources.rotate_secret). Returns &#123;id, secret} with the new secret, once; it enters this conversation's transcript. The plaintext secret is not redacted and is returned only once: do not log or store it. Senders using the old secret fail until updated. 409 busy (SyteOps 1.6.804+; was 500 write_failed): another pipelines change is in progress, so retry.
 
 **Profiles:** `full`, `syteops`
 
@@ -1016,7 +1016,7 @@ Read-only preview of a mapping against a sample payload; nothing is written (Syt
 
 ## `syteops_source_update`
 
-Update editable fields on a content source (SyteOps content_sources.update); only the fields you send change. The slug, new_cpt and the internal idempotency key are not editable. A non-empty secret or forward_secret overwrites the stored one (write-only, never returned); an empty value leaves it unchanged. Returns the source without secrets.
+Update editable fields on a content source (SyteOps content_sources.update); only the fields you send change. The slug, new_cpt and the internal idempotency key are not editable. A non-empty secret or forward_secret overwrites the stored one (write-only, never returned); an empty value leaves it unchanged. Returns the source without secrets. 409 busy (SyteOps 1.6.804+; was 500 write_failed): another pipelines change is in progress, so retry.
 
 **Profiles:** `full`, `syteops`
 

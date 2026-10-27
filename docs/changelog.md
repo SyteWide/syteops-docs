@@ -8,6 +8,18 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.807
+
+- Note pins on pages whose sections are built by the page's own scripts (tabs, sliders) now appear once the page finishes loading, and the locate button tries again for a note marked as moved.
+
+## v1.6.806
+
+- The review portal preview now opens from a saved copy for speed, and shows when that copy was made. Reload latest (formerly Refresh) fetches the newest version and replaces the copy. The copy is made for each reviewer alone, is replaced automatically when pages, pictures, menus, the theme, plugins or settings change, and is never kept longer than about 10 hours. Reload latest always shows the newest.
+
+## v1.6.805
+
+- Notes placed in the review portal now find their spot again after the page's text, tabs or formatting change, and quotes on note cards read with proper spacing.
+
 ## v1.6.804
 
 - Consent records sent through the licensing server now also carry the admin's browser address as reported by the client site, kept beside the server's own verified address and labeled unverified.
@@ -43,6 +55,7 @@ A running log of user-facing changes in each SyteOps release. Only features, imp
 ## v1.6.796
 
 - Management API hardening. Approving a scheduled article through the API now keeps its scheduled date instead of publishing it at once. Reading or changing a module's settings through the API now reaches only the Banners settings, named field by field, so no stored password or key can be read or written that way. Rescheduling, unscheduling or taking an article down, from the calendar or the API, now waits for a reviewer's save or publish of the same article to finish. An internal error no longer hands its raw message to the API caller, and a social post whose text is empty once cleaned is refused instead of queued. On the command line, reading a webhook address no longer prints a placeholder that could be piped back in and stop lead delivery, the placeholder is refused as a value, and a clear switch given the value false no longer clears.
+
 ## v1.6.795
 
 - Leads fixes from a two-week review. Move existing links now keeps a link prefix you chose instead of putting links back under the default. The Automation and CRM webhook addresses refuse addresses inside the server's own network, and are checked again when a lead is sent. The lead-form widget no longer records test submissions from signed-in staff when internal traffic is set to skip. A RingTonic contact edit no longer stops at another contact when RingTonic answers the phone-only retry without saying how it matched, and a merge flag is never raised for a single contact. Outbound calls spelled with capital letters, or as outbound-dial, no longer create leads or attach their summary to a caller's lead. The Leads settings screens use the white-label plugin name. Imported people no longer carry another site's slot or user, so the hub cannot show their links to a different person, and imported slugs are checked. The RingTonic handshake no longer makes a site's own contact push stand down when SyteOps would record no lead.
@@ -3170,6 +3183,7 @@ A running log of user-facing changes in each SyteOps release. Only features, imp
 - **The box says when a note is unsaved**, and the browser warns before you leave the page with one outstanding. A note is stored by its own **Save note** button and never rides along with a draft save, so nothing else was ever going to catch it.
 - **A started note follows its picture.** Import an image, replace it, or change it with AI, and the text you were writing is still there against the new version — including when the change finishes after you have closed the panel. If the picture is removed from the article, the note goes with it and the page stops warning you about work it can no longer show you. Point two pictures at the same file and their started notes are joined rather than one being dropped, with a line marking the text that was carried over.
 - **Notify saves the note you are looking at before it sends.** Otherwise the email listing "the notes on this article" went out without the one you had just written. If that save fails, the send is cancelled and says so rather than going out incomplete. Pressing **Save note** and then **Notify** now files the note once instead of twice, and the confirmation counts the notes still waiting on other pictures accurately.
+
 ## v1.6.112
 
 - **Resolve and reopen a note from the Feedback panel.** An image note could only be marked handled from inside the picture's own panel, so clearing a list of notes meant hunting down every photo they were about — while the Feedback panel already dimmed the ones that were resolved, with no way to get them there or bring them back. Each image note in the panel now carries its own **Resolve** link, and **Reopen** once it is resolved. See [The Feedback panel](features/review-and-publish-your-post.md#step-5-request-changes).
@@ -3699,9 +3713,11 @@ Fixed: The review portal page was being marked publicly cacheable, so a per-revi
 ## v1.6.012
 
 - Changed: Watermark removal on blog and archive cards is now done by SyteHero's image AI, which reconstructs the background behind the watermark instead of smudging it in from the picture around it. The old fill was only convincing on a plain background and looked wrong on anything else. This needs SyteHero installed with an image AI key — without it the setting is switched off and says so. Each picture costs one image request against your own SyteHero balance, once per picture rather than once per visit, and repairs run in the background so a card may show its original crop for a minute after you turn it on. Fixed: A repair that could not run was recorded as if it had succeeded, so it was never tried again. On a server missing the image library that meant every picture was reprocessed once, nothing changed, and nothing said why.
+
 ## v1.6.011
 
 - Added: Articles that arrive without a summary now get one written for them. When a source sends no excerpt, SyteOps writes a short summary of the article and stores it as the excerpt and the meta description, so blog and archive cards stop showing the article's opening heading twice. A summary you or a reviewer has already written is never overwritten, and if your source sends an excerpt field of its own that field stays in charge. The Generate with AI button in the review portal now produces exactly the same kind of sentence.
+
 ## v1.6.010
 
 - Added: You can now delete a single entry from the pipeline run history. Until now the only way to remove anything was to clear the whole history, so tidying away one test delivery meant losing the record of everything else. Every row now carries its own Delete button, and it asks you to confirm before it removes anything.
