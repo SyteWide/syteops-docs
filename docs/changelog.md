@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.814
+
+- A link for a number that cannot be dialed (a withheld or blocked caller) is now left off, so no Call button appears for that caller.
+
 ## v1.6.813
 
 - Call buttons in callback emails now place the call right away: your phone rings, press 1 to connect, and the call is logged to the lead. Sites can add the same button to their own lead and missed-call emails.
