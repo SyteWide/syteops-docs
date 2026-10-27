@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.810
+
+- The locate button on a note inside a tab now goes straight to the note every time instead of sometimes jumping to the top of the page, and it no longer looks grayed out when it can open the note.
+
 ## v1.6.809
 
 - The locate button now works every time on a note inside a tab, even after switching to another tab, and the note says "Not showing" while its tab is closed.
