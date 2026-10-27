@@ -164,6 +164,8 @@ If the site checks with SyteOps before it dials, the person sees why a call was 
 
 For the exact checks and answers a site's code can use, see the developer documentation, **Companion contract** (`can_place` and `claim_for_phone`).
 
+A site can also put the same one-tap **Call** button that the callback emails carry into its own lead, missed-call and inbound-call emails. Tapping it places the call through SyteOps, so the site does not place or report the call itself: it is locked, counted and logged exactly like a call from the portal. Only people signed in with Call access on your site can use the button, and a button made for one person works for that person alone: if the email is forwarded, a colleague who opens it is told the link is for another account. A button that is opened a second time shows a Call again button instead of calling by itself. For the helper a site's code uses, see the developer documentation, **Call link**.
+
 ## Related
 
 - [Callbacks](callbacks): what the list does once it is on.

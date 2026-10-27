@@ -8,6 +8,19 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.813
+
+- Call buttons in callback emails now place the call right away: your phone rings, press 1 to connect, and the call is logged to the lead. Sites can add the same button to their own lead and missed-call emails.
+- A Call button made for one person works for that person only, a link opened again shows a Call again button instead of calling by itself, and a call RingTonic refuses pauses that person's next try for a few seconds.
+
+## v1.6.812
+
+- The weekly callbacks list now arrives at 8:00 on Monday morning, on time, instead of somewhere between 7:30 and 8:30.
+
+## v1.6.811
+
+- The callback report, summary and reminder emails now have a compact header with a label, more space under each section heading, and a footer that stays on one line.
+
 ## v1.6.810
 
 - The locate button on a note inside a tab now goes straight to the note every time instead of sometimes jumping to the top of the page, and it no longer looks grayed out when it can open the note.

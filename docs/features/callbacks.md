@@ -78,7 +78,7 @@ If a call does not go through, the row says why in plain words:
 
 ### Monday callbacks list
 
-Every Monday from 7:30 am (your site's time; it can arrive up to about an hour later, and a missed Monday is made up later that week), the people you list get one email with the week in front of them. Nobody is listed until you add them.
+Every Monday at 8:00 am (your site's time; if the site was unable to send it then, it goes out as soon as it can, and a missed Monday is made up later that week), the people you list get one email with the week in front of them. Nobody is listed until you add them.
 
 - **Last mention**: callbacks in their 16th week. If nobody returns or closes them, they expire after this email.
 - **Callbacks still waiting**: oldest first, each with how many weeks it has been waiting. A callback stays on the list, week after week, until someone returns it or closes it.
@@ -93,7 +93,9 @@ With contact details stored in full, the email shows names and numbers and the D
 
 ### Open a callback from an email
 
-The buttons in a callback email, such as the call summary email below, open your private page at the right row: the page scrolls to it, highlights it and opens the same question the row's button opens. Nothing happens until you confirm. If someone else is calling that lead, the page says who and since when, and opens nothing. If the callback is no longer waiting, the page says "This callback is no longer waiting."
+**Call** in a callback email places the call right away: tap it and a small page opens that says "Calling. Your phone will ring: press 1 to connect." RingTonic rings your phone first, and pressing 1 connects you to the lead, so that is your confirmation. The call is the same as one from the portal's Call button: it locks the callback for you, counts toward the same limits and is logged to the lead with its summary and recording. You must be signed in with Call access; if you are not signed in, the page asks you to sign in and then places the call. Tapping Call again within a minute does not place a second call. If the number is not on your callbacks list yet, nothing is called and the page says so. While your site cannot place calls yet, Call opens your page instead, like the other buttons.
+
+The other buttons in a callback email, such as the call summary email below, open your private page at the right row: the page scrolls to it, highlights it and opens the same question the row's button opens. Nothing happens until you confirm. If someone else is calling that lead, the page says who and since when, and opens nothing. If the callback is no longer waiting, the page says "This callback is no longer waiting."
 
 ### Call summary emails
 
@@ -109,7 +111,7 @@ Each person in a listed slot gets one email per callback (once the AI has read i
 
 When the AI closed the callback, the top of the email says so, with its reason and how sure it was, and offers **Reopen**.
 
-The buttons open your own page at that callback and ask you to confirm; nothing changes from the email itself, and a callback someone else is calling stays locked. A person only gets the email while their slot has Callbacks access of View and act or Call. The email never contains the transcript or the words the AI quoted. Under **Masked** it shows the masked number only, with no name, summary or AI reason, and under **Off** no number either. In both, the buttons are replaced by one **Open your page** link, because the page only acts on a callback while contact details are stored in full.
+**Call again** places the call right away (see [Open a callback from an email](#open-a-callback-from-an-email)). The other buttons open your own page at that callback and ask you to confirm; nothing changes from the email itself, and a callback someone else is calling stays locked. A person only gets the email while their slot has Callbacks access of View and act or Call. The email never contains the transcript or the words the AI quoted. Under **Masked** it shows the masked number only, with no name, summary or AI reason, and under **Off** no number either. In both, the buttons are replaced by one **Open your page** link, because the page only acts on a callback while contact details are stored in full.
 
 ### Your branding in these emails
 
@@ -123,7 +125,7 @@ Inside:
 
 - the lead, the follow-up date and how long they have been waiting;
 - the summary of the last call and the next step, when the AI saw that another call is needed;
-- buttons (when contact details are stored in full): **Call** (only for people with Call access), **Done** and **Not a lead**. They open your own page at that callback and ask you to confirm; nothing changes from the email itself.
+- buttons (when contact details are stored in full): **Call** (only for people with Call access), **Done** and **Not a lead**. Call places the call right away; Done and Not a lead open your own page at that callback and ask you to confirm, and nothing changes from the email itself.
 
 Who gets it: the person who placed the most recent call on that callback, as long as they still hold their slot with Call access, a portal page and an email address. If they do not, the reminder goes to the slots you list under **Otherwise send reminders to slots** (for example `001, 003`), and to nobody when that box is empty.
 
