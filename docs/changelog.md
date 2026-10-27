@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.808
+
+- Notes placed inside a tab, slide or menu now appear as soon as that part of the page is opened in the preview, the locate button opens the tab or section a note was placed in, and notes that can't be seen right now say "Not showing" instead of "Moved".
+
 ## v1.6.807
 
 - Note pins on pages whose sections are built by the page's own scripts (tabs, sliders) now appear once the page finishes loading, and the locate button tries again for a note marked as moved.
