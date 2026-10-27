@@ -1,6 +1,6 @@
 {
     "schema_version": 1,
-    "syteops_version": "1.6.787",
+    "syteops_version": "1.6.804",
     "operations": [
         {
             "resource": "users",
@@ -395,7 +395,7 @@
         {
             "resource": "modules",
             "action": "get_config",
-            "summary": "Get a module's stored configuration. Refused for syteops_leads (422 use_leads_settings_get): its webhook addresses can carry a token, and leads.settings_get returns the same settings with them masked.",
+            "summary": "Get a module's configuration: allowlisted buckets and keys only (today syteops_banners: banner_text, default_html, schedule_activation, schedule_deactivation, show_defaults_outside_times, clear_litespeed_cache). Any other module is 403 config_not_exposed; syteops_leads is 422 use_leads_settings_get (leads.settings_get returns its settings with the webhook addresses masked).",
             "params": {
                 "module": {
                     "type": "string",
@@ -409,7 +409,7 @@
         {
             "resource": "modules",
             "action": "update_config",
-            "summary": "Merge keys into a module's stored configuration (no schema). Refused for syteops_leads (422 use_leads_settings_set): the Leads settings are written through leads.settings_set.",
+            "summary": "Merge keys into a module's configuration: allowlisted buckets and keys only, the same list as get_config, each stored as its settings screen stores it (HTML filtered, text sanitized, flags as true/false). All or nothing: a key outside the list is 422 unknown_config_key, a value of the wrong type 422 invalid_config_value. Any other module is 403 config_not_exposed; syteops_leads is 422 use_leads_settings_set.",
             "params": {
                 "module": {
                     "type": "string",
@@ -1095,12 +1095,12 @@
             "destructive": false,
             "capability": "manage_options",
             "strict": true,
-            "returns": "data: {settings: {key: value}, keys: {key: {type, writable, masked, egress, confirm}}, notes: {key: note}}. egress: the key decides where lead data is sent. confirm: changing it on leads.settings_set needs confirm: true (pii_mode and every egress key)."
+            "returns": "data: {settings: {key: value}, keys: {key: {type, writable, masked, egress, confirm}}, notes: {key: note}}. egress: the key decides where lead data is sent. confirm: changing it on leads.settings_set needs confirm: true (pii_mode, ringtonic_store_call_summary and every egress key; ringtonic_contact_internal only when set to push)."
         },
         {
             "resource": "leads",
             "action": "settings_set",
-            "summary": "Set one or more Leads settings in one write, all or nothing, with the settings screen's own rule for each key (the same table `wp syteops leads setting set` uses): a value the screen would quietly correct is refused. Keys are applied in the screen's order, so consent_mode lands before consent_cookie. Refused with 422 and nothing written: an unknown key (unknown_setting), ringtonic_noabort (screen_only_setting: it edits .htaccess), a RingTonic secret by any name (secret_setting: secrets are never written through this API; set them from a terminal with `wp syteops systems-api set --stdin`), a value the rules refuse (invalid_setting). A change to pii_mode (how contact details are stored) or to a key that decides where lead contact details are sent (crm_webhook_url, automation_webhook_url, recipient_emails, email_reply_to, callbacks_summary_slots, callbacks_reminder_slots, callbacks_reminders_enabled) needs confirm:true (409 confirmation_required, naming the keys); resending the current value does not. The confirm is one explicit step for every caller, not a role check. changed is false and nothing is written when no stored value would change.",
+            "summary": "Set one or more Leads settings in one write, all or nothing, with the settings screen's own rule for each key (the same table `wp syteops leads setting set` uses): a value the screen would quietly correct is refused. Keys are applied in the screen's order, so consent_mode lands before consent_cookie. Refused with 422 and nothing written: an unknown key (unknown_setting), ringtonic_noabort (screen_only_setting: it edits .htaccess), a RingTonic secret by any name (secret_setting: secrets are never written through this API; set them from a terminal with `wp syteops systems-api set --stdin`), a value the rules refuse (invalid_setting). A change to pii_mode (how contact details are stored) or to a key that decides where lead contact details are sent (crm_webhook_url, automation_webhook_url, recipient_emails, email_reply_to, callbacks_summary_slots, callbacks_reminder_slots, callbacks_weekly_slots, callbacks_reminders_enabled), or turns on a switch that sends lead details off-site (automation_webhook_enabled, crm_webhook_enabled, email_instant_enabled, email_periodic_enabled, ringtonic_contact_forms, ringtonic_contact_field_names, ringtonic_contact_internal=push), or changes ringtonic_store_call_summary, needs confirm:true (409 confirmation_required, naming the keys); resending the current value does not. The confirm is one explicit step for every caller, not a role check. changed is false and nothing is written when no stored value would change.",
             "params": {
                 "settings": {
                     "type": "object",
@@ -1110,7 +1110,7 @@
                 "confirm": {
                     "type": "boolean",
                     "required": false,
-                    "description": "true to change pii_mode or a lead-data destination (the two webhook addresses, recipient_emails, email_reply_to, callbacks_summary_slots, callbacks_reminder_slots, callbacks_weekly_slots, callbacks_reminders_enabled)."
+                    "description": "true to change pii_mode, ringtonic_store_call_summary, a lead-data destination (the two webhook addresses, recipient_emails, email_reply_to, callbacks_summary_slots, callbacks_reminder_slots, callbacks_weekly_slots, callbacks_reminders_enabled) or an off-site switch (automation_webhook_enabled, crm_webhook_enabled, email_instant_enabled, email_periodic_enabled, ringtonic_contact_forms, ringtonic_contact_field_names, ringtonic_contact_internal=push)."
                 }
             },
             "destructive": false,
@@ -2151,7 +2151,7 @@
             "destructive": false,
             "capability": "manage_options",
             "strict": true,
-            "returns": "data: {post_id, user_id, emailed, notify: sent|failed|none, reviewers[], watchers[]}; emailed and notify only when the person was added; a person is {user_id, display_name, roles[]}"
+            "returns": "data: {post_id, user_id, emailed, notify: {outcome: sent|queued|failed|off|none, partial}, reviewers[], watchers[]}; emailed and notify only when the person was added; a person is {user_id, display_name, roles[]}"
         },
         {
             "resource": "review",
@@ -2225,7 +2225,7 @@
         {
             "resource": "review",
             "action": "approve",
-            "summary": "Approve a post for publishing, as the Review Portal's Publish does with nothing edited: it publishes now, or schedules it when the post holds a reviewer's intended time or a reserved cadence slot at least a minute ahead and scheduling is on. Acts with admin authority: an admin or API-key caller bypasses the post's reviewer list and the who_can_publish rule, which gate people in the portal, and is limited to posts in review. It records the approver as user 0 whenever the API key authorized the call, otherwise the signed-in SyteOps Admin. A post never sent for review (no reviewers and no review link) is refused (409 not_in_review). A post already live is ok with changed:false and already_live:true, and nothing is written, logged or emailed. A title, excerpt or body the call does not send is published exactly as stored. Every portal check applies: 409 not_ready (with failed[] requirements), 409 published_immutable, 500 publish_failed. Open notes do not block it (the portal only warns); open_notes reports them. Destructive: send confirm:true.",
+            "summary": "Approve a post for publishing, as the Review Portal's Publish does with nothing edited: it publishes now, or schedules it when the post holds a reviewer's intended time or a reserved cadence slot at least a minute ahead and scheduling is on. A post already scheduled keeps its own date: with scheduling on and the date at least a minute ahead it is ok with changed:false and already_scheduled:true, and nothing is written, logged or emailed; with scheduling off that date could not be kept, so it is refused (409 scheduling_off; unschedule it first to publish now). A scheduled date already due (a missed schedule) publishes with that date. Acts with admin authority: an admin or API-key caller bypasses the post's reviewer list and the who_can_publish rule, which gate people in the portal, and is limited to posts in review. It records the approver as user 0 whenever the API key authorized the call, otherwise the signed-in SyteOps Admin. A post never sent for review (no reviewers and no review link) is refused (409 not_in_review). A post already live is ok with changed:false and already_live:true, and nothing is written, logged or emailed. A title, excerpt or body the call does not send is published exactly as stored. Every portal check applies: 409 not_ready (with failed[] requirements), 409 published_immutable, 500 publish_failed. Open notes do not block it (the portal only warns); open_notes reports them. Destructive: send confirm:true.",
             "params": {
                 "post_id": {
                     "type": "integer",
@@ -2241,7 +2241,7 @@
             "destructive": true,
             "capability": "manage_options",
             "strict": true,
-            "returns": "data: {post_id, status, scheduled, scheduled_readable, permalink, emailed, notify: {outcome, partial}, images: {imported, reused, failed, capped}|null, open_notes, approved_by: {user_id, via, api_key}, already_live}"
+            "returns": "data: {post_id, status, scheduled, scheduled_readable, permalink, emailed, notify: {outcome, partial}, images: {imported, reused, failed, capped}|null, open_notes, approved_by: {user_id, via, api_key}, already_live, already_scheduled}"
         },
         {
             "resource": "review",
@@ -2329,6 +2329,40 @@
             "capability": "manage_options",
             "strict": true,
             "returns": "data: {post_id, as_user_id, kind: reply|image|element, entry: {id, parent, kind, created_at, via_api}}; a reply adds {resolve: changed|unchanged|missing|failed|null (null when not asked), notified, notify: {outcome, partial}}"
+        },
+        {
+            "resource": "review",
+            "action": "permissions_get",
+            "summary": "The Review Portal's Portal Permissions as the settings screen reads them: who_can_publish (any or author_approver) and the per-area matrix, with a default row (everyone else), role rows keyed by SyteOps role slug and person rows keyed by user number. An absent role or person cell inherits; an absent default cell is that area's default. Also lists every area with its allowed values and whether this site's screen shows it, and the role and person rows that may be set (a person is listed only when linked to a WordPress account, as on the screen). A SyteOps Admin is never restricted by the matrix, and site administrators can always publish. Works before the portal is in use.",
+            "params": [],
+            "destructive": false,
+            "capability": "manage_options",
+            "strict": true,
+            "returns": "data: {who_can_publish, permissions: {default: {area: value}, roles: {slug: {area: value}}, users: {user_num: {area: value}}}, areas[]: {key, label, values[], default, shown}, roles[]: {slug, name}, users[]: {user_num, name}}"
+        },
+        {
+            "resource": "review",
+            "action": "permissions_set",
+            "summary": "Change who can review and publish in the Review Portal. Partial: only the cells sent change, every other cell and row is kept. In roles and users a cell of inherit (or null) clears it and a row of null clears the whole row; the default row takes real values only. Every section, role slug, user number (a person linked to a WordPress account, as the screen lists), area and value is checked against the settings screen's own lists, and an area the screen does not show on this site is refused (422 invalid_permissions; nothing is written). who_can_publish is any or author_approver (422 invalid_who_can_publish). Switching to author_approver when no user holds the administrator publish override is refused (409 no_publisher_left). Send at least one of the two (422 nothing_to_change). One set runs at a time; a concurrent one is refused (409 busy) rather than risk losing a cell, so retry it. Saved through the screen's own validator and recorded in the activity log. Requires confirm:true.",
+            "params": {
+                "permissions": {
+                    "type": "object",
+                    "required": false,
+                    "description": "Partial matrix: {default?: {area: value}, roles?: {slug: {area: value|inherit|null}|null}, users?: {user_num: {area: value|inherit|null}|null}}."
+                },
+                "who_can_publish": {
+                    "type": "string",
+                    "required": false,
+                    "description": "any (any selected reviewer) or author_approver (the post author or an administrator)."
+                },
+                "confirm": {
+                    "type": "boolean"
+                }
+            },
+            "destructive": true,
+            "capability": "manage_options",
+            "strict": true,
+            "returns": "data: {who_can_publish, permissions: {default, roles, users} as stored after the change, changes[]: {row, area, from, to}} (null = unset)"
         },
         {
             "resource": "calendar",
@@ -2567,7 +2601,7 @@
         {
             "resource": "listing_image",
             "action": "run",
-            "summary": "Build the listing-card image for each image the article owns that lacks a current one (the same unforced path a page render takes; images already current are left alone). With the repair on this queues paid jobs. At most 25 images per call. 409 listing_image_disabled when the feature is off; 429 cooldown (10 minutes per article, shared with reprocess, released when nothing was built or queued); processed and queued count only images built or newly queued, and changed is true only then; 404 post_not_found for a missing, trashed or non-viewable post.",
+            "summary": "Build the listing-card image for each image the article owns that lacks a current one (the same unforced path a page render takes; images already current are left alone). With the repair on this queues paid jobs. At most 25 images per call. 409 listing_image_disabled when the feature is off; 429 cooldown (10 minutes per article, shared with reprocess, released when nothing was built or queued); 429 daily_limit when the site-wide daily allowance of images (100 by default, counted per image across run and reprocess, refunded when nothing was built or queued) is used up; processed and queued count only images built or newly queued, and changed is true only then; 404 post_not_found for a missing, trashed or non-viewable post.",
             "params": {
                 "post_id": {
                     "type": "integer",
@@ -2584,7 +2618,7 @@
         {
             "resource": "listing_image",
             "action": "reprocess",
-            "summary": "Rebuild the listing-card image for each image the article owns, from scratch, even when one looks current: the failure memo is cleared and the repair is re-queued (paid). The live crop stays until the new one replaces it, so this is not destructive. At most 25 images per call; same refusals and 10-minute per-article cooldown as run.",
+            "summary": "Rebuild the listing-card image for each image the article owns, from scratch, even when one looks current: the failure memo is cleared and the repair is re-queued (paid). The live crop stays until the new one replaces it, so this is not destructive. At most 25 images per call; same refusals, 10-minute per-article cooldown and site-wide daily image allowance as run.",
             "params": {
                 "post_id": {
                     "type": "integer",
@@ -2597,40 +2631,6 @@
             "capability": "manage_options",
             "strict": true,
             "returns": "data: {post_id, processed, queued, failed, skipped, items[] is {attachment_id, built, queued, error?, repaired?, reason?, retrying?}}"
-        },
-        {
-            "resource": "review",
-            "action": "permissions_get",
-            "summary": "The Review Portal's Portal Permissions as the settings screen reads them: who_can_publish (any or author_approver) and the per-area matrix, with a default row (everyone else), role rows keyed by SyteOps role slug and person rows keyed by user number. An absent role or person cell inherits; an absent default cell is that area's default. Also lists every area with its allowed values and whether this site's screen shows it, and the role and person rows that may be set (a person is listed only when linked to a WordPress account, as on the screen). A SyteOps Admin is never restricted by the matrix, and site administrators can always publish. Works before the portal is in use.",
-            "params": [],
-            "destructive": false,
-            "capability": "manage_options",
-            "strict": true,
-            "returns": "data: {who_can_publish, permissions: {default: {area: value}, roles: {slug: {area: value}}, users: {user_num: {area: value}}}, areas[]: {key, label, values[], default, shown}, roles[]: {slug, name}, users[]: {user_num, name}}"
-        },
-        {
-            "resource": "review",
-            "action": "permissions_set",
-            "summary": "Change who can review and publish in the Review Portal. Partial: only the cells sent change, every other cell and row is kept. In roles and users a cell of inherit (or null) clears it and a row of null clears the whole row; the default row takes real values only. Every section, role slug, user number (a person linked to a WordPress account, as the screen lists), area and value is checked against the settings screen's own lists, and an area the screen does not show on this site is refused (422 invalid_permissions; nothing is written). who_can_publish is any or author_approver (422 invalid_who_can_publish). Switching to author_approver when no user holds the administrator publish override is refused (409 no_publisher_left). Send at least one of the two (422 nothing_to_change). One set runs at a time; a concurrent one is refused (409 busy) rather than risk losing a cell, so retry it. Saved through the screen's own validator and recorded in the activity log. Requires confirm:true.",
-            "params": {
-                "permissions": {
-                    "type": "object",
-                    "required": false,
-                    "description": "Partial matrix: {default?: {area: value}, roles?: {slug: {area: value|inherit|null}|null}, users?: {user_num: {area: value|inherit|null}|null}}."
-                },
-                "who_can_publish": {
-                    "type": "string",
-                    "required": false,
-                    "description": "any (any selected reviewer) or author_approver (the post author or an administrator)."
-                },
-                "confirm": {
-                    "type": "boolean"
-                }
-            },
-            "destructive": true,
-            "capability": "manage_options",
-            "strict": true,
-            "returns": "data: {who_can_publish, permissions: {default, roles, users} as stored after the change, changes[]: {row, area, from, to}} (null = unset)"
         },
         {
             "resource": "site",

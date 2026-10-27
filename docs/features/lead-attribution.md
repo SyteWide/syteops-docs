@@ -47,6 +47,7 @@ Stay informed without watching a dashboard:
 
 - **Per-lead emails** — get an email the moment a new lead is captured. You can set a short digest window (e.g. 15 minutes) so that several leads arriving in quick succession are bundled into one message.
 - **Scheduled summaries** — choose daily, weekly, or monthly digests for a periodic overview of lead volume and sources. Pick the send hour, and (for weekly/monthly) the day it goes out.
+- **Held leads** — when one network sends more than 20 new leads in an hour, its further leads are still saved but marked **Held** in the Leads list, and their webhook, emails and CRM push are not sent, so a flood of automated submissions cannot bury real ones. Leads from other networks are not affected. If more than 300 new leads arrive across the whole site in an hour, further new leads are held too, and the report recipients get one email saying so. You can still send a held lead to your automation webhook from its row.
 - **Reply-To address** — replies to any lead report email can go to a person (for example, your sales lead) instead of the site's sending address. Set it under **Leads → Settings → Email reports**; leave it blank to keep the default.
 
 ### Email branding
@@ -472,7 +473,7 @@ How consent is decided depends on your setup:
 - **Using another consent tool (or none):** set a **Consent mode** on **Leads → Settings → Consent & privacy**:
   - **Opt-out** (default) — track unless a visitor withholds consent. Grant can be signaled by a consent cookie/value you configure, a JavaScript consent flag your tool sets, or a consent-update event your tool dispatches.
   - **Opt-in** — track only after consent is given (via the cookie/value, flag, or event above).
-  - **By location** — treat EU/EEA/UK visitors as opt-in and everyone else as opt-out, based on the visitor's country.
+  - **By location** — treat EU/EEA/UK visitors as opt-in and everyone else as opt-out, based on the visitor's country. A visitor whose country cannot be told (no country header, a VPN or Tor exit) is treated as opt-in, so they are asked first.
 
 ### Cookies this feature sets
 
@@ -510,7 +511,7 @@ Both pages follow the same consent rules as the rest of the cookie and are remov
 
 A visitor can send a form without the first-touch cookie: they never allowed tracking, their browser blocks the cookie, or they sent the form on the first page before it was written. **Leads → Settings → Consent & privacy → When the visitor has no attribution cookie** decides what such a form lead gets:
 
-- **Automatic** (the default) follows your consent mode. In **Opt-out** the lead takes the campaign tags of the page the form was sent from; in **Opt-in** it is left blank; **By location** does one or the other per visitor (blank for EU/EEA/UK visitors). With WP Full Picture as your consent tool, the visitor's region decides the same way, and a visitor whose region cannot be told is left blank.
+- **Automatic** (the default) follows your consent mode. In **Opt-out** the lead takes the campaign tags of the page the form was sent from; in **Opt-in** it is left blank; **By location** does one or the other per visitor (blank for EU/EEA/UK visitors and for a visitor whose country cannot be told). With WP Full Picture as your consent tool, the visitor's region decides the same way, and a visitor whose region cannot be told is left blank.
 - **Use the form page's own tags** takes them whatever the region, including for visitors your consent mode would treat as opt-in.
 - **Leave blank** never does.
 
@@ -537,7 +538,7 @@ If your site already has an editorial internal-traffic parameter in the review s
 Internal traffic is never tracked or attributed: no cookie is set, no events are recorded, tracked-link clicks still redirect but are not counted, and no form fields are filled. **Form submissions from internal traffic** decides what a form or qualification your team sends does:
 
 - **Record the lead without attribution** (the default): it is recorded as a lead with no source and no link to any earlier visit, so a test submission still shows up.
-- **Don't record a lead**: no lead is made. The form itself still saves its entry and sends its own notification emails as usual.
+- **Don't record a lead**: no lead is made for a signed-in team member or a request carrying your internal header. The form itself still saves its entry and sends its own notification emails as usual. A visit that is internal only because of the cookie, the query parameter or a user agent is still recorded as a lead with no source: the parameter is public, so a link you forward to a prospect would otherwise make their enquiry disappear.
 
 This works on cached pages too: the page itself checks the cookie, the query parameter and the user agent, and the server checks every signal again when a form, a click or an event arrives. A headless frontend gets the cookie, parameter and user-agent settings with its site settings and is rebuilt when they change.
 

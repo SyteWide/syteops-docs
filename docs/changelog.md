@@ -8,6 +8,69 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.804
+
+- Consent records sent through the licensing server now also carry the admin's browser address as reported by the client site, kept beside the server's own verified address and labeled unverified.
+
+## v1.6.803
+
+- Admin fixes from a two-week review. A Tab Code that the file store would rewrite, such as wp, key or csv, or one that ends in an underscore, is now refused up front with "Tab code is not valid" when you create, rename, copy or import a tab, instead of failing later with "Unable to persist tab"; the Create popup field holds the same rule. On the license server, the Modules screen now shows the automatic-update switch of the list it is actually using, without the words "set by your license server". Delete links in the collections popup use the standard danger color from the admin color scheme, the registry popup panel and the error status badge use design tokens instead of fixed colors, and stopping the retention countdown of a reactivated endpoint changes only that one entry.
+
+## v1.6.802
+
+- Licensing fixes from a two-week review. On a licensing server whose connection records cannot be read, the admin dashboard, settings saves, the server's connection tools and the background endpoint scan now stop with a plain message instead of a critical error. A credential roll refuses a token pasted in its stored, encrypted form before anything is sent to an endpoint. Authorized Domains entries are checked label by label when saved, and the screen refuses a value it would otherwise have cleaned into a different domain. The debug answer for a refused domain no longer lists the authorized domains. The version check route answers an OPTIONS request like a route that does not exist. A module uninstall now waits for a running module install or update instead of running beside it, and a module index entry with a malformed version no longer stops the update check. The public install check routes count an IPv6 caller by its network, so one caller cannot use up the site-wide limit. Licensing debug logs mask list values that name no field.
+
+## v1.6.801
+
+- Licensing and lead-form security fixes. Rate limits on the licensing server, its connection routes and the public lead forms now count the address that actually connected, and read a forwarding header only from Cloudflare or a proxy you name, so a caller can no longer reset a limit by changing a header. Parallel requests can no longer slip past a limit, and one signed request can no longer be used twice. When one network sends more than 20 new leads in an hour, its further leads are still saved but marked Held and send no notifications, so a flood cannot silence real leads from elsewhere; past 300 new leads an hour across the site, new leads are held too and the report recipients get one email about it. The licensing server's purchase address accepts only the purchase credential however the address is written, forwards a consent record only for the license holder's own email and only with its consent fields, and registers a reported connection only when it is in server mode. A connected site now stops using its own connection credential only when its server says that credential was refused, not after a clock or header problem. A license lookup now asks the store's search first, and answers as an outage instead of an unknown key only when a read of the store failed.
+
+## v1.6.800
+
+- Leads privacy and consent fixes from a two-week review. By location now treats a visitor whose country cannot be told (no country header, a VPN or Tor) as opt-in, so they are asked first; before, they were tracked without being asked. When a visitor withdraws consent, the visitor and session ids kept in their browser are removed too, and a form lead no longer picks up a first-touch cookie that survived the withdrawal. A query string such as an email address in the link a visitor arrived on is no longer stored with a lead or shown on the proof page. The qualification form now starts a session when tracking is allowed, so the leads it makes are attributed. With Don't record a lead set for internal traffic, a lead is dropped only for a signed-in team member or your internal header, so a link you forward to a prospect no longer makes their enquiry disappear. Through the management API and MCP, turning on anything that sends lead details off the site (the webhooks, the instant and periodic emails, the RingTonic contact push) and changing whether call summaries are stored now needs an explicit confirmation, and a script that sets report recipients is refused when an address is not valid; the settings screen is unchanged. Saving the Leads settings while the RingTonic integration is off no longer switches off the stored call summary setting. Tracked links: a link path with a dot segment is refused, two saves or inserts at the same moment can no longer leave a link without its first segment or give two kinds the same suffix, imported templates are checked like saved ones, and the Copy link menu keeps channels added by other tools. The RingTonic caller ID list is no longer stored when it was only partly read, contact details are read from RingTonic only when they are stored in Full, a first-touch owner claim is checked even without a link id, and the speed-up rule in .htaccess is removed when the RingTonic integration is switched off or the plugin is deactivated. The Tracked links screen messages can now be translated.
+
+## v1.6.799
+
+- Fixes from the two-week review of pipelines, the management API and sharing. Saving a recipe, a content source, the operating mode or an engine choice can no longer undo something another request saved a moment earlier, such as a recipe or a rotated webhook secret. Listing-image runs started from the management API now stop at a daily limit for the whole site, and automatic GEO re-analysis has a daily limit for the whole site as well. Every successful destructive management action leaves a lasting entry in the activity log, and the log entries for review and calendar actions name where the action came from in one consistent way. A failed clear of the run history is reported as a failure, calendar refusals use the right status, and a bare internal-traffic option on the command line is refused. Share to no longer posts twice when a slow post is retried, and a second Connect in another tab no longer breaks the first.
+
+## v1.6.798
+
+- Integration fixes. A headless site's SEO records now update right after a title or description is edited on its own, without waiting for another save of the page. The Search Console key help and the brand colors help now show your white-label name. Link passes keep the first and last letters of an anchor, never put links inside FAQ or How-to blocks, leave a post alone when it was edited while a pass was running, and a second pass can no longer claim the same first publish. AI link matches now respect the maximum links to one address. Removal pings for a permanently deleted page are now sent, and a front page follows its own noindex default. The headless deploy request now stops at a daily limit (48 by default) and sends the kept change the next day. A reply cut off after the request was sent is no longer retried. A private-link sign-in with an empty password no longer counts toward the wrong-password pause. The Send now note shows in the site language.
+
+## v1.6.797
+
+- Review Portal fixes from a two-week review. Changing a picture, or its alt text and caption, on a live Elementor page now refreshes the live page and its page cache straight away, and rebuilds only that page's Elementor styles. Undo on a picture swap stops and says why when the picture was already on the page before the swap or the page was changed again since. Adding or removing a reviewer or watcher at the same time as another change no longer loses either. A swap, Apply and Undo now wait for one another, the Share to dialog no longer lets a finished post be sent twice, and the messages the portal shows use your own plugin name. The Check now button, the AI prompt builder and the Generate buttons now respect their limits, and the preview frame, sign-in and layout have a few smaller fixes.
+
+## v1.6.796
+
+- Management API hardening. Approving a scheduled article through the API now keeps its scheduled date instead of publishing it at once. Reading or changing a module's settings through the API now reaches only the Banners settings, named field by field, so no stored password or key can be read or written that way. Rescheduling, unscheduling or taking an article down, from the calendar or the API, now waits for a reviewer's save or publish of the same article to finish. An internal error no longer hands its raw message to the API caller, and a social post whose text is empty once cleaned is refused instead of queued. On the command line, reading a webhook address no longer prints a placeholder that could be piped back in and stop lead delivery, the placeholder is refused as a value, and a clear switch given the value false no longer clears.
+## v1.6.795
+
+- Leads fixes from a two-week review. Move existing links now keeps a link prefix you chose instead of putting links back under the default. The Automation and CRM webhook addresses refuse addresses inside the server's own network, and are checked again when a lead is sent. The lead-form widget no longer records test submissions from signed-in staff when internal traffic is set to skip. A RingTonic contact edit no longer stops at another contact when RingTonic answers the phone-only retry without saying how it matched, and a merge flag is never raised for a single contact. Outbound calls spelled with capital letters, or as outbound-dial, no longer create leads or attach their summary to a caller's lead. The Leads settings screens use the white-label plugin name. Imported people no longer carry another site's slot or user, so the hub cannot show their links to a different person, and imported slugs are checked. The RingTonic handshake no longer makes a site's own contact push stand down when SyteOps would record no lead.
+
+## v1.6.794
+
+- The GEO card in the Review Portal now uses the full width better. On a wide screen the questions sit on the left, and Add a question, the two checkboxes and the review confirmation sit in a column on the right, level with the first question. When the answers are not published anywhere yet, the card now says so instead of hiding the confirmation without a word, and points people who manage settings to where to turn it on.
+
+## v1.6.793
+
+- Review Portal emails no longer show a logo in place of a missing featured image. An item without a picture now ends its card after the buttons, so the logo no longer sits off-center on a gray panel under the header logo. Items with a featured image are unchanged, and the Review Portal queue cards keep their logo stand-in.
+
+## v1.6.792
+
+- Licensing fixes. A license lock no longer turns off the licensing server's own gateway, and the licensing server no longer locks itself after 15 days without a confirmed check. A lock now saves every SyteOps Admin before removing the role, and a repeated lock no longer forgets which modules to turn back on, so the next valid check always restores both, and opening an admin screen no longer removes SyteOps Admin because the management connection reports the domain as in use elsewhere or not authorized. A license check whose recovery attempt goes unanswered now keeps its expired or inactive answer instead of falling back to the offline grace period. When the licensing server cannot confirm a site's hub credential, or cannot read the license it was pointed at, the site now stays on the offline grace period instead of reading it as a refusal or an unknown key.
+
+## v1.6.791
+
+- Callback emails now carry your site's own brand. The call summary, the follow-up reminder and the Monday list use the logo and color set in General → Branding instead of a fixed teal, and a site can also set its own logo size, colors, font and footer text for these three emails, or hide the plugin footer. Other lead emails are unchanged.
+
+## v1.6.789
+
+- Callbacks fixes from review. Done, Not a lead and Reopen from any tool now wait while a call is being placed and respect another person's call lock. An answered call from a lead no longer reopens a closed callback (a missed or very short call still does): the AI read of that call decides. The Monday list never expires a callback it did not name, and an email nobody received no longer counts as sent. A follow-up reminder goes out once, even after the lead calls in. A call whose outcome the phone system never confirmed is credited to the person who placed it. AI reads whose scheduled run was lost are picked up by the hourly check, and the callbacks schedules are removed when callbacks or the plugin are turned off.
+
+## v1.6.788
+
+- The subject and main heading of the three callback emails (the call summary, the follow-up reminder and the Monday list) now use Title Case, to match the weekly report from the phone system. Only the fixed words change: a lead's name, a date or a count shows exactly as it is stored.
+
 ## v1.6.787
 
 - The management API's Leads settings read now says, for each setting, whether it decides where lead details are sent and whether changing it needs a confirmation, so tools no longer keep their own list.
