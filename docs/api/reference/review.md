@@ -12,7 +12,7 @@ description: Manage API operations for the review resource.
 
 ## `approve`
 
-Approve a post for publishing, as the Review Portal's Publish does with nothing edited: it publishes now, or schedules it when the post holds a reviewer's intended time or a reserved cadence slot at least a minute ahead and scheduling is on. Acts with admin authority: an admin or API-key caller bypasses the post's reviewer list and the who_can_publish rule, which gate people in the portal, and is limited to posts in review. It records the approver as user 0 whenever the API key authorized the call, otherwise the signed-in SyteOps Admin. A post never sent for review (no reviewers and no review link) is refused (409 not_in_review). A post already live is ok with changed:false and already_live:true, and nothing is written, logged or emailed. A title, excerpt or body the call does not send is published exactly as stored. Every portal check applies: 409 not_ready (with failed[] requirements), 409 published_immutable, 500 publish_failed. Open notes do not block it (the portal only warns); open_notes reports them. Destructive: send confirm:true.
+Approve a post for publishing, as the Review Portal's Publish does with nothing edited: it publishes now, or schedules it when the post holds a reviewer's intended time or a reserved cadence slot at least a minute ahead and scheduling is on. A post already scheduled keeps its own date: with scheduling on and the date at least a minute ahead it is ok with changed:false and already_scheduled:true, and nothing is written, logged or emailed; with scheduling off that date could not be kept, so it is refused (409 scheduling_off; unschedule it first to publish now). A scheduled date already due (a missed schedule) publishes with that date. Acts with admin authority: an admin or API-key caller bypasses the post's reviewer list and the who_can_publish rule, which gate people in the portal, and is limited to posts in review. It records the approver as user 0 whenever the API key authorized the call, otherwise the signed-in SyteOps Admin. A post never sent for review (no reviewers and no review link) is refused (409 not_in_review). A post already live is ok with changed:false and already_live:true, and nothing is written, logged or emailed. A title, excerpt or body the call does not send is published exactly as stored. Every portal check applies: 409 not_ready (with failed[] requirements), 409 published_immutable, 500 publish_failed. Open notes do not block it (the portal only warns); open_notes reports them. Destructive: send confirm:true.
 
 **🔴 Destructive**  
 **Access:** SyteOps Admin or API key, plus `confirm: true`.
@@ -27,7 +27,7 @@ Approve a post for publishing, as the Review Portal's Publish does with nothing 
 
 **Returns**
 
-data: &#123;post_id, status, scheduled, scheduled_readable, permalink, emailed, notify: &#123;outcome, partial}, images: &#123;imported, reused, failed, capped}|null, open_notes, approved_by: &#123;user_id, via, api_key}, already_live}
+data: &#123;post_id, status, scheduled, scheduled_readable, permalink, emailed, notify: &#123;outcome, partial}, images: &#123;imported, reused, failed, capped}|null, open_notes, approved_by: &#123;user_id, via, api_key}, already_live, already_scheduled}
 
 **Request**
 
@@ -294,7 +294,7 @@ Add a reviewer to one post, as the portal's Send to a colleague does: the person
 
 **Returns**
 
-data: &#123;post_id, user_id, emailed, notify: sent|failed|none, reviewers[], watchers[]}; emailed and notify only when the person was added; a person is &#123;user_id, display_name, roles[]}
+data: &#123;post_id, user_id, emailed, notify: &#123;outcome: sent|queued|failed|off|none, partial}, reviewers[], watchers[]}; emailed and notify only when the person was added; a person is &#123;user_id, display_name, roles[]}
 
 **Request**
 

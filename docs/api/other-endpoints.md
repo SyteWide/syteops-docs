@@ -29,7 +29,7 @@ Namespace: `syteops/v1`. Authentication: rotating short-lived token.
 | Method | Path | Auth | Purpose |
 |---|---|---|---|
 | `GET` | `/leads/bootstrap` | token | Mints a short-lived, rate-limited, cache-safe ingest token for a visitor session |
-| `POST` | `/leads/ingest` | token | Records a conversion event; requires the rotating token returned by bootstrap |
+| `POST` | `/leads/ingest` | token | Records a conversion event; requires the rotating token returned by bootstrap. A new lead counts toward the same per-network allowance as `/leads/qualify`; past it the lead is stored but held (no webhook or email) |
 
 The bootstrap/ingest pair is designed for front-end use: the page fetches `/leads/bootstrap` to obtain a token, then uses that token to call `/leads/ingest`. The token is rate-limited and cache-safe so that CDN or page-cache hits on the bootstrap request do not reuse stale tokens.
 
@@ -39,7 +39,7 @@ Namespace: `syteops/v1`. Authentication: ingest token (same gate as `/leads/inge
 
 | Method | Path | Auth | Purpose |
 |---|---|---|---|
-| `POST` | `/leads/qualify` | token | Runs qualification logic against a lead record; reuses the ingest token gate |
+| `POST` | `/leads/qualify` | token | Runs qualification logic against a lead record; reuses the ingest token gate. Past 20 new leads an hour from one network (an IPv4 /24 or IPv6 /48; counted once per lead, here or on `/leads/ingest`), or 300 across the site, a new lead is still stored, but marked held: no new-lead webhook, email or CRM push is sent for it |
 
 ## Leads proof
 

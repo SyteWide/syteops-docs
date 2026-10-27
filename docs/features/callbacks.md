@@ -10,6 +10,8 @@ When someone calls or fills in a form and is waiting for a call back, Lead Attri
 
 ## Before you start
 
+To turn all of this on, follow the ordered checklist in [Turn on callbacks and calling](callbacks-setup).
+
 The Callbacks list appears only when all of these are true:
 
 - **Lead Attribution** is on.
@@ -60,7 +62,7 @@ The Call button is grayed out, with the reason at the top of the list, until you
 
 **Limits.** To keep calls under control, each person can place 20 calls a day and the whole site 60 a day, no more than 8 a minute across the site (RingTonic allows 10), and one lead can be called at most 3 times an hour and 10 times a day, whoever calls. The daily counts start again at midnight in your site's time zone. An admin can change all of them on **Leads → Settings → RingTonic → Click-to-call → Call limits**. When a limit is reached, the call is not placed and the row says which limit it was.
 
-**Calls your site places itself.** If your site has a Call button outside the portal, such as in its lead emails, and it tells SyteOps about each call it places, that call now locks the callback for the person who placed it, just like a call from this list, and counts toward the same limits. A call like that is never stopped by a limit, because it has already been placed; once a limit is used up, the Call button here stops placing calls until it resets. If someone else is already calling that lead, their lock stays.
+**Calls your site places itself.** If your site has a Call button outside the portal, such as in its lead emails, and it tells SyteOps about each call it places (see [Sites with their own Call buttons](callbacks-setup#sites-with-their-own-call-buttons)), that call locks the callback for the person who placed it, just like a call from this list, and counts toward the same limits. A call like that is never stopped by a limit, because it has already been placed; once a limit is used up, the Call button here stops placing calls until it resets. If someone else is already calling that lead, their lock stays.
 
 If a call does not go through, the row says why in plain words:
 
@@ -76,16 +78,16 @@ If a call does not go through, the row says why in plain words:
 
 ### Monday callbacks list
 
-Every Monday at about 7:30 am (your site's time; a missed Monday is made up later that week), the people you list get one email with the week in front of them. Nobody is listed until you add them.
+Every Monday from 7:30 am (your site's time; it can arrive up to about an hour later, and a missed Monday is made up later that week), the people you list get one email with the week in front of them. Nobody is listed until you add them.
 
 - **Last mention**: callbacks in their 16th week. If nobody returns or closes them, they expire after this email.
 - **Callbacks still waiting**: oldest first, each with how many weeks it has been waiting. A callback stays on the list, week after week, until someone returns it or closes it.
 - **Follow-ups due or overdue**: the follow-ups due this week, and any that are late.
 - **Returned last week**, **Closed last week** (including the ones the AI closed, each with Reopen) and **Called in last week**.
 
-At 16 weeks a callback gets one last mention and then expires. It leaves the waiting list and shows as Expired under Closed. Reopen it, or a new call from the same number, starts its 16 weeks again. Nothing expires while nobody is listed for the email, because the Monday list carries the last mention; with a list set, a callback in its last week also says when it expires on its row in the portal. A new call or form from the same number counts as hearing from them again, so their 16 weeks restart.
+At 16 weeks a callback gets one last mention and then expires. It expires only after an email that named it went out: if the Monday email of its last week could not be sent, the next one names it as its last mention and it expires after that. It then leaves the waiting list and shows as Expired under Closed. Reopen it, or a new call from the same number, starts its 16 weeks again. Nothing expires while nobody is listed for the email, because the Monday list carries the last mention; with a list set, a callback in its last week also says when it expires on its row in the portal. A new call or form from the same number counts as hearing from them again, so their 16 weeks restart.
 
-**Settings** (an admin, on **Leads → Settings → RingTonic → Monday callbacks list**): **Send the Monday list to slots**, for example `001, 003`. This list is separate from the call summary emails. The email goes to whoever holds each slot on Monday, and only while they have Callbacks access of View and act or Call. If you already send a Monday callbacks report from another tool, turn that off at the same time.
+**Settings** (an admin, on **Leads → Settings → RingTonic → Monday callbacks list**): **Send the Monday list to slots**, for example `001, 003`. This list is separate from the call summary emails. The email goes to whoever holds each slot on Monday, and only while they have Callbacks access of View and act or Call. This list replaces a site's own weekly callbacks report, so turn that report off in the same step you set the slots; it does not replace lead notification emails, inbound call alerts or missed-call alerts, which stay on. To compare first, list one slot and run both for a week or two (see [Switching over from a site's own report](callbacks-setup#switching-over-from-a-sites-own-report)). The email's subject reads like **Callbacks This Week: 4 Waiting, 2 Follow-Ups**.
 
 With contact details stored in full, the email shows names and numbers and the Done, Not a lead, Call again and Reopen buttons. With Masked it shows masked names and numbers and one **Open your page** link. With Off it shows counts only. It never includes a call transcript.
 
@@ -95,9 +97,9 @@ The buttons in a callback email, such as the call summary email below, open your
 
 ### Call summary emails
 
-Each callback a person places can be emailed to the people you choose, once the call has a transcript. In **Leads → Settings → RingTonic → Call summary email**, list their Users slot numbers (for example `001, 003`). **Off until recipients are set.** On a site that already sends callback emails from its own code, turn those off at the same time, or people will get two.
+Each callback a person places can be emailed to the people you choose, once the call has a transcript. In **Leads → Settings → RingTonic → Call summary email**, list their Users slot numbers (for example `001, 003`). **Off until recipients are set.** This email replaces a per-callback summary email the site sends from its own code, if it has one; turn that one off when you list slots, or people will get two. It does not replace lead notification emails, inbound call alerts or missed-call alerts, which stay on.
 
-Each person in a listed slot gets one email per callback (once the AI has read it, when AI reads are on). The subject reads like **Callback by Todd: Jane Roe (4 min)**. Calls the lead made to you do not send this email. Inside:
+Each person in a listed slot gets one email per callback (once the AI has read it, when AI reads are on). The subject reads like **Callback by Todd: Jane Roe (4 min)**, and the email's heading says **Call Summary**. Calls the lead made to you do not send this email. Inside:
 
 - who called, or who you called, and what happened: answered, no answer, how long, when, and who placed it;
 - the summary RingTonic wrote, and what the AI did with the call: closed the callback, marked it returned, reopened it, suggested a change, or left it alone;
@@ -109,9 +111,13 @@ When the AI closed the callback, the top of the email says so, with its reason a
 
 The buttons open your own page at that callback and ask you to confirm; nothing changes from the email itself, and a callback someone else is calling stays locked. A person only gets the email while their slot has Callbacks access of View and act or Call. The email never contains the transcript or the words the AI quoted. Under **Masked** it shows the masked number only, with no name, summary or AI reason, and under **Off** no number either. In both, the buttons are replaced by one **Open your page** link, because the page only acts on a callback while contact details are stored in full.
 
+### Your branding in these emails
+
+The call summary, the follow-up reminder and the Monday list use your General → Branding settings: your company logo, your company name and your brand color for the buttons. Your site's developer can also set the logo size, colors, font and footer line for these three emails, or hide the plugin's own footer.
+
 ### Follow-up reminders
 
-When a callback has a follow-up date, the person who last called that lead can get one reminder email on the day, at about 7:30 am in your site's time zone. **Off by default.** Turn it on in **Leads → Settings → RingTonic → Follow-up reminders**.
+When a callback has a follow-up date, the person who last called that lead can get one reminder email on the day, at about 7:30 am in your site's time zone. **Off by default.** Turn it on in **Leads → Settings → RingTonic → Follow-up reminders**. The subject reads **Follow Up Today: Jane Roe**, or **Follow Up: Jane Roe (Was Due 2026-10-23)** when it reaches you late.
 
 Inside:
 
@@ -201,7 +207,7 @@ When a call has a transcript, outgoing or incoming, an AI reads it once and deci
 - **Closing a callback** (the call was returned, the matter is handled, or the caller is not a real lead) happens only when the AI is at least **85% sure** and can quote the transcript word for word to back it up. The row then says, for example, **Closed by AI · The caller says the loan closed · 91%**, with **Reopen** right there.
 - **Below that**, nothing changes. The row shows a suggestion instead, for example **AI: looks handled — The caller says the loan closed 72%**, with **Confirm** (which does exactly what the row's **Done** or **Not a lead** button does) and **Dismiss**.
 - **Opening a callback again** (the caller still wants a call, or asked to be called on a later date) happens when the AI is at least **60% sure**. The row says **Opened by AI** with the reason, and a follow-up date is set when a day was agreed. Below 60% nothing happens. A callback someone marked **Not a lead** is never reopened by the AI; it suggests a **Reopen** instead.
-- **Moving a waiting callback to a later follow-up date** takes it off the waiting list, so it needs the same 85% and the words from the call. Otherwise the row only notes "AI: suggests a follow-up on …", which you can dismiss.
+- **Moving a waiting callback to a later follow-up date** takes it off the waiting list, so it needs the same 85% and the words from the call. Otherwise the row only notes "AI: suggests a follow-up on …". It is a note only, since nothing in the list sets a follow-up date: dismiss it once it is handled.
 - **A row the AI marked returned** says **Marked returned by AI**.
 - **Names, company and email** heard on the call fill in only fields that are still empty and that nobody on your team has typed, and only at the same 85% with the words in the transcript. The panel then says **Filled by AI**. Anything else becomes a suggestion such as **AI heard: Jane Roe, Marriott**; **Confirm** opens **Edit contact** with those values filled in, and nothing is saved until you press **Save contact**.
 - **The carrier's caller ID name** is weighed as a clue but is never enough on its own: it can only suggest ("Carrier caller ID says: Marriott Intl"). A business name there is treated as the company. When the caller ID and the call disagree, the suggestion shows both.
@@ -232,6 +238,6 @@ The row moves to its new group straight away, and the page records who marked it
 
 ## Good to know
 
-- A new call from someone whose callback is Done, Returned, Expired or Held puts them back in the waiting list automatically. A form submission does not.
+- A new call from someone whose callback is Done, Returned, Expired or Held puts them back in the waiting list automatically when the call was missed or lasted under 30 seconds. When your team talked with them, the callback stays as it is and the AI read of that call decides whether it needs another call back. A form submission never moves it.
 - The list shows up to 200 waiting callbacks and the 200 most recently closed ones.
 - **Scripted setup.** The Lead Attribution settings, a person's people link and the site time zone can also be set through the Manage API (`leads.settings_set`, `leads.people_issue_link`, `site.timezone_set`; see the [API reference](../api/reference/leads)). The RingTonic keys are not: they are entered on the RingTonic card or set from a terminal, never through the API.

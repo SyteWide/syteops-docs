@@ -237,7 +237,7 @@ data: &#123;entitlements}
 
 ## `get_config`
 
-Get a module's stored configuration. Refused for syteops_leads (422 use_leads_settings_get): its webhook addresses can carry a token, and leads.settings_get returns the same settings with them masked.
+Get a module's configuration: allowlisted buckets and keys only (today syteops_banners: banner_text, default_html, schedule_activation, schedule_deactivation, show_defaults_outside_times, clear_litespeed_cache). Any other module is 403 config_not_exposed; syteops_leads is 422 use_leads_settings_get (leads.settings_get returns its settings with the webhook addresses masked).
 
 **Access:** SyteOps Admin or API key.
 
@@ -291,7 +291,7 @@ data.modules[]: array of &#123;module, active}
 
 ## `update_config`
 
-Merge keys into a module's stored configuration (no schema). Refused for syteops_leads (422 use_leads_settings_set): the Leads settings are written through leads.settings_set.
+Merge keys into a module's configuration: allowlisted buckets and keys only, the same list as get_config, each stored as its settings screen stores it (HTML filtered, text sanitized, flags as true/false). All or nothing: a key outside the list is 422 unknown_config_key, a value of the wrong type 422 invalid_config_value. Any other module is 403 config_not_exposed; syteops_leads is 422 use_leads_settings_set.
 
 **Access:** SyteOps Admin or API key.
 

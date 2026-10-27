@@ -34,6 +34,7 @@ const sidebars: SidebarsConfig = {
         'features/banners',
         'features/lead-attribution',
         'features/callbacks',
+        'features/callbacks-setup',
         'features/white-label',
         'features/variable-sets',
         'features/ai-providers',
