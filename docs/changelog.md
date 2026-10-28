@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.816
+
+- A module signing key that SyteOps retires is no longer trusted by your site after its next license check.
+
+## v1.6.815
+
+- A note placed inside a tab now says "Not showing" whenever its tab is closed, however it was first shown.
+
 ## v1.6.814
 
 - A link for a number that cannot be dialed (a withheld or blocked caller) is now left off, so no Call button appears for that caller.
