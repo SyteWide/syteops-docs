@@ -8,6 +8,34 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.823
+
+- Headless frontends can send their layout breakpoints to the preview.
+
+## v1.6.822
+
+- Agent prompts list the site's preview breakpoints and label notes by width.
+
+## v1.6.821
+
+- Review Portal can use this site's own breakpoints, with extra preview widths set by the site owner.
+
+## v1.6.820
+
+- Each reviewer can save their own default preview width, and the preview opens at it.
+
+## v1.6.819
+
+- Clicking a page section now attaches the note to the part you clicked, with Smaller part and Larger part to adjust it.
+
+## v1.6.818
+
+- The device preview offers five widths and a Custom width, and a note remembers the exact width it was left at.
+
+## v1.6.817
+
+- A note on a page section now stays on that section after the page changes, instead of moving onto a smaller part of it.
+
 ## v1.6.816
 
 - A module signing key that SyteOps retires is no longer trusted by your site after its next license check.

@@ -284,7 +284,7 @@ The default is a two-column table. With `--format=json`, the first line on stand
 Example line (fake values):
 
 ```json
-{"schema":1,"syteops_version":"1.6.592","integration_enabled":true,"headless":true,"frontend_origin":"https://www.example.com","key_set":true,"rest_restriction":"authenticated","webhook_set":true,"webhook_last_trigger":1760000000,"webhook_last_result":"http_200","webhook_debounce_seconds":60,"webhook_events":["content","product","menu","taxonomy","settings","requested"],"stray_output_guard":true,"stray_output_last_seen":null,"connect_active":true,"connect_version":"2.4.1","capabilities":["rebuild_webhook","stray_output_guard","authors","rebuild_request","lead_origin","exclusions","expected_pages","site_settings","seo_fields","form_route"],"wp_cron_disabled":false}
+{"schema":1,"syteops_version":"1.6.592","integration_enabled":true,"headless":true,"frontend_origin":"https://www.example.com","key_set":true,"rest_restriction":"authenticated","webhook_set":true,"webhook_last_trigger":1760000000,"webhook_last_result":"http_200","webhook_debounce_seconds":60,"webhook_events":["content","product","menu","taxonomy","settings","requested"],"stray_output_guard":true,"stray_output_last_seen":null,"connect_active":true,"connect_version":"2.4.1","capabilities":["rebuild_webhook","stray_output_guard","authors","rebuild_request","lead_origin","exclusions","expected_pages","site_settings","seo_fields","form_route"],"wp_cron_disabled":false,"frontend_breakpoints":{"count":2,"at":1760000000}}
 ```
 
 | Field | Meaning |
@@ -306,9 +306,71 @@ Example line (fake values):
 | `connect_active` | The PhantomWP Connect plugin is active. |
 | `connect_version` | Its version, or `null`. |
 | `capabilities` | The features this site reports to PhantomStudio. |
+| `frontend_breakpoints` | When your frontend has published layout widths, how many and when (`count` and `at` only), or `null`. |
 | `wp_cron_disabled` | WordPress's built-in scheduled tasks are switched off on this site (`DISABLE_WP_CRON`), so a deploy waits for a real system cron. |
 
 A plugin that prints plain text while WordPress loads, or that changes the PHP error display setting, can put text on standard output before the command starts. The command cannot prevent that.
+
+## Send your breakpoints
+
+On a **headless** install, your frontend build can tell WordPress the pixel widths where your CSS layout changes. When **Use this site's breakpoints in the preview** is on, the Review Portal preview uses those widths in place of its middle presets; Desktop (1440) and Phone (390) stay.
+
+**Request**
+
+- **Method and path:** `POST /wp-json/syteops/v1/phantomstudio/breakpoints`
+- **Header:** `X-PhantomWP-Secret: <your PhantomStudio project key>` (same key as for read access)
+- **Body (JSON, at most 4 KB):** optional `source` (a short name such as `astro`, default `frontend`) and a `widths` array (at most 12 entries). Each entry needs `name` (letters, digits, `_`, `-`, up to 20 characters), `px` (whole number from 320 to 2560, the range the preview can show), and `direction` (`min` or `max`).
+
+Example:
+
+```json
+{
+  "source": "astro",
+  "widths": [
+    { "name": "lg", "px": 1024, "direction": "min" },
+    { "name": "md", "px": 768, "direction": "max" }
+  ]
+}
+```
+
+A successful response looks like `{"stored":2}`. The integration must be on, REST Block All must be off, and the key must match; a signed-in WordPress user without the key gets 403.
+
+**Astro (after each production build)**
+
+Run this from your Astro project after `astro build`, with the key in an environment variable (never commit it):
+
+```javascript
+import { defineConfig } from 'astro/config';
+
+export default defineConfig({
+  integrations: [
+    {
+      name: 'syteops-breakpoints',
+      hooks: {
+        'astro:build:done': async () => {
+          const key = process.env.SYTEOPS_PHANTOMWP_SECRET;
+          const site = process.env.SYTEOPS_WORDPRESS_URL;
+          if (!key || !site) return;
+          const widths = [
+            { name: 'lg', px: 1024, direction: 'min' },
+            { name: 'md', px: 768, direction: 'max' },
+          ];
+          await fetch(`${site.replace(/\/$/, '')}/wp-json/syteops/v1/phantomstudio/breakpoints`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-PhantomWP-Secret': key,
+            },
+            body: JSON.stringify({ source: 'astro', widths }),
+          });
+        },
+      },
+    },
+  ],
+});
+```
+
+Turn on **Use this site's breakpoints in the preview** in Content Pipelines → Review Portal settings so reviewers see the stored widths.
 
 ## Setup
 

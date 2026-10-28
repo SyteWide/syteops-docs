@@ -61,7 +61,7 @@ Add a review note as one person, through the Review Portal's own writer, so the 
 | `resolve` | boolean | no | Reply only: also resolve the parent note. |
 | `attachment_id` | integer | no | Record id, digits only. |
 | `image_url` | string | no | The picture's URL, when it has no attachment id. |
-| `element` | object | no | Element target: selector, sig, text, ox, oy, vw, media, src, name, breakpoint, tag, el_id, classes, heading, html, builder_path, rect, url, bld. |
+| `element` | object | no | Element target: selector, sig, text, ox, oy, vw, media, src, name, breakpoint, bp_px, tag, el_id, classes, heading, html, builder_path, rect, url, bld. |
 
 
 **Returns**

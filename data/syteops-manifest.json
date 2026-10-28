@@ -1,6 +1,6 @@
 {
     "schema_version": 1,
-    "syteops_version": "1.6.816",
+    "syteops_version": "1.6.823",
     "operations": [
         {
             "resource": "users",
@@ -95,6 +95,10 @@
                     "type": "string",
                     "description": "Review list page size for this person: '5', '10', '25', '100', or '' to inherit the site default."
                 },
+                "preview_width": {
+                    "type": "string",
+                    "description": "The width in pixels the Review Portal page preview opens at for this person: a whole number from 320 to 2560 (clamped), or '' for the site default. Site-local."
+                },
                 "callbacks_access": {
                     "type": "string",
                     "description": "Callbacks access in the person's private page: '' (off), 'act' (view and act) or 'call'. Anything else is stored as off. Site-local."
@@ -181,6 +185,10 @@
                 "list_per": {
                     "type": "string",
                     "description": "Review list page size for this person: '5', '10', '25', '100', or '' to inherit the site default."
+                },
+                "preview_width": {
+                    "type": "string",
+                    "description": "The width in pixels the Review Portal page preview opens at for this person: a whole number from 320 to 2560 (clamped), or '' for the site default. Site-local."
                 },
                 "callbacks_access": {
                     "type": "string",
@@ -2322,7 +2330,7 @@
                 "element": {
                     "type": "object",
                     "required": false,
-                    "description": "Element target: selector, sig, text, ox, oy, vw, media, src, name, breakpoint, tag, el_id, classes, heading, html, builder_path, rect, url, bld."
+                    "description": "Element target: selector, sig, text, ox, oy, vw, media, src, name, breakpoint, bp_px, tag, el_id, classes, heading, html, builder_path, rect, url, bld."
                 }
             },
             "destructive": false,
