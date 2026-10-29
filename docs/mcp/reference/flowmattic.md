@@ -31,7 +31,7 @@ Create a FlowMattic connection (bearer/basic/api-key) from a secret REFERENCE, n
 
 ## `fflow_create_workflow`
 
-Author a new FlowMattic workflow from a trigger + ordered actions (each naming an app/action slug from fflow_list_apps with a config object). Validates required fields (use fflow_describe_action); unknown fields pass through with a warning. Provide an optional "key" for deterministic, idempotent re-runs (fleet-safe); omit for a one-off. Ships disabled (status off) by default; pass status:"on" to create AND activate it (this also registers the trigger — schedule/polling cron, plugin-action hooks), or activate later with fflow_set_workflow_status. The result's "registration" field reports what was registered. Note: a webhook-triggered workflow created with status:on begins accepting unauthenticated POSTs at its capture URL immediately.
+Author a new FlowMattic workflow from a trigger + ordered actions (each naming an app/action slug from fflow_list_apps with a config object). Validates required fields (use fflow_describe_action); unknown fields pass through with a warning. Provide an optional "key" for deterministic, idempotent re-runs (fleet-safe); omit for a one-off. Ships disabled (status off) by default; pass status:"on" to create AND activate it (this also registers the trigger — schedule/polling cron, plugin-action hooks), or activate later with fflow_set_workflow_status. The result's "registration" field reports what was registered; schedule_cron_failed or polling_cron_failed means the cron event did not stick, so re-run fflow_set_workflow_status with status on. Note: a webhook-triggered workflow created with status:on begins accepting unauthenticated POSTs at its capture URL immediately.
 
 **🔴 Destructive** — supports a `dry_run` preview flag.  
 **Profiles:** `full`, `flowmattic`
@@ -268,7 +268,7 @@ Create or update a NATIVE FlowMattic custom variable (referenced in workflows as
 
 ## `fflow_set_workflow_status`
 
-Activate (status on) or deactivate (off) a FlowMattic workflow by "id" or "key". Registers the trigger correctly for ALL trigger types: webhook/integration-event run on activation with no extra setup; schedule/polling register a WP-Cron event; plugin-action hooks register their dynamic hook. Closes the gap where workflows had to be toggled in the FlowMattic UI.
+Activate (status on) or deactivate (off) a FlowMattic workflow by "id" or "key". Registers the trigger correctly for ALL trigger types: webhook/integration-event run on activation with no extra setup; schedule/polling register a WP-Cron event; plugin-action hooks register their dynamic hook. Closes the gap where workflows had to be toggled in the FlowMattic UI. registration schedule_cron_failed or polling_cron_failed means the cron event did not stick after one retry (another write to WordPress's cron list can drop it): run this again with status on.
 
 **🔴 Destructive** — supports a `dry_run` preview flag.  
 **Profiles:** `full`, `flowmattic`
