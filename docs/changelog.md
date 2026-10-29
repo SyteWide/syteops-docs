@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.836
+
+- Fixed: pictures served from your site's own ExactDN image CDN are now recognized as already in the media library, so the Review Portal no longer offers to import them again or creates duplicate copies.
+
 ## v1.6.835
 
 - Lead notification emails can carry a small footer link that blocks the sender's IP in Wordfence and Cloudflare after a confirm step, with an Unblock link and a Blocked IPs list in the leads settings.
