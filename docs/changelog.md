@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.830
+
+- The call-link, sign-in and Review Portal cards now show the site's logo where a lazy-load plugin had hidden it, the call-link and sign-in cards drop the "Your page" title, and a site with no logo shows the SyteOps logo.
+
 ## v1.6.829
 
 - Copying a theme logo to the Media Library now works when the logo's file path contains a space.
