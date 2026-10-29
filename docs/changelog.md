@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.835
+
+- Lead notification emails can carry a small footer link that blocks the sender's IP in Wordfence and Cloudflare after a confirm step, with an Unblock link and a Blocked IPs list in the leads settings.
+- The link is off until the Lead IP block integration is switched on, and it refuses private addresses, Cloudflare ranges, your own IP and any protected IP.
+
 ## v1.6.834
 
 - Modify with AI now names a changed picture from what the result shows, instead of copying the original name or the article title. You can edit the file name, title and alt text before the picture is placed.
