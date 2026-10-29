@@ -256,6 +256,8 @@ Its **caption is left exactly as you wrote it**. A caption is your own words abo
 
 The image panel also has a **Modify with AI** section, below **Image Details**: describe the change you want and press **Generate**. Pressing Generate makes a new version and leaves your article alone — you decide afterwards which version the article uses. The original is kept, so **Revert** always brings it back.
 
+Each version has its own delete. A version the page no longer shows can be deleted. If the page still shows it, the original is put back first and the page is checked again; when that does not save, nothing is deleted. If the picture is still used somewhere else, the message names that page. If the check cannot be finished, the picture is left in place.
+
 The prompt box and the reference-picture control now share one box. Click the **Use another picture** pill at the bottom of the box to remix from a different picture instead of the one you opened — once you pick one, the pill turns into a chip showing its thumbnail and **AI reference: &lt;file name&gt;**. A note beside the pill or chip says plainly that this only guides **Generate** below, and points you at **Media Library** in **Image Details** if you actually want to replace the picture. Click the **×** on the chip (its accessible name is **Stop using a different source image**) to drop it and go back to remixing the picture you opened.
 
 **Picking a picture here does nothing until you press Generate.** If you have picked one and press **Apply** or close the panel some other way before generating with it, you are asked to confirm — pressing Apply or closing does not swap in the picture you picked, and confirming discards it. Once you have pressed **Generate** with it at least once, closing or applying no longer asks.
@@ -285,7 +287,7 @@ Two things decide whether the picture comes back looking like itself:
 
 The picture also keeps its own proportions. A square or portrait photo used to come back cropped to widescreen, because nothing told the image service what shape it started as.
 
-The new version also keeps the original picture's title, alt text, caption and description, rather than arriving in your media library with a made-up name and nothing written about it. The one exception: if the original's title is nothing more than its file name — something like `IMG_4471` — that isn't carried over, since a file name isn't a title anyone chose. This looks past the file names WordPress makes up on your behalf, too: when a name is already taken it adds a number, it saves a smaller copy of a very large photo, it turns a sideways photo the right way up, and it saves a separate copy when you crop. A picture still titled `IMG_4471` is recognized in all of those cases. When the title is refused this way, the new version is named after the original's alt text instead, or after the article if there is no alt text. If the article has no title of its own either, there is nothing left to borrow, and the picture keeps its generated name. The file itself still gets a generated name on your server either way; it's the title, alt text, caption and description shown in the media library that come from the original.
+A remix that is still the same scene keeps the original picture's title and alt text, and it does not stack another generated suffix onto the file name. A change that shows something new — a remix started from a different picture, a Vary result, or a picture generated from text — gets a new title and alt text describing the result, and an empty caption. The title is never the article's title. If that description cannot be made, the title and the file name come from the prompt you typed, the alt text is left empty, and the card says the name still needs a look. You can edit the file name, the title and the alt text on the result and on each version, then press **Save name**. The file is renamed only while that version is not the picture the article is using; if it is already in place, the title and alt text are saved and you are told the file name was left as it is. A same-scene remix still skips a title that is nothing more than the file name, such as `IMG_4471`, including the copies WordPress makes when a name is taken, a photo is very large, a sideways photo is turned upright, or you crop.
 
 Your site administrator sets the defaults under **Content Pipelines → AI Models → Image generation**; each Generate can override them. The **Create an original picture by default** checkbox — whether attaching a reference picture ticks **Create an original picture inspired by this one** for you — lives in the same **Review Portal → Modify images with AI** settings, right after **Preserve detail**.
 
@@ -390,6 +392,20 @@ Up to three controls sit on each card.
 
 **Use in article never deletes a file.** It only changes which picture the article shows. To remove
 a version from your media library, use the trash icon on that card.
+
+**Use in article puts the picture in the exact spot you changed.** If the picture sits inside a
+page-builder HTML or text widget, only that picture is replaced; the rest of the widget stays as it
+was. A picture that is already in your media library is reused rather than added again; one from
+another site is copied into the library, and the portal tells you so. For a picture in the article
+text, the article is saved first, and the version is marked **In use** only once the saved article
+shows it. If a save is already running, Use in article waits for it. If a conflict is open, or the
+article is already published, you are told the placement did not run. If the site refused the save,
+you are told the picture is in the article but not recorded as in use yet. For a picture on the page
+preview, the new picture is checked on the saved page, including a background image. If it could not
+be saved, you get a message naming the widget, and the page keeps showing the old picture. If the
+page changed while the picture was being placed, that newer page is left as it is.
+A picture that is only in the page's plain content, not in any Elementor widget, cannot be swapped
+here; change it in the Elementor editor.
 
 Some versions carry fewer than three controls, because some of them are refused on purpose. A
 picture another article is also using is never deleted from the library. The version your article
