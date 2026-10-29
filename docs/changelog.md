@@ -8,6 +8,30 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.829
+
+- Copying a theme logo to the Media Library now works when the logo's file path contains a space.
+
+## v1.6.828
+
+- Switching GEO off now removes its content from the llms files right away, as it was meant to.
+
+## v1.6.827
+
+- Background tasks such as rebuilding the llms files and recording a paid coverage run now re-run themselves if the site's task list drops them.
+
+## v1.6.826
+
+- Lead status updates sent to the CRM, finishing a publish's image imports, reprocessing a listing image, and bulk variable-set jobs are no longer dropped when two site requests overlap.
+
+## v1.6.825
+
+- A scheduled social post or an after-publish step is no longer skipped when two site requests overlap; it runs within about 15 minutes instead.
+
+## v1.6.824
+
+- Lead and callback emails are no longer lost when two site requests overlap, and a delayed callback email now goes out within about 25 minutes instead of up to an hour.
+
 ## v1.6.823
 
 - Headless frontends can send their layout breakpoints to the preview.
