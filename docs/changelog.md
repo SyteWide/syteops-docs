@@ -8,6 +8,21 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.834
+
+- Modify with AI now names a changed picture from what the result shows, instead of copying the original name or the article title. You can edit the file name, title and alt text before the picture is placed.
+- A remix of the same scene keeps the original name and alt text, and a stacked generated suffix on the file name is cleaned up.
+
+## v1.6.833
+
+- Deleting a remixed picture now works when the page no longer shows it, and a picture still in use names the page that uses it.
+- A remix that cannot be fully checked is left in place, and deleting one the page still shows puts the original back first.
+
+## v1.6.832
+
+- Use in article now places a remixed picture inside page-builder HTML and text widgets, reuses a picture already in the media library instead of importing a copy, and reports a swap that did not save instead of showing it as done.
+- If the page changed while the picture was being placed, that newer page is left as it is, and a save that never started is reported separately from a save the site refused.
+
 ## v1.6.830
 
 - The call-link, sign-in and Review Portal cards now show the site's logo where a lazy-load plugin had hidden it, the call-link and sign-in cards drop the "Your page" title, and a site with no logo shows the SyteOps logo.
