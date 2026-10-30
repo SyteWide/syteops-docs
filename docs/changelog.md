@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.843
+
+- Changed: a remix picture's name stays hidden until you press Picture name, and the fields use the same small type as the rest of the card.
+- Fixed: Attach reference tells you when the media library cannot open, and the library still opens if the usage badges fail.
+
 ## v1.6.842
 
 - Fixed: a picture already on this site that a page builder stores as HTML no longer asks you to import it before you can attach a reference.
