@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.844
+
+- Fixed: Attach reference image is a button again. When a reference cannot be attached, the button says so instead of leaving a heading with nothing to press.
+
 ## v1.6.843
 
 - Changed: a remix picture's name stays hidden until you press Picture name, and the fields use the same small type as the rest of the card.
