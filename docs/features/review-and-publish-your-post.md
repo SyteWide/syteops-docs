@@ -429,7 +429,7 @@ button is hidden.
 
 ### Notes on an image
 
-Click any picture in the article — or the featured image — and **Notes on This Image** is the first thing in the panel. Type what is wrong with the picture and click **Save note**. Under **Save note**, on every one of those panels, is **Attach reference image**, so later Modify with AI remixes start from that tagged picture unless you pick a one-off source for a single generate. If the picture is still only a web address and has not been imported into your media library, **Pick** stays disabled and a highlighted note next to it explains why, with a **Go to Import** link that jumps straight to the import button. If the picture is no longer in the article, **Attach reference image** is hidden.
+Click any picture in the article — or the featured image — and **Notes on This Image** is the first thing in the panel. Type what is wrong with the picture and click **Save note**. Under **Save note**, on every one of those panels, is **Attach reference image**, so later Modify with AI remixes start from that tagged picture unless you pick a one-off source for a single generate. If the picture is still only a web address and has not been imported into your media library, **Attach reference image** stays disabled and a highlighted note next to it explains why, with a **Go to Import** link that jumps straight to the import button. If the picture is no longer in the article, **Attach reference image** is hidden.
 
 The heading carries a count of the notes on that picture nobody has resolved yet, so you can tell at a glance whether a picture still has something outstanding without reading the list. A picture with nothing outstanding says nothing.
 
