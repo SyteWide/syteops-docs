@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.847
+
+- Changed: the Blocks search button sits beside the search box, and Re-check and Unblock are the same width with space between them.
+- Changed: dates, view links, and notes in the Blocks list keep their own space, and each blocking layer is named on its own.
+
 ## v1.6.846
 
 - Added: a Blocks section in Systems/API lists every block with links to view it in Cloudflare and Wordfence, editable notes, and Unblock, and you can add range, country, ASN and user agent blocks after a two-step confirmation.
