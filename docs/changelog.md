@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.838
+
+- Fixed: when a Modify with AI picture's file name cannot be changed, the Review Portal now says why instead of a generic failure, and renaming a freshly made picture works in more cases, long picture names no longer end in a stray hyphen, and a remixed page picture no longer keeps the page title.
+
 ## v1.6.837
 
 - Fixed: importing a picture served from a photo CDN such as Jetpack no longer creates a new copy on every click, and the page now switches to the imported picture instead of still showing the CDN copy.
