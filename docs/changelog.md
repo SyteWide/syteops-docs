@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.841
+
+- AI agent prompts that include a picture note now tell the coding session how to choose a crop, a photo already on the site, or a ready-to-paste Modify with AI prompt, and to report that choice. The session never runs the remix itself.
+
+## v1.6.840
+
+- Management Connection: the connection ID is no longer exposed to automation workflows.
+
 ## v1.6.839
 
 - Fixed: a picture already in the Media Library no longer shows "Import this picture first" in the Review Portal image popover when the page does not mark it, so a reference picture can be attached to it.
