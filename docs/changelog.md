@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.855
+
+- Changed: the copied prompt names the section and file inside an HTML block and does not offer a batch apply when nothing can be written.
+- Changed: picture notes stay in force at every width, and a remix of a picture typed into an HTML block is a manual change.
+
 ## v1.6.854
 
 - Fixed: undoing a page picture swap cannot put a picture back after it was deleted, including while that undo is waiting its turn.
