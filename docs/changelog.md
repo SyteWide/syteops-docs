@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.846
+
+- Added: a Blocks section in Systems/API lists every block with links to view it in Cloudflare and Wordfence, editable notes, and Unblock, and you can add range, country, ASN and user agent blocks after a two-step confirmation.
+- Changed: only the blocking layers you have set up are used, and with none set up the lead email shows Configure Blocking; the unblock confirmation page also has more space above its link.
+
 ## v1.6.845
 
 - Fixed: Attach reference image works again on a page for an account that can change pictures.
