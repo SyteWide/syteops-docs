@@ -8,6 +8,41 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.854
+
+- Fixed: undoing a page picture swap cannot put a picture back after it was deleted, including while that undo is waiting its turn.
+- Fixed: a picture check that does not finish can be tried again, and deleting many pictures on one article no longer lets an early one be restored.
+
+## v1.6.853
+
+- Changed: the Device Preview bar is a light row of device icons, with width choices and height in their own panels.
+- Changed: Reload latest and undo are icon buttons, and the click key wraps on a narrow screen.
+
+## v1.6.852
+
+- Changed: a resized picture that is already in this article keeps its filmstrip, and a picture from the site layout is named as such.
+- Changed: deleting a picture in the page preview refreshes that preview.
+
+## v1.6.851
+
+- Changed: Picture name opens in its own dialog, with the filename, title, and alt text beside the picture.
+- Changed: the Modify with AI and Image Details headings use a dark band with white text.
+
+## v1.6.850
+
+- Changed: Picture name opens as a full-width row under the filmstrip, so the filename, title, and alt text are easier to read.
+- Changed: the Modify with AI and Image Details headings use a slightly darker background, and the status text on them still meets contrast.
+
+## v1.6.849
+
+- Fixed: Photo SEO and attaching a reference recognize a featured picture and a canvas picture that is already in the media library.
+- Fixed: a note on a picture shows that picture, even when the page was showing a placeholder.
+
+## v1.6.848
+
+- Fixed: after you use a new picture in a spot, earlier pictures from that spot can be deleted when this page no longer shows them.
+- Changed: a picture another page still shows, or that this page's saved content still shows, stays in the library, and Undo will not put a deleted picture back.
+
 ## v1.6.847
 
 - Changed: the Blocks search button sits beside the search box, and Re-check and Unblock are the same width with space between them.
