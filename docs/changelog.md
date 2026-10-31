@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.856
+
+- Changed: a copied prompt for a picture typed into an HTML block follows the theme's own crop at every preview width.
+- Changed: that crop is written in the theme, or in the Astro frontend when the site is headless.
+
 ## v1.6.855
 
 - Changed: the copied prompt names the section and file inside an HTML block and does not offer a batch apply when nothing can be written.
