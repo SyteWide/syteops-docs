@@ -8,6 +8,26 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.859
+
+- Changed: Device Preview stays beside the page after the top bar scrolls away, and a width click keeps your place.
+- Changed: A page note is one card across preview widths, and a copied prompt lists each width's settings.
+- Fixed: Width notes no longer count as extra notes in the review queue, the notify list or the notes list.
+- Changed: Only a note's author or an editor can update the widths a note is linked to.
+- Fixed: A personal default width no longer causes repeated checks on the preview.
+- Fixed: The copied prompt keeps the operations the site detects, such as cache clearing and SEO updates.
+- Fixed: Reviewers are no longer emailed the same note several times.
+- Fixed: The admin comment counts no longer count width notes twice.
+- Fixed: The preview keeps your place when you switch widths.
+
+## v1.6.858
+
+- Fixed: A removed picture leaves the preview immediately, and picture details save when Apply is done.
+
+## v1.6.857
+
+- Fixed: Review preview height follows the page when you switch preview width.
+
 ## v1.6.856
 
 - Changed: a copied prompt for a picture typed into an HTML block follows the theme's own crop at every preview width.
