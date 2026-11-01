@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.866
+
+- Fixed: A picture you just created no longer shows as possibly in use just because its number appears in a page builder's cached template list, so you can delete it from the portal.
+
 ## v1.6.865
 
 - Fixed: A refused picture delete no longer leaves the page changed: when the site says a picture may still be in use, the page stays exactly as it was.
