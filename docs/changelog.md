@@ -8,6 +8,19 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.863
+
+- Improved: The preview's width controls are now a slim strip of icons that floats over the left edge of the preview, with each size's name appearing on hover, so it never changes the preview's size and stays hidden while the toolbar is on screen. The green frame around the preview is gone; the status pill in the toolbar still shows whether the page is live. Width chips on a note are now small rounded pills that match the Reply and Resolve buttons.
+
+## v1.6.862
+
+- Fixed: Apply now asks before it writes the article when a picked picture has not been used yet, and no longer shows a false error or the wrong published message.
+- Fixed: Deleting a picture from the page only removes a picture that is really that one.
+
+## v1.6.861
+
+- Fixed: The preview no longer jumps or grows when the page inside it is resized without a width change.
+
 ## v1.6.860
 
 - Fixed: Switching preview width keeps your place when the preview is set to Auto height.
