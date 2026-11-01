@@ -406,6 +406,13 @@ be saved, you get a message naming the widget, and the page keeps showing the ol
 page changed while the picture was being placed, that newer page is left as it is.
 A picture that is only in the page's plain content, not in any Elementor widget, cannot be swapped
 here; change it in the Elementor editor.
+On a page built with Avada or Divi, a swap replaces the picture in the builder's own image and
+background settings as well as the picture shown on the page, and the saved page is checked again
+afterward. If any place still showed the old picture, the page is put back and you are told the new
+picture did not save. A picture that is also used inside a code block, in Avada or Divi dynamic content, or that sits
+only in a shared Divi layout (a Library layout or a Theme Builder template) cannot be swapped here; the message says
+which, and nothing on the page changes. Change it in the builder. Deleting a picture from the page is refused the
+same way when a code block or dynamic content on the page also uses it, and the page is left as it was.
 
 Some versions carry fewer than three controls, because some of them are refused on purpose. A
 picture another article is also using is never deleted from the library. The version your article
