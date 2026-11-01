@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.860
+
+- Fixed: Switching preview width keeps your place when the preview is set to Auto height.
+
 ## v1.6.859
 
 - Changed: Device Preview stays beside the page after the top bar scrolls away, and a width click keeps your place.
