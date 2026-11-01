@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.865
+
+- Fixed: A refused picture delete no longer leaves the page changed: when the site says a picture may still be in use, the page stays exactly as it was.
+
+## v1.6.864
+
+- Fixed: The width strip beside the preview now stays inside the preview when you scroll to the end of the page.
+
 ## v1.6.863
 
 - Improved: The preview's width controls are now a slim strip of icons that floats over the left edge of the preview, with each size's name appearing on hover, so it never changes the preview's size and stays hidden while the toolbar is on screen. The green frame around the preview is gone; the status pill in the toolbar still shows whether the page is live. Width chips on a note are now small rounded pills that match the Reply and Resolve buttons.
