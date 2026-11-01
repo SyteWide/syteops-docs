@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.868
+
+- Fixed: Swapping a picture on a page built with Avada or Divi now replaces the picture in the builder's own image and background settings, and a swap that could not change every place no longer reports success.
+
+## v1.6.867
+
+- Fixed: Pictures on sites using the Divi theme are no longer all treated as in use, so unused pictures can be deleted from the portal.
+
 ## v1.6.866
 
 - Fixed: A picture you just created no longer shows as possibly in use just because its number appears in a page builder's cached template list, so you can delete it from the portal.
