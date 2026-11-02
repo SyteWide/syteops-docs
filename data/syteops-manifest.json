@@ -1,6 +1,6 @@
 {
     "schema_version": 1,
-    "syteops_version": "1.6.891",
+    "syteops_version": "1.6.892",
     "operations": [
         {
             "resource": "users",
