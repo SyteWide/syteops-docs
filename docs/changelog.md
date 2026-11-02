@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.872
+
+- Fixed: Undoing a picture swap made before builder support no longer reports a conflict on Avada and Divi pages.
+
 ## v1.6.871
 
 - Fixed: A cached slider-template list or backup schedule is now ignored when checking whether a picture is in use only when the plugin's own code proves it holds no pictures, so the slider library list counts again until it is proven.
