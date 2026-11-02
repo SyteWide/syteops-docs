@@ -8,6 +8,34 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.882
+
+- Improved: When commenting on a page in the review portal, Apply to all views is checked by default and sends the comment to every device size; unchecking it lets you write a separate comment for each size.
+
+## v1.6.881
+
+- Improved: The device-size buttons on a review note now switch the note to the comment written for that size, and a size with no comment is shown shaded and cannot be pressed.
+
+## v1.6.880
+
+- Improved: A review note that has a comment for each device size now lists every size's comment in the notes email, labeled by size, and in the agent prompt.
+
+## v1.6.879
+
+- Fixed: A comment written for one device size of a review note can only be sent by the note's author, never on a resolved note, and re-checking the sizes no longer removes a comment for a size it skipped.
+
+## v1.6.878
+
+- Improved: Groundwork for one comment per device size on a review note: each size can now store its own comment, and re-checking the sizes keeps what was written.
+
+## v1.6.877
+
+- Fixed: Delete All Comments no longer lists the hidden per-width copies of a note as extra comments, so it no longer refuses on the first press, no longer draws the copies as cards, and counts each note once.
+
+## v1.6.876
+
+- Fixed: The page preview in the review portal no longer leaves a blank strip down its left side; the page fills the card edge to edge and the toolbar now appears in the margin outside the card.
+
 ## v1.6.875
 
 - Improved: The page preview in the review portal now keeps its toolbar beside the page instead of on top of it, and the toolbar follows the page as you switch between device sizes.
