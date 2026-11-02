@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.891
+
+- Improved: The review preview now has a star button, in the top toolbar and the side rail, that jumps to your saved default width. It lights up when the page is at your default, and updates right away when you press Make this my default.
+
 ## v1.6.890
 
 - Fixed: After you drop to a note's spot on the page, pressing a device-size button at the top of the preview now returns the view to the top instead of jumping back to that note's spot.
