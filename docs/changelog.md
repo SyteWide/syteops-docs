@@ -8,6 +8,18 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.889
+
+- Improved: Pressing a note's locate button or one of its device-size buttons now shows a small bubble beside the spot on the page with who wrote the note, which size it is for, and the comment written for that size. It stays until you close it or press Escape.
+
+## v1.6.888
+
+- Fixed: A review note's image thumbnail no longer shows as a blank box right after you save the note, and a thumbnail or hover preview whose image cannot load now shows a small labeled placeholder instead of an empty box.
+
+## v1.6.887
+
+- Improved: When a device view in the review portal is narrower than the preview area, a faint line now marks the edge of the device and the rest of the area is slightly grayed, so empty space is not mistaken for part of the page.
+
 ## v1.6.886
 
 - Improved: The review comments API now lists each note's comments per device size and accepts per-size comments when a note is added.
