@@ -8,6 +8,18 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.875
+
+- Improved: The page preview in the review portal now keeps its toolbar beside the page instead of on top of it, and the toolbar follows the page as you switch between device sizes.
+
+## v1.6.874
+
+- Fixed the lead IP block confirmation page refusing every request with an Origin/Referer host mismatch message, so blocking an IP from a notification email now completes.
+
+## v1.6.873
+
+- Fixed: A slider plugin's cached template library is ignored again when checking whether a picture is in use, now backed by the plugin's own code.
+
 ## v1.6.872
 
 - Fixed: Undoing a picture swap made before builder support no longer reports a conflict on Avada and Divi pages.
