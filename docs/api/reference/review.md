@@ -92,7 +92,7 @@ data: &#123;post_id, as_user_id, kind: reply|image|element, entry: &#123;id, par
 
 ## `comments_list`
 
-One post's review notes and replies, oldest first, as the portal shows them. per_page is 1 to 100 (default 25). A note made in one device size can carry a comment per other size: they are listed in views as &#123;px, text}, never as notes of their own, and never counted in total.
+One post's review notes and replies, oldest first, as the portal shows them. per_page is 1 to 100 (default 25). A note made in one device size can carry a comment per other size: they are listed in views as &#123;px, text}, never as notes of their own, and never counted in total. A comment sent with the note that has not yet become a measured size is listed with queued: true.
 
 **Access:** SyteOps Admin or API key.
 
@@ -107,7 +107,7 @@ One post's review notes and replies, oldest first, as the portal shows them. per
 
 **Returns**
 
-data: &#123;post_id, total, page, per_page, has_more, comments[]}; a comment is &#123;id, parent, user_id, user_name, note, created_at, kind, target_kind, att_id, resolved, via_api, views}; via_api is true for a note written through this API; views is always present: [&#123;px, text}] widest first, one per other device size where the card holds its own comment (note is the comment for the size the card was made in), [] when none or for a reply
+data: &#123;post_id, total, page, per_page, has_more, comments[]}; a comment is &#123;id, parent, user_id, user_name, note, created_at, kind, target_kind, att_id, resolved, via_api, views}; via_api is true for a note written through this API; views is always present: [&#123;px, text, queued?}] widest first, one per other device size where the card holds its own comment (note is the comment for the size the card was made in), queued true while a comment waits for the author's width walk, [] when none or for a reply
 
 **Request**
 

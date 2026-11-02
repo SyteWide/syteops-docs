@@ -1,6 +1,6 @@
 {
     "schema_version": 1,
-    "syteops_version": "1.6.892",
+    "syteops_version": "1.6.894",
     "operations": [
         {
             "resource": "users",
@@ -2114,7 +2114,7 @@
         {
             "resource": "review",
             "action": "comments_list",
-            "summary": "One post's review notes and replies, oldest first, as the portal shows them. per_page is 1 to 100 (default 25). A note made in one device size can carry a comment per other size: they are listed in views as {px, text}, never as notes of their own, and never counted in total.",
+            "summary": "One post's review notes and replies, oldest first, as the portal shows them. per_page is 1 to 100 (default 25). A note made in one device size can carry a comment per other size: they are listed in views as {px, text}, never as notes of their own, and never counted in total. A comment sent with the note that has not yet become a measured size is listed with queued: true.",
             "params": {
                 "post_id": {
                     "type": "integer",
@@ -2136,7 +2136,7 @@
             "destructive": false,
             "capability": "manage_options",
             "strict": true,
-            "returns": "data: {post_id, total, page, per_page, has_more, comments[]}; a comment is {id, parent, user_id, user_name, note, created_at, kind, target_kind, att_id, resolved, via_api, views}; via_api is true for a note written through this API; views is always present: [{px, text}] widest first, one per other device size where the card holds its own comment (note is the comment for the size the card was made in), [] when none or for a reply"
+            "returns": "data: {post_id, total, page, per_page, has_more, comments[]}; a comment is {id, parent, user_id, user_name, note, created_at, kind, target_kind, att_id, resolved, via_api, views}; via_api is true for a note written through this API; views is always present: [{px, text, queued?}] widest first, one per other device size where the card holds its own comment (note is the comment for the size the card was made in), queued true while a comment waits for the author's width walk, [] when none or for a reply"
         },
         {
             "resource": "review",

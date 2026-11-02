@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.894
+
+- Fixed: Review notes can no longer be written to look like extra fields when the agent prompt is classified, and the agent prompt now clearly marks reviewer-note text, including the titles and readings suggested for each task, as quoted text rather than instructions.
+
+## v1.6.893
+
+- Improved: Per-size comments added when a note is created now show up in the agent prompt, the notes email and the comments API right away, labeled as queued, instead of only after the note's author re-checks the sizes in the portal. Editing or clearing a size's comment also drops its stale queued copy.
+
 ## v1.6.892
 
 - Improved: The button that saves your default preview width is now called Set as default, looks and presses like a button, and shows a small saving indicator while it saves.
