@@ -8,6 +8,23 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.886
+
+- Improved: The review comments API now lists each note's comments per device size and accepts per-size comments when a note is added.
+
+## v1.6.885
+
+- Improved: The person who wrote a review note can now add, edit or clear the comment for any other device size after the note is posted, from a new button on the note.
+- Fixed: Deleting a note by one of its hidden per-size copies is now refused instead of deleting the whole note, and changes to per-size comments now appear in the review activity feed.
+
+## v1.6.884
+
+- Fixed: Review notes made before per-size comments existed now let you switch between device sizes on the note again; pressing a size moves the preview and the pin to that size and keeps the note's text.
+
+## v1.6.883
+
+- Improved: The device-size toolbar in the review portal now appears vertically centered in the window when you scroll past the page toolbar, and stays centered as you scroll or resize.
+
 ## v1.6.882
 
 - Improved: When commenting on a page in the review portal, Apply to all views is checked by default and sends the comment to every device size; unchecking it lets you write a separate comment for each size.

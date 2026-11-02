@@ -62,11 +62,12 @@ Add a review note as one person, through the Review Portal's own writer, so the 
 | `attachment_id` | integer | no | Record id, digits only. |
 | `image_url` | string | no | The picture's URL, when it has no attachment id. |
 | `element` | object | no | Element target: selector, sig, text, ox, oy, vw, media, src, name, breakpoint, bp_px, tag, el_id, classes, heading, html, builder_path, rect, url, bld. |
+| `view_notes` | object | no | Element note only: a comment per other device size, as \{"768": "text", "390": "text"\} (viewport width in px to plain text). At most 7 entries; a width must be 1 to 10000 and the text non-empty, capped to the note length; anything else is dropped. The comments are HELD on the note and become its per-size comments only when the note's author walks the page widths in the Review Portal and reaches that width; nothing is written for a size until then. The response view_notes_queued is how many were held. |
 
 
 **Returns**
 
-data: &#123;post_id, as_user_id, kind: reply|image|element, entry: &#123;id, parent, kind, created_at, via_api}}; a reply adds &#123;resolve: changed|unchanged|missing|failed|null (null when not asked), notified, notify: &#123;outcome, partial}}
+data: &#123;post_id, as_user_id, kind: reply|image|element, entry: &#123;id, parent, kind, created_at, via_api}}; a reply adds &#123;resolve: changed|unchanged|missing|failed|null (null when not asked), notified, notify: &#123;outcome, partial}}; an element note sent with view_notes adds &#123;view_notes_queued}, the number of per-size comments held on the note
 
 **Request**
 
@@ -83,14 +84,15 @@ data: &#123;post_id, as_user_id, kind: reply|image|element, entry: &#123;id, par
     "resolve": true,
     "attachment_id": 0,
     "image_url": "string",
-    "element": {}
+    "element": {},
+    "view_notes": {}
   }
 }
 ```
 
 ## `comments_list`
 
-One post's review notes and replies, oldest first, as the portal shows them. per_page is 1 to 100 (default 25).
+One post's review notes and replies, oldest first, as the portal shows them. per_page is 1 to 100 (default 25). A note made in one device size can carry a comment per other size: they are listed in views as &#123;px, text}, never as notes of their own, and never counted in total.
 
 **Access:** SyteOps Admin or API key.
 
@@ -105,7 +107,7 @@ One post's review notes and replies, oldest first, as the portal shows them. per
 
 **Returns**
 
-data: &#123;post_id, total, page, per_page, has_more, comments[]}; a comment is &#123;id, parent, user_id, user_name, note, created_at, kind, target_kind, att_id, resolved, via_api}; via_api is true for a note written through this API
+data: &#123;post_id, total, page, per_page, has_more, comments[]}; a comment is &#123;id, parent, user_id, user_name, note, created_at, kind, target_kind, att_id, resolved, via_api, views}; via_api is true for a note written through this API; views is always present: [&#123;px, text}] widest first, one per other device size where the card holds its own comment (note is the comment for the size the card was made in), [] when none or for a reply
 
 **Request**
 
