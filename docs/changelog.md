@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.871
+
+- Fixed: A cached slider-template list or backup schedule is now ignored when checking whether a picture is in use only when the plugin's own code proves it holds no pictures, so the slider library list counts again until it is proven.
+
 ## v1.6.870
 
 - Fixed: Deleting a picture now also checks the places Avada and Divi keep pictures by number or inside encoded blocks, so a picture used only there is no longer treated as unused.
