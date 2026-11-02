@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.890
+
+- Fixed: After you drop to a note's spot on the page, pressing a device-size button at the top of the preview now returns the view to the top instead of jumping back to that note's spot.
+
 ## v1.6.889
 
 - Improved: Pressing a note's locate button or one of its device-size buttons now shows a small bubble beside the spot on the page with who wrote the note, which size it is for, and the comment written for that size. It stays until you close it or press Escape.
