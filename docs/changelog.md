@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.892
+
+- Improved: The button that saves your default preview width is now called Set as default, looks and presses like a button, and shows a small saving indicator while it saves.
+
 ## v1.6.891
 
 - Improved: The review preview now has a star button, in the top toolbar and the side rail, that jumps to your saved default width. It lights up when the page is at your default, and updates right away when you press Make this my default.
