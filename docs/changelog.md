@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.870
+
+- Fixed: Deleting a picture now also checks the places Avada and Divi keep pictures by number or inside encoded blocks, so a picture used only there is no longer treated as unused.
+
+## v1.6.869
+
+- Fixed: Pictures are no longer shown as possibly in use because of numbers in backup, migration and slider-template data, so more unused pictures can be deleted.
+
 ## v1.6.868
 
 - Fixed: Swapping a picture on a page built with Avada or Divi now replaces the picture in the builder's own image and background settings, and a swap that could not change every place no longer reports success.
