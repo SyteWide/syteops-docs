@@ -107,7 +107,7 @@ One post's review notes and replies, oldest first, as the portal shows them. per
 
 **Returns**
 
-data: &#123;post_id, total, page, per_page, has_more, comments[]}; a comment is &#123;id, parent, user_id, user_name, note, created_at, kind, target_kind, att_id, resolved, via_api, views}; via_api is true for a note written through this API; views is always present: [&#123;px, text, queued?}] widest first, one per other device size where the card holds its own comment (note is the comment for the size the card was made in), queued true while a comment waits for the author's width walk, [] when none or for a reply
+data: &#123;post_id, total, page, per_page, has_more, comments[]}; a comment is &#123;id, parent, user_id, user_name, note, created_at, kind, target_kind, att_id, resolved, via_api, views, bp_px?, breakpoint?, breakpoint_label?}; via_api is true for a note written through this API; bp_px (integer, 320 to 2560) is the exact preview width a picture or element note was made at, breakpoint its stored key (desktop, laptop, tablet_landscape, tablet, mobile or custom, where custom is a typed width) and breakpoint_label the display name the agent prompt uses (for example Custom width); each is present only when the note stored it, and a reply or an article-level note has none; views is always present: [&#123;px, text, queued?}] widest first, one per other device size where the card holds its own comment (note is the comment for the size the card was made in), queued true while a comment waits for the author's width walk, [] when none or for a reply
 
 **Request**
 
