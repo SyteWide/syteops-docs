@@ -8,7 +8,7 @@ description: Manage API operations for the leads resource.
 
 # `leads`
 
-15 operation(s). All run through `POST /syteops/v1/manage/dispatch` (reads may use the documented GET form).
+22 operation(s). All run through `POST /syteops/v1/manage/dispatch` (reads may use the documented GET form).
 
 ## `callback_action`
 
@@ -417,6 +417,138 @@ data: &#123;changed_keys[], settings: &#123;key: value} (the keys sent, effectiv
 }
 ```
 
+## `tracked_link_add_alias`
+
+Add another path that answers with an existing link's tagged destination. An alias is always stored against the root link, so a `link_id` that names an alias answers with its root's id. 404 not_found (unknown link_id), 409 path_collision, 422 invalid_path.
+
+**Access:** SyteOps Admin or API key.
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `link_id` | integer | yes | Record id, digits only. |
+| `path` | string | yes | The new address, for example /meet/new-name. |
+
+
+**Returns**
+
+data: &#123;link_id, alias: &#123;id, path}}
+
+**Request**
+
+```json
+{
+  "resource": "leads",
+  "action": "tracked_link_add_alias",
+  "params": {
+    "link_id": 0,
+    "path": "string"
+  }
+}
+```
+
+## `tracked_link_create_ownerless`
+
+Add an ownerless tracked link with no tags (for example /meet/ourteam to /about/), the same writer as the screen's Add link. `destination` is a path on this site (a same-host address is reduced to its path). 409 path_collision when a tracked link, page, post or archive already answers at the path; 422 invalid_path (not usable or reserved), invalid_destination, invalid_kind. Never creates a link that has an owner.
+
+**Access:** SyteOps Admin or API key.
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `path` | string | yes | The address visitors use, for example /meet/ourteam. |
+| `destination` | string | yes | A path on this site (with any query), or an address on this site's own host. |
+| `kind` | string | no | Lowercase letters, digits and hyphens, up to 32 (default team). |
+
+
+**Returns**
+
+data: &#123;link: &#123;id, path, destination, kind, owner_slug, active, aliases[], tags&#123;}, fragment, person_anchor}}
+
+**Request**
+
+```json
+{
+  "resource": "leads",
+  "action": "tracked_link_create_ownerless",
+  "params": {
+    "path": "string",
+    "destination": "string",
+    "kind": "string"
+  }
+}
+```
+
+## `tracked_link_delete`
+
+Permanently delete a main tracked link and every alias of it, freeing their paths. Destructive: needs confirm:true (409 confirmation_required without it) and a success leaves the lasting manage_destructive record. To see what a delete would remove first, read the link with tracked_link_list (with_clicks true): its aliases and all-time clicks. 404 not_found; 422 alias_not_editable (an alias is removed with its main link: delete that). The link's click events are NOT deleted: they stay in the events table and stop matching any link, so `clicks_orphaned` counts the events left unattributed and `clicks_removed` is always 0.
+
+**🔴 Destructive**  
+**Access:** SyteOps Admin or API key, plus `confirm: true`.
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `link_id` | integer | yes | Record id, digits only. |
+| `confirm` | boolean | no | Must be true. |
+
+
+**Returns**
+
+data: &#123;deleted (the link id), aliases_deleted, clicks_removed (always 0: no click rows are deleted), clicks_orphaned (the link's lifetime click events, left in place but no longer attributed to any link)}
+
+**Request**
+
+```json
+{
+  "resource": "leads",
+  "action": "tracked_link_delete",
+  "params": {
+    "link_id": 0,
+    "confirm": true
+  },
+  "confirm": true
+}
+```
+
+## `tracked_link_list`
+
+List the tracked links (root links with their aliases), in the Tracked links screen order (owner, then path), a page at a time. `owner_slug` filters to one person's slug, or `__none` for the ownerless links. `per_page` is 1 to 200 (default 50) and is clamped, not refused. `next_cursor` is present while more links remain: send it back unchanged as `cursor`. A cursor this list did not issue is 422 invalid_cursor. `clicks` (all-time clicks) is on each item only when `with_clicks` is true.
+
+**Access:** SyteOps Admin or API key.
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `owner_slug` | string | no | A person's link slug, or __none for ownerless links (default: every link). |
+| `with_clicks` | boolean | no | true to add each link's all-time click count (default false). |
+| `per_page` | integer | no | Links per page, 1 to 200 (default 50); a value outside that range is clamped to it, not refused. |
+| `cursor` | string | no | The next_cursor of the previous page, unchanged. |
+
+
+**Returns**
+
+data: &#123;items[]: &#123;id, path, destination, kind, owner_slug, active, aliases[]: &#123;id, path}, tags&#123;}, fragment, person_anchor, clicks? (only with with_clicks)}, total (root links matching the filter), next_cursor? (only while more remain)}
+
+**Request**
+
+```json
+{
+  "resource": "leads",
+  "action": "tracked_link_list",
+  "params": {
+    "owner_slug": "string",
+    "with_clicks": true,
+    "per_page": 0,
+    "cursor": "string"
+  }
+}
+```
+
 ## `tracked_link_metrics`
 
 Tracked-link metrics for reports: clicks, unique clicks and attributed leads per person and kind, plus company, ownerless and total rows. Dates are in the site timezone; the same answer as GET syteops/v1/leads/tracked-links/metrics. Carries no lead PII.
@@ -446,6 +578,107 @@ data: &#123;schema, from, to, timezone, group[], generated_at, people[]: &#123;s
     "from": "string",
     "to": "string",
     "group": "string"
+  }
+}
+```
+
+## `tracked_link_rename`
+
+Give an ownerless main link a new path, keeping its id so its click history stays attached. With keep_old_as_alias true (the default) the old path becomes an alias of the link and still redirects; false lets the old path fall through to WordPress. A new_path that is already an alias OF THIS LINK is swapped in as the main path. All or nothing (one transaction): a failure leaves the old path serving and writes 500 write_failed. 404 not_found; 409 path_collision (another link, a page or post, or an archive); 422 invalid_path (not usable, reserved, or the link's current path), alias_not_editable (an alias id), rename_not_allowed (a link that has an owner: its path follows its link-set template and the Move tool).
+
+**Access:** SyteOps Admin or API key.
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `link_id` | integer | yes | Record id, digits only. |
+| `new_path` | string | yes | The new address, for example /meet/new-name. |
+| `keep_old_as_alias` | boolean | no | true (default) keeps the old path answering as an alias of the link; false frees it. |
+
+
+**Returns**
+
+data: &#123;link: &#123;id, path, destination, kind, owner_slug, active, aliases[], tags&#123;}, fragment, person_anchor}}
+
+**Request**
+
+```json
+{
+  "resource": "leads",
+  "action": "tracked_link_rename",
+  "params": {
+    "link_id": 0,
+    "new_path": "string",
+    "keep_old_as_alias": true
+  }
+}
+```
+
+## `tracked_link_set_active`
+
+Enable or disable a tracked link; a disabled link and its aliases fall through to WordPress. changed is false when the link was already in that state. 404 not_found for an unknown link_id.
+
+**Access:** SyteOps Admin or API key.
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `link_id` | integer | yes | Record id, digits only. |
+| `active` | boolean | yes | true to enable the link, false to disable it. |
+
+
+**Returns**
+
+data: &#123;link_id, active}
+
+**Request**
+
+```json
+{
+  "resource": "leads",
+  "action": "tracked_link_set_active",
+  "params": {
+    "link_id": 0,
+    "active": true
+  }
+}
+```
+
+## `tracked_link_update`
+
+Edit a main link's destination, fragment, tags and person anchor, with the screen's own rules. A key not sent leaves the stored value alone. `tags` is an object of the five utm_* tags the screen shows (utm_source, utm_medium, utm_campaign, utm_content, utm_term): one left out or empty is removed, and a stored tag beyond the five is kept; another key or a non-text value is 422 invalid_tags. `person_anchor` true needs a link that has an owner (422 person_anchor_needs_owner); false is always allowed. The path never changes. 404 not_found, 422 alias_not_editable (an alias follows its main link: edit the main link), 422 invalid_destination.
+
+**Access:** SyteOps Admin or API key.
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `link_id` | integer | yes | Record id, digits only. |
+| `destination` | string | no | A path on this site (with any query), or an address on this site's own host; a #fragment typed here is kept when `fragment` is not sent. |
+| `fragment` | string | no | The part after #; empty clears it. |
+| `tags` | object | no | The link's utm_source, utm_medium, utm_campaign, utm_content and utm_term as text values. |
+| `person_anchor` | boolean | no | true to anchor the destination to the owner's slug (owner's links only). |
+
+
+**Returns**
+
+data: &#123;link: &#123;id, path, destination, kind, owner_slug, active, aliases[], tags&#123;}, fragment, person_anchor}}; changed is false when nothing differed
+
+**Request**
+
+```json
+{
+  "resource": "leads",
+  "action": "tracked_link_update",
+  "params": {
+    "link_id": 0,
+    "destination": "string",
+    "fragment": "string",
+    "tags": {},
+    "person_anchor": true
   }
 }
 ```
