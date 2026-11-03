@@ -1,6 +1,6 @@
 {
     "schema_version": 1,
-    "syteops_version": "1.6.913",
+    "syteops_version": "1.6.917",
     "operations": [
         {
             "resource": "users",
@@ -1142,6 +1142,193 @@
             "capability": "manage_options",
             "strict": true,
             "returns": "data: {user_num, slug, name, issued (true when this call created the slug)}"
+        },
+        {
+            "resource": "leads",
+            "action": "tracked_link_list",
+            "summary": "List the tracked links (root links with their aliases), in the Tracked links screen order (owner, then path), a page at a time. `owner_slug` filters to one person's slug, or `__none` for the ownerless links. `per_page` is 1 to 200 (default 50) and is clamped, not refused. `next_cursor` is present while more links remain: send it back unchanged as `cursor`. A cursor this list did not issue is 422 invalid_cursor. `clicks` (all-time clicks) is on each item only when `with_clicks` is true.",
+            "params": {
+                "owner_slug": {
+                    "type": "string",
+                    "required": false,
+                    "description": "A person's link slug, or __none for ownerless links (default: every link)."
+                },
+                "with_clicks": {
+                    "type": "boolean",
+                    "required": false,
+                    "description": "true to add each link's all-time click count (default false)."
+                },
+                "per_page": {
+                    "type": "integer",
+                    "required": false,
+                    "description": "Links per page, 1 to 200 (default 50); a value outside that range is clamped to it, not refused."
+                },
+                "cursor": {
+                    "type": "string",
+                    "required": false,
+                    "description": "The next_cursor of the previous page, unchanged."
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "strict": true,
+            "returns": "data: {items[]: {id, path, destination, kind, owner_slug, active, aliases[]: {id, path}, tags{}, fragment, person_anchor, clicks? (only with with_clicks)}, total (root links matching the filter), next_cursor? (only while more remain)}"
+        },
+        {
+            "resource": "leads",
+            "action": "tracked_link_create_ownerless",
+            "summary": "Add an ownerless tracked link with no tags (for example /meet/ourteam to /about/), the same writer as the screen's Add link. `destination` is a path on this site (a same-host address is reduced to its path). 409 path_collision when a tracked link, page, post or archive already answers at the path; 422 invalid_path (not usable or reserved), invalid_destination, invalid_kind. Never creates a link that has an owner.",
+            "params": {
+                "path": {
+                    "type": "string",
+                    "required": true,
+                    "description": "The address visitors use, for example /meet/ourteam."
+                },
+                "destination": {
+                    "type": "string",
+                    "required": true,
+                    "description": "A path on this site (with any query), or an address on this site's own host."
+                },
+                "kind": {
+                    "type": "string",
+                    "required": false,
+                    "description": "Lowercase letters, digits and hyphens, up to 32 (default team)."
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "strict": true,
+            "returns": "data: {link: {id, path, destination, kind, owner_slug, active, aliases[], tags{}, fragment, person_anchor}}"
+        },
+        {
+            "resource": "leads",
+            "action": "tracked_link_add_alias",
+            "summary": "Add another path that answers with an existing link's tagged destination. An alias is always stored against the root link, so a `link_id` that names an alias answers with its root's id. 404 not_found (unknown link_id), 409 path_collision, 422 invalid_path.",
+            "params": {
+                "link_id": {
+                    "type": "integer",
+                    "format": "record_id",
+                    "required": true,
+                    "description": "Record id, digits only."
+                },
+                "path": {
+                    "type": "string",
+                    "required": true,
+                    "description": "The new address, for example /meet/new-name."
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "strict": true,
+            "returns": "data: {link_id, alias: {id, path}}"
+        },
+        {
+            "resource": "leads",
+            "action": "tracked_link_set_active",
+            "summary": "Enable or disable a tracked link; a disabled link and its aliases fall through to WordPress. changed is false when the link was already in that state. 404 not_found for an unknown link_id.",
+            "params": {
+                "link_id": {
+                    "type": "integer",
+                    "format": "record_id",
+                    "required": true,
+                    "description": "Record id, digits only."
+                },
+                "active": {
+                    "type": "boolean",
+                    "required": true,
+                    "description": "true to enable the link, false to disable it."
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "strict": true,
+            "returns": "data: {link_id, active}"
+        },
+        {
+            "resource": "leads",
+            "action": "tracked_link_update",
+            "summary": "Edit a main link's destination, fragment, tags and person anchor, with the screen's own rules. A key not sent leaves the stored value alone. `tags` is an object of the five utm_* tags the screen shows (utm_source, utm_medium, utm_campaign, utm_content, utm_term): one left out or empty is removed, and a stored tag beyond the five is kept; another key or a non-text value is 422 invalid_tags. `person_anchor` true needs a link that has an owner (422 person_anchor_needs_owner); false is always allowed. The path never changes. 404 not_found, 422 alias_not_editable (an alias follows its main link: edit the main link), 422 invalid_destination.",
+            "params": {
+                "link_id": {
+                    "type": "integer",
+                    "format": "record_id",
+                    "required": true,
+                    "description": "Record id, digits only."
+                },
+                "destination": {
+                    "type": "string",
+                    "required": false,
+                    "description": "A path on this site (with any query), or an address on this site's own host; a #fragment typed here is kept when `fragment` is not sent."
+                },
+                "fragment": {
+                    "type": "string",
+                    "required": false,
+                    "description": "The part after #; empty clears it."
+                },
+                "tags": {
+                    "type": "object",
+                    "required": false,
+                    "description": "The link's utm_source, utm_medium, utm_campaign, utm_content and utm_term as text values."
+                },
+                "person_anchor": {
+                    "type": "boolean",
+                    "required": false,
+                    "description": "true to anchor the destination to the owner's slug (owner's links only)."
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "strict": true,
+            "returns": "data: {link: {id, path, destination, kind, owner_slug, active, aliases[], tags{}, fragment, person_anchor}}; changed is false when nothing differed"
+        },
+        {
+            "resource": "leads",
+            "action": "tracked_link_delete",
+            "summary": "Permanently delete a main tracked link and every alias of it, freeing their paths. Destructive: needs confirm:true (409 confirmation_required without it) and a success leaves the lasting manage_destructive record. To see what a delete would remove first, read the link with tracked_link_list (with_clicks true): its aliases and all-time clicks. 404 not_found; 422 alias_not_editable (an alias is removed with its main link: delete that). The link's click events are NOT deleted: they stay in the events table and stop matching any link, so `clicks_orphaned` counts the events left unattributed and `clicks_removed` is always 0.",
+            "params": {
+                "link_id": {
+                    "type": "integer",
+                    "format": "record_id",
+                    "required": true,
+                    "description": "Record id, digits only."
+                },
+                "confirm": {
+                    "type": "boolean",
+                    "required": false,
+                    "description": "Must be true."
+                }
+            },
+            "destructive": true,
+            "capability": "manage_options",
+            "strict": true,
+            "returns": "data: {deleted (the link id), aliases_deleted, clicks_removed (always 0: no click rows are deleted), clicks_orphaned (the link's lifetime click events, left in place but no longer attributed to any link)}"
+        },
+        {
+            "resource": "leads",
+            "action": "tracked_link_rename",
+            "summary": "Give an ownerless main link a new path, keeping its id so its click history stays attached. With keep_old_as_alias true (the default) the old path becomes an alias of the link and still redirects; false lets the old path fall through to WordPress. A new_path that is already an alias OF THIS LINK is swapped in as the main path. All or nothing (one transaction): a failure leaves the old path serving and writes 500 write_failed. 404 not_found; 409 path_collision (another link, a page or post, or an archive); 422 invalid_path (not usable, reserved, or the link's current path), alias_not_editable (an alias id), rename_not_allowed (a link that has an owner: its path follows its link-set template and the Move tool).",
+            "params": {
+                "link_id": {
+                    "type": "integer",
+                    "format": "record_id",
+                    "required": true,
+                    "description": "Record id, digits only."
+                },
+                "new_path": {
+                    "type": "string",
+                    "required": true,
+                    "description": "The new address, for example /meet/new-name."
+                },
+                "keep_old_as_alias": {
+                    "type": "boolean",
+                    "required": false,
+                    "description": "true (default) keeps the old path answering as an alias of the link; false frees it."
+                }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "strict": true,
+            "returns": "data: {link: {id, path, destination, kind, owner_slug, active, aliases[], tags{}, fragment, person_anchor}}"
         },
         {
             "resource": "leads",

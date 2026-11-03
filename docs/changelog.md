@@ -8,6 +8,22 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.917
+
+- Improved: The one-time clean-up of stored review notes, which has finished on every site, has been removed.
+
+## v1.6.916
+
+- Improved: The site's management interface can now delete a tracked link after confirmation, and rename one while keeping its click history and its old address.
+
+## v1.6.915
+
+- Improved: The site's management interface can now list, add, switch on or off, and edit tracked links, including their aliases, tags and destinations.
+
+## v1.6.914
+
+- Improved: The My links card and the Copy my links menu on the personal page now include the team page address, the one shared link everyone uses, the Add link example is updated to match, and the team tile has a copy button and a note that its clicks are counted for the whole team.
+
 ## v1.6.913
 
 - Improved: The prompt panel now notices later changes to prompts generated before the recent update, shows the AI versus rule badge as soon as the panel loads, and the agent prompt shows link targets and builder ids as quoted text.
