@@ -8,6 +8,23 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.913
+
+- Improved: The prompt panel now notices later changes to prompts generated before the recent update, shows the AI versus rule badge as soon as the panel loads, and the agent prompt shows link targets and builder ids as quoted text.
+- Fixed: The status message next to Set as default is announced again on narrow screens instead of being hidden.
+
+## v1.6.912
+
+- Improved: A request for an agent prompt that does not name a format now gets the newer prompt format, with its approval modes and safety checks; the older format is used only when it is asked for explicitly.
+
+## v1.6.911
+
+- Improved: Review notes saved before the recent privacy changes are cleaned once in the background after this update: their stored page markup and link addresses lose security tokens and personal details, and the review activity log no longer keeps raw picture addresses.
+
+## v1.6.910
+
+- Fixed: Saved page markup and link addresses now also drop login and verification codes, text typed into text areas and plain phone numbers, no longer leave a stray semicolon, no longer treat harmless words ending in key as secrets, and the older prompt format masks them too; a review note on a signed or tokened picture is matched to its image again.
+
 ## v1.6.909
 
 - Improved: The prompt panel now says how many notes the AI classified when part of a large batch fell back to rule-based types, marks the notes that use a rule-based type, and the AI request sizes are kept within a safe range.
