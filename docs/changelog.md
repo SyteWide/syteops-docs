@@ -8,6 +8,70 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.909
+
+- Improved: The prompt panel now says how many notes the AI classified when part of a large batch fell back to rule-based types, marks the notes that use a rule-based type, and the AI request sizes are kept within a safe range.
+- Fixed: Generating a prompt no longer shows 'Could not reach the site' while the site is still working, a double click on Generate no longer returns a false conflict error after the AI was already used, and a long classification can no longer run past the web proxy's time limit.
+
+## v1.6.908
+
+- Improved: When the automatic rules cannot classify a review note but the AI proposes a type that would write something, the agent prompt now holds that note for your confirmation in batch mode, and the prompt panel shows the AI versus rule badge and keeps it after a reload.
+- Fixed: A type you picked for a note in the prompt panel is no longer applied after the note's content has changed, and the panel's suggested type for picture notes now matches the prompt.
+
+## v1.6.907
+
+- Improved: The AI that classifies review notes now also sees each note's per-size and queued comments, and the agent prompt shows headings, names, builder paths and captured values as quoted text and no longer shortens saved selectors, links and names.
+- Fixed: The prompt panel now notices when a picture note was retargeted, or when a note's saved text, heading, element details or per-size settings changed since its last prompt, for notes whose prompt is generated from now on.
+
+## v1.6.906
+
+- Fixed: Page markup and link addresses saved with a review note now drop more kinds of security tokens and personal details, such as signed-link and fragment parameters, hidden form values, comments, event handlers, javascript links and encoded email addresses, before they are stored or sent to an agent prompt or the AI provider.
+
+## v1.6.905
+
+- Fixed: The agent prompt now leaves out a saved page-builder element id that is not in the expected format instead of printing it, so a malformed saved id can no longer add fake lines to a prompt.
+
+## v1.6.904
+
+- Fixed: The agent prompt panel now notices when a note's saved element, reveal steps or per-size locations changed since its last prompt, for notes whose prompt is generated from now on, instead of still saying the note is unchanged.
+
+## v1.6.903
+
+- Improved: The agent prompt now includes where the reviewer clicked, the text next to the click, the tabs or accordions that had to be opened, the picture name, and the saved builder ids when an element could not be found, and it says whether a note's quoted text is the words the reviewer selected or the element's own text.
+
+## v1.6.902
+
+- Fixed: The page markup saved with a review note no longer keeps security tokens, hidden form values, email addresses or phone numbers from links, and older notes have them removed before they go into an agent prompt or to the AI provider; the saved markup is also cut cleanly at a tag boundary.
+
+## v1.6.901
+
+- Improved: Generating an agent prompt for a large selection of notes now sends the AI classification in several smaller requests, so a big batch no longer falls back to rule-based types for every note when one request is too large, and a failed request only affects its own notes.
+
+## v1.6.900
+
+- Improved: When the AI and the rule-based guess would send the agent to different places for a note, the agent prompt now holds that note for your confirmation in batch mode, the prompt panel shows an AI versus rule badge on it, and the panel says when AI classification was unavailable and rule-based types were used.
+
+## v1.6.899
+
+- Improved: The agent prompt now shows every size comment, queued comment, note and reply in full, keeps their line breaks, and marks notes the team already handled.
+- Fixed: The file name suggested for a picture note in the notify picker now comes from the picture itself, not the page address.
+
+## v1.6.898
+
+- Fixed: The bubble opened by a note's locate button now shows the size and comment of the width the preview actually jumped to, and pressing the size button of a note made at a custom width now fills the custom width box with that width.
+
+## v1.6.897
+
+- Improved: Notes made at a custom preview width now carry that exact width into the agent prompt, with a rule to apply the fix in the breakpoint range that contains it, and the comments API now reports each note's width, breakpoint and a readable label.
+
+## v1.6.896
+
+- Fixed: Clicking empty space on the page while adding a review note no longer jumps the pin to a block further down the page; the note stays where you clicked unless an element is close by.
+
+## v1.6.895
+
+- Fixed: The locate button on a review note now finds the element at every preview width, not only the width the note was made at, and at a width between two checked sizes the preview now uses the next larger checked size, matching how responsive layouts cascade.
+
 ## v1.6.894
 
 - Fixed: Review notes can no longer be written to look like extra fields when the agent prompt is classified, and the agent prompt now clearly marks reviewer-note text, including the titles and readings suggested for each task, as quoted text rather than instructions.
