@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.919
+
+- Improved: In the Review Portal, Apply to all views is now off by default, so each note shows the exact view it was made on, and the agent prompt now tells the agent to look for the same problem on the other views and fix it there too.
+
+## v1.6.918
+
+- Improved: The team page tile on the My links card now shows clicks and leads for the whole team, for 30 days and all time, and the tiles on that card have a darker border and a soft shadow so they stand out.
+
 ## v1.6.917
 
 - Improved: The one-time clean-up of stored review notes, which has finished on every site, has been removed.
