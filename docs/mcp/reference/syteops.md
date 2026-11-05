@@ -7,7 +7,7 @@ description: MCP tools provided by SyteOps (provider id syteops).
 
 # SyteOps
 
-Provider id: `syteops` · 71 tool(s).
+Provider id: `syteops` · 78 tool(s).
 
 ## `syteops_builder_guard`
 
@@ -556,7 +556,7 @@ DESTRUCTIVE: approves a post for publishing (SyteOps review.approve; SyteOps 1.6
 
 ## `syteops_review_comment_add`
 
-Add a review note as one person through the Review Portal's own writer (SyteOps review.comments_add; SyteOps 1.6.758+). Send exactly one target: parent_id (a reply to a top-level note; notify and resolve apply), attachment_id or image_url (a note on a picture), or element (a note pinned to a page element). None is 422 target_required, more than one is 422 ambiguous_target; for an article-level note use syteops_review_request_changes. The note is marked as added via API. Through MCP omit as_user_id to act as yourself (the SyteOps Admin); pass it only to act on behalf of that user (SyteOps's own REST API key must send it; MCP need not). That person must be able to comment (403 forbidden); resolve needs edit rights. Returns &#123;post_id, as_user_id, kind, entry}; a reply adds &#123;resolve, notified, notify}. Returns 409 module_unavailable when the Review Portal is not loaded.
+Add a review note as one person through the Review Portal's own writer (SyteOps review.comments_add; SyteOps 1.6.758+). Send exactly one target: parent_id (a reply to a top-level note; notify and resolve apply), attachment_id or image_url (a note on a picture), or element (a note pinned to a page element; element alone may add view_notes &#123;px: text}, up to 7, held until the author walks to that width, 1.6.886+). None is 422 target_required, more than one is 422 ambiguous_target; for an article-level note use syteops_review_request_changes. The note is marked as added via API. Through MCP omit as_user_id to act as yourself (the SyteOps Admin); pass it only to act on behalf of that user (SyteOps's own REST API key must send it; MCP need not). That person must be able to comment (403 forbidden); resolve needs edit rights. Returns &#123;post_id, as_user_id, kind, entry}; a reply adds &#123;resolve, notified, notify}; view_notes_queued appears only when view_notes was sent. Returns 409 module_unavailable when the Review Portal is not loaded.
 
 **Profiles:** `full`, `syteops`
 
@@ -573,11 +573,12 @@ Add a review note as one person through the Review Portal's own writer (SyteOps 
 | `attachment_id` | integer | no | Attachment ID of the picture (a picture target). |
 | `image_url` | string | no | The picture's URL, when it has no attachment ID (a picture target). |
 | `element` | object | no | Element target (an element note). Keys: selector, sig, text, ox, oy, vw, media, src, name, breakpoint, tag, el_id, classes, heading, html, builder_path, rect, url, bld; any other key is 422 invalid_params. |
+| `view_notes` | object | no | Element target only (SyteOps 1.6.886+): per-device-width notes as \{px: text\}, at most 7 entries, px 1 to 10000. Sent with any other target, or inside element, it is 422 invalid_params. Each is held until the note's author walks to that width in the portal. |
 
 
 ## `syteops_review_comments`
 
-Read-only. One post's review notes and replies, oldest first, as the portal shows them (SyteOps review.comments_list; SyteOps 1.6.750+). Returns &#123;post_id, total, page, per_page, has_more, comments[]}; a comment is &#123;id, parent, user_id, user_name, note, created_at, kind, target_kind, att_id, resolved}. Returns 409 module_unavailable when the Review Portal is not loaded.
+Read-only. One post's review notes and replies, oldest first, as the portal shows them (SyteOps review.comments_list; SyteOps 1.6.750+). Returns &#123;post_id, total, page, per_page, has_more, comments[]}; a comment is &#123;id, parent, user_id, user_name, note, created_at, kind, target_kind, att_id, resolved, via_api, views[]}; total counts visible notes only, never per-width copies (1.6.886+); views (1.6.886+, always present) is the per-width notes [&#123;px, text}], widest first, with queued:true (1.6.893+) while held and not yet tied to a measured width. bp_px, breakpoint and breakpoint_label (1.6.897+) appear only when stored. Returns 409 module_unavailable when the Review Portal is not loaded.
 
 **Profiles:** `full`, `syteops`
 
@@ -592,7 +593,7 @@ Read-only. One post's review notes and replies, oldest first, as the portal show
 
 ## `syteops_review_get`
 
-Read-only. One post's review status (SyteOps review.get; SyteOps 1.6.750+): post status, whether changes are requested, open and total note counts, the reviewers and watchers, and the latest recorded activity. A missing, trashed or non-viewable post is 404 post_not_found. Returns &#123;post_id, title, post_status, changes_requested, open_notes, total_notes, reviewers[], watchers[], last_activity: &#123;event, at} or null}; a person is &#123;user_id, display_name, roles[]}. Returns 409 module_unavailable when the Review Portal is not loaded.
+Read-only. One post's review status (SyteOps review.get; SyteOps 1.6.750+): post status, whether changes are requested, open and total note counts (visible notes only; per-width copies are never counted, 1.6.886+), the reviewers and watchers, and the latest recorded activity. A missing, trashed or non-viewable post is 404 post_not_found. Returns &#123;post_id, title, post_status, changes_requested, open_notes, total_notes, reviewers[], watchers[], last_activity: &#123;event, at} or null}; a person is &#123;user_id, display_name, roles[]}. Returns 409 module_unavailable when the Review Portal is not loaded.
 
 **Profiles:** `full`, `lean`, `syteops`
 
@@ -1054,4 +1055,109 @@ Update editable fields on a content source (SyteOps content_sources.update); onl
 | `strip_inbody_faq` | boolean | no | Strip an in-body FAQ. |
 | `add_heading_anchors` | boolean | no | Add anchors to headings. |
 | `image_modify` | object | no | Portal image-modify mapping (tokens only). |
+
+
+## `syteops_tracked_link_add_alias`
+
+Add another path that answers with an existing link's tagged destination (SyteOps leads.tracked_link_add_alias; SyteOps 1.6.915+). An alias is stored against the root link, so a link_id that names an alias answers with its root's id. 404 not_found (unknown link_id), 409 path_collision, 422 invalid_path. Returns &#123;link_id, alias: &#123;id, path}}. 409 module_unavailable when Lead Attribution is not loaded.
+
+**Profiles:** `full`, `syteops`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `link_id` | integer | yes | Tracked link id from syteops_tracked_link_list. |
+| `path` | string | yes | The new address, for example /meet/new-name. |
+
+
+## `syteops_tracked_link_create`
+
+Add an ownerless tracked link with no tags, for example /meet/ourteam to /about/ (SyteOps leads.tracked_link_create_ownerless; SyteOps 1.6.915+). destination is a path on this site (a same-host address is reduced to its path). 409 path_collision when a tracked link, page, post or archive already answers at the path; 422 invalid_path (not usable or reserved), invalid_destination, invalid_kind. It never creates a link that has an owner. Returns &#123;link: item}; item is as in syteops_tracked_link_list. 409 module_unavailable when Lead Attribution is not loaded.
+
+**Profiles:** `full`, `syteops`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `path` | string | yes | The address visitors use, for example /meet/ourteam. |
+| `destination` | string | yes | A path on this site (with any query), or an address on this own host. |
+| `kind` | string | no | Lowercase letters, digits and hyphens, up to 32 (default team). |
+
+
+## `syteops_tracked_link_delete`
+
+DESTRUCTIVE: permanently deletes a main tracked link and every alias of it, freeing their paths (SyteOps leads.tracked_link_delete; SyteOps 1.6.916+). Needs confirm:true; without it SyteOps answers 409 confirmation_required and deletes nothing, with no preview. Read the link first with syteops_tracked_link_list (with_clicks:true) to see its aliases and clicks. To change only the address, use syteops_tracked_link_rename: it keeps click history. Click events are not deleted but stop matching any link. Returns &#123;deleted, aliases_deleted, clicks_removed (always 0), clicks_orphaned (lifetime clicks no longer attributed to any link)}. 404 not_found; 422 alias_not_editable (delete the main link). 409 module_unavailable when Lead Attribution is not loaded.
+
+**Profiles:** `full`, `syteops`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `link_id` | integer | yes | Tracked link id from syteops_tracked_link_list. |
+| `confirm` | boolean | no | Required (true): this permanently deletes the link and its aliases. |
+
+
+## `syteops_tracked_link_list`
+
+Read-only. The tracked links (root links with their aliases) in the Tracked links screen order, a page at a time (SyteOps leads.tracked_link_list; SyteOps 1.6.915+). owner_slug filters to one person's slug, or __none for the ownerless links (the shared team link). per_page is clamped to 1 to 200 (default 50). Send next_cursor back unchanged as cursor; any other cursor is 422 invalid_cursor. Returns &#123;items[], total, next_cursor?}; an item is &#123;id, path, destination, kind, owner_slug, active, aliases[]: &#123;id, path}, tags&#123;}, fragment, person_anchor, clicks? (only with with_clicks)}. Use with_clicks:true before a delete: delete has no preview of its own. 409 module_unavailable when Lead Attribution is not loaded.
+
+**Profiles:** `full`, `syteops`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `owner_slug` | string | no | A person link slug, or __none for ownerless links. Omit for every link. |
+| `with_clicks` | boolean | no | true to add each link all-time click count (default false). |
+| `per_page` | integer | no | Links per page, 1 to 200 (default 50); outside that range is clamped. |
+| `cursor` | string | no | The next_cursor of the previous page, unchanged. |
+
+
+## `syteops_tracked_link_rename`
+
+Give an ownerless tracked link a new path, keeping its id so click history stays (SyteOps leads.tracked_link_rename; SyteOps 1.6.916+). PREVIEWS BY DEFAULT: dry_run defaults to true and changes nothing; it returns the before and after paths, whether the old path keeps answering as an alias, and the click count. Send dry_run:false to apply. keep_old_as_alias (default true) keeps the old path redirecting; false lets it fall through to WordPress. A new_path that is already an alias of this link is swapped in as the main path. Ownerless links only (the shared team link qualifies): a link with an owner is 422 rename_not_allowed. On apply: 409 path_collision, 422 invalid_path, alias_not_editable, 404 not_found, 500 write_failed (atomic: the old path keeps serving). Undo is a rename back. Older SyteOps has no rename: this tool is then absent. 409 module_unavailable when Lead Attribution is not loaded.
+
+**Profiles:** `full`, `syteops`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `link_id` | integer | yes | Tracked link id from syteops_tracked_link_list (owner_slug __none finds the team link). |
+| `new_path` | string | yes | The new address, for example /meet/our-team. |
+| `keep_old_as_alias` | boolean | no | true (default) keeps the old path answering as an alias; false frees it. |
+
+
+## `syteops_tracked_link_set_active`
+
+Enable or disable a tracked link (SyteOps leads.tracked_link_set_active; SyteOps 1.6.915+). A disabled link and its aliases fall through to WordPress. changed is false when the link was already in that state. 404 not_found for an unknown link_id. Returns &#123;link_id, active}. 409 module_unavailable when Lead Attribution is not loaded.
+
+**Profiles:** `full`, `syteops`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `link_id` | integer | yes | Tracked link id from syteops_tracked_link_list. |
+| `active` | boolean | yes | true to enable the link, false to disable it. |
+
+
+## `syteops_tracked_link_update`
+
+Edit a main link's destination, fragment, tags and person anchor with the screen's own rules (SyteOps leads.tracked_link_update; SyteOps 1.6.915+). A key not sent keeps its stored value. tags is an object of the five utm_* tags (utm_source, utm_medium, utm_campaign, utm_content, utm_term): one left out or empty is removed, a stored tag beyond the five is kept, anything else is 422 invalid_tags. person_anchor true needs a link with an owner (422 person_anchor_needs_owner). The path never changes: use syteops_tracked_link_rename. 404 not_found; 422 alias_not_editable (edit the main link), invalid_destination. Returns &#123;link: item}; changed is false when nothing differed. 409 module_unavailable when Lead Attribution is not loaded.
+
+**Profiles:** `full`, `syteops`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `link_id` | integer | yes | Tracked link id from syteops_tracked_link_list. |
+| `destination` | string | no | A path on this site (with any query), or an address on this own host; a #fragment typed here is kept when fragment is not sent. |
+| `fragment` | string | no | The part after #; empty clears it. |
+| `tags` | object | no | utm_source, utm_medium, utm_campaign, utm_content and utm_term as text values. |
+| `person_anchor` | boolean | no | true to anchor the destination to the owner's slug (links with an owner only). |
 

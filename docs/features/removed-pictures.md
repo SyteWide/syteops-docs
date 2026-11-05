@@ -41,3 +41,12 @@ Lists the pictures a person marked **Always keep**, with who kept them, when, an
 ## Several at once
 
 Tick rows, or press **Select all on this page**, then use **Restore selected**, **Delete selected now** or **Stop keeping selected**. Large selections are handled a few pictures at a time with progress shown. If one picture cannot be handled it is named in the result line and stays in the list, and the others carry on. The result also stays written under the buttons after the pop-up message goes away.
+
+## AI image cleanup
+
+The **AI image cleanup** view sits beside **Removed pictures** in the **Content Pipelines** tab. It looks for the pictures your AI tools generated or remixed, and shows for each one whether anything on the site still uses it. Press **Scan** to look. A scan changes nothing; only **Remove selected** removes pictures.
+
+- A picture is **removable** when nothing on the site uses it. A picture that an article's Modify with AI panel made but that was never placed on the page counts as unused, so it is selected for removal like any other. A picture in use is kept, and so is the picture it was made from while the new one is in use or might be in use. A picture that might still be in use is listed with the reason, but it is not selected for you.
+- The list is scanned 50 pictures at a time; press **Scan the next pictures** for more. **Select all removable** and the **Remove** count apply only to the rows the current filter shows, so a picture the filter hides is never removed. Only the pictures you select are removed, and each one is checked again just before it goes.
+- A removed picture waits in **Removed pictures** for the number of days set there, and you can restore it from that list until then. If your site deletes removed pictures at once, they cannot be restored, and the view says so.
+- **Back up originals as a zip first** is on by default. It saves a copy of each picture to be removed in a zip file that you can download from the view. The newest few zip files are kept. Older ones are removed automatically, after each removal and once a day, and none is kept for more than 30 days. If a zip cannot be trimmed to the pictures that were removed, you are told, and the larger zip is still there to download.

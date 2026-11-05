@@ -212,7 +212,7 @@ Click any image in the article body — or the featured image — to open its pa
 
 **Remove from article** takes that picture out of the body (and drops its caption with it). The file stays in your media library. The same confirmation is used as for the featured image. This is not the stronger library-delete confirmation.
 
-**Generate New Image from Text** (when SyteHero can create images from text) starts from a prompt only — no source photo. The result is not placed until you add it to the article or use it as featured.
+**Generate New Image from Text** (when SyteHero can create images from text) starts from a prompt only — no source photo. You find it in the **Generate** pill's menu, next to **Apply**. The result is not placed until you add it to the article or use it as featured.
 
 Below the notes is **Image Details**, a section that opens by itself every time you click a picture — click its heading, or the chevron beside it, to collapse it if you would rather not see it, and the chevron turns to show whether the section is expanded. It holds three short fields — **Image Link**, **Alt Text** and **Caption** — each with its own gray hint line underneath explaining what it is for, in place of a dash-separated explanation. Collapse it for the picture you are looking at, and it opens again on the next one — the section defaults open on every picture rather than remembering that you closed it.
 
@@ -230,7 +230,7 @@ Two things to know about that automatic copy. If an image cannot be fetched — 
 
 Importing needs permission to add media to the site. If your account does not have it, the Import button does not appear and images are left exactly as they are.
 
-**Swapping a picture for one from your media library.** Next to the image link is a **Media Library** button, which opens your media library so you can pick a different picture. This works for pictures inside the article as well as for the featured image. Picking one keeps the article properly linked to that library item — something pasting a link cannot do — and the picture brings its own alt text with it, since alt text describes the picture rather than the article.
+**Swapping a picture for one from your media library.** Next to the image link is a **Media Library** button, which opens your media library so you can pick a different picture. This works for pictures inside the article as well as for the featured image. Picking one keeps the article properly linked to that library item — something pasting a link cannot do — and the picture brings its own alt text with it, since alt text describes the picture rather than the article. If the picture you are replacing was already deleted from the media library but is still on the page, the swap still works, and Undo puts the old address back.
 
 In that window, a picture already in use somewhere on the site carries a **Used** badge with the number of places (a plus sign means at least that many). Select a picture and a **Used on** list appears at the top of the details column on the right: it names the posts and pages you can edit and counts the rest. On a phone, where that column is not shown, the same list is a short line beside the button at the bottom. Nothing pops up when you rest the pointer on a picture there; the window already selects a picture on a click, and the list belongs to the picture you selected. With a keyboard, move between pictures with the arrow keys; a screen reader reads the picture's uses after its name. The same badge and list appear in the window **Use another picture** opens.
 
@@ -248,17 +248,17 @@ Its **caption is left exactly as you wrote it**. A caption is your own words abo
 
 **Putting the original links back.** If an article's images were copied across and you would rather they were not, a **Revert images** button appears beside the publish controls. It points the pictures back at the addresses they came from. Nothing is deleted from your media library — the copies stay there, in case another article is using them. If someone has changed one of the images by hand since it was copied, that one is left alone and you are told, rather than having your change overwritten. Reverting a live article asks you to confirm first, since the published page will go back to loading its pictures from somewhere else. Reverting also switches **Import images** off for that article, so the next publish leaves the original links alone — turn it back on if you change your mind.
 
-**Modify with AI.** When SyteHero is installed and ready, **Modify with AI** sits below the **Image Details** section in the image panel, and also on the featured-image card. Type a prompt (often pre-filled from the incoming article) — the same box also holds a **Use another picture** pill if you would rather start the remix from a different picture — and click **Generate**. Model and Quality now share one row at equal width, so the model name is never cut off; Strength, for the one model that uses it, wraps onto its own line below with a hint. **Generating no longer swaps the picture in your article** — it makes a new version and puts it in a grid of version cards for you to [choose between](#choosing-between-versions). The original picture is kept so you can **Revert**. Generate with a blank prompt is refused. Each version in the strip under the picture carries a **Used** badge when it is in use anywhere on the site; click it to see where, in the preview that opens below the strip.
+**Modify with AI.** When SyteHero is installed and ready, **Modify with AI** sits below the **Image Details** section in the image panel, and also on the featured-image card. Type a prompt (often pre-filled from the incoming article) — the same box also holds a **Use another picture** pill if you would rather start the remix from a different picture — and click the **Generate** pill beside **Apply** (see [The Generate pill](#the-generate-pill)). Model and Quality now share one row at equal width, so the model name is never cut off; Strength, for the one model that uses it, wraps onto its own line below with a hint. **Generating no longer swaps the picture in your article** — it makes a new version and puts it in a grid of version cards for you to [choose between](#choosing-between-versions). The original picture is kept so you can **Revert**. The pill is grayed out until the prompt box has words in it. Each version in the strip under the picture carries a **Used** badge when it is in use anywhere on the site; click it to see where, in the preview that opens below the strip.
 
 **Telling the AI what the article is about.** Under the prompt is a tickbox, **Tell the AI what this article is about**. Ticked, it sends the article's title and summary alongside your prompt, which is what lets an instruction like "make the text on the screen readable" produce text about the right subject rather than plausible-looking nonsense. It is **off unless you tick it**, and it applies only to the generation you are about to run — these models are editing your photograph rather than drawing a new picture, and extra description is not always wanted. The grid of versions still labels each picture with the prompt in your own words; the added context is never shown there as something you typed. This never runs when the article is ingested — only when a reviewer asks. An operator can hide Modify with AI from specific reviewer types in **Reviewer editing permissions** (the **Modify with AI and image libraries** column).
 
 ### Changing an image with AI
 
-The image panel also has a **Modify with AI** section, below **Image Details**: describe the change you want and press **Generate**. Pressing Generate makes a new version and leaves your article alone — you decide afterwards which version the article uses. The original is kept, so **Revert** always brings it back.
+The image panel also has a **Modify with AI** section, below **Image Details**: describe the change you want and press the **Generate** pill beside **Apply**. Pressing Generate makes a new version and leaves your article alone — you decide afterwards which version the article uses. The original is kept, so **Revert** always brings it back.
 
 Each version has its own delete. A version the page no longer shows can be deleted. If the page still shows it, the original is put back first and the page is checked again; when that does not save, nothing is deleted. If the picture is still used somewhere else, the message names that page. If the check cannot be finished, the picture is left in place.
 
-The prompt box and the reference-picture control now share one box. Click the **Use another picture** pill at the bottom of the box to remix from a different picture instead of the one you opened — once you pick one, the pill turns into a chip showing its thumbnail and **AI reference: &lt;file name&gt;**. A note beside the pill or chip says plainly that this only guides **Generate** below, and points you at **Media Library** in **Image Details** if you actually want to replace the picture. Click the **×** on the chip (its accessible name is **Stop using a different source image**) to drop it and go back to remixing the picture you opened.
+The prompt box and the reference-picture control now share one box. Click the **Use another picture** pill at the bottom of the box to remix from a different picture instead of the one you opened — once you pick one, the pill turns into a chip showing its thumbnail and **AI reference: &lt;file name&gt;**. A note beside the pill or chip says plainly: **Only guides Generate.** It also points you at **Media Library** in **Image Details** if you actually want to replace the picture. Click the **×** on the chip (its accessible name is **Stop using a different source image**) to drop it and go back to remixing the picture you opened.
 
 **Picking a picture here does nothing until you press Generate.** If you have picked one and press **Apply** or close the panel some other way before generating with it, you are asked to confirm — pressing Apply or closing does not swap in the picture you picked, and confirming discards it. Once you have pressed **Generate** with it at least once, closing or applying no longer asks.
 
@@ -266,7 +266,7 @@ The prompt box and the reference-picture control now share one box. Click the **
 
 #### Using a Model
 
-A **Use a Model** control appears in this same Modify with AI block — not under Generate SEO with AI — but only once your administrator has granted **Model consent** for at least one person on a Users card. With nobody consented, the control does not appear at all. Open it, pick the person, then check which of their photos to send with **this** generate. Nothing starts checked, and closing the popover forgets the checks. Some remix models take Model photos (up to a number the model list shows) and others are scene-only. You can send up to four Model photos with one generate — fewer when the remix model you picked takes fewer pictures. The limit follows the model as you switch, and any checks past a lower limit are cleared. The article picture (or **Use another picture**) stays the picture being edited and does not take a Model-photo slot; Model photos are extra references so the result can match that person.
+A **Use a Model** control appears in this same Modify with AI block — not under the SEO option in the Generate pill — but only once your administrator has granted **Model consent** for at least one person on a Users card. With nobody consented, the control does not appear at all. Open it, pick the person, then check which of their photos to send with **this** generate. Nothing starts checked, and closing the popover forgets the checks. Some remix models take Model photos (up to a number the model list shows) and others are scene-only. You can send up to four Model photos with one generate — fewer when the remix model you picked takes fewer pictures. The limit follows the model as you switch, and any checks past a lower limit are cleared. The article picture (or **Use another picture**) stays the picture being edited and does not take a Model-photo slot; Model photos are extra references so the result can match that person.
 
 The photo list only shows pictures that can actually be sent with the generate — other file types and pictures you do not have permission to see are left out. It shows every curated photo and the 24 newest tagged files. People without consent never appear in the person list either.
 
@@ -283,7 +283,7 @@ Two things decide whether the picture comes back looking like itself:
 - **Model.** The list now names each model and says which ones *keep text and logos*. If a picture has words in it — a sign, a label, packaging — choose one of those. The others are better at reimagining a scene than at preserving one, and they are the reason text has come back garbled. Where your image service reports it, each option also ends with a price rating from **$** (lowest cost) to **$$$$** (highest), so you can weigh quality against cost before you generate.
 - **Keep text and logos exactly as they are.** On by default. Turn it off only when you want a genuine reinterpretation rather than an edit.
 
-**Model** and **Quality** now share one row at equal width, so the model name is never cut off. **Quality** is Standard, High or Ultra; several of the models that best preserve text ignore it entirely — they always return their own size — so it applies mainly to the more generative ones. **Strength**, for the one model that actually uses it, wraps onto its own line below Model and Quality, with its own hint. **Generate** (with a sparkle icon), **Revert** and **Stop** sit together on their own row below both checkboxes on this panel — this one and **Tell the AI what this article is about** above — with Generate filling the row.
+**Model** and **Quality** now share one row at equal width, so the model name is never cut off. **Quality** is Standard, High or Ultra; several of the models that best preserve text ignore it entirely — they always return their own size — so it applies mainly to the more generative ones. **Strength**, for the one model that actually uses it, wraps onto its own line below Model and Quality, with its own hint. **Revert** and **Stop** stay in this block, together on their own row below both checkboxes on this panel — this one and **Tell the AI what this article is about** above — and show only when there is something to revert or stop. **Generate** is in the [Generate pill](#the-generate-pill) to the left of **Apply**.
 
 The picture also keeps its own proportions. A square or portrait photo used to come back cropped to widescreen, because nothing told the image service what shape it started as.
 
@@ -321,7 +321,7 @@ are, and the bar fills to match — it deliberately sits near the end for a whil
 where the image service holds a job it has not quite finished. Many models say nothing at all while
 they work, and for those the bar shows a moving sliver rather than a percentage: the job is running,
 but there is no honest number to put on it. It no longer sits frozen at zero, which used to look
-like a picture that was never going to arrive. A **Stop** button sits beside **Generate** while a
+like a picture that was never going to arrive. A **Stop** button sits in the Modify with AI section while a
 picture is being made; pressing it abandons the job and gives the controls straight back. (**Apply**
 and **Cancel** now sit together in a footer bar pinned to the bottom of the panel, so both stay
 reachable however far the popover scrolls; **Cancel** still just closes the panel.)
@@ -340,6 +340,15 @@ price**, or, when the figure is an estimate rather than an exact one, **est. $0.
 service confirms the actual billed charge for that generation, it instead reads **This cost $0.025 ·
 billed by fal**. If the image service does not report a cost for that generation, nothing is added —
 you are never shown a made-up figure.
+
+### The Generate pill
+
+Every generate action in the picture panel lives in one pill to the left of **Apply**, on article pictures, the featured image and the page canvas alike. The pill shows only when at least one generate option is available for the picture.
+
+- **The face** runs the last option you used. It starts as **Generate** (the remix of the picture), and becomes **Generate from text** after you choose that from the menu, until you choose the other again.
+- **The arrow** opens a menu above the pill listing every option available for this picture: **Generate**, **Generate New Image from Text** and **Generate SEO with AI**. **Generate SEO with AI** opens a small submenu with one item, **Alt text and caption**, because that is the one thing the picture description produces. Use the arrow keys, Home and End to move, Enter or Space to choose, and Escape to close the menu without closing the panel.
+- **No prompt, no Generate.** With the prompt box empty the face is grayed out and says a prompt is needed, and the two prompt-based menu items are grayed out too. The arrow still opens, and the SEO option stays available, because it looks at the picture rather than at a prompt. Choosing a grayed-out item tells you to enter a prompt and moves the cursor to the box.
+- **While a generation runs**, the face and the prompt-based items are unavailable, and **Stop** stays in the Modify with AI section above.
 
 ### Choosing between versions
 
@@ -370,25 +379,29 @@ Up to three controls sit on each card.
   plus six versions — oldest first, so a long session of experimenting does not fill your media
   library. A version you have kept is never tidied away, and neither is the newest one — the picture
   you just asked for is always still there when you look at it. A version tidied away is not
-  destroyed at once when your site keeps removed pictures: it stays on its card, marked removed, and
-  can be restored like one you removed yourself (below).
+  destroyed at once when your site keeps removed pictures: it leaves the grid but is kept, and can be
+  restored like one you removed yourself (below).
 - **Delete** is a trash-icon button (its accessible name is **Delete this version**) on every card,
   including the original and the one the article is showing. It removes that picture from your media
-  library. If the article is showing it, it is taken out of the article first, and the
-  confirm says so. Any notes left on that version move to the picture your article is showing, so a
-  note never outlives the picture it is about.
-- **Restore** appears on a version that was removed (by you, a colleague, or the automatic tidy-up)
-  while your site still keeps it. The card reads "Removed. Restore until" and the last day; it no
-  longer counts toward the seven cards. **Restore** puts the version back in the grid where it was,
-  with its prompt, and back in your media library. It does not put the picture back into the article
-  (restore it first, then press **Use in article**), and notes that moved to another picture
-  when it was removed stay where they are. A restored version is left alone by the automatic tidy-up
-  for a week, even if the grid is full; that happens once per version, so press **Keep** to hold on
-  to it for good. After the last day
-  the version is checked once more and deleted for good unless something uses it by then, in which
-  case it comes back on its own. If your site does not keep removed pictures, Delete is permanent
-  and the confirm says so; if that setting changed while your page was open, you are asked again
-  before anything is deleted for good.
+  library, and the card leaves the grid at once. If the article is showing it, it is taken out of the
+  article first, the picture's panel closes, and the confirm says so. Any notes left on that version
+  move to the picture your article is showing, so a note never outlives the picture it is about. If
+  the site refuses the Delete (the picture is still in the article, used on another page, set to
+  always keep, or a remix is running), the grid is refreshed and the line under it says why and what
+  to do first.
+- **Undo and Restore.** When your site keeps removed pictures, the line under the grid reads
+  "Removed" with an **Undo** button for as long as the picture's panel stays open. After that, a
+  version removed by you, a colleague, or the automatic tidy-up is listed under **Recently removed**
+  on the Unused pictures card (for people who have that card), with its last day. **Undo** and
+  **Restore** put the version back in the grid where it was, with its prompt, and back in your media
+  library. They do not put the picture back into the article (restore it first, then press **Use in
+  article**), and notes that moved to another picture when it was removed stay where they are. A
+  restored version is left alone by the automatic tidy-up for a week, even if the grid is full; that
+  happens once per version, so press **Keep** to hold on to it for good. After the last day the
+  version is checked once more and deleted for good unless something uses it by then, in which case
+  it comes back on its own. If your site does not keep removed pictures, Delete is permanent and the
+  confirm says so; if that setting changed while your page was open, you are asked again before
+  anything is deleted for good.
 
 **Use in article never deletes a file.** It only changes which picture the article shows. To remove
 a version from your media library, use the trash icon on that card.
@@ -766,9 +779,9 @@ If you posted a note by mistake, click the trash control on your own note. The c
 
 :::note Describing a picture for search
 
-Open a picture, expand **Image Details**, and click **Generate SEO with AI** (a soft-filled button with a sparkle icon). It looks at the actual photo — not at the words around it — and suggests alt text and a caption, which appear in the boxes for you to edit. That includes a remixed version of the photo, even when the remix file is not attached to the article the usual way. When the page is showing a CDN copy, it still describes the file in your media library: the portal sends both the library id and the address on screen, and the server uses the library file. Nothing is saved until you press **Apply**, the same as everywhere else in the portal. If it cannot run, the portal names the reason instead of a generic failure. If the server does not finish looking at the picture, you see **The server did not finish looking at that picture. Try again.** rather than **That did not work.**
+Open a picture, open the arrow on the **Generate** pill beside **Apply**, choose **Generate SEO with AI**, then **Alt text and caption**. Image Details opens so you can see the boxes it fills. It looks at the actual photo — not at the words around it — and suggests alt text and a caption, which appear in the boxes for you to edit. That includes a remixed version of the photo, even when the remix file is not attached to the article the usual way. When the page is showing a CDN copy, it still describes the file in your media library: the portal sends both the library id and the address on screen, and the server uses the library file. Nothing is saved until you press **Apply**, the same as everywhere else in the portal. If it cannot run, the portal names the reason instead of a generic failure. If the server does not finish looking at the picture, you see **The server did not finish looking at that picture. Try again.** rather than **That did not work.**
 
-**This is not Modify with AI.** Generate SEO uses **Image SEO** — a vision-capable provider and model under Content Pipelines → AI Models, plus that provider's key on **System / API**. Modify with AI uses SyteHero and remakes the picture. The two are independent: remixing can work while Generate SEO still fails, and the other way around. If Image SEO is not set up, the button is not shown at all.
+**This is not Modify with AI.** Generate SEO uses **Image SEO** — a vision-capable provider and model under Content Pipelines → AI Models, plus that provider's key on **System / API**. Modify with AI uses SyteHero and remakes the picture. The two are independent: remixing can work while Generate SEO still fails, and the other way around. If Image SEO is not set up, the SEO option is not shown at all. It needs no prompt, so it stays available when the prompt box is empty.
 
 Alt text written from the surrounding article rather than from the picture is confidently wrong about what is in the frame, and a screen reader reads it out as fact. That is why Image SEO AI must point at a model that can actually see an image. See [AI Providers](./ai-providers.md).
 
@@ -1091,7 +1104,7 @@ Every AI choice the portal makes is here — one row per feature, named by what 
 - **Answer-engine analysis** (GEO) — the answer-engine analysis in the GEO panel.
 - **Ingest field mapping** (Ingest) — proposes how an inbound content-source payload maps to your post fields.
 - **Social posts** (Social) — composes the post text for **Send to webhook**. Its provider/model save with this card; the Social Publishing view keeps its own profiles, destinations and enable toggle.
-- **Image alt & captions** (Image SEO, carries a **Vision** badge) — what **Generate SEO with AI** uses for alt text and captions. This is not SyteHero and not Modify with AI. Needs a model that accepts image input, so any provider that cannot take one is shown unselectable — see [AI Providers](./ai-providers.md) for which those are.
+- **Image alt & captions** (Image SEO, carries a **Vision** badge) — what the pill's **Generate SEO with AI** option uses for alt text and captions. This is not SyteHero and not Modify with AI. Needs a model that accepts image input, so any provider that cannot take one is shown unselectable — see [AI Providers](./ai-providers.md) for which those are.
 - **Agent prompts** — turns page-review notes into an implementation prompt for a coding agent.
 
 Two more rows are status-only — a pill, a "Powers: …" line and a link, no controls here:
