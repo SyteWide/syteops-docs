@@ -47,3 +47,17 @@ test('an array param samples as a JSON list and an object param as a JSON object
   assert.match(md, /"post_types": \[\]/);
   assert.match(md, /"mapping": \{\}/);
 });
+
+test('an operation that carries its own example prints it, not the generic sample', () => {
+  const md = renderResourcePage('ai_images', [
+    { resource: 'ai_images', action: 'cleanup', summary: 'C.', destructive: true, capability: 'manage_options',
+      params: { ids: { type: 'array' }, offset: { type: 'integer' } }, example: { ids: [123, 124] } },
+    { resource: 'ai_images', action: 'scan', summary: 'S.', destructive: false, capability: 'manage_options',
+      params: { limit: { type: 'integer' } } },
+  ]);
+  const [cleanup, scan] = md.split('## `scan`');
+  assert.match(cleanup, /"ids": \[\s+123,\s+124\s+\]/);
+  assert.doesNotMatch(cleanup, /"offset"/);
+  assert.match(cleanup, /"confirm": true/);
+  assert.match(scan, /"limit": 0/, 'an operation with no example keeps the generic sample');
+});

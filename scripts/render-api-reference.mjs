@@ -63,7 +63,7 @@ export function renderResourcePage(resource, ops) {
       '**Request**', '',
       '```json',
       JSON.stringify(
-        { resource, action: op.action, params: sampleParams(op.params), ...(op.destructive ? { confirm: true } : {}) },
+        { resource, action: op.action, params: sampleRequestParams(op), ...(op.destructive ? { confirm: true } : {}) },
         null,
         2,
       ),
@@ -71,6 +71,16 @@ export function renderResourcePage(resource, ops) {
     );
   }
   return parts.join('\n');
+}
+
+/**
+ * The params of an operation's sample request: its own `example` when the manifest carries one, else the generic
+ * sample. WHY: the generic sample cannot know that two parameters exclude each other or that an empty list or a 0
+ * is refused, so an operation with such rules names a call that works.
+ */
+function sampleRequestParams(op) {
+  const own = op.example;
+  return own && typeof own === 'object' && !Array.isArray(own) ? own : sampleParams(op.params);
 }
 
 function sampleParams(params) {

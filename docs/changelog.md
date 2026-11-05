@@ -8,6 +8,30 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.926
+
+- Improved: In the Review Portal's picture popover, the Generate buttons now sit together in one pill to the left of Apply. The pill runs the last option you used, starting with Generate, and its arrow lists every generate option available for the picture, with the SEO option in its own submenu. The pill is grayed out until you enter a prompt, and the SEO option works without one.
+
+## v1.6.925
+
+- Improved: In the Review Portal, deleting a picture version now takes its card off the picture's grid at once and shows an Undo while the panel is open, and the removed picture stays restorable from Recently removed. A refused delete now refreshes the grid and says why it was refused and what to do first.
+
+## v1.6.924
+
+- Fixed: Swapping a picture in the Review Portal now works when the old picture was already deleted from the media library but is still on the page, Undo puts the old address back, and the portal no longer calls such a picture part of the site layout.
+
+## v1.6.923
+
+- Improved: The site's management interface can now scan for unused AI-generated pictures, preview a cleanup, and run it after confirmation, with the same zip backup and recoverable removal as the AI image cleanup screen.
+
+## v1.6.922
+
+- Improved: A new AI image cleanup screen in the Content Pipelines area scans for AI-generated pictures that nothing uses, shows why each one is kept or removable, offers a zip backup of the originals, and moves the unused ones into the Removed pictures list, where they can be restored.
+
+## v1.6.921
+
+- Improved: Groundwork for cleaning up unused AI-generated pictures: the site can now find them, check everywhere each one is used, keep the source of any picture that is still in use, back up the originals as a zip, and move the rest into the recoverable Removed pictures list. This version adds no screen yet.
+
 ## v1.6.920
 
 - Improved: In the Review Portal, the view tabs in the comment box now show the same device icons as the preview toolbar, so a desktop, laptop, tablet or phone view is clear at a glance.

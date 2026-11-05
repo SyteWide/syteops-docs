@@ -13,6 +13,7 @@ Every operation runs through the single dispatch endpoint. See [Dispatch contrac
 | Resource | Operations | Has destructive |
 |---|---|---|
 | [`ai`](./ai) | 5 | no |
+| [`ai_images`](./ai-images) | 3 | yes |
 | [`builder`](./builder) | 1 | no |
 | [`cache`](./cache) | 1 | no |
 | [`calendar`](./calendar) | 7 | yes |
