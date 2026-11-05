@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.928
+
+- Improved: In the Review Portal's Share to LinkedIn dialog you can now choose one of your saved LinkedIn groups instead of your profile: your post and the article's link are copied and the group opens in a new tab for you to paste into. Save your groups in the new LinkedIn groups card on your personal page.
+
+## v1.6.927
+
+- Improved: A My Portal link now appears at the top of every site menu for signed-in people who have a portal; it can be turned off in the Review Portal settings.
+
 ## v1.6.926
 
 - Improved: In the Review Portal's picture popover, the Generate buttons now sit together in one pill to the left of Apply. The pill runs the last option you used, starting with Generate, and its arrow lists every generate option available for the picture, with the SEO option in its own submenu. The pill is grayed out until you enter a prompt, and the SEO option works without one.

@@ -34,13 +34,34 @@ Each person connects their own account once:
 3. The window closes and the dialog shows your name and picture. Write your post (up to 3,000 characters) and choose **Post to LinkedIn**.
 4. The status line reads **Posted to LinkedIn · View post**. Each post is recorded on the article.
 
-The post is public and goes to your own profile. Posting to a Company Page comes in a later release.
+The post is public and goes to your own profile. Posting to a Company Page is not available (see What LinkedIn does not offer, below).
 
 Posting the same text twice within a minute is refused, so a double click or a retry cannot post twice. Your text posts exactly as you wrote it. A word that starts with `#`, such as `#launch`, becomes a LinkedIn hashtag. LinkedIn counts a backslash for each of these characters in the 3,000 limit: `\ | { } @ [ ] ( ) < > # * _ ~`.
 
 ### The preview card
 
 LinkedIn does not read the page when a post comes from another app, so SyteOps builds the card itself from what the page tells every other site: its Open Graph title, description and image, as your SEO plugin prints them. Where the page has none of these, the card uses the post's title, its excerpt and its featured picture. A picture is sent as a JPEG, PNG or GIF: a WebP or AVIF picture is converted to JPEG. A picture over 8 MB or too large for LinkedIn is left off, and the featured picture is used instead when there is one. A picture on another site is used only when its address starts with https. A long title or description is shortened for the card.
+
+## Sharing to a LinkedIn group
+
+LinkedIn offers apps no way to list the groups a member belongs to or to post into one, so SyteOps keeps no such list for you and never posts to a group on your behalf. Instead you save the groups you post in, and Share to copies your post and opens the group for you to paste it.
+
+**Save your groups.** Open your personal page (the hub) and find the **LinkedIn groups** card. It appears while LinkedIn sharing is on for your site. For each group, enter a name you will recognize and the group's address, then choose **Add group**:
+
+1. Open the group on LinkedIn.
+2. Copy the address from your browser, for example `https://www.linkedin.com/groups/1234567/`. The group's number on its own also works.
+3. Paste it into **Group address**.
+
+Only a LinkedIn group address is accepted, and only the group's number is kept. An address on any other site, or a group address that uses a name instead of a number, is refused with a message. Each person saves up to 20 groups, and the list is private to that person. Use **Remove** to take one off.
+
+**Share to a group.** In **Share to → LinkedIn**, the dialog shows a **Share to** choice once you have saved groups: **My profile (posts now)** first, then **Your saved groups**. Pick a group, and the main button changes to **Copy and open group**. Choose it and SyteOps copies your post followed by the article's link, then opens the group in a new tab. Start a post in the group and paste. Nothing is posted for you, and this works whether or not you have connected your LinkedIn account. With no saved groups, the dialog is exactly as described above.
+
+## What LinkedIn does not offer
+
+Checked against LinkedIn's developer documentation on 2026-11-05:
+
+- **Groups:** there is no permission or endpoint for an app to list a member's groups or to post to a group, which is why groups work by copy-and-open.
+- **Company Pages:** posting to a Company Page needs LinkedIn's Community Management API approval, which LinkedIn grants only to a vetted, registered organization. That is why posting here goes to your own profile.
 
 ## Reconnecting and disconnecting
 
