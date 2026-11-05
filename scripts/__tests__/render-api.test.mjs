@@ -61,3 +61,11 @@ test('an operation that carries its own example prints it, not the generic sampl
   assert.match(cleanup, /"confirm": true/);
   assert.match(scan, /"limit": 0/, 'an operation with no example keeps the generic sample');
 });
+
+test('a brand word in a resource key keeps its own capitalization in the page title', () => {
+  const md = renderResourcePage('linkedin_groups', [
+    { resource: 'linkedin_groups', action: 'list', summary: 'L.', destructive: false, capability: 'manage_options', params: {} },
+  ]);
+  assert.match(md, /title: LinkedIn Groups/);
+  assert.doesNotMatch(md, /Linkedin/);
+});

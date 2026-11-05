@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.929
+
+- Improved: Site operators can now list, add and remove the saved LinkedIn groups of a chosen person through the management API, so a person's groups can be set up before their Share to LinkedIn dialog is offered. Removing a group needs confirmation and leaves a lasting activity record.
+
 ## v1.6.928
 
 - Improved: In the Review Portal's Share to LinkedIn dialog you can now choose one of your saved LinkedIn groups instead of your profile: your post and the article's link are copied and the group opens in a new tab for you to paste into. Save your groups in the new LinkedIn groups card on your personal page.

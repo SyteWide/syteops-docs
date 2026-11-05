@@ -18,14 +18,18 @@ export function resourceSlug(resource) {
 // but the sidebar nav and page title read better Title-Cased. This only affects the human-facing
 // label; the literal key still appears in the H1, request bodies, and the index table.
 const RESOURCE_ACRONYMS = new Set(['ai', 'crm', 'api', 'mcp', 'rest', 'url', 'id', 'seo', 'sso']);
+// WHY: a brand name has its own capitalization that neither rule above produces (linkedin -> LinkedIn, not Linkedin).
+const RESOURCE_BRAND_WORDS = { linkedin: 'LinkedIn' };
 export function resourceDisplayName(resource) {
   return String(resource)
     .split('_')
     .filter(Boolean)
     .map((word) =>
-      RESOURCE_ACRONYMS.has(word.toLowerCase())
-        ? word.toUpperCase()
-        : word.charAt(0).toUpperCase() + word.slice(1),
+      RESOURCE_BRAND_WORDS[word.toLowerCase()]
+        ? RESOURCE_BRAND_WORDS[word.toLowerCase()]
+        : RESOURCE_ACRONYMS.has(word.toLowerCase())
+          ? word.toUpperCase()
+          : word.charAt(0).toUpperCase() + word.slice(1),
     )
     .join(' ');
 }

@@ -22,6 +22,7 @@ Every operation runs through the single dispatch endpoint. See [Dispatch contrac
 | [`identity`](./identity) | 2 | no |
 | [`integrations`](./integrations) | 3 | yes |
 | [`leads`](./leads) | 22 | yes |
+| [`linkedin_groups`](./linkedin-groups) | 3 | yes |
 | [`listing_image`](./listing-image) | 2 | no |
 | [`modules`](./modules) | 10 | yes |
 | [`pipelines`](./pipelines) | 19 | yes |
