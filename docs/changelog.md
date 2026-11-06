@@ -8,6 +8,22 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.948
+
+- Fixed: The settings fields on a user's card in the Users tab, and in the Edit user window, now have consistent widths. A dropdown such as Phone Type is wide enough that its text no longer overlaps the arrow, the px unit next to Preview width sits beside the number box instead of on its own line, and number boxes are compact. Fields no longer run past the edge of the card on narrow windows, and the dropdown arrow shows again in the Edit user window.
+
+## v1.6.947
+
+- Improved: You can now turn any card on your My Portal page off and back on from the Customize menu. Each card has a Show on my page switch, a card you turn off is not shown on your page, and your choice is saved for you, so different people can keep different layouts. A link that points to a card you have turned off shows a short notice with a button that opens Customize. The switch to turn a card back on stays in the Customize menu.
+
+## v1.6.946
+
+- Improved: The Find a post or page card on your My Portal page now has two separate buttons, Recent and Show all, instead of one button that switched between them, and the one that is active is clearly marked. The Show all button follows your Posts, Pages or Both choice and reads Show all posts, Show all pages or Show all posts and pages, and the hint under the buttons names the same choice.
+
+## v1.6.944
+
+- Improved: The Callbacks list on your My Portal page now labels callers who did not make it through the calling menu. A call that ended in under 30 seconds, or was missed, shows Hung up, and a call that reached the voicemail prompt where the caller left no message shows Voicemail, no message, in place of Answered, on the callback row and in the call history. The number of seconds is a new setting, Count a call as hung up if it is shorter than, in the call settings. The labels appear when your site shows full caller details and only on callbacks that are still waiting.
+
 ## v1.6.943
 
 - Improved: The ad click ids from TikTok, LinkedIn and Microsoft ads are now sent to the caller's contact record, alongside the Google and Meta click ids, when the visitor has agreed to tracking, so an ad click can be matched to the person and the call. Each is sent only when its field is named in the RingTonic settings and exists in your calling workspace.

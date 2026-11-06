@@ -1,7 +1,7 @@
 {
     "schema_version": 1,
     "generated_from": "sytewide-mcp",
-    "mcp_version": "0.36.0",
+    "mcp_version": "0.37.0",
     "profiles": {
         "full": {
             "label": "Full (all tools)",
@@ -13698,6 +13698,100 @@
                 "required": [
                     "settings",
                     "confirm"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_linkedin_groups_add",
+            "provider": "syteops",
+            "description": "Saves one LinkedIn group to one person's list and answers the updated list (SyteOps linkedin_groups.add; SyteOps 1.6.929+). Not destructive. address is the numeric group id (1234567) or the group page address (https://www.linkedin.com/groups/1234567/); only the numeric id is stored, and any other host, scheme, slug, extra path, port or spaces is 422 invalid_address. name is plain text of 1 to 80 characters with no angle brackets or invisible characters: blank is 422 name_required, anything else wrong is 422 name_invalid (refused, never cleaned). The same group twice is 409 duplicate_group; a 21st group is 409 list_full (20 per person). 409 busy means another write for that person held the lock and nothing was written: retry once or twice. Works before the person's dialog is offered, so groups can be staged. Returns {user_id, groups[]: {id, name, url}, count, max: 20}; groups is the whole list after the call in saved order, id is the numeric group id as a string, url is https://www.linkedin.com/groups/{id}/; add and remove also return changed:true. 409 module_unavailable when the saved-groups feature is not loaded.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "user_id": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "description": "WordPress user id of the person whose saved LinkedIn groups to use (404 user_not_found when no such user). Only that person's list is read or written."
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The group name as the person will see it: plain text, 1 to 80 characters."
+                    },
+                    "address": {
+                        "type": "string",
+                        "description": "The LinkedIn group: its numeric id or its page address (https://www.linkedin.com/groups/1234567/)."
+                    }
+                },
+                "required": [
+                    "user_id",
+                    "name",
+                    "address"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_linkedin_groups_list",
+            "provider": "syteops",
+            "description": "Read-only. One person's saved LinkedIn groups, the list their Share to LinkedIn dialog offers (SyteOps linkedin_groups.list; SyteOps 1.6.929+). LinkedIn has no groups API, so the lists are typed in by hand; this reads the saved copy and works whether or not the dialog is offered to that person right now. Returns {user_id, groups[]: {id, name, url}, count, max: 20}; groups is the whole list after the call in saved order, id is the numeric group id as a string, url is https://www.linkedin.com/groups/{id}/; add and remove also return changed:true. 409 module_unavailable when the saved-groups feature is not loaded.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "user_id": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "description": "WordPress user id of the person whose saved LinkedIn groups to use (404 user_not_found when no such user). Only that person's list is read or written."
+                    }
+                },
+                "required": [
+                    "user_id"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_linkedin_groups_remove",
+            "provider": "syteops",
+            "description": "DESTRUCTIVE: removes one saved LinkedIn group from one person's list and answers the updated list (SyteOps linkedin_groups.remove; SyteOps 1.6.929+). Needs confirm:true; without it SyteOps answers 409 confirmation_required and removes nothing. Read the list first with syteops_linkedin_groups_list. id is the numeric group id exactly as the list returns it (an address is not accepted): 422 invalid_group_id when it is not numeric, 404 group_not_found when it is not in that person's list. 409 busy means nothing changed: retry once or twice. The removal leaves an activity row in the Content Pipelines ledger. Returns {user_id, groups[]: {id, name, url}, count, max: 20}; groups is the whole list after the call in saved order, id is the numeric group id as a string, url is https://www.linkedin.com/groups/{id}/; add and remove also return changed:true. 409 module_unavailable when the saved-groups feature is not loaded.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "user_id": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "description": "WordPress user id of the person whose saved LinkedIn groups to use (404 user_not_found when no such user). Only that person's list is read or written."
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The numeric LinkedIn group id to remove, as syteops_linkedin_groups_list returns it."
+                    },
+                    "confirm": {
+                        "type": "boolean",
+                        "description": "Required (true): this removes the saved group from that person's list."
+                    }
+                },
+                "required": [
+                    "user_id",
+                    "id"
                 ]
             },
             "destructive": false,

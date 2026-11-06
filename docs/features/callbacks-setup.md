@@ -103,6 +103,8 @@ Under **Monday callbacks list**, enter the slots in **Send the Monday list to sl
 Callbacks expire after 16 weeks, with one last mention in the Monday list. That only happens while at least one slot is listed here. With the field empty, nothing ever expires.
 :::
 
+Optional: **Call labels** (Leads → Settings → RingTonic) sets how many seconds a call must last before it stops being called **Hung up** in the portal. The default of 30 suits most sites; see [Hung up and Voicemail, no message](callbacks#hung-up-and-voicemail-no-message).
+
 For steps 8 to 10, each listed person needs Callbacks access of **View and act** or **Call** (step 5), a private page and an email address, or that slot is skipped. Buttons in the emails need contact details in Full.
 
 ## 11. Doing it from a repo with the MCP
@@ -124,6 +126,7 @@ A repo connected through the SyteWide MCP can do each step with a Manage operati
 | 8. Summary emails | `leads.settings_set` with `callbacks_summary_slots` and `confirm: true` |
 | 9. Reminders | `leads.settings_set` with `callbacks_reminders_enabled` and `callbacks_reminder_slots`, and `confirm: true` |
 | 10. Monday list | `leads.settings_set` with `callbacks_weekly_slots` and `confirm: true` |
+| Optional: call labels | `leads.settings_set` with `callbacks_hung_up_seconds` (5 to 120, default 30) |
 
 `confirm: true` is needed for changes to how contact details are stored and to anything that decides where call details are emailed: the three slot lists and the reminders switch (see the [API reference](../api/reference/leads)). `leads.settings_get` reads every setting back. A secret named as a setting is refused.
 
