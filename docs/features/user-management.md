@@ -179,6 +179,8 @@ WordPress has a hidden **All Settings** screen that lets any administrator chang
 
 For a dedicated role management interface, navigate to **SyteOps > Roles & Users** in the WordPress admin sidebar. This standalone page shows all system and custom roles, their current user assignments, assignment counts, and aggregator variable status.
 
+The Open Your Card link on your My Portal page takes you straight to your own card on this page and expands it. The link only appears if you are allowed to open Roles & Users.
+
 ## Sending a Welcome Email
 
 Every person's card — on the **Users** tab and on the **Roles & Users** page — carries a **Send Welcome Email** button (SyteOps Admins only). It sends that person one email with a link to their personal SyteOps page, their WordPress username, and a link to the "Lost your password?" page where they can set or reset a password.

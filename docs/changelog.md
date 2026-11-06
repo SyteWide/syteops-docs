@@ -8,6 +8,21 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.937
+
+- Improved: You can now customize your My Portal page. A Customize button opens a menu where you choose the order of your cards, whether each card is full width or half width (half width cards sit side by side in two columns on wide screens), and whether each card is open or closed when the page loads. Your choices are saved for you and a Reset button puts everything back to the defaults.
+- Improved: On wide screens the smaller cards (Your details, LinkedIn groups, My links and Content health) now sit side by side in two columns by default, and the page stays a single column on phones and narrow windows.
+- Improved: Your own open or closed choice for a card takes priority over the site-wide My Portal page setting for sections open on load, which now acts as the starting point for everyone.
+
+## v1.6.936
+
+- Improved: The Open Your Card link on your My Portal page now opens your own card on the Roles & Users page, already expanded and ready to edit, instead of leaving it collapsed. The link now appears only for people who can open that page.
+
+## v1.6.935
+
+- Improved: In the Find a post or page card on your My Portal page, the list of results now closes when you click or tap anywhere outside it, including elsewhere inside the card, and opens again when you click back into the search box.
+- Improved: A new Show all posts and pages button lists everything you can edit, most recently edited first, twenty at a time with a Show more button. It follows the Posts, Pages or Both switch and the status filter, and typing in the search box returns you to searching.
+
 ## v1.6.934
 
 - Improved: The card that opens when you select a post in the content calendar now shows Review Content and Review Appearance buttons at the top, scheduled posts included, so you can open a review straight from the calendar. Each button appears only for a review you are already allowed to open, and pages offer Review Appearance only.
