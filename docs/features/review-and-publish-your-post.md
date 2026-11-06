@@ -1130,7 +1130,7 @@ These are the same provider and model settings used by those areas elsewhere in 
 | **Soft lock** | Warns before concurrent edits. |
 | **Offer passkey sign-in** | Adds a passkey option at sign-in. Password sign-in still works. Gray until Secure Passkeys is active; **on by default** once it is. See below. |
 | **Scheduled publishing** | Allows a future publish date. When off, approvals publish immediately. |
-| **My Portal menu link** | Adds a **My Portal** link at the top of your site's menus for signed-in team members who have a private review page. **On by default**; turn it off here to remove it from every menu. See [A My Portal link in your site menu](#a-my-portal-link-in-your-site-menu). |
+| **My Portal page: sections open on load** | One switch for each section of a person's private page: **Callbacks**, **Your details**, **My links**, **Live posts and pages**, **Content health** and **LinkedIn groups**. A switch that is on opens that section when the page loads; off keeps it closed. **Callbacks** starts on and the others start off. See [Sections open or closed when the page loads](#sections-open-or-closed-when-the-page-loads). |
 | **Keep removed pictures** | How long a picture removed with Delete unused is kept before it is deleted for good (7, 14, 30, 60, 90, 180 or 365 days; default **30**), or **Do not keep (delete immediately)**. While it is kept, the picture is out of the media library, still works on the site, and can be restored from the article's Unused pictures card. A profile picture or theme logo removed with Delete image is held the same way when nothing else uses it; it is restored with Undo in the notice on that screen. The [Removed pictures](removed-pictures.md) view in Content Pipelines lists everything being kept for the whole site and lets an administrator restore a picture or delete it before its time. |
 | **Review link expiry** | How long the emailed review link stays valid (3, 7, 14, or 30 days; default **7**). Re-send an expired link from the draft — the post is unaffected. |
 | **Default reviewers** | Emailed and given edit access on every new draft, plus the author. |
@@ -1264,18 +1264,29 @@ Opening your own private page shows more than your queue. The header logo opens 
 
 The same card carries two notification switches: **Reminder emails** (nudges before something you're on is due to go live) and **Reply notifications** (notes left on the items you are on, and replies to your own notes). Both are on by default. Turning either off takes effect starting with the next email of that kind — it doesn't cancel anything already on its way. Every review email's footer carries a **Why you got this: Email settings** link that opens this exact card on your own private page, so you never have to go hunting for it.
 
+Every section on the page is a card you open and close with its heading. When the page loads, only **Callbacks** is open; the rest are closed until you open them, and the header with your photo and name is always shown. A site can change which cards start open, as described in [Sections open or closed when the page loads](#sections-open-or-closed-when-the-page-loads).
+
 When LinkedIn sharing is on, a **LinkedIn groups** card on your page lets you save the LinkedIn groups you post in (a name and the group's address, up to 20, private to you). In **Share to → LinkedIn** you can then pick one of **Your saved groups** instead of your profile: your post and the article's link are copied and the group opens in a new tab for you to paste into. LinkedIn gives apps no list of your groups and no way to post into one, so SyteOps only copies and opens. See [LinkedIn sharing](../integrations/linkedin.md).
 
 The last row of that summary is **Your private link** — the link to this page, with a **Copy** button beside it. Open **Your details** to see it. There is no **Regenerate** button here: replacing a link stays with site administrators on the **Users** tab.
 
-### A My Portal link in your site menu
+### Sections open or closed when the page loads
 
-A signed-in team member who has a [private review page](#each-persons-private-review-page) sees a **My Portal** link at the top of every menu on your site. Clicking it opens their own page. Visitors who are not signed in never see it, and neither do signed-in people without a private review page, so it never shows up in a cached copy of a page.
+Each section of a person's [private review page](#each-persons-private-review-page) is a card that opens and closes from its heading: **Callbacks**, **Your details**, **My links**, **Live posts and pages** (inside the review area), **Content health** and **LinkedIn groups**. The header with the photo and name is not a card and is always shown.
 
-- **It is on by default.** Turn it off under **Content Pipelines → Review Portal settings → Review & approval rules → My Portal menu link**.
-- **It works in any menu your theme draws with WordPress menus**, including the Elementor, Avada, Divi and Blocksy menus. A menu built with the block editor's Navigation block does not get it; add a link to it yourself if you want one there.
-- **Add your own where a menu is not covered.** Add a custom link in the menu editor. The exact address to use is printed under the **My Portal menu link** setting. It is the same address for everyone: each signed-in team member who clicks it lands on their own page, and a signed-out visitor is asked to sign in first. If a menu already holds that link, or a link to the person's own page, the automatic one is skipped for that menu.
-- **An empty menu shows only My Portal.** A menu with no items that is assigned to a theme location still draws, so a signed-in team member sees the lone **My Portal** link there. To switch the link off for one menu while leaving it on elsewhere, ask your developer: the developer documentation names the filter that does it. Turning off **My Portal menu link** in the settings removes it from every menu.
+- **The defaults.** Until you change them, **Callbacks** loads open and every other card loads closed.
+- **Change them** under **Content Pipelines → Review Portal settings → Review & approval rules → My Portal page: sections open on load**. Turn a section's switch on to have it open when the page loads, or off to have it closed, then save. The choice applies to everyone's page on the site, and it takes effect the next time a page loads.
+- **Opening a card by hand still works.** Anyone can open or close any card while they are on the page. That choice is not remembered, so the next load goes back to the site's setting.
+- **Choosing a published-content order opens that list.** On the **Live posts and pages** list, choosing **Recently updated**, **Newest published** or **Oldest published** always opens it, even when its switch is off, so the list never seems to vanish.
+- **A section you do not have still does not show.** For example, **Callbacks** appears only for people who can use it, whatever its switch says.
+
+### A My Portal link in the toolbar
+
+A signed-in team member who has a [private review page](#each-persons-private-review-page) gets a **My Portal** link in the black WordPress toolbar, on the site and in the dashboard. It sits just before **Quick Links**, and **Quick Links** repeats it under its **SyteOps** heading. Clicking either opens their own page.
+
+- **Only for people with a private review page.** Visitors who are not signed in never see it, and neither do signed-in people without a private review page.
+- **There is no setting for it.** It is simply there for anyone who has a private review page.
+- **Your site's public menus are not changed.** An earlier version added a **My Portal** link to the top of every menu on the public site, with a setting for it. That link has been removed; the toolbar is the only place **My Portal** appears.
 
 ### Open the portal for any post
 
