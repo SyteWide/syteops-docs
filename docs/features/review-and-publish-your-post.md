@@ -1281,14 +1281,28 @@ At the top of a person's [private review page](#each-persons-private-review-page
 - **Open one.** Click a result, or move with the arrow keys and press Enter, to open its review in the same tab. **Home** and **End** jump to the first and last result, **Escape** closes the list, and a second **Escape** clears the box.
 - **Only what you can edit.** The list never shows a post or page you cannot edit in WordPress. Private, trashed and password-protected items are never listed.
 - **Opening can add it to your review list.** If you are an editor, the first time you open a post this way you are added to its reviewers, so the review opens ready to edit and publish as your role allows, and the post then appears in your lists. Nobody is emailed. Being added this way does not let you give other people access to the post: **Send to a colleague** is refused for you, and an administrator has to add them. Administrators can already edit every review, so nothing is added for them. People with a lower role, such as authors and contributors, open the review read-only and are not added. If an administrator removed you from a post's reviewers, opening it does not add you back.
+- **Show all posts and pages.** Click **Show all posts and pages** to list everything you can edit, most recently edited first, twenty at a time. Click **Show more** for the next twenty.
+- **The switch and the filter still apply.** The full list follows **Posts**, **Pages** or **Both** and the **Status** menu.
+- **Typing returns you to search.** Once you type in the search box, the list goes back to normal search results.
+- **Click outside to close.** The results close when you click or tap anywhere outside them, including elsewhere in the card. They open again when you click back into the search box.
 
 ### Sections open or closed when the page loads
 
 Each section of a person's [private review page](#each-persons-private-review-page) is a card that opens and closes from its heading: **Callbacks**, **Your details**, **My links**, **Live posts and pages** (inside the review area), **Content health** and **LinkedIn groups**. The header with the photo and name is not a card and is always shown.
 
 - **The defaults.** Until you change them, **Callbacks** loads open and every other card loads closed.
-- **Change them** under **Content Pipelines → Review Portal settings → Review & approval rules → My Portal page: sections open on load**. Turn a section's switch on to have it open when the page loads, or off to have it closed, then save. The choice applies to everyone's page on the site, and it takes effect the next time a page loads.
-- **Opening a card by hand still works.** Anyone can open or close any card while they are on the page. That choice is not remembered, so the next load goes back to the site's setting.
+- **Change them** under **Content Pipelines → Review Portal settings → Review & approval rules → My Portal page: sections open on load**. Turn a section's switch on to have it open when the page loads, or off to have it closed, then save. The setting is the starting point for everyone's page on the site, and it takes effect the next time a page loads.
+- **Opening a card by hand still works.** Anyone can open or close any card while they are on the page. To keep your own choice for the next load, use **Customize** (see [Customize your My Portal page](#customize-your-my-portal-page)).
+
+### Customize your My Portal page
+
+Use **Customize** at the top of your private review page to open a panel that lists every card on the page. Arrange the page for yourself there. Your choices are saved for you, one set per person, and used each time you open the page.
+
+- **Order.** In the panel, use the **Move up** and **Move down** buttons beside a card's name to place it higher or lower.
+- **Full / Half.** The switch beside each card's name in the panel makes it full width or half width. On wide screens two half width cards sit side by side in two columns. On phones and narrow windows the page stays a single column.
+- **Open on load.** For a card that opens and closes, the **Open on load** switch beside its name in the panel sets whether it opens when the page loads.
+- **Reset.** The **Reset to defaults** button in the panel puts the order, widths and open or closed choices back to the defaults.
+- **The site setting is the starting point.** Your own open or closed choice takes priority over the site-wide switches above. Anyone who has not chosen sees the site's setting.
 - **Choosing a published-content order opens that list.** On the **Live posts and pages** list, choosing **Recently updated**, **Newest published** or **Oldest published** always opens it, even when its switch is off, so the list never seems to vanish.
 - **A section you do not have still does not show.** For example, **Callbacks** appears only for people who can use it, whatever its switch says.
 
