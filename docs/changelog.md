@@ -8,6 +8,15 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.931
+
+- Improved: Every section of a person's private My Portal page is now a card you open and close from its heading, and the page loads with only Callbacks open. Content health and LinkedIn groups are now cards too, so they no longer take up room until you open them.
+- Improved: A new setting in the Review Portal settings, My Portal page: sections open on load, lets you choose for each section whether it loads open or closed. Callbacks starts on and the others start off. Choosing an order for the published content list still opens that list.
+
+## v1.6.930
+
+- Improved: Signed-in people who have a portal now get a My Portal link in the admin toolbar, just before Quick Links, and under the SyteOps heading inside Quick Links, on the site and in the dashboard. The My Portal link in the site's public navigation menus, and its setting in the Review Portal settings, have been removed; they shipped in earlier versions.
+
 ## v1.6.929
 
 - Improved: Site operators can now list, add and remove the saved LinkedIn groups of a chosen person through the management API, so a person's groups can be set up before their Share to LinkedIn dialog is offered. Removing a group needs confirmation and leaves a lasting activity record.
