@@ -1299,6 +1299,7 @@ Each section of a person's [private review page](#each-persons-private-review-pa
 Use **Customize** at the top of your private review page to open a panel that lists every card on the page. Arrange the page for yourself there. Your choices are saved for you, one set per person, and used each time you open the page.
 
 - **Order.** In the panel, use the **Move up** and **Move down** buttons beside a card's name to place it higher or lower.
+- **Drag a card.** While the panel is open, each card on the page shows a **Drag** handle at its top. Drag the handle (with a mouse, a pen or your finger) and drop the card where you want it; a line shows where it will land, and the page scrolls when you drag near the top or bottom of the window. Press **Escape** to cancel a drag. Dragging changes only the order, never the width. With a keyboard, press **Space** or **Enter** on a handle to pick the card up, use the arrow keys to choose its place, and press **Space** or **Enter** again to drop it. The **Move up** and **Move down** buttons still work too.
 - **Full / Half.** The switch beside each card's name in the panel makes it full width or half width. On wide screens two half width cards sit side by side in two columns. On phones and narrow windows the page stays a single column.
 - **Open on load.** For a card that opens and closes, the **Open on load** switch beside its name in the panel sets whether it opens when the page loads.
 - **Reset.** The **Reset to defaults** button in the panel puts the order, widths and open or closed choices back to the defaults.

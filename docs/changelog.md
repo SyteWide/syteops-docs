@@ -8,6 +8,29 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.943
+
+- Improved: The ad click ids from TikTok, LinkedIn and Microsoft ads are now sent to the caller's contact record, alongside the Google and Meta click ids, when the visitor has agreed to tracking, so an ad click can be matched to the person and the call. Each is sent only when its field is named in the RingTonic settings and exists in your calling workspace.
+
+## v1.6.942
+
+- Fixed: On the Leads screen, the Recent leads table no longer runs past the edge of its card in a narrow window. On wider windows it scrolls sideways inside the card with the Send to webhook and Delete buttons kept in view at the right, and on phones and small windows each lead is shown as a stacked card. Lead numbers, dates and phone numbers no longer break across lines, and long landing page addresses in a lead's details wrap inside their cells.
+## v1.6.941
+
+- Improved: The Callbacks list on your My Portal page now shows a caller's best time to call and their office phone number on the callback row, when your site shows full caller details, so you can return the call at the right time and on the right number. Both are also sent to the caller's contact record as custom fields named best_time_to_call and office_phone, which must exist in your calling workspace. Long text in these lines now wraps inside the row instead of widening it.
+
+## v1.6.940
+
+- The page address and the referring site saved with each form submission are now cleaned before they are stored. Only campaign tags and ad click ids are kept, and other parameters, such as signed test-link tokens, are dropped. The referrer now records where the visitor first came from instead of repeating the page, and stays empty when the visitor has not agreed to tracking. The same cleaning applies to the landing page fields filled from tracking, and to the referrer saved with a tracked link click. Addresses with non-English characters are stored safely. Events saved before this version are not changed.
+
+## v1.6.939
+
+- Improved: In the Callbacks list on your My Portal page, a caller whose name has not been entered yet now shows the name from the caller's phone carrier as Possibly followed by that name, written in normal capitalization instead of all capitals, such as Possibly McDonald James. It appears only when the site is set to show full caller details, and the name is never saved as the caller's real name. The Caller ID name in the lead panel is tidied the same way.
+
+## v1.6.938
+
+- Improved: You can now rearrange the cards on your My Portal page by dragging. Open Customize, then drag a card by its handle to a new place; the page shows a line where it will land, scrolls as you drag near the top or bottom, and saves the new order. Escape cancels a drag, and the Move up and Move down buttons still work, as does picking a card up from the keyboard with Space or Enter and moving it with the arrow keys.
+
 ## v1.6.937
 
 - Improved: You can now customize your My Portal page. A Customize button opens a menu where you choose the order of your cards, whether each card is full width or half width (half width cards sit side by side in two columns on wide screens), and whether each card is open or closed when the page loads. Your choices are saved for you and a Reset button puts everything back to the defaults.
