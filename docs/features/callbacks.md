@@ -200,6 +200,27 @@ On the Callbacks list, a row that nobody has named yet shows the caller-ID name 
 
 When a caller rings your RingTonic number again, the callback records that call too, with how it went, how long it lasted, whether there is a recording and, while contact details are stored in **Full**, RingTonic's AI summary and transcript. The row's last call then reads, for example, "Called in Oct 24, 2:30 pm · Answered · 5:00" or "Called in Oct 24, 2:30 pm · Missed".
 
+#### Hung up and Voicemail, no message
+
+RingTonic calls a call "Answered" whenever something picks up the line, even a phone menu or a voicemail in front of your team. So a caller who hangs up in the menu, or who reaches the voicemail and says nothing, would look answered. While contact details are stored in **Full**, the row says what happened instead. It shows a small label next to the status and words the last call the same way:
+
+| What the row says | What happened |
+|---|---|
+| **Hung up** | The call was missed, or it was picked up but lasted less than the number of seconds you set (30 by default). |
+| **Voicemail, no message** | The call lasted at least that long, the transcript shows the caller reached a voicemail prompt such as "please leave a message", and the caller said nothing at all that counts as a message. A lone "thank you" or "okay" does not count. |
+| **Answered · 5:00** | Anything else: a real conversation, a message the caller left, or a call whose transcript has not arrived yet. Once it arrives, the row may change to **Voicemail, no message**. |
+
+- The labels are cautious on purpose. If the caller said anything real, at any point in the call, or the transcript is cut off, unlabeled or unclear, the row keeps **Answered**. A missing label is harmless; a real message hidden as "no message" is not.
+- **Voicemail, no message** is tuned to how a typical business phone-system voicemail sounds in a transcript: the greeting and menu, then "please leave a message", and often a spoken menu about reviewing, sending or re-recording the voicemail that plays when the caller stays silent. A recording notice read out at the start ("this call is being recorded") is not counted as the caller speaking. A name, a few words, or any short reply other than a brief filler such as hello, yes, okay or thank you counts as a message, even a very short one, in any language.
+- If your phone system words its voicemail prompt very differently, those calls keep **Answered**.
+- A call that really was short, such as a wrong number that lasted 25 seconds, is called **Hung up** even though there is a transcript. Lower the number of seconds if that is too many.
+- The label shows only on callers still waiting (**Waiting for a call back** and **Follow-ups**). Once a callback is **Returned** or closed, its row goes back to the plain wording.
+- A caller who also filled in a form never gets either label.
+- If a caller phoned more than once, a real conversation or a real message on any of the calls means no label. Otherwise the most recent call decides.
+- The label is worked out each time the row is shown and is not saved. Change the number and every row follows. The setting is **Count a call as hung up if it is shorter than (seconds)** under **Call labels** in **Leads → Settings → RingTonic**, from 5 to 120 seconds.
+- The labels only change the words. They never close, reopen or otherwise move a callback, and the Monday list and the call summary emails are unchanged.
+- The lead panel's call list uses the same words for each call. The labels are for **Full** only: under **Masked** or **Off** no new labels appear, and any earlier calls the panel still lists keep their old words.
+
 A call from the caller never marks the callback **Returned** or closes it by its length alone, however long it lasted: talking to someone when they ring in does not always mean their request was handled. The only change the call itself makes is the one in [Good to know](#good-to-know): a callback that was Done, Returned, Expired or Held goes back to the waiting list. What was said on the call is for the AI read (see [What the AI does with each call](#what-the-ai-does-with-each-call)).
 
 These calls are recorded only while contact details are stored in **Full**, and only for callers who already have a callback (a first-time caller gets one from the call itself).
