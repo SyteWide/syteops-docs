@@ -132,6 +132,10 @@ The **Slot held** row appears in the key only when [Reserve publishing slots](#r
 
 Drafts that don't have a publish date yet appear in the **Unscheduled drafts** list beside the grid, instead of on a specific day. On a narrower screen that list moves below the grid. An article holding a reserved publishing slot is the exception: it is drawn on the grid on the day it is holding, not in that list, because an article holding a date is not unscheduled.
 
+### Reviewing from the calendar
+
+Select any post and its card opens with **Review Content** and **Review Appearance** buttons at the top, each opening in a new tab. They are there for scheduled, draft, pending and published posts alike, so you can review a scheduled article before it goes live. A button appears only for a review you are already allowed to open: pages offer **Review Appearance** only, and a post you cannot review shows neither. On a phone the buttons stack and are sized for a thumb.
+
 ### Rescheduling and scheduling posts
 
 - **Pick a date and time** — select any post to open a picker and choose exactly when it goes live. This works on every device, including phones and tablets.

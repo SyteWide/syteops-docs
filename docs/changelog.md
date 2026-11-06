@@ -8,6 +8,20 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.934
+
+- Improved: The card that opens when you select a post in the content calendar now shows Review Content and Review Appearance buttons at the top, scheduled posts included, so you can open a review straight from the calendar. Each button appears only for a review you are already allowed to open, and pages offer Review Appearance only.
+- Improved: On a phone the two buttons stack, one per line, and are sized for a thumb. They come first in the card for keyboard users, right after the close button.
+
+## v1.6.933
+
+- Improved: The review lines on a person's private My Portal page now take less room. By default each line in Awaiting Your Review, Watching, Coming Up, Published Content and Notes & Replies is a single compact row: no thumbnail, the dates on the right, and the Copy link button on the same line at every screen width. Anything that does not fit on the line wraps onto a second line, so nothing is hidden, and a note's text shows its first two lines.
+- Improved: A new Compact / Comfortable switch beside the Your Reviews heading brings back the larger rows with thumbnails. Each person's choice is remembered for them, and it changes only how the lists look. The review queue page and the Review Portal editor are unchanged.
+
+## v1.6.932
+
+- Improved: A new Find a post or page card sits at the top of each person's My Portal page. Click into its search box to see your most recently edited posts and pages, or type a title, a web address or a post number to find any post or page you can edit. Choose Posts, Pages or Both and filter by status, then click a result to open its review. Editors who can publish are added to a post's reviewers the first time they open it this way, so it opens ready to edit (they cannot add other people); people with lower roles open it read-only. No email is sent, and nothing you cannot edit in WordPress is ever listed.
+
 ## v1.6.931
 
 - Improved: Every section of a person's private My Portal page is now a card you open and close from its heading, and the page loads with only Callbacks open. Content health and LinkedIn groups are now cards too, so they no longer take up room until you open them.

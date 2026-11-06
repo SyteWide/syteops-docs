@@ -804,6 +804,7 @@ You don't have to open an article to reach the calendar. The same **Calendar** b
 From the calendar you can:
 
 - **Select a post** to open its details card — the full title, its featured image, when it publishes, who is reviewing it, how much feedback it has, and a checklist of what it still needs before it can go live. From the same card you can pick an exact date and time. A past date publishes immediately and keeps that date as the post's publish date; a time less than a minute away publishes now. This works on every device, including phones and tablets.
+- **Open a review from its card** — the card shows **Review Content** and **Review Appearance** buttons at the top, each opening in a new tab. They appear only for articles you are already allowed to review, so a card can show both, only **Review Appearance** (pages have no content view), or neither. They work for a scheduled article too, so you can review it before it goes live.
 - **Move a live article** to a past or current day — it stays on your site with that new published date. A future day is refused, so a live article cannot be pulled back onto the schedule. This needs publish permission, same as taking the article back to a draft.
 - **Drag a scheduled post to a new day** to move it to a different publish date. Dragging needs a mouse or trackpad — on a touchscreen, select the post instead.
 - **Drag a post from Unscheduled drafts onto a day** to give it a publish date.
@@ -1270,6 +1271,17 @@ When LinkedIn sharing is on, a **LinkedIn groups** card on your page lets you sa
 
 The last row of that summary is **Your private link** — the link to this page, with a **Copy** button beside it. Open **Your details** to see it. There is no **Regenerate** button here: replacing a link stays with site administrators on the **Users** tab.
 
+### Find a post or page
+
+At the top of a person's [private review page](#each-persons-private-review-page), just under the photo and name, a **Find a post or page** card lets you open the review of any post or page you can edit, whether or not it has been sent to you.
+
+- **Start with nothing typed.** Click into the search box and your most recently edited posts and pages appear, newest first, up to eight.
+- **Search by title, web address or number.** Type at least two letters to search titles, the web address (slug) and the text of your posts and pages. Paste a page's web address from this site, or its number, to jump straight to it.
+- **Narrow the list.** **Posts**, **Pages** and **Both** choose what to look in, and the **Status** menu limits the list to Published, Scheduled, Draft or Pending. At most 20 results are shown, each on one line with its type, status and when it was last changed.
+- **Open one.** Click a result, or move with the arrow keys and press Enter, to open its review in the same tab. **Home** and **End** jump to the first and last result, **Escape** closes the list, and a second **Escape** clears the box.
+- **Only what you can edit.** The list never shows a post or page you cannot edit in WordPress. Private, trashed and password-protected items are never listed.
+- **Opening can add it to your review list.** If you are an editor, the first time you open a post this way you are added to its reviewers, so the review opens ready to edit and publish as your role allows, and the post then appears in your lists. Nobody is emailed. Being added this way does not let you give other people access to the post: **Send to a colleague** is refused for you, and an administrator has to add them. Administrators can already edit every review, so nothing is added for them. People with a lower role, such as authors and contributors, open the review read-only and are not added. If an administrator removed you from a post's reviewers, opening it does not add you back.
+
 ### Sections open or closed when the page loads
 
 Each section of a person's [private review page](#each-persons-private-review-page) is a card that opens and closes from its heading: **Callbacks**, **Your details**, **My links**, **Live posts and pages** (inside the review area), **Content health** and **LinkedIn groups**. The header with the photo and name is not a card and is always shown.
@@ -1279,6 +1291,15 @@ Each section of a person's [private review page](#each-persons-private-review-pa
 - **Opening a card by hand still works.** Anyone can open or close any card while they are on the page. That choice is not remembered, so the next load goes back to the site's setting.
 - **Choosing a published-content order opens that list.** On the **Live posts and pages** list, choosing **Recently updated**, **Newest published** or **Oldest published** always opens it, even when its switch is off, so the list never seems to vanish.
 - **A section you do not have still does not show.** For example, **Callbacks** appears only for people who can use it, whatever its switch says.
+
+### Compact or comfortable review lines
+
+The review lists on a person's [private review page](#each-persons-private-review-page) (**Awaiting Your Review**, **Watching**, **Coming Up**, **Published Content** and **Notes & Replies for You**) are **compact** by default, so more of them fit on the screen.
+
+- **What compact looks like.** Each item is one short line: the title, its status and other labels, and its dates on the right, with the **Copy link** button on the same line at every screen width. There is no picture. A label that does not fit on the line moves to a second line, so nothing is left out. A note shows its first two lines.
+- **Comfortable brings back the larger rows.** Use the **Compact** and **Comfortable** buttons beside **Your Reviews**. **Comfortable** shows the picture and the roomier layout the lists had before.
+- **Each person chooses for themselves.** The choice is remembered for the signed-in person and used the next time they open their page. It only changes how the lists look: the same items, counts and dates are shown either way, and it changes no one else's page.
+- **Other pages are not affected.** The review queue page and the portal editor keep their usual look. **Content health**, **Callbacks** and **My links** keep their own rows.
 
 ### A My Portal link in the toolbar
 
