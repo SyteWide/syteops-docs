@@ -48,7 +48,11 @@ Callers are grouped in this order:
 3. **Returned**: callers someone has already called back.
 4. **Closed**: callbacks marked Done or Not a lead, and ones that expired after 16 weeks.
 
-Each row shows the caller's name and number, their status, how long they have been waiting (or when they first got in touch), any follow-up date and who it belongs to, who closed it and when, the last time someone called them back and how that call went, and, for people who can open the Leads screen, an **Open in admin** link that opens the lead there in a new window, so the portal stays open. When the person's phone and email are on two different RingTonic contacts, the row also says **RingTonic: this person's phone and email are on two different contacts. Merge them in RingTonic.** until someone marks them merged on the lead ([RingTonic](../integrations/ringtonic#create-contacts-from-form-submissions)).
+Each row shows the caller's name and number (when no one has named the caller yet, a row can show **Possibly** and a name from caller ID; see [Caller ID name](#caller-id-name)), their status, how long they have been waiting (or when they first got in touch), any follow-up date and who it belongs to, who closed it and when, the last time someone called them back and how that call went, the **best time to call** and an **office number** when the person gave them on the form (for example "Best time to call: Weekdays after 3pm" and "Office (212) 555-0187"), and, for people who can open the Leads screen, an **Open in admin** link that opens the lead there in a new window, so the portal stays open. When the person's phone and email are on two different RingTonic contacts, the row also says **RingTonic: this person's phone and email are on two different contacts. Merge them in RingTonic.** until someone marks them merged on the lead ([RingTonic](../integrations/ringtonic#create-contacts-from-form-submissions)).
+
+The best time to call and the office number come from the caller's most recent form submission, so they follow the same rule as the name and number: they show only while Lead Attribution stores contact details in **Full**, and disappear from the list when it is set to Masked or Off. Nothing is shown when the caller left them blank, and an office number that is the same as the main number is not repeated. Very long answers are shortened, and a long web address in an answer wraps inside the row instead of stretching it.
+
+The office number comes from the form's office phone mapping. The best time to call needs a custom field named **Best time to call** in the **Form field mapping** card (**Leads → Settings**): add it under **Custom fields** and pick the form field that holds the answer ([Map any form field](lead-attribution#map-any-form-field-custom-fields)). Without that custom field the row has nothing to show, even though the answer may still be sent to RingTonic.
 
 ### Call a lead back
 
@@ -189,6 +193,8 @@ A value a person saves here is final: later automatic fills (from a call transcr
 ### Caller ID name
 
 When a lead calls in, the phone carrier can send a short caller-ID name for the number, such as "Marriott Intl". The panel shows it as **Caller ID name (carrier)**. It is kept only while contact details are stored in **Full**, the first one received is kept, and generic names such as "Wireless Caller", "Unknown", "Private" or a city and state are left out. It is shown as a clue only: it is never copied into the contact's name or company.
+
+On the Callbacks list, a row that nobody has named yet shows the caller-ID name as **Possibly Smith John A**, in a lighter italic style so it never looks like a confirmed name. The carrier usually sends the last name first, so the order is kept as sent and only the capital letters are fixed (a name such as MCDONALD JAMES reads McDonald James). It appears only while contact details are stored in **Full**; under **Masked** or **Off** the row keeps **Name hidden**. The lead panel's **Caller ID name (carrier)** shows the same tidied-up name. As soon as someone names the caller, by a form, by **Edit contact** or by the AI read, that name replaces it. The "Possibly" name is not used anywhere else: not in the call, the emails or the one-tap Call page.
 
 ### Calls from the caller
 

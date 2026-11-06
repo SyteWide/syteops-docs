@@ -180,6 +180,8 @@ Beyond Name, Email, Phone, Office phone and Message, you can map **any** of a fo
 
 Custom fields appear on the lead, in the CSV export, in lead emails, and in the outgoing webhook (under a `custom` object). You don't need to map UTM or campaign fields — those are captured automatically and already sent.
 
+A custom field named like a page address that Lead Attribution itself fills in (for example `landing_page`, `first_landing_page` or `referrer_url`) is stored without any tracking parameters other than the campaign tags and click IDs, the same as the lead's own landing page. A web address a visitor types into any other field, such as a website, is kept exactly as they typed it.
+
 ### Let AI map the form for you (Auto-map with AI)
 
 Instead of mapping each field by hand, you can let AI do the first pass. On a mapping row, once you've picked a form plugin and a form, click **Auto-map with AI**. It reads that form's fields and fills the row in for you:
@@ -366,7 +368,7 @@ Click a lead's name to open its **proof packet**.
 
 ## Proof packets and shareable links
 
-Each lead's proof packet shows its full story: the source, campaign, landing page, first landing page, originating post, and a timeline of every event — with an **integrity check** that confirms the record hasn't been altered since it was captured.
+Each lead's proof packet shows its full story: the source, campaign, landing page, first landing page, originating post, and a timeline of every event — with an **integrity check** that confirms the record hasn't been altered since it was captured. For a form submission, the timeline shows the page the form was on, with only its campaign tags and click IDs kept; the referrer on the lead is where the visitor first came from, and stays empty when no tracking was allowed. Events recorded before this was added are left as they were.
 
 Need to show a client the evidence without giving them admin access? Use the **shareable proof link** — a read-only web page for that single lead. You can regenerate the link at any time to revoke the old one.
 
