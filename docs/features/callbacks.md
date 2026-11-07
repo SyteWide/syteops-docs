@@ -257,6 +257,26 @@ Closed callbacks are hidden until you ask for them. Turn on **Show closed** to s
 
 Use the buttons above the list to show **Everything waiting**, or only **Waiting**, **Follow-ups**, **Returned** or **Closed**. Each button shows how many callbacks are in that group. Choosing **Closed** shows the closed callbacks even when Show closed is off.
 
+### Split the waiting list by what happened
+
+When one person returns the callers who hung up or left no message, and others return the callers who left a real message, each of them can show just their share of the list. While contact details are stored in **Full**, a second row of buttons sits beside the group buttons:
+
+| Button | What it shows |
+|---|---|
+| **All callers** | Every waiting caller. This is the starting point. |
+| **Hung up or no message** | Waiting callers whose row says **Hung up** or **Voicemail, no message** (see [Hung up and Voicemail, no message](#hung-up-and-voicemail-no-message)). |
+| **Left a message** | Every other waiting caller: a real conversation, a message the caller left, and a call whose transcript has not arrived yet. |
+
+- Each button shows how many callers it holds, for example **Hung up or no message (3)**. These numbers count the callers loaded on the page (the list loads up to 200), so they can be lower than the true total on a very busy site. The numbers on the group buttons are not affected.
+- The buttons only narrow **Waiting** and **Follow-ups**. **Returned** and **Closed** callbacks always show, because they are not calls still to be made.
+- They work together with the group buttons and **Show closed**. For example, **Waiting** plus **Left a message** shows only the waiting callers who left a message.
+- If your choice leaves no waiting caller showing, the page says "No callbacks in this view." instead of silently hiding the lists, even when Returned callbacks are still showing below. Choose another button to see the rest. (With a single group button chosen, that group shows "None right now." instead.)
+- The page reads the choice out for screen readers: with **Hung up or no message** or **Left a message** it says how many waiting callers are showing, for example "Showing 4 callbacks to return.", the same number as on the button. With **All callers** it counts every callback showing. Pressing the same button again reads it again.
+- Your browser remembers your choice for you, so the list opens the same way next time. Another person's choice on their own computer is theirs alone, and nothing is saved on the site.
+- A button in a callback email always takes you to its row. If your remembered choice would hide that row, the page shows **All callers** for that visit, says "Showing all callbacks to show this one.", and your own choice returns the next time.
+- Under **Masked** or **Off** there are no outcome labels, so these buttons do not appear.
+- When you press **Done**, **Not a lead** or **Reopen**, the numbers update at once, and a reopened callback appears under the button that matches its call.
+
 ### Mark a callback
 
 - **Done**: you have handled it.
