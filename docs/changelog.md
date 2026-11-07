@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.949
+
+- Improved: The Callbacks list on your My Portal page now has buttons to show only the callbacks you work, All callers, Hung up or no message, and Left a message, so each person can see their own list. They combine with the status buttons, are remembered in your browser, and only apply to callbacks that are still waiting. A link to a callback that your choice would hide shows it anyway. The buttons appear when your site shows full caller details.
+
 ## v1.6.948
 
 - Fixed: The settings fields on a user's card in the Users tab, and in the Edit user window, now have consistent widths. A dropdown such as Phone Type is wide enough that its text no longer overlaps the arrow, the px unit next to Preview width sits beside the number box instead of on its own line, and number boxes are compact. Fields no longer run past the edge of the card on narrow windows, and the dropdown arrow shows again in the Edit user window.
