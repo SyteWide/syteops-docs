@@ -83,7 +83,7 @@ With the key, live notifications (step 4) and a verified caller ID in place, peo
 
 When you change a lead's status in SyteOps — **New**, **Contacted**, **Qualified**, **Unqualified**, or **Customer** — the matching RingTonic contact's stage is updated in the background a short time later. Repeated changes to the same lead in quick succession are collapsed into a single push of the final status.
 
-There's one nuance when you move a lead **backward** — for example from **Customer** back to **Contacted**, or when you re-engage a lead that RingTonic currently shows as **Unqualified** or **Lost** (see [Deleting a lead](#deleting-a-lead)) by moving it to any other status. RingTonic only accepts a move like this if your API key is allowed to force stage changes; SyteOps asks for exactly that only when the move is a genuine regression from what it last knew RingTonic to hold. If your key isn't permitted to force stage changes, your change still saves in SyteOps as normal, but RingTonic keeps its earlier stage. A forward move (moving a lead further along, including out of Unqualified/Lost) is sent as a plain update and never needs forcing — but like any request, RingTonic can still decline it for an unrelated reason (a plan or permission issue); SyteOps never retries a declined request as a forced move, so a genuinely-declined forward change stays exactly where RingTonic left it rather than being pushed through by force.
+There's one nuance when you move a lead **backward** — for example from **Customer** back to **Contacted**, or when you re-engage a lead that RingTonic currently shows as **Unqualified** or **Lost** by moving it to any other status. RingTonic only accepts a move like this if your API key is allowed to force stage changes; SyteOps asks for exactly that only when the move is a genuine regression from what it last knew RingTonic to hold. If your key isn't permitted to force stage changes, your change still saves in SyteOps as normal, but RingTonic keeps its earlier stage. A forward move (moving a lead further along, including out of Unqualified/Lost) is sent as a plain update and never needs forcing — but like any request, RingTonic can still decline it for an unrelated reason (a plan or permission issue); SyteOps never retries a declined request as a forced move, so a genuinely-declined forward change stays exactly where RingTonic left it rather than being pushed through by force.
 
 SyteOps also recognizes when RingTonic has simply gotten **ahead** of it — for example, another tool recorded a RingTonic-side milestone that puts the contact further along than SyteOps' own last-known stage, or moved it since SyteOps' last successful sync. When that happens, SyteOps does not fight it: it logs the reason and leaves RingTonic's stage alone rather than forcing a regression.
 
@@ -252,13 +252,14 @@ Everything here is ordinary lead data: it is deleted with the lead, included in 
 
 ## Deleting a lead
 
-RingTonic's API has **no delete** capability, so deleting a lead in SyteOps cannot remove the corresponding contact from RingTonic. Instead:
+Deleting a lead on the **Leads** dashboard only moves it to the **Deleted** list. It does not change anything in RingTonic, and neither does restoring it from there. A lead left in **Deleted** is removed for good after 30 days; that automatic removal also leaves the RingTonic contact as it is.
 
-- SyteOps trashes the lead **locally**, as usual.
-- SyteOps makes a **best-effort** move of the matching RingTonic contact to the **Lost** stage.
-- RingTonic **keeps its own record** of the contact.
+To remove a lead for good, open the **Deleted** list and choose **Delete permanently** (see [The dashboard](../features/lead-attribution#deleted-leads-and-delete-permanently)). If the lead has a RingTonic contact, you choose what happens to it, and nothing is chosen for you:
 
-This is expected behavior — plan for RingTonic to retain contacts you delete in SyteOps, marked **Lost** where possible.
+- **Also delete the contact in RingTonic** asks RingTonic to delete it first, then deletes the lead. If RingTonic does not confirm, the lead is left untouched.
+- **Leave the RingTonic contact** deletes the lead and sends nothing to RingTonic.
+
+RingTonic's delete is **soft**: RingTonic keeps a copy it can restore, it can still be found by phone number, and a later update for the same person brings the contact back. To erase it from RingTonic for good, ask RingTonic. A lead whose contact SyteOps knows only by an old number cannot have it deleted in RingTonic from here, so that choice is grayed out.
 
 ## How outbound status pushes are matched
 
@@ -302,7 +303,7 @@ Note that SyteOps only attempts a forced move when the change is genuinely backw
 
 ### A lead I deleted is still in RingTonic
 
-Also expected. RingTonic has no delete via its API, so SyteOps best-effort marks the contact **Lost** and RingTonic keeps its record. See [Deleting a lead](#deleting-a-lead).
+Deleting a lead on the dashboard never touches RingTonic, and a permanent delete only deletes the contact there if you choose that. Even then RingTonic keeps a copy it can restore. See [Deleting a lead](#deleting-a-lead).
 
 ### A form submission didn't create a RingTonic contact
 

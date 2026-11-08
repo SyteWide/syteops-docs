@@ -360,7 +360,23 @@ The native qualification form can be placed anywhere on your site:
 **Row actions:**
 
 - **Send to webhook** — push that single lead to your automation webhook on demand (in addition to the automatic send for new leads).
-- **Delete** — remove the lead. If RingTonic sync is on, its RingTonic contact is moved to **Lost** (RingTonic keeps its own record — it has no delete).
+- **Delete** — move the lead to the **Deleted** list. Nothing else changes: the lead's RingTonic contact is not touched. To remove a lead for good, use **Delete permanently** from the **Deleted** list (see below).
+
+### Deleted leads and Delete permanently
+
+Once a lead has been deleted from the dashboard, a **Deleted** tab appears next to **Tracked links**, with the number of deleted leads. It lists them, each with a **Restore** button and a **Delete permanently** button. Use **Restore** to put a lead back on the dashboard exactly as it was; it does not change anything in RingTonic. Use **Delete permanently** for test data, or when a person asks you to erase what you hold about them.
+
+**Leads in Deleted are removed for good after 30 days, or sooner when you delete them.** (WordPress sets the 30 days; your site administrator can change it.) That automatic removal takes the same data as **Delete permanently**, but it does not ask about RingTonic: the contact there is left as it is. It adds an entry to the activity history, so you can see that it happened. A lead restored from WordPress's own trash screen also returns to the dashboard as it was.
+
+If you have more than 100 deleted leads, the list shows the newest 100 and says so; restore or delete some to see the rest. A very long name is shortened in the list; hover over it to read more.
+
+**Delete permanently** opens a window that checks the lead first and shows, in plain numbers, what would be removed: recorded events, phone calls, call transcripts and summaries, callback requests, attachments, scheduled items and emails or updates still waiting to be sent. It never shows the person's name, email address or phone number. Then:
+
+- If the lead is in the middle of something (a call, a callback held for review, a send that is running), the window says so and offers no delete button. Try again in a few minutes.
+- If the lead has a [RingTonic](../integrations/ringtonic) contact, you must choose what happens to it, and neither choice is selected for you: **Also delete the contact in RingTonic (RingTonic keeps a copy it can restore)**, or **Leave the RingTonic contact**. **Delete permanently** stays grayed out until you choose.
+- **Delete permanently** removes the lead and everything listed. This cannot be undone. The window then tells you what happened, including anything that only partly worked, and an entry is added to the activity history.
+
+The window's check is good for 10 minutes. If anything about the lead changes while it is open, the delete is refused and nothing is removed; close the window and open it again.
 
 **Export CSV** downloads your leads — now including name, how received, email, phone, office phone, status, and deal value (as `deal_value_cents` + `deal_currency`) alongside the attribution columns.
 
