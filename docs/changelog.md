@@ -8,6 +8,26 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.954
+
+- Added: Leads can now be deleted for good, safely, from your connected management tools. A preview first shows exactly what would be removed, as counts with no names or contact details, and anything that is still in progress, such as a call being placed or an email being sent, holds the delete back. The delete only goes ahead with a confirmation tied to that preview, removes everything the plugin keeps for the lead, including scheduled emails and follow-ups, and asks whether to also delete the contact in RingTonic, which keeps a copy it can restore. Each delete leaves a lasting record of who removed which lead. Deleting a lead for good from anywhere else now removes the same things.
+
+## v1.6.953
+
+- Improved: Your My Portal page has a new Graphite look: a soft warm-gray page with white cards, charcoal buttons and a steel-blue color for callers who hung up or left no message, with text and controls that meet WCAG AA contrast. It is the default for every site. A new setting, My Portal page: Portal look, in the Review Portal settings lets you keep the previous look (Brand colors, which follows your Branding colors) instead. Your logo and the review pages are not changed, and the sign-in cards no longer show an orange stripe.
+
+## v1.6.952
+
+- Improved: Each call in a callback's details on your My Portal page now keeps its own record. The Calls list opens with how many calls are on record, newest first, and each call shows its full date and time and who placed it. A transcript that has speaker labels is split into who said what. Older calls' transcripts load when you press Load transcript, a call whose transcript has not arrived yet says so, and a call with none says that too. The Leads settings help now says that call summaries and transcripts are kept with the callback while full caller details are on, and are removed with it, instead of saying they are never stored.
+
+## v1.6.951
+
+- Fixed: The RingTonic card in Leads settings now refuses a pasted value that is not shaped like a RingTonic API key and keeps your saved key, so a password your browser fills in can no longer replace a working key. Each key field now shows whether RingTonic accepts the key, and the Leads screens warn you when RingTonic rejects the saved API key, so contact pushes that fail no longer go unnoticed.
+
+## v1.6.950
+
+- Improved: The sign-in page for your private portal now reads Private Portal instead of Review Portal. The sign-in messages that people see, on that page, on the draft review link page, on the private page's own sign-in card and in the welcome email, now name your brand instead of WordPress, or simply say your account when no brand name is set.
+
 ## v1.6.949
 
 - Improved: The Callbacks list on your My Portal page now has buttons to show only the callbacks you work, All callers, Hung up or no message, and Left a message, so each person can see their own list. They combine with the status buttons, are remembered in your browser, and only apply to callbacks that are still waiting. A link to a callback that your choice would hide shows it anyway. The buttons appear when your site shows full caller details.

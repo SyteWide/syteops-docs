@@ -8,7 +8,7 @@ description: Manage API operations for the leads resource.
 
 # `leads`
 
-22 operation(s). All run through `POST /syteops/v1/manage/dispatch` (reads may use the documented GET form).
+24 operation(s). All run through `POST /syteops/v1/manage/dispatch` (reads may use the documented GET form).
 
 ## `callback_action`
 
@@ -109,7 +109,7 @@ data: &#123;items[]: &#123;id, phone_masked, status, reason, display_name, carry
 
 ## `delete`
 
-Permanently delete a lead and its events (best-effort moves its RingTonic contact to "lost").
+LEGACY (deprecated: use delete_preview then delete_confirmed). Permanently delete one lead and everything this plugin keeps for it (the same purge as delete_confirmed), with no preview and no token. Its RingTonic step is unchanged: a fire-and-forget request to move the contact to "lost" (never a delete), reported as `ringtonic`: lost_requested (sent, not confirmed), no_contact, not_configured or not_sent. Checks no blocker and takes no lock. A refused or failed delete is 500 delete_failed (data left in place) or delete_partial (part of it removed), with data &#123;id, deleted: false, ringtonic, removed}.
 
 **🔴 Destructive**  
 **Access:** SyteOps Admin or API key, plus `confirm: true`.
@@ -124,7 +124,7 @@ Permanently delete a lead and its events (best-effort moves its RingTonic contac
 
 **Returns**
 
-data: &#123;id, deleted: true}
+data: &#123;id, deleted: true, ringtonic, removed&#123;}}
 
 **Request**
 
@@ -137,6 +137,74 @@ data: &#123;id, deleted: true}
     "confirm": true
   },
   "confirm": true
+}
+```
+
+## `delete_confirmed`
+
+Destructive. Permanently delete the leads a delete_preview showed, and everything this plugin keeps for them. Needs confirm:true, the preview's confirm_token and the same ids; the preview is recomputed and any difference refuses the whole call with nothing deleted: 409 token_invalid (malformed or not this preview: another id set, other counts, another caller), 409 token_expired, 409 blocked (data.leads names the blockers), 404 not_found (an id that is no longer a lead, so a repeat after success is a clean not_found). `ringtonic` is required when any lead has a RingTonic contact (422 ringtonic_choice_required): soft_delete sends DELETE /contacts/&#123;uuid} first (a 404 counts as already gone; any other failure stops the call there, 502 ringtonic_failed, with that lead untouched), leave keeps the contact and says so. RingTonic's delete is soft: it keeps a recoverable copy that a later contact push restores. soft_delete is refused 409 ringtonic_uuid_unknown for a lead whose contact uuid is not known and 409 ringtonic_unavailable while RingTonic is off. Each lead is then locked and checked again right before its own RingTonic step: 409 delete_in_progress (another call holds it) or 409 lead_changed (a change or a new blocker since the check) stops there, the leads after it not_attempted. A lead whose local delete could not run now (purge hooks detached, a pre_delete_post veto) is refused 500 delete_failed BEFORE any RingTonic request. A refused or failed local delete is 500 delete_failed (the lead untouched) or 500 delete_partial (part of its data removed); a hook that throws stops the call there with the results so far (hook_error warning). One lasting audit row per deleted lead; audit_recorded is false, with a warnings entry, when one could not be written.
+
+**🔴 Destructive**  
+**Access:** SyteOps Admin or API key, plus `confirm: true`.
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `ids` | array | yes | The same JSON list of 1 to 25 lead ids the preview was made for. |
+| `confirm_token` | string | yes | The confirm_token delete_preview returned, unchanged. |
+| `ringtonic` | string | no | soft_delete or leave. Required when any of the leads has a RingTonic contact. |
+| `confirm` | boolean | no | Must be true. |
+
+
+**Returns**
+
+data: &#123;deleted[] (lead ids), results[]: &#123;id, status (deleted, failed, partial or not_attempted), removed&#123;} (the preview's count keys), ringtonic&#123;choice, outcome (no_contact, kept, deleted, already_gone, failed, transport or not_attempted), http}}, audit_recorded, warnings[]: &#123;code: audit_not_recorded|hook_error, id}, ringtonic_note}
+
+**Request**
+
+```json
+{
+  "resource": "leads",
+  "action": "delete_confirmed",
+  "params": {
+    "ids": [],
+    "confirm_token": "string",
+    "ringtonic": "string",
+    "confirm": true
+  },
+  "confirm": true
+}
+```
+
+## `delete_preview`
+
+Read-only. Show exactly what a permanent delete of up to 25 leads would remove, with no names, emails, phones or messages: per lead a short label (status, created date, source), the counts of every kind of stored data, the RingTonic contact and what each RingTonic choice would do, and any blockers. When nothing blocks, it returns a confirm_token (valid 10 minutes, bound to these ids, these counts and the caller) for delete_confirmed. Send exactly one of id or ids; an id that is not a lead is the blocker not_found. The ids are read as one batch deleted in ascending order: a callback row or session click rows held only by leads of the batch are removed with the last of them (callbacks_with_batch / click_rows_with_batch at the earlier ones), never counted as shared.
+
+**Access:** SyteOps Admin or API key.
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `id` | integer | no | Record id, digits only. |
+| `ids` | array | no | A JSON list of 1 to 25 lead ids (positive whole numbers). Send this or id, not both. |
+
+
+**Returns**
+
+data: &#123;ids[] (sorted), leads[]: &#123;id, found, label&#123;status, created, source (paid, organic, social, email, referral, direct or unknown)}, counts&#123;events, click_rows, click_rows_shared, click_rows_with_batch, callbacks, callbacks_shared, callbacks_with_batch, callback_events, calls, transcripts, shared_events_unlinked, shared_names_cleared, attachments, meta, options, cron, pending_outbox}, ringtonic&#123;linked, uuid_known, on_soft_delete, on_leave}, blockers[]}, deletable, confirm_token (null unless deletable), expires_at (null unless deletable)}
+
+**Request**
+
+```json
+{
+  "resource": "leads",
+  "action": "delete_preview",
+  "params": {
+    "id": 0,
+    "ids": []
+  }
 }
 ```
 
