@@ -870,7 +870,7 @@ Every reviewer-facing email — a new draft, an updated draft, a change request,
 
 The queue can list **posts and pages side by side** so you can scan both at once. The [content calendar](#step-6-use-the-content-calendar) stays one column.
 
-- **Sign in required.** Like the portal itself, you must be signed in to your WordPress account to see the queue — SyteOps checks your account against the reviewers assigned to each draft, so you only ever see posts and pages you're actually on.
+- **Sign in required.** Like the portal itself, you must be signed in to your account to see the queue. If you are signed out, the page shows a sign-in card headed **Private Portal** (with your business name in front of it when the card shows a letter instead of your logo). SyteOps checks your account against the reviewers assigned to each draft, so you only ever see posts and pages you're actually on.
 - **Administrators see everything.** A WordPress administrator opening the queue sees every draft currently assigned to any reviewer, not just their own.
 - **No link expiry.** Once you're signed in, opening a draft from your review queue always works, even past the normal review-link expiry window — your WordPress session is what proves who you are, not the link.
 - **"Received" means received.** Each row shows the date the article arrived for review, and it keeps showing that date no matter what happens to the article afterwards — scheduling it, moving it, or cancelling the schedule. A scheduled article shows both: when it arrived, and when it will publish.
@@ -1132,6 +1132,7 @@ These are the same provider and model settings used by those areas elsewhere in 
 | **Offer passkey sign-in** | Adds a passkey option at sign-in. Password sign-in still works. Gray until Secure Passkeys is active; **on by default** once it is. See below. |
 | **Scheduled publishing** | Allows a future publish date. When off, approvals publish immediately. |
 | **My Portal page: sections open on load** | One switch for each section of a person's private page: **Callbacks**, **Your details**, **My links**, **Live posts and pages**, **Content health** and **LinkedIn groups**. A switch that is on opens that section when the page loads; off keeps it closed. **Callbacks** starts on and the others start off. See [Sections open or closed when the page loads](#sections-open-or-closed-when-the-page-loads). |
+| **My Portal page: Portal look** | The color look of everyone's private page: **Graphite (default)** or **Brand colors**. Graphite uses charcoal and white with a steel-blue accent; Brand colors uses your Branding colors. It applies to the whole site, and your logo is the same either way. See [The look of the My Portal page](#the-look-of-the-my-portal-page). |
 | **Keep removed pictures** | How long a picture removed with Delete unused is kept before it is deleted for good (7, 14, 30, 60, 90, 180 or 365 days; default **30**), or **Do not keep (delete immediately)**. While it is kept, the picture is out of the media library, still works on the site, and can be restored from the article's Unused pictures card. A profile picture or theme logo removed with Delete image is held the same way when nothing else uses it; it is restored with Undo in the notice on that screen. The [Removed pictures](removed-pictures.md) view in Content Pipelines lists everything being kept for the whole site and lets an administrator restore a picture or delete it before its time. |
 | **Review link expiry** | How long the emailed review link stays valid (3, 7, 14, or 30 days; default **7**). Re-send an expired link from the draft — the post is unaffected. |
 | **Default reviewers** | Emailed and given edit access on every new draft, plus the author. |
@@ -1318,6 +1319,16 @@ The review lists on a person's [private review page](#each-persons-private-revie
 - **Comfortable brings back the larger rows.** Use the **Compact** and **Comfortable** buttons beside **Your Reviews**. **Comfortable** shows the picture and the roomier layout the lists had before.
 - **Each person chooses for themselves.** The choice is remembered for the signed-in person and used the next time they open their page. It only changes how the lists look: the same items, counts and dates are shown either way, and it changes no one else's page.
 - **Other pages are not affected.** The review queue page and the portal editor keep their usual look. **Content health**, **Callbacks** and **My links** keep their own rows.
+
+### The look of the My Portal page
+
+The private page can wear one of two looks. The choice is one setting for the whole site, so everyone sees the same look.
+
+- **Graphite is the default.** The page ground is a soft warm gray, the cards are white, and buttons, the selected pill and the keyboard focus outline are charcoal. Callers who hung up or left no message, and the **Hung up or no message** button, use a calm steel blue so they stand out without looking like an error. **Left a message** uses a neutral gray-blue.
+- **Brand colors keeps the earlier look.** Buttons, links and highlights follow the colors you set under Branding.
+- **Change it** under **Content Pipelines → Review Portal settings → Review & approval rules → My Portal page: Portal look**, then save. A page that is already open changes the next time it loads.
+- **What does not change.** Your logo and company name are shown as they are in both looks. The review pages, the sign-in screens for reviewers and the admin screens are not affected.
+- **Readable by design.** In the Graphite look all text has at least the contrast WCAG AA asks for (4.5 to 1), and the edges of buttons, fields, switches and the two outcome buttons, and the keyboard focus outline, have at least 3 to 1 against the page. The exceptions are disabled buttons and the checkmark boxes your browser draws itself.
 
 ### A My Portal link in the toolbar
 

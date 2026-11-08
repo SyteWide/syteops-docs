@@ -33,6 +33,18 @@ Go to the **Integrations** tab in SyteOps, toggle **RingTonic** ON, and save. On
 
 Open **Leads → Settings** and find the **RingTonic** card (it only appears once the integration is turned on). Paste your RingTonic **Agency API key** into it and save. The key is stored securely (encrypted) and is never shown back to you in full.
 
+**What a key looks like.** A RingTonic API key starts with a number, a bar and `rt_`, followed by about 48 letters and digits, for example `12|rt_` and then the rest: about 50 characters in all. Copy the whole key, including the number and bar at the start. If you paste something else (a password your browser filled in, a shortened key, the dots of the "saved" placeholder), the card refuses it with the message "That does not look like a RingTonic API key", and your saved key stays exactly as it was. The key fields also ask browsers and password managers not to fill them in. Leaving the field blank keeps the saved key.
+
+**Key status.** Right after you save a new key, SyteOps asks RingTonic once whether it accepts the key, and a **Key status** line appears under the field:
+
+- **accepted by RingTonic (checked *date*)**: the key works.
+- **RingTonic rejected this key (HTTP 401) on *date*.** Contact pushes are not reaching RingTonic until you save a working key. Copy the key again from RingTonic (or create a new one there) and paste it.
+- **RingTonic accepted this key but it does not have permission to read contacts (HTTP 403)**: the key works, but it was created without the contacts permission this check reads with. Pushes may still work; if contacts are not being created, ask your hub operator for a key with contact access.
+- **could not reach RingTonic to check**: RingTonic did not answer at that moment. Your key was saved anyway; the line updates by itself as soon as RingTonic answers a contact push.
+- **not checked yet**: the key has not been used or checked since it was set.
+
+The line keeps itself up to date: whenever RingTonic refuses the key itself (HTTP 401) while sending a contact or a status change, it changes to "rejected", and a red notice appears at the top of the Leads screens saying contact pushes are failing, with a link back to this card. Once you save a key RingTonic accepts (or RingTonic accepts the key again), the notice goes away. The **Click-to-call** key below has its own Key status line that works the same way.
+
 :::note For advanced users
 Instead of pasting the key into the settings card, you can define it in your site's `wp-config.php` as the constant `SYTEOPS_LEADS_RINGTONIC_API_KEY`. When that constant is present it takes precedence, which is handy for keeping the key out of the database on managed or version-controlled environments.
 :::
@@ -98,7 +110,7 @@ Once your hub operator has set up the connection (see [Live notifications](#4-li
 
 Each of these also records the call detail RingTonic already has — duration, how the call ended, the tracking number's name, the caller's city and state and the tags — and, if you switch it on, RingTonic's AI summary of the conversation. See [What lands on the lead](#what-lands-on-the-lead) for the full list and how each field is written.
 
-A delivery whose type SyteOps doesn't yet recognize is simply acknowledged and ignored, never treated as an error — RingTonic adds new capabilities over time, and an unrecognized one should never look like something is broken. A **transcription** notification for an inbound call is the one exception SyteOps acts on selectively: with the call summary switched on it takes the AI summary from it and discards the transcript itself; with the summary off it changes nothing.
+A delivery whose type SyteOps doesn't yet recognize is simply acknowledged and ignored, never treated as an error — RingTonic adds new capabilities over time, and an unrecognized one should never look like something is broken. A **transcription** notification for an inbound call is the one exception SyteOps acts on selectively: with the call summary switched on it puts only the AI summary on the lead and leaves the transcript off it; with the summary off it adds nothing to the lead. (A call with someone waiting on a [callback](../features/callbacks) is the one place its transcript is kept: with that callback, not on the lead.)
 
 :::note Matching an inbound call to an existing lead
 A completed or missed call is matched by the call's OWN identity in RingTonic (its call id), not by the contact — a lead qualified for that call is looked up the same way, so qualifying one call for a repeat caller only ever affects that one call's lead, never an earlier one from the same person. A stage change or a form submission, by contrast, IS a contact-level fact — see [How inbound deliveries are matched](#how-inbound-deliveries-are-matched) below.
@@ -232,7 +244,7 @@ An inbound call can carry the phone carrier's caller-ID name for the number. Syt
 
 ### What is never stored
 
-- **Recordings and transcripts.** RingTonic can send the full transcript of a call; SyteOps discards it and keeps only the AI summary. The one exception is a call with someone waiting on a [callback](../features/callbacks): its transcript is kept with that callback's history, only while contact details are stored in Full. While AI reads are on, that transcript, the call's date and length, the callback's status, the carrier's caller ID name and the lead's name, company and email are sent once to the AI provider chosen in the **AI mapping** card, so it can read the call; set **AI reads per site per day** to 0 to send nothing. A recording is never stored. The credentials your hub operator installs deliberately cannot read call logs either, so there is no second route to it.
+- **Recordings, and transcripts on the lead.** RingTonic can send the full transcript of a call; SyteOps never puts it on the lead and keeps only the AI summary there. The one exception is a call with someone waiting on a [callback](../features/callbacks): its summary and transcript are saved in that callback's call history, only while contact details are stored in Full, and are removed with the callback. While AI reads are on, that transcript, the call's date and length, the callback's status, the carrier's caller ID name and the lead's name, company and email are sent once to the AI provider chosen in the **AI mapping** card, so it can read the call; set **AI reads per site per day** to 0 to send nothing. A recording is never stored. The credentials your hub operator installs deliberately cannot read call logs either, so there is no second route to it.
 - **The caller's ZIP code.** City and state answer "where is this caller?" without a pinpoint identifier.
 - **Call sentiment.** RingTonic scores sentiment in its own call-log screens, but it does not include it in any of the notifications it sends, so SyteOps has nothing to record. This is a limit of the notification payload, not a SyteOps choice.
 
@@ -271,7 +283,7 @@ If nothing matches, the delivery is acknowledged and changes nothing — it neve
 ### Status changes aren't reaching RingTonic
 
 1. Confirm the **RingTonic** integration is toggled ON in the Integrations tab.
-2. Confirm your **Agency API key** is saved on the **Leads → Settings** RingTonic card (or defined via the `wp-config.php` constant).
+2. Confirm your **Agency API key** is saved on the **Leads → Settings** RingTonic card (or defined via the `wp-config.php` constant), and read the **Key status** line under it. If it says RingTonic rejected the key, or that the key in use does not look like a RingTonic API key, paste the key again (see [Add your Agency API key](#2-add-your-agency-api-key)).
 3. Confirm your RingTonic account is on the **Agency plan** — API access isn't available on lower plans. RingTonic reports this distinctly (as a "plan required" refusal) rather than a generic error, so SyteOps' logs (Debug Mode required — see the note above) will call it out by name if this is the cause.
 4. Make sure the lead actually matches a RingTonic contact by **phone or email** (see [How outbound status pushes are matched](#how-outbound-status-pushes-are-matched)). A lead created purely from a phone call, with a masked phone number on the lead, can't be matched this way yet — SyteOps logs that case rather than sending an unusable value to RingTonic.
 5. Give it a minute — the push runs via a background task shortly after the change, not instantly.
