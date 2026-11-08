@@ -8,6 +8,30 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.959
+
+- Added: On a wide window, the Callbacks card on your My Portal page now shows a list of callers beside the caller you picked. Each caller in the list has their name, a short time, what happened (Hung up, Voicemail, no message, or their status) and the length of the call; the callers stay in the same groups and order as before, and the group buttons, the outcome buttons and the tiles under the header still filter the list. Click a caller, or use the Up, Down, Home and End keys and press Enter or Space, to see their details on the right with the same Call, Done and Not a lead buttons, contact details and call transcripts as before. The card switches by its own width (about 900 pixels or more), so a Half-width card, a narrow window and every phone keep the callers as rows that open in place, exactly as they were. Names and numbers stay hidden whenever contact details are masked or off.
+- Improved: Your My Portal page now behaves better at the edges. The list of cards at the left goes back to your saved order, and shows a card again, if a layout change could not be saved. Pick a card near the bottom of the page and it stays highlighted instead of switching to Callbacks, and at the very bottom the last card on screen is highlighted. The summary tiles now fill the whole row, so they line up with the cards below, and the All callers tile is no longer a dark block when no one is waiting. Show closed always sits on the same row as the outcome buttons, at the right. The list of cards starts with a Skip to cards link for keyboard users. A very long name, note, summary, transcript or label wraps inside its card instead of stretching the page, and dragging the window edge back and forth no longer leaves the callers list stuck in the narrow look.
+
+## v1.6.958
+
+- Fixed: The two buttons under Find a post or page on your My Portal page now match. Recent and Show all are the same size and shape in every state, the one you are viewing is a flat solid fill with no stray line along its bottom edge, the other is white with an outline in your colors, and both are at least 44 pixels tall on every screen.
+
+## v1.6.957
+
+- Improved: In a callback's details on your My Portal page, each call's AI summary now sits at the top of Show transcript, above what was said, so you read what the call was about first. It is shown once, not twice, and a call that has a summary but no transcript still shows its summary. Pressing Load transcript on an older call opens its transcript with the summary on top. On a phone, Show transcript is now an easier target to tap.
+
+## v1.6.956
+
+- Added: Your My Portal page now has a summary strip and a section list. Under the header, the strip shows how many callers are waiting, how many hung up or left no message and how many left a message; the three tiles are the same outcome filter as the buttons in the callbacks card, so pressing one shows those callers, opens the card if it is closed and moves you to it, and the tiles and buttons always agree. A Reviews waiting tile takes you to your reviews. On wide windows a list of your cards stays at the left as you scroll: it follows your own order, leaves out cards you turned off, shows how many callers and reviews are waiting, highlights the card you are on, opens a closed card when you pick it, and has a Customize button for the same panel as before. Phones and narrow windows look as they did, and nothing needs switching on.
+
+## v1.6.955
+
+- Added: Deleted leads can now be removed for good from the Leads screen. Deleting a lead on the dashboard moves it to a new Deleted tab, and each lead there has a Delete permanently button. It opens a window that shows what would be removed, as counts with no names or contact details, and says so when the lead is in the middle of something and cannot be deleted yet. For a lead with a RingTonic contact it asks you to choose between also deleting the contact in RingTonic, which keeps a copy it can restore, and leaving it, with neither chosen for you, and the delete button stays off until you choose. The delete is refused if anything about the lead changed while the window was open, the result is shown in plain words, and each delete leaves a lasting record of who removed which lead. Each lead in Deleted also has a Restore button that puts it back on the Dashboard, and a lead restored from WordPress's own trash now returns as it was instead of disappearing. Leads in Deleted are removed for good after 30 days, or sooner when you delete them; that automatic removal does not touch RingTonic and leaves a record in the activity history.
+- Fixed: Deleting a lead on the Leads dashboard no longer changes its contact in RingTonic, and restoring a lead from Deleted leaves its contact as it was.
+- Fixed: The Dashboard tab on the Leads screen is no longer highlighted at the same time as Tracked links.
+- Fixed: The inactive tabs on the Leads screen, including Deleted, are now darker so they are easier to read.
+
 ## v1.6.954
 
 - Added: Leads can now be deleted for good, safely, from your connected management tools. A preview first shows exactly what would be removed, as counts with no names or contact details, and anything that is still in progress, such as a call being placed or an email being sent, holds the delete back. The delete only goes ahead with a confirmation tied to that preview, removes everything the plugin keeps for the lead, including scheduled emails and follow-ups, and asks whether to also delete the contact in RingTonic, which keeps a copy it can restore. Each delete leaves a lasting record of who removed which lead. Deleting a lead for good from anywhere else now removes the same things.
