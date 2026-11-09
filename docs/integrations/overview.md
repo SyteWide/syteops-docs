@@ -161,7 +161,7 @@ Recognition for the SyteHero sister plugin, which runs hero sliders, visitor con
 
 ### Wordfence
 
-Wordfence authentication support. The toggle allowlists the Wordfence authenticate endpoint so Wordfence-driven sign-ins keep working when SyteOps REST API restriction is enabled. See the dedicated [Wordfence Integration](wordfence) page for setup.
+Wordfence authentication support. The toggle allowlists the Wordfence authenticate endpoint so Wordfence-driven sign-ins keep working when SyteOps REST API restriction is enabled, and adds two lines to robots.txt so search engines skip Wordfence's self-check addresses. See the dedicated [Wordfence Integration](wordfence) page for setup.
 
 ### Secure Passkeys
 
