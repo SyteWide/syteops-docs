@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.961
+
+- Improved: Your My Portal page is quieter and its section list can now be folded away. The list starts as a slim bar with one Show menu button, so the cards use the full width until you open it, and it remembers your choice in this browser. The row of summary tiles at the top of the page is gone: under Callbacks in the list, a small arrow opens two filters, Hung up or no message and Left a message, each with its count (they start folded, and while they are folded a line under Callbacks names a filter that is on). Rows in the list are lighter, the count badges are smaller and Customize is a plain text button, and a thin line separates the open list from the page.
+
 ## v1.6.960
 
 - Improved: On the Callbacks card on your My Portal page, a call that has both an AI summary and a transcript now shows a one-line preview of the summary just above Show transcript, so you can see what each call was about without opening anything. A long summary is cut with an ellipsis so it never widens the card, and a screen reader hears it as "AI summary" followed by the text. The preview steps aside while the transcript is open, because the full summary is at the top of it, and comes back when you close it. Calls with no summary, or with a summary and no transcript, look the same as before.
