@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.963
+
+- Improved: With the Wordfence integration turned on, SyteOps now keeps Wordfence's self-check addresses (the ones that look like yoursite.com/?wordfence_lh=1&hid=...) out of search engines' crawls by adding two lines to your robots.txt, so you no longer need a separate snippet or plugin for it. It works with Yoast SEO, Rank Math, Squirrly SEO and WordPress's own robots.txt, recognizes lines you already added by hand, never removes a line you wrote, and takes back only its own lines when you turn the integration off or deactivate Wordfence. If your site has a real robots.txt file in its main folder, add the lines to that file yourself.
+
 ## v1.6.962
 
 - Improved: The section list on your My Portal page is now a slim icon bar with one icon for each card, a count on Callbacks and Your Reviews, and a Customize icon at the bottom. Press the menu button at its top and the full list opens as a drawer over the page, without moving or resizing anything, with the current card shown as a solid dark row and the Callbacks filters (Hung up or no message, Left a message) beneath Callbacks. Esc, the X, the dimmed page or picking a card closes it, and it is always closed when the page loads. The bar is still hidden on a narrow window.
