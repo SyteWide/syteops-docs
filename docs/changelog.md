@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.960
+
+- Improved: On the Callbacks card on your My Portal page, a call that has both an AI summary and a transcript now shows a one-line preview of the summary just above Show transcript, so you can see what each call was about without opening anything. A long summary is cut with an ellipsis so it never widens the card, and a screen reader hears it as "AI summary" followed by the text. The preview steps aside while the transcript is open, because the full summary is at the top of it, and comes back when you close it. Calls with no summary, or with a summary and no transcript, look the same as before.
+
 ## v1.6.959
 
 - Added: On a wide window, the Callbacks card on your My Portal page now shows a list of callers beside the caller you picked. Each caller in the list has their name, a short time, what happened (Hung up, Voicemail, no message, or their status) and the length of the call; the callers stay in the same groups and order as before, and the group buttons, the outcome buttons and the tiles under the header still filter the list. Click a caller, or use the Up, Down, Home and End keys and press Enter or Space, to see their details on the right with the same Call, Done and Not a lead buttons, contact details and call transcripts as before. The card switches by its own width (about 900 pixels or more), so a Half-width card, a narrow window and every phone keep the callers as rows that open in place, exactly as they were. Names and numbers stay hidden whenever contact details are masked or off.
