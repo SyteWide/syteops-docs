@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.962
+
+- Improved: The section list on your My Portal page is now a slim icon bar with one icon for each card, a count on Callbacks and Your Reviews, and a Customize icon at the bottom. Press the menu button at its top and the full list opens as a drawer over the page, without moving or resizing anything, with the current card shown as a solid dark row and the Callbacks filters (Hung up or no message, Left a message) beneath Callbacks. Esc, the X, the dimmed page or picking a card closes it, and it is always closed when the page loads. The bar is still hidden on a narrow window.
+
 ## v1.6.961
 
 - Improved: Your My Portal page is quieter and its section list can now be folded away. The list starts as a slim bar with one Show menu button, so the cards use the full width until you open it, and it remembers your choice in this browser. The row of summary tiles at the top of the page is gone: under Callbacks in the list, a small arrow opens two filters, Hung up or no message and Left a message, each with its count (they start folded, and while they are folded a line under Callbacks names a filter that is on). Rows in the list are lighter, the count badges are smaller and Customize is a plain text button, and a thin line separates the open list from the page.
