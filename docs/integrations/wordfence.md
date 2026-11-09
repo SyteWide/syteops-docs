@@ -25,9 +25,9 @@ Disallow: /*?wordfence_lh=
 Disallow: /*&wordfence_lh=
 ```
 
-- **No extra plugin or code snippet is needed.** If you added these lines by hand, or with a small custom plugin, SyteOps recognizes them and does not add them twice. Lines you added yourself are never removed.
-- **It works with whichever SEO plugin writes your robots.txt.** With Yoast SEO and Rank Math the lines appear in the file they generate. With Squirrly SEO's Robots File turned on, SyteOps adds the lines to the list you see under the Robots File settings, in the "all crawlers" section, and puts them back if a settings save removes them. Squirrly sends its list through a filter that rewrites the `&` character, so only the first line (`?wordfence_lh=`) can be added there; it covers the addresses Wordfence actually uses.
-- **Turning the toggle off, or deactivating Wordfence, takes back only the lines SyteOps added.**
+- **No extra plugin or code snippet is needed.** If you added these lines by hand, or with a small custom plugin, SyteOps recognizes them and does not add them twice. On Squirrly SEO, a line you added yourself that is exactly the same as one SyteOps adds is treated as SyteOps's own and is removed along with the feature; any line that differs is never changed. A line with a note after it, or any other difference, counts as different.
+- **It works with whichever SEO plugin writes your robots.txt.** With Yoast SEO and Rank Math the lines appear in the file they generate. With Squirrly SEO's Robots File turned on, SyteOps adds the lines to the list you see under the Robots File settings, in the "all crawlers" section, and puts them back if a settings save removes them. Older Squirrly releases (14.2.7 and earlier) rewrite the `&` character in that list, so SyteOps adds only the first line (`?wordfence_lh=`) there on every version; it covers the addresses Wordfence actually uses and is safe everywhere.
+- **Turning the toggle off, or deactivating Wordfence, takes back only the lines SyteOps added or took over.**
 - **A change can take a while to show up** if your host or Cloudflare caches robots.txt. Whenever the lines are added or removed, SyteOps asks your cache layers to refresh the file in the background, but it can still take a short time for crawlers to see the new version.
 - **If your site has a real robots.txt file** in its main folder, the web server serves that file and WordPress never gets a say, so SyteOps cannot add the lines. Add them to that file yourself, or delete it so your SEO plugin or WordPress can serve one.
 
