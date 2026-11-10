@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.967
+
+- New: An optional AI deal summary for each caller on your Callbacks list. When an admin turns it on (it is off by default), the top of each caller's panel shows where the deal stands, a dated timeline of the calls and what is waiting now, written by AI from the caller's calls, names, status and your team notes, and labeled AI-generated and for your team only. It updates by itself a few minutes after a new call (a missed one too), a saved note, a name or contact change or a status change, and a Refresh button asks for a new one right away and shows it as soon as it is ready. A daily limit, 50 requests by default, caps what it spends, one update never uses more than half of it, and turning the setting off stops spending at once. Turning it on sends each caller's call transcripts and team notes to the AI provider chosen for Leads; the summary itself is never emailed, exported, sent to a webhook or returned by the Manage API, and it is kept only while contact details are stored in Full.
+
 ## v1.6.966
 
 - Improved: Every call in a callback's lead panel now has a Team note box, and each caller has one pinned team note, so your team can leave notes only they see. A note saves by itself a moment after you stop typing, shows who saved it and when, and keeps your text with a Retry button if a save fails. Team notes stay on your site: they are never sent to RingTonic, put in emails or exports, or returned by the Manage API, and they are kept only while contact details are stored in Full.

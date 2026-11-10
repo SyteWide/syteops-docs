@@ -1,7 +1,7 @@
 ---
 sidebar_position: 17
 title: Callbacks
-description: A list on each person's private page of the callers waiting for a call back, with Call, Done, Not a lead and Reopen, an AI read of every call, and a setting that decides who sees it.
+description: A list on each person's private page of the callers waiting for a call back, with Call, Done, Not a lead and Reopen, an AI read of every call, an optional AI deal summary of each caller, and a setting that decides who sees it.
 ---
 
 # Callbacks
@@ -204,6 +204,20 @@ Each call in the lead panel has a **Team note** box under it, and the caller has
 - Anyone who can open the panel can read the notes. Only people who can act on callbacks can write them; everyone else sees the text without a box.
 
 Team notes stay on your site and are for your team only. They are not written to the REST log either. They are different from the **Note** in the Contact section, which is the contact's own note and is sent to RingTonic. A team note is never sent to RingTonic, never put in an email, the CSV export or a webhook, and is not available through the API. Notes are kept only while contact details are stored in **Full**. Under **Masked** or **Off** the boxes are not shown and nothing can be saved. A note is removed when the lead behind the callback is permanently deleted, and with the plugin's data when you uninstall it. The delete preview lists them as "team notes".
+
+### Deal summary
+
+When an admin turns it on, the top of each caller's panel shows a **Deal summary** written by AI: one line on where the deal stands now, a dated **Timeline** of what happened on each call, and a **Waiting now** list of what is waiting and on whom. Under it, a line says how old it is and how many calls it is based on ("Updated 3 hours ago, based on 6 calls"). It is labeled **AI-generated · team only**. Click its heading to fold it away.
+
+- It is written from everything on record for that caller: each call's date and how it ended, RingTonic's summary and the transcript, the caller's names and where each one came from (a carrier caller ID name counts only as "possibly"), the callback's status and how long it has been waiting, and every team note, on each call and pinned. Your team's notes are always sent in full, never shortened.
+- It updates by itself about five minutes after a new call (a missed call too), a saved team note, a name or contact change, or a status change (including a callback marked returned by a call or expired after 16 weeks), so a busy afternoon of changes makes one update, not many. While an update is on its way the panel says so under the summary you are reading.
+- **Refresh** writes it again right away, even if nothing changed: the panel says it is writing a new summary and shows it as soon as it is ready, usually within a minute. One refresh per caller a minute; a second press within the minute says how long to wait. Pressing Refresh while an update is already running gets you one more update right after it.
+- If a call or a note seems to speak to the AI ("ignore your instructions", for example), the summary says to read the calls before relying on it. The summary only describes; it never changes the callback.
+- The panel says plainly when there is no summary yet, when the AI could not write one (it tries again by itself a few times), when today's limit of AI summaries is reached, and when it is not set up yet.
+
+**Settings** (an admin, on **Leads → Settings → RingTonic → AI deal summary**): a switch, **off** by default, and **AI summary requests per site per day** (50 by default; 0 stops new summaries). A summary is usually one request; for a caller with a long history, each call (or each part of a very long call) takes one more request first, and every request counts toward the limit. Those first steps are kept as they are done, so a later update only pays for new calls, and one update never uses more than half the daily limit (at most 25 requests); a very long history finishes over a few updates. The count starts again at midnight in your site's time zone. Turning it off hides the summary and stops all spending at once, even in the middle of an update.
+
+**Where your call content goes.** Turning this on sends each caller's call transcripts, RingTonic summaries and team notes to the AI provider and model chosen in the **AI mapping** card, the same provider the AI read of each call uses. It needs that provider, a model and its key, and contact details stored in **Full**; until then the card says what is missing and links to the AI settings. The summary stays on your site and is for your team only: it is never put in an email, the CSV export or a webhook, is not available through the API, and is not written to the REST log. It is removed when the lead behind the callback is permanently deleted, and with the plugin's data when you uninstall it. When you switch contact details to **Masked** or **Off**, every summary is deleted. When a lead is deleted but another lead still uses the same phone number, that caller's summary is deleted and written again without the deleted lead's name and details; the calls and team notes on that number stay, because they belong to the caller.
 
 ### Caller ID name
 
