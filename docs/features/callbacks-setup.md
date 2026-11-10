@@ -95,6 +95,10 @@ Under **Call summary email**, enter the Users slot numbers (for example `001, 00
 
 Under **Follow-up reminders**, tick **Email follow-up reminders**. It is off by default. Optionally fill **Otherwise send reminders to slots** for a follow-up whose caller can no longer be reminded; empty means nobody. Reminders go out at about 7:30 am in the site's time zone.
 
+### Optional: AI deal summary
+
+Under **AI deal summary**, tick **Write an AI deal summary for each caller** to show an AI-written summary of each caller at the top of their panel (see [Callbacks](./callbacks#deal-summary)). It is off by default. **AI summary requests per site per day** defaults to 50; 0 stops new summaries. Turning it on sends each caller's call transcripts and team notes to the AI provider chosen in the **AI mapping** card, so it needs that provider, a model and its key, and contact details stored in Full.
+
 ## 10. The Monday list
 
 Under **Monday callbacks list**, enter the slots in **Send the Monday list to slots** (for example `001, 003`). It is separate from the summary slots and off until you list slots.
@@ -126,9 +130,10 @@ A repo connected through the SyteWide MCP can do each step with a Manage operati
 | 8. Summary emails | `leads.settings_set` with `callbacks_summary_slots` and `confirm: true` |
 | 9. Reminders | `leads.settings_set` with `callbacks_reminders_enabled` and `callbacks_reminder_slots`, and `confirm: true` |
 | 10. Monday list | `leads.settings_set` with `callbacks_weekly_slots` and `confirm: true` |
+| Optional: AI deal summary | `leads.settings_set` with `callbacks_deal_summary_enabled` and `callbacks_deal_summary_cap_day`, and `confirm: true` to turn it on |
 | Optional: call labels | `leads.settings_set` with `callbacks_hung_up_seconds` (5 to 120, default 30) |
 
-`confirm: true` is needed for changes to how contact details are stored and to anything that decides where call details are emailed: the three slot lists and the reminders switch (see the [API reference](../api/reference/leads)). `leads.settings_get` reads every setting back. A secret named as a setting is refused.
+`confirm: true` is needed for changes to how contact details are stored and to anything that decides where call details are emailed: the three slot lists and the reminders switch, and to turning on the AI deal summary, which sends call content to the AI provider (see the [API reference](../api/reference/leads)). `leads.settings_get` reads every setting back. A secret named as a setting is refused.
 
 ## What these emails replace
 

@@ -7,7 +7,7 @@ description: MCP tools provided by SyteOps (provider id syteops).
 
 # SyteOps
 
-Provider id: `syteops` · 81 tool(s).
+Provider id: `syteops` · 83 tool(s).
 
 ## `syteops_builder_guard`
 
@@ -197,6 +197,35 @@ Read-only. The Leads callback list: people to call back, one row per phone numbe
 | `status` | string | no | Which callbacks: open (default: open, returned, follow_up), closed (done, not_lead, expired), all (every status, held included), one status, or a comma list of open, returned, follow_up, done, not_lead, expired, held. An unknown word is 422 invalid_status. |
 | `page` | integer | no | Page number from 1 to 10000 (default 1); above is 422 invalid_page. |
 | `per_page` | integer | no | Rows per page, 1 to 200 (default 50). |
+
+
+## `syteops_leads_delete_confirm`
+
+DESTRUCTIVE and permanent: deletes the leads a syteops_leads_delete_preview showed, and everything SyteOps keeps for them (SyteOps leads.delete_confirmed; SyteOps 1.6.954+). There is no undo. Call it ONLY after the operator has seen that preview's counts and told you in chat to delete, and with the RingTonic choice the operator gave; never decide it yourself. It takes the preview's confirm_token, exactly the preview's ids, ringtonic and confirm:true. The token is accepted only from a syteops_leads_delete_preview made by this same WordPress user on this site in the last 10 minutes, and only ONCE: whatever the answer, a second call with it is refused. Never retry this tool after an error: report the error, the results and the warnings to the operator, and on their say-so start again with a new preview. ringtonic has no default: soft_delete sends RingTonic's delete first (a SOFT delete: the contact leaves the contact list and its page, but RingTonic keeps a copy that is still matched by phone and is restored by the next contact push for the same person; an erasure request must also be raised with RingTonic); leave keeps the RingTonic contact. A lead without a RingTonic contact ignores the choice (outcome no_contact). Any refusal deletes nothing: 409 token_invalid (another id set, a change since the preview, another caller), token_expired, blocked, ringtonic_uuid_unknown (only the legacy contact id is known: use leave), ringtonic_unavailable, 404 not_found, 422 ringtonic_choice_required. Leads go in ascending id order, RingTonic first per lead; a failure stops the batch at that lead and the leads after it are not_attempted, while the ones before it stay deleted: 409 delete_in_progress or lead_changed, 502 ringtonic_failed (that lead untouched), 500 delete_failed (that lead untouched) or delete_partial (part of its data went). The answer always carries deleted[], results[] &#123;id, status: deleted, failed, partial or not_attempted, removed counts, ringtonic &#123;choice, outcome, http}}, audit_recorded, warnings[] and ringtonic_note: pass every warning and the ringtonic_note on to the operator. Needs a SyteOps Admin (403 forbidden otherwise); 409 module_unavailable while Lead Attribution is off. The legacy leads.delete (one lead, no preview, no token, no RingTonic choice) is not the path to use.
+
+**Profiles:** `full`, `syteops`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `ids` | array | yes | Exactly the ids of the preview that issued confirm_token (order does not matter). |
+| `confirm_token` | string | yes | The confirm_token syteops_leads_delete_preview returned, unchanged. |
+| `ringtonic` | string | yes | The operator's choice, no default. soft_delete: RingTonic's soft delete (the contact stays matchable by phone and revives on the next push). leave: keep the RingTonic contact. |
+| `confirm` | boolean | yes | Required (true): the operator has confirmed this permanent delete in chat. |
+
+
+## `syteops_leads_delete_preview`
+
+Read-only. Shows what a PERMANENT delete of 1 to 25 leads would remove, so the operator can decide (SyteOps leads.delete_preview; SyteOps 1.6.954+). Changes nothing and never contacts RingTonic. Per lead: a label (status, created date, a source word), the counts of every kind of stored data (events, click_rows, callbacks, callback_events, calls, transcripts, attachments, meta, options, cron, pending_outbox, and the *_shared / *_with_batch counts of rows that are kept or go with another lead of the batch), the RingTonic contact (linked, uuid_known) and what each RingTonic choice would do (on_soft_delete: delete, refused_uuid_unknown, refused_not_configured or nothing; on_leave: kept or nothing), and blockers (not_found, held_for_review, contact_write_in_flight, ringtonic_push_in_flight, email_in_flight, call_in_flight, ai_read_in_flight). No names, emails, phones or messages: use the leads read tools for identity. When nothing blocks it returns deletable:true, a confirm_token and expires_at (10 minutes). AFTER THIS CALL: show the operator the per-lead counts, blockers and RingTonic plan, and ask whether to delete and which RingTonic choice to use (soft_delete or leave). Call syteops_leads_delete_confirm only when the operator says so in chat; never on your own judgment. RingTonic's delete is soft: the contact leaves the list but stays findable by phone and comes back on the next contact push for that person. Needs a SyteOps Admin (403 forbidden otherwise); 409 module_unavailable while Lead Attribution is off. The legacy leads.delete (one lead, no preview, no token, no RingTonic choice) is not the path to use.
+
+**Profiles:** `full`, `syteops`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `ids` | array | yes | Lead ids (WordPress post ids of the leads), 1 to 25. Read as one batch, deleted later in ascending order; duplicates collapse. |
 
 
 ## `syteops_leads_people_issue_link`
