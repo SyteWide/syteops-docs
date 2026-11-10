@@ -1,7 +1,7 @@
 {
     "schema_version": 1,
     "generated_from": "sytewide-mcp",
-    "mcp_version": "0.38.0",
+    "mcp_version": "0.38.1",
     "profiles": {
         "full": {
             "label": "Full (all tools)",
@@ -13761,7 +13761,7 @@
         {
             "name": "syteops_leads_settings_set",
             "provider": "syteops",
-            "description": "Set one or more Leads settings in one write, all or nothing (SyteOps leads.settings_set; SyteOps 1.6.776+). This changes live lead routing; read syteops_leads_settings_get first. 422, nothing written: unknown_setting; screen_only_setting (ringtonic_noabort); invalid_setting (a value the screen refuses; 1.6.804+: also a loopback, private or metadata webhook address, a sent-back \"[set\" placeholder, a bad recipient_emails entry); secret_setting (RingTonic secrets: `wp syteops systems-api set --stdin` or upload-plugin-release.sh set-secret); invalid_params (settings empty/list); 409 module_unavailable. 409 confirmation_required unless confirm is true when a call changes a key whose syteops_leads_settings_get keys entry has confirm true (1.6.787+; check keys{k}.confirm first). Fallback: pii_mode, ringtonic_store_call_summary, crm_webhook_url, automation_webhook_url, recipient_emails, email_reply_to, callbacks_summary_slots, callbacks_reminders_enabled, callbacks_reminder_slots, callbacks_weekly_slots, and from 1.6.804 automation_webhook_enabled, crm_webhook_enabled, email_instant_enabled, email_periodic_enabled, ringtonic_contact_forms, ringtonic_contact_field_names, ringtonic_contact_internal=push. Resending the current value needs none. Returns {changed_keys[], settings}.",
+            "description": "Set one or more Leads settings in one write, all or nothing (leads.settings_set; SyteOps 1.6.776+). This changes live lead routing; read syteops_leads_settings_get first. 422, nothing written: unknown_setting; screen_only_setting (ringtonic_noabort); invalid_setting (a value the screen refuses; 1.6.804+: also a loopback, private or metadata webhook address, a sent-back \"[set\" placeholder, a bad recipient_emails entry); secret_setting (RingTonic secrets: `wp syteops systems-api set --stdin` or upload-plugin-release.sh set-secret); invalid_params (settings empty/list); 409 module_unavailable. 409 confirmation_required unless confirm is true when a call changes a key whose settings_get keys entry has confirm true (1.6.787+; check keys{k}.confirm first). Fallback: pii_mode, ringtonic_store_call_summary, crm_webhook_url, automation_webhook_url, recipient_emails, email_reply_to, callbacks_summary_slots, callbacks_reminders_enabled, callbacks_reminder_slots, callbacks_weekly_slots, callbacks_deal_summary_enabled, and from 1.6.804 automation_webhook_enabled, crm_webhook_enabled, email_instant_enabled, email_periodic_enabled, ringtonic_contact_forms, ringtonic_contact_field_names, ringtonic_contact_internal=push. Resending the current value needs none. Returns {changed_keys[], settings}.",
             "inputSchema": {
                 "type": "object",
                 "properties": {
@@ -13771,7 +13771,7 @@
                     },
                     "confirm": {
                         "type": "boolean",
-                        "description": "true only when this call changes a key that syteops_leads_settings_get marks confirm (check keys{k}.confirm first): pii_mode, ringtonic_store_call_summary or a data-egress key (crm_webhook_url, automation_webhook_url, recipient_emails, email_reply_to; SyteOps 1.6.786+ also callbacks_summary_slots, callbacks_reminders_enabled, callbacks_reminder_slots, callbacks_weekly_slots; SyteOps 1.6.804+ also the off-site switches automation_webhook_enabled, crm_webhook_enabled, email_instant_enabled, email_periodic_enabled, ringtonic_contact_forms, ringtonic_contact_field_names, ringtonic_contact_internal=push) and the operator approved it; false otherwise."
+                        "description": "true only when this call changes a key that syteops_leads_settings_get marks confirm (check keys{k}.confirm first): pii_mode, ringtonic_store_call_summary or a data-egress key (crm_webhook_url, automation_webhook_url, recipient_emails, email_reply_to; SyteOps 1.6.786+ also callbacks_summary_slots, callbacks_reminders_enabled, callbacks_reminder_slots, callbacks_weekly_slots; SyteOps 1.6.804+ also the off-site switches automation_webhook_enabled, crm_webhook_enabled, email_instant_enabled, email_periodic_enabled, ringtonic_contact_forms, ringtonic_contact_field_names, ringtonic_contact_internal=push; SyteOps 1.6.967+ also the AI deal summary switch callbacks_deal_summary_enabled) and the operator approved it; false otherwise."
                     }
                 },
                 "required": [

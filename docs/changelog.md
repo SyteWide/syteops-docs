@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.6.970
+
+- Improved: On your Callbacks list, a caller nobody on your team has named, whose only name is one RingTonic supplied in its contact data, now shows that name with the orange Possibly tag instead of Unknown caller, in the list, in the list entry and in the caller's header. The phone carrier's caller-ID name still comes first when both exist, a name your team entered is never marked Possibly, and under Masked or Off storage the name stays hidden. Confirm opens Edit contact filled in from the name shown, and the AI deal summary treats such a name as a guess too.
+
+## v1.6.969
+
+- Fixed: The AI deal summary on your Callbacks list no longer says "No summary yet" for ever. A caller whose only history is a call to your number with no recording or outcome, or a form they sent, now gets a summary written from that (it says only that the caller phoned in or sent a form, never what was said), and a caller with nothing on record reads "Nothing to summarize yet" with what to do next instead of asking for a Refresh. The panel now shows a summary as soon as it is written, without a reload, including after you save a team note or reopen a caller. Fixed: The team note box on a caller's panel is now named for the caller exactly as the list names them (a name from the caller's phone carrier reads Possibly, and an Unknown caller is named by phone number), so the header and the box no longer disagree.
+
 ## v1.6.968
 
 - Improved: On your Callbacks list, a name that is not confirmed yet (a name from the caller's phone carrier) now carries a warm orange Possibly tag, and a caller whose name someone gave or confirmed carries a small green Confirmed tag, in the list and in the caller's header; the words say the same thing as the colors, and an Unknown caller or a caller whose details are hidden shows no tag at all. The row of buttons under the caller's header (Open in admin, View lead, Call, Done and Not a lead) now has the same comfortable space above and below it. The cards inside a caller's details (the Deal summary, Contact, each call on record, a call's AI read and the pinned team note) now sit on a soft shadow so they read as cards, with a thin edge kept so they look the same without it; on a phone they stay flat. Every button now rests on a light shadow that deepens when you hover and sinks when you press, and a button that is turned off or still loading has none.
