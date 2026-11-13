@@ -42,14 +42,7 @@ In the same RingTonic card, under **Click-to-call**:
 3. Enter the **Caller ID number**: the RingTonic tracking number both your team member and the lead see, written with +1 and no spaces. Leave it blank and no call can be placed. Done looks like: none of these warnings show, "not checked yet", "not one of the tracking numbers on the RingTonic account", "RingTonic has calls turned off for this tracking number".
 
 :::warning Verify the caller ID first
-The number must reach **attestation A** with phone carriers. Without it, carriers refuse the call to the lead, RingTonic logs it as "busy" and the row says **The lead's carrier refused the call (or the line was busy)**. SyteOps cannot check this for you. In Twilio, the number needs all four of these:
-
-- a **Trust Hub Business Profile**;
-- the **SHAKEN/STIR Trust Product**, with this number assigned;
-- **Voice Integrity**;
-- **CNAM** (the caller name).
-
-Finish all four before the first real call, and repeat them for every site that will place calls.
+The number must reach **attestation A** with phone carriers. Without it, carriers refuse the call to the lead, RingTonic logs it as "busy" and the row says **The lead's carrier refused the call (or the line was busy)**. SyteOps cannot check this for you. RingTonic's phone carrier layer is SignalWire, so ask RingTonic to confirm that the number carries attestation A, and which caller-ID name registration it has, before the first real call. Repeat the check for every site that will place calls.
 :::
 
 The keys and the secret come from a terminal or your hub operator, never from an AI assistant or the API (see step 11).
@@ -107,7 +100,21 @@ Under **Monday callbacks list**, enter the slots in **Send the Monday list to sl
 Callbacks expire after 16 weeks, with one last mention in the Monday list. That only happens while at least one slot is listed here. With the field empty, nothing ever expires.
 :::
 
-Optional: **Call labels** (Leads → Settings → RingTonic) sets how many seconds a call must last before it stops being called **Hung up** in the portal. The default of 30 suits most sites; see [Hung up and Voicemail, no message](callbacks#hung-up-and-voicemail-no-message).
+Optional: **Call announcement** (Leads → Settings → RingTonic) sets what the staff member hears before they press 1. By default RingTonic says the site name and the word callback, then the reason for the callback, for example "Example Co callback. Call back". To use your own wording, type it in **What the staff member hears before pressing 1** (plain text, up to 200 characters). Two placeholders are filled in for each call: `{site}` is the site name and `{reason}` is the reason for the callback. For example, "Example Co dot com. This call may be recorded and transcribed." is read exactly as typed, and `{site}. {reason}. This call may be recorded.` adds the reason. Write brand names the way they should be spoken ("dot com").
+
+- **Leave it blank** to keep the built-in announcement.
+- **Built-in announcement** (just above that field) chooses what the built-in announcement says: **Site name and reason** (the default, as described above), **Reason only** (the staff member hears just the reason, without the site name and the word callback), or **Nothing** (no announcement text is sent). Words typed in the field replace **Site name and reason** and **Reason only**. **Nothing** ignores them.
+- **RingTonic may add its own words.** RingTonic may add its own words around the caller's name and the announcement, and this plugin does not control them. Choosing **Nothing** removes the announcement this plugin sends, but RingTonic may still say its own words.
+- **A text without `{reason}`** means the staff member no longer hears the reason before pressing 1.
+- **An empty reason** (a callback with none) leaves out the placeholder and the comma, period or dash in front of it.
+- **Anything else in curly braces** is removed.
+- **Numbers are never read.** Any two or more digits in a row are removed from the finished announcement, whether they come from your text, the site name or the reason, so a phone number is never read into a recorded call. Write numbers as words. A single digit, as in "Press 1", stays.
+- **RingTonic reads the first 100 characters** of the finished text, so keep the part that matters at the start.
+- **Tags and special characters:** tags are removed and extra spaces are collapsed. Letters and punctuation are kept as typed.
+
+Optional: **Call labels** (Leads → Settings → RingTonic) sets how many seconds a call must last before it stops being called **Hung up** in the portal (a longer call that was only your phone menu, with nobody reached, is still called **Hung up**). The default of 30 suits most sites; see [Hung up and Voicemail, no message](callbacks#hung-up-and-voicemail-no-message).
+
+Optional: **Callback number to give** (Leads → Settings → RingTonic) is the number your staff ask a lead to call back, shown as **Request callbacks at** beside the call note after a call ([Write your call note](callbacks#write-your-call-note)). Type a phone number, with or without spaces, dashes or parentheses (7 to 20 digits, and a plus sign only at the start). Leave it blank and the panel shows the number the lead dialed instead, or nothing when that is unknown. It is only shown to your staff on their private page: it is not sent to RingTonic, to emails or to the lead.
 
 For steps 8 to 10, each listed person needs Callbacks access of **View and act** or **Call** (step 5), a private page and an email address, or that slot is skipped. Buttons in the emails need contact details in Full.
 
@@ -131,7 +138,10 @@ A repo connected through the SyteWide MCP can do each step with a Manage operati
 | 9. Reminders | `leads.settings_set` with `callbacks_reminders_enabled` and `callbacks_reminder_slots`, and `confirm: true` |
 | 10. Monday list | `leads.settings_set` with `callbacks_weekly_slots` and `confirm: true` |
 | Optional: AI deal summary | `leads.settings_set` with `callbacks_deal_summary_enabled` and `callbacks_deal_summary_cap_day`, and `confirm: true` to turn it on |
+| Optional: call announcement | `leads.settings_set` with `ringtonic_call_topic_template` (up to 200 characters; an empty string restores the built-in announcement) and `ringtonic_call_topic_mode` (`built_in`, `reason_only` or `none`); no `confirm` needed |
+| Optional: Not a lead marks the lead Unqualified | `leads.settings_set` with `callbacks_not_lead_sets_unqualified` (default false; no `confirm` needed) |
 | Optional: call labels | `leads.settings_set` with `callbacks_hung_up_seconds` (5 to 120, default 30) |
+| Optional: callback number to give | `leads.settings_set` with `callbacks_callback_number` (a phone number, 7 to 20 digits; an empty string clears it and the panel shows the number the lead dialed); no `confirm` needed |
 
 `confirm: true` is needed for changes to how contact details are stored and to anything that decides where call details are emailed: the three slot lists and the reminders switch, and to turning on the AI deal summary, which sends call content to the AI provider (see the [API reference](../api/reference/leads)). `leads.settings_get` reads every setting back. A secret named as a setting is refused.
 

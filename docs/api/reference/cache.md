@@ -12,7 +12,7 @@ description: Manage API operations for the cache resource.
 
 ## `purge`
 
-Purge one post's page (post_id), or up to 30 URLs on this site's own host (urls), from LiteSpeed and Cloudflare when present. With post_id it also asks Elementor to rebuild its generated CSS when that post is built with Elementor. Send post_id or urls, not both; a URL on any other host refuses the whole call.
+Purge one post's page (post_id), or up to 30 URLs on this site's own host (urls), from LiteSpeed and Cloudflare when present. With post_id it also purges the pages that show the post (home, blog index, category and tag archives, author page, main feed, post type archive, SEO sitemaps) when the related-pages setting allows it (Off is the post's own page alone), and, when that post is built with Elementor, clears and rebuilds that post's generated CSS before the purge (elementor_css_scope post), or clears the Elementor CSS site-wide (elementor_css_scope site_wide) for the Kit, header, footer and other site-wide templates, when the Regenerate Elementor CSS setting is off, or when the per-post rebuild cannot run; a site-wide clear is answered by a background rebuild of every page's CSS and one site purge. layers reports each cache layer: litespeed is attempted (it cannot confirm), partial, error or skipped; cloudflare is purged, partial, error, skipped or off (the Cloudflare purge mode setting; off is also listed in skipped, and zone mode purges the whole zone even for one URL). queued is true and deferred is zone when, in the zone purge mode, the minimum interval since the last full purge held the Cloudflare zone purge back: the pages are purged in LiteSpeed now and the zone purge is booked for when the interval ends. not_run with reentrant in skipped means a purge was already running and nothing was done. Send post_id or urls, not both; a URL on any other host refuses the whole call.
 
 **Access:** SyteOps Admin or API key.
 
@@ -26,7 +26,7 @@ Purge one post's page (post_id), or up to 30 URLs on this site's own host (urls)
 
 **Returns**
 
-data: &#123;urls[], purged[], attempted[], skipped[], errors[], elementor_css: cleared|unavailable|not_elementor|null}
+data: &#123;urls[], purged[], attempted[], skipped[], errors[], layers: &#123;litespeed: &#123;status}, cloudflare: &#123;status, mode, reason?}}, queued, deferred?, elementor_css: regenerated|cleared|unavailable|not_elementor|null, elementor_css_scope: post|site_wide|null}
 
 **Request**
 

@@ -7,7 +7,7 @@ description: MCP tools provided by SyteOps (provider id syteops).
 
 # SyteOps
 
-Provider id: `syteops` · 83 tool(s).
+Provider id: `syteops` · 85 tool(s).
 
 ## `syteops_builder_guard`
 
@@ -141,7 +141,7 @@ Cancel a scheduled post's publication and return it to a draft (SyteOps calendar
 
 ## `syteops_dispatch`
 
-Invoke any SyteOps Manage operation. Pass resource + action (see syteops_manifest) and params per that operation's schema. Destructive operations (the manifest marks them) require confirm:true. The dedicated secret-slot writes (crm.set_secret, ai.set_key, any action ending set_secret or set_key, and any operation that takes one of its own secret_keys as a param) are refused, so stored API keys are set from a terminal or the SyteOps admin, not as an MCP tool input. Returns &#123;ok, changed, data} on success. SyteOps 1.6.804+: modules get_config and update_config reach only the syteops_banners bucket (other modules 403 config_not_exposed; update_config 422 unknown_config_key or invalid_config_value; Leads uses leads.settings_get and settings_set). 409 busy is retryable.
+Invoke any SyteOps Manage operation. Pass resource + action (see syteops_manifest) and params per that operation's schema. Destructive operations (the manifest marks them) require confirm:true. The dedicated secret-slot writes (crm.set_secret, ai.set_key, any action ending set_secret or set_key, and any operation that takes one of its own secret_keys as a param) are refused, so stored API keys are set from a terminal or the SyteOps admin, not as an MCP tool input. Returns &#123;ok, changed, data} on success. SyteOps 1.6.982+: users.create and users.update take email_photos, that person's own choice of article photos in their review emails: JSON true or '1' (show), false or '0' (hide), or '' (follow the site default, see syteops_review_email_options_get). Send it exactly so: "false", "true", 2 or null is 422 invalid_params and nothing is written. SyteOps 1.6.804+: modules get_config and update_config reach only the syteops_banners bucket (other modules 403 config_not_exposed; update_config 422 unknown_config_key or invalid_config_value; Leads uses leads.settings_get and settings_set). 409 busy is retryable.
 
 **Profiles:** `full`, `syteops`
 
@@ -661,6 +661,30 @@ Read-only. One post's review notes and replies, oldest first, as the portal show
 | `post_id` | integer | yes | Post ID. |
 | `per_page` | integer | no | Notes per page, 1 to 100 (default 25). |
 | `page` | integer | no | Page number from 1 to 10000 (default 1). |
+
+
+## `syteops_review_email_options_get`
+
+Read-only. The Review Portal's site-wide email options (SyteOps review.email_options_get; SyteOps 1.6.982+). show_photos is the site default for whether a review email card carries the article's featured photo (on unless switched off). A person's own choice (users.update email_photos, through syteops_dispatch) overrides it in either direction; people_showing and people_hiding count the active people who have made one, which is why flipping the default can change fewer inboxes than expected. Emails only: the photo on the site and in the portal is unaffected. Returns &#123;show_photos, people_showing, people_hiding}. Needs a WordPress administrator (manage_options).
+
+**Profiles:** `full`, `syteops`
+
+**Parameters**
+
+_No parameters._
+
+
+## `syteops_review_email_options_set`
+
+Sets the site default for article photos in review emails (SyteOps review.email_options_set; SyteOps 1.6.982+). false leaves the photo off the cards in every review email (digest, new and updated draft, reminders and the rest) sent to anyone who has not chosen for themselves; true puts it back. A person's own choice (users.update email_photos) is never changed by this and still wins. Takes effect on the next email built, including one already queued. Not destructive: no confirm, and calling it again reverses it. show_photos must be the JSON value true or false: the string "false", 0, 1 or null is 422 invalid_show_photos and nothing is written. Returns &#123;show_photos, people_showing, people_hiding} as stored. Needs a WordPress administrator (manage_options).
+
+**Profiles:** `full`, `syteops`
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `show_photos` | boolean | yes | JSON true (show the featured photo on review email cards, the default) or false (leave it off). Never a string or a number. |
 
 
 ## `syteops_review_get`

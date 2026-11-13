@@ -8,6 +8,126 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.7.001
+
+- Fixed: A follow-up or result request that has left the page is no longer remembered as unsent if the browser refuses a later write, so a reload cannot send a second outcome. A failed write of the "already done" mark now asks for a retry instead of being ignored. Reopen on a callback parked for a follow-up now says it is parked and how to resolve it. A contact value stored with unusual spacing and re-sent untouched is no longer rewritten. The old contact request format used by tabs opened before this release stops working after 2026-12-06 and asks for a page reload.
+
+## v1.7.000
+
+- Improved: The Page cache card now shows the effective LiteSpeed Cache lifetime for public pages, the front page and feeds, and warns when public pages can stay cached for more than 24 hours. It only reads the value and changes nothing.
+
+## v1.6.999
+
+- Fixed: When the Review Portal swaps a picture or edits a caption on an Elementor page, the page's cached widget output and asset list are now cleared and its stylesheet rebuilt, so the page shows the new picture, and the page's cache copies are purged once.
+
+## v1.6.998
+
+- Fixed: Reloading a lead after a conflict no longer drops text that was only held on the page. A contact value that is not text is refused instead of clearing the field. A follow-up restored after a page reload shows its date before it is sent again. A follow-up on a callback that is already closed no longer reads as applied. A person's follow-up now makes an older AI suggestion go stale, so the AI can no longer close a callback someone parked for follow-up; it only suggests.
+
+## v1.6.997
+
+- Improved: Edit contact is safer during a call. Save now sends only the fields you changed, and a field a teammate changed in the meantime is not overwritten: it is shown as a conflict with their value next to yours (Keep mine or Use theirs), while your other fields still save. The form is tied to the lead it was opened for, so a save can never land on a newer lead; if the lead changed, Reload the lead keeps what you typed. What you typed is never discarded: Cancel lists any text that is not saved anywhere, with Copy. The update sent to the phone system after a contact edit now includes only the fields that save changed, so an edit made there by a teammate is no longer overwritten by an older value.
+
+## v1.6.996
+
+- Improved: While you are on a call, the calling panel on a Callbacks card has a Follow up button. It opens a small step with quick choices (Tomorrow, In 3 days, Next week) and a date field, for any day up to 180 days ahead. Saving records the call note and the outcome once and moves the callback to follow-up on the chosen date, and the Follow Up Today reminder then lists it on that day. The note needs a few words, like Done. Changing the date later works the same way. A result you pressed just before a lost reply or a page reload is no longer recorded twice: the card remembers the open request for up to 24 hours.
+
+## v1.6.995
+
+- Improved: While you are on a call, the calling panel on a Callbacks card has four result buttons: Spoke with them, Left voicemail, No answer and Wrong number. Each one saves your call note first, then records the outcome once: pressing a button twice, or pressing it again after a bad connection, never records it twice. Each one closes the calling prompt and leaves the callback open. Done and Not a lead also save the call note first while the calling panel is open, and Done needs a few words in the note. If the note cannot be saved, or someone else changed it, nothing is recorded and the conflict screen helps. If the outcome cannot be applied, the note stays saved and Try again appears. Wrong number, No answer and Not a lead fill the note with their wording when it is blank.
+
+## v1.6.994
+
+- Improved: While you are on a call, the Callbacks card shows a calling panel with the live status, the number to give the lead under "Request callbacks at" with a Copy button, and a call note box that must be filled in before the call is finished. The End call button only stops the calling prompt, because the phone system has no hang-up. A "Didn't connect" button covers a call that never connected. If a call ends without a note, "Add your call note" stays on the card for that staff member until a note is saved, and the card shows a "Call notes owed" count (with a plus sign when more than 100). The confirmation now reads "RingTonic rings you on your phone, then connects the lead." A new Leads setting, "Callback number to give", sets the number shown during a call; when it is blank, the number the lead dialed is shown instead.
+
+## v1.6.993
+
+- Improved: A call you place is now recorded before the request is sent, so a note you type during the call is saved against that call straight away and appears in the lead's call history and in the AI deal summary even if the phone system never reports the call back. While you hold a call you can keep editing the lead's contact details (other people still cannot act on that lead). A call that never connected is labeled Call attempt, outcome unknown. The system also remembers which of your calls still need a note.
+
+## v1.6.992
+
+- Improved: When two people, or two tabs, edit the same callback note at once, nothing is overwritten any more. A note saved from an out-of-date copy is refused, and a clear screen shows the other text with who saved it and when, offering Keep both (the default, which merges the two texts), Use mine (asks first and keeps a copy of theirs) and Use theirs (keeps a copy of yours). Two plain additions are merged automatically. A save whose reply was lost is recognized as your own and is not treated as a conflict. A note over the length limit shows a counter and a Copy button instead of failing silently.
+
+## v1.6.991
+
+- Improved: The page cache card has a new Visitor check. Every 30 minutes the site fetches its home page and three recent posts as an anonymous visitor, and checks that every stylesheet and script loads and, when Elementor is active, that the Elementor styles are present. The card shows the result of the last check. When the same failure is seen on two checks in a row, the site posts it to Slack if a Slack incoming webhook is set up, and a Purge button appears on the card; the check never purges anything by itself. A Cloudflare challenge page, or a site that cannot reach itself, shows that the check could not run and sends no alert. A new Visitor check setting in the Page cache card (Automatic, On or Off) controls it; Automatic turns it on when a cache layer is active.
+
+## v1.6.990
+
+- Improved: The site now purges its page caches after plugin, theme and WordPress updates, once for a whole batch of updates, and skips translation updates. If an Elementor stylesheet rebuild is running, the purge waits for it to finish, and pages saved in the meantime are still purged within about 30 seconds. A new Purge after updates setting in the Page cache card (Automatic, On or Off) controls this; Automatic turns it on when a cache layer is active. The site also reacts when SyteHero clears its page caches: it purges the CDN and page cache once SyteHero announces a flush.
+
+## v1.6.989
+
+- Improved: Notes and contact edits you make on a Callbacks card are now kept safe while you work. What you type is also kept on this device as you type, so a closed tab, a dropped connection or an expired sign-in no longer loses it. Failed saves retry on their own and when the connection returns, and the note shows Saved, Saving, Offline, retrying or Needs attention. After a reload you are offered the kept text with Restore, Copy and Discard; Restore keeps both the kept text and what is in the box. Kept text is removed once it is saved, after 14 days if it is still unsent (from day 7 the bar warns you and offers Copy), or when you choose Clear saved drafts on this device. The card is no longer redrawn over text you have not saved, and saving a contact only redraws the contact section. A note over 2000 characters shows a counter and a clear too-long message instead of failing silently. An expired sign-in is refreshed automatically for the same person only.
+
+## v1.6.988
+
+- Improved: In the portal's Callbacks section, the list of callers is now grouped under slate-blue band headings, Callbacks, Follow-ups, Returned and Closed, that line up with the matching band at the top of the caller's detail pane. The selected caller is highlighted in white, the list fills the full height beside the detail pane so there are no stray white or gray areas, and the headings stay at the top of the list as you scroll. The first group heading now reads Callbacks instead of Waiting for a call back.
+
+## v1.6.987
+
+- Improved: When Elementor's stylesheets are cleared, from the Elementor tools page, by a SyteOps tool or by a media rename, SyteOps now rebuilds the stylesheets for your Kit and every page built with Elementor in small background batches, and purges the page caches only after the last batch, so no visitor is served a cached page that points at a missing stylesheet. If a rebuild fails or runs too long, the page caches are still purged and the Page cache card says so. Purging the cache for one edited Elementor page now rebuilds only that page's styles and clears that page's cached widgets before the purge, instead of clearing every page's styles; changes to the Kit, headers, footers and other site-wide templates still clear everything. A new Rebuild Elementor styles after a clear setting in the Page cache card, with Automatic, On and Off, controls this; Automatic turns it on when Elementor is active.
+
+## v1.6.985
+
+- Improved: When a caller's RingTonic contact has a name and the lead in SyteOps has none, the name is filled in the first time the contact is opened in the portal. It shows as an Unverified name until your team confirms it. A name that is already set is never replaced, email and phone details are never written, nothing happens unless the contact details are stored in full, and the name is never sent back to RingTonic. Placeholder names such as an email address, a number or the word unknown are ignored. In the callback summary email (heading and subject line), on the Monday list and in the follow-up reminder, a name filled in this way, or by the AI, that nobody has confirmed reads the name followed by (unverified). The small tag beside such a name on your Callbacks list now says Unverified instead of Possibly. A form opened before the fill may show the "changed since you opened it" message once; nothing is lost.
+
+## v1.6.984
+
+- Improved: You can now choose what the staff member hears before pressing 1 when a callback is placed from the portal. A new Built-in announcement choice under Call announcement in the RingTonic settings lets you keep the site name and the reason (the default, so nothing changes until you use it), read only the reason, or send no announcement at all. Words you type in the announcement field still replace the first two choices, and Nothing ignores them. RingTonic may still add its own words around the caller's name, which SyteOps does not control.
+
+## v1.6.983
+
+- Improved: A page is now purged from the page cache and the Cloudflare CDN when its content changes, so visitors see the new version within about a minute (a page saved in the Review Portal is cleared at once). Publishing, updating, scheduling, trashing or permanently deleting a post or page clears that page, its old address after a slug change, the home page, the blog index, the category and tag pages the post is in or has just left, the author page, the main feed, the post type archive and the sitemaps of your SEO plugin. Saving a navigation menu or a header, footer or site-settings template, or changing the address of a category or tag, clears the whole site, at most once every five minutes, and a page saved while that wait is running is still cleared on its own after about 30 seconds. A new Page cache card on the System / API tab sets how related pages are purged (Automatic, On or Off; Automatic turns it on when LiteSpeed Cache is active or the Cloudflare integration is on; Off clears only the page that changed, though a menu or template save still clears the whole site) and the Cloudflare purge mode (only the changed URLs, which is the default, the entire zone, which is also limited to once every five minutes, or Off, which never calls Cloudflare), and shows the result of the last purge for each layer. The cache purge tool in the management API now reports the result for each layer as well.
+
+## v1.6.982
+
+- Improved: You can now leave the article photo out of your review emails. A new Show article photos in review emails switch, under Email notifications in the Review Portal settings, sets the default for everyone. It is on, so nothing changes until you use it. Each person can also choose for the emails sent to them, with Photos in review emails under Email notifications on their own private page: Site default, Show photos or Hide photos. A person's own choice wins in either direction, and everyone who has not chosen follows the site default. The new draft, updated draft, schedule, reminder and digest emails all follow it, and a hidden photo is neither shown nor linked. Only emails change: the photo on the site and in the portal stays as it is. A change applies from the next email built for that person, including one already waiting in a batch. An administrator can set both levels from the management API.
+
+## v1.6.981
+
+- Improved: Saving a team note on a caller no longer starts an AI deal summary by itself, so a note alone never spends a summary. A caller's first AI summary now waits for their second call on record, while a caller who already has a summary keeps being brought up to date. When a summary is out of date, the panel shows an Out of date marker, and an Add to summary button beside the notes brings it up to date the same way Refresh does. The panel's wording is corrected: it says a summary is being written only while one is really queued or running, and after about three minutes it says the summary is still being written and asks you to press Refresh only if it does not appear. On a caller's panel, a Call back number shows the business number the caller first dialed, written out so you can read it aloud, with a Copy button. It appears after the caller's next call, because earlier calls did not record the number.
+
+## v1.6.980
+
+- Improved: If your form asks what kind of financing and how large a loan, you can now send those two answers to RingTonic as custom fields on the contact. Both are off until you type the name of a RingTonic custom field for each under RingTonic custom field names, and the field must already exist in your RingTonic workspace, so until you do, nothing about them is sent and your contacts go out exactly as before. On the form's row, pick which form fields hold the answers; a form you already set up shows None until you do. An answer left blank is never sent, and if you name a field your workspace does not have, only that field is dropped and the contact is still created.
+
+## v1.6.979
+
+- Improved: On your Callbacks list, a caller who reached your phone menu, pressed a key such as the name directory and never got through to a person now reads Hung up, however long the call ran, instead of Answered. The call counts only when the caller said nothing that counts and every sentence the phone system said is menu wording; if a person spoke, even one short word, or the caller said anything real, the row keeps Answered, and a voicemail with no message keeps its own label. Nothing is stored and no callback changes status.
+
+## v1.6.978
+
+- Improved: On the license server itself, checking a site's license or releasing it now finds the license key with one quick read of the store's own records instead of a chain of requests the server made to itself, so those checks are answered sooner and the server keeps more room for other visitors. When that quick read cannot settle a key, the server searches exactly as it used to. Two rare cases now favor the license: a key the old search could not reach in a very large store is found, and a store hiccup during that read is answered with try again later instead of key not found. Activating a license and recording consent work as before.
+
+## v1.6.977
+
+- Improved: The My Portal page now ends with a quiet line showing the plugin name and version, so you can read the version off the page when you report a problem. The name follows your white label, and the line does not print.
+
+## v1.6.976
+
+- Improved: When a site asks the license server about a license key, the server now stops searching after about nine seconds instead of working on for minutes after the asking site has given up. If the search is cut short before it finds the key, the server answers that it is busy and the site tries again later, keeping its current license status; it never reports the key as not found. A key that is found, or one that really is missing, is answered exactly as before.
+
+## v1.6.975
+
+- Improved: The licensing server's gateway now keeps a short record of its slowest or failed calls to the store, and of any check that took unusually long or made many store calls, so an intermittent stall can be traced afterward. The record holds no license keys, email addresses or passwords, keeps only the newest entries, notes how many entries it could not keep when many slow calls arrive at once, and can be emptied by an administrator from the command line. While debug mode is on, the same events are also written to a log file.
+
+## v1.6.974
+
+- Improved: Under Leads → Settings → RingTonic, a new setting called Not a lead also marks the lead Unqualified lets the Not a lead button on a callback do more than close the callback. Turn it on and pressing Not a lead also moves the caller's most recent lead to Unqualified, and when the RingTonic status sync is on, RingTonic is told in the background like any other status change. Reopen puts the lead's earlier status back, but only if the lead is still Unqualified, so a change someone else made in between is never overwritten. Only a person pressing the buttons does this; a callback the AI closed by itself or one that expired never changes a lead. RingTonic accepts a move from Qualified or Customer back to Unqualified only when its API key may force stage changes; otherwise the lead is marked Unqualified on your site and RingTonic keeps its earlier stage. The setting is off by default, so nothing changes until you turn it on.
+
+## v1.6.973
+
+- Improved: Under Leads → Settings → RingTonic, a new Call announcement field lets you choose what your team member hears before they press 1 when they place a callback from the portal. Type your own wording (up to 200 characters) and add the site name or the reason for the callback with the two placeholders shown under the field, or leave it blank to keep the usual announcement of the site name, the word callback and the reason. A text without the reason placeholder means the team member no longer hears the reason. Any two or more digits in a row are always removed, so a phone number is never read into a recorded call, and RingTonic reads the first 100 characters.
+
+## v1.6.972
+
+- Improved: The caller-ID reminder on your Callbacks settings, and the setup pages that match it, now says RingTonic's phone carrier layer is SignalWire and asks you to confirm with RingTonic that your calling number carries attestation A and which caller-ID name registration it has before calls go live; it no longer points you at Twilio or lists steps to do there. Improved: The small arrow beside View lead on a caller's panel now sits level with the lowercase letters of the words instead of riding up beside the capital V, both closed and open and in right-to-left languages (closed, it points to the side the words end on), and the arrow on the Deal summary heading lines up the same way. Improved: A caller-ID name that is just the phone carrier's own name (SignalWire as well as Twilio) is treated as no name, like the other carrier names.
+
+## v1.6.971
+
+- Improved: On your Callbacks list, the pinned note for each caller in the caller's panel is now headed General note about this caller, so it reads as a note about the person, while the Team note box under each call stays about that call. The button next to a Possibly name now says Confirm name instead of Confirm, so it is clear what it confirms. The tags under Where they came from (such as UTM source or UTM campaign) are tidier too: each one keeps its name and value together on one line when they fit, moves a long value onto its own line under the name when they do not, and wraps a very long value inside the tag instead of overflowing, in every width and in right-to-left languages. The eight number tiles on your My Portal page (Published, Last 30 Days, Awaiting Your Review and the rest) now have the same soft shadow as the cards in the Callbacks panel, and every tile is the same height with its number and label lined up across the row.
+
 ## v1.6.970
 
 - Improved: On your Callbacks list, a caller nobody on your team has named, whose only name is one RingTonic supplied in its contact data, now shows that name with the orange Possibly tag instead of Unknown caller, in the list, in the list entry and in the caller's header. The phone carrier's caller-ID name still comes first when both exist, a name your team entered is never marked Possibly, and under Masked or Off storage the name stays hidden. Confirm opens Edit contact filled in from the name shown, and the AI deal summary treats such a name as a guess too.

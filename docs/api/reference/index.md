@@ -26,7 +26,7 @@ Every operation runs through the single dispatch endpoint. See [Dispatch contrac
 | [`listing_image`](./listing-image) | 2 | no |
 | [`modules`](./modules) | 10 | yes |
 | [`pipelines`](./pipelines) | 19 | yes |
-| [`review`](./review) | 13 | yes |
+| [`review`](./review) | 15 | yes |
 | [`roles`](./roles) | 6 | yes |
 | [`seo`](./seo) | 2 | no |
 | [`site`](./site) | 2 | no |
