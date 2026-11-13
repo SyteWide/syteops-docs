@@ -8,7 +8,7 @@ description: Manage API operations for the review resource.
 
 # `review`
 
-13 operation(s). All run through `POST /syteops/v1/manage/dispatch` (reads may use the documented GET form).
+15 operation(s). All run through `POST /syteops/v1/manage/dispatch` (reads may use the documented GET form).
 
 ## `approve`
 
@@ -119,6 +119,60 @@ data: &#123;post_id, total, page, per_page, has_more, comments[]}; a comment is 
     "post_id": 0,
     "per_page": 0,
     "page": 0
+  }
+}
+```
+
+## `email_options_get`
+
+The Review Portal's site-wide email options. show_photos is the site default for whether a review email card carries the article's featured photo (on unless switched off). A person's own choice (users.update email_photos) overrides it in either direction and a person with none follows it; people_showing and people_hiding count the active people who have made one. Emails only: the photo on the site and in the portal is unaffected.
+
+**Access:** SyteOps Admin or API key.
+
+**Parameters**
+
+_No parameters._
+
+
+**Returns**
+
+data: &#123;show_photos, people_showing, people_hiding}
+
+**Request**
+
+```json
+{
+  "resource": "review",
+  "action": "email_options_get",
+  "params": {}
+}
+```
+
+## `email_options_set`
+
+Set the site default for article photos in review emails. false leaves the photo off the cards in every review email (digest, new draft, updated draft, reminders and the rest) sent to anyone who has not chosen for themselves; true puts it back. A person's own choice (users.update email_photos) is never changed by this and still wins. Takes effect on the next email built, including one already queued. Not destructive: no confirm needed, and calling it again reverses it. show_photos must be the JSON value true or false (422 otherwise).
+
+**Access:** SyteOps Admin or API key.
+
+**Parameters**
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `show_photos` | boolean | yes | JSON true (show the featured photo on review email cards, the default) or false (leave it off). |
+
+
+**Returns**
+
+data: &#123;show_photos, people_showing, people_hiding} as stored after the change
+
+**Request**
+
+```json
+{
+  "resource": "review",
+  "action": "email_options_set",
+  "params": {
+    "show_photos": true
   }
 }
 ```

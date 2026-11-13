@@ -37,6 +37,7 @@ Create a SyteOps team-member record in the next free slot and fill its fields. A
 | `model_consent_granted` | string | no | The Model consent flag and the only consent signal: '1' or ''. |
 | `notify_reminders` | string | no | Whether this person receives publishing reminders and deferral escalations: '1' or ''. Absent means on. |
 | `notify_replies` | string | no | Whether this person receives article feedback and reply notifications: '1' or ''. Absent means on. |
+| `email_photos` | string | no | Whether article photos show on the cards in the review emails sent to this person: true or '1' (show), false or '0' (hide), or '' to follow the site setting. Anything else is 422 and nothing is written. Site-local. |
 | `list_per` | string | no | Review list page size for this person: '5', '10', '25', '100', or '' to inherit the site default. |
 | `preview_width` | string | no | The width in pixels the Review Portal page preview opens at for this person: a whole number from 320 to 2560 (clamped), or '' for the site default. Site-local. |
 | `callbacks_access` | string | no | Callbacks access in the person's private page: '' (off), 'act' (view and act) or 'call'. Anything else is stored as off. Site-local. |
@@ -71,6 +72,7 @@ data: &#123;user_num, ...fields}
     "model_consent_granted": "string",
     "notify_reminders": "string",
     "notify_replies": "string",
+    "email_photos": "string",
     "list_per": "string",
     "preview_width": "string",
     "callbacks_access": "string",
@@ -229,6 +231,7 @@ Update fields on an existing SyteOps team-member record.
 | `model_consent_granted` | string | no | The Model consent flag and the only consent signal: '1' or ''. |
 | `notify_reminders` | string | no | Whether this person receives publishing reminders and deferral escalations: '1' or ''. Absent means on. |
 | `notify_replies` | string | no | Whether this person receives article feedback and reply notifications: '1' or ''. Absent means on. |
+| `email_photos` | string | no | Whether article photos show on the cards in the review emails sent to this person: true or '1' (show), false or '0' (hide), or '' to follow the site setting. Anything else is 422 and nothing is written. Site-local. |
 | `list_per` | string | no | Review list page size for this person: '5', '10', '25', '100', or '' to inherit the site default. |
 | `preview_width` | string | no | The width in pixels the Review Portal page preview opens at for this person: a whole number from 320 to 2560 (clamped), or '' for the site default. Site-local. |
 | `callbacks_access` | string | no | Callbacks access in the person's private page: '' (off), 'act' (view and act) or 'call'. Anything else is stored as off. Site-local. |
@@ -264,6 +267,7 @@ data: &#123;user_num, ...fields}
     "model_consent_granted": "string",
     "notify_reminders": "string",
     "notify_replies": "string",
+    "email_photos": "string",
     "list_per": "string",
     "preview_width": "string",
     "callbacks_access": "string",

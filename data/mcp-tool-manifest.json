@@ -1,7 +1,7 @@
 {
     "schema_version": 1,
     "generated_from": "sytewide-mcp",
-    "mcp_version": "0.38.1",
+    "mcp_version": "0.40.0",
     "profiles": {
         "full": {
             "label": "Full (all tools)",
@@ -339,7 +339,7 @@
         {
             "name": "create_content",
             "provider": "wp-content",
-            "description": "Create new content of any type. Returns the created object.",
+            "description": "Create new content of any type. Returns the created object. A published item then gets a coherent cache purge; the result carries a `cache` key.",
             "inputSchema": {
                 "type": "object",
                 "properties": {
@@ -669,7 +669,7 @@
         {
             "name": "delete_content",
             "provider": "wp-content",
-            "description": "Delete content of any type. Set force=true to bypass trash.",
+            "description": "Delete content of any type. Set force=true to bypass trash. The page's URL is then purged from the caches; the result carries a `cache` key.",
             "inputSchema": {
                 "type": "object",
                 "properties": {
@@ -11281,7 +11281,7 @@
         {
             "name": "find_content_by_url",
             "provider": "wp-content",
-            "description": "Find content by its public URL. Extracts the slug and resolves the content type from the URL path (e.g. /documentation/guide/ tries the \"documentation\" type first), including custom post types. Optionally update it.",
+            "description": "Find content by its public URL. Extracts the slug and resolves the content type from the URL path (e.g. /documentation/guide/ tries the \"documentation\" type first), including custom post types. Optionally update it; an update runs a coherent cache purge and the result carries a `cache` key.",
             "inputSchema": {
                 "type": "object",
                 "properties": {
@@ -12875,7 +12875,7 @@
         {
             "name": "replace_content_text",
             "provider": "wp-content",
-            "description": "Replace exact text in one or more posts or Elementor pages, all or nothing. Defaults to a dry run that writes nothing and previews every edit (match counts, where found as widget and setting, the post_content mirror count, what would be written). A real run needs dry_run:false AND confirm:true. Every edit is checked before any write: each must match old exactly expected_count times (default 1), so one bad edit writes nothing and the result names it. On an Elementor page only the matching setting values change and the rest of _elementor_data stays byte for byte; post_content (the mirror) must hold old the same number of times and gets the same replacement. widget_id limits an Elementor match to one widget; refuse_if_present refuses a post that already contains a string (use the target URL to prevent double links). A match inside an HTML tag (an attribute) is refused unless allow_in_attributes:true; a match inside <script>, <style> or an HTML comment is refused unless allow_in_code:true. A restore point (a revision carrying the Elementor meta) is created per post before writing and must still exist; the result gives revision_id, the sha1 of the old _elementor_data and rollback steps. Writes are raw compare-and-swap SQL (no kses, no second revision): a post changed by someone else in the meantime is refused untouched and the posts already written are put back. Save hooks do not run; post_modified is set, caches are cleared and SyteOps cache.purge runs when available. A builder-mode Elementor page with no usable _elementor_data is refused. With verify_rendered (default true) it fetches each published post of this site (about 20 s in total, then the rest are skipped with time_budget) and warns when the new text is missing from the rendered page (it may be stripped from display, for example an in-body FAQ replaced by structured data): check those warnings, the write has already happened. Takes 1-25 edits, one per post. Same permission as update_content (edit_post per post); without unfiltered_html, the stored result must pass wp_kses_post() unchanged and carry no disallowed URL protocol, only Elementor text and content settings may change (not links, custom attributes, CSS, ids or dynamic tags), and allow_in_attributes / allow_in_code are refused.",
+            "description": "Replace exact text in one or more posts or Elementor pages, all or nothing. Defaults to a dry run that writes nothing and previews every edit (match counts, where found as widget and setting, the post_content mirror count, what would be written). A real run needs dry_run:false AND confirm:true. Every edit is checked before any write: each must match old exactly expected_count times (default 1), so one bad edit writes nothing and the result names it. On an Elementor page only the matching setting values change and the rest of _elementor_data stays byte for byte; post_content (the mirror) must hold old the same number of times and gets the same replacement. widget_id limits an Elementor match to one widget; refuse_if_present refuses a post that already contains a string (use the target URL to prevent double links). A match inside an HTML tag (an attribute) is refused unless allow_in_attributes:true; a match inside <script>, <style> or an HTML comment is refused unless allow_in_code:true. A restore point (a revision carrying the Elementor meta) is created per post before writing and must still exist; the result gives revision_id, the sha1 of the old _elementor_data and rollback steps. Writes are raw compare-and-swap SQL (no kses, no second revision): a post changed by someone else in the meantime is refused untouched and the posts already written are put back. Save hooks do not run; post_modified is set, caches are cleared and a coherent cache purge runs when SyteOps can (site-wide when the Elementor files were cleared; that clear is skipped, caches.elementor_files = skipped_scoped, only when SyteOps can regenerate just the edited post CSS and none is a kit, template or global widget); the result caches.coherence has the per-layer detail, and caches.syteops_cache_purge keeps the per-post purged/failed. A builder-mode Elementor page with no usable _elementor_data is refused. With verify_rendered (default true) it fetches each published post of this site (about 20 s in total, then the rest are skipped with time_budget) and warns when the new text is missing from the rendered page (it may be stripped from display, for example an in-body FAQ replaced by structured data): check those warnings, the write has already happened. Takes 1-25 edits, one per post. Same permission as update_content (edit_post per post); without unfiltered_html, the stored result must pass wp_kses_post() unchanged and carry no disallowed URL protocol, only Elementor text and content settings may change (not links, custom attributes, CSS, ids or dynamic tags), and allow_in_attributes / allow_in_code are refused.",
             "inputSchema": {
                 "type": "object",
                 "properties": {
@@ -12957,7 +12957,7 @@
         {
             "name": "sqseo_delete_snippet",
             "provider": "squirrly",
-            "description": "Delete a page's Squirrly wp_qss override row, reverting it to Squirrly's computed defaults. Target by post_id or url (\"/\" = homepage). Destructive; supports dry_run.",
+            "description": "Delete a page's Squirrly wp_qss override row, reverting it to Squirrly's computed defaults. Target by post_id or url (\"/\" = homepage). Destructive; supports dry_run. Afterwards the page's caches are purged and the result carries a `cache` key.",
             "inputSchema": {
                 "type": "object",
                 "properties": {
@@ -13080,7 +13080,7 @@
         {
             "name": "sqseo_set_snippet",
             "provider": "squirrly",
-            "description": "Write a page's Squirrly SEO snippet. Writes the canonical wp_qss row (the layer that renders the <title>) plus the _sq_* post-meta mirror. Only supplied fields change. Target by post_id or url (\"/\" = homepage). Destructive: pass dry_run:true to preview the call (the arguments to be written) without executing. For title, description and keywords alone, syteops_seo_set does the same write through SyteOps and works with any SEO plugin; use this tool for the Squirrly-only fields.",
+            "description": "Write a page's Squirrly SEO snippet. Writes the canonical wp_qss row (the layer that renders the <title>) plus the _sq_* post-meta mirror. Only supplied fields change. Target by post_id or url (\"/\" = homepage). Destructive: pass dry_run:true to preview the call (the arguments to be written) without executing. For title, description and keywords alone, syteops_seo_set does the same write through SyteOps and works with any SEO plugin; use this tool for the Squirrly-only fields. Afterwards the page's caches are purged and the result carries a `cache` key.",
             "inputSchema": {
                 "type": "object",
                 "properties": {
@@ -13494,7 +13494,7 @@
         {
             "name": "syteops_dispatch",
             "provider": "syteops",
-            "description": "Invoke any SyteOps Manage operation. Pass resource + action (see syteops_manifest) and params per that operation's schema. Destructive operations (the manifest marks them) require confirm:true. The dedicated secret-slot writes (crm.set_secret, ai.set_key, any action ending set_secret or set_key, and any operation that takes one of its own secret_keys as a param) are refused, so stored API keys are set from a terminal or the SyteOps admin, not as an MCP tool input. Returns {ok, changed, data} on success. SyteOps 1.6.804+: modules get_config and update_config reach only the syteops_banners bucket (other modules 403 config_not_exposed; update_config 422 unknown_config_key or invalid_config_value; Leads uses leads.settings_get and settings_set). 409 busy is retryable.",
+            "description": "Invoke any SyteOps Manage operation. Pass resource + action (see syteops_manifest) and params per that operation's schema. Destructive operations (the manifest marks them) require confirm:true. The dedicated secret-slot writes (crm.set_secret, ai.set_key, any action ending set_secret or set_key, and any operation that takes one of its own secret_keys as a param) are refused, so stored API keys are set from a terminal or the SyteOps admin, not as an MCP tool input. Returns {ok, changed, data} on success. SyteOps 1.6.982+: users.create and users.update take email_photos, that person's own choice of article photos in their review emails: JSON true or '1' (show), false or '0' (hide), or '' (follow the site default, see syteops_review_email_options_get). Send it exactly so: \"false\", \"true\", 2 or null is 422 invalid_params and nothing is written. SyteOps 1.6.804+: modules get_config and update_config reach only the syteops_banners bucket (other modules 403 config_not_exposed; update_config 422 unknown_config_key or invalid_config_value; Leads uses leads.settings_get and settings_set). 409 busy is retryable.",
             "inputSchema": {
                 "type": "object",
                 "properties": {
@@ -14627,6 +14627,46 @@
                 },
                 "required": [
                     "post_id"
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_review_email_options_get",
+            "provider": "syteops",
+            "description": "Read-only. The Review Portal's site-wide email options (SyteOps review.email_options_get; SyteOps 1.6.982+). show_photos is the site default for whether a review email card carries the article's featured photo (on unless switched off). A person's own choice (users.update email_photos, through syteops_dispatch) overrides it in either direction; people_showing and people_hiding count the active people who have made one, which is why flipping the default can change fewer inboxes than expected. Emails only: the photo on the site and in the portal is unaffected. Returns {show_photos, people_showing, people_hiding}. Needs a WordPress administrator (manage_options).",
+            "inputSchema": {
+                "type": "object",
+                "properties": {}
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_review_email_options_set",
+            "provider": "syteops",
+            "description": "Sets the site default for article photos in review emails (SyteOps review.email_options_set; SyteOps 1.6.982+). false leaves the photo off the cards in every review email (digest, new and updated draft, reminders and the rest) sent to anyone who has not chosen for themselves; true puts it back. A person's own choice (users.update email_photos) is never changed by this and still wins. Takes effect on the next email built, including one already queued. Not destructive: no confirm, and calling it again reverses it. show_photos must be the JSON value true or false: the string \"false\", 0, 1 or null is 422 invalid_show_photos and nothing is written. Returns {show_photos, people_showing, people_hiding} as stored. Needs a WordPress administrator (manage_options).",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "show_photos": {
+                        "type": "boolean",
+                        "description": "JSON true (show the featured photo on review email cards, the default) or false (leave it off). Never a string or a number."
+                    }
+                },
+                "required": [
+                    "show_photos"
                 ]
             },
             "destructive": false,
@@ -16079,7 +16119,7 @@
         {
             "name": "update_content",
             "provider": "wp-content",
-            "description": "Update existing content of any type. Only provided fields change.",
+            "description": "Update existing content of any type. Only provided fields change. A coherent cache purge runs afterwards; the result carries a `cache` key.",
             "inputSchema": {
                 "type": "object",
                 "properties": {

@@ -27,7 +27,7 @@ Assign taxonomy terms to a piece of content (e.g. set a post's categories or tag
 
 ## `create_content`
 
-Create new content of any type. Returns the created object.
+Create new content of any type. Returns the created object. A published item then gets a coherent cache purge; the result carries a `cache` key.
 
 **🔴 Destructive** — supports a `dry_run` preview flag.  
 **Profiles:** `full`, `wp`
@@ -70,7 +70,7 @@ Create a new term in a taxonomy.
 
 ## `delete_content`
 
-Delete content of any type. Set force=true to bypass trash.
+Delete content of any type. Set force=true to bypass trash. The page's URL is then purged from the caches; the result carries a `cache` key.
 
 **🔴 Destructive** — supports a `dry_run` preview flag.  
 **Profiles:** `full`, `wp`
@@ -123,7 +123,7 @@ _No parameters._
 
 ## `find_content_by_url`
 
-Find content by its public URL. Extracts the slug and resolves the content type from the URL path (e.g. /documentation/guide/ tries the "documentation" type first), including custom post types. Optionally update it.
+Find content by its public URL. Extracts the slug and resolves the content type from the URL path (e.g. /documentation/guide/ tries the "documentation" type first), including custom post types. Optionally update it; an update runs a coherent cache purge and the result carries a `cache` key.
 
 **Profiles:** `full`, `lean`, `wp`
 
@@ -238,7 +238,7 @@ List terms in a taxonomy (e.g. category, post_tag, or a custom taxonomy).
 
 ## `replace_content_text`
 
-Replace exact text in one or more posts or Elementor pages, all or nothing. Defaults to a dry run that writes nothing and previews every edit (match counts, where found as widget and setting, the post_content mirror count, what would be written). A real run needs dry_run:false AND confirm:true. Every edit is checked before any write: each must match old exactly expected_count times (default 1), so one bad edit writes nothing and the result names it. On an Elementor page only the matching setting values change and the rest of _elementor_data stays byte for byte; post_content (the mirror) must hold old the same number of times and gets the same replacement. widget_id limits an Elementor match to one widget; refuse_if_present refuses a post that already contains a string (use the target URL to prevent double links). A match inside an HTML tag (an attribute) is refused unless allow_in_attributes:true; a match inside &lt;script>, &lt;style> or an HTML comment is refused unless allow_in_code:true. A restore point (a revision carrying the Elementor meta) is created per post before writing and must still exist; the result gives revision_id, the sha1 of the old _elementor_data and rollback steps. Writes are raw compare-and-swap SQL (no kses, no second revision): a post changed by someone else in the meantime is refused untouched and the posts already written are put back. Save hooks do not run; post_modified is set, caches are cleared and SyteOps cache.purge runs when available. A builder-mode Elementor page with no usable _elementor_data is refused. With verify_rendered (default true) it fetches each published post of this site (about 20 s in total, then the rest are skipped with time_budget) and warns when the new text is missing from the rendered page (it may be stripped from display, for example an in-body FAQ replaced by structured data): check those warnings, the write has already happened. Takes 1-25 edits, one per post. Same permission as update_content (edit_post per post); without unfiltered_html, the stored result must pass wp_kses_post() unchanged and carry no disallowed URL protocol, only Elementor text and content settings may change (not links, custom attributes, CSS, ids or dynamic tags), and allow_in_attributes / allow_in_code are refused.
+Replace exact text in one or more posts or Elementor pages, all or nothing. Defaults to a dry run that writes nothing and previews every edit (match counts, where found as widget and setting, the post_content mirror count, what would be written). A real run needs dry_run:false AND confirm:true. Every edit is checked before any write: each must match old exactly expected_count times (default 1), so one bad edit writes nothing and the result names it. On an Elementor page only the matching setting values change and the rest of _elementor_data stays byte for byte; post_content (the mirror) must hold old the same number of times and gets the same replacement. widget_id limits an Elementor match to one widget; refuse_if_present refuses a post that already contains a string (use the target URL to prevent double links). A match inside an HTML tag (an attribute) is refused unless allow_in_attributes:true; a match inside &lt;script>, &lt;style> or an HTML comment is refused unless allow_in_code:true. A restore point (a revision carrying the Elementor meta) is created per post before writing and must still exist; the result gives revision_id, the sha1 of the old _elementor_data and rollback steps. Writes are raw compare-and-swap SQL (no kses, no second revision): a post changed by someone else in the meantime is refused untouched and the posts already written are put back. Save hooks do not run; post_modified is set, caches are cleared and a coherent cache purge runs when SyteOps can (site-wide when the Elementor files were cleared; that clear is skipped, caches.elementor_files = skipped_scoped, only when SyteOps can regenerate just the edited post CSS and none is a kit, template or global widget); the result caches.coherence has the per-layer detail, and caches.syteops_cache_purge keeps the per-post purged/failed. A builder-mode Elementor page with no usable _elementor_data is refused. With verify_rendered (default true) it fetches each published post of this site (about 20 s in total, then the rest are skipped with time_budget) and warns when the new text is missing from the rendered page (it may be stripped from display, for example an in-body FAQ replaced by structured data): check those warnings, the write has already happened. Takes 1-25 edits, one per post. Same permission as update_content (edit_post per post); without unfiltered_html, the stored result must pass wp_kses_post() unchanged and carry no disallowed URL protocol, only Elementor text and content settings may change (not links, custom attributes, CSS, ids or dynamic tags), and allow_in_attributes / allow_in_code are refused.
 
 **Profiles:** `full`, `wp`
 
@@ -255,7 +255,7 @@ Replace exact text in one or more posts or Elementor pages, all or nothing. Defa
 
 ## `update_content`
 
-Update existing content of any type. Only provided fields change.
+Update existing content of any type. Only provided fields change. A coherent cache purge runs afterwards; the result carries a `cache` key.
 
 **🔴 Destructive** — supports a `dry_run` preview flag.  
 **Profiles:** `full`, `wp`
