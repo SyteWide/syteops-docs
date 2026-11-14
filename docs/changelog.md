@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.7.002
+
+- Fixed: A page changed by a background job, a scheduled publish or a tool that writes content directly no longer stays stale for minutes after a purge. LiteSpeed's purge can only be sent with a real page response, so SyteOps now sends it in the request that made the change when it can, and otherwise holds it until the next real visit or a tiny public nudge request that only sends purges already waiting, and it purges Cloudflare only after that, so Cloudflare can no longer cache the old copy again. The Page cache card shows whether each LiteSpeed purge was sent, is waiting or is unknown. A failed Cloudflare purge is retried a limited number of times when the failure can be temporary. Known limits: a Cloudflare failure during a whole-site purge, combined with an edit in the same minute, can leave that page at the edge until its own cache expires or the next edit; a few content paths (reviewer saves, media hold and rename, the robots file writer) still purge both layers in one request.
+
 ## v1.7.001
 
 - Fixed: A follow-up or result request that has left the page is no longer remembered as unsent if the browser refuses a later write, so a reload cannot send a second outcome. A failed write of the "already done" mark now asks for a retry instead of being ignored. Reopen on a callback parked for a follow-up now says it is parked and how to resolve it. A contact value stored with unusual spacing and re-sent untouched is no longer rewritten. The old contact request format used by tabs opened before this release stops working after 2026-12-06 and asks for a page reload.
