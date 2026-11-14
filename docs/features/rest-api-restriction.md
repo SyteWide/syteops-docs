@@ -72,6 +72,12 @@ When REST restriction is enabled:
 When Block All is enabled:
 - Everything, with no exceptions, including browser preflight (OPTIONS) requests
 
+## Query-Style REST Addresses
+
+WordPress can also be asked for REST data with a `rest_route` value in the address (`/?rest_route=/wp/v2/posts`) or in a submitted form. Sites with plain permalinks use that form for their own REST address, always on the home page or its `index.php`. A request that carries `rest_route` anywhere else (for example `/robots.txt?rest_route=/wp/v2/users`) is refused with HTTP 403 before WordPress routes it, whatever spelling it uses, and the refusal is marked so that no cache keeps it. Normal `/wp-json/...` addresses, admin pages, scheduled tasks and command-line tools are not affected.
+
+There is nothing to switch on. If a tool of yours must call the REST API with the query form on a page other than the home page, change it to the `/wp-json/` address, or ask your developer for the site-level exception.
+
 ## Signed In, Not Just a Header
 
 With the restriction on, a request is served only if it ends up signed in once WordPress has finished authenticating it, or is on the allowlist. A credentials header, a login cookie sent without a REST nonce, or another plugin's approval without a signed-in user is not enough by itself: the request is treated like any other anonymous request.

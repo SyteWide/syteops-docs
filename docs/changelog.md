@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.7.005
+
+- Security: a request that carries a REST route in its address or form data is refused everywhere except the home page and its index file. Real REST calls to the home page keep working, and a site can list extra exact paths through a filter if a proxy needs it. The refusal is a plain 403 that no cache stores.
+
+## v1.7.004
+
+- Fixed: A page changed around the time a whole-site Cloudflare clear failed or was refused could keep its old copy at Cloudflare until its next edit or until the edge lifetime ran out. Such a page now gets its own follow-up Cloudflare clear, after LiteSpeed has let go of the old copy and a thirty-second wait. The follow-up is limited the same way every clear is, and a clear that failed in a way that cannot pass, such as a wrong token, is not repeated. The Page cache card and the cache state call are unchanged.
+
 ## v1.7.003
 
 - Added: The Page cache card has a new Cache state panel: which cache layers are present, the Cloudflare mode, the LiteSpeed Cache lifetime, whether WP-Cron is disabled, and when the scheduled job's request to the site's carry address last arrived. A new read-only cache state call in the Manage API returns the same facts. A recent request only shows that something called the carry address; it does not prove who sent it.
