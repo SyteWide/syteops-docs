@@ -1,6 +1,6 @@
 {
     "schema_version": 1,
-    "syteops_version": "1.7.008",
+    "syteops_version": "1.7.009",
     "operations": [
         {
             "resource": "users",
@@ -2295,7 +2295,7 @@
             "destructive": false,
             "capability": "manage_options",
             "strict": true,
-            "returns": "data: {urls[], purged[], attempted[], skipped[], errors[], layers: {litespeed: {status}, cloudflare: {status, mode, reason?}}, queued, deferred?, elementor_css: regenerated|cleared|unavailable|not_elementor|null, elementor_css_scope: post|site_wide|null}"
+            "returns": "data: {urls[], purged[], attempted[], skipped[], errors[], layers: {litespeed: {status}, cloudflare: {status, mode, reason?}}, queued, deferred?, builder_clear?: {builder, status, scope, posts, failed, capped}, elementor_css: regenerated|cleared|unavailable|not_elementor|null, elementor_css_scope: post|site_wide|null}"
         },
         {
             "resource": "cache",

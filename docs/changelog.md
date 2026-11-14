@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.7.009
+
+- Fixed: The Avada cache button now clears Avada's compiled styles and then purges the whole site's page cache at once, so a page cached before the clear can no longer point at a style file that was deleted. When Avada is not available the button now says so instead of reporting success.
+- Fixed: The Elementor, Blocksy and Divi cache buttons now use each product's real clear, and say so honestly when the product is missing or the clear could not run. The Blocksy button says plainly when only its theme, not its companion plugin, is active.
+- Fixed: Review Portal picture swaps now also reset the page styles of Avada and Elementor's newer widgets, so the swapped picture shows with the right styles on the next visit.
+- Added: The Page cache card has a new 'Page builder' choice (Automatic, Elementor, Avada, Divi, Headless or None) and, for Elementor sites on the Blocksy theme, a 'Blocksy CSS refresh' option. The choice is saved and shown next to what SyteOps detects, but it does not change any clearing yet.
+- Added: Saving a page on an Avada or Divi site now clears that page's builder styles before the page cache is purged, as Elementor sites already did, and the Page builder choice decides which builder is used. When Avada or Divi clears its own styles for the whole site, SyteOps now purges the page cache for the whole site right away. At most 25 pages are cleared this way in one request.
+
 ## v1.7.008
 
 - Added: When you schedule a follow-up call in the person hub, you can now choose who gets its reminder email: anyone with Callbacks access. Leaving the choice on 'Same as today' keeps the reminder going to the person who made the last call. If the chosen person can no longer be reminded, the reminder goes where it would have gone before.
