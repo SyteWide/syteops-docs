@@ -111,11 +111,14 @@ Press **Follow up** when the caller asked to be called on a later day. If the no
 
 - **Tomorrow**, **In 3 days** and **Next week** fill in the date for you. **Pick a date** takes you to the date field to choose any day. The days count from today in your site's time zone, which can differ from the clock on your own computer.
 - You can choose today or any day up to 180 days ahead, the same range the AI uses. Another day shows a short message in the step and nothing is sent.
+- **Who gets the reminder?** lists the people you can send it to. The first choice, **Same as today**, is already selected and leaves the reminder with the person who made the last call, so nothing changes unless you pick someone. Choose **Me** or a colleague to send it to them instead. A colleague who does not have access to Callbacks is shown grayed out with the reason and cannot be chosen.
 - **Save follow-up** saves your note first, records the result once, and moves the callback to **Follow-ups** with that date. **Cancel** (or the Escape key) closes the step and puts you back on the buttons with your note exactly as it was.
 
 If the callback is already a follow-up, choosing a new day moves it to that day. If the answer is lost or the callback could not be moved, a **Try again** button appears and sends the same day again, so a follow-up is never recorded twice and the day you chose never changes. If you reload the page before the answer arrives, the page remembers the request for up to 24 hours and shows the same day when you press **Follow up** again: the step opens with that day fixed and a **Send follow-up again** button, and nothing is sent until you press it.
 
 On the day itself the follow-up reminder email (when your admin has turned it on) goes to the person who last called the lead, as for any follow-up.
+
+If the page cannot save your choice of colleague (for example, their access to Callbacks ended a moment ago), the step opens again with your note and your day kept, says so, and grays that colleague out so you can choose again. Once saved, the follow-up row shows the colleague's name after the date. If you lose the answer and press **Try again**, or reload the page, the same colleague is sent again, never a different one.
 
 If the call never connected (nobody answered, or it never rang), press **Didn't connect** instead of writing a note. That button is not offered while the note box has words in it, while a note is still saving, or while the box shows a **Restore**, **Copy** or **Discard** offer for text kept from before a reload: answer the offer first. **Close** waits for the same reason. If you do write a note on a call you marked as not connected, the note is kept and the call counts as a call again.
 

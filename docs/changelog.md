@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.7.008
+
+- Added: When you schedule a follow-up call in the person hub, you can now choose who gets its reminder email: anyone with Callbacks access. Leaving the choice on 'Same as today' keeps the reminder going to the person who made the last call. If the chosen person can no longer be reminded, the reminder goes where it would have gone before.
+- Added: The person who set a follow-up now gets a separate copy of its reminder when the reminder goes to someone else. The copy has no buttons and cannot be acted on. It is on by default and can be turned off with a new setting in the Follow-up reminders section of the Leads settings.
+
 ## v1.7.007
 
 - Fixed: Four more places that cleared a page's cache in one step, the Review Portal save, the picture hold, the picture rename tool and the robots.txt update, now use the same ordered clear as every other change: the server's own cache first, then Cloudflare after the server's clear has gone out. A rename of a picture that is stored on another host than the site's address is reported as skipped instead of silently ignored. The Page cache card is unchanged.

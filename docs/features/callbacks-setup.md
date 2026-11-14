@@ -140,6 +140,7 @@ A repo connected through the SyteWide MCP can do each step with a Manage operati
 | Optional: AI deal summary | `leads.settings_set` with `callbacks_deal_summary_enabled` and `callbacks_deal_summary_cap_day`, and `confirm: true` to turn it on |
 | Optional: call announcement | `leads.settings_set` with `ringtonic_call_topic_template` (up to 200 characters; an empty string restores the built-in announcement) and `ringtonic_call_topic_mode` (`built_in`, `reason_only` or `none`); no `confirm` needed |
 | Optional: Not a lead marks the lead Unqualified | `leads.settings_set` with `callbacks_not_lead_sets_unqualified` (default false; no `confirm` needed) |
+| Optional: turn off the copy to the person who set a follow-up | `leads.settings_set` with `callbacks_reminder_copy_enabled` (default true; no `confirm` needed) |
 | Optional: call labels | `leads.settings_set` with `callbacks_hung_up_seconds` (5 to 120, default 30) |
 | Optional: callback number to give | `leads.settings_set` with `callbacks_callback_number` (a phone number, 7 to 20 digits; an empty string clears it and the panel shows the number the lead dialed); no `confirm` needed |
 
