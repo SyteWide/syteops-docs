@@ -15,7 +15,7 @@ Every operation runs through the single dispatch endpoint. See [Dispatch contrac
 | [`ai`](./ai) | 5 | no |
 | [`ai_images`](./ai-images) | 3 | yes |
 | [`builder`](./builder) | 1 | no |
-| [`cache`](./cache) | 1 | no |
+| [`cache`](./cache) | 2 | no |
 | [`calendar`](./calendar) | 7 | yes |
 | [`content_sources`](./content-sources) | 13 | yes |
 | [`crm`](./crm) | 6 | yes |

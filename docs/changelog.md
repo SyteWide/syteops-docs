@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.7.003
+
+- Added: The Page cache card has a new Cache state panel: which cache layers are present, the Cloudflare mode, the LiteSpeed Cache lifetime, whether WP-Cron is disabled, and when the scheduled job's request to the site's carry address last arrived. A new read-only cache state call in the Manage API returns the same facts. A recent request only shows that something called the carry address; it does not prove who sent it.
+
 ## v1.7.002
 
 - Fixed: A page changed by a background job, a scheduled publish or a tool that writes content directly no longer stays stale for minutes after a purge. LiteSpeed's purge can only be sent with a real page response, so SyteOps now sends it in the request that made the change when it can, and otherwise holds it until the next real visit or a tiny public nudge request that only sends purges already waiting, and it purges Cloudflare only after that, so Cloudflare can no longer cache the old copy again. The Page cache card shows whether each LiteSpeed purge was sent, is waiting or is unknown. A failed Cloudflare purge is retried a limited number of times when the failure can be temporary. Known limits: a Cloudflare failure during a whole-site purge, combined with an edit in the same minute, can leave that page at the edge until its own cache expires or the next edit; a few content paths (reviewer saves, media hold and rename, the robots file writer) still purge both layers in one request.
