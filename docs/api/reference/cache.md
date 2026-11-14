@@ -26,7 +26,7 @@ Purge one post's page (post_id), or up to 30 URLs on this site's own host (urls)
 
 **Returns**
 
-data: &#123;urls[], purged[], attempted[], skipped[], errors[], layers: &#123;litespeed: &#123;status}, cloudflare: &#123;status, mode, reason?}}, queued, deferred?, elementor_css: regenerated|cleared|unavailable|not_elementor|null, elementor_css_scope: post|site_wide|null}
+data: &#123;urls[], purged[], attempted[], skipped[], errors[], layers: &#123;litespeed: &#123;status}, cloudflare: &#123;status, mode, reason?}}, queued, deferred?, builder_clear?: &#123;builder, status, scope, posts, failed, capped}, elementor_css: regenerated|cleared|unavailable|not_elementor|null, elementor_css_scope: post|site_wide|null}
 
 **Request**
 
