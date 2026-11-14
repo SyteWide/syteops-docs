@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.7.006
+
+- Fixed: Page cache clears are now bounded in two more cases. A page whose clear request keeps failing to leave the server is retried a limited number of times instead of for days, and a whole-site Cloudflare clear that Cloudflare refuses for good, such as with a wrong token, is not repeated for an hour unless something newer changed or the Cloudflare settings were corrected. The Page cache card is unchanged.
+
 ## v1.7.005
 
 - Security: a request that carries a REST route in its address or form data is refused everywhere except the home page and its index file. Real REST calls to the home page keep working, and a site can list extra exact paths through a filter if a proxy needs it. The refusal is a plain 403 that no cache stores.
