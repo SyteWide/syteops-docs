@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.7.007
+
+- Fixed: Four more places that cleared a page's cache in one step, the Review Portal save, the picture hold, the picture rename tool and the robots.txt update, now use the same ordered clear as every other change: the server's own cache first, then Cloudflare after the server's clear has gone out. A rename of a picture that is stored on another host than the site's address is reported as skipped instead of silently ignored. The Page cache card is unchanged.
+
 ## v1.7.006
 
 - Fixed: Page cache clears are now bounded in two more cases. A page whose clear request keeps failing to leave the server is retried a limited number of times instead of for days, and a whole-site Cloudflare clear that Cloudflare refuses for good, such as with a wrong token, is not repeated for an hour unless something newer changed or the Cloudflare settings were corrected. The Page cache card is unchanged.
