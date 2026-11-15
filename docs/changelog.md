@@ -8,6 +8,19 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.7.029
+
+- Changed: LiteSpeed's toolbar no longer shows Purge All, Purge All - LSCache, Purge All - CSS/JS or Purge All - Cloudflare to people who see the Purge All button, because those clear Cloudflare before LiteSpeed has been told. LiteSpeed's icon now opens its dashboard instead of purging, and its other items stay: Manage, Settings, Purge this page and the optimizer purges. A new Hide LiteSpeed purge buttons setting on the Page cache card (Automatic is on while LiteSpeed Cache is active, and Off shows the items again) controls it. LiteSpeed's own pages and shell commands still purge as before.
+
+## v1.7.028
+
+- Added: a Purge All button. It sits in the admin toolbar next to LiteSpeed's icon and at the top of the Page cache card, and it clears the page builder's styles first, then LiteSpeed (its complete Purge All), then Cloudflare, in that order, so Cloudflare never clears before LiteSpeed has been told. Administrators and SyteOps Admins can press it; a second press within ten seconds waits. The message says what happened, and tells you when Cloudflare follows a minute later.
+- Changed: the Quick Links menu no longer has Clear LiteSpeed Cache, which cleared Cloudflare too early; use Purge All. Clear Caches is now named Clear SyteOps Cache, and its heading follows the white-label name.
+
+## v1.7.027
+
+- Changed: The Callbacks page's script was tidied behind the scenes once more: the code behind opening a callback from a link in an email (the question a link asks before it acts, and the way the row it names is brought into view) and the once-a-minute check of who is calling now sits together in one clearly labeled part. Nothing changes in how the page looks or works.
+
 ## v1.7.025
 
 - Changed: The Callbacks page's script was tidied behind the scenes once more: the code behind the two-pane list (the list of callers beside the selected caller's details, the way a row moves into the details pane and back, the arrow keys, and the width check that turns the two panes on and off) now sits together in one clearly labeled part. Nothing changes in how the page looks or works.
