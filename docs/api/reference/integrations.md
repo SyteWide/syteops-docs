@@ -8,7 +8,57 @@ description: Manage API operations for the integrations resource.
 
 # `integrations`
 
-3 operation(s). All run through `POST /syteops/v1/manage/dispatch` (reads may use the documented GET form).
+5 operation(s). All run through `POST /syteops/v1/manage/dispatch` (reads may use the documented GET form).
+
+## `compat`
+
+Read-only. The stored compatibility findings for the plugins and themes SyteOps relies on (EWWW Image Optimizer, LiteSpeed Cache, Elementor, Elementor Pro, Avada, Avada Builder, Divi, Blocksy, Blocksy Companion Pro): one row per integration with the installed version, the newest version SyteOps was verified against (verified_max), the status and its severity, and for a major the ids of the failing checks. status is integration_absent (not installed), ok, version_unverified (installed version outside the verified range; soft), indeterminate (a check could not be decided; soft), probe_failed (a hook, function, class, constant or option SyteOps relies on is gone or changed; major) or unchecked (no check has run). first_seen and checked_at are Unix seconds or null; acknowledged and emailed are null until those are tracked. The checks run in the background after a plugin or theme changes and once a day. No path, URL, check target or error text is returned. A plugin older than this operation answers 404 unknown_operation.
+
+**Access:** SyteOps Admin or API key.
+
+**Parameters**
+
+_No parameters._
+
+
+**Returns**
+
+data.integrations[]: array of &#123;slug, installed, verified_max, status: integration_absent|ok|version_unverified|indeterminate|probe_failed|unchecked, severity: major|soft|'', failing[], first_seen|null, acknowledged: null, emailed: null, checked_at|null}
+
+**Request**
+
+```json
+{
+  "resource": "integrations",
+  "action": "compat",
+  "params": {}
+}
+```
+
+## `compat_check`
+
+Run the compatibility checks now and return the same rows as integrations.compat. Non-destructive: the checks read files and symbols and write only their own stored findings. At most once per 5 minutes after ANY check, the background one included: inside that window it answers 429 cooldown with retry_after in seconds and the stored rows, which the recent check left fresh. 409 compat_disabled when the checks are switched off on this site (the SYTEOPS_COMPAT_CHECKS_DISABLED constant or the syteops/compat/enabled filter). A major found now is a candidate until a second check at least 5 minutes later agrees.
+
+**Access:** SyteOps Admin or API key.
+
+**Parameters**
+
+_No parameters._
+
+
+**Returns**
+
+data: &#123;integrations[] (as integrations.compat), ran, retry_after}
+
+**Request**
+
+```json
+{
+  "resource": "integrations",
+  "action": "compat_check",
+  "params": {}
+}
+```
 
 ## `disable`
 
