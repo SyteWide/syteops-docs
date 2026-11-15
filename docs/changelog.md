@@ -8,6 +8,12 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.7.014
+
+- Added: The plugin now checks, in the background, whether the add-ons it depends on still look the way it expects after they update, and shows what it finds. Today it covers the image optimizer, LiteSpeed Cache, Elementor, Avada, Divi and Blocksy. A small command-line command reports the result. Nothing is emailed and nothing is shown to visitors: a note appears only to SyteOps administrators, in the Page cache card, when an add-on is newer than the version the plugin was last checked against, and a clearer warning appears there when something the plugin relies on has gone missing.
+- Added: A read-only Manage API call reports the same compatibility results, with no file paths or error text, so they can be read across all sites.
+- Fixed: The Review Portal's LiteSpeed lazy-loading opt-out now actually takes effect, and one unused hook name was removed.
+
 ## v1.7.013
 
 - Added: Two WP-CLI commands for deploys and maintenance, both under the plugin's cache command group: the cache purge command clears the page cache for the whole site or for a list of addresses in the right order (the server's own cache first, then Cloudflare), and the cache state command prints the same cache report as the Manage API. The purge command prints one line of JSON and uses distinct exit codes, so a deploy script can tell queued, done and failed apart; it can wait for the clear to finish, and with its builder option it clears the page builder's styles first (Elementor, Avada or Divi).

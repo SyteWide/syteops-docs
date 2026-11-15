@@ -20,7 +20,7 @@ Every operation runs through the single dispatch endpoint. See [Dispatch contrac
 | [`content_sources`](./content-sources) | 13 | yes |
 | [`crm`](./crm) | 6 | yes |
 | [`identity`](./identity) | 2 | no |
-| [`integrations`](./integrations) | 3 | yes |
+| [`integrations`](./integrations) | 5 | yes |
 | [`leads`](./leads) | 24 | yes |
 | [`linkedin_groups`](./linkedin-groups) | 3 | yes |
 | [`listing_image`](./listing-image) | 2 | no |
