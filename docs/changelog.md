@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.7.021
+
+- Changed: The Callbacks page's script was tidied behind the scenes once more: the code behind kept text (the strip that lists words no box can show, the Restore and Discard choices and the warning before an unsaved Edit contact form closes) now sits together in one clearly labeled part. Nothing changes in how the page looks or works.
+
 ## v1.7.020
 
 - Changed: The Callbacks page's script was tidied behind the scenes once more: the code behind the lead panel (the lead view fetched for each caller, the note and summary requests and the Edit contact fields) now sits together in one clearly labeled part. Nothing changes in how the page looks or works.
