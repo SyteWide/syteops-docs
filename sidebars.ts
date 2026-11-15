@@ -46,6 +46,7 @@ const sidebars: SidebarsConfig = {
         'features/search-console-index-status',
         'features/coverage-audit',
         'features/removed-pictures',
+        'features/replaced-pictures',
         'features/social-publishing',
         'features/server-connections',
         'features/debug-tool',
