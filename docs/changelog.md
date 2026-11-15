@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.7.025
+
+- Changed: The Callbacks page's script was tidied behind the scenes once more: the code behind the two-pane list (the list of callers beside the selected caller's details, the way a row moves into the details pane and back, the arrow keys, and the width check that turns the two panes on and off) now sits together in one clearly labeled part. Nothing changes in how the page looks or works.
+
+## v1.7.024
+
+- Changed: behind the scenes, the cache clear can now ask LiteSpeed for its complete Purge All, including its combined style and script files, while Cloudflare is still cleared afterward in the right order. Nothing changes on screen yet.
+
 ## v1.7.023
 
 - Fixed: when a deploy's cache clear runs on a site that had its own full cache clear in the last five minutes, the clear now finishes right away instead of waiting out the five minutes. Every other full clear keeps the five-minute pause between them.
