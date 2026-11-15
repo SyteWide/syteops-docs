@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.7.012
+
+- Changed: The Callbacks page's script was reorganized behind the scenes so it is easier to maintain: its helpers, its storage code and the note box are now grouped into clearly separated parts. Nothing changes in how the page looks or works, and notes, drafts and follow-up requests are saved exactly as before.
+
 ## v1.7.011
 
 - Fixed: Replaced pictures are now detected for pictures that were already in the media library before the update. After updating, SyteOps quietly records each existing picture's file signature in the background, a few hundred pictures at a time, so replacing the file of an older picture is detected automatically afterwards. The cache state read shows how far this has got and whether it has stalled.
