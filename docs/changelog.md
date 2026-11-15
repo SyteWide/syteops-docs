@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.7.015
+
+- Added: When a compatibility check finds that an add-on changed in a way the plugin relies on, and a second check a few minutes later confirms it, SyteOps administrators now see a notice on every admin screen and receive one email each, once for each finding. Add-on versions that are merely newer than the last check, with nothing broken, stay quiet and are never emailed. The email can be turned off in a new Integration compatibility box on the System / API tab, which only a SyteOps administrator can change; the notice still shows when it is off.
+
 ## v1.7.014
 
 - Added: The plugin now checks, in the background, whether the add-ons it depends on still look the way it expects after they update, and shows what it finds. Today it covers the image optimizer, LiteSpeed Cache, Elementor, Avada, Divi and Blocksy. A small command-line command reports the result. Nothing is emailed and nothing is shown to visitors: a note appears only to SyteOps administrators, in the Page cache card, when an add-on is newer than the version the plugin was last checked against, and a clearer warning appears there when something the plugin relies on has gone missing.

@@ -12,7 +12,7 @@ description: Manage API operations for the integrations resource.
 
 ## `compat`
 
-Read-only. The stored compatibility findings for the plugins and themes SyteOps relies on (EWWW Image Optimizer, LiteSpeed Cache, Elementor, Elementor Pro, Avada, Avada Builder, Divi, Blocksy, Blocksy Companion Pro): one row per integration with the installed version, the newest version SyteOps was verified against (verified_max), the status and its severity, and for a major the ids of the failing checks. status is integration_absent (not installed), ok, version_unverified (installed version outside the verified range; soft), indeterminate (a check could not be decided; soft), probe_failed (a hook, function, class, constant or option SyteOps relies on is gone or changed; major) or unchecked (no check has run). first_seen and checked_at are Unix seconds or null; acknowledged and emailed are null until those are tracked. The checks run in the background after a plugin or theme changes and once a day. No path, URL, check target or error text is returned. A plugin older than this operation answers 404 unknown_operation.
+Read-only. The stored compatibility findings for the plugins and themes SyteOps relies on (EWWW Image Optimizer, LiteSpeed Cache, Elementor, Elementor Pro, Avada, Avada Builder, Divi, Blocksy, Blocksy Companion Pro): one row per integration with the installed version, the newest version SyteOps was verified against (verified_max), the status and its severity, and for a major the ids of the failing checks. status is integration_absent (not installed), ok, version_unverified (installed version outside the verified range; soft), indeterminate (a check could not be decided; soft), probe_failed (a hook, function, class, constant or option SyteOps relies on is gone or changed; major) or unchecked (no check has run). first_seen and checked_at are Unix seconds or null; acknowledged and emailed are, for a major, the Unix seconds of the site-wide acknowledgment of its admin notice and of the first accepted email to a SyteOps Admin for the current change (integration, installed version and failing checks), else null. The checks run in the background after a plugin or theme changes and once a day. No path, URL, check target or error text is returned. A plugin older than this operation answers 404 unknown_operation.
 
 **Access:** SyteOps Admin or API key.
 
@@ -23,7 +23,7 @@ _No parameters._
 
 **Returns**
 
-data.integrations[]: array of &#123;slug, installed, verified_max, status: integration_absent|ok|version_unverified|indeterminate|probe_failed|unchecked, severity: major|soft|'', failing[], first_seen|null, acknowledged: null, emailed: null, checked_at|null}
+data.integrations[]: array of &#123;slug, installed, verified_max, status: integration_absent|ok|version_unverified|indeterminate|probe_failed|unchecked, severity: major|soft|'', failing[], first_seen|null, acknowledged|null, emailed|null, checked_at|null}
 
 **Request**
 
