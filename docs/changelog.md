@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.7.011
+
+- Fixed: Replaced pictures are now detected for pictures that were already in the media library before the update. After updating, SyteOps quietly records each existing picture's file signature in the background, a few hundred pictures at a time, so replacing the file of an older picture is detected automatically afterwards. The cache state read shows how far this has got and whether it has stalled.
+
 ## v1.7.010
 
 - Added: When a picture's file is replaced in place (same file name), visitors who already have the old picture now get the new one: the replaced picture's address gets a short version token on the pages that show it, and only that picture's address changes, so nothing else on the site is downloaded again. Replacements are detected when the file is replaced through the media tools or its details are regenerated (at most 20 automatic detections per hour), and you can also mark pictures as replaced through the Manage API or with a command. The pages that show the picture are cleared from the page cache when it is marked.
