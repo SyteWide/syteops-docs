@@ -86,7 +86,7 @@ Under **Call summary email**, enter the Users slot numbers (for example `001, 00
 
 ## 9. Follow-up reminders
 
-Under **Follow-up reminders**, tick **Email follow-up reminders**. It is off by default. Optionally fill **Otherwise send reminders to slots** for a follow-up whose caller can no longer be reminded; empty means nobody. Reminders go out at about 7:30 am in the site's time zone.
+Under **Follow-up reminders**, tick **Email follow-up reminders**. It is off by default. A reminder goes to the person chosen when the follow-up was set; when none was chosen, or that person can no longer be reminded, to the person who last called the lead. Optionally fill **Otherwise send reminders to slots** for a follow-up where neither can be reminded; empty means nobody. **Send the person who set a follow-up a copy of its reminder when it goes to someone else** is on by default; untick it to stop those copies. Reminders go out at about 7:30 am in the site's time zone.
 
 ### Optional: AI deal summary
 

@@ -116,7 +116,7 @@ Press **Follow up** when the caller asked to be called on a later day. If the no
 
 If the callback is already a follow-up, choosing a new day moves it to that day. If the answer is lost or the callback could not be moved, a **Try again** button appears and sends the same day again, so a follow-up is never recorded twice and the day you chose never changes. If you reload the page before the answer arrives, the page remembers the request for up to 24 hours and shows the same day when you press **Follow up** again: the step opens with that day fixed and a **Send follow-up again** button, and nothing is sent until you press it.
 
-On the day itself the follow-up reminder email (when your admin has turned it on) goes to the person who last called the lead, as for any follow-up.
+On the day itself the follow-up reminder email (when your admin has turned it on) goes to the person you chose under **Who gets the reminder?**, or to the person who last called the lead when you left **Same as today**. If the chosen person can no longer be reminded, it falls back the same way; see [Follow-up reminders](#follow-up-reminders).
 
 If the page cannot save your choice of colleague (for example, their access to Callbacks ended a moment ago), the step opens again with your note and your day kept, says so, and grays that colleague out so you can choose again. Once saved, the follow-up row shows the colleague's name after the date. If you lose the answer and press **Try again**, or reload the page, the same colleague is sent again, never a different one.
 
@@ -169,7 +169,7 @@ The call summary, the follow-up reminder and the Monday list use your General �
 
 ### Follow-up reminders
 
-When a callback has a follow-up date, the person who last called that lead can get one reminder email on the day, at about 7:30 am in your site's time zone. **Off by default.** Turn it on in **Leads → Settings → RingTonic → Follow-up reminders**. The subject reads **Follow Up Today: Jane Roe**, or **Follow Up: Jane Roe (Was Due 2026-10-23)** when it reaches you late.
+When a callback has a follow-up date, one person can get a reminder email on the day, at about 7:30 am in your site's time zone. **Off by default.** Turn it on in **Leads → Settings → RingTonic → Follow-up reminders**. The subject reads **Follow Up Today: Jane Roe**, or **Follow Up: Jane Roe (Was Due 2026-10-23)** when it reaches you late.
 
 Inside:
 
@@ -177,11 +177,17 @@ Inside:
 - the summary of the last call and the next step, when the AI saw that another call is needed;
 - buttons (when contact details are stored in full): **Call** (only for people with Call access), **Done** and **Not a lead**. Call places the call right away; Done and Not a lead open your own page at that callback and ask you to confirm, and nothing changes from the email itself.
 
-Who gets it: the person who placed the most recent call on that callback, as long as they still hold their slot with Call access, a portal page and an email address. If they do not, the reminder goes to the slots you list under **Otherwise send reminders to slots** (for example `001, 003`), and to nobody when that box is empty.
+Who gets it: the first of these that can be reminded, and only that one.
+
+- The person chosen under **Who gets the reminder?** when the follow-up was set, as long as they still hold their slot with access to act on Callbacks, a portal page and an email address.
+- Otherwise the person who placed the most recent call on that callback, as long as they still hold their slot with Call access, a portal page and an email address.
+- Otherwise the slots you list under **Otherwise send reminders to slots** (for example `001, 003`), and nobody when that box is empty.
+
+When the reminder goes to someone other than the person who set the follow-up, that person also gets a separate copy headed **Copy: sent to** and the name of the person reminded. The copy has no buttons or links. It is on by default; turn it off with **Send the person who set a follow-up a copy of its reminder when it goes to someone else** in **Leads → Settings → RingTonic → Follow-up reminders**. No copy is sent when the AI set the follow-up, or when the person who set it no longer has a slot with access and an email address.
 
 Good to know:
 
-- A reminder is sent once for each follow-up date. Move the date and you get a new one for the new date.
+- A reminder is sent once for each follow-up date and each person it is meant for. Move the date, or choose someone else, and the new date or the new person gets their own reminder. Choosing someone who already got that day's reminder sends nothing more.
 - Nothing is sent while someone is calling that lead, or once the callback is no longer waiting.
 - If the site was down, or reminders were off, a follow-up up to three days late is still reminded once (the subject then says when it was due), and older ones are not. A follow-up set for today after 7:30 is reminded the next morning. If the 7:30 run was missed (for example after a time zone change), it runs as soon as the site is next visited that day.
 - The email never contains the transcript or the words the AI quoted. Under **Masked** it shows the masked number and the person's initials instead of the name, with no summary or next step, and under **Off** no number either; in both, the buttons are replaced by one **Open your page** link.
