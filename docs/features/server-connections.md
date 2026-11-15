@@ -122,7 +122,8 @@ These actions only appear when FlowMattic is detected on the endpoint.
 
 | Action | Description |
 |---|---|
-| **Purge LiteSpeed Cache** | Clear the LiteSpeed cache on the endpoint (only available when LiteSpeed Cache is active) |
+| **Purge LiteSpeed Cache** | Clear the page cache on the endpoint in order: LiteSpeed first, then Cloudflare once (only available when LiteSpeed Cache is active). A second press within five minutes is booked instead of clearing Cloudflare again |
+| **Cloudflare only, not ordered** | Clear the whole Cloudflare zone for the endpoint straight away, without waiting for LiteSpeed. Use it only when you need Cloudflare cleared on its own (only available when Cloudflare is set up on the endpoint) |
 
 ### Danger Zone
 

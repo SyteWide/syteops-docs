@@ -8,6 +8,26 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.7.033
+
+- Added: a Purge this page button in the toolbar on the public site, just right of Purge All. It purges the page you are viewing, and the pages that list it (the home page, archives, feed and sitemaps) while the related pages setting is on: first the builder styles when the page has any, then LiteSpeed, then Cloudflare, in that order, so Cloudflare never keeps the old page. Administrators and SyteOps Admins who see Purge All see it too; a second press within five seconds waits, and the page reloads after a complete success. When so many pages are affected that the whole site is purged instead, the message says so.
+- Changed: LiteSpeed's Purge this page - LSCache item no longer shows to people who see the new button, because it purges only LiteSpeed and leaves Cloudflare holding the old page. LiteSpeed's Purge this page - UCSS item stays, since it regenerates that page's unique CSS, which the new button does not. The Hide LiteSpeed purge buttons setting controls both groups of hidden items, and everyone else keeps all of LiteSpeed's items.
+
+## v1.7.032
+
+- Changed: Clear Elementor Cache in the Quick Links menu now clears the page caches in order after it deletes Elementor's generated stylesheets, LiteSpeed first and then Cloudflare, even when LiteSpeed is off or Elementor's CSS regeneration is turned off. Its message now says what was cleared.
+- Changed: changing a Leads setting that visitors see, and saving, moving or deleting a tracked link, now clear the page caches in the same order (LiteSpeed first, then Cloudflare) instead of all at once. These actions no longer touch other page cache plugins.
+- Changed: the Purge caches button of the Visitor check now does what Purge All does: it clears the page builder's styles, runs LiteSpeed's complete Purge All, then purges Cloudflare, and it shares Purge All's ten second wait between presses.
+
+## v1.7.031
+
+- Changed: the Banners module's Automatically clear LiteSpeed Cache setting now clears the whole site in order, LiteSpeed first and Cloudflare after it, whenever a scheduled banner goes live or ends, when banner settings are saved and when banner settings are imported; it no longer asks LiteSpeed for its own Purge All, which cleared Cloudflare too early. The setting still has to be on for any of it to happen. Banners module 1.0.012.
+- Changed: the hub's Purge LS Cache action now clears LiteSpeed first and then Cloudflare once on the connected site, instead of clearing Cloudflare twice and in the wrong order. The direct Cloudflare action is renamed Cloudflare only, not ordered, because it still clears the whole Cloudflare zone without waiting for LiteSpeed.
+- Changed: Refresh LS CDN in Quick Links is now named Refresh LiteSpeed Cloudflare zone, because it saves LiteSpeed's CDN form and refreshes its Cloudflare zone and does not purge anything.
+- Changed: the Clear Caches button on the Plugin Updates card and beside the GitHub token is now named Clear update cache, and its confirmation says what it clears: the update-check and plugin update caches, not page caches or the object cache.
+- Changed: resetting all settings now also clears the page cache in order, LiteSpeed first and Cloudflare after it, so visitors do not keep seeing pages built from the old settings.
+- Removed: the old Clear LiteSpeed Cache action that a browser tab opened before v1.7.028 could still send. Use Purge All.
+
 ## v1.7.029
 
 - Changed: LiteSpeed's toolbar no longer shows Purge All, Purge All - LSCache, Purge All - CSS/JS or Purge All - Cloudflare to people who see the Purge All button, because those clear Cloudflare before LiteSpeed has been told. LiteSpeed's icon now opens its dashboard instead of purging, and its other items stay: Manage, Settings, Purge this page and the optimizer purges. A new Hide LiteSpeed purge buttons setting on the Page cache card (Automatic is on while LiteSpeed Cache is active, and Off shows the items again) controls it. LiteSpeed's own pages and shell commands still purge as before.
