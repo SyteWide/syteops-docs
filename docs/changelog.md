@@ -8,6 +8,12 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.7.013
+
+- Added: Two WP-CLI commands for deploys and maintenance, both under the plugin's cache command group: the cache purge command clears the page cache for the whole site or for a list of addresses in the right order (the server's own cache first, then Cloudflare), and the cache state command prints the same cache report as the Manage API. The purge command prints one line of JSON and uses distinct exit codes, so a deploy script can tell queued, done and failed apart; it can wait for the clear to finish, and with its builder option it clears the page builder's styles first (Elementor, Avada or Divi).
+- Added: The cache state now also shows work that is booked but not yet run, the next scheduled run, the time until a whole-site clear is allowed again, and rows still waiting to reach Cloudflare, so a clear that is still in progress is never mistaken for a finished one.
+- Fixed: On sites that use LiteSpeed Cache without the Cloudflare connection, a whole-site clear no longer books a second whole-site clear about five minutes later. The Divi cache button and Divi's own full clear now lift the five-minute limit between whole-site clears, so cached pages never point at deleted style files.
+
 ## v1.7.012
 
 - Changed: The Callbacks page's script was reorganized behind the scenes so it is easier to maintain: its helpers, its storage code and the note box are now grouped into clearly separated parts. Nothing changes in how the page looks or works, and notes, drafts and follow-up requests are saved exactly as before.
