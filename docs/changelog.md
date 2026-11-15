@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.7.016
+
+- Changed: The Callbacks page's script was tidied again behind the scenes: the code behind the Deal summary, the call back number and the Copy buttons now sits together in one clearly labeled part. Nothing changes in how the page looks or works.
+
 ## v1.7.015
 
 - Added: When a compatibility check finds that an add-on changed in a way the plugin relies on, and a second check a few minutes later confirms it, SyteOps administrators now see a notice on every admin screen and receive one email each, once for each finding. Add-on versions that are merely newer than the last check, with nothing broken, stay quiet and are never emailed. The email can be turned off in a new Integration compatibility box on the System / API tab, which only a SyteOps administrator can change; the notice still shows when it is off.
