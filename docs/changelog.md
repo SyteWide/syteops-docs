@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.7.023
+
+- Fixed: when a deploy's cache clear runs on a site that had its own full cache clear in the last five minutes, the clear now finishes right away instead of waiting out the five minutes. Every other full clear keeps the five-minute pause between them.
+
 ## v1.7.022
 
 - Changed: The Callbacks page's script was tidied behind the scenes once more: the code behind conflicts and held text (the Their version and Your version choice after a refused contact save, the held note for text you replaced, the strip that carries your words when the lead changed under the form, and the contact save itself) now sits together in one clearly labeled part. Nothing changes in how the page looks or works.
