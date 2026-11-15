@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.7.018
+
+- Changed: The Callbacks page's script was tidied behind the scenes once more: the code behind the result buttons and the follow-up date step now sits together in one clearly labeled part. Nothing changes in how the page looks or works.
+
 ## v1.7.017
 
 - Changed: The Callbacks page's script was tidied once more behind the scenes: its small helper routines that depend on nothing else now sit together in one clearly labeled part, and the addresses the page requests from the server are now built in one place. Nothing changes in how the page looks or works.
