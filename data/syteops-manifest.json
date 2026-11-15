@@ -1,6 +1,6 @@
 {
     "schema_version": 1,
-    "syteops_version": "1.7.009",
+    "syteops_version": "1.7.010",
     "operations": [
         {
             "resource": "users",
@@ -2300,12 +2300,40 @@
         {
             "resource": "cache",
             "action": "state",
-            "summary": "Read-only. How the page cache stands on this site, from one function the Page cache card also uses: which layers are present (LiteSpeed Cache with its public, front page and feed lifetimes in seconds and whether the public lifetime is longer than the warning limit, Cloudflare with its purge mode, Elementor), each layer's last purge outcome, whether WP-Cron is disabled, and a trace of the carry endpoint that delivers LiteSpeed's purge. The trace is bounded: the time of the last recorded answer, of the last answer to a nudge and to a visitor, counts of RECORDED answers (not requests; an answer that found nothing waiting is recorded at most once every 30 seconds), up to 20 recent answers newest first, and waiting, a COUNT of purges no response has carried yet. A source of nudge means a nudge arrived at the carry endpoint, which is unauthenticated: anyone can send one, so it is evidence that something called, never proof that the cron Worker did; cross-check the origin access log. A time is a Unix second or null; a lifetime of 0 means not cached and null means unknown. No page URL, token, zone id or error text is returned. A plugin older than this operation answers 404 unknown_operation.",
+            "summary": "Read-only. How the page cache stands on this site, from one function the Page cache card also uses: which layers are present (LiteSpeed Cache with its public, front page and feed lifetimes in seconds and whether the public lifetime is longer than the warning limit, Cloudflare with its purge mode, Elementor), each layer's last purge outcome, whether WP-Cron is disabled, and a trace of the carry endpoint that delivers LiteSpeed's purge. The trace is bounded: the time of the last recorded answer, of the last answer to a nudge and to a visitor, counts of RECORDED answers (not requests; an answer that found nothing waiting is recorded at most once every 30 seconds), up to 20 recent answers newest first, and waiting, a COUNT of purges no response has carried yet. A source of nudge means a nudge arrived at the carry endpoint, which is unauthenticated: anyone can send one, so it is evidence that something called, never proof that the cron Worker did; cross-check the origin access log. A time is a Unix second or null; a lifetime of 0 means not cached and null means unknown. The builder section is read-only information for operators and the deploy tool: the stored page builder choice (selected, empty when automatic) and the effective builder, the builders detected (several_detected is true when more than one is active), and per product its version and the setting that decides how its generated CSS is stored (Elementor CSS print method, Blocksy dynamic CSS mode file or inline, Avada CSS compiling method file, db or off and whether Avada critical CSS is on, Divi version, LiteSpeed Clear Cloudflare cache on Purge All), plus the Cloudflare purge mode and wp_cron_disabled. Anything that cannot be read is null or false. media is the map of replaced pictures (see media.mark_replaced): replaced_count is how many attachments are marked and recent is the newest ten, each with the attachment id, the Unix second it was marked and its URL version token; no URL and no file path. No page URL, token, zone id, path or error text is returned. A plugin older than this operation answers 404 unknown_operation.",
             "params": [],
             "destructive": false,
             "capability": "manage_options",
             "strict": true,
-            "returns": "data: {layers: {litespeed: {present, lifetime: {public, frontpage, feed, warn_after, long}|null, last: {at, status, scope, reason, urls, errors, delivery?, why?}|null}, cloudflare: {present, mode: urls|zone|off, last}, elementor: {present}}, cron: {wp_cron_disabled}, carry: {last_served_at, last_nudge_at, last_visitor_at, counts: {nudge, visitor, carried}, recent: [{at, source: nudge|visitor, carried}], waiting}}"
+            "returns": "data: {layers: {litespeed: {present, lifetime: {public, frontpage, feed, warn_after, long}|null, last: {at, status, scope, reason, urls, errors, delivery?, why?}|null}, cloudflare: {present, mode: urls|zone|off, last}, elementor: {present}}, cron: {wp_cron_disabled}, carry: {last_served_at, last_nudge_at, last_visitor_at, counts: {nudge, visitor, carried}, recent: [{at, source: nudge|visitor, carried}], waiting}, builder: {selected: elementor|avada|divi|headless|none|'', effective, detected[], several_detected, elementor: {active, version|null, pro, print_method: external|internal|null}, blocksy: {theme, companion, dynamic_css_mode: file|inline|null, css_refresh_enabled}, avada: {active, version|null, css_mode: file|db|off|null, critical_css|null}, divi: {active, version|null}, litespeed: {present, cdn_cloudflare|null, cdn_cloudflare_clear|null}, cloudflare: {mode}, wp_cron_disabled}, media: {replaced_count, recent: [{attachment_id, marked_at, token}]}}"
+        },
+        {
+            "resource": "media",
+            "action": "mark_replaced",
+            "summary": "Mark picture attachments whose file was replaced in place (same attachment id, same file name). Their front-end image URLs then carry a version token (ver) that changes with the replacement, so a browser that holds the old picture for the CDN's one year lifetime fetches the new one, and every other picture keeps its URL and its cached copy. Use it for a replacement SyteOps could not see: a file overwritten with no metadata update, for example by FTP or a shell copy (a replace made through the media library, Enable Media Replace or a metadata regeneration after the overwrite is marked on its own). It stores the token, then purges the pages that show the picture (posts and Elementor layouts that name it, posts that use it as the featured image, the attachment page) and the picture's own address from the page caches present; the body and layout scans are capped, so a page that holds the picture and was missed shows the new address when its own cache expires. Easy IO has no purge call; the changed address is what makes it fetch the new file. A picture already marked with the same token is unchanged and is purged again only when repurge is true. A picture that is not an image attachment or whose file is missing is skipped. At most 50 ids per call (422 above that). Off switch: the constant SYTEOPS_MEDIA_REPLACED_OFF or the filter syteops/media_replaced/enabled answers 409 media_replaced_off.",
+            "params": {
+                "ids": {
+                    "type": "array",
+                    "required": true,
+                    "description": "A JSON list of 1 to 50 picture (attachment) ids, each a positive whole number. A list that is empty, is longer than 50 or holds anything else is 422."
+                },
+                "repurge": {
+                    "type": "boolean",
+                    "literal": true,
+                    "required": false,
+                    "description": "JSON true to purge the pages of a picture that is already marked with the current token (default false). A real boolean only; \"true\" or 1 is 422."
+                }
+            },
+            "example": {
+                "ids": [
+                    123,
+                    124
+                ]
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "strict": true,
+            "returns": "data: {marked, purge: {calls, errors}, bounded, items[]}. An item is {id, status: marked|unchanged|repurged|skipped|failed, token?, pages?, reason?}: token is the version added to the picture's URLs, pages how many pages were purged for it, reason one of not_a_markable_image, over_limit, storage_busy. bounded is true when a page scan reached its cap. errors counts purge calls that reported an error, never a failed mark."
         },
         {
             "resource": "review",

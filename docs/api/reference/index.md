@@ -24,6 +24,7 @@ Every operation runs through the single dispatch endpoint. See [Dispatch contrac
 | [`leads`](./leads) | 24 | yes |
 | [`linkedin_groups`](./linkedin-groups) | 3 | yes |
 | [`listing_image`](./listing-image) | 2 | no |
+| [`media`](./media) | 1 | no |
 | [`modules`](./modules) | 10 | yes |
 | [`pipelines`](./pipelines) | 19 | yes |
 | [`review`](./review) | 15 | yes |

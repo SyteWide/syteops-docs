@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.7.010
+
+- Added: When a picture's file is replaced in place (same file name), visitors who already have the old picture now get the new one: the replaced picture's address gets a short version token on the pages that show it, and only that picture's address changes, so nothing else on the site is downloaded again. Replacements are detected when the file is replaced through the media tools or its details are regenerated (at most 20 automatic detections per hour), and you can also mark pictures as replaced through the Manage API or with a command. The pages that show the picture are cleared from the page cache when it is marked.
+- Added: The Page cache card and the cache state read now also show which page builder is in use and what was detected (Elementor, Blocksy, Avada, Divi), the generated style settings that matter for clearing, whether LiteSpeed's own Cloudflare clear on Purge All is on, and how many replaced pictures are tracked.
+
 ## v1.7.009
 
 - Fixed: The Avada cache button now clears Avada's compiled styles and then purges the whole site's page cache at once, so a page cached before the clear can no longer point at a style file that was deleted. When Avada is not available the button now says so instead of reporting success.
