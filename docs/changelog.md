@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.7.034
+
+- Changed: an Edit contact form left open in a browser tab since before Edit contact started sending only the fields you changed (v1.6.997) is no longer accepted. Saving it now asks you to reload the page, and nothing is saved. A form opened on any recent page is not affected.
+
 ## v1.7.033
 
 - Added: a Purge this page button in the toolbar on the public site, just right of Purge All. It purges the page you are viewing, and the pages that list it (the home page, archives, feed and sitemaps) while the related pages setting is on: first the builder styles when the page has any, then LiteSpeed, then Cloudflare, in that order, so Cloudflare never keeps the old page. Administrators and SyteOps Admins who see Purge All see it too; a second press within five seconds waits, and the page reloads after a complete success. When so many pages are affected that the whole site is purged instead, the message says so.
