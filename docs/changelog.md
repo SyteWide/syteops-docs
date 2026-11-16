@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.7.040
+
+- Forms that send contacts to RingTonic now report what happened to each entry. A site's own tools can check whether an entry was queued, sent, failed or deliberately not sent, and why: marked as spam, held by a spam check, internal traffic, or no email or phone. An entry for which no lead could be created is reported as failed so a site can still send it itself. Nothing that was sent before changes.
+
 ## v1.7.039
 
 - Email images: the inline-image feature in outgoing emails now attaches only real photos and logos (JPG, PNG, GIF and WebP). Any other file type, including SVG, stays a normal linked image, so a crafted email can no longer pull a non-image file from the site into a message.
