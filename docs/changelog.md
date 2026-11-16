@@ -8,6 +8,11 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.7.042
+
+- Each caller's card now has a Refresh status button. It checks that caller's call and button state right away, even while their details are open or you are typing a note, and reads the summary again, so a call that has already ended no longer keeps showing Release until you reload the page.
+- The AI deal summary also keeps watching a summary that is queued for later, and a single failed check no longer stops the watch, so "The summary is being written" now clears by itself.
+
 ## v1.7.041
 
 - Host sites that extend lead capture now have a documented, stable set of hooks and helper functions, and a safe way to read a team member's email addresses and first name from the Users settings. The order in which SyteOps runs its form and content filters is published, so a site can place its own code before or after it.
