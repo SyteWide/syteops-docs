@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.7.035
+
+- Fixed: a deploy's cache clear on a site where a scheduled follow-up got lost no longer ends with the Cloudflare half still owed; the clear now finishes on its own.
+
 ## v1.7.034
 
 - Changed: an Edit contact form left open in a browser tab since before Edit contact started sending only the fields you changed (v1.6.997) is no longer accepted. Saving it now asks you to reload the page, and nothing is saved. A form opened on any recent page is not affected.
