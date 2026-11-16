@@ -7,7 +7,7 @@ description: MCP tools provided by SyteOps (provider id syteops).
 
 # SyteOps
 
-Provider id: `syteops` · 85 tool(s).
+Provider id: `syteops` · 86 tool(s).
 
 ## `syteops_builder_guard`
 
@@ -35,6 +35,17 @@ Purge one post's page, or up to 30 URLs on this site, from LiteSpeed and Cloudfl
 |---|---|---|---|
 | `post_id` | integer | no | Post ID. |
 | `urls` | array | no | Absolute http(s) URLs on this site's host, at most 30. |
+
+
+## `syteops_cache_state`
+
+Read-only. How the site's caches stand right now (SyteOps cache.state; SyteOps 1.7.003 or newer). Takes no params and changes nothing. Returns which cache layers are present: LiteSpeed Cache with its cache lifetimes, Cloudflare with its purge mode, and Elementor. For each layer, the last purge with its status and delivery. Whether a purge is still owed, and whether WP-Cron is disabled. The purge delivery trace: when the last nudge and the last carried purge happened and how many purges are waiting; a nudge row only shows that a request arrived, not who sent it. And the page builder in effect. No URLs and no secrets come back. Use it to check a purge landed or is still pending before calling syteops_cache_purge again.
+
+**Profiles:** `full`, `syteops`
+
+**Parameters**
+
+_No parameters._
 
 
 ## `syteops_calendar_check`

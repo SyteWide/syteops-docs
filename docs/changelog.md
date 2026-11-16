@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.7.036
+
+- Fixed: changing a Leads setting that visitors see now clears WP Rocket, W3 Total Cache and WP Super Cache again, as it did before v1.7.032. Sites on LiteSpeed and Cloudflare are unaffected.
+
 ## v1.7.035
 
 - Fixed: a deploy's cache clear on a site where a scheduled follow-up got lost no longer ends with the Cloudflare half still owed; the clear now finishes on its own.

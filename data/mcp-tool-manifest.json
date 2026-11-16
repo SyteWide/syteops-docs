@@ -1,7 +1,7 @@
 {
     "schema_version": 1,
     "generated_from": "sytewide-mcp",
-    "mcp_version": "0.40.0",
+    "mcp_version": "0.42.0",
     "profiles": {
         "full": {
             "label": "Full (all tools)",
@@ -12875,7 +12875,7 @@
         {
             "name": "replace_content_text",
             "provider": "wp-content",
-            "description": "Replace exact text in one or more posts or Elementor pages, all or nothing. Defaults to a dry run that writes nothing and previews every edit (match counts, where found as widget and setting, the post_content mirror count, what would be written). A real run needs dry_run:false AND confirm:true. Every edit is checked before any write: each must match old exactly expected_count times (default 1), so one bad edit writes nothing and the result names it. On an Elementor page only the matching setting values change and the rest of _elementor_data stays byte for byte; post_content (the mirror) must hold old the same number of times and gets the same replacement. widget_id limits an Elementor match to one widget; refuse_if_present refuses a post that already contains a string (use the target URL to prevent double links). A match inside an HTML tag (an attribute) is refused unless allow_in_attributes:true; a match inside <script>, <style> or an HTML comment is refused unless allow_in_code:true. A restore point (a revision carrying the Elementor meta) is created per post before writing and must still exist; the result gives revision_id, the sha1 of the old _elementor_data and rollback steps. Writes are raw compare-and-swap SQL (no kses, no second revision): a post changed by someone else in the meantime is refused untouched and the posts already written are put back. Save hooks do not run; post_modified is set, caches are cleared and a coherent cache purge runs when SyteOps can (site-wide when the Elementor files were cleared; that clear is skipped, caches.elementor_files = skipped_scoped, only when SyteOps can regenerate just the edited post CSS and none is a kit, template or global widget); the result caches.coherence has the per-layer detail, and caches.syteops_cache_purge keeps the per-post purged/failed. A builder-mode Elementor page with no usable _elementor_data is refused. With verify_rendered (default true) it fetches each published post of this site (about 20 s in total, then the rest are skipped with time_budget) and warns when the new text is missing from the rendered page (it may be stripped from display, for example an in-body FAQ replaced by structured data): check those warnings, the write has already happened. Takes 1-25 edits, one per post. Same permission as update_content (edit_post per post); without unfiltered_html, the stored result must pass wp_kses_post() unchanged and carry no disallowed URL protocol, only Elementor text and content settings may change (not links, custom attributes, CSS, ids or dynamic tags), and allow_in_attributes / allow_in_code are refused.",
+            "description": "Replace exact text in one or more posts or Elementor pages, all or nothing. Defaults to a dry run that writes nothing and previews every edit (match counts, where found as widget and setting, the post_content mirror count, what would be written). A real run needs dry_run:false AND confirm:true. Every edit is checked before any write: each must match old exactly expected_count times (default 1), so one bad edit writes nothing and the result names it. On an Elementor page only the matching setting values change and the rest of _elementor_data stays byte for byte; post_content (the mirror) must hold old the same number of times and gets the same replacement. widget_id limits an Elementor match to one widget; refuse_if_present refuses a post that already contains a string (use the target URL to prevent double links). A match inside an HTML tag (an attribute) is refused unless allow_in_attributes:true; a match inside <script>, <style> or an HTML comment is refused unless allow_in_code:true. A restore point (a revision carrying the Elementor meta) is created per post before writing and must still exist; the result gives revision_id, the sha1 of the old _elementor_data and rollback steps. Writes are raw compare-and-swap SQL (no kses, no second revision): a post changed by someone else in the meantime is refused untouched and the posts already written are put back. Save hooks do not run; post_modified is set, caches are cleared and a coherent cache purge runs when SyteOps can (immediately for the edited pages, site-wide when the Elementor files were cleared; that clear is skipped, caches.elementor_files = skipped_scoped, only when SyteOps reports scoped post CSS and every edited post is a public page type that is not site-wide, such as a kit, template or block; a text-only edit does not change the page CSS); the result caches.coherence has the per-layer detail, caches.delivery says whether the LiteSpeed purge was sent, waiting or unknown (queued is asynchronous: visitors can see old content until it completes), and caches.syteops_cache_purge keeps the per-post status. A builder-mode Elementor page with no usable _elementor_data is refused. With verify_rendered (default true) it fetches each published post of this site (about 20 s in total, then the rest are skipped with time_budget) and warns when the new text is missing from the rendered page (it may be stripped from display, for example an in-body FAQ replaced by structured data): check those warnings, the write has already happened. Takes 1-25 edits, one per post. Same permission as update_content (edit_post per post); without unfiltered_html, the stored result must pass wp_kses_post() unchanged and carry no disallowed URL protocol, only Elementor text and content settings may change (not links, custom attributes, CSS, ids or dynamic tags), and allow_in_attributes / allow_in_code are refused.",
             "inputSchema": {
                 "type": "object",
                 "properties": {
@@ -13248,6 +13248,22 @@
                         "description": "Absolute http(s) URLs on this site's host, at most 30."
                     }
                 }
+            },
+            "destructive": false,
+            "capability": "manage_options",
+            "always": false,
+            "profiles": [
+                "full",
+                "syteops"
+            ]
+        },
+        {
+            "name": "syteops_cache_state",
+            "provider": "syteops",
+            "description": "Read-only. How the site's caches stand right now (SyteOps cache.state; SyteOps 1.7.003 or newer). Takes no params and changes nothing. Returns which cache layers are present: LiteSpeed Cache with its cache lifetimes, Cloudflare with its purge mode, and Elementor. For each layer, the last purge with its status and delivery. Whether a purge is still owed, and whether WP-Cron is disabled. The purge delivery trace: when the last nudge and the last carried purge happened and how many purges are waiting; a nudge row only shows that a request arrived, not who sent it. And the page builder in effect. No URLs and no secrets come back. Use it to check a purge landed or is still pending before calling syteops_cache_purge again.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {}
             },
             "destructive": false,
             "capability": "manage_options",
