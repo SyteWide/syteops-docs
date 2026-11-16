@@ -8,6 +8,12 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.7.041
+
+- Host sites that extend lead capture now have a documented, stable set of hooks and helper functions, and a safe way to read a team member's email addresses and first name from the Users settings. The order in which SyteOps runs its form and content filters is published, so a site can place its own code before or after it.
+- RingTonic contact push: when a person's email belongs to one RingTonic contact and their phone number to another, the push now retries using the phone number alone, so the contact and the form conversion are no longer lost. The lead is flagged for a merge when both contacts are known. Each push record also keeps the reason for the last refusal, so a failed push can be diagnosed afterwards.
+- Leads now remember which Fluent Forms entry created each lead, so a site no longer needs custom code to tie a lead to its form entry. The first entry stays on a lead that submits again. Leads that a site chooses not to record for staff or its secret header still record nothing, and the documentation explains how a site retires its own bridge.
+
 ## v1.7.040
 
 - Forms that send contacts to RingTonic now report what happened to each entry. A site's own tools can check whether an entry was queued, sent, failed or deliberately not sent, and why: marked as spam, held by a spam check, internal traffic, or no email or phone. An entry for which no lead could be created is reported as failed so a site can still send it itself. Nothing that was sent before changes.
