@@ -46,7 +46,7 @@ When you save a change to the consent mode, the cookie settings, the internal tr
 Stay informed without watching a dashboard:
 
 - **Per-lead emails** — get an email the moment a new lead is captured. You can set a short digest window (e.g. 15 minutes) so that several leads arriving in quick succession are bundled into one message.
-- **Scheduled summaries** — choose daily, weekly, or monthly digests for a periodic overview of lead volume and sources. Pick the send hour, and (for weekly/monthly) the day it goes out.
+- **Scheduled summaries** — choose daily, weekly, or monthly digests for a periodic overview of lead volume and sources. Pick the send hour, and (for weekly/monthly) the day it goes out. Each summary is sent once per period: a site update or cache clear no longer sends the same summary again, and a send that may already have gone through is never repeated.
 - **Held leads** — when one network sends more than 20 new leads in an hour, its further leads are still saved but marked **Held** in the Leads list, and their webhook, emails and CRM push are not sent, so a flood of automated submissions cannot bury real ones. Leads from other networks are not affected. If more than 300 new leads arrive across the whole site in an hour, further new leads are held too, and the report recipients get one email saying so. You can still send a held lead to your automation webhook from its row.
 - **Reply-To address** — replies to any lead report email can go to a person (for example, your sales lead) instead of the site's sending address. Set it under **Leads → Settings → Email reports**; leave it blank to keep the default.
 

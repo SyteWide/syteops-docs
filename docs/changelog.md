@@ -8,6 +8,18 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.7.039
+
+- Email images: the inline-image feature in outgoing emails now attaches only real photos and logos (JPG, PNG, GIF and WebP). Any other file type, including SVG, stays a normal linked image, so a crafted email can no longer pull a non-image file from the site into a message.
+
+## v1.7.038
+
+- The daily, weekly and monthly lead summary email is now sent once per period. A site update or cache clear no longer sends the same summary again. A summary that failed to send right away is retried once later, and one that may already have gone through is never repeated.
+
+## v1.7.037
+
+- License checks answered by the licensing server are faster and no longer tie up a second server process. The server now reads license details directly instead of calling itself over the web, and falls back to the previous method whenever the direct read cannot answer.
+
 ## v1.7.036
 
 - Fixed: changing a Leads setting that visitors see now clears WP Rocket, W3 Total Cache and WP Super Cache again, as it did before v1.7.032. Sites on LiteSpeed and Cloudflare are unaffected.
