@@ -8,6 +8,18 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.7.049
+
+- FlowMattic workflows can now put the "Block this sender's IP" link in an email: add a PHP Functions step that calls one of two new SyteOps functions (the Lead IP Block page lists their names), give it the visitor's address from an earlier step, and use the result in the Email step. SyteOps cannot read the visitor from a webhook that another service posts, so the address has to come in as a value; for an Avada form it is the webhook body's ip field, which SyteOps now replaces with the safely read address while the Lead IP Block integration is on. A workflow whose form service sends no visitor address, such as OpnForm, has nothing to pass.
+
+## v1.7.048
+
+- Elementor Pro form emails can now carry the "Block this sender's IP" link: in an Elementor Pro Email action, add one of the two new SyteOps shortcodes to the message, a ready-made link line or the bare link (the Lead IP Block page lists their names). The link is left out automatically of any email addressed to the person who submitted the form, such as an auto-responder. It names the address that opened the connection (behind Cloudflare, Cloudflare's own header); SyteOps never reads a header a visitor can set. For Avada forms, while the Lead IP Block integration is on, the address Avada stores with a submission, sends in a webhook and offers to its email is now the safely read one, and a posted form field named ip no longer overrides it in the webhook body; a real field with that name should be renamed. Avada's own notification emails cannot carry the link, because Avada removes unknown tags before SyteOps sees them: use a FlowMattic email step.
+
+## v1.7.047
+
+- WPForms notification emails can now carry the same "Block this sender's IP" link that Fluent Forms emails already had: in a staff notification's message, add one of the two new SyteOps smart tags from the WPForms tag picker, a ready-made link line or the bare link. The link names the address that opened the connection (behind Cloudflare, Cloudflare's own header); SyteOps never reads a header a visitor can set. It appears only in staff notification emails, never in a confirmation message or in a notification addressed to the person who submitted the form, and every safety rule of the block page is unchanged.
+
 ## v1.7.046
 
 - Every SyteOps email on a site now wears one set of brand colors, the Review Portal's branding (its own override when set, otherwise your General → Branding colors). The lead summary, new-lead, callback and compatibility emails used to read the General settings while the Review Portal emails used the portal's colors.
