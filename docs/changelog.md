@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.7.045
+
+- Housekeeping: removed the name of a site that is no longer managed from a code comment and from the developer documentation. Nothing changes in how SyteOps behaves.
+
+## v1.7.044
+
+- The daily, weekly and monthly lead summary email and the new-lead email now look like your callback and contact-form emails: your logo on the left, a dark label on the right (Lead Summary or New Lead), a line in your brand color under the header, a tinted box for the totals and a button in your brand color. The period is no longer written twice at the top. The "new leads are being held" alert and the test email use the same layout.
+
 ## v1.7.042
 
 - Each caller's card now has a Refresh status button. It checks that caller's call and button state right away, even while their details are open or you are typing a note, and reads the summary again, so a call that has already ended no longer keeps showing Release until you reload the page.

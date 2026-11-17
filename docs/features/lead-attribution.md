@@ -52,7 +52,9 @@ Stay informed without watching a dashboard:
 
 ### Email branding
 
-You can put your own logo at the top of the lead emails this feature sends (new-lead alerts, digests, and scheduled summaries):
+The new-lead alert, the digest and scheduled summary emails, the "new leads are being held" alert and the test email use the same layout as your callback and contact-form emails: your logo on the left, a dark label on the right (**New Lead** or **Lead Summary**), a line in your brand color under the header, a tinted box for the totals and a button in your brand color. Your colors come from **General → Branding**.
+
+You can put your own logo at the top of these emails:
 
 1. Go to **Leads → Settings → Email reports**.
 2. Next to **Email logo**, click **Select logo** and choose an image from your Media Library.
