@@ -8,6 +8,10 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.7.046
+
+- Every SyteOps email on a site now wears one set of brand colors, the Review Portal's branding (its own override when set, otherwise your General → Branding colors). The lead summary, new-lead, callback and compatibility emails used to read the General settings while the Review Portal emails used the portal's colors.
+
 ## v1.7.045
 
 - Housekeeping: removed the name of a site that is no longer managed from a code comment and from the developer documentation. Nothing changes in how SyteOps behaves.
