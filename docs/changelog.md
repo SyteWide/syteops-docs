@@ -8,6 +8,14 @@ description: Release history and user-facing changes for each SyteOps version.
 
 A running log of user-facing changes in each SyteOps release. Only features, improvements, and fixes that affect the admin experience are listed here.
 
+## v1.7.051
+
+- The "Block this sender's IP" link now works on sites that do not use the Leads module. Until now its code loaded only together with Leads, so a site without it (for example one that does not use RingTonic) had the Lead IP Block integration turned on with nothing behind it: the Fluent Forms, WPForms, Elementor Pro and FlowMattic links, the block page and the expiry of timed blocks were all missing, and a FlowMattic step reported that the function does not exist. The code now loads whenever the Lead IP Block integration is on, whether or not the Leads module is.
+
+## v1.7.050
+
+- The block page now refuses more addresses that are not a real visitor: the shared address space used by carrier networks and tunnels (including Tailscale), the documentation and benchmarking blocks, and the translation, discard, tunnel and documentation ranges of IPv6, on top of the private and reserved ranges it already refused. An IPv4 address written in its IPv6-mapped form is now treated exactly like the plain address, so it can no longer slip past the Cloudflare, Wordfence and protected-list checks, and the person clicking cannot block their own address by writing it another way. The Lead IP Block page lists what is refused.
+
 ## v1.7.049
 
 - FlowMattic workflows can now put the "Block this sender's IP" link in an email: add a PHP Functions step that calls one of two new SyteOps functions (the Lead IP Block page lists their names), give it the visitor's address from an earlier step, and use the result in the Email step. SyteOps cannot read the visitor from a webhook that another service posts, so the address has to come in as a value; for an Avada form it is the webhook body's ip field, which SyteOps now replaces with the safely read address while the Lead IP Block integration is on. A workflow whose form service sends no visitor address, such as OpnForm, has nothing to pass.
